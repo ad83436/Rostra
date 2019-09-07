@@ -43,14 +43,16 @@ public class MainInventory : MonoBehaviour {
             // Also, if the item already has a stack, add these items to the stack as well
             if ((invItem[i, 0] == 0 || invItem[i, 0] == itemID) && numToAdd > 0) {
                 int stackSize = ItemStackLimit(itemID);
-                if (numToAdd <= stackSize) {
+                if (numToAdd <= stackSize) { // There is enough space in the stack for the newly found item
                     invItem[i, 0] = itemID;
                     invItem[i, 1] += numToAdd;
                     numToAdd = 0;
-                } else {
+                } else { // No more space in a stack, try to find an empty spot
                     int remainder = stackSize - invItem[i, 1];
                     invItem[i, 1] = stackSize;
                     numToAdd -= remainder;
+                    // NOTE -- If the inventory cannot find a spot for the remaining items it will just discard them.
+                    // When this happens a message should be displayed for the player to let them know those items couldn't be picked up.
                 }
                 if (numToAdd == 0) { return true; }
             }
@@ -82,14 +84,20 @@ public class MainInventory : MonoBehaviour {
         string name = "";
 
         switch (itemID) {
-            case (int)ITEM_ID.TEST1:
-                name = "Test_Item_1";
+            case (int)ITEM_ID.TEST_POTION_HP:
+                name = "Test Potion (HP)";
                 break;
-            case (int)ITEM_ID.TEST2:
-                name = "Test_Item_2";
+            case (int)ITEM_ID.TEST_POTION_MP:
+                name = "Test Potion (MP)";
                 break;
-            case (int)ITEM_ID.TEST3:
-                name = "Test_Item_3";
+            case (int)ITEM_ID.TEST_QUEST_ITEM:
+                name = "Test Quest Item";
+                break;
+            case (int)ITEM_ID.TEST_ARMOR1:
+                name = "Test Armor";
+                break;
+            case (int)ITEM_ID.TEST_WEAPON1:
+                name = "Test Weapon";
                 break;
         }
         return name;
