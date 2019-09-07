@@ -11,6 +11,11 @@ public class MainInventory : MonoBehaviour {
     // NOTE -- Element 1 is the item's ID value that will point to its name, description, icon, etc.
     //         Element 2 is how many items currently occupy the slot in the inventory
     //         Element 3 is what character has this item equipped (Ex. armor and weapons)
+    private int[] itemToSwap = new int[3];      // Holds data about the item being swapped in the inventory
+    private bool swappingItems = false;         // If true, the inventory will be in an "Item Swap" state. Meaning, no items can be selected until the swap is declined or completed
+    private int curOption = 0;                  // The current inventory item the player has their cursor over
+    private int selectedOption = -1;            // The item that the player has selected in the inventory
+    private int subCurOption = 0;               // The current option the player has their cursor over after selecting an item
 
     // Set the main inventory instance to this one if no inventory is active, delete otherwise
     public void Awake() {
@@ -19,6 +24,16 @@ public class MainInventory : MonoBehaviour {
         } else {
             Destroy(gameObject);
         }
+    }
+
+    // Handling keyboard functionality
+    private void Update() {
+        
+    }
+
+    // Handling the inventory drawing
+    private void OnGUI() {
+        GUIStyle style = new GUIStyle(GUI.skin.label);
     }
 
     // Swaps two items within the inventory
@@ -94,10 +109,10 @@ public class MainInventory : MonoBehaviour {
                 name = "Test Quest Item";
                 break;
             case (int)ITEM_ID.TEST_ARMOR1:
-                name = "Test Armor";
+                name = "Test Leather Armor";
                 break;
             case (int)ITEM_ID.TEST_WEAPON1:
-                name = "Test Weapon";
+                name = "Test Iron Sword";
                 break;
         }
         return name;
@@ -109,13 +124,19 @@ public class MainInventory : MonoBehaviour {
 
         switch (itemID) {
             case (int)ITEM_ID.TEST_POTION_HP:
-                description = "Test_Description_1";
+                description = "There's like a 50% chance this will restore the player's HP.";
                 break;
             case (int)ITEM_ID.TEST_POTION_MP:
-                description = "Test_Description_2";
+                description = "I think it restores MP, but it might not.";
                 break;
             case (int)ITEM_ID.TEST_QUEST_ITEM:
-                description = "Test_Description_3";
+                description = "Some piece of junk. Go give it to someone.";
+                break;
+            case (int)ITEM_ID.TEST_ARMOR1:
+                description = "A piece of leather armor to test the inventory with.";
+                break;
+            case (int)ITEM_ID.TEST_WEAPON1:
+                description = "An Iron Sword used for testing the game's inventory.";
                 break;
         }
 
@@ -143,8 +164,12 @@ public class MainInventory : MonoBehaviour {
     }
 
     // Executes code based upon what option was selected by the user. These include options like equipping, unequipping, switching, dropping, etc.
-    public void ItemOptionsFunction(string option) {
-        // Provide use cases for every item based on their item stats
+    public void ItemOptionsFunction(int itemID, string option) {
+        if (option.Equals("Use")) {
+
+        } else if (option.Equals("Switch")) {
+            // TODO -- Add functionality to swap items in the inventory
+        }
     }
 
     // Returns the "Type" of the item based on the itemID. This is used to determined what options the player can use in tandem with the item
@@ -158,6 +183,10 @@ public class MainInventory : MonoBehaviour {
                 break;
             case (int)ITEM_ID.TEST_QUEST_ITEM:
                 itemType = (int)ITEM_TYPE.KEY_ITEM;
+                break;
+            case (int)ITEM_ID.TEST_WEAPON1:
+            case (int)ITEM_ID.TEST_ARMOR1:
+                itemType = (int)ITEM_TYPE.EQUIPABLE;
                 break;
         }
 

@@ -4,7 +4,7 @@
 // NOTE -- The minimum and maximum values exists as a guideline to prevent any values from overlapping.
 
 enum ITEM_ID { // Minimum Value -- 0x0000, Maximum Value -- 0xFEFF (65280 possible items)
-    NO_ITEM =           0x0000,     // Test Item
+    NO_ITEM =           0x0000,     
     TEST_POTION_HP =    0x0001,     // Test Item
     TEST_POTION_MP =    0x0002,     // Test Item
     TEST_QUEST_ITEM =   0x0003,     // Test Item
