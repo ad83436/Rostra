@@ -58,7 +58,6 @@ public class BattleManager : MonoBehaviour
     private int maxEnemyIndex = 0;
     private int[] removedEnemyIndexes;
 
-    private int test;
     private string nametest;
 
 
@@ -145,9 +144,12 @@ public class BattleManager : MonoBehaviour
     {
         //Store and sort the agilities of the players and enemies in ascending order
 
-        for (int i = 0; i < players.Length; i++)
+        foreach(PlayerInformtion p in players)
         {
-            pAgilities.Add(players[i].agi);
+            if (p.playerReference != null)//Make sure all the entries have players (i.e. what if we have less than 4 players)
+            {
+                pAgilities.Add(p.agi);
+            }
         }
             
 
@@ -156,10 +158,14 @@ public class BattleManager : MonoBehaviour
 
         foreach (PlayerInformtion e in enemies)
         {
-            eAgilities.Add(e.agi);
+            if (e.enemyReference != null) //Make sure all the entries have enemies (i.e. what if we have less than 5 enemies)
+            {
+                eAgilities.Add(e.agi);
+            }
         }
 
         eAgilities.Sort();
+        Debug.Log(eAgilities.Count);
 
     }
 
