@@ -153,6 +153,7 @@ MonoBehaviour:
   agi: 6
   str: 0
   crit: 0
+  name: Baby
 --- !u!4 &27785245
 Transform:
   m_ObjectHideFlags: 0
@@ -206,8 +207,11 @@ MonoBehaviour:
     agi: 10
     str: 0
     crit: 0
+    name: 
     exp: 0
     expNeededForNextLevel: 0
+    playerReference: {fileID: 0}
+    enemyReference: {fileID: 0}
   - playerIndex: 0
     hp: 0
     mp: 0
@@ -217,8 +221,11 @@ MonoBehaviour:
     agi: 15
     str: 0
     crit: 0
+    name: 
     exp: 0
     expNeededForNextLevel: 0
+    playerReference: {fileID: 0}
+    enemyReference: {fileID: 0}
   - playerIndex: 0
     hp: 0
     mp: 0
@@ -228,8 +235,11 @@ MonoBehaviour:
     agi: 8
     str: 0
     crit: 0
+    name: 
     exp: 0
     expNeededForNextLevel: 0
+    playerReference: {fileID: 0}
+    enemyReference: {fileID: 0}
   - playerIndex: 0
     hp: 0
     mp: 0
@@ -239,8 +249,11 @@ MonoBehaviour:
     agi: 13
     str: 0
     crit: 0
+    name: 
     exp: 0
     expNeededForNextLevel: 0
+    playerReference: {fileID: 0}
+    enemyReference: {fileID: 0}
   enemies: []
 --- !u!4 &28491561
 Transform:
@@ -289,6 +302,7 @@ MonoBehaviour:
   agi: 12
   str: 0
   crit: 0
+  name: Thief
 --- !u!4 &184730089
 Transform:
   m_ObjectHideFlags: 0
@@ -423,6 +437,7 @@ MonoBehaviour:
   str: 0
   crit: 0
   playerIndex: 0
+  name: Fargas
   equippedSkills:
   - 
   - 
@@ -475,10 +490,11 @@ MonoBehaviour:
   def: 0
   hp: 0
   mp: 0
-  agi: 8
+  agi: 10
   str: 0
   crit: 0
   playerIndex: 3
+  name: Arcelus
   equippedSkills:
   - 
   - 
@@ -528,9 +544,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyIndexInBattleManager: 0
-  agi: 5
+  agi: 7
   str: 0
   crit: 0
+  name: Giant
 --- !u!4 &888036282
 Transform:
   m_ObjectHideFlags: 0
@@ -578,10 +595,11 @@ MonoBehaviour:
   def: 0
   hp: 0
   mp: 0
-  agi: 10
+  agi: 7
   str: 0
   crit: 0
   playerIndex: 2
+  name: Freya
   equippedSkills:
   - 
   - 
@@ -634,6 +652,7 @@ MonoBehaviour:
   agi: 20
   str: 0
   crit: 0
+  name: Wolf
 --- !u!4 &1084291266
 Transform:
   m_ObjectHideFlags: 0
@@ -678,9 +697,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyIndexInBattleManager: 2
-  agi: 9
+  agi: 6
   str: 0
   crit: 0
+  name: Dragon
 --- !u!4 &1691322062
 Transform:
   m_ObjectHideFlags: 0
@@ -732,6 +752,7 @@ MonoBehaviour:
   str: 0
   crit: 0
   playerIndex: 1
+  name: Oberon
   equippedSkills:
   - 
   - 
