@@ -165,7 +165,6 @@ public class BattleManager : MonoBehaviour
         }
 
         eAgilities.Sort();
-        Debug.Log(eAgilities.Count);
 
     }
 
