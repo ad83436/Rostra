@@ -22,10 +22,10 @@ public struct CharacterStats {
 		critical = 0;
 		agility = 0;
 		skill = new Skills[] { Skills.None, Skills.None, Skills.None, Skills.None };
-		level = 0;
+		level = 1;
 		currentExperience = 0;				       
-		neededExperience = 0;
-		skillPoints = 0;
+		neededExperience = 500;
+		statPoints = 0;
 	}										       
 	// stats								       
 	public int attack, attackMod;
@@ -35,6 +35,9 @@ public struct CharacterStats {
 	public int strength;
 	public int critical;
 	public int agility;
+	///returns the total of each
+	public int TotalAttack => attack + attackMod;
+	public int TotalDefence => defence + defenceMod;
 
 	//skills
 	public Skills[] skill;
@@ -48,6 +51,6 @@ public struct CharacterStats {
 	public int level;
 	public int currentExperience;
 	public int neededExperience;
-	public int skillPoints;
+	public int statPoints;
 }
 
