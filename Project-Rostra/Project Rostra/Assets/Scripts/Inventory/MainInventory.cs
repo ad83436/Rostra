@@ -12,10 +12,13 @@ public class MainInventory : MonoBehaviour {
     //         Element 2 is how many items currently occupy the slot in the inventory
     //         Element 3 is what character has this item equipped (Ex. armor and weapons)
     private int[] itemToSwap = new int[3];      // Holds data about the item being swapped in the inventory
+    private int slotToSwapTo = -1;              // The slot the the selected item will send the other item to
     private bool swappingItems = false;         // If true, the inventory will be in an "Item Swap" state. Meaning, no items can be selected until the swap is declined or completed
     private int curOption = 0;                  // The current inventory item the player has their cursor over
     private int selectedOption = -1;            // The item that the player has selected in the inventory
     private int subCurOption = 0;               // The current option the player has their cursor over after selecting an item
+    private int firstToDraw = 0;                // The first item from the inventory array to draw out of the full inventory
+    private int numToDraw = 15;                 // How many inventory items that can be visible to the player at any given time
 
     // Set the main inventory instance to this one if no inventory is active, delete otherwise
     public void Awake() {
@@ -26,14 +29,146 @@ public class MainInventory : MonoBehaviour {
         }
     }
 
-    // Handling keyboard functionality
-    private void Update() {
-        
+    // FOR TESTING
+    private void Start() {
+        invItem[0, 0] = (int)ITEM_ID.TEST_QUEST_ITEM;
+        invItem[0, 1] = ItemStackLimit((int)ITEM_ID.TEST_QUEST_ITEM);
+
+        invItem[1, 0] = (int)ITEM_ID.TEST_POTION_HP;
+        invItem[1, 1] = 8;
     }
 
-    // Handling the inventory drawing
+    // Handling keyboard functionality
+    private void Update() {
+        bool keySelect, keyReturn, keyUp, keyDown;
+        keySelect = Input.GetKeyDown(KeyCode.Z);
+        keyReturn = Input.GetKeyDown(KeyCode.X);
+        keyUp = Input.GetKeyDown(KeyCode.UpArrow);
+        keyDown = Input.GetKeyDown(KeyCode.DownArrow);
+
+        if (selectedOption == -1) { // Input functionality for when the player has no item currently selected
+            // Shifting up and down through the inventory screen
+            if (keyUp) {
+                curOption--;
+                // Shifting the inventory's view up
+                if (curOption < firstToDraw + (numToDraw / 2) - 1 && firstToDraw > 0) {
+                    firstToDraw--;
+                }
+                // Looping to the end of the inventory if the player presses up while on the first item
+                if (curOption < 0) {
+                    curOption = INVENTORY_SIZE - 1;
+                    firstToDraw = curOption - numToDraw;
+                }
+            }
+            if (keyDown) {
+                curOption++;
+                // Shifting the inventory's view up
+                if (curOption > firstToDraw + (numToDraw / 2) + 1 && firstToDraw < INVENTORY_SIZE - 1 - numToDraw) {
+                    firstToDraw++;
+                }
+                // Looping to the start of the inventory if the player presses down while on the last item
+                if (curOption > INVENTORY_SIZE - 1) {
+                    curOption = 0;
+                    firstToDraw = 0;
+                }
+            }
+
+            if (keySelect) { 
+                if (swappingItems) { // Swapping items when the player selects after enabling swapping
+                    if (slotToSwapTo != curOption) { // Make sure the player isn't swapping an item into the same spot it was in before
+                        SwapItems(slotToSwapTo, curOption);
+                        // Remove the current item from the swapping buffer, and reset all the variables to their original values
+                        swappingItems = false;
+                        slotToSwapTo = -1;
+                        var length = itemToSwap.Length;
+                        for (int i = 0; i < length; i++) {
+                            itemToSwap[i] = 0;
+                        }
+                    }
+                } else {  // Selecting an item when the player doesn't have swapping enabled
+                    if (invItem[curOption, 0] > 0) {
+                        selectedOption = curOption;
+                    }
+                }
+            }
+
+            if (keyReturn) {
+                if (swappingItems) { // Disabling item swapping
+                    swappingItems = false;
+                    slotToSwapTo = -1;
+                    var length = itemToSwap.Length;
+                    for (int i = 0; i < length; i++) {
+                        itemToSwap[i] = 0;
+                    }
+                } else {
+                    // TODO -- Make this block of code exit out of the inventory
+                }
+            }
+        } else { // Input functionality for when the player has selected an item (The option menu)
+            int menuLength = ItemOptions(invItem[curOption, 0]).Count;
+            // Shifting up and down through the sub-menu options
+            if (keyUp) {
+                subCurOption--;
+                if (subCurOption < 0) {
+                    subCurOption = menuLength - 1;
+                }
+            }
+            if (keyDown) {
+                subCurOption++;
+                if (subCurOption > menuLength - 1) {
+                    subCurOption = 0;
+                }
+            }
+
+            // Selecting one of the given options
+            if (keySelect) {
+                List<string> options = ItemOptions(invItem[curOption, 0]);
+                string[] option = options.ToArray();
+                ItemOptionsFunction(invItem[curOption, 0], option[subCurOption]);
+                subCurOption = 0;
+                selectedOption = -1;
+            }
+
+            // Unselecting the current item, returning the player back to the main inventory window
+            if (keyReturn) {
+                selectedOption = -1;
+            }
+        }
+    }
+
+    // Drawing the inventory to the screen
     private void OnGUI() {
-        GUIStyle style = new GUIStyle(GUI.skin.label);
+        GUIStyle style = new GUIStyle(GUI.skin.label) {
+            fontSize = 12,
+            fontStyle = FontStyle.Bold,
+            border = new RectOffset(20, 20, 20, 20),
+        };
+
+        // Drawing the inventory items
+        for (int i = firstToDraw; i <= firstToDraw + numToDraw; i++) {
+            GUI.Label(new Rect(25.0f, 5.0f + (15.0f * (i - firstToDraw)), 200.0f, 25.0f), ItemName(invItem[i, 0]), style);
+            GUI.Label(new Rect(200.0f, 5.0f + (15.0f * (i - firstToDraw)), 200.0f, 25.0f), "x" + invItem[i, 1], style);
+            // Drawing a cursor that points to the item the player has highlighted
+            GUI.Label(new Rect(5.0f, 5.0f + (15.0f * (curOption - firstToDraw)), 25.0f, 25.0f), ">", style);
+        }
+        // Drawing the item's description
+        GUI.Label(new Rect(5.0f, 260.0f, 300.0f, 150.0f), ItemDescription(invItem[curOption, 0]), style);
+
+        // Drawing the selected item's options to the screen
+        if (selectedOption != -1) {
+            List<string> options = ItemOptions(invItem[curOption, 0]);
+            string[] option = options.ToArray();
+            var length = options.Count;
+            for (int i = 0; i < length; i++) {
+                GUI.Label(new Rect(250.0f, 5.0f + (15.0f * i), 200.0f, 25.0f), option[i], style);
+                if (subCurOption == i) { GUI.Label(new Rect(230.0f, 5.0f + (15.0f * i), 25.0f, 25.0f), ">", style); }
+            }
+        }
+
+        // Drawing the item that is currently being swapped
+        if (swappingItems) {
+            GUI.Label(new Rect(250.0f, 90.0f, 150.0f, 150.0f), "Item Held:\n" + ItemName(itemToSwap[0]) + "\nx" + itemToSwap[1], style);
+        }
     }
 
     // Swaps two items within the inventory
@@ -58,7 +193,7 @@ public class MainInventory : MonoBehaviour {
             // Also, if the item already has a stack, add these items to the stack as well
             if ((invItem[i, 0] == 0 || invItem[i, 0] == itemID) && numToAdd > 0) {
                 int stackSize = ItemStackLimit(itemID);
-                if (numToAdd <= stackSize) { // There is enough space in the stack for the newly found item
+                if (invItem[i, 1] + numToAdd <= stackSize) { // There is enough space in the stack for the newly found item
                     invItem[i, 0] = itemID;
                     invItem[i, 1] += numToAdd;
                     numToAdd = 0;
@@ -96,7 +231,7 @@ public class MainInventory : MonoBehaviour {
 
     // Returns the name of the specified item based on its ID
     public string ItemName(int itemID) {
-        string name = "";
+        string name = "---";
 
         switch (itemID) {
             case (int)ITEM_ID.TEST_POTION_HP:
@@ -120,7 +255,7 @@ public class MainInventory : MonoBehaviour {
 
     // Returns the item's description based of the itemID specified
     public string ItemDescription(int itemID) {
-        string description = "";
+        string description = "---";
 
         switch (itemID) {
             case (int)ITEM_ID.TEST_POTION_HP:
@@ -158,6 +293,12 @@ public class MainInventory : MonoBehaviour {
                 options.Add("Use");
                 options.Add("Switch");
                 break;
+            case (int)ITEM_TYPE.EQUIPABLE:
+                if (invItem[curOption, 2] == 0) { options.Add("Equip"); }
+                else { options.Add("Unequip"); }
+                options.Add("Switch");
+                options.Add("Drop");
+                break;
         }
 
         return options;
@@ -165,10 +306,22 @@ public class MainInventory : MonoBehaviour {
 
     // Executes code based upon what option was selected by the user. These include options like equipping, unequipping, switching, dropping, etc.
     public void ItemOptionsFunction(int itemID, string option) {
+        if (option.Equals("Drop")) {
+            RemoveItem(curOption, invItem[curOption, 1]);
+            return;
+        }
+
         if (option.Equals("Use")) {
 
         } else if (option.Equals("Switch")) {
-            // TODO -- Add functionality to swap items in the inventory
+            if (!swappingItems) {
+                swappingItems = true;
+                slotToSwapTo = curOption;
+                var length = itemToSwap.Length;
+                for (int i = 0; i < length; i++) {
+                    itemToSwap[i] = invItem[curOption, i];
+                }
+            }
         }
     }
 
