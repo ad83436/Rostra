@@ -108,13 +108,13 @@ public class MainInventory : MonoBehaviour {
         string description = "";
 
         switch (itemID) {
-            case (int)ITEM_ID.TEST1:
+            case (int)ITEM_ID.TEST_POTION_HP:
                 description = "Test_Description_1";
                 break;
-            case (int)ITEM_ID.TEST2:
+            case (int)ITEM_ID.TEST_POTION_MP:
                 description = "Test_Description_2";
                 break;
-            case (int)ITEM_ID.TEST3:
+            case (int)ITEM_ID.TEST_QUEST_ITEM:
                 description = "Test_Description_3";
                 break;
         }
@@ -152,11 +152,11 @@ public class MainInventory : MonoBehaviour {
         int itemType = 0;
 
         switch (itemID) {
-            case (int)ITEM_ID.TEST1:
-            case (int)ITEM_ID.TEST2:
+            case (int)ITEM_ID.TEST_POTION_HP:
+            case (int)ITEM_ID.TEST_POTION_MP:
                 itemType = (int)ITEM_TYPE.CONSUMABLE;
                 break;
-            case (int)ITEM_ID.TEST3:
+            case (int)ITEM_ID.TEST_QUEST_ITEM:
                 itemType = (int)ITEM_TYPE.KEY_ITEM;
                 break;
         }
@@ -169,10 +169,10 @@ public class MainInventory : MonoBehaviour {
         int stackSize = 1; // Default stack limit is 1
 
         switch (itemID) {
-            case (int)ITEM_ID.TEST1:
+            case (int)ITEM_ID.TEST_POTION_HP:
                 stackSize = 20;
                 break;
-            case (int)ITEM_ID.TEST2:
+            case (int)ITEM_ID.TEST_POTION_MP:
                 stackSize = 10;
                 break;
         }
