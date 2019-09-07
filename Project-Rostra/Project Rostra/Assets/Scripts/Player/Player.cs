@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     public int str;
     public int crit;
     public int playerIndex;
+    public string name;
     public string[] equippedSkills = new string [4];
     private BattleManager battleManager;
 
@@ -19,13 +20,19 @@ public class Player : MonoBehaviour
     private void Start()
     {
         battleManager = BattleManager.instance;
-        battleManager.players[playerIndex] = new BattleManager.PlayerInformtion();
-        battleManager.players[playerIndex].playerIndex = playerIndex;
-        battleManager.players[playerIndex].agi = agi;
+
     }
 
     private void Update()
     {
+        if(Input.GetKeyDown(KeyCode.Y))
+        {
+            battleManager.players[playerIndex].playerIndex = playerIndex;
+            battleManager.players[playerIndex].agi = agi;
+            battleManager.players[playerIndex].playerReference = this;
+            battleManager.players[playerIndex].name = name;
+            Debug.Log("Added player to BTL manager");
+        }
         if(Input.GetKeyDown(KeyCode.A))
         {
             StartBattle();
@@ -51,5 +58,10 @@ public class Player : MonoBehaviour
     private void EndBattle()
     {
         battleManager.EndOfBattle(playerIndex, hp, mp);
+    }
+
+    public void mynameis()
+    {
+        Debug.Log("Player " + name);
     }
 }
