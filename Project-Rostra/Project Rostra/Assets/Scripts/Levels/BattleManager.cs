@@ -173,9 +173,6 @@ public class BattleManager : MonoBehaviour
 
         eAgilities.Sort();
 
-        //Temp code, will call this function from the Q
-        //uiBtl.showThisPlayerUI(0, "Fargas", players[0].playerReference);
-
         BuildQueue();
         NextOnQueue();
     }

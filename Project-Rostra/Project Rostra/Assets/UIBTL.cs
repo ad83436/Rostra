@@ -102,14 +102,12 @@ public class UIBTL : MonoBehaviour
     //Called from the BTL Manager to update the UI based on which player's turn it is
     public void showThisPlayerUI(int playerIndex, string name, Player playerReference)
     {
-        if(playerReference.currentState!=Player.playerState.Guard 
-            && playerReference.currentState != Player.playerState.Waiting)
+        if(playerReference.currentState != Player.playerState.Waiting)
         {
             currentState = btlUIState.choosingBasicCommand;
         }
+        
 
-
-        Debug.Log("Show this player UI " + name);
         playerTurnIndicator.SetActive(true);
         controlsPanel.gameObject.SetActive(true);
 

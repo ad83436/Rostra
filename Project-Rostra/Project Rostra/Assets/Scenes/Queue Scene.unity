@@ -1409,6 +1409,7 @@ GameObject:
   - component: {fileID: 426476449}
   - component: {fileID: 426476448}
   - component: {fileID: 426476450}
+  - component: {fileID: 426476451}
   m_Layer: 0
   m_Name: Arcelus
   m_TagString: Untagged
@@ -1497,7 +1498,7 @@ MonoBehaviour:
   def: 0
   hp: 0
   mp: 0
-  agi: 10
+  agi: 24
   str: 0
   crit: 0
   playerIndex: 3
@@ -1508,6 +1509,25 @@ MonoBehaviour:
   - 
   - 
   currentState: 0
+--- !u!95 &426476451
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 426476447}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a55ff1ff64979d1438ff364fb4ed135b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &516849112
 GameObject:
   m_ObjectHideFlags: 0
@@ -1525,7 +1545,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!212 &516849113
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1962,7 +1982,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!212 &667189819
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3267,6 +3287,7 @@ GameObject:
   - component: {fileID: 1186166447}
   - component: {fileID: 1186166446}
   - component: {fileID: 1186166448}
+  - component: {fileID: 1186166449}
   m_Layer: 0
   m_Name: Freya
   m_TagString: Untagged
@@ -3366,6 +3387,25 @@ MonoBehaviour:
   - 
   - 
   currentState: 0
+--- !u!95 &1186166449
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1186166445}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 619f77ebcf08802478ce56306c542fee, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1213235510
 GameObject:
   m_ObjectHideFlags: 0
@@ -3663,7 +3703,7 @@ MonoBehaviour:
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 4
+  m_FillMethod: 0
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 1
