@@ -85,6 +85,7 @@ public class Player : MonoBehaviour
         Debug.Log("CompleteAttack");
         playerAnimator.SetBool("Attack", false);
         attackingThisEnemy.TakeDamage(20.0f);
+        battleManager.NextOnQueue(); //Move to the next on Q
 
     }
 

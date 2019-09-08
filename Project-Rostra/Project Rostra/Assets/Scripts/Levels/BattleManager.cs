@@ -174,8 +174,22 @@ public class BattleManager : MonoBehaviour
         eAgilities.Sort();
 
         //Temp code, will call this function from the Q
-        uiBtl.showThisPlayerUI(0, "Fargas", players[0].playerReference);
+        //uiBtl.showThisPlayerUI(0, "Fargas", players[0].playerReference);
 
+        BuildQueue();
+        NextOnQueue();
+    }
+
+    public void NextOnQueue()
+    {
+        //Temp code
+
+        //Should check if this is a player, but for now, this is a player
+        uiBtl.showThisPlayerUI(battleQueue[0].playerIndex, battleQueue[0].name, battleQueue[0].playerReference);
+        //Add it to the end of the Q
+        battleQueue.Add(battleQueue[0]);
+        //Remove it from the start of the Q 
+        battleQueue.RemoveAt(0);
     }
 
     public void BuildQueue()
