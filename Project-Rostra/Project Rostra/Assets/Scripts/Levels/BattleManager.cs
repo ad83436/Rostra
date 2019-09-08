@@ -40,9 +40,39 @@ public class BattleManager : MonoBehaviour
             Destroy(gameObject);
         }
 
+        players = new PlayerInformtion[4]; //max 4 players
+        enemies = new PlayerInformtion[5];//max 5 enemies
+        pAgilities = new List<int>();
+        eAgilities = new List<int>();
+        battleQueue = new List<PlayerInformtion>();
+        removedPlayerIndexes = new int[4];
+        removedEnemyIndexes = new int[5];
+
+        for (int i = 0; i < players.Length; i++)
+        {
+            players[i] = new PlayerInformtion();
+        }
+
+        for (int i = 0; i < enemies.Length; i++)
+        {
+            enemies[i] = new PlayerInformtion();
+        }
+
+        for (int i = 0; i < removedPlayerIndexes.Length; i++)
+        {
+            removedPlayerIndexes[i] = -1;
+        }
+        for (int i = 0; i < removedEnemyIndexes.Length; i++)
+        {
+            removedEnemyIndexes[i] = -1;
+        }
+
+
     }
 
     #endregion
+
+    private UIBTL uiBtl;
 
     public PlayerInformtion[] players;
     public PlayerInformtion[] enemies;
@@ -64,34 +94,9 @@ public class BattleManager : MonoBehaviour
 
     private void Start()
     {
+        uiBtl = UIBTL.instance;
         //Each player and enemy would have an index that stores their information
-        players = new PlayerInformtion[4]; //max 4 players
-        enemies = new PlayerInformtion[5];//max 5 enemies
-        pAgilities = new List<int>();
-        eAgilities = new List<int>();
-        battleQueue = new List<PlayerInformtion>();
-        removedPlayerIndexes = new int[4];
-        removedEnemyIndexes = new int[5];
-
-        for(int i =0;i<players.Length;i++)
-        {
-            players[i] = new PlayerInformtion();
-        }
-
-        for (int i = 0; i < enemies.Length; i++)
-        {
-            enemies[i] = new PlayerInformtion();
-        }
-
-        for(int i =0;i<removedPlayerIndexes.Length;i++)
-        {
-            removedPlayerIndexes[i] = -1;
-        }
-        for (int i = 0; i < removedEnemyIndexes.Length; i++)
-        {
-            removedEnemyIndexes[i] = -1;
-        }
-
+        
     }
 
 
@@ -138,6 +143,8 @@ public class BattleManager : MonoBehaviour
             enemies[enemyIndex].enemyReference = enemyRef;
             enemies[enemyIndex].name = name;
 
+        //This will probably need to change to avoid race conditions between startbattle and build Q
+            uiBtl.enemies[enemyIndex] = enemyRef; //Update the UI system with the enemy
     }
 
     public void StartBattle()
@@ -165,6 +172,9 @@ public class BattleManager : MonoBehaviour
         }
 
         eAgilities.Sort();
+
+        //Temp code, will call this function from the Q
+        uiBtl.showThisPlayerUI(0, "Fargas", players[0].playerReference);
 
     }
 
