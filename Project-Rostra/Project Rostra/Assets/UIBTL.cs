@@ -128,7 +128,7 @@ public class UIBTL : MonoBehaviour
 
     private void choosingBasicCommand()
     {
-        Debug.Log("Choosing Basic Commands");
+        //Debug.Log("Choosing Basic Commands");
         switch(controlsIndicator)
         {
             case 0://Highlighter is at attack

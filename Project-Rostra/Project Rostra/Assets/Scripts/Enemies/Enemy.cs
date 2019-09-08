@@ -67,7 +67,7 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(float damage)
     {
         currentHP -= damage;
-        HP.fillAmount -= currentHP / maxHP;
+        HP.fillAmount -= (1- currentHP / maxHP);
     }
 
 

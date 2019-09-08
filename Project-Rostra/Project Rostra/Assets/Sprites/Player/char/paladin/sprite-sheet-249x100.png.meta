@@ -22,40 +22,40 @@ TextureImporter:
     second: Idle0
   - first:
       213: 3110989167953360914
-    second: sprite-sheet-249x100_6
+    second: Attack0
   - first:
       213: 1917840015716836961
-    second: sprite-sheet-249x100_7
+    second: Attack11
   - first:
       213: 929747616229168797
-    second: sprite-sheet-249x100_8
-  - first:
-      213: -8613893559307406191
-    second: sprite-sheet-249x100_9
-  - first:
-      213: 4992966174507967389
-    second: sprite-sheet-249x100_10
-  - first:
-      213: -608106345311185100
-    second: sprite-sheet-249x100_11
-  - first:
-      213: 1328181545973392355
-    second: Attack5
-  - first:
-      213: -9026265515335879138
-    second: Attack4
-  - first:
-      213: -4084878617026229775
-    second: Attack3
-  - first:
-      213: -7526501678190853256
     second: Attack2
   - first:
+      213: -8613893559307406191
+    second: Attack3
+  - first:
+      213: 4992966174507967389
+    second: Attack4
+  - first:
+      213: -608106345311185100
+    second: Attack5
+  - first:
+      213: 1328181545973392355
+    second: Attack6
+  - first:
+      213: -9026265515335879138
+    second: Attack7
+  - first:
+      213: -4084878617026229775
+    second: Attack8
+  - first:
+      213: -7526501678190853256
+    second: Attack9
+  - first:
       213: 4253578787339828477
-    second: Attack1
+    second: Attack11
   - first:
       213: -7836013898870580239
-    second: Attack0
+    second: Attack11
   - first:
       213: 7758931403693586281
     second: sprite-sheet-249x100_18
@@ -362,15 +362,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-sheet-249x100_6
+      name: Attack0
       rect:
         serializedVersion: 2
         x: 113
-        y: 502
+        y: 503
         width: 112
         height: 86
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.35, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -383,15 +383,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-sheet-249x100_7
+      name: Attack1
       rect:
         serializedVersion: 2
         x: 362
-        y: 502
+        y: 503
         width: 112
         height: 86
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.35, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -404,15 +404,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-sheet-249x100_8
+      name: Attack2
       rect:
         serializedVersion: 2
         x: 633
         y: 504
         width: 100
         height: 91
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.35, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -425,15 +425,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-sheet-249x100_9
+      name: Attack3
       rect:
         serializedVersion: 2
         x: 888
         y: 504
         width: 95
         height: 93
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.35, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -446,15 +446,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-sheet-249x100_10
+      name: Attack4
       rect:
         serializedVersion: 2
         x: 1138
-        y: 504
+        y: 505
         width: 93
         height: 94
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.35, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -467,15 +467,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-sheet-249x100_11
+      name: Attack5
       rect:
         serializedVersion: 2
         x: 1388
         y: 504
         width: 88
         height: 84
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.35, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -488,15 +488,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Attack5
+      name: Attack6
       rect:
         serializedVersion: 2
         x: 20
         y: 403
         width: 221
         height: 85
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.35, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -509,15 +509,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Attack4
+      name: Attack7
       rect:
         serializedVersion: 2
         x: 265
         y: 403
         width: 217
         height: 86
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.35, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -530,15 +530,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Attack3
+      name: Attack8
       rect:
         serializedVersion: 2
         x: 513
         y: 403
         width: 218
         height: 90
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.35, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -551,15 +551,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Attack2
+      name: Attack9
       rect:
         serializedVersion: 2
         x: 763
-        y: 403
+        y: 404
         width: 217
         height: 87
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.35, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -572,15 +572,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Attack1
+      name: Attack10
       rect:
         serializedVersion: 2
         x: 1105
         y: 404
         width: 111
         height: 82
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.35, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -593,15 +593,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Attack0
+      name: Attack11
       rect:
         serializedVersion: 2
         x: 1360
         y: 402
         width: 109
         height: 86
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.35, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -974,7 +974,7 @@ TextureImporter:
       name: sprite-sheet-249x100_40
       rect:
         serializedVersion: 2
-        x: 1264
+        x: 1263
         y: 102
         width: 213
         height: 97
