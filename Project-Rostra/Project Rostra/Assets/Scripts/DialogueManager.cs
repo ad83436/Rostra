@@ -50,7 +50,7 @@ public class DialogueManager : MonoBehaviour
 		}
 		else
 		{
-			Debug.LogError("The Dialogue Guy is missing and sweet Jesus I can't find him");
+			print("The Dialogue Guy is missing and sweet Jesus I can't find him");
 		}
 		// set everything to its default 
 		textElements = new Queue<string>();
