@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
     public string name;
     public string[] equippedSkills = new string [4];
     private BattleManager battleManager;
+    private UIBTL uiBTL;
     private Animator playerAnimator;
     private Enemy attackingThisEnemy;
 
@@ -26,11 +27,12 @@ public class Player : MonoBehaviour
         Dead //When a character's HP reaches zero, that character's turn is skipped
     }
 
-    private playerState currentState;
+    public playerState currentState;
 
     private void Start()
     {
         battleManager = BattleManager.instance;
+        uiBTL = UIBTL.instance;
         currentState = playerState.Idle;
         playerAnimator = gameObject.GetComponent<Animator>();
 
@@ -85,6 +87,8 @@ public class Player : MonoBehaviour
         Debug.Log("CompleteAttack");
         playerAnimator.SetBool("Attack", false);
         attackingThisEnemy.TakeDamage(20.0f);
+        uiBTL.ResetVisibilityForAllEnemies();
+        uiBTL.EndTurn();
         battleManager.NextOnQueue(); //Move to the next on Q
 
     }

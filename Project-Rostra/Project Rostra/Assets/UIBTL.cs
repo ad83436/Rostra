@@ -102,6 +102,13 @@ public class UIBTL : MonoBehaviour
     //Called from the BTL Manager to update the UI based on which player's turn it is
     public void showThisPlayerUI(int playerIndex, string name, Player playerReference)
     {
+        if(playerReference.currentState!=Player.playerState.Guard 
+            && playerReference.currentState != Player.playerState.Waiting)
+        {
+            currentState = btlUIState.choosingBasicCommand;
+        }
+
+
         Debug.Log("Show this player UI " + name);
         playerTurnIndicator.SetActive(true);
         controlsPanel.gameObject.SetActive(true);
@@ -148,7 +155,7 @@ public class UIBTL : MonoBehaviour
                     enemyToAttackIndicator.SetActive(true);
                     enemyToAttackIndicator.transform.position = enemyIndicatorPos0.transform.position;
                     enemyIndicatorIndex = 0;
-                    makeChosenEnemyMorePrompt(enemyIndicatorIndex);
+                    MakeChosenEnemyMorePrompt(enemyIndicatorIndex);
                     Debug.Log("Go to choosing enemy");
                 }
                 break;
@@ -235,7 +242,7 @@ public class UIBTL : MonoBehaviour
         //If we're at the same enemy, don't call the visible function again
         if (previousEnemyIndicatorIndex != enemyIndicatorIndex)
         {
-            makeChosenEnemyMorePrompt(enemyIndicatorIndex);
+            MakeChosenEnemyMorePrompt(enemyIndicatorIndex);
         }
 
         switch (enemyIndicatorIndex)
@@ -243,101 +250,146 @@ public class UIBTL : MonoBehaviour
             case 0:
                 if(Input.GetKeyDown(KeyCode.DownArrow))
                 {
-                    previousEnemyIndicatorIndex = enemyIndicatorIndex;
-                    enemyIndicatorIndex = 1;
-                    enemyToAttackIndicator.transform.position = enemyIndicatorPos1.transform.position;
+                    if (enemies[1] != null)
+                    {
+                        previousEnemyIndicatorIndex = enemyIndicatorIndex;
+                        enemyIndicatorIndex = 1;
+                        enemyToAttackIndicator.transform.position = enemyIndicatorPos1.transform.position;
+                    }
                 }
                 else if(Input.GetKeyDown(KeyCode.RightArrow)|| Input.GetKeyDown(KeyCode.LeftArrow))
                 {
-                    previousEnemyIndicatorIndex = enemyIndicatorIndex;
-                    enemyIndicatorIndex = 3;
-                    enemyToAttackIndicator.transform.position = enemyIndicatorPos3.transform.position;
+                    if (enemies[3] != null)
+                    {
+                        previousEnemyIndicatorIndex = enemyIndicatorIndex;
+                        enemyIndicatorIndex = 3;
+                        enemyToAttackIndicator.transform.position = enemyIndicatorPos3.transform.position;
+                    }
                 }
                 else if(Input.GetKeyDown(KeyCode.UpArrow))
                 {
-                    previousEnemyIndicatorIndex = enemyIndicatorIndex;
-                    enemyIndicatorIndex = 2;
-                    enemyToAttackIndicator.transform.position = enemyIndicatorPos2.transform.position;
+                    if (enemies[2] != null)
+                    {
+                        previousEnemyIndicatorIndex = enemyIndicatorIndex;
+                        enemyIndicatorIndex = 2;
+                        enemyToAttackIndicator.transform.position = enemyIndicatorPos2.transform.position;
+                    }
                 }
                 break;
             case 1:
                 if (Input.GetKeyDown(KeyCode.DownArrow))
                 {
-                    previousEnemyIndicatorIndex = enemyIndicatorIndex;
-                    enemyIndicatorIndex = 2;
-                    enemyToAttackIndicator.transform.position = enemyIndicatorPos2.transform.position;
+                    if (enemies[2] != null)
+                    {
+                        previousEnemyIndicatorIndex = enemyIndicatorIndex;
+                        enemyIndicatorIndex = 2;
+                        enemyToAttackIndicator.transform.position = enemyIndicatorPos2.transform.position;
+                    }
                 }
                 else if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow))
                 {
-                    previousEnemyIndicatorIndex = enemyIndicatorIndex;
-                    enemyIndicatorIndex = 4;
-                    enemyToAttackIndicator.transform.position = enemyIndicatorPos4.transform.position;
+                    if (enemies[4] != null)
+                    {
+                        previousEnemyIndicatorIndex = enemyIndicatorIndex;
+                        enemyIndicatorIndex = 4;
+                        enemyToAttackIndicator.transform.position = enemyIndicatorPos4.transform.position;
+                    }
                 }
                 else if (Input.GetKeyDown(KeyCode.UpArrow))
                 {
-                    previousEnemyIndicatorIndex = enemyIndicatorIndex;
-                    enemyIndicatorIndex = 0;
-                    enemyToAttackIndicator.transform.position = enemyIndicatorPos0.transform.position;
+                    if (enemies[0] != null)
+                    {
+                        previousEnemyIndicatorIndex = enemyIndicatorIndex;
+                        enemyIndicatorIndex = 0;
+                        enemyToAttackIndicator.transform.position = enemyIndicatorPos0.transform.position;
+                    }
                 }
                 break;
             case 2:
                 if (Input.GetKeyDown(KeyCode.DownArrow))
                 {
-                    previousEnemyIndicatorIndex = enemyIndicatorIndex;
-                    enemyIndicatorIndex = 0;
-                    enemyToAttackIndicator.transform.position = enemyIndicatorPos0.transform.position;
+                    if (enemies[0] != null)
+                    {
+                        previousEnemyIndicatorIndex = enemyIndicatorIndex;
+                        enemyIndicatorIndex = 0;
+                        enemyToAttackIndicator.transform.position = enemyIndicatorPos0.transform.position;
+                    }
                 }
                 else if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow))
                 {
-                    previousEnemyIndicatorIndex = enemyIndicatorIndex;
-                    enemyIndicatorIndex = 3;
-                    enemyToAttackIndicator.transform.position = enemyIndicatorPos3.transform.position;
+                    if (enemies[3])
+                    {
+                        previousEnemyIndicatorIndex = enemyIndicatorIndex;
+                        enemyIndicatorIndex = 3;
+                        enemyToAttackIndicator.transform.position = enemyIndicatorPos3.transform.position;
+                    }
                 }
                 else if (Input.GetKeyDown(KeyCode.UpArrow))
                 {
-                    previousEnemyIndicatorIndex = enemyIndicatorIndex;
-                    enemyIndicatorIndex = 1;
-                    enemyToAttackIndicator.transform.position = enemyIndicatorPos1.transform.position;
+                    if (enemies[1])
+                    {
+                        previousEnemyIndicatorIndex = enemyIndicatorIndex;
+                        enemyIndicatorIndex = 1;
+                        enemyToAttackIndicator.transform.position = enemyIndicatorPos1.transform.position;
+                    }
                 }
                 break;
             case 3:
                 if (Input.GetKeyDown(KeyCode.DownArrow))
                 {
-                    previousEnemyIndicatorIndex = enemyIndicatorIndex;
-                    enemyIndicatorIndex = 4;
-                    enemyToAttackIndicator.transform.position = enemyIndicatorPos4.transform.position;
+                    if (enemies[4] != null)
+                    {
+                        previousEnemyIndicatorIndex = enemyIndicatorIndex;
+                        enemyIndicatorIndex = 4;
+                        enemyToAttackIndicator.transform.position = enemyIndicatorPos4.transform.position;
+                    }
                 }
                 else if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow))
                 {
-                    previousEnemyIndicatorIndex = enemyIndicatorIndex;
-                    enemyIndicatorIndex = 0;
-                    enemyToAttackIndicator.transform.position = enemyIndicatorPos0.transform.position;
+                    if (enemies[0] != null)
+                    {
+                        previousEnemyIndicatorIndex = enemyIndicatorIndex;
+                        enemyIndicatorIndex = 0;
+                        enemyToAttackIndicator.transform.position = enemyIndicatorPos0.transform.position;
+                    }
                 }
                 else if (Input.GetKeyDown(KeyCode.UpArrow))
                 {
-                    previousEnemyIndicatorIndex = enemyIndicatorIndex;
-                    enemyIndicatorIndex = 4;
-                    enemyToAttackIndicator.transform.position = enemyIndicatorPos4.transform.position;
+                    if (enemies[4] != null)
+                    {
+                        previousEnemyIndicatorIndex = enemyIndicatorIndex;
+                        enemyIndicatorIndex = 4;
+                        enemyToAttackIndicator.transform.position = enemyIndicatorPos4.transform.position;
+                    }
                 }
                 break;
             case 4:
                 if (Input.GetKeyDown(KeyCode.DownArrow))
                 {
-                    previousEnemyIndicatorIndex = enemyIndicatorIndex;
-                    enemyIndicatorIndex = 3;
-                    enemyToAttackIndicator.transform.position = enemyIndicatorPos3.transform.position;
+                    if (enemies[3] != null)
+                    {
+                        previousEnemyIndicatorIndex = enemyIndicatorIndex;
+                        enemyIndicatorIndex = 3;
+                        enemyToAttackIndicator.transform.position = enemyIndicatorPos3.transform.position;
+                    }
                 }
                 else if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow))
                 {
-                    previousEnemyIndicatorIndex = enemyIndicatorIndex;
-                    enemyIndicatorIndex = 2;
-                    enemyToAttackIndicator.transform.position = enemyIndicatorPos2.transform.position;
+                    if (enemies[2] != null)
+                    {
+                        previousEnemyIndicatorIndex = enemyIndicatorIndex;
+                        enemyIndicatorIndex = 2;
+                        enemyToAttackIndicator.transform.position = enemyIndicatorPos2.transform.position;
+                    }
                 }
                 else if (Input.GetKeyDown(KeyCode.UpArrow))
                 {
-                    previousEnemyIndicatorIndex = enemyIndicatorIndex;
-                    enemyIndicatorIndex = 3;
-                    enemyToAttackIndicator.transform.position = enemyIndicatorPos3.transform.position;
+                    if (enemies[3])
+                    {
+                        previousEnemyIndicatorIndex = enemyIndicatorIndex;
+                        enemyIndicatorIndex = 3;
+                        enemyToAttackIndicator.transform.position = enemyIndicatorPos3.transform.position;
+                    }
                 }
                 break;
         }
@@ -348,17 +400,33 @@ public class UIBTL : MonoBehaviour
         }
     }
 
-    public void makeChosenEnemyMorePrompt(int enemyIndex) //When the player chooses an enemy to attack, the other enemies should be less visible
+    public void MakeChosenEnemyMorePrompt(int enemyIndex) //When the player chooses an enemy to attack, the other enemies should be less visible
     {
-        enemies[enemyIndex].resetVisibility();
+        if (enemies[enemyIndex] != null)
+        {
+            enemies[enemyIndex].resetVisibility();
+        }
 
         for(int i =0;i<5;i++)
         {
-            if(i!=enemyIndex)
+            if(i!=enemyIndex && enemies[i]!=null)
             {
                 enemies[i].becomeLessVisbile();
             }
         }
+    }
+
+    public void ResetVisibilityForAllEnemies()
+    {
+        //Reset the visibility of all enemies
+        for (int i = 0; i < 5; i++)
+        {
+            if (enemies[i] != null)
+            {
+                enemies[i].resetVisibility();
+            }
+        }
+
     }
 
     private void choosingPlayer()
@@ -366,7 +434,7 @@ public class UIBTL : MonoBehaviour
 
     }
 
-    private void EndTurn()
+    public void EndTurn()
     {
         playerTurnIndicator.SetActive(false);
         controlsPanel.gameObject.SetActive(false);
