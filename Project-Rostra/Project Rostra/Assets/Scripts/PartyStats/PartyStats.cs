@@ -21,6 +21,7 @@ public struct CharacterStats {
 		strength = 0;
 		critical = 0;
 		agility = 0;
+		range = 0;
 		skill = new Skills[] { Skills.None, Skills.None, Skills.None, Skills.None };
 		level = 1;
 		currentExperience = 0;				       
@@ -35,10 +36,11 @@ public struct CharacterStats {
 	public int strength;
 	public int critical;
 	public int agility;
+	public int range;
 	///returns the total of each
 	public int TotalAttack => attack + attackMod;
 	public int TotalDefence => defence + defenceMod;
-
+	
 	//skills
 	public Skills[] skill;
 	//returns a reference to the corisponding skill
