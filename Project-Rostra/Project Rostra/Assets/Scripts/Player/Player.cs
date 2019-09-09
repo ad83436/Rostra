@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -14,6 +15,9 @@ public class Player : MonoBehaviour
     public int playerIndex;
     public string name;
     public string[] equippedSkills = new string [4];
+    public int range; //Range of player standard attack
+    public int initialPos; //Position of the player 0 being Frontline and -1 being Ranged
+    public Sprite qImage;
     private BattleManager battleManager;
     private UIBTL uiBTL;
     private Animator playerAnimator;

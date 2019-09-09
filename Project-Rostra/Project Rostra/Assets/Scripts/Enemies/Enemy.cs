@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour
     public int str;
     public int crit;
     public string name;
+    public Sprite qImage;
 
     private SpriteRenderer spriteRenderer;
     private Color spriteColor;

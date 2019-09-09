@@ -173,6 +173,7 @@ public class BattleManager : MonoBehaviour
 
         eAgilities.Sort();
 
+
         BuildQueue();
         NextOnQueue();
     }
@@ -256,6 +257,8 @@ public class BattleManager : MonoBehaviour
             {
                //The player has a higher agility
                battleQueue.Add(players[maxPlayerIndex]);
+               //Add the player's image to the UI
+               uiBtl.AddImageToQ(players[maxPlayerIndex].playerReference.qImage);
                //Remove the player's agility from the list
                pAgilities.RemoveAt(pAgilities.Count - 1);
                //Add the player's index to the array of removed players
@@ -266,6 +269,8 @@ public class BattleManager : MonoBehaviour
             {
                 //The enemy has the higher agility
                 battleQueue.Add(enemies[maxEnemyIndex]);
+                //Add the enemy's image to the UI
+                uiBtl.AddImageToQ(enemies[maxEnemyIndex].enemyReference.qImage);
                 //Remove the enemy's agility from the list
                 eAgilities.RemoveAt(eAgilities.Count - 1);
                 //Add the enemy's index to the array of removed enemy
@@ -277,6 +282,8 @@ public class BattleManager : MonoBehaviour
         else if(pAgilities.Count>0 && eAgilities.Count<=0)
         {
             battleQueue.Add(players[maxPlayerIndex]);
+            //Add the player's image to the UI
+            uiBtl.AddImageToQ(players[maxPlayerIndex].playerReference.qImage);
             pAgilities.RemoveAt(pAgilities.Count - 1);
             removedPlayerIndexes[maxPlayerIndex] = maxPlayerIndex;
         }
@@ -284,6 +291,8 @@ public class BattleManager : MonoBehaviour
         else if(pAgilities.Count<=0 && eAgilities.Count>0)
         {
             battleQueue.Add(enemies[maxEnemyIndex]);
+            //Add the enemy's image to the UI
+            uiBtl.AddImageToQ(enemies[maxEnemyIndex].enemyReference.qImage);
             eAgilities.RemoveAt(eAgilities.Count - 1);
             removedEnemyIndexes[maxEnemyIndex] = maxEnemyIndex;
         }
@@ -292,6 +301,11 @@ public class BattleManager : MonoBehaviour
         if (pAgilities.Count>0 || eAgilities.Count>0)
         {
             BuildQueue();
+        }
+        //Otherwise, tell the UI system to show the Q
+        else
+        {
+            uiBtl.QueueIsReady();
         }
     }
 
