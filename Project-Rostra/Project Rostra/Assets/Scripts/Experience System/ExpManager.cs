@@ -131,7 +131,7 @@ public class ExpManager : MonoBehaviour {
 		if (PartyStats.chara[playerIndex].statPoints == 0) return;
 
 		PartyStats.chara[playerIndex].maxHealth++;
-		PartyStats.chara[playerIndex].curHealth++;
+		PartyStats.chara[playerIndex].hitpoints++;
 	}
 
 	public void UsePointOnMana(int playerIndex) {
@@ -143,7 +143,7 @@ public class ExpManager : MonoBehaviour {
 		if (PartyStats.chara[playerIndex].statPoints == 0) return;
 
 		PartyStats.chara[playerIndex].maxMana++;
-		PartyStats.chara[playerIndex].curMana++;
+		PartyStats.chara[playerIndex].magicpoints++;
 	}
 
 	public void UsePointOnStrength(int playerIndex) {

@@ -18,11 +18,11 @@ public struct CharacterStats {
 		defence = 0;
 		defenceMod = 0;
 
-		curHealth = 0;
+		hitpoints = 0;
 		maxHealth = 0;
 		maxHealthMod = 0;
 
-		curMana = 0;
+		magicpoints = 0;
 		maxMana = 0;
 		maxManaMod = 0;
 
@@ -38,14 +38,14 @@ public struct CharacterStats {
 		level = 1;
 		currentExperience = 0;				       
 		neededExperience = 500;
-		statPoints = 0;
+		statPoints = 5;
 	}
 	
 	// stats								       
 	public int attack, attackMod;
 	public int defence, defenceMod;
-	public int curHealth, maxHealth, maxHealthMod;
-	public int curMana, maxMana, maxManaMod;
+	public int hitpoints, maxHealth, maxHealthMod;
+	public int magicpoints, maxMana, maxManaMod;
 	public int strength, strengthMod;
 	public int critical, criticalMod;
 	public int agility, agilityMod;
