@@ -11,12 +11,22 @@ public class MainInventory : MonoBehaviour {
     // NOTE -- Element 1 is the item's ID value that will point to its name, description, icon, etc.
     //         Element 2 is how many items currently occupy the slot in the inventory
     //         Element 3 is what character has this item equipped (Ex. armor and weapons)
+
+    // Variables for holding a to-be-swapped item in the inventory
     private int[] itemToSwap = new int[3];      // Holds data about the item being swapped in the inventory
     private int slotToSwapTo = -1;              // The slot the the selected item will send the other item to
     private bool swappingItems = false;         // If true, the inventory will be in an "Item Swap" state. Meaning, no items can be selected until the swap is declined or completed
+
+    // Variables for selecting options and inventory items
     private int curOption = 0;                  // The current inventory item the player has their cursor over
     private int selectedOption = -1;            // The item that the player has selected in the inventory
     private int subCurOption = 0;               // The current option the player has their cursor over after selecting an item
+
+    // Variables for selecting the player to use a consumable item
+    private bool playerChooseWindow = false;    // If true, the inventory needs a player to be chosen (For using consumable items)
+    private int curPlayerOption = 0;            // Which player is being chosen to use the given item
+
+    // Variables for drawing the inventory to the screen
     private int firstToDraw = 0;                // The first item from the inventory array to draw out of the full inventory
     private int numToDraw = 15;                 // How many inventory items that can be visible to the player at any given time
 
@@ -27,6 +37,10 @@ public class MainInventory : MonoBehaviour {
         } else {
             Destroy(gameObject);
         }
+        // Set all 3rd elements in the array to -1 (Equipped by nobody) 
+        for (int i = 0; i < INVENTORY_SIZE; i++) {
+            invItem[i, 2] = -1;
+        }
     }
 
     // FOR TESTING
@@ -35,11 +49,15 @@ public class MainInventory : MonoBehaviour {
         invItem[0, 1] = ItemStackLimit((int)ITEM_ID.TEST_QUEST_ITEM);
 
         invItem[1, 0] = (int)ITEM_ID.TEST_POTION_HP;
-        invItem[1, 1] = 8;
+        invItem[1, 1] = ItemStackLimit((int)ITEM_ID.TEST_POTION_HP);
+
+        invItem[2, 0] = (int)ITEM_ID.TEST_POTION_MP;
+        invItem[2, 1] = ItemStackLimit((int)ITEM_ID.TEST_POTION_MP);
     }
 
     // Handling keyboard functionality
     private void Update() {
+        // Getting Keyboard Input
         bool keySelect, keyReturn, keyUp, keyDown;
         keySelect = Input.GetKeyDown(KeyCode.Z);
         keyReturn = Input.GetKeyDown(KeyCode.X);
@@ -73,7 +91,7 @@ public class MainInventory : MonoBehaviour {
                 }
             }
 
-            if (keySelect) { 
+            if (keySelect) {
                 if (swappingItems) { // Swapping items when the player selects after enabling swapping
                     if (slotToSwapTo != curOption) { // Make sure the player isn't swapping an item into the same spot it was in before
                         SwapItems(slotToSwapTo, curOption);
@@ -90,6 +108,26 @@ public class MainInventory : MonoBehaviour {
                         selectedOption = curOption;
                     }
                 }
+            } else if (playerChooseWindow) { // Choosing which player will use the consumable
+                // Moving up and down through the player use list
+                if (keyUp) { // Moving up in the list of players
+                    curPlayerOption--;
+                    if (curPlayerOption < 0) {
+                        curPlayerOption = 3;
+                    }
+                }
+
+                if (keyDown) { // Moving down in the list of players
+                    curPlayerOption++;
+                    if (curPlayerOption > 3) {
+                        curPlayerOption = 0;
+                    }
+                }
+
+                // Using an item on the player that is currently highlighted
+                if (keySelect) {
+                    ItemUseFunction(invItem[curOption, 0], curPlayerOption);
+                }
             }
 
             if (keyReturn) {
@@ -102,6 +140,10 @@ public class MainInventory : MonoBehaviour {
                     }
                 } else {
                     // TODO -- Make this block of code exit out of the inventory
+                }
+                // Disable the player choosing window, while still keeping the sub-menu open
+                if (playerChooseWindow) {
+                    playerChooseWindow = false;
                 }
             }
         } else { // Input functionality for when the player has selected an item (The option menu)
@@ -211,18 +253,34 @@ public class MainInventory : MonoBehaviour {
         return false;
     }
 
+    // Finds if an item exists in the inventory and returns the slot that the item is in
+    // A side effect of this method of search is that it will find the first instance of the
+    // item relative to the top of the inventory. So, the closest to the top will be prioritized
+    public int FindItem(int itemID) {
+        int slot = -1;
+
+        // Search the entire inventory for the item
+        for (int i = 0; i < INVENTORY_SIZE; i++) {
+            // The item is found
+            if (invItem[i, 0] == itemID) {
+                slot = i;
+                break;
+            }
+        }
+
+        // Return either -1 (Default Value) or the item's slot
+        return slot;
+    }
+
     // Removes an item from the specified slot in the inventory, if 0 items remain after word, empty the slot completely
     public void RemoveItem(int slot, int numToRemove = 1) {
-        if (numToRemove >= invItem[slot, 1]) {
-            invItem[slot, 1] -= numToRemove;
-            // Completely remove the item if all in the stack have been used
-            if (invItem[slot, 1] <= 0) {
-                invItem[slot, 0] = 0;
-                // Chekc if the item needs to be unequipped from a character
-                if (invItem[slot, 2] != 0) {
-                    invItem[slot, 2] = 0;
-                    // TODO -- Add a call to remove the item off a character if the item is equipped by one of them
-                }
+       invItem[slot, 1] -= numToRemove;
+       // Completely remove the item if all in the stack have been used
+       if (invItem[slot, 1] <= 0) {
+            invItem[slot, 0] = (int)ITEM_ID.NO_ITEM;
+            // Remove the item from a player object if one had the dropped item equipped
+            if (invItem[slot, 2] != -1) {
+                UpdatePlayerStats(invItem[slot, 2], invItem[slot, 0], true);
             }
         }
     }
@@ -233,6 +291,7 @@ public class MainInventory : MonoBehaviour {
     public string ItemName(int itemID) {
         string name = "---";
 
+        // Find the item's name based on its ID value
         switch (itemID) {
             case (int)ITEM_ID.TEST_POTION_HP:
                 name = "Test Potion (HP)";
@@ -257,6 +316,7 @@ public class MainInventory : MonoBehaviour {
     public string ItemDescription(int itemID) {
         string description = "---";
 
+        // Find an item's description based on its ID
         switch (itemID) {
             case (int)ITEM_ID.TEST_POTION_HP:
                 description = "There's like a 50% chance this will restore the player's HP.";
@@ -283,6 +343,7 @@ public class MainInventory : MonoBehaviour {
         List<string> options = new List<string>();
         int itemType = ItemType(itemID);
 
+        // Find out the options avaiable to a player bassed on the selected item's ID
         switch (itemType) {
             case (int)ITEM_TYPE.CONSUMABLE:
                 options.Add("Use");
@@ -294,8 +355,11 @@ public class MainInventory : MonoBehaviour {
                 options.Add("Switch");
                 break;
             case (int)ITEM_TYPE.EQUIPABLE:
-                if (invItem[curOption, 2] == 0) { options.Add("Equip"); }
-                else { options.Add("Unequip"); }
+                if (invItem[curOption, 2] == -1) { // Shot "Equip" if nobody has the item equipped
+                    options.Add("Equip");
+                } else { // Show "Unequip" if the item is equipped by a player already
+                    options.Add("Unequip");
+                }
                 options.Add("Switch");
                 options.Add("Drop");
                 break;
@@ -306,14 +370,10 @@ public class MainInventory : MonoBehaviour {
 
     // Executes code based upon what option was selected by the user. These include options like equipping, unequipping, switching, dropping, etc.
     public void ItemOptionsFunction(int itemID, string option) {
-        if (option.Equals("Drop")) {
-            RemoveItem(curOption, invItem[curOption, 1]);
-            return;
-        }
+        int itemType = ItemType(itemID);
 
-        if (option.Equals("Use")) {
-
-        } else if (option.Equals("Switch")) {
+        // Starting up the item swapping
+        if (option.Equals("Switch")) {
             if (!swappingItems) {
                 swappingItems = true;
                 slotToSwapTo = curOption;
@@ -322,13 +382,69 @@ public class MainInventory : MonoBehaviour {
                     itemToSwap[i] = invItem[curOption, i];
                 }
             }
+            return;
+        }
+
+        // Removing an item and/or its entire stack from the inventory
+        if (option.Equals("Drop")) {
+            RemoveItem(curOption, invItem[curOption, 1]);
+            return;
+        }
+
+        // Using a CONSUMABLE item (Not the same as equipping/unequipping a weapon or piece of armor)
+        if (itemType == (int)ITEM_TYPE.CONSUMABLE) {
+            if (option.Equals("Use")) {
+                // Open prompt for choosing which player to use the consumable on
+                playerChooseWindow = true;
+                return;
+            }
+        }
+
+        if (itemType == (int)ITEM_TYPE.EQUIPABLE) {
+            if (option.Equals("Equip") || option.Equals("Unequip")) {
+                // TODO -- create a call to a script that handles equipping and unequipping armor and weapons
+                return;
+            }
+        }
+    }
+
+    // A method that holds all the functionality for every item in the game. If the item slot is empty after use, delete the item.
+    // This method will not equip or unequip any item, but it will provide functionality for CONSUMABLE items.
+    public void ItemUseFunction(int itemID, int playerID) {
+        int itemType = ItemType(itemID);
+        bool isEquipped = false;
+        // Only check if an item is equipped or not if the item CAN BE EQUIPPED (Ex. Weapons and Armor)
+        if (itemType == (int)ITEM_TYPE.EQUIPABLE) {
+            if (invItem[curOption, 2] == playerID) {
+                isEquipped = true;
+            }
+        }
+
+        // Check which functionality to use based on the itemID provided
+        switch (itemID) {
+            case (int)ITEM_ID.TEST_POTION_HP:
+                UpdatePlayerHitpoints(10, playerID);
+                break;
+            case (int)ITEM_ID.TEST_POTION_MP:
+                UpdatePlayerMagicpoints(20, playerID);
+                break;
+            case (int)ITEM_ID.TEST_ARMOR1:
+            case (int)ITEM_ID.TEST_WEAPON1:
+                UpdatePlayerStats(playerID, itemID, isEquipped);
+                break;
+        }
+
+        // Remove the item (Or one from the stack) if it was consumed by the player
+        if (itemType == (int)ITEM_TYPE.CONSUMABLE) {
+            RemoveItem(invItem[curOption, 0]);
         }
     }
 
     // Returns the "Type" of the item based on the itemID. This is used to determined what options the player can use in tandem with the item
     public int ItemType(int itemID) {
-        int itemType = 0;
+        int itemType = (int)ITEM_TYPE.CONSUMABLE;
 
+        // Search for the item's type based on its ID
         switch (itemID) {
             case (int)ITEM_ID.TEST_POTION_HP:
             case (int)ITEM_ID.TEST_POTION_MP:
@@ -350,6 +466,7 @@ public class MainInventory : MonoBehaviour {
     public int ItemStackLimit(int itemID) {
         int stackSize = 1; // Default stack limit is 1
 
+        // Find out an item's max stack size based on its ID
         switch (itemID) {
             case (int)ITEM_ID.TEST_POTION_HP:
                 stackSize = 20;
@@ -360,5 +477,72 @@ public class MainInventory : MonoBehaviour {
         }
 
         return stackSize;
+    }
+
+    // Holds stats for every single weapon and piece of armor in the game
+    // If no values have been set, the item's stats will be defaulted to 0
+    public int[] ItemStats(int itemID) {
+        int[] stat = { 0, 0 };
+        // NOTE -- Element 0 is the item's attack-buff property
+        //         Element 1 is the item's defense-buff property
+
+        // Find out an item's stats based on its ID
+        switch (itemID) {
+            case (int)ITEM_ID.TEST_ARMOR1:
+                stat[1] = 5;
+                break;
+            case (int)ITEM_ID.TEST_WEAPON1:
+                stat[0] = 8;
+                break;
+        }
+
+        return stat;
+    }
+
+    // Updates the player's HP when a health potion or similar is used in the inventory
+    private void UpdatePlayerHitpoints(int amount, int playerID) {
+        CharacterStats player = PartyStats.chara[playerID];
+        player.hitpoints += amount;
+        // TODO -- add check to make sure hitpoints don't go over maximum value
+        // Make sure the hitpoints don't go below zero or above the player's maximum HP
+        if (player.hitpoints < 0) {
+            player.hitpoints = 0;
+        }
+    } 
+
+    // Updates the player's MP when a mana potion or similar is used in the inventory
+    private void UpdatePlayerMagicpoints(int amount, int playerID) {
+        CharacterStats player = PartyStats.chara[playerID];
+        player.magicpoints += amount;
+        // TODO -- add check to make sure magicpoints don't go over maximum value
+        // Make sure the magicpoints don't go below zero or above the player's maximum MP
+        if (player.magicpoints < 0) {
+            player.magicpoints = 0;
+        }
+    }
+
+    // Updates player stats whenever an item like a piece of armor or weapon is equipped or unequipped
+    private void UpdatePlayerStats(int playerID, int itemID, bool isEquipped) {
+        CharacterStats player = PartyStats.chara[playerID];
+        int[] itemStats = ItemStats(itemID);
+
+        if (!isEquipped) { // Equipping the item onto the specified player
+            // Add the item to the current player
+            player.attackMod += itemStats[0];
+            player.defenceMod += itemStats[1];
+            // Remove this item from another player if it is equipped to them
+            if (invItem[curOption, 2] != -1) {
+                CharacterStats oPlayer = PartyStats.chara[invItem[curOption, 2]];
+                oPlayer.attackMod -= itemStats[0];
+                oPlayer.defenceMod -= itemStats[1];
+            }
+            // Set the inventory item's "Who's Equipped This" elements to the current player's ID
+            invItem[curOption, 2] = playerID;
+        } else { // Unequipping the item from the specified player
+            player.attackMod -= itemStats[0];
+            player.defenceMod -= itemStats[1];
+            // Tell the inventory that the item isn't equipped by anybody anymore
+            invItem[curOption, 2] = -1;
+        }
     }
 }

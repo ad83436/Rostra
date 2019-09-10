@@ -173,9 +173,21 @@ public class BattleManager : MonoBehaviour
 
         eAgilities.Sort();
 
-        //Temp code, will call this function from the Q
-        uiBtl.showThisPlayerUI(0, "Fargas", players[0].playerReference);
 
+        BuildQueue();
+        NextOnQueue();
+    }
+
+    public void NextOnQueue()
+    {
+        //Temp code
+
+        //Should check if this is a player, but for now, this is a player
+        uiBtl.showThisPlayerUI(battleQueue[0].playerIndex, battleQueue[0].name, battleQueue[0].playerReference);
+        //Add it to the end of the Q
+        battleQueue.Add(battleQueue[0]);
+        //Remove it from the start of the Q 
+        battleQueue.RemoveAt(0);
     }
 
     public void BuildQueue()
@@ -245,6 +257,8 @@ public class BattleManager : MonoBehaviour
             {
                //The player has a higher agility
                battleQueue.Add(players[maxPlayerIndex]);
+               //Add the player's image to the UI
+               uiBtl.AddImageToQ(players[maxPlayerIndex].playerReference.qImage);
                //Remove the player's agility from the list
                pAgilities.RemoveAt(pAgilities.Count - 1);
                //Add the player's index to the array of removed players
@@ -255,6 +269,8 @@ public class BattleManager : MonoBehaviour
             {
                 //The enemy has the higher agility
                 battleQueue.Add(enemies[maxEnemyIndex]);
+                //Add the enemy's image to the UI
+                uiBtl.AddImageToQ(enemies[maxEnemyIndex].enemyReference.qImage);
                 //Remove the enemy's agility from the list
                 eAgilities.RemoveAt(eAgilities.Count - 1);
                 //Add the enemy's index to the array of removed enemy
@@ -266,6 +282,8 @@ public class BattleManager : MonoBehaviour
         else if(pAgilities.Count>0 && eAgilities.Count<=0)
         {
             battleQueue.Add(players[maxPlayerIndex]);
+            //Add the player's image to the UI
+            uiBtl.AddImageToQ(players[maxPlayerIndex].playerReference.qImage);
             pAgilities.RemoveAt(pAgilities.Count - 1);
             removedPlayerIndexes[maxPlayerIndex] = maxPlayerIndex;
         }
@@ -273,6 +291,8 @@ public class BattleManager : MonoBehaviour
         else if(pAgilities.Count<=0 && eAgilities.Count>0)
         {
             battleQueue.Add(enemies[maxEnemyIndex]);
+            //Add the enemy's image to the UI
+            uiBtl.AddImageToQ(enemies[maxEnemyIndex].enemyReference.qImage);
             eAgilities.RemoveAt(eAgilities.Count - 1);
             removedEnemyIndexes[maxEnemyIndex] = maxEnemyIndex;
         }
@@ -281,6 +301,11 @@ public class BattleManager : MonoBehaviour
         if (pAgilities.Count>0 || eAgilities.Count>0)
         {
             BuildQueue();
+        }
+        //Otherwise, tell the UI system to show the Q
+        else
+        {
+            uiBtl.QueueIsReady();
         }
     }
 

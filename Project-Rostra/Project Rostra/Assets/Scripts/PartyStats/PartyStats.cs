@@ -14,41 +14,51 @@ public struct CharacterStats {
 	public CharacterStats(int i) {
 		attack = 0;
 		attackMod = 0;
+
 		defence = 0;
 		defenceMod = 0;
+
 		hitpoints = 0;
+		maxHealth = 0;
+		maxHealthMod = 0;
+
 		magicpoints = 0;
+		maxMana = 0;
+		maxManaMod = 0;
+
 		strength = 0;
+		strengthMod = 0;
+
 		critical = 0;
+		criticalMod = 0;
+
 		agility = 0;
-		range = 0;
-		skill = new Skills[] { Skills.None, Skills.None, Skills.None, Skills.None };
+		agilityMod = 0;
+		
 		level = 1;
 		currentExperience = 0;				       
 		neededExperience = 500;
-		statPoints = 0;
-	}										       
+		statPoints = 5;
+	}
+	
 	// stats								       
 	public int attack, attackMod;
 	public int defence, defenceMod;
-	public int hitpoints;
-	public int magicpoints;
-	public int strength;
-	public int critical;
-	public int agility;
-	public int range;
-	///returns the total of each
-	public int TotalAttack => attack + attackMod;
-	public int TotalDefence => defence + defenceMod;
-	
-	//skills
-	public Skills[] skill;
-	//returns a reference to the corisponding skill
-	public ref Skills SkillOne   => ref skill[0];
-	public ref Skills SkillTwo   => ref skill[1];
-	public ref Skills SkillThree => ref skill[2];
-	public ref Skills SkillFour  => ref skill[3];
+	public int hitpoints, maxHealth, maxHealthMod;
+	public int magicpoints, maxMana, maxManaMod;
+	public int strength, strengthMod;
+	public int critical, criticalMod;
+	public int agility, agilityMod;
 
+	///returns the total of each
+	public int TotalAttack    => attack    + attackMod;
+	public int TotalDefence   => defence   + defenceMod;
+	public int TotalMaxHealth => maxHealth + maxHealthMod;
+	public int TotalMaxMana  => maxMana   + maxManaMod;
+	public int TotalStrength  => strength  + strengthMod;
+	public int TotalCritical  => critical  + criticalMod;
+	public int TotalAgility   => agility   + agilityMod;
+	
 	//experience, level, and skill points
 	public int level;
 	public int currentExperience;
