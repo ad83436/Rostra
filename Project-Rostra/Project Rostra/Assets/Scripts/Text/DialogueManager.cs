@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿// written by: Sean Fowke
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
@@ -41,6 +43,19 @@ public class DialogueManager : MonoBehaviour
 	// highlighting boxes
 	public GameObject highlight1;
 	public GameObject highlight2;
+	// a few bools that are relevant to the text and story progression of the game
+	public bool dwarf;
+	public bool guild;
+	// set 1 ^ 
+	public bool kill;
+	public bool spare;
+	// set 2 ^
+	public bool tell;
+	public bool lie;
+	//set 3 ^
+	// stores a local copy of which choice set we will be using
+	private float choiceSet;
+	private bool[] choices;
 	void Awake()
     {
 		// singleton notation
@@ -54,6 +69,7 @@ public class DialogueManager : MonoBehaviour
 		}
 		// set everything to its default 
 		textElements = new Queue<string>();
+		choices = new bool[7];
 		currentChange = 0;
 		boxCount = 0;
 		continueCount = 0;
@@ -102,6 +118,15 @@ public class DialogueManager : MonoBehaviour
 		// disable the choice markers
 		choice1.gameObject.SetActive(false);
 		choice2.gameObject.SetActive(false);
+		// check to see if the choice presented will be remembered and which choice set will we be remembering
+		if (d.willRemember == true)
+		{
+			choiceSet = d.choiceSet;
+		}
+		else
+		{
+			choiceSet = 0;
+		}
 	}
 
 	public void NextSentence()
@@ -190,14 +215,69 @@ public class DialogueManager : MonoBehaviour
 	// did you pick door 1 
 	public void selectFirstChoice()
 	{
+		if (dia.willRemember == true)
+		{
+			switch (choiceSet)
+			{
+				case 1:
+					dwarf = true;
+					choices[1] = true;
+					break;
+				case 2:
+					kill = true;
+					choices[2] = true;
+					break;
+				case 3:
+					tell = true;
+					choices[3] = true;
+					break;
+				default:
+					Debug.LogError("You wanted a story choice but passed no choice set, fix it you idiot");
+					break;
+			}
+		}
 		End();
 		StartConversation(dia.choice1.dialogue);
 	}
 	// or door two
 	public void selectSecondChoice()
 	{
+		if (dia.willRemember == true)
+		{
+			switch (choiceSet)
+			{
+				case 1:
+					guild = true;
+					choices[4] = true;
+					break;
+				case 2:
+					spare = true;
+					choices[5] = true;
+					break;
+				case 3:
+					lie = true;
+					choices[6] = true;
+					break;
+				default:
+					Debug.LogError("You wanted a story choice but passed no choice set, fix it you idiot");
+					break;
+			}
+		}
 		End();
 		StartConversation(dia.choice2.dialogue);
+	}
+	// call this method when a conversation depends of choices made
+	public void choiceDependantConvo(float choice, Dialogue d)
+	{
+		dia = d;
+		if (choices[(int)choice] == true)
+		{
+			StartConversation(dia.choiceCare1.dialogue);
+		}
+		else if (choices[(int)choice] == false)
+		{
+			StartConversation(dia.choiceCare2.dialogue);
+		}
 	}
 	// check our keyboard pressed and do things accordingly
 	public void checkInput()

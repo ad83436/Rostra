@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿// written by: Sean Fowke
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
@@ -25,6 +26,13 @@ public class Dialogue
 	// contains the triggers for choices one and two
 	public ConversationTrigger choice1;
 	public ConversationTrigger choice2;
+	// will the choice be remembered;
+	public bool willRemember;
+	// which set of bools will be selected?
+	public float choiceSet;
+	// the two dialogues that will be spit out depending on your choices
+	public ConversationTrigger choiceCare1;
+	public ConversationTrigger choiceCare2;
 	// contains the text that will be passed to the UI
 	[TextArea(3, 15)]
 	public string choiceText1;
