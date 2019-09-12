@@ -54,7 +54,7 @@ public struct CharacterStats {
 	public int TotalAttack    => attack    + attackMod;
 	public int TotalDefence   => defence   + defenceMod;
 	public int TotalMaxHealth => maxHealth + maxHealthMod;
-	public int TotalMaxMana  => maxMana   + maxManaMod;
+	public int TotalMaxMana   => maxMana   + maxManaMod;
 	public int TotalStrength  => strength  + strengthMod;
 	public int TotalCritical  => critical  + criticalMod;
 	public int TotalAgility   => agility   + agilityMod;
