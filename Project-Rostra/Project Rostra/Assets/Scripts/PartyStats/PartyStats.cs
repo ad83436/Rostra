@@ -12,28 +12,28 @@ public static class PartyStats {
 
 public struct CharacterStats {
 	public CharacterStats(int i) {
-		attack = 0;
-		attackMod = 0;
+		attack = 0.0f;
+		attackMod = 0.0f;
 
-		defence = 0;
-		defenceMod = 0;
+		defence = 0.0f;
+		defenceMod = 0.0f;
 
-		hitpoints = 0;
-		maxHealth = 0;
-		maxHealthMod = 0;
+		hitpoints = 0.0f;
+		maxHealth = 0.0f;
+		maxHealthMod = 0.0f;
 
-		magicpoints = 0;
-		maxMana = 0;
-		maxManaMod = 0;
+		magicpoints = 0.0f;
+		maxMana = 0.0f;
+		maxManaMod = 0.0f;
 
-		strength = 0;
-		strengthMod = 0;
+		strength = 0.0f;
+		strengthMod = 0.0f;
 
-		critical = 0;
-		criticalMod = 0;
+		critical = 0.0f;
+		criticalMod = 0.0f;
 
-		agility = 0;
-		agilityMod = 0;
+		agility = 0.0f;
+		agilityMod = 0.0f;
 		
 		level = 1;
 		currentExperience = 0;				       
@@ -42,22 +42,22 @@ public struct CharacterStats {
 	}
 	
 	// stats								       
-	public int attack, attackMod;
-	public int defence, defenceMod;
-	public int hitpoints, maxHealth, maxHealthMod;
-	public int magicpoints, maxMana, maxManaMod;
-	public int strength, strengthMod;
-	public int critical, criticalMod;
-	public int agility, agilityMod;
+	public float attack, attackMod;
+	public float defence, defenceMod;
+	public float hitpoints, maxHealth, maxHealthMod;
+	public float magicpoints, maxMana, maxManaMod;
+	public float strength, strengthMod;
+	public float critical, criticalMod;
+	public float agility, agilityMod;
 
 	///returns the total of each
-	public int TotalAttack    => attack    + attackMod;
-	public int TotalDefence   => defence   + defenceMod;
-	public int TotalMaxHealth => maxHealth + maxHealthMod;
-	public int TotalMaxMana   => maxMana   + maxManaMod;
-	public int TotalStrength  => strength  + strengthMod;
-	public int TotalCritical  => critical  + criticalMod;
-	public int TotalAgility   => agility   + agilityMod;
+	public float TotalAttack    => attack    + attackMod;
+	public float TotalDefence   => defence   + defenceMod;
+	public float TotalMaxHealth => maxHealth + maxHealthMod;
+	public float TotalMaxMana   => maxMana   + maxManaMod;
+	public float TotalStrength  => strength  + strengthMod;
+	public float TotalCritical  => critical  + criticalMod;
+	public float TotalAgility   => agility   + agilityMod;
 	
 	//experience, level, and skill points
 	public int level;

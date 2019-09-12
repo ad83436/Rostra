@@ -232,7 +232,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5fc992a38aa05b42b67a5297a4c4e2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  invGUIsmall: {fileID: 12800000, guid: 8cd005d600c706945b313ab1374fb2ea, type: 3}
+  GuiSmall: {fileID: 12800000, guid: 8cd005d600c706945b313ab1374fb2ea, type: 3}
 --- !u!4 &1807960832
 Transform:
   m_ObjectHideFlags: 0

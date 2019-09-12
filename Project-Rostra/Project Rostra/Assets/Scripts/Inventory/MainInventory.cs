@@ -13,7 +13,7 @@ public class MainInventory : MonoBehaviour {
     //         Element 2 is what character has this item equipped (Ex. armor and weapons)
 
     // The fonts that are used for drawing the Inventory's GUI
-    public Font invGUIsmall;
+    public Font GuiSmall;
 
     // Variables for holding a to-be-swapped item in the inventory
     private int[] itemToSwap = new int[3];      // Holds data about the item being swapped in the inventory
@@ -187,28 +187,29 @@ public class MainInventory : MonoBehaviour {
     // Drawing the inventory to the screen
     private void OnGUI() {
         GUIStyle style = new GUIStyle(GUI.skin.label) {
-            font = invGUIsmall,
-            fontSize = 20,
+            font = GuiSmall,
+            fontSize = 30,
         };
+        var fontHeight = style.lineHeight;
 
         // Drawing the inventory items
         for (int i = firstToDraw; i <= firstToDraw + numToDraw; i++) {
-            GUI.Label(new Rect(25.0f, 5.0f + (15.0f * (i - firstToDraw)), 200.0f, 25.0f), ItemName(invItem[i, 0]), style);
+            GUI.Label(new Rect(45.0f, 15.0f + (fontHeight * (i - firstToDraw)), 200.0f, fontHeight), ItemName(invItem[i, 0]), style);
             // Only show number of items beside items that can stack
-            if (ItemStackLimit(invItem[i, 0]) > 1) { GUI.Label(new Rect(200.0f, 5.0f + (15.0f * (i - firstToDraw)), 200.0f, 25.0f), "x" + invItem[i, 1], style); }
+            if (ItemStackLimit(invItem[i, 0]) > 1) { GUI.Label(new Rect(220.0f, 15.0f + (fontHeight * (i - firstToDraw)), 200.0f, fontHeight), "x" + invItem[i, 1], style); }
             // Drawing a cursor that points to the item the player has highlighted
-            GUI.Label(new Rect(5.0f, 5.0f + (15.0f * (curOption - firstToDraw)), 25.0f, 25.0f), ">", style);
+            GUI.Label(new Rect(25.0f, 15.0f + (fontHeight * (curOption - firstToDraw)), 25.0f, fontHeight), ">", style);
             // Let the player know this item is equipped if it is
-            if (invItem[i, 2] != -1) { GUI.Label(new Rect(170.0f, 5.0f + (15.0f * (i - firstToDraw)), 200.0f, 25.0f), "(E)", style); }
+            if (invItem[i, 2] != -1) { GUI.Label(new Rect(200.0f, 15.0f + (fontHeight * (i - firstToDraw)), 25.0f, fontHeight), "(E)", style); }
         }
 
         // Drawing the item's description
         if (ItemType(invItem[curOption, 0]) == (int)ITEM_TYPE.EQUIPABLE) {
             string playerName = "N/A";
             if (invItem[curOption, 2] != -1) { playerName = "Player" + (invItem[curOption, 2] + 1); }
-            GUI.Label(new Rect(5.0f, 260.0f, 300.0f, 150.0f), ItemDescription(invItem[curOption, 0]) + "\n\nEquipped By -- " + playerName, style);
+            GUI.Label(new Rect(25.0f, 15.0f + (fontHeight * numToDraw) + 35.0f, 600.0f, 150.0f), ItemDescription(invItem[curOption, 0]) + "\n\nEquipped By -- " + playerName, style);
         } else {
-            GUI.Label(new Rect(5.0f, 260.0f, 300.0f, 150.0f), ItemDescription(invItem[curOption, 0]), style);
+            GUI.Label(new Rect(25.0f, 15.0f + (fontHeight * numToDraw) + 35.0f, 600.0f, 150.0f), ItemDescription(invItem[curOption, 0]), style);
         }
 
         // Drawing the selected item's options to the screen
@@ -217,20 +218,22 @@ public class MainInventory : MonoBehaviour {
             string[] option = options.ToArray();
             var length = options.Count;
             for (int i = 0; i < length; i++) {
-                GUI.Label(new Rect(250.0f, 5.0f + (15.0f * i), 200.0f, 25.0f), option[i], style);
-                if (subCurOption == i) { GUI.Label(new Rect(230.0f, 5.0f + (15.0f * i), 25.0f, 25.0f), ">", style); }
+                GUI.Label(new Rect(280.0f, 15.0f + (fontHeight * i), 200.0f, fontHeight), option[i], style);
+                if (subCurOption == i) { GUI.Label(new Rect(260.0f, 15.0f + (fontHeight * i), 25.0f, fontHeight), ">", style); }
             }
         }
 
         // Drawing the item that is currently being swapped
         if (swappingItems) {
-            GUI.Label(new Rect(250.0f, 90.0f, 150.0f, 150.0f), "Item Held:\n" + ItemName(itemToSwap[0]) + "\nx" + itemToSwap[1], style);
+            GUI.Label(new Rect(280.0f, 90.0f, 150.0f, 150.0f), "Item Held:\n" + ItemName(itemToSwap[0]) + "\nx" + itemToSwap[1], style);
         }
 
         // Drawing the player selection window options
         if (playerChooseWindow) {
-            GUI.Label(new Rect(320.0f, 5.0f, 150.0f, 150.0f), "Player1\nPlayer2\nPlayer3\nPlayer4", style);
-            GUI.Label(new Rect(300.0f, 5.0f + (20.0f * curPlayerOption), 25.0f, 25.0f), ">", style);
+            for (int i = 0; i < 4; i++) {
+                GUI.Label(new Rect(350.0f, 5.0f + (fontHeight * i), 150.0f, fontHeight), "Player" + (i + 1), style);
+            }
+            GUI.Label(new Rect(330.0f, 5.0f + (20.0f * curPlayerOption), 25.0f, fontHeight), ">", style);
         }
     }
 
@@ -335,7 +338,7 @@ public class MainInventory : MonoBehaviour {
 
     // Returns the item's description based of the itemID specified
     public string ItemDescription(int itemID) {
-        string description = "---";
+        string description = "";
 
         // Find an item's description based on its ID
         switch (itemID) {
@@ -496,8 +499,8 @@ public class MainInventory : MonoBehaviour {
 
     // Holds stats for every single weapon and piece of armor in the game
     // If no values have been set, the item's stats will be defaulted to 0
-    public int[] ItemStats(int itemID) {
-        int[] stat = { 0, 0, 0, 0, 0, 0, 0 };
+    public float[] ItemStats(int itemID) {
+        float[] stat = { 0, 0, 0, 0, 0, 0, 0 };
         // NOTE -- Element 0 is the item's attack-buff property
         //         Element 1 is the item's defense-buff property
         //         Element 2 is the item's strength-buff property
@@ -549,7 +552,7 @@ public class MainInventory : MonoBehaviour {
     // Updates player stats whenever an item like a piece of armor or weapon is equipped or unequipped
     private void UpdatePlayerStats(int playerID, int itemID, bool isEquipped) {
         CharacterStats player = PartyStats.chara[playerID];
-        int[] itemStats = ItemStats(itemID);
+        float[] itemStats = ItemStats(itemID);
 
         if (!isEquipped) { // Equipping the item onto the specified player
             // Add the item to the current player
