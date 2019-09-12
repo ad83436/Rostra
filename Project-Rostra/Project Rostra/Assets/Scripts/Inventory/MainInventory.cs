@@ -571,7 +571,7 @@ public class MainInventory : MonoBehaviour {
                 oPlayer.maxHealthMod -= itemStats[5];
                 oPlayer.maxManaMod -= itemStats[6];
             }
-            // Set the inventory item's "Who's Equipped This" elements to the current player's ID
+            // Set the inventory item's "Who's Equipped This" element to the current player's ID
             invItem[curOption, 2] = playerID;
         } else { // Unequipping the item from the specified player
             player.attackMod -= itemStats[0];
