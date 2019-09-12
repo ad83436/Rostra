@@ -2,15 +2,18 @@
 using UnityEngine;
 
 // Code Written By:     Christopher Brine
-// Last Updated:        September 6th, 2019
+// Last Updated:        September 11th, 2019
 
 public class MainInventory : MonoBehaviour {
     public static MainInventory invInstance;    // Holds the current inventory instance in a single variable
     public static int INVENTORY_SIZE = 60;      // The maximum size of the inventory
     public int[,] invItem = new int[INVENTORY_SIZE, 3];
-    // NOTE -- Element 1 is the item's ID value that will point to its name, description, icon, etc.
-    //         Element 2 is how many items currently occupy the slot in the inventory
-    //         Element 3 is what character has this item equipped (Ex. armor and weapons)
+    // NOTE -- Element 0 is the item's ID value that will point to its name, description, icon, etc.
+    //         Element 1 is how many items currently occupy the slot in the inventory
+    //         Element 2 is what character has this item equipped (Ex. armor and weapons)
+
+    // The fonts that are used for drawing the Inventory's GUI
+    public Font invGUIsmall;
 
     // Variables for holding a to-be-swapped item in the inventory
     private int[] itemToSwap = new int[3];      // Holds data about the item being swapped in the inventory
@@ -108,8 +111,50 @@ public class MainInventory : MonoBehaviour {
                         selectedOption = curOption;
                     }
                 }
-            } else if (playerChooseWindow) { // Choosing which player will use the consumable
-                // Moving up and down through the player use list
+            }
+            
+            if (keyReturn) {
+                if (swappingItems) { // Disabling item swapping
+                    swappingItems = false;
+                    slotToSwapTo = -1;
+                    var length = itemToSwap.Length;
+                    for (int i = 0; i < length; i++) {
+                        itemToSwap[i] = 0;
+                    }
+                } else {
+                    // TODO -- Make this block of code exit out of the inventory
+                }
+            }
+        } else { // Input functionality for when the player has selected an item (The option menu)
+            if (!playerChooseWindow) {
+                int menuLength = ItemOptions(invItem[curOption, 0]).Count;
+                // Shifting up and down through the sub-menu options
+                if (keyUp) {
+                    subCurOption--;
+                    if (subCurOption < 0) {
+                        subCurOption = menuLength - 1;
+                    }
+                }
+                if (keyDown) {
+                    subCurOption++;
+                    if (subCurOption > menuLength - 1) {
+                        subCurOption = 0;
+                    }
+                }
+
+                // Selecting one of the given options
+                if (keySelect) {
+                    List<string> options = ItemOptions(invItem[curOption, 0]);
+                    string[] option = options.ToArray();
+                    ItemOptionsFunction(invItem[curOption, 0], option[subCurOption]);
+                    subCurOption = 0;
+                }
+
+                // Unselecting the current item, returning the player back to the main inventory window
+                if (keyReturn) {
+                    selectedOption = -1;
+                }
+            } else { // Choosing which player will use the consumable
                 if (keyUp) { // Moving up in the list of players
                     curPlayerOption--;
                     if (curPlayerOption < 0) {
@@ -127,50 +172,14 @@ public class MainInventory : MonoBehaviour {
                 // Using an item on the player that is currently highlighted
                 if (keySelect) {
                     ItemUseFunction(invItem[curOption, 0], curPlayerOption);
+                    playerChooseWindow = false;
+                    selectedOption = -1;
                 }
-            }
 
-            if (keyReturn) {
-                if (swappingItems) { // Disabling item swapping
-                    swappingItems = false;
-                    slotToSwapTo = -1;
-                    var length = itemToSwap.Length;
-                    for (int i = 0; i < length; i++) {
-                        itemToSwap[i] = 0;
-                    }
-                } else {
-                    // TODO -- Make this block of code exit out of the inventory
+                // Returning to the item's sub-menu, exiting out of the player selection menu
+                if (keyReturn) {
+                    playerChooseWindow = false;
                 }
-            }
-        } else { // Input functionality for when the player has selected an item (The option menu)
-            int menuLength = ItemOptions(invItem[curOption, 0]).Count;
-            // Shifting up and down through the sub-menu options
-            if (keyUp) {
-                subCurOption--;
-                if (subCurOption < 0) {
-                    subCurOption = menuLength - 1;
-                }
-            }
-            if (keyDown) {
-                subCurOption++;
-                if (subCurOption > menuLength - 1) {
-                    subCurOption = 0;
-                }
-            }
-
-            // Selecting one of the given options
-            if (keySelect) {
-                List<string> options = ItemOptions(invItem[curOption, 0]);
-                string[] option = options.ToArray();
-                ItemOptionsFunction(invItem[curOption, 0], option[subCurOption]);
-                subCurOption = 0;
-                selectedOption = -1;
-            }
-
-            // Unselecting the current item, returning the player back to the main inventory window
-            if (keyReturn) {
-                selectedOption = -1;
-                playerChooseWindow = false;
             }
         }
     }
@@ -178,9 +187,8 @@ public class MainInventory : MonoBehaviour {
     // Drawing the inventory to the screen
     private void OnGUI() {
         GUIStyle style = new GUIStyle(GUI.skin.label) {
-            fontSize = 12,
-            fontStyle = FontStyle.Bold,
-            border = new RectOffset(20, 20, 20, 20),
+            font = invGUIsmall,
+            fontSize = 20,
         };
 
         // Drawing the inventory items
@@ -207,6 +215,15 @@ public class MainInventory : MonoBehaviour {
         // Drawing the item that is currently being swapped
         if (swappingItems) {
             GUI.Label(new Rect(250.0f, 90.0f, 150.0f, 150.0f), "Item Held:\n" + ItemName(itemToSwap[0]) + "\nx" + itemToSwap[1], style);
+        }
+
+        // Drawing the player selection window options
+        if (playerChooseWindow) {
+            // TEMPORARY CODE
+            GUI.Label(new Rect(320.0f, 5.0f, 150.0f, 150.0f), "Player1\nPlayer2\nPlayer3\nPlayer4", style);
+            for (int i = 0; i < 4; i++) {
+                if (curPlayerOption == i) { GUI.Label(new Rect(300.0f, 5.0f + (15.0f * i), 25.0f, 25.0f), ">", style); }
+            }
         }
     }
 
@@ -388,18 +405,18 @@ public class MainInventory : MonoBehaviour {
             return;
         }
 
+        if (itemType == (int)ITEM_TYPE.EQUIPABLE) {
+            if (option.Equals("Equip") || option.Equals("Unequip")) {
+
+                return;
+            }
+        }
+
         // Using a CONSUMABLE item (Not the same as equipping/unequipping a weapon or piece of armor)
         if (itemType == (int)ITEM_TYPE.CONSUMABLE) {
             if (option.Equals("Use")) {
                 // Open prompt for choosing which player to use the consumable on
                 playerChooseWindow = true;
-                return;
-            }
-        }
-
-        if (itemType == (int)ITEM_TYPE.EQUIPABLE) {
-            if (option.Equals("Equip") || option.Equals("Unequip")) {
-                // TODO -- create a call to a script that handles equipping and unequipping armor and weapons
                 return;
             }
         }
@@ -479,17 +496,25 @@ public class MainInventory : MonoBehaviour {
     // Holds stats for every single weapon and piece of armor in the game
     // If no values have been set, the item's stats will be defaulted to 0
     public int[] ItemStats(int itemID) {
-        int[] stat = { 0, 0 };
+        int[] stat = { 0, 0, 0, 0, 0, 0, 0 };
         // NOTE -- Element 0 is the item's attack-buff property
         //         Element 1 is the item's defense-buff property
+        //         Element 2 is the item's strength-buff property
+        //         Element 3 is the item's agility-buff property
+        //         Element 4 is the item's critical-buff property
+        //         Element 5 is the item's hitpoint-buff property
+        //         Element 6 is the item's magicpoint-buff property
 
         // Find out an item's stats based on its ID
         switch (itemID) {
             case (int)ITEM_ID.TEST_ARMOR1:
                 stat[1] = 5;
+                stat[5] = 10;
+                stat[6] = 2;
                 break;
             case (int)ITEM_ID.TEST_WEAPON1:
                 stat[0] = 8;
+                stat[4] = 2;
                 break;
         }
 
@@ -500,9 +525,10 @@ public class MainInventory : MonoBehaviour {
     private void UpdatePlayerHitpoints(int amount, int playerID) {
         CharacterStats player = PartyStats.chara[playerID];
         player.hitpoints += amount;
-        // TODO -- add check to make sure hitpoints don't go over maximum value
         // Make sure the hitpoints don't go below zero or above the player's maximum HP
-        if (player.hitpoints < 0) {
+        if (player.hitpoints > player.TotalMaxHealth) {
+            player.hitpoints = player.TotalMaxHealth;
+        } else if (player.hitpoints < 0) {
             player.hitpoints = 0;
         }
     } 
@@ -511,9 +537,10 @@ public class MainInventory : MonoBehaviour {
     private void UpdatePlayerMagicpoints(int amount, int playerID) {
         CharacterStats player = PartyStats.chara[playerID];
         player.magicpoints += amount;
-        // TODO -- add check to make sure magicpoints don't go over maximum value
         // Make sure the magicpoints don't go below zero or above the player's maximum MP
-        if (player.magicpoints < 0) {
+        if (player.magicpoints > player.TotalMaxMana) {
+            player.magicpoints = player.TotalMaxMana;
+        } else if (player.magicpoints < 0) {
             player.magicpoints = 0;
         }
     }
@@ -527,17 +554,32 @@ public class MainInventory : MonoBehaviour {
             // Add the item to the current player
             player.attackMod += itemStats[0];
             player.defenceMod += itemStats[1];
+            player.strengthMod += itemStats[2];
+            player.agilityMod += itemStats[3];
+            player.criticalMod += itemStats[4];
+            player.maxHealthMod += itemStats[5];
+            player.maxManaMod += itemStats[6];
             // Remove this item from another player if it is equipped to them
             if (invItem[curOption, 2] != -1) {
                 CharacterStats oPlayer = PartyStats.chara[invItem[curOption, 2]];
                 oPlayer.attackMod -= itemStats[0];
                 oPlayer.defenceMod -= itemStats[1];
+                oPlayer.strengthMod -= itemStats[2];
+                oPlayer.agilityMod -= itemStats[3];
+                oPlayer.criticalMod -= itemStats[4];
+                oPlayer.maxHealthMod -= itemStats[5];
+                oPlayer.maxManaMod -= itemStats[6];
             }
             // Set the inventory item's "Who's Equipped This" elements to the current player's ID
             invItem[curOption, 2] = playerID;
         } else { // Unequipping the item from the specified player
             player.attackMod -= itemStats[0];
             player.defenceMod -= itemStats[1];
+            player.strengthMod -= itemStats[2];
+            player.agilityMod -= itemStats[3];
+            player.criticalMod -= itemStats[4];
+            player.maxHealthMod -= itemStats[5];
+            player.maxManaMod -= itemStats[6];
             // Tell the inventory that the item isn't equipped by anybody anymore
             invItem[curOption, 2] = -1;
         }
