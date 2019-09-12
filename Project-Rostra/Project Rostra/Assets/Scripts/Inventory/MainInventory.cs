@@ -48,7 +48,7 @@ public class MainInventory : MonoBehaviour {
 
     // FOR TESTING
     private void Start() {
-        invItem[0, 0] = (int)ITEM_ID.TEST_QUEST_ITEM;
+        invItem[0, 0] = (int)ITEM_ID.TEST_WEAPON1;
         invItem[0, 1] = ItemStackLimit((int)ITEM_ID.TEST_QUEST_ITEM);
 
         invItem[1, 0] = (int)ITEM_ID.TEST_POTION_HP;
@@ -147,7 +147,6 @@ public class MainInventory : MonoBehaviour {
                     List<string> options = ItemOptions(invItem[curOption, 0]);
                     string[] option = options.ToArray();
                     ItemOptionsFunction(invItem[curOption, 0], option[subCurOption]);
-                    subCurOption = 0;
                 }
 
                 // Unselecting the current item, returning the player back to the main inventory window
@@ -173,6 +172,7 @@ public class MainInventory : MonoBehaviour {
                 if (keySelect) {
                     ItemUseFunction(invItem[curOption, 0], curPlayerOption);
                     playerChooseWindow = false;
+                    subCurOption = 0;
                     selectedOption = -1;
                 }
 
@@ -194,12 +194,22 @@ public class MainInventory : MonoBehaviour {
         // Drawing the inventory items
         for (int i = firstToDraw; i <= firstToDraw + numToDraw; i++) {
             GUI.Label(new Rect(25.0f, 5.0f + (15.0f * (i - firstToDraw)), 200.0f, 25.0f), ItemName(invItem[i, 0]), style);
-            GUI.Label(new Rect(200.0f, 5.0f + (15.0f * (i - firstToDraw)), 200.0f, 25.0f), "x" + invItem[i, 1], style);
+            // Only show number of items beside items that can stack
+            if (ItemStackLimit(invItem[i, 0]) > 1) { GUI.Label(new Rect(200.0f, 5.0f + (15.0f * (i - firstToDraw)), 200.0f, 25.0f), "x" + invItem[i, 1], style); }
             // Drawing a cursor that points to the item the player has highlighted
             GUI.Label(new Rect(5.0f, 5.0f + (15.0f * (curOption - firstToDraw)), 25.0f, 25.0f), ">", style);
+            // Let the player know this item is equipped if it is
+            if (invItem[i, 2] != -1) { GUI.Label(new Rect(170.0f, 5.0f + (15.0f * (i - firstToDraw)), 200.0f, 25.0f), "(E)", style); }
         }
+
         // Drawing the item's description
-        GUI.Label(new Rect(5.0f, 260.0f, 300.0f, 150.0f), ItemDescription(invItem[curOption, 0]), style);
+        if (ItemType(invItem[curOption, 0]) == (int)ITEM_TYPE.EQUIPABLE) {
+            string playerName = "N/A";
+            if (invItem[curOption, 2] != -1) { playerName = "Player" + (invItem[curOption, 2] + 1); }
+            GUI.Label(new Rect(5.0f, 260.0f, 300.0f, 150.0f), ItemDescription(invItem[curOption, 0]) + "\n\nEquipped By -- " + playerName, style);
+        } else {
+            GUI.Label(new Rect(5.0f, 260.0f, 300.0f, 150.0f), ItemDescription(invItem[curOption, 0]), style);
+        }
 
         // Drawing the selected item's options to the screen
         if (selectedOption != -1) {
@@ -219,11 +229,8 @@ public class MainInventory : MonoBehaviour {
 
         // Drawing the player selection window options
         if (playerChooseWindow) {
-            // TEMPORARY CODE
             GUI.Label(new Rect(320.0f, 5.0f, 150.0f, 150.0f), "Player1\nPlayer2\nPlayer3\nPlayer4", style);
-            for (int i = 0; i < 4; i++) {
-                if (curPlayerOption == i) { GUI.Label(new Rect(300.0f, 5.0f + (15.0f * i), 25.0f, 25.0f), ">", style); }
-            }
+            GUI.Label(new Rect(300.0f, 5.0f + (20.0f * curPlayerOption), 25.0f, 25.0f), ">", style);
         }
     }
 
@@ -396,29 +403,23 @@ public class MainInventory : MonoBehaviour {
                     itemToSwap[i] = invItem[curOption, i];
                 }
             }
+            subCurOption = 0;
+            selectedOption = -1;
             return;
         }
 
         // Removing an item and/or its entire stack from the inventory
         if (option.Equals("Drop")) {
             RemoveItem(curOption, invItem[curOption, 1]);
+            subCurOption = 0;
+            selectedOption = -1;
             return;
         }
 
-        if (itemType == (int)ITEM_TYPE.EQUIPABLE) {
-            if (option.Equals("Equip") || option.Equals("Unequip")) {
-
-                return;
-            }
-        }
-
-        // Using a CONSUMABLE item (Not the same as equipping/unequipping a weapon or piece of armor)
-        if (itemType == (int)ITEM_TYPE.CONSUMABLE) {
-            if (option.Equals("Use")) {
-                // Open prompt for choosing which player to use the consumable on
-                playerChooseWindow = true;
-                return;
-            }
+        // Using a consumable item or equipped a piece of armor or weapon
+        if (option.Equals("Use") || option.Equals("Equip") || option.Equals("Unequip")) {
+            playerChooseWindow = true;
+            return;
         }
     }
 
