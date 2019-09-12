@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 
 public class Enemy : MonoBehaviour
@@ -21,6 +22,8 @@ public class Enemy : MonoBehaviour
     private float maxHP;
     private float currentHP;
 
+    private bool haveAddedMyself;
+
 
     private void Start()
     {
@@ -30,6 +33,7 @@ public class Enemy : MonoBehaviour
 
         maxHP = currentHP = 100.0f;
 
+        haveAddedMyself = false;
 
     }
 
@@ -40,16 +44,22 @@ public class Enemy : MonoBehaviour
             battleManager.AddEnemy(enemyIndexInBattleManager, agi, str, crit, this,name);
             Debug.Log("Added enemy to battlemanager");
         }
+
+        if(!haveAddedMyself&&battleManager.addEnemies)
+        {
+            AddEnemyToBattle();
+           // Debug.Log("HITTTTT");
+            haveAddedMyself = true;
+        }
     }
 
-    private void EndBattle()
+    public void AddEnemyToBattle()
     {
-        battleManager.DeleteEnemyFromQueue(enemyIndexInBattleManager);
+        battleManager.AddEnemy(enemyIndexInBattleManager, agi, str, crit, this, name);
     }
-
-    public void mynameis()
+    public void MyName()
     {
-        Debug.Log("Enemy " + name);
+        Debug.Log("Hi my name is: " + name);
     }
 
     public void becomeLessVisbile() //Called from UIBTL when this enemy is NOT chosen for attack

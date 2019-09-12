@@ -9,14 +9,14 @@ public class BattleManager : MonoBehaviour
     public class PlayerInformtion
     {
         public int playerIndex;
-        public int hp;
-        public int mp;
+        public float hp;
+        public float mp;
         public string[] skills = new string[4];
-        public int atk;
-        public int def;
-        public int agi;
-        public int str;
-        public int crit;
+        public float atk;
+        public float def;
+        public float agi;
+        public float str;
+        public float crit;
         public string name;
         public int exp;
         public int expNeededForNextLevel;
@@ -28,6 +28,32 @@ public class BattleManager : MonoBehaviour
     #region singleton
 
     public static BattleManager instance;
+
+    private UIBTL uiBtl;
+    private EnemySpawner enemySpawner;
+
+    public PlayerInformtion[] players;
+    public PlayerInformtion[] enemies;
+    private List<PlayerInformtion> battleQueue;
+
+    private List<float> pAgilities;
+    private List<float> eAgilities;
+
+    private float maxPlayerAgi = 0;
+    private int maxPlayerIndex = 0;
+    private int[] removedPlayerIndexes; //We need to keep track of which players and enemies have been accounted for in the queue
+    private float maxEnemyAgi = 0;
+    private int maxEnemyIndex = 0;
+    private int[] removedEnemyIndexes;
+    public int numberOfEnemies; // Updated from the world map. Need to make sure all enemies are added before building the Q
+    private bool allEnemiesAdded = false; //Used to make sure that enemies and players are added before building the Q
+    private bool allPlayersAdded = false;
+    public int numberOfPlayers = 4; //Should be private. Public for testing purposes as its updated from the player's side
+
+    public GameObject[] enemyPos = new GameObject[5];
+
+    public bool addEnemies;
+
 
     private void Awake()
     {
@@ -42,8 +68,8 @@ public class BattleManager : MonoBehaviour
 
         players = new PlayerInformtion[4]; //max 4 players
         enemies = new PlayerInformtion[5];//max 5 enemies
-        pAgilities = new List<int>();
-        eAgilities = new List<int>();
+        pAgilities = new List<float>();
+        eAgilities = new List<float>();
         battleQueue = new List<PlayerInformtion>();
         removedPlayerIndexes = new int[4];
         removedEnemyIndexes = new int[5];
@@ -66,42 +92,26 @@ public class BattleManager : MonoBehaviour
         {
             removedEnemyIndexes[i] = -1;
         }
-
-
+        addEnemies = false;
     }
 
     #endregion
 
-    private UIBTL uiBtl;
-
-    public PlayerInformtion[] players;
-    public PlayerInformtion[] enemies;
-    private List<PlayerInformtion> battleQueue;
-
-    private List<int> pAgilities; 
-    private List<int> eAgilities; 
-
-    private int maxPlayerAgi = 0;
-    private int maxPlayerIndex = 0;
-    private int[] removedPlayerIndexes; //We need to keep track of which players and enemies have been accounted for in the queue
-    private int maxEnemyAgi = 0;
-    private int maxEnemyIndex = 0;
-    private int[] removedEnemyIndexes;
-
-    private string nametest;
-
-
-
     private void Start()
     {
         uiBtl = UIBTL.instance;
+        enemySpawner = EnemySpawner.instance;
+        for(int i =0;i<5;i++)
+        {
+            enemySpawner.AddPos(enemyPos[i], i);
+        }
         //Each player and enemy would have an index that stores their information
-        
     }
 
 
     private void Update()
     {
+        /*
         if (Input.GetKeyDown(KeyCode.S))
         {
            StartBattle();
@@ -114,23 +124,33 @@ public class BattleManager : MonoBehaviour
             Debug.Log("Build queue");
             Debug.Log("Q size: " + battleQueue.Count);
         }
+        */
 
-        if(Input.GetKeyDown(KeyCode.D))
+        //Temp code
+
+        if(numberOfPlayers<=0 && allPlayersAdded == false)
         {
-            Debug.Log("I already told you the count is: " + battleQueue.Count);
+            allPlayersAdded = true;
+            addEnemies = true;
+            for (int i = 0; i < 5; i++)
+            {
+                enemySpawner.AddPos(enemyPos[i],i);
+            }
+            enemySpawner.SpawnEnemies();
 
-            //Testing "hey it's your turn"
-           if(battleQueue[0].playerReference!=null)
-            {
-                battleQueue[0].playerReference.mynameis();
-            }
-           else if(battleQueue[0].enemyReference!=null)
-            {
-                battleQueue[0].enemyReference.mynameis();
-            }
-            battleQueue.Add(battleQueue[0]);
-            battleQueue.RemoveAt(0);
         }
+
+        //Only start the battle when all players and enemies have been added
+        if(allPlayersAdded && allEnemiesAdded)
+        {
+            Debug.Log("Start Battle");
+            StartBattle();
+            allPlayersAdded = false;
+            allEnemiesAdded = false;
+            numberOfPlayers = 4; //Ready for the next battle
+            addEnemies = false;
+        }
+
     }
 
     //Called at the beginning of the battle to store references to current enemies. Needed to be able to update the queue
@@ -143,8 +163,18 @@ public class BattleManager : MonoBehaviour
             enemies[enemyIndex].enemyReference = enemyRef;
             enemies[enemyIndex].name = name;
 
+
+        numberOfEnemies--; //Update the number of enemies after adding an enemy. This number is obtained from the WM
+        Debug.Log("Number ofenemies " + numberOfEnemies);
+
+        if (numberOfEnemies<=0)
+        {
+            allEnemiesAdded = true;
+        }
+
         //This will probably need to change to avoid race conditions between startbattle and build Q
-            uiBtl.enemies[enemyIndex] = enemyRef; //Update the UI system with the enemy
+        Debug.Log("Indexxxxx  "+ enemyIndex);
+        uiBtl.enemies[enemyIndex] = enemyRef; //Update the UI system with the enemy
     }
 
     public void StartBattle()
@@ -309,16 +339,9 @@ public class BattleManager : MonoBehaviour
         }
     }
 
-    //Once an enemy is defeated, the enemy should be removed from the queue
-    public void DeleteEnemyFromQueue(int enemyIndex)
-    {
-        enemies[enemyIndex] = null;
-        battleQueue.Clear();
-    }
-
 
     //Called by each player at the end of each battle
-    public void EndOfBattle(int playerIndex, int remainingHP, int remainingMP )
+    public void EndOfBattle(int playerIndex, float remainingHP, float remainingMP )
     {
         players[playerIndex].hp = remainingHP;
         players[playerIndex].mp = remainingMP;
@@ -334,7 +357,6 @@ public class BattleManager : MonoBehaviour
         {
             enemies[i] = null;
         }
-        UpdateToInv(playerIndex); //Update the inventory system
     }
 
     //Called by the inventory manager to update the player's stats when the player changes gear and on awake
@@ -358,12 +380,6 @@ public class BattleManager : MonoBehaviour
         //Update UI for max EXP
     }
     
-    //Update the inventory. Called after the battle has ended. Basically, the battle manager and inventory need to always be in sync
-    public void UpdateToInv(int playerIndex)
-    {
-        //Update inventory with hp and mp
-    }
-
 
     private void LevelUp(int playerIndex)
     {
