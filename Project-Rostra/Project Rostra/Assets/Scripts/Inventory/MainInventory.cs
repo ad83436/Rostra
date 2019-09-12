@@ -141,10 +141,6 @@ public class MainInventory : MonoBehaviour {
                 } else {
                     // TODO -- Make this block of code exit out of the inventory
                 }
-                // Disable the player choosing window, while still keeping the sub-menu open
-                if (playerChooseWindow) {
-                    playerChooseWindow = false;
-                }
             }
         } else { // Input functionality for when the player has selected an item (The option menu)
             int menuLength = ItemOptions(invItem[curOption, 0]).Count;
@@ -174,6 +170,7 @@ public class MainInventory : MonoBehaviour {
             // Unselecting the current item, returning the player back to the main inventory window
             if (keyReturn) {
                 selectedOption = -1;
+                playerChooseWindow = false;
             }
         }
     }
