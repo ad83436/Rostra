@@ -33,13 +33,19 @@ public class UIBTL : MonoBehaviour
     [HideInInspector]
     public int currentPlayerTurnIndex; //Updated from the btl manager to know which player turn it is
 
-    //Texts
+    //Control Panel
     public Text rageText; //Needs to be disabled when it's not usable
     public Text playerName;
     public Text attackText;
     public Text skillsText;
     public Text itemsText;
     public Text guardText;
+    public Text currentHP;
+    public Text maxHP;
+    public Image hpBar;
+    public Text currentMP;
+    public Text maxMP;
+    public Image mpBar;
 
 
     //Q UI Images
@@ -280,24 +286,20 @@ public class UIBTL : MonoBehaviour
         {
             currentState = btlUIState.choosingBasicCommand;
         }
-        
+
+        Debug.Log("Player index " + playerIndex);
 
         playerTurnIndicator.SetActive(true);
         controlsPanel.gameObject.SetActive(true);
 
         playerName.text = name;
         playerInControl = playerReference;
+        UpdatePlayerHPControlPanel();
+        UpdatePlayerMPControlPanel();
         playerInControl.MyTurn();
+        RageOptionTextColor();
 
-        if (playerInControl.canRage)
-        {
-            rageText.color = Color.white;
-        }
-        else
-        {
-            rageText.color = Color.gray;
-        }
-
+       
         //Turn off the indicator if the player in question is not in rage mode
         if(playerInControl.currentState!=Player.playerState.Rage)
         {
@@ -357,7 +359,6 @@ public class UIBTL : MonoBehaviour
                         enemyIndicatorIndex = 0;
                         activeRange = playerInControl.range;
                         MakeChosenEnemyMorePrompt(enemyIndicatorIndex);
-                        Debug.Log("Go to choosing enemy");
                     }
                     break;
 
@@ -375,7 +376,6 @@ public class UIBTL : MonoBehaviour
                     else if (Input.GetKeyDown(KeyCode.Space)) //Player has chosen Guard
                     {
                         playerInControl.Guard();
-                        EndTurn();
                     }
                     break;
 
@@ -673,6 +673,33 @@ public class UIBTL : MonoBehaviour
     private void choosingPlayer()
     {
 
+    }
+
+    public void RageOptionTextColor()
+    {
+        if (playerInControl.canRage)
+        {
+            rageText.color = Color.white;
+        }
+        else
+        {
+            rageText.color = Color.gray;
+        }
+
+    }
+
+    public void UpdatePlayerHPControlPanel()
+    {
+        currentHP.text = Mathf.RoundToInt(playerInControl.currentHP).ToString();
+        maxHP.text = " / " + Mathf.RoundToInt(playerInControl.maxHP).ToString();
+        hpBar.fillAmount = playerInControl.hpImage.fillAmount;
+    }
+
+    public void UpdatePlayerMPControlPanel()
+    {
+        currentMP.text = Mathf.RoundToInt(playerInControl.currentMP).ToString();
+        maxMP.text = " / " + Mathf.RoundToInt(playerInControl.maxMP).ToString();
+        mpBar.fillAmount = playerInControl.currentMP / playerInControl.maxMP;
     }
 
     public void EndTurn()

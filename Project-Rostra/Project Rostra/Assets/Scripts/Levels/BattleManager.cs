@@ -9,8 +9,10 @@ public class BattleManager : MonoBehaviour
     public class PlayerInformtion
     {
         public int playerIndex;
-        public float hp;
-        public float mp;
+        public float currentHP;
+        public float maxHP;
+        public float currentMP;
+        public float maxMP;
         public string[] skills = new string[4];
         public float atk;
         public float def;
@@ -165,7 +167,6 @@ public class BattleManager : MonoBehaviour
 
 
         numberOfEnemies--; //Update the number of enemies after adding an enemy. This number is obtained from the WM
-        Debug.Log("Number ofenemies " + numberOfEnemies);
 
         if (numberOfEnemies<=0)
         {
@@ -173,7 +174,6 @@ public class BattleManager : MonoBehaviour
         }
 
         //This will probably need to change to avoid race conditions between startbattle and build Q
-        Debug.Log("Indexxxxx  "+ enemyIndex);
         uiBtl.enemies[enemyIndex] = enemyRef; //Update the UI system with the enemy
     }
 
@@ -343,8 +343,8 @@ public class BattleManager : MonoBehaviour
     //Called by each player at the end of each battle
     public void EndOfBattle(int playerIndex, float remainingHP, float remainingMP )
     {
-        players[playerIndex].hp = remainingHP;
-        players[playerIndex].mp = remainingMP;
+        players[playerIndex].currentHP = remainingHP;
+        players[playerIndex].currentMP = remainingMP;
         players[playerIndex].exp += 5; //Arbitrary number. How will we decide how much exp we'll get from each battle?
         
         if(players[playerIndex].exp>= players[playerIndex].expNeededForNextLevel)
@@ -362,8 +362,8 @@ public class BattleManager : MonoBehaviour
     //Called by the inventory manager to update the player's stats when the player changes gear and on awake
     public void UpdateFromInv(int playerIndex,int hp, int mp, int atk, int def, int agi, int str, int crit)
     {
-        players[playerIndex].hp = hp;
-        players[playerIndex].mp = mp;
+        players[playerIndex].currentHP = hp;
+        players[playerIndex].currentMP = mp;
         players[playerIndex].atk = atk;
         players[playerIndex].def = def;
         players[playerIndex].agi = agi;
