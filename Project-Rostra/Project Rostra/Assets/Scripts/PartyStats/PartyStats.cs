@@ -38,7 +38,7 @@ public struct CharacterStats {
 		level = 1;
 		currentExperience = 0;				       
 		neededExperience = 500;
-		statPoints = 5;
+		statPoints = 0;
 	}
 	
 	// stats								       
