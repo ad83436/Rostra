@@ -142,16 +142,16 @@ TextureImporter:
     second: sprite-sheet-158x173_51
   - first:
       213: -7730064191558331735
-    second: sprite-sheet-158x173_52
+    second: Hit0
   - first:
       213: -1668372192746930647
-    second: sprite-sheet-158x173_53
+    second: Hit1
   - first:
       213: -8166925897312803377
-    second: sprite-sheet-158x173_54
+    second: Hit2
   - first:
       213: -6994179204062490348
-    second: sprite-sheet-158x173_55
+    second: Hit3
   - first:
       213: -9149896499326961556
     second: sprite-sheet-158x173_56
@@ -1205,7 +1205,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-sheet-158x173_52
+      name: Hit0
       rect:
         serializedVersion: 2
         x: 360
@@ -1226,7 +1226,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-sheet-158x173_53
+      name: Hit1
       rect:
         serializedVersion: 2
         x: 512
@@ -1247,10 +1247,10 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-sheet-158x173_54
+      name: Hit2
       rect:
         serializedVersion: 2
-        x: 670
+        x: 669
         y: 4
         width: 102
         height: 83
@@ -1268,7 +1268,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-sheet-158x173_55
+      name: Hit3
       rect:
         serializedVersion: 2
         x: 829

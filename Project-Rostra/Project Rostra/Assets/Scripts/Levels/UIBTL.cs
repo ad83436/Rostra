@@ -18,19 +18,35 @@ public class UIBTL : MonoBehaviour
     public GameObject enemyIndicatorPos3;
     public GameObject enemyIndicatorPos4;
     public GameObject controlsPanel; //Needs to be disabled after choosing a command and re-enabled when it's a player's turn
+    public GameObject rageModeIndicator1;
+    public GameObject rageModeIndicator2;
     public GameObject highlighter;
     public GameObject highlighterPos0;
     public GameObject highlighterPos1;
     public GameObject highlighterPos2;
     public GameObject highlighterPos3;
     public GameObject highlighterPos4; //Used to go back to the basic menu when inside the skills/items menu
-    public Text playerName;
     private int controlsIndicator; //Used to know which command has been chosen
     private int enemyIndicatorIndex;//Used to know which enemy is being chosen to be attacked
     private int activeRange; // Are we using the player's standard range of a skill's range?
     private int previousEnemyIndicatorIndex; //Used to limit calls to become less visible
     [HideInInspector]
     public int currentPlayerTurnIndex; //Updated from the btl manager to know which player turn it is
+
+    //Control Panel
+    public Text rageText; //Needs to be disabled when it's not usable
+    public Text playerName;
+    public Text attackText;
+    public Text skillsText;
+    public Text itemsText;
+    public Text guardText;
+    public Text currentHP;
+    public Text maxHP;
+    public Image hpBar;
+    public Text currentMP;
+    public Text maxMP;
+    public Image mpBar;
+
 
     //Q UI Images
 
@@ -62,6 +78,8 @@ public class UIBTL : MonoBehaviour
     private btlUIState currentState;
 
     public Enemy[] enemies;
+    public bool [] enemiesDead;
+    public int numberOfEnemies;
 
     private Player playerInControl;
 
@@ -78,12 +96,17 @@ public class UIBTL : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+
     }
     #endregion
 
     void Start()
     {
         btlManager = BattleManager.instance;
+
+        enemies = new Enemy[5]; //Filled by the BTL Manager in Add Enemy
+        enemiesDead = new bool[5]; //Every entry is turned to true by the enemy that dies
         controlsIndicator = 0; //Start at Attack
         highlighter.transform.position = highlighterPos0.transform.position;
         currentState = btlUIState.choosingBasicCommand;
@@ -91,18 +114,28 @@ public class UIBTL : MonoBehaviour
         enemyToAttackIndicator.gameObject.SetActive(false);
         playerTurnIndicator.SetActive(false);
         controlsPanel.gameObject.SetActive(false);
-        enemies = new Enemy[5];
         enemyIndicatorIndex = 0;
         previousEnemyIndicatorIndex = 0;
         activeRange = 0;
 
         imagesQ = new List<Sprite>();
-        imageRecyclePos = image8.gameObject.transform.position;
+        imageRecyclePos = image8.gameObject.transform.localPosition;
         targetPos = image0.transform.localPosition;
- 
+
         imageMovementSpeed = 250.0f;
         imageMaxDistance = 149.0f;
-        moveImagesNow = false; 
+        moveImagesNow = false;
+
+        //Rage mode is not available when the battle starts
+        rageText.color = Color.gray;
+        rageModeIndicator1.gameObject.SetActive(false);
+        rageModeIndicator2.gameObject.SetActive(false);
+
+        //All the enemies are alive at the beginning
+        for(int i=0;i<enemiesDead.Length;i++)
+        {
+            enemiesDead[i] = false;
+        }
     }
 
 
@@ -225,31 +258,31 @@ public class UIBTL : MonoBehaviour
         switch (imageIndex) //Which image hit the recycler?
         {
             case 0:
-                image0.gameObject.transform.position = imageRecyclePos;
+                image0.gameObject.transform.localPosition = imageRecyclePos;
                 break;
             case 1:
-                image1.gameObject.transform.position = imageRecyclePos;
+                image1.gameObject.transform.localPosition = imageRecyclePos;
                 break;
             case 2:
-                image2.gameObject.transform.position = imageRecyclePos;
+                image2.gameObject.transform.localPosition = imageRecyclePos;
                 break;
             case 3:
-                image3.gameObject.transform.position = imageRecyclePos;
+                image3.gameObject.transform.localPosition = imageRecyclePos;
                 break;
             case 4:
-                image4.gameObject.transform.position = imageRecyclePos;
+                image4.gameObject.transform.localPosition = imageRecyclePos;
                 break;
             case 5:
-                image5.gameObject.transform.position = imageRecyclePos;
+                image5.gameObject.transform.localPosition = imageRecyclePos;
                 break;
             case 6:
-                image6.gameObject.transform.position = imageRecyclePos;
+                image6.gameObject.transform.localPosition = imageRecyclePos;
                 break;
             case 7:
-                image7.gameObject.transform.position = imageRecyclePos;
+                image7.gameObject.transform.localPosition = imageRecyclePos;
                 break;
             case 8:
-                image8.gameObject.transform.position = imageRecyclePos;
+                image8.gameObject.transform.localPosition = imageRecyclePos;
                 break;
 
         }
@@ -262,13 +295,29 @@ public class UIBTL : MonoBehaviour
         {
             currentState = btlUIState.choosingBasicCommand;
         }
-        
+
+        //Debug.Log("Player index " + playerIndex);
 
         playerTurnIndicator.SetActive(true);
         controlsPanel.gameObject.SetActive(true);
 
         playerName.text = name;
         playerInControl = playerReference;
+        UpdatePlayerHPControlPanel();
+        UpdatePlayerMPControlPanel();
+        playerInControl.MyTurn();
+        RageOptionTextColor();
+
+       
+        //Turn off the indicator if the player in question is not in rage mode
+        if(playerInControl.currentState!=Player.playerState.Rage)
+        {
+            rageModeIndicator1.gameObject.SetActive(false);
+            rageModeIndicator2.gameObject.SetActive(false);
+            skillsText.color = Color.white;
+            itemsText.color = Color.white;
+            guardText.color = Color.white;
+        }
 
         switch (playerIndex)
         {
@@ -294,16 +343,22 @@ public class UIBTL : MonoBehaviour
         {
             switch (controlsIndicator)
             {
+                //If the player is in range mode, only "Attack" can be chosen
                 case 0://Highlighter is at attack
-                    if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.UpArrow))
+                    if ((Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.UpArrow)) && playerInControl.currentState!=Player.playerState.Rage)
                     {
                         controlsIndicator = 1;
                         highlighter.transform.position = highlighterPos1.transform.position;
                     }
-                    else if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow))
+                    else if (Input.GetKeyDown(KeyCode.RightArrow) && playerInControl.currentState != Player.playerState.Rage)
                     {
                         controlsIndicator = 2;
                         highlighter.transform.position = highlighterPos2.transform.position;
+                    }
+                    else if(Input.GetKeyDown(KeyCode.LeftArrow) && playerInControl.canRage && playerInControl.currentState != Player.playerState.Rage)
+                    {
+                        controlsIndicator = 4;
+                        highlighter.transform.position = highlighterPos4.transform.position;
                     }
                     else if (Input.GetKeyDown(KeyCode.Space)) //Player has chosen attack
                     {
@@ -313,7 +368,6 @@ public class UIBTL : MonoBehaviour
                         enemyIndicatorIndex = 0;
                         activeRange = playerInControl.range;
                         MakeChosenEnemyMorePrompt(enemyIndicatorIndex);
-                        Debug.Log("Go to choosing enemy");
                     }
                     break;
 
@@ -331,7 +385,6 @@ public class UIBTL : MonoBehaviour
                     else if (Input.GetKeyDown(KeyCode.Space)) //Player has chosen Guard
                     {
                         playerInControl.Guard();
-                        EndTurn();
                     }
                     break;
 
@@ -342,10 +395,15 @@ public class UIBTL : MonoBehaviour
                         controlsIndicator = 3;
                         highlighter.transform.position = highlighterPos3.transform.position;
                     }
-                    else if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow))
+                    else if (Input.GetKeyDown(KeyCode.LeftArrow))
                     {
                         controlsIndicator = 0;
                         highlighter.transform.position = highlighterPos0.transform.position;
+                    }
+                    else if(Input.GetKeyDown(KeyCode.RightArrow) && playerInControl.canRage)
+                    {
+                        controlsIndicator = 4;
+                        highlighter.transform.position = highlighterPos4.transform.position;
                     }
                     else if (Input.GetKeyDown(KeyCode.Space)) //Player has chosen Skills
                     {
@@ -359,14 +417,48 @@ public class UIBTL : MonoBehaviour
                         controlsIndicator = 2;
                         highlighter.transform.position = highlighterPos2.transform.position;
                     }
-                    else if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow))
+                    else if (Input.GetKeyDown(KeyCode.LeftArrow))
                     {
                         controlsIndicator = 1;
                         highlighter.transform.position = highlighterPos1.transform.position;
                     }
+                    else if(Input.GetKeyDown(KeyCode.RightArrow) && playerInControl.canRage)
+                    {
+                        controlsIndicator = 4;
+                        highlighter.transform.position = highlighterPos4.transform.position;
+                    }
                     else if (Input.GetKeyDown(KeyCode.Space)) //Player has chosen Skills
                     {
                         currentState = btlUIState.choosingItemsCommand;
+                    }
+                    break;
+                case 4://Hilighter is at RAGE
+                    if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.UpArrow))
+                    {
+                        controlsIndicator = 3;
+                        highlighter.transform.position = highlighterPos3.transform.position;
+                    }
+                    else if (Input.GetKeyDown(KeyCode.LeftArrow))
+                    {
+                        controlsIndicator = 2;
+                        highlighter.transform.position = highlighterPos2.transform.position;
+                    }
+                    else if (Input.GetKeyDown(KeyCode.RightArrow))
+                    {
+                        controlsIndicator = 0;
+                        highlighter.transform.position = highlighterPos0.transform.position;
+                    }
+                    else if (Input.GetKeyDown(KeyCode.Space)) //Player has chosen Skills
+                    {
+                        rageText.color = Color.yellow;
+                        skillsText.color = Color.gray;
+                        itemsText.color = Color.gray;
+                        guardText.color = Color.gray;
+                        playerInControl.Rage(); //Go into rage mode
+                        rageModeIndicator1.gameObject.SetActive(true);
+                        rageModeIndicator2.gameObject.SetActive(true);
+                        highlighter.transform.position = highlighterPos0.transform.position;
+                        controlsIndicator = 0;
                     }
                     break;
             }
@@ -408,7 +500,7 @@ public class UIBTL : MonoBehaviour
             case 0:
                 if(Input.GetKeyDown(KeyCode.DownArrow))
                 {
-                    if (enemies[1] != null)
+                    if (enemies[1] != null && enemiesDead[1]==false)
                     {
                         previousEnemyIndicatorIndex = enemyIndicatorIndex;
                         enemyIndicatorIndex = 1;
@@ -417,7 +509,7 @@ public class UIBTL : MonoBehaviour
                 }
                 else if((Input.GetKeyDown(KeyCode.RightArrow)|| Input.GetKeyDown(KeyCode.LeftArrow)) && (activeRange + playerInControl.initialPos >= 2))
                 {
-                    if (enemies[3] != null)
+                    if (enemies[3] != null && enemiesDead[3] == false)
                     {
                         previousEnemyIndicatorIndex = enemyIndicatorIndex;
                         enemyIndicatorIndex = 3;
@@ -426,7 +518,7 @@ public class UIBTL : MonoBehaviour
                 }
                 else if(Input.GetKeyDown(KeyCode.UpArrow))
                 {
-                    if (enemies[2] != null)
+                    if (enemies[2] != null && enemiesDead[2] == false)
                     {
                         previousEnemyIndicatorIndex = enemyIndicatorIndex;
                         enemyIndicatorIndex = 2;
@@ -437,7 +529,7 @@ public class UIBTL : MonoBehaviour
             case 1:
                 if (Input.GetKeyDown(KeyCode.DownArrow))
                 {
-                    if (enemies[2] != null)
+                    if (enemies[2] != null && enemiesDead[2] == false)
                     {
                         previousEnemyIndicatorIndex = enemyIndicatorIndex;
                         enemyIndicatorIndex = 2;
@@ -446,7 +538,7 @@ public class UIBTL : MonoBehaviour
                 }
                 else if ((Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow)) && (activeRange + playerInControl.initialPos >= 2))
                 {
-                    if (enemies[4] != null)
+                    if (enemies[4] != null && enemiesDead[4] == false)
                     {
                         previousEnemyIndicatorIndex = enemyIndicatorIndex;
                         enemyIndicatorIndex = 4;
@@ -455,7 +547,7 @@ public class UIBTL : MonoBehaviour
                 }
                 else if (Input.GetKeyDown(KeyCode.UpArrow))
                 {
-                    if (enemies[0] != null)
+                    if (enemies[0] != null && enemiesDead[0] == false)
                     {
                         previousEnemyIndicatorIndex = enemyIndicatorIndex;
                         enemyIndicatorIndex = 0;
@@ -466,7 +558,7 @@ public class UIBTL : MonoBehaviour
             case 2:
                 if (Input.GetKeyDown(KeyCode.DownArrow))
                 {
-                    if (enemies[0] != null)
+                    if (enemies[0] != null && enemiesDead[0] == false)
                     {
                         previousEnemyIndicatorIndex = enemyIndicatorIndex;
                         enemyIndicatorIndex = 0;
@@ -475,7 +567,7 @@ public class UIBTL : MonoBehaviour
                 }
                 else if ((Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow)) && (activeRange + playerInControl.initialPos >= 2))
                 {
-                    if (enemies[3])
+                    if (enemies[3] != null && enemiesDead[3] == false)
                     {
                         previousEnemyIndicatorIndex = enemyIndicatorIndex;
                         enemyIndicatorIndex = 3;
@@ -484,7 +576,7 @@ public class UIBTL : MonoBehaviour
                 }
                 else if (Input.GetKeyDown(KeyCode.UpArrow))
                 {
-                    if (enemies[1])
+                    if (enemies[1] != null && enemiesDead[1] == false)
                     {
                         previousEnemyIndicatorIndex = enemyIndicatorIndex;
                         enemyIndicatorIndex = 1;
@@ -495,7 +587,7 @@ public class UIBTL : MonoBehaviour
             case 3:
                 if (Input.GetKeyDown(KeyCode.DownArrow))
                 {
-                    if (enemies[4] != null)
+                    if (enemies[4] != null && enemiesDead[4] == false)
                     {
                         previousEnemyIndicatorIndex = enemyIndicatorIndex;
                         enemyIndicatorIndex = 4;
@@ -504,7 +596,7 @@ public class UIBTL : MonoBehaviour
                 }
                 else if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow))
                 {
-                    if (enemies[0] != null)
+                    if (enemies[0] != null && enemiesDead[0] == false)
                     {
                         previousEnemyIndicatorIndex = enemyIndicatorIndex;
                         enemyIndicatorIndex = 0;
@@ -513,7 +605,7 @@ public class UIBTL : MonoBehaviour
                 }
                 else if (Input.GetKeyDown(KeyCode.UpArrow))
                 {
-                    if (enemies[4] != null)
+                    if (enemies[4] != null  && enemiesDead[4] == false)
                     {
                         previousEnemyIndicatorIndex = enemyIndicatorIndex;
                         enemyIndicatorIndex = 4;
@@ -524,7 +616,7 @@ public class UIBTL : MonoBehaviour
             case 4:
                 if (Input.GetKeyDown(KeyCode.DownArrow))
                 {
-                    if (enemies[3] != null)
+                    if (enemies[3] != null && enemiesDead[3] == false)
                     {
                         previousEnemyIndicatorIndex = enemyIndicatorIndex;
                         enemyIndicatorIndex = 3;
@@ -533,7 +625,7 @@ public class UIBTL : MonoBehaviour
                 }
                 else if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow))
                 {
-                    if (enemies[2] != null)
+                    if (enemies[2] != null && enemiesDead[2] == false)
                     {
                         previousEnemyIndicatorIndex = enemyIndicatorIndex;
                         enemyIndicatorIndex = 2;
@@ -542,7 +634,7 @@ public class UIBTL : MonoBehaviour
                 }
                 else if (Input.GetKeyDown(KeyCode.UpArrow))
                 {
-                    if (enemies[3])
+                    if (enemies[3] != null && enemiesDead[3] == false)
                     {
                         previousEnemyIndicatorIndex = enemyIndicatorIndex;
                         enemyIndicatorIndex = 3;
@@ -592,11 +684,56 @@ public class UIBTL : MonoBehaviour
 
     }
 
+    public void RageOptionTextColor()
+    {
+        if (playerInControl.canRage)
+        {
+            rageText.color = Color.white;
+        }
+        else
+        {
+            rageText.color = Color.gray;
+        }
+
+    }
+
+    public void UpdatePlayerHPControlPanel()
+    {
+        currentHP.text = Mathf.RoundToInt(playerInControl.currentHP).ToString();
+        maxHP.text = " / " + Mathf.RoundToInt(playerInControl.maxHP).ToString();
+        hpBar.fillAmount = playerInControl.hpImage.fillAmount;
+    }
+
+    public void UpdatePlayerMPControlPanel()
+    {
+        currentMP.text = Mathf.RoundToInt(playerInControl.currentMP).ToString();
+        maxMP.text = " / " + Mathf.RoundToInt(playerInControl.maxMP).ToString();
+        mpBar.fillAmount = playerInControl.currentMP / playerInControl.maxMP;
+    }
+
     public void EndTurn()
     {
         playerTurnIndicator.SetActive(false);
+        enemyToAttackIndicator.SetActive(false);
         controlsPanel.gameObject.SetActive(false);
         moveImagesNow = true;
+    }
+
+    public void EnemyIsDead(int enemyIndex)
+    {
+        enemiesDead[enemyIndex] = true;
+
+        for(int i = 0, j=0; j<enemies.Length;j++)
+        {
+            if(enemies[j]!=null && enemiesDead[j]==true)
+            {
+                i++;
+                if(i>=numberOfEnemies)
+                {
+                    Debug.Log("Victorrryyyy");
+                }
+            }
+        }
     }
 
 

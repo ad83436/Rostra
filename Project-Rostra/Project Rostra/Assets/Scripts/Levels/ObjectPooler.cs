@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ObjectPooler : MonoBehaviour
 {
@@ -57,6 +58,8 @@ public class ObjectPooler : MonoBehaviour
             //Add the queue to the dictionary
             poolDictionary.Add(p.tag, gameObjectQueue);
         }
+
+        //SpawnFromPool("Giant", new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
     }
 
     public GameObject SpawnFromPool(string tag,Vector3 position, Quaternion rotation)
