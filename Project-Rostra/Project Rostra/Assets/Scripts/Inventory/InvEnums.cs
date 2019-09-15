@@ -1,5 +1,5 @@
 ﻿// Code Written By:     Christopher Brine
-// Last Updated:        September 11th, 2019
+// Last Updated:        September 15th, 2019
 
 // IMPORTANT -- Make sure you put (int) before referencing the enum values in this file.
 //                      Example:    (int)ITEM_ID.NO_ITEM;
@@ -19,6 +19,7 @@ enum ITEM_TYPE { // Minimum Value -- 0xFF00, Maximum Value -- 0xFF4F (64 possibl
     EQUIPABLE =         0xFF00,     // Type for items that can be equipped and unequipped by certain characters (Armor/Weapons)
     CONSUMABLE =        0xFF01,     // Type for items that can be consumed by a character (Potions, Stat Boosts, etc.)
     KEY_ITEM =          0xFF02,     // Type for items that are important in the game (Quest Items)
+    GENERIC_LOOT =      0xFF03,     // Type for items that can only be sold to merchants; they have no other use
 };
 
 enum ARMOR_TYPE { // Minimum Value -- 0xFF50, Maximum Value -- 0xFFAF (80 possible armor types)
