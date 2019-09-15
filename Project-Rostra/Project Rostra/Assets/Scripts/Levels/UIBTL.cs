@@ -249,31 +249,31 @@ public class UIBTL : MonoBehaviour
         switch (imageIndex) //Which image hit the recycler?
         {
             case 0:
-                image0.gameObject.transform.position = imageRecyclePos;
+                image0.gameObject.transform.localPosition = imageRecyclePos;
                 break;
             case 1:
-                image1.gameObject.transform.position = imageRecyclePos;
+                image1.gameObject.transform.localPosition = imageRecyclePos;
                 break;
             case 2:
-                image2.gameObject.transform.position = imageRecyclePos;
+                image2.gameObject.transform.localPosition = imageRecyclePos;
                 break;
             case 3:
-                image3.gameObject.transform.position = imageRecyclePos;
+                image3.gameObject.transform.localPosition = imageRecyclePos;
                 break;
             case 4:
-                image4.gameObject.transform.position = imageRecyclePos;
+                image4.gameObject.transform.localPosition = imageRecyclePos;
                 break;
             case 5:
-                image5.gameObject.transform.position = imageRecyclePos;
+                image5.gameObject.transform.localPosition = imageRecyclePos;
                 break;
             case 6:
-                image6.gameObject.transform.position = imageRecyclePos;
+                image6.gameObject.transform.localPosition = imageRecyclePos;
                 break;
             case 7:
-                image7.gameObject.transform.position = imageRecyclePos;
+                image7.gameObject.transform.localPosition = imageRecyclePos;
                 break;
             case 8:
-                image8.gameObject.transform.position = imageRecyclePos;
+                image8.gameObject.transform.localPosition = imageRecyclePos;
                 break;
 
         }
@@ -287,7 +287,7 @@ public class UIBTL : MonoBehaviour
             currentState = btlUIState.choosingBasicCommand;
         }
 
-        Debug.Log("Player index " + playerIndex);
+        //Debug.Log("Player index " + playerIndex);
 
         playerTurnIndicator.SetActive(true);
         controlsPanel.gameObject.SetActive(true);

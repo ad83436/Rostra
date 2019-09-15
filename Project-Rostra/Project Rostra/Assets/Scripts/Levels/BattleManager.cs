@@ -205,17 +205,26 @@ public class BattleManager : MonoBehaviour
 
 
         BuildQueue();
+       // Debug.Log(battleQueue.Count);
+       // Debug.Log("At the end of the Q is " + battleQueue[battleQueue.Count - 1].name + " And " + battleQueue[battleQueue.Count - 2].name);
         NextOnQueue();
     }
 
     public void NextOnQueue()
     {
-        //Temp code
-
-        //Should check if this is a player, but for now, this is a player
-        uiBtl.showThisPlayerUI(battleQueue[0].playerIndex, battleQueue[0].name, battleQueue[0].playerReference);
+        //Debug.Log("Next on Q is " + battleQueue[0].name);
+        //Check if the next on Q is a player or an enemy and call the correct function
+        if (battleQueue[0].playerReference != null && battleQueue[0].enemyReference == null)
+        {
+            uiBtl.showThisPlayerUI(battleQueue[0].playerIndex, battleQueue[0].name, battleQueue[0].playerReference);
+        }
+        else if (battleQueue[0].playerReference == null && battleQueue[0].enemyReference != null)
+        {
+            battleQueue[0].enemyReference.ItsMyTurn();
+        }
         //Add it to the end of the Q
         battleQueue.Add(battleQueue[0]);
+        //Debug.Log("I've added "  + battleQueue[battleQueue.Count - 1].name);
         //Remove it from the start of the Q 
         battleQueue.RemoveAt(0);
     }
@@ -335,6 +344,14 @@ public class BattleManager : MonoBehaviour
         //Otherwise, tell the UI system to show the Q
         else
         {
+            if(battleQueue.Count<9)
+            {
+                //The Q should always be of size 9
+                for(int i = 0; battleQueue.Count<9; i++)
+                {
+                    battleQueue.Add(battleQueue[i]);
+                }
+            }
             uiBtl.QueueIsReady();
         }
     }

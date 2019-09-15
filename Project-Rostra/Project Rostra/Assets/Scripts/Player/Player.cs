@@ -109,6 +109,7 @@ public class Player : MonoBehaviour
         battleManager.players[playerIndex].def = actualDEF;
         battleManager.players[playerIndex].crit = actualCRIT;
         battleManager.players[playerIndex].str = actualSTR;
+        battleManager.players[playerIndex].name = name;
         battleManager.numberOfPlayers--;
 
         //UI
@@ -208,7 +209,6 @@ public class Player : MonoBehaviour
         }
         uiBTL.ResetVisibilityForAllEnemies();
         uiBTL.EndTurn();
-        battleManager.NextOnQueue(); //Move to the next on Q
 
         //If the player is in rage state, they can only attack so it makes sense to check if we were in rage mode when attacking
         if(currentState==playerState.Rage)
@@ -226,7 +226,7 @@ public class Player : MonoBehaviour
     private void CalculateHit()
     {
         //20 sided die + str <? enemy agility
-        if(Random.Range(0.0f,20.0f) + str < attackingThisEnemy.agi)
+        if(Random.Range(0.0f,20.0f) + str < attackingThisEnemy.eAgility)
         {
             hit = false;
         }

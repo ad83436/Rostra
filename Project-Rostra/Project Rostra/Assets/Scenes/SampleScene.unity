@@ -236,6 +236,7 @@ MonoBehaviour:
   - {fileID: 3829569745243744735, guid: 460a4576a18cf3a45b5553168ae80480, type: 3}
   - {fileID: 3829569745243744735, guid: 460a4576a18cf3a45b5553168ae80480, type: 3}
   - {fileID: 3829569745243744735, guid: 460a4576a18cf3a45b5553168ae80480, type: 3}
+  enemyLevels: 050000000a0000000f000000
   enemySpwn: {fileID: 0}
 --- !u!4 &899406936
 Transform:
@@ -262,7 +263,7 @@ GameObject:
   - component: {fileID: 1297121566}
   - component: {fileID: 1297121567}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: EXP Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

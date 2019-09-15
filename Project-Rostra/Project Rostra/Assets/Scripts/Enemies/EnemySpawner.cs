@@ -6,6 +6,7 @@ public class EnemySpawner : MonoBehaviour
 {
     public static EnemySpawner instance;
     public Enemy[] enemiesToSpawn = new Enemy[5];
+    public int[] enemyLevels = new int[5];
     public GameObject[] enemyPos = new GameObject[5]; //Provided by the BTL Manager before the battle starts
     private Enemy enemySpawned;
 
@@ -25,10 +26,12 @@ public class EnemySpawner : MonoBehaviour
     #endregion
 
     //Called from the World Map
-    public void AddEnemyToSpawn(Enemy enemyToAdd, int index)
+    public void AddEnemyToSpawn(Enemy enemyToAdd, int index, int currentEnemyLevel)
     {
+        Debug.Log("Incoming enemy level " + currentEnemyLevel);
         enemiesToSpawn[index] = enemyToAdd;
-        //Add level and stats here
+        enemiesToSpawn[index].enemyIndexInBattleManager = index;
+        enemyLevels[index] = currentEnemyLevel;
     }
 
     //Called from BTL Manager
@@ -46,7 +49,7 @@ public class EnemySpawner : MonoBehaviour
             {
                 enemySpawned = Instantiate(enemiesToSpawn[i], enemyPos[i].transform.position, gameObject.transform.rotation);
                 enemySpawned.enemyIndexInBattleManager = i;
-                enemySpawned.agi = 15;                
+                enemySpawned.IncreaseStatsBasedOnLevel(enemyLevels[i]);
             }
         }
     }
