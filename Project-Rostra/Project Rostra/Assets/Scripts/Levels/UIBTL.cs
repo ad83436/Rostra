@@ -78,6 +78,8 @@ public class UIBTL : MonoBehaviour
     private btlUIState currentState;
 
     public Enemy[] enemies;
+    public bool [] enemiesDead;
+    public int numberOfEnemies;
 
     private Player playerInControl;
 
@@ -104,6 +106,7 @@ public class UIBTL : MonoBehaviour
         btlManager = BattleManager.instance;
 
         enemies = new Enemy[5]; //Filled by the BTL Manager in Add Enemy
+        enemiesDead = new bool[5]; //Every entry is turned to true by the enemy that dies
         controlsIndicator = 0; //Start at Attack
         highlighter.transform.position = highlighterPos0.transform.position;
         currentState = btlUIState.choosingBasicCommand;
@@ -127,6 +130,12 @@ public class UIBTL : MonoBehaviour
         rageText.color = Color.gray;
         rageModeIndicator1.gameObject.SetActive(false);
         rageModeIndicator2.gameObject.SetActive(false);
+
+        //All the enemies are alive at the beginning
+        for(int i=0;i<enemiesDead.Length;i++)
+        {
+            enemiesDead[i] = false;
+        }
     }
 
 
@@ -448,8 +457,8 @@ public class UIBTL : MonoBehaviour
                         playerInControl.Rage(); //Go into rage mode
                         rageModeIndicator1.gameObject.SetActive(true);
                         rageModeIndicator2.gameObject.SetActive(true);
-                        controlsIndicator = 0;
                         highlighter.transform.position = highlighterPos0.transform.position;
+                        controlsIndicator = 0;
                     }
                     break;
             }
@@ -491,7 +500,7 @@ public class UIBTL : MonoBehaviour
             case 0:
                 if(Input.GetKeyDown(KeyCode.DownArrow))
                 {
-                    if (enemies[1] != null)
+                    if (enemies[1] != null && enemiesDead[1]==false)
                     {
                         previousEnemyIndicatorIndex = enemyIndicatorIndex;
                         enemyIndicatorIndex = 1;
@@ -500,7 +509,7 @@ public class UIBTL : MonoBehaviour
                 }
                 else if((Input.GetKeyDown(KeyCode.RightArrow)|| Input.GetKeyDown(KeyCode.LeftArrow)) && (activeRange + playerInControl.initialPos >= 2))
                 {
-                    if (enemies[3] != null)
+                    if (enemies[3] != null && enemiesDead[3] == false)
                     {
                         previousEnemyIndicatorIndex = enemyIndicatorIndex;
                         enemyIndicatorIndex = 3;
@@ -509,7 +518,7 @@ public class UIBTL : MonoBehaviour
                 }
                 else if(Input.GetKeyDown(KeyCode.UpArrow))
                 {
-                    if (enemies[2] != null)
+                    if (enemies[2] != null && enemiesDead[2] == false)
                     {
                         previousEnemyIndicatorIndex = enemyIndicatorIndex;
                         enemyIndicatorIndex = 2;
@@ -520,7 +529,7 @@ public class UIBTL : MonoBehaviour
             case 1:
                 if (Input.GetKeyDown(KeyCode.DownArrow))
                 {
-                    if (enemies[2] != null)
+                    if (enemies[2] != null && enemiesDead[2] == false)
                     {
                         previousEnemyIndicatorIndex = enemyIndicatorIndex;
                         enemyIndicatorIndex = 2;
@@ -529,7 +538,7 @@ public class UIBTL : MonoBehaviour
                 }
                 else if ((Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow)) && (activeRange + playerInControl.initialPos >= 2))
                 {
-                    if (enemies[4] != null)
+                    if (enemies[4] != null && enemiesDead[4] == false)
                     {
                         previousEnemyIndicatorIndex = enemyIndicatorIndex;
                         enemyIndicatorIndex = 4;
@@ -538,7 +547,7 @@ public class UIBTL : MonoBehaviour
                 }
                 else if (Input.GetKeyDown(KeyCode.UpArrow))
                 {
-                    if (enemies[0] != null)
+                    if (enemies[0] != null && enemiesDead[0] == false)
                     {
                         previousEnemyIndicatorIndex = enemyIndicatorIndex;
                         enemyIndicatorIndex = 0;
@@ -549,7 +558,7 @@ public class UIBTL : MonoBehaviour
             case 2:
                 if (Input.GetKeyDown(KeyCode.DownArrow))
                 {
-                    if (enemies[0] != null)
+                    if (enemies[0] != null && enemiesDead[0] == false)
                     {
                         previousEnemyIndicatorIndex = enemyIndicatorIndex;
                         enemyIndicatorIndex = 0;
@@ -558,7 +567,7 @@ public class UIBTL : MonoBehaviour
                 }
                 else if ((Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow)) && (activeRange + playerInControl.initialPos >= 2))
                 {
-                    if (enemies[3])
+                    if (enemies[3] != null && enemiesDead[3] == false)
                     {
                         previousEnemyIndicatorIndex = enemyIndicatorIndex;
                         enemyIndicatorIndex = 3;
@@ -567,7 +576,7 @@ public class UIBTL : MonoBehaviour
                 }
                 else if (Input.GetKeyDown(KeyCode.UpArrow))
                 {
-                    if (enemies[1])
+                    if (enemies[1] != null && enemiesDead[1] == false)
                     {
                         previousEnemyIndicatorIndex = enemyIndicatorIndex;
                         enemyIndicatorIndex = 1;
@@ -578,7 +587,7 @@ public class UIBTL : MonoBehaviour
             case 3:
                 if (Input.GetKeyDown(KeyCode.DownArrow))
                 {
-                    if (enemies[4] != null)
+                    if (enemies[4] != null && enemiesDead[4] == false)
                     {
                         previousEnemyIndicatorIndex = enemyIndicatorIndex;
                         enemyIndicatorIndex = 4;
@@ -587,7 +596,7 @@ public class UIBTL : MonoBehaviour
                 }
                 else if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow))
                 {
-                    if (enemies[0] != null)
+                    if (enemies[0] != null && enemiesDead[0] == false)
                     {
                         previousEnemyIndicatorIndex = enemyIndicatorIndex;
                         enemyIndicatorIndex = 0;
@@ -596,7 +605,7 @@ public class UIBTL : MonoBehaviour
                 }
                 else if (Input.GetKeyDown(KeyCode.UpArrow))
                 {
-                    if (enemies[4] != null)
+                    if (enemies[4] != null  && enemiesDead[4] == false)
                     {
                         previousEnemyIndicatorIndex = enemyIndicatorIndex;
                         enemyIndicatorIndex = 4;
@@ -607,7 +616,7 @@ public class UIBTL : MonoBehaviour
             case 4:
                 if (Input.GetKeyDown(KeyCode.DownArrow))
                 {
-                    if (enemies[3] != null)
+                    if (enemies[3] != null && enemiesDead[3] == false)
                     {
                         previousEnemyIndicatorIndex = enemyIndicatorIndex;
                         enemyIndicatorIndex = 3;
@@ -616,7 +625,7 @@ public class UIBTL : MonoBehaviour
                 }
                 else if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow))
                 {
-                    if (enemies[2] != null)
+                    if (enemies[2] != null && enemiesDead[2] == false)
                     {
                         previousEnemyIndicatorIndex = enemyIndicatorIndex;
                         enemyIndicatorIndex = 2;
@@ -625,7 +634,7 @@ public class UIBTL : MonoBehaviour
                 }
                 else if (Input.GetKeyDown(KeyCode.UpArrow))
                 {
-                    if (enemies[3])
+                    if (enemies[3] != null && enemiesDead[3] == false)
                     {
                         previousEnemyIndicatorIndex = enemyIndicatorIndex;
                         enemyIndicatorIndex = 3;
@@ -708,6 +717,23 @@ public class UIBTL : MonoBehaviour
         enemyToAttackIndicator.SetActive(false);
         controlsPanel.gameObject.SetActive(false);
         moveImagesNow = true;
+    }
+
+    public void EnemyIsDead(int enemyIndex)
+    {
+        enemiesDead[enemyIndex] = true;
+
+        for(int i = 0, j=0; j<enemies.Length;j++)
+        {
+            if(enemies[j]!=null && enemiesDead[j]==true)
+            {
+                i++;
+                if(i>=numberOfEnemies)
+                {
+                    Debug.Log("Victorrryyyy");
+                }
+            }
+        }
     }
 
 

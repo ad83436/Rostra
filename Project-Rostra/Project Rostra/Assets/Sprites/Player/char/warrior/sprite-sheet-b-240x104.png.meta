@@ -52,10 +52,10 @@ TextureImporter:
     second: sprite-sheet-b-240x104_15
   - first:
       213: 2957047908748795447
-    second: sprite-sheet-b-240x104_16
+    second: Hit0
   - first:
       213: -4121351101298097012
-    second: sprite-sheet-b-240x104_17
+    second: Hit1
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -476,7 +476,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-sheet-b-240x104_16
+      name: Hit0
       rect:
         serializedVersion: 2
         x: 331
@@ -497,7 +497,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-sheet-b-240x104_17
+      name: Hit1
       rect:
         serializedVersion: 2
         x: 573

@@ -58,19 +58,19 @@ TextureImporter:
     second: Attack11
   - first:
       213: 7758931403693586281
-    second: sprite-sheet-249x100_18
+    second: Hit0
   - first:
       213: 339060721102170803
-    second: sprite-sheet-249x100_19
+    second: Hit1
   - first:
       213: 1117975591344982352
-    second: sprite-sheet-249x100_20
+    second: Hit2
   - first:
       213: 3351632499509304258
-    second: sprite-sheet-249x100_21
+    second: Hit3
   - first:
       213: -5632424067176655265
-    second: sprite-sheet-249x100_22
+    second: Hit4
   - first:
       213: 898003864772971652
     second: sprite-sheet-249x100_23
@@ -614,7 +614,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-sheet-249x100_18
+      name: Hit0
       rect:
         serializedVersion: 2
         x: 113
@@ -635,7 +635,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-sheet-249x100_19
+      name: Hit1
       rect:
         serializedVersion: 2
         x: 364
@@ -656,7 +656,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-sheet-249x100_20
+      name: Hit2
       rect:
         serializedVersion: 2
         x: 609
@@ -677,7 +677,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-sheet-249x100_21
+      name: Hit3
       rect:
         serializedVersion: 2
         x: 860
@@ -698,11 +698,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-sheet-249x100_22
+      name: Hit4
       rect:
         serializedVersion: 2
         x: 1109
-        y: 302
+        y: 303
         width: 112
         height: 87
       alignment: 0

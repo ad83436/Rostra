@@ -10,7 +10,6 @@ public class Enemy : MonoBehaviour
     public int enemyIndexInBattleManager;
     private BattleManager battleManager;
     private UIBTL uiBTL;
-    public float eHp;
     public float eMana;
     public float eAttack;
     public float eAgility;
@@ -36,8 +35,10 @@ public class Enemy : MonoBehaviour
     public Image HP;
     private float maxHP;
     private float currentHP;
+    public GameObject enemyCanvas;
 
     private bool haveAddedMyself;
+    public bool dead;
 
 
     private void Start()
@@ -52,6 +53,7 @@ public class Enemy : MonoBehaviour
 
         haveAddedMyself = false;
         hit = false;
+        dead = false;
 
     }
 
@@ -74,7 +76,7 @@ public class Enemy : MonoBehaviour
     //Every enemy scales differently based on its warrior class (DPS,Tanks, Support)
     public void IncreaseStatsBasedOnLevel(int enemyCurrentLevel)
     {
-        Debug.Log("hey it's me enemy! " + enemyCurrentLevel);
+        
         eCurrentLevel = enemyCurrentLevel;
         //eHP increase is still temporary until we agree how much each class'es HP increases with leveling up
             float skillPoints = enemyCurrentLevel - eBaseLevel;
@@ -83,20 +85,20 @@ public class Enemy : MonoBehaviour
                 case "DPS":
                     eAttack = Mathf.CeilToInt(eAttack += (skillPoints * 0.6f));
                     eAgility = Mathf.CeilToInt(eAgility += +(skillPoints * 0.4f));
-                    eHp += skillPoints * 35.0f * 0.5f;
+                    currentHP += skillPoints * 35.0f * 0.5f;
 
                 break;
 
                 case "Tank":
                     eAttack = Mathf.CeilToInt(eAttack += (skillPoints * 0.3f));
                     eDefence = Mathf.CeilToInt(eDefence += (skillPoints * 0.7f));
-                    eHp += skillPoints * 60.0f * 0.5f;
+                    currentHP += skillPoints * 60.0f * 0.5f;
                 break;
 
                 case "Support":
                     eAttack = Mathf.CeilToInt(eAttack += (skillPoints * 0.4f));
                     eAgility = Mathf.CeilToInt(eAttack += (skillPoints * 0.6f));
-                    eHp += skillPoints * 85.0f * 0.5f;
+                    currentHP += skillPoints * 85.0f * 0.5f;
                 break;
             }
     }
@@ -106,38 +108,45 @@ public class Enemy : MonoBehaviour
         battleManager.AddEnemy(enemyIndexInBattleManager, Mathf.RoundToInt(eAgility), Mathf.RoundToInt(eStrength), Mathf.RoundToInt(eCritical), this, name);
     }
 
-    public void ItsMyTurn()
+    public void EnemyTurn()
     {
-        switch (enemyType)
+        if (!dead)
         {
-            case "":
-                DumbAttack();
-                break;
+            switch (enemyType)
+            {
+                case "":
+                    DumbAttack();
+                    break;
 
-            case "Opportunistic":
+                case "Opportunistic":
 
-                break;
+                    break;
 
-            case "Assassin":
-                AttackLowHp();
-                break;
+                case "Assassin":
+                    AttackLowHp();
+                    break;
 
-            case "Bruiser":
+                case "Bruiser":
 
-                break;
+                    break;
 
-            case "Healer":
+                case "Healer":
 
-                break;
+                    break;
 
-            case "Heal-Support":
+                case "Heal-Support":
 
-                break;
+                    break;
 
-            case "Straegist":
+                case "Straegist":
 
-                break;
+                    break;
 
+            }
+        }
+        else
+        {
+            uiBTL.EndTurn();
         }
     }
 
@@ -207,15 +216,6 @@ public class Enemy : MonoBehaviour
 
     }
 
-    private void Death()
-    {
-        if (eHp <= 0)
-        {
-            enabled = false;
-            spriteRenderer.enabled = false;
-            Debug.Log(eName + " Died with a health of " + eHp);
-        }
-    }
 
     //returns a int between 0 and 4 
     public int GetRandomNumber()
@@ -258,6 +258,26 @@ public class Enemy : MonoBehaviour
         currentHP -= damage;
         battleManager.enemies[enemyIndexInBattleManager].currentHP = currentHP; //Update the BTL manager with the new health
         HP.fillAmount = currentHP / maxHP;
+        animator.SetBool("Hit", true);
+
+        if(currentHP<=0.0f)
+        {
+            Death();
+        }
+    }
+
+    public void EndHitAnimation()
+    {
+        animator.SetBool("Hit", false);
+    }
+
+
+    private void Death()
+    {
+        spriteRenderer.enabled = false;
+        enemyCanvas.SetActive(false);
+        dead = true;
+        uiBTL.EnemyIsDead(enemyIndexInBattleManager);
     }
 
 

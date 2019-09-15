@@ -196,7 +196,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyIndexInBattleManager: 2
-  eHp: 150
   eMana: 0
   eAttack: 20
   eAgility: 7
@@ -212,6 +211,8 @@ MonoBehaviour:
   hit: 0
   qImage: {fileID: 21300000, guid: a1c83ac44df87ae4bb4206c178de4c5a, type: 3}
   HP: {fileID: 3829569746409785133}
+  enemyCanvas: {fileID: 3829569744485860892}
+  dead: 0
 --- !u!95 &8834717703439480084
 Animator:
   serializedVersion: 3

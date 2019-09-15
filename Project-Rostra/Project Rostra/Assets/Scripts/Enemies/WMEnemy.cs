@@ -13,11 +13,6 @@ public class WMEnemy : MonoBehaviour
     private void Start()
     {
         enemySpwn = EnemySpawner.instance;
-
-        for (int i = 0; i < enemies.Length; i++)
-        {
-            Debug.Log("Enemy Level :" + enemyLevels[i]);
-        }
     }
 
     private void Update()

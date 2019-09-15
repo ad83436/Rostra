@@ -103,6 +103,7 @@ public class BattleManager : MonoBehaviour
     {
         uiBtl = UIBTL.instance;
         enemySpawner = EnemySpawner.instance;
+        uiBtl.numberOfEnemies = numberOfEnemies = enemySpawner.numberOfEnemies;
         for(int i =0;i<5;i++)
         {
             enemySpawner.AddPos(enemyPos[i], i);
@@ -113,22 +114,6 @@ public class BattleManager : MonoBehaviour
 
     private void Update()
     {
-        /*
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-           StartBattle();
-           Debug.Log("Start battle");
-        }
-
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            BuildQueue();
-            Debug.Log("Build queue");
-            Debug.Log("Q size: " + battleQueue.Count);
-        }
-        */
-
-        //Temp code
 
         if(numberOfPlayers<=0 && allPlayersAdded == false)
         {
@@ -220,7 +205,7 @@ public class BattleManager : MonoBehaviour
         }
         else if (battleQueue[0].playerReference == null && battleQueue[0].enemyReference != null)
         {
-            battleQueue[0].enemyReference.ItsMyTurn();
+            battleQueue[0].enemyReference.EnemyTurn();
         }
         //Add it to the end of the Q
         battleQueue.Add(battleQueue[0]);

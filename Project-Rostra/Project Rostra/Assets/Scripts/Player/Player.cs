@@ -276,6 +276,13 @@ public class Player : MonoBehaviour
                 canRage = true; //Can now go into rage mode
             }
         }
+
+        playerAnimator.SetBool("Hit", true);
+    }
+
+    private void EndHit()
+    {
+        playerAnimator.SetBool("Hit", false);
     }
 
     //Heal function. Different heal skills will heal the player by different percentages

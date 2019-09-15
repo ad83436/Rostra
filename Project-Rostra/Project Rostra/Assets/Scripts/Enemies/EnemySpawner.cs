@@ -9,6 +9,7 @@ public class EnemySpawner : MonoBehaviour
     public int[] enemyLevels = new int[5];
     public GameObject[] enemyPos = new GameObject[5]; //Provided by the BTL Manager before the battle starts
     private Enemy enemySpawned;
+    public int numberOfEnemies = 0;
 
     #region singleton
     private void Awake()
@@ -28,10 +29,11 @@ public class EnemySpawner : MonoBehaviour
     //Called from the World Map
     public void AddEnemyToSpawn(Enemy enemyToAdd, int index, int currentEnemyLevel)
     {
-        Debug.Log("Incoming enemy level " + currentEnemyLevel);
+
         enemiesToSpawn[index] = enemyToAdd;
         enemiesToSpawn[index].enemyIndexInBattleManager = index;
         enemyLevels[index] = currentEnemyLevel;
+        numberOfEnemies++;
     }
 
     //Called from BTL Manager

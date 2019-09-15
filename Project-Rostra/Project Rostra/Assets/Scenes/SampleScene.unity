@@ -330,12 +330,14 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  enemyLevels: 0000000000000000000000000000000000000000
   enemyPos:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  numberOfEnemies: 0
 --- !u!4 &1325869636
 Transform:
   m_ObjectHideFlags: 0

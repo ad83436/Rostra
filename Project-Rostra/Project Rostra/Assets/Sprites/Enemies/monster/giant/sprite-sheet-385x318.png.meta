@@ -97,16 +97,16 @@ TextureImporter:
     second: sprite-sheet-385x318_30
   - first:
       213: 1657619448390711096
-    second: sprite-sheet-385x318_31
+    second: Hit0
   - first:
       213: 2508137986225234285
-    second: sprite-sheet-385x318_32
+    second: Hit1
   - first:
       213: 8459200610959441607
-    second: sprite-sheet-385x318_33
+    second: Hit2
   - first:
       213: -6400483696480131071
-    second: sprite-sheet-385x318_34
+    second: Hit3
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -842,15 +842,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-sheet-385x318_31
+      name: Hit0
       rect:
         serializedVersion: 2
-        x: 1589
+        x: 1591
         y: 4
         width: 234
         height: 177
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2837581}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -863,15 +863,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-sheet-385x318_32
+      name: Hit1
       rect:
         serializedVersion: 2
         x: 1974
         y: 7
         width: 233
         height: 177
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2837581}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -884,15 +884,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-sheet-385x318_33
+      name: Hit2
       rect:
         serializedVersion: 2
         x: 2359
         y: 8
         width: 234
         height: 176
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2837581}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -905,15 +905,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-sheet-385x318_34
+      name: Hit3
       rect:
         serializedVersion: 2
-        x: 2744
+        x: 2742
         y: 10
         width: 234
         height: 171
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2837581}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
