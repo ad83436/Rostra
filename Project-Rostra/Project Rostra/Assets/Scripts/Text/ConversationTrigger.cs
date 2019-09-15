@@ -10,6 +10,7 @@ public class ConversationTrigger : MonoBehaviour
 	public float choiceCare;
 	// these two dialogues will be spit out depending on the choice that was made. 
 	// call this method in order to trigger the conversation
+	public bool isChoiceDepend;
 	public void TriggerConvo()
 	{
 		FindObjectOfType<DialogueManager>().StartConversation(dialogue);
@@ -17,6 +18,6 @@ public class ConversationTrigger : MonoBehaviour
 	// 1 = dwarf, 2 = guild, 3 = kill, 4 = spare, 5 = tell, 6 = lie
 	public void TriggerChoiceDependantConvo()
 	{
-		FindObjectOfType<DialogueManager>().choiceDependantConvo(choiceCare, dialogue);
+		FindObjectOfType<DialogueManager>().ChoiceDependantConvo(choiceCare, dialogue);
 	}
 }
