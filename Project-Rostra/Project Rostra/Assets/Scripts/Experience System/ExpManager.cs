@@ -9,9 +9,13 @@ public class ExpManager : MonoBehaviour {
 	#region Initialization & Destruction
 
 	private void Awake() {
-		//initialize singleton
-		if (instance == null) instance = this;
-		else Debug.LogError("There is more than one instance of the ExpManager or the instance variable was not cleared on destroy");
+        //initialize singleton
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
+        else Debug.LogError("There is more than one instance of the ExpManager or the instance variable was not cleared on destroy");
 	}
 
 	private void OnDestroy() {

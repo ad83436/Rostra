@@ -57,7 +57,7 @@ public class Player : MonoBehaviour
 
     //Guarding
     private float actualDefBeforeGuard; //What if the player uses a def-increasing skill before making this character go to guard?
-
+                                        //Should be updated correctly if a player is guarding and while doing so gets his/her def increased
 
 
     public enum playerState
