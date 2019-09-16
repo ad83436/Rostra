@@ -4,17 +4,17 @@ using UnityEngine;
 
 public abstract class SubMenu : MonoBehaviour {
 	
-	public CanvasGroup group;
+	private CanvasGroup group;
 
-	private bool activeMenu = false;
-	public bool ActiveMenu {
-		get => activeMenu;
+	private bool active = false;
+	public bool IsActive {
+		get => active;
 		set {
-			if (activeMenu && !value) {
-				activeMenu = value;
+			if (active && !value) {
+				active = value;
 				OnInactive();
-			} else if (!activeMenu && value) {
-				activeMenu = value;
+			} else if (!active && value) {
+				active = value;
 				OnActive();
 			}
 		}
@@ -25,10 +25,6 @@ public abstract class SubMenu : MonoBehaviour {
 		set => group.alpha = value ? 1f : 0f;
 	}
 
-	protected bool HeldUp => PauseMenuController.instance.HeldUp;
-	protected bool HeldDown => PauseMenuController.instance.HeldDown;
-	protected bool HeldLeft => PauseMenuController.instance.HeldLeft;
-	protected bool HeldRight => PauseMenuController.instance.HeldUp;
 	protected bool Up => PauseMenuController.instance.Up;
 	protected bool Down => PauseMenuController.instance.Down;
 	protected bool Left => PauseMenuController.instance.Left;
@@ -36,12 +32,16 @@ public abstract class SubMenu : MonoBehaviour {
 	protected bool Confirm => PauseMenuController.instance.Confirm;
 	protected bool Cancel => PauseMenuController.instance.Cancel;
 
+	private void Awake() {
+		group = GetComponent<CanvasGroup>();
+	}
+
 	public abstract void MenuUpdate();
 	public abstract void OnActive();
 	public abstract void OnInactive();
 
 	protected void ExitMenu() {
-		ActiveMenu = false;
+		IsActive = false;
 		PauseMenuController.instance.activeMenu = true;
 	}
 

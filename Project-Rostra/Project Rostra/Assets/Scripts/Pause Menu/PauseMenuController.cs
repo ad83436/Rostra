@@ -9,10 +9,8 @@ public class PauseMenuController : MonoBehaviour {
 
 	public static bool isPaused = false;
 	public bool activeMenu = true;
-
-	[SerializeField]
-	private CanvasGroup PauseMenu;
-
+	private CanvasGroup group;
+	
 	[SerializeField] private UnityEngine.UI.Text[] listItems;
 	[SerializeField] private SubMenu[] allSubMenus;
 
@@ -23,12 +21,7 @@ public class PauseMenuController : MonoBehaviour {
 	#endregion
 
 	#region InputVariables
-
-	public bool HeldUp { get; private set; }
-	public bool HeldDown { get; private set; }
-	public bool HeldLeft { get; private set; }
-	public bool HeldRight { get; private set; }
-
+	
 	public bool Up { get; private set; }
 	public bool Down { get; private set; }
 	public bool Left { get; private set; }
@@ -45,6 +38,8 @@ public class PauseMenuController : MonoBehaviour {
 	private void Awake() {
 		if (instance == null) instance = this;
 		else Debug.LogError("instance was not null in the PauseMenuController");
+		group = GetComponent<CanvasGroup>();
+		group.alpha = 0f;
 	}
 
 	private void OnDestroy() {
@@ -57,50 +52,55 @@ public class PauseMenuController : MonoBehaviour {
 
 	private void Update() {
 		//update inputs
-		pause = Input.GetButtonDown("pause");
+		pause = Input.GetButtonDown("Pause");
 
 		if (pause) {
 			isPaused = !isPaused;
 			if (isPaused) {
 				//onPause logic
+				currentListItem = 0;
+				listItems[currentListItem].color = Color.blue;
+				group.alpha = 1f;
 			} else {
 				//onUnPause logic
+				listItems[currentListItem].color = Color.white;
+				group.alpha = 0f;
 			}
 		}
 
 		if (!isPaused) return;
 
-		Up = !HeldUp && Input.GetAxis("Vertical") > 0f;			HeldUp = Input.GetAxis("Vertical") > 0f;
-		Down = !HeldDown && Input.GetAxis("Vertical") < 0f;		HeldDown = Input.GetAxis("Vertical") < 0f;
-		Left = !HeldLeft && Input.GetAxis("Horizontal") < 0f;	HeldLeft = Input.GetAxis("Horizontal") < 0f;
-		Right = !HeldRight && Input.GetAxis("Horizontal") > 0f; HeldRight = Input.GetAxis("Horizontal") > 0f;
+		Up = Input.GetButtonDown("Up");
+		Down = Input.GetButtonDown("Down");
+		Left = Input.GetButtonDown("Left");
+		Right = Input.GetButtonDown("Right");
 
+		Confirm = Input.GetButtonDown("Confirm");
+		Cancel = Input.GetButtonDown("Cancel");
+		
 		if (activeMenu) {
 			//do main list
 			if (Up) currentListItem++;
 			else if (Down) currentListItem--;
-			if (currentListItem > 5) currentListItem = 0;
-			else if (currentListItem < 0) currentListItem = 5;
-
-
-
-			if (Confirm) {
-				switch (currentListItem) {
-					case 0:
-
-						break;
-					case 1: break;
-					case 2: break;
-					case 3: break;
-					case 4: break;
-					default: Debug.LogError("Something broke in the PauseMenuController tell dom"); break;
+			if (currentListItem > listItems.Length - 1) currentListItem = 0;
+			else if (currentListItem < 0) currentListItem = listItems.Length - 1;
+			
+			if (Up || Down) {
+				for (int i = 0; i < listItems.Length; i++) {
+					if (currentListItem == i) listItems[i].color = Color.blue;
+					else listItems[i].color = Color.white;
+				}
+				for (int i = 0; i < allSubMenus.Length; i++) {
+					if (currentListItem == i) allSubMenus[i].Visible = true;
+					else allSubMenus[i].Visible = false;
 				}
 			}
 
+			if (Confirm) allSubMenus[currentListItem].IsActive = true;
 
-		} else { // currently in a submenu
+		} else { // currently in a submenu or submenu is visible
 			foreach (SubMenu item in allSubMenus) {
-				item.MenuUpdate;
+				if (item.Visible) item.MenuUpdate();
 			}
 		}
 
