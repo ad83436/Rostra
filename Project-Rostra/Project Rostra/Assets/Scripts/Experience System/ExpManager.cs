@@ -106,7 +106,7 @@ public class ExpManager : MonoBehaviour {
 			default: Debug.LogError("If your reading this its too late (tell Domara)"); break;
 		}
 
-		//calculate the number of stat points gained
+		//calculate the number of stat podojejofjiejfiejiints gained
 		///number of points increases by 1 each level
 		///eg: level 30, points gained = 7;
 		PartyStats.chara[playerIndex].statPoints += 1 + PartyStats.chara[playerIndex].level / 5; // WIP

@@ -290,7 +290,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3433109c976580046abb875c29afb47b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  group: {fileID: 0}
 --- !u!1 &323823396342989211
 GameObject:
   m_ObjectHideFlags: 0
@@ -352,7 +351,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79b2e38d3555584499c10a1be8ae8d65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  group: {fileID: 0}
 --- !u!1 &457151559283894034
 GameObject:
   m_ObjectHideFlags: 0
@@ -544,8 +542,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.018765911, y: 0}
   m_AnchorMax: {x: 1, y: 0.9760001}
-  m_AnchoredPosition: {x: -4.9999695, y: 5}
-  m_SizeDelta: {x: 10, y: 10}
+  m_AnchoredPosition: {x: -4.979492, y: 5}
+  m_SizeDelta: {x: 9.959, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &3722657665604592140
 CanvasGroup:
@@ -571,7 +569,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1eb48afd7fb6bd945ae75c87e924b462, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  group: {fileID: 3722657665604592140}
   chara0Health: {fileID: 0}
   chara0Mana: {fileID: 0}
   chara1Health: {fileID: 0}
@@ -768,7 +765,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.024358246, y: 0.5343079}
   m_AnchorMax: {x: 0.41442683, y: 1}
-  m_AnchoredPosition: {x: -0.069992065, y: 0.07501221}
+  m_AnchoredPosition: {x: -0.06997681, y: 0.07501221}
   m_SizeDelta: {x: -0.1499939, y: -0.14999962}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4686361515928217314
@@ -949,7 +946,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52e3c17b307973841b94f35dc9fa1fe2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  group: {fileID: 0}
 --- !u!1 &2113945823581004735
 GameObject:
   m_ObjectHideFlags: 0
@@ -1165,7 +1161,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.3143288}
-  m_AnchoredPosition: {x: 0.000030517578, y: 0.88000107}
+  m_AnchoredPosition: {x: 0.000030517578, y: 0.8799858}
   m_SizeDelta: {x: 0.000045776, y: -0.7599945}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8024417867496134450
@@ -1407,7 +1403,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.024358246, y: 0.5343079}
   m_AnchorMax: {x: 0.41442683, y: 1}
-  m_AnchoredPosition: {x: -0.070007324, y: 0.07501221}
+  m_AnchoredPosition: {x: -0.07002258, y: 0.07501221}
   m_SizeDelta: {x: -0.1499939, y: -0.14999962}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1338135238127388679
@@ -2345,7 +2341,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Fragas
+  m_Text: Fargas
 --- !u!1 &3722657664568477438
 GameObject:
   m_ObjectHideFlags: 0
@@ -2357,7 +2353,7 @@ GameObject:
   - component: {fileID: 3722657664568477439}
   - component: {fileID: 3722657664568477437}
   m_Layer: 5
-  m_Name: FragasMenu
+  m_Name: FargasMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2380,8 +2376,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0.5, y: 0}
+  m_SizeDelta: {x: 1, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3722657664568477437
 CanvasRenderer:
@@ -2584,7 +2580,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeMenu: 1
-  PauseMenu: {fileID: 0}
   listItems:
   - {fileID: 828900176642136655}
   - {fileID: 471789115948595180}
@@ -4454,7 +4449,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cf00d45206c8074ba854c782128136a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  group: {fileID: 0}
 --- !u!1 &8083420188622311259
 GameObject:
   m_ObjectHideFlags: 0
