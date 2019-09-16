@@ -507,7 +507,7 @@ public class MainInventory : MonoBehaviour {
     // Holds stats for every single weapon and piece of armor in the game
     // If no values have been set, the item's stats will be defaulted to 0
     public float[] ItemStats(int itemID) {
-        float[] stat = { 0, 0, 0, 0, 0, 0, 0 };
+        float[] stat = { 0, 0, 0, 0, 0, 0, 0, 0 };
         // NOTE -- Element 0 is the item's attack-buff property
         //         Element 1 is the item's defense-buff property
         //         Element 2 is the item's strength-buff property
@@ -515,6 +515,7 @@ public class MainInventory : MonoBehaviour {
         //         Element 4 is the item's critical-buff property
         //         Element 5 is the item's hitpoint-buff property
         //         Element 6 is the item's magicpoint-buff property
+		//		   Element 7 is the item's class property
 
         // Find out an item's stats based on its ID
         switch (itemID) {
@@ -522,10 +523,12 @@ public class MainInventory : MonoBehaviour {
                 stat[1] = 5;
                 stat[5] = 10;
                 stat[6] = 2;
+				stat[7] = (float)ARMOR_TYPE.LEATHER;
                 break;
             case (int)ITEM_ID.TEST_WEAPON1:
                 stat[0] = 8;
                 stat[4] = 2;
+				stat[7] = (float)WEAPON_TYPE.SWORD;
                 break;
         }
 
@@ -560,6 +563,7 @@ public class MainInventory : MonoBehaviour {
     private void UpdatePlayerStats(int playerID, int itemID, bool isEquipped) {
         CharacterStats player = PartyStats.chara[playerID];
         float[] itemStats = ItemStats(itemID);
+		// This array will ignore the final element in the array (The weapon's class)
 
         if (!isEquipped) { // Equipping the item onto the specified player
             // Add the item to the current player
