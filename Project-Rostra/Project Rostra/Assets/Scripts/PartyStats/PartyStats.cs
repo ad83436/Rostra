@@ -34,6 +34,8 @@ public struct CharacterStats {
 
 		agility = 0.0f;
 		agilityMod = 0.0f;
+
+        rage = 0.0f;
 		
 		level = 1;
 		currentExperience = 0;				       
@@ -49,6 +51,7 @@ public struct CharacterStats {
 	public float strength, strengthMod;
 	public float critical, criticalMod;
 	public float agility, agilityMod;
+    public float rage;
 
 	///returns the total of each
 	public float TotalAttack    => attack    + attackMod;

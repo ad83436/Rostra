@@ -305,7 +305,7 @@ public class UIBTL : MonoBehaviour
         playerInControl = playerReference;
         UpdatePlayerHPControlPanel();
         UpdatePlayerMPControlPanel();
-        playerInControl.MyTurn();
+        playerInControl.PlayerTurn();
         RageOptionTextColor();
 
        
@@ -730,7 +730,8 @@ public class UIBTL : MonoBehaviour
                 i++;
                 if(i>=numberOfEnemies)
                 {
-                    Debug.Log("Victorrryyyy");
+                    Debug.Log("Victooorryyy");
+                    btlManager.EndOfBattle();
                 }
             }
         }

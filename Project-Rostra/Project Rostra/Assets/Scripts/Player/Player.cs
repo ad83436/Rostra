@@ -84,10 +84,18 @@ public class Player : MonoBehaviour
         playerAnimator = gameObject.GetComponent<Animator>();
 
         //Rage
-        currentRage = 0.0f;
         maxRage = 100.0f;
         canRage = false;
         rageModeIndicator.gameObject.SetActive(false);
+
+
+        //Targeted enemy info
+        attackingThisEnemy = null;
+        hit = false;
+
+        //Get the stats from the party stats function
+        StartBattle();
+
 
         //Actual stats
         actualATK = atk;
@@ -97,26 +105,9 @@ public class Player : MonoBehaviour
         actualSTR = str;
         healable = false;
 
-        //Targeted enemy info
-        attackingThisEnemy = null;
-        hit = false;
-
-        //Temp code until we have stats in the stat file
-        battleManager.players[playerIndex].playerIndex = playerIndex;
-        battleManager.players[playerIndex].agi = agi;
-        battleManager.players[playerIndex].playerReference = this;
-        battleManager.players[playerIndex].atk = actualATK;
-        battleManager.players[playerIndex].def = actualDEF;
-        battleManager.players[playerIndex].crit = actualCRIT;
-        battleManager.players[playerIndex].str = actualSTR;
-        battleManager.players[playerIndex].name = name;
-        battleManager.numberOfPlayers--;
-
         //UI
         hpImage.fillAmount = currentHP / maxHP;
         rageImage.fillAmount = currentRage / maxRage;
-
-
     }
 
     private void Update()
@@ -152,26 +143,27 @@ public class Player : MonoBehaviour
 
     private void StartBattle()
     {
-        currentHP = battleManager.players[playerIndex].currentHP;
-        currentMP = battleManager.players[playerIndex].currentMP;
-        atk = battleManager.players[playerIndex].atk;
-        def = battleManager.players[playerIndex].def;
-        //agi = battleManager.players[playerIndex].agi;
-        str = battleManager.players[playerIndex].str;
-        crit = battleManager.players[playerIndex].crit;
-        equippedSkills[0] = battleManager.players[playerIndex].skills[0];
-        equippedSkills[1] = battleManager.players[playerIndex].skills[1];
-        equippedSkills[2] = battleManager.players[playerIndex].skills[2];
-        equippedSkills[3] = battleManager.players[playerIndex].skills[3];
-    }
+        //Get the information from the party stats file
+        currentHP = PartyStats.chara[playerIndex].hitpoints;
+        maxHP = PartyStats.chara[playerIndex].TotalMaxHealth;
+        currentMP = PartyStats.chara[playerIndex].magicpoints;
+        maxMP = PartyStats.chara[playerIndex].TotalMaxMana;
+        atk = PartyStats.chara[playerIndex].TotalAttack;
+        def = PartyStats.chara[playerIndex].TotalDefence;
+        agi = PartyStats.chara[playerIndex].TotalAgility;
+        crit = PartyStats.chara[playerIndex].TotalCritical;
+        str = PartyStats.chara[playerIndex].TotalStrength;
+        currentRage = PartyStats.chara[playerIndex].rage;
+        battleManager.players[playerIndex].playerIndex = playerIndex;
+        battleManager.players[playerIndex].playerReference = this;
+        battleManager.players[playerIndex].name = name;
+        battleManager.numberOfPlayers--;
 
-    private void EndBattle()
-    {
-        battleManager.EndOfBattle(playerIndex, currentHP, currentMP);
+        //Update skills
     }
 
     //Called from the UIBTL to turn on the animation
-    public void MyTurn()
+    public void PlayerTurn()
     {
         playerAnimator.SetBool("Turn", true);
 
