@@ -31,27 +31,27 @@ public static class PartyStats {
 		new CharacterStats(
             new int[]{ 
                 // Equipable Weapons for Frea
+                (int)WEAPON_TYPE.DAGGER,
+                (int)WEAPON_TYPE.BOW,
+                // Equipable Weapons for Frea
+                (int)ARMOR_TYPE.HIDE_CLOTHES,
+                (int)ARMOR_TYPE.LEATHER,
+                (int)ARMOR_TYPE.IRON,
+                (int)ARMOR_TYPE.CHAINMAIL
+            }),
+        new CharacterStats(
+            new int[]{ 
+                // Equipable Weapons for Arcelus
                 (int)WEAPON_TYPE.STAFF,
                 (int)WEAPON_TYPE.SPEAR,
                 (int)WEAPON_TYPE.SWORD,
-                // Equipable Armor for Frea
+                // Equipable Armor for Arcelus
                 (int)ARMOR_TYPE.HIDE_CLOTHES,
                 (int)ARMOR_TYPE.LEATHER,
                 (int)ARMOR_TYPE.ROBE,
                 (int)ARMOR_TYPE.CHAINMAIL
             }),
-		new CharacterStats(
-            new int[]{ 
-                // Equipable Weapons for Arcelus
-                (int)WEAPON_TYPE.DAGGER,
-                (int)WEAPON_TYPE.BOW,
-                // Equipable Weapons for Arcelus
-                (int)ARMOR_TYPE.HIDE_CLOTHES,
-                (int)ARMOR_TYPE.LEATHER,
-                (int)ARMOR_TYPE.IRON,
-                (int)ARMOR_TYPE.CHAINMAIL
-            })
-	};
+    };
 
 	//returns a reference to the corisponding character
 	public static ref CharacterStats CharaOne => ref chara[0];              // Fargas  == 0
