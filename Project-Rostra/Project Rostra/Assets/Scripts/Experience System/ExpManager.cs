@@ -118,7 +118,14 @@ public class ExpManager : MonoBehaviour {
 		///eg: level 30, exp needed is 7,750
 	}
 
-	
+	public int ExpNeeded(int level) {
+		//a calculation of how much exp is needed
+		return 500 + 250 * (level - 1);
+		// WIP
+		///500 is the base exp needed
+		///250 * (level - 1) adds 250 for each level gained
+		///eg: level 30, exp needed is 7,750
+	}	
 
 	/* TODO: Add functionality */
 	#region functions that give each player their skills
