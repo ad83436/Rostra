@@ -1,24 +1,67 @@
 ﻿
 public static class PartyStats {
-	static PartyStats() {
-
-	}
-	public static CharacterStats[] chara ={
-		new CharacterStats(new int[]{0, 0, 0, 0}, new int[]{0, 0, 0, 0}),
-		new CharacterStats(new int[]{0, 0, 0, 0}, new int[]{0, 0, 0, 0}),
-		new CharacterStats(new int[]{0, 0, 0, 0}, new int[]{0, 0, 0, 0}),
-		new CharacterStats(new int[]{0, 0, 0, 0}, new int[]{0, 0, 0, 0})
+    public static CharacterStats[] chara ={
+        new CharacterStats(
+            new int[]{ 
+                // Equipable Weapons for Fargas
+                (int)WEAPON_TYPE.AXE,
+                (int)WEAPON_TYPE.SWORD,
+                (int)WEAPON_TYPE.MACE,
+                // Equipable Armor for Fargas
+                (int)ARMOR_TYPE.LEATHER,
+                (int)ARMOR_TYPE.HIDE_CLOTHES,
+                (int)ARMOR_TYPE.CHAINMAIL,
+                (int)ARMOR_TYPE.COPPER
+            }),
+		new CharacterStats(
+            new int[]{ 
+                // Equipable Weapons for Oberon
+                (int)WEAPON_TYPE.SPEAR,
+                (int)WEAPON_TYPE.JAVELIN,
+                (int)WEAPON_TYPE.STAFF,
+                // Equipable Armor for Oberon
+                (int)ARMOR_TYPE.HIDE_CLOTHES,
+                (int)ARMOR_TYPE.LEATHER,
+                (int)ARMOR_TYPE.PLATED_STEEL,
+                (int)ARMOR_TYPE.CHAINMAIL,
+                (int)ARMOR_TYPE.COPPER,
+                (int)ARMOR_TYPE.IRON,
+                (int)ARMOR_TYPE.STEEL
+            }),
+		new CharacterStats(
+            new int[]{ 
+                // Equipable Weapons for Frea
+                (int)WEAPON_TYPE.STAFF,
+                (int)WEAPON_TYPE.SPEAR,
+                (int)WEAPON_TYPE.SWORD,
+                // Equipable Armor for Frea
+                (int)ARMOR_TYPE.HIDE_CLOTHES,
+                (int)ARMOR_TYPE.LEATHER,
+                (int)ARMOR_TYPE.ROBE,
+                (int)ARMOR_TYPE.CHAINMAIL
+            }),
+		new CharacterStats(
+            new int[]{ 
+                // Equipable Weapons for Arcelus
+                (int)WEAPON_TYPE.DAGGER,
+                (int)WEAPON_TYPE.BOW,
+                // Equipable Weapons for Arcelus
+                (int)ARMOR_TYPE.HIDE_CLOTHES,
+                (int)ARMOR_TYPE.LEATHER,
+                (int)ARMOR_TYPE.IRON,
+                (int)ARMOR_TYPE.CHAINMAIL
+            })
 	};
 
 	//returns a reference to the corisponding character
-	public static ref CharacterStats CharaOne => ref chara[0];
-	public static ref CharacterStats CharaTwo => ref chara[1];
-	public static ref CharacterStats CharaThree => ref chara[2];
-	public static ref CharacterStats CharaFour => ref chara[3];
+	public static ref CharacterStats CharaOne => ref chara[0];              // Fargas  == 0
+	public static ref CharacterStats CharaTwo => ref chara[1];              // Oberon  == 1
+	public static ref CharacterStats CharaThree => ref chara[2];            // Frea    == 2
+	public static ref CharacterStats CharaFour => ref chara[3];             // Arcelus == 3
 }
 
 public struct CharacterStats {
-	public CharacterStats(int[] vWeapon, int[] vArmor) {
+	public CharacterStats(int[] vEquipables) {
 		attack = 0.0f;
 		attackMod = 0.0f;
 
@@ -49,8 +92,7 @@ public struct CharacterStats {
 		neededExperience = 500;
 		statPoints = 0;
 
-		validWeapon = vWeapon;
-		validArmor = vArmor;
+        validEquipables = vEquipables;
 	}
 
 	// stats								       
@@ -63,7 +105,8 @@ public struct CharacterStats {
 	public float agility, agilityMod;
 	public float rage;
 
-	readonly public int[] validArmor, validWeapon;
+    // The weapon and armor types each player can equip
+	readonly public int[] validEquipables;
 
 	///returns the total of each
 	public float TotalAttack => attack + attackMod;

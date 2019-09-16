@@ -170,15 +170,38 @@ public class MainInventory : MonoBehaviour {
 
                 // Using an item on the player that is currently highlighted
                 if (keySelect) {
-                    ItemUseFunction(invItem[curOption, 0], curPlayerOption);
-                    playerChooseWindow = false;
-                    subCurOption = 0;
-                    selectedOption = -1;
+                    bool canUseItem = true;
+                    // Check if the item can be equipped by the current player that is selected
+                    if (ItemType(invItem[curOption, 0]) == (int)ITEM_TYPE.EQUIPABLE) {
+                        CharacterStats player = PartyStats.chara[curPlayerOption];
+                        float[] itemStats = ItemStats(invItem[curOption, 0]);
+                        // Loop through the items that the selected player can equip
+                        var length = player.validEquipables.Length;
+                        for (int i = 0; i < length; i++) {
+                            if (player.validEquipables[i] == itemStats[7]) { // Item is valid, selected player can equip it
+                                canUseItem = true;
+                                i = length; // Exit the loop
+                            } else { // Item is not valid, selected player cannot equip it
+                                canUseItem = false;
+                            }
+                        }
+                    }
+                    // Equip the item only if it can be equipped
+                    if (canUseItem) {
+                        ItemUseFunction(invItem[curOption, 0], curPlayerOption);
+                        playerChooseWindow = false;
+                        curPlayerOption = -1;
+                        subCurOption = 0;
+                        selectedOption = -1;
+                    } else { // TEMPORARY CODE
+                        Debug.Log("Cannot be equipped to the current player.");
+                    }
                 }
 
                 // Returning to the item's sub-menu, exiting out of the player selection menu
                 if (keyReturn) {
                     playerChooseWindow = false;
+                    curPlayerOption = -1;
                 }
             }
         }
@@ -232,8 +255,8 @@ public class MainInventory : MonoBehaviour {
         if (playerChooseWindow) {
             for (int i = 0; i < 4; i++) {
                 GUI.Label(new Rect(770.0f, 15.0f + (fontHeight * i), 150.0f, 50.0f), "Player" + (i + 1), style);
+                if (curPlayerOption == i) { GUI.Label(new Rect(750.0f, 15.0f + (fontHeight * i), 50.0f, 50.0f), ">", style); }
             }
-            GUI.Label(new Rect(750.0f, 15.0f + (20.0f * curPlayerOption), 50.0f, 50.0f), ">", style);
         }
     }
 
@@ -421,7 +444,11 @@ public class MainInventory : MonoBehaviour {
 
         // Using a consumable item or equipping a piece of armor or weapon
         if (option.Equals("Use") || option.Equals("Equip")) {
-            playerChooseWindow = true;
+            if (ItemType(invItem[curOption, 0]) != (int)ITEM_TYPE.KEY_ITEM) {
+                playerChooseWindow = true;
+            } else {
+                // TODO -- Add code for turning in quest items
+            }
             return;
         }
 
