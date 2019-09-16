@@ -33,7 +33,7 @@ public class ExpManager : MonoBehaviour {
         PartyStats.chara[0].maxHealth = 200.0f;
         PartyStats.chara[0].magicpoints = 200.0f;
         PartyStats.chara[0].maxMana = 200.0f;
-        PartyStats.chara[0].attack = 18.0f;
+        PartyStats.chara[0].attack = 100.0f;
         PartyStats.chara[0].defence = 15.0f;
         PartyStats.chara[0].agility = 18.0f;
         PartyStats.chara[0].strength = 16.0f;
@@ -46,7 +46,7 @@ public class ExpManager : MonoBehaviour {
         PartyStats.chara[1].maxHealth = 250.0f;
         PartyStats.chara[1].magicpoints = 150.0f;
         PartyStats.chara[1].maxMana = 150.0f;
-        PartyStats.chara[1].attack = 16.0f;
+        PartyStats.chara[1].attack = 100.0f;
         PartyStats.chara[1].defence = 20.0f;
         PartyStats.chara[1].agility = 13.0f;
         PartyStats.chara[1].strength = 14.0f;
@@ -59,7 +59,7 @@ public class ExpManager : MonoBehaviour {
         PartyStats.chara[2].maxHealth = 180.0f;
         PartyStats.chara[2].magicpoints = 200.0f;
         PartyStats.chara[2].maxMana = 200.0f;
-        PartyStats.chara[2].attack = 20.0f;
+        PartyStats.chara[2].attack = 100.0f;
         PartyStats.chara[2].defence = 14.0f;
         PartyStats.chara[2].agility = 17.0f;
         PartyStats.chara[2].strength = 15.0f;
@@ -72,7 +72,7 @@ public class ExpManager : MonoBehaviour {
         PartyStats.chara[3].maxHealth = 160.0f;
         PartyStats.chara[3].magicpoints = 250.0f;
         PartyStats.chara[3].maxMana = 250.0f;
-        PartyStats.chara[3].attack = 12.0f;
+        PartyStats.chara[3].attack = 100.0f;
         PartyStats.chara[3].defence = 15.0f;
         PartyStats.chara[3].agility = 19.0f;
         PartyStats.chara[3].strength = 13.0f;

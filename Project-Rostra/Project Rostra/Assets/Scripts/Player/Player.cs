@@ -267,6 +267,7 @@ public class Player : MonoBehaviour
                 currentRage = maxRage;
                 canRage = true; //Can now go into rage mode
             }
+            PartyStats.chara[playerIndex].rage = currentRage; //Update the party stats
         }
 
         playerAnimator.SetBool("Hit", true);
@@ -306,6 +307,7 @@ public class Player : MonoBehaviour
         hpImage.fillAmount = currentHP / maxHP;
         rageImage.fillAmount = currentRage / maxRage;
         uiBTL.UpdatePlayerHPControlPanel();
+        PartyStats.chara[playerIndex].rage = currentRage; //Update the party stats
     }
 
     //Called by the UIBTl when the player chooses to go into rage mode

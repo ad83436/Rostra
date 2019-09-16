@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class BattleManager : MonoBehaviour
 {
@@ -56,8 +55,8 @@ public class BattleManager : MonoBehaviour
     public bool addEnemies; //Turned true after all the players have been added
     //Temp
     private int totalLevels;//The sum of the enemies level
-    private int expGain; //Determined by the enemy levels
-    private bool battleHasEnded;
+    public int expGain; //Determined by the enemy levels
+    public bool battleHasEnded;
 
     //At the beginning of each battle, each player and enemy will use the singleton to update their stats
     #region singleton
@@ -109,10 +108,12 @@ public class BattleManager : MonoBehaviour
 
     private void Start()
     {
+        Debug.Log("BTL Start");
         uiBtl = UIBTL.instance;
         enemySpawner = EnemySpawner.instance;
         expManager = ExpManager.instance;
         uiBtl.numberOfEnemies = numberOfEnemies = enemySpawner.numberOfEnemies;
+        Debug.Log("____ " + numberOfEnemies);
         for(int i =0;i<5;i++)
         {
             enemySpawner.AddPos(enemyPos[i], i);
@@ -139,6 +140,7 @@ public class BattleManager : MonoBehaviour
 
     private void Update()
     {
+       // Debug.Log(numberOfPlayers);
         //Number of players is decreased by the player scripts
         if(numberOfPlayers<=0 && allPlayersAdded == false)
         {
@@ -186,7 +188,8 @@ public class BattleManager : MonoBehaviour
         {
             allEnemiesAdded = true;
             //Temp code
-            expGain = 6 * totalLevels;
+            expGain = 3 * totalLevels;
+            Debug.Log("EXP GAINNN " + expGain);
         }
 
         //This will probably need to change to avoid race conditions between startbattle and build Q
@@ -387,10 +390,7 @@ public class BattleManager : MonoBehaviour
             players[i].currentMP = PartyStats.chara[i].magicpoints = players[i].playerReference.currentMP;
             players[i].exp += expGain;
             PartyStats.chara[i].currentExperience = players[i].exp;
-            if (players[i].exp >=players[i].expNeededForNextLevel)
-            {
-                LevelUp(i);
-            }
+            enemySpawner.numberOfEnemies = 0; //Reset the enemy spawner to get ready for the next battle
         }
 
         //Clear out the enemies array
@@ -398,7 +398,7 @@ public class BattleManager : MonoBehaviour
         {
             enemies[i] = null;
         }
-        SceneManager.UnloadSceneAsync(SceneManager.GetSceneByName("Queue Scene"));
+
     }
 
     //Called by the inventory manager to update the player's stats when the player changes gear and on awake
@@ -423,9 +423,9 @@ public class BattleManager : MonoBehaviour
     }
     
 
-    private void LevelUp(int playerIndex)
+    public void LevelUp(int playerIndex)
     {
-        Debug.Log(players[playerIndex].playerReference.name + " has leveled up!");
+       // Debug.Log(players[playerIndex].playerReference.name + " has leveled up!");
         //The new EXP is what remains after reaching the new level
         players[playerIndex].exp = players[playerIndex].exp - players[playerIndex].expNeededForNextLevel;
         //Update the party stats
@@ -436,10 +436,11 @@ public class BattleManager : MonoBehaviour
         expManager.LevelUp(playerIndex);
         //Update the needed exp for next levelup
         players[playerIndex].expNeededForNextLevel = PartyStats.chara[playerIndex].neededExperience;
+        Debug.Log("You need this much to level up again! " + players[playerIndex].expNeededForNextLevel);
         //If the player gains enough EXP to level up more than once
-        if (players[playerIndex].exp >= players[playerIndex].expNeededForNextLevel)
-        {
-            LevelUp(playerIndex);
-        }
+       // if (players[playerIndex].exp >= players[playerIndex].expNeededForNextLevel)
+       // {
+       //     LevelUp(playerIndex);
+       // }
     }
 }
