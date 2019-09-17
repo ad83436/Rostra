@@ -48,6 +48,7 @@ public class UIBTL : MonoBehaviour
     //Q UI Images
 
     private List<Sprite> imagesQ; //Filled by the BTL manager
+    public Image[] images = new Image[9];
     public Image image0;
     public Image image1;
     public Image image2;
@@ -256,11 +257,12 @@ public class UIBTL : MonoBehaviour
                 image7.gameObject.SetActive(false);
                 image8.gameObject.SetActive(false);
 
-                image0.sprite = imagesQ[0];
-                image1.sprite = imagesQ[1];
-                image2.sprite = imagesQ[2];
-                image3.sprite = imagesQ[3];
-                image4.sprite = imagesQ[4];
+                for(int i =0;i<5;i++)
+                {
+                    //0 - 5
+                    images[i].sprite = imagesQ[i];
+                }
+
 
                 break;
             case 6:
@@ -269,38 +271,33 @@ public class UIBTL : MonoBehaviour
                 image7.gameObject.SetActive(false);
                 image8.gameObject.SetActive(false);
 
-                image0.sprite = imagesQ[0];
-                image1.sprite = imagesQ[1];
-                image2.sprite = imagesQ[2];
-                image3.sprite = imagesQ[3];
-                image4.sprite = imagesQ[4];
-                image5.sprite = imagesQ[5];
+                for (int i = 0; i < 6; i++)
+                {
+                    //0 - 5
+                    images[i].sprite = imagesQ[i];
+                }
                 break;
             case 7:
                 imageRecyclePos = image6.transform.localPosition;
                 image7.gameObject.SetActive(false);
                 image8.gameObject.SetActive(false);
 
-                image0.sprite = imagesQ[0];
-                image1.sprite = imagesQ[1];
-                image2.sprite = imagesQ[2];
-                image3.sprite = imagesQ[3];
-                image4.sprite = imagesQ[4];
-                image5.sprite = imagesQ[5];
-                image6.sprite = imagesQ[6];
+                for (int i = 0; i < 7; i++)
+                {
+                    //0 - 6
+                    images[i].sprite = imagesQ[i];
+                }
+
 
                 break;
             case 8:
-                imageRecyclePos = image8.transform.localPosition;
-                image0.sprite = imagesQ[0];
-                image1.sprite = imagesQ[1];
-                image2.sprite = imagesQ[2];
-                image3.sprite = imagesQ[3];
-                image4.sprite = imagesQ[4];
-                image5.sprite = imagesQ[5];
-                image6.sprite = imagesQ[6];
-                image7.sprite = imagesQ[7];
-                image8.sprite = imagesQ[8];
+                imageRecyclePos = image7.transform.localPosition;
+                image8.gameObject.SetActive(false);
+                for (int i = 0; i < 8; i++)
+                {
+                    //0 - 7
+                    images[i].sprite = imagesQ[i];
+                }
                 break;
         }
 

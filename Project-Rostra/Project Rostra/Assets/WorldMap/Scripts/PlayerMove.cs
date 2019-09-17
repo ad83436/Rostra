@@ -6,7 +6,6 @@ public class PlayerMove : MonoBehaviour
 {
     public float Speed;
     public Animator animator;
-    
 
     private Rigidbody2D rb;
     private Vector2 moveVelocity;
@@ -40,7 +39,7 @@ public class PlayerMove : MonoBehaviour
                 rb.MovePosition(rb.position + moveVelocity * Time.fixedDeltaTime);
             }
 
-        }
+ }
     
 
 
