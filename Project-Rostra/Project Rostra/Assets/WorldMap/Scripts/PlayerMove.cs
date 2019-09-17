@@ -12,7 +12,9 @@ public class PlayerMove : MonoBehaviour
     float verticalMove;
 	private ConversationTrigger ct;
 	private DialogueManager dm;
-	private void Awake()
+    private Vector2 moveInput;
+
+    private void Awake()
 	{
 		dm = FindObjectOfType<DialogueManager>();
 	}
@@ -26,8 +28,9 @@ public class PlayerMove : MonoBehaviour
     {
 		if (dm.canWalk == true)
 		{
-			Vector2 moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-			moveVelocity = moveInput.normalized * Speed;
+            moveInput.x = Input.GetAxisRaw("Horizontal");
+            moveInput.y = Input.GetAxisRaw("Vertical");
+            moveVelocity = moveInput.normalized * Speed;
 			horizontalMove = Input.GetAxisRaw("Horizontal") * Speed;
 			verticalMove = Input.GetAxisRaw("Vertical") * Speed;
 
