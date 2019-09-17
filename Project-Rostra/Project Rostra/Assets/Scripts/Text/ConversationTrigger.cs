@@ -20,4 +20,9 @@ public class ConversationTrigger : MonoBehaviour
 	{
 		FindObjectOfType<DialogueManager>().ChoiceDependantConvo(choiceCare, dialogue);
 	}
+
+	public void TriggerNormalDialogue()
+	{
+		FindObjectOfType<DialogueManager>().PlayNormalDialogue(dialogue);
+	}
 }

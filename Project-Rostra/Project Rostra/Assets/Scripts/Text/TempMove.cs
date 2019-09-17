@@ -69,15 +69,20 @@ public class TempMove : MonoBehaviour
 
 	public void TalkToNPC()
 	{
-		
-		if ((dm.nextDialogue == true && dm.isActive == false)/* && canTalk == true*/ && Input.GetKeyDown(KeyCode.Return) && ct != null && ct.isChoiceDepend == false)
+
+		if ((dm.nextDialogue == true && dm.isActive == false) && Input.GetKeyDown(KeyCode.Return) && ct != null && ct.isChoiceDepend == false && ct.dialogue.hasPlayed == false)
 		{
-				ct.TriggerConvo();
+			ct.TriggerConvo();
 		}
-		else if ((dm.nextDialogue == true && dm.isActive == false)/* && canTalk == true*/ && Input.GetKeyDown(KeyCode.Return) && ct != null && ct.isChoiceDepend == true)
+		else if ((dm.nextDialogue == true && dm.isActive == false) && Input.GetKeyDown(KeyCode.Return) && ct != null && ct.dialogue.isChoice == true && ct.dialogue.hasPlayed == true)
+		{
+			ct.TriggerNormalDialogue();
+		}
+		else if ((dm.nextDialogue == true && dm.isActive == false) && Input.GetKeyDown(KeyCode.Return) && ct != null && ct.isChoiceDepend == true)
 		{
 			Debug.Log("Triggered the convo");
-				ct.TriggerChoiceDependantConvo();
+			ct.TriggerChoiceDependantConvo();
 		}
+		
 	}
 }
