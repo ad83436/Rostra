@@ -1615,35 +1615,15 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 242658911}
-    - target: {fileID: 230563280832064220, guid: 9f72b6d54aeb3c844871b64d15a60701,
+    - target: {fileID: 230563281294727062, guid: 9f72b6d54aeb3c844871b64d15a60701,
         type: 3}
       propertyPath: m_SortingOrder
-      value: 40
+      value: 50
       objectReference: {fileID: 0}
-    - target: {fileID: 230563281012434212, guid: 9f72b6d54aeb3c844871b64d15a60701,
+    - target: {fileID: 230563281844078120, guid: 9f72b6d54aeb3c844871b64d15a60701,
         type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 232.60004
-      objectReference: {fileID: 0}
-    - target: {fileID: 230563282549537476, guid: 9f72b6d54aeb3c844871b64d15a60701,
-        type: 3}
-      propertyPath: m_Color.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 230563282549537476, guid: 9f72b6d54aeb3c844871b64d15a60701,
-        type: 3}
-      propertyPath: m_Color.r
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 230563282549537476, guid: 9f72b6d54aeb3c844871b64d15a60701,
-        type: 3}
-      propertyPath: m_Color.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 230563282549537476, guid: 9f72b6d54aeb3c844871b64d15a60701,
-        type: 3}
-      propertyPath: m_Color.b
-      value: 0
+      propertyPath: m_SortingOrder
+      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f72b6d54aeb3c844871b64d15a60701, type: 3}

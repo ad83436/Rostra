@@ -29,7 +29,7 @@ public class PlayerMove : MonoBehaviour
 		if (dm.canWalk == true)
 		{
             moveInput.x = Input.GetAxisRaw("Horizontal");
-            moveInput.y = Input.GetAxisRaw("Vertical");
+            moveInput.y = -Input.GetAxisRaw("Vertical");
             moveVelocity = moveInput.normalized * Speed;
 			horizontalMove = Input.GetAxisRaw("Horizontal") * Speed;
 			verticalMove = Input.GetAxisRaw("Vertical") * Speed;

@@ -49,15 +49,6 @@ public class UIBTL : MonoBehaviour
 
     private List<Sprite> imagesQ; //Filled by the BTL manager
     public Image[] images = new Image[9];
-    public Image image0;
-    public Image image1;
-    public Image image2;
-    public Image image3;
-    public Image image4;
-    public Image image5;
-    public Image image6;
-    public Image image7;
-    public Image image8;
     private Vector2 imageRecyclePos; //To which position do images go when recycled?
     private Vector2 targetPos; //Used to calculate the distance each image travels in the Q
     private float imageMovementSpeed;
@@ -168,8 +159,8 @@ public class UIBTL : MonoBehaviour
         activeRange = 0;
 
         imagesQ = new List<Sprite>();
-        imageRecyclePos = image8.gameObject.transform.localPosition;
-        targetPos = image0.transform.localPosition;
+        imageRecyclePos = images[8].gameObject.transform.localPosition;
+        targetPos = images[0].transform.localPosition;
 
         imageMovementSpeed = 250.0f;
         imageMaxDistance = 149.0f;
@@ -251,11 +242,11 @@ public class UIBTL : MonoBehaviour
             //Minimum size of Q is 5 since we will not be removing the images when characters die
             //Change the image recycler position depending on the size of the Q
             case 5:
-                imageRecyclePos = image4.transform.localPosition;
-                image5.gameObject.SetActive(false);
-                image6.gameObject.SetActive(false);
-                image7.gameObject.SetActive(false);
-                image8.gameObject.SetActive(false);
+                imageRecyclePos = images[4].transform.localPosition;
+                images[5].gameObject.SetActive(false);
+                images[6].gameObject.SetActive(false);
+                images[7].gameObject.SetActive(false);
+                images[8].gameObject.SetActive(false);
 
                 for(int i =0;i<5;i++)
                 {
@@ -266,10 +257,10 @@ public class UIBTL : MonoBehaviour
 
                 break;
             case 6:
-                imageRecyclePos = image5.transform.localPosition;
-                image6.gameObject.SetActive(false);
-                image7.gameObject.SetActive(false);
-                image8.gameObject.SetActive(false);
+                imageRecyclePos = images[5].transform.localPosition;
+                images[6].gameObject.SetActive(false);
+                images[7].gameObject.SetActive(false);
+                images[8].gameObject.SetActive(false);
 
                 for (int i = 0; i < 6; i++)
                 {
@@ -278,9 +269,9 @@ public class UIBTL : MonoBehaviour
                 }
                 break;
             case 7:
-                imageRecyclePos = image6.transform.localPosition;
-                image7.gameObject.SetActive(false);
-                image8.gameObject.SetActive(false);
+                imageRecyclePos = images[6].transform.localPosition;
+                images[7].gameObject.SetActive(false);
+                images[8].gameObject.SetActive(false);
 
                 for (int i = 0; i < 7; i++)
                 {
@@ -291,8 +282,8 @@ public class UIBTL : MonoBehaviour
 
                 break;
             case 8:
-                imageRecyclePos = image7.transform.localPosition;
-                image8.gameObject.SetActive(false);
+                imageRecyclePos = images[7].transform.localPosition;
+                images[8].gameObject.SetActive(false);
                 for (int i = 0; i < 8; i++)
                 {
                     //0 - 7
@@ -305,34 +296,45 @@ public class UIBTL : MonoBehaviour
 
     public void moveQImages()
     {
+
+        //Turn off the indicator next to the "RAGE" word and return the text color to normal if the previous player was in rage
+        if (playerInControl.currentState == Player.playerState.Rage)
+        {
+            rageModeIndicator1.gameObject.SetActive(false);
+            rageModeIndicator2.gameObject.SetActive(false);
+            skillsText.color = Color.white;
+            itemsText.color = Color.white;
+            guardText.color = Color.white;
+        }
+
         //Move all the images an amount of imageMaxDistance to the right
 
-        targetPos.x = image0.transform.localPosition.x + imageMaxDistance;
-        image0.transform.localPosition = Vector2.MoveTowards(image0.transform.localPosition, targetPos, imageMovementSpeed * Time.deltaTime);
+        targetPos.x = images[0].transform.localPosition.x + imageMaxDistance;
+        images[0].transform.localPosition = Vector2.MoveTowards(images[0].transform.localPosition, targetPos, imageMovementSpeed * Time.deltaTime);
 
-        targetPos.x = image1.transform.localPosition.x + imageMaxDistance;
-        image1.transform.localPosition = Vector2.MoveTowards(image1.transform.localPosition, targetPos , imageMovementSpeed * Time.deltaTime);
+        targetPos.x = images[1].transform.localPosition.x + imageMaxDistance;
+        images[1].transform.localPosition = Vector2.MoveTowards(images[1].transform.localPosition, targetPos , imageMovementSpeed * Time.deltaTime);
 
-        targetPos.x = image2.transform.localPosition.x + imageMaxDistance;
-        image2.transform.localPosition = Vector2.MoveTowards(image2.transform.localPosition, targetPos , imageMovementSpeed * Time.deltaTime);
+        targetPos.x = images[2].transform.localPosition.x + imageMaxDistance;
+        images[2].transform.localPosition = Vector2.MoveTowards(images[2].transform.localPosition, targetPos , imageMovementSpeed * Time.deltaTime);
 
-        targetPos.x = image3.transform.localPosition.x + imageMaxDistance;
-        image3.transform.localPosition = Vector2.MoveTowards(image3.transform.localPosition, targetPos , imageMovementSpeed * Time.deltaTime);
+        targetPos.x = images[3].transform.localPosition.x + imageMaxDistance;
+        images[3].transform.localPosition = Vector2.MoveTowards(images[3].transform.localPosition, targetPos , imageMovementSpeed * Time.deltaTime);
 
-        targetPos.x = image4.transform.localPosition.x + imageMaxDistance;
-        image4.transform.localPosition = Vector2.MoveTowards(image4.transform.localPosition, targetPos , imageMovementSpeed * Time.deltaTime);
+        targetPos.x = images[4].transform.localPosition.x + imageMaxDistance;
+        images[4].transform.localPosition = Vector2.MoveTowards(images[4].transform.localPosition, targetPos , imageMovementSpeed * Time.deltaTime);
 
-        targetPos.x = image5.transform.localPosition.x + imageMaxDistance;
-        image5.transform.localPosition = Vector2.MoveTowards(image5.transform.localPosition, targetPos , imageMovementSpeed * Time.deltaTime);
+        targetPos.x = images[5].transform.localPosition.x + imageMaxDistance;
+        images[5].transform.localPosition = Vector2.MoveTowards(images[5].transform.localPosition, targetPos , imageMovementSpeed * Time.deltaTime);
 
-        targetPos.x = image6.transform.localPosition.x + imageMaxDistance;
-        image6.transform.localPosition = Vector2.MoveTowards(image6.transform.localPosition, targetPos , imageMovementSpeed * Time.deltaTime);
+        targetPos.x = images[6].transform.localPosition.x + imageMaxDistance;
+        images[6].transform.localPosition = Vector2.MoveTowards(images[6].transform.localPosition, targetPos , imageMovementSpeed * Time.deltaTime);
 
-        targetPos.x = image7.transform.localPosition.x + imageMaxDistance;
-        image7.transform.localPosition = Vector2.MoveTowards(image7.transform.localPosition, targetPos , imageMovementSpeed * Time.deltaTime);
+        targetPos.x = images[7].transform.localPosition.x + imageMaxDistance;
+        images[7].transform.localPosition = Vector2.MoveTowards(images[7].transform.localPosition, targetPos , imageMovementSpeed * Time.deltaTime);
 
-        targetPos.x = image8.transform.localPosition.x + imageMaxDistance;
-        image8.transform.localPosition = Vector2.MoveTowards(image8.transform.localPosition, targetPos , imageMovementSpeed * Time.deltaTime);
+        targetPos.x = images[8].transform.localPosition.x + imageMaxDistance;
+        images[8].transform.localPosition = Vector2.MoveTowards(images[8].transform.localPosition, targetPos , imageMovementSpeed * Time.deltaTime);
 
     }
 
@@ -345,31 +347,31 @@ public class UIBTL : MonoBehaviour
         switch (imageIndex) //Which image hit the recycler?
         {
             case 0:
-                image0.gameObject.transform.localPosition = imageRecyclePos;
+                images[0].gameObject.transform.localPosition = imageRecyclePos;
                 break;
             case 1:
-                image1.gameObject.transform.localPosition = imageRecyclePos;
+                images[1].gameObject.transform.localPosition = imageRecyclePos;
                 break;
             case 2:
-                image2.gameObject.transform.localPosition = imageRecyclePos;
+                images[2].gameObject.transform.localPosition = imageRecyclePos;
                 break;
             case 3:
-                image3.gameObject.transform.localPosition = imageRecyclePos;
+                images[3].gameObject.transform.localPosition = imageRecyclePos;
                 break;
             case 4:
-                image4.gameObject.transform.localPosition = imageRecyclePos;
+                images[4].gameObject.transform.localPosition = imageRecyclePos;
                 break;
             case 5:
-                image5.gameObject.transform.localPosition = imageRecyclePos;
+                images[5].gameObject.transform.localPosition = imageRecyclePos;
                 break;
             case 6:
-                image6.gameObject.transform.localPosition = imageRecyclePos;
+                images[6].gameObject.transform.localPosition = imageRecyclePos;
                 break;
             case 7:
-                image7.gameObject.transform.localPosition = imageRecyclePos;
+                images[7].gameObject.transform.localPosition = imageRecyclePos;
                 break;
             case 8:
-                image8.gameObject.transform.localPosition = imageRecyclePos;
+                images[8].gameObject.transform.localPosition = imageRecyclePos;
                 break;
 
         }
@@ -396,14 +398,15 @@ public class UIBTL : MonoBehaviour
         RageOptionTextColor();
 
        
-        //Turn off the indicator if the player in question is not in rage mode
-        if(playerInControl.currentState!=Player.playerState.Rage)
+        //Turn on the indicator if the player is in rage mode
+        if(playerInControl.currentState==Player.playerState.Rage)
         {
-            rageModeIndicator1.gameObject.SetActive(false);
-            rageModeIndicator2.gameObject.SetActive(false);
-            skillsText.color = Color.white;
-            itemsText.color = Color.white;
-            guardText.color = Color.white;
+            rageModeIndicator1.gameObject.SetActive(true);
+            rageModeIndicator2.gameObject.SetActive(true);
+            skillsText.color = Color.grey;
+            itemsText.color = Color.grey;
+            guardText.color = Color.grey;
+            rageText.color = Color.yellow;
         }
 
         switch (playerIndex)
@@ -454,7 +457,7 @@ public class UIBTL : MonoBehaviour
                         activeRange = playerInControl.range;
 
                         //Make sure the indicator starts at an alive enemy
-                        for(int i =0;i>enemiesDead.Length;i++)
+                        for(int i =0;i<enemiesDead.Length;i++)
                         {
                             if(enemiesDead[i] == false)
                             {
@@ -524,7 +527,7 @@ public class UIBTL : MonoBehaviour
                         controlsIndicator = 4;
                         highlighter.transform.position = highlighterPos4.transform.position;
                     }
-                    else if (Input.GetKeyDown(KeyCode.Space)) //Player has chosen Skills
+                    else if (Input.GetKeyDown(KeyCode.Space)) //Player has chosen Items
                     {
                         currentState = btlUIState.choosingItemsCommand;
                     }
@@ -545,7 +548,7 @@ public class UIBTL : MonoBehaviour
                         controlsIndicator = 0;
                         highlighter.transform.position = highlighterPos0.transform.position;
                     }
-                    else if (Input.GetKeyDown(KeyCode.Space)) //Player has chosen Skills
+                    else if (Input.GetKeyDown(KeyCode.Space)) //Player has chosen Rage
                     {
                         rageText.color = Color.yellow;
                         skillsText.color = Color.gray;
