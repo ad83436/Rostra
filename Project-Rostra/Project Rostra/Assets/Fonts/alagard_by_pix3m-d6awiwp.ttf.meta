@@ -11,9 +11,10 @@ TrueTypeFontImporter:
   fontName: Alagard
   fontNames:
   - Alagard
-  fallbackFontReferences: []
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 428688516fbd2f84eb6d2191b501b538, type: 3}
   customCharacters: 
-  fontRenderingMode: 0
+  fontRenderingMode: 2
   ascentCalculationMode: 1
   useLegacyBoundsCalculation: 0
   shouldRoundAdvanceValue: 1

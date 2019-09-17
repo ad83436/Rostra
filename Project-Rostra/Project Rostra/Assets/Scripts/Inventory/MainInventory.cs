@@ -63,11 +63,23 @@ public class MainInventory : MonoBehaviour {
     // Handling keyboard functionality
     private void Update() {
         // Getting Keyboard Input
-        bool keySelect, keyReturn, keyUp, keyDown;
+        bool keyOpen, keySelect, keyReturn, keyUp, keyDown;
+        keyOpen = Input.GetKeyDown(KeyCode.I);
         keySelect = Input.GetKeyDown(KeyCode.Z);
         keyReturn = Input.GetKeyDown(KeyCode.X);
         keyUp = Input.GetKeyDown(KeyCode.UpArrow);
         keyDown = Input.GetKeyDown(KeyCode.DownArrow);
+
+        // Opening and Closing the Inventory Window
+        if (keyOpen) {
+            isVisible = !isVisible;
+            return;
+        }
+
+        // Don't allow any input functionality when the inventory is not open
+        if (!isVisible) {
+            return;
+        }
 
         if (selectedOption == -1) { // Input functionality for when the player has no item currently selected
             // Shifting up and down through the inventory screen
@@ -82,10 +94,9 @@ public class MainInventory : MonoBehaviour {
                     curOption = INVENTORY_SIZE - 1;
                     firstToDraw = curOption - numToDraw;
                 }
-            }
-            if (keyDown) {
+            } else if (keyDown) {
                 curOption++;
-                // Shifting the inventory's view up
+                // Shifting the inventory's view down
                 if (curOption > firstToDraw + (numToDraw / 2) + 1 && firstToDraw < INVENTORY_SIZE - 1 - numToDraw) {
                     firstToDraw++;
                 }
@@ -193,6 +204,12 @@ public class MainInventory : MonoBehaviour {
 
     // Drawing the inventory to the screen
     private void OnGUI() {
+        // Don't allow the inventory to be drawn when it isn't open
+        if (!isVisible) {
+            return;
+        }
+
+        // Creating the Font(s) for the Inventory
         GUIStyle style = new GUIStyle(GUI.skin.label) {
             font = GuiSmall,
             fontSize = 30,

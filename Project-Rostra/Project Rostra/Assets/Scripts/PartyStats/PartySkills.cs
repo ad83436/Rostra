@@ -80,6 +80,58 @@ public struct PlayerSkills {
         return emptySlotExists;
     }
 
+    // Attempts to remove an equipped skill for the respective array. If it cannot remove the skill because the slot provided
+    // was out of bounds of there was no skill equipped, this code will return false.
+    public bool UnequipSkill(int skillSlot) {
+        if (skillSlot >= 0 && skillSlot < CharacterSkills.MAX_SKILLS) {
+            equippedSkills[skillSlot] = (int)SKILLS.NO_SKILL;
+            return true;
+        }
+        return false;
+    }
+
+    // Finds the name of the skill relative to the ID provided in the argument
+    public string SkillName(int skillID) {
+        string name = "";
+
+        // Find the name relative to the ID given
+        switch (skillID) {
+            case (int)SKILLS.TEST_SKILL1:
+                name = "Booty Destroyer";
+                break;
+            case (int)SKILLS.TEST_SKILL2:
+                name = "Spinng Ass Shot";
+                break;
+            case (int)SKILLS.TEST_SKILL3:
+                name = "Implant Popper";
+                break;
+            case (int)SKILLS.TEST_SKILL4:
+                name = "Healing Anal Needle";
+                break;
+        }
+
+        return name;
+    }
+
+    // Finds the skill's description relative to the ID provided in the argument parameter
+    public string SkillDescription(int skillID) {
+        string description = "";
+
+        // Find the description relative to the ID given
+        switch (skillID) {
+            case (int)SKILLS.TEST_SKILL1:
+                break;
+            case (int)SKILLS.TEST_SKILL2:
+                break;
+            case (int)SKILLS.TEST_SKILL3:
+                break;
+            case (int)SKILLS.TEST_SKILL4:
+                break;
+        }
+
+        return description;
+    }
+
     // This method holds the stats for every single skill in the game
     // When called, it will search for the ID that was provided by the 
     // caller and return those stats in an array
