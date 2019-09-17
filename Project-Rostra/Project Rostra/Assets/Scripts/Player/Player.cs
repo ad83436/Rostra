@@ -39,6 +39,9 @@ public class Player : MonoBehaviour
     public float maxRage;
     public GameObject rageModeIndicator;
 
+    //Guard
+    public GameObject guardIcon;
+
     //UI
     public Image hpImage;
     public Image rageImage;
@@ -88,6 +91,8 @@ public class Player : MonoBehaviour
         canRage = false;
         rageModeIndicator.gameObject.SetActive(false);
 
+        //Guard
+        guardIcon.gameObject.SetActive(false);
 
         //Targeted enemy info
         attackingThisEnemy = null;
@@ -242,13 +247,14 @@ public class Player : MonoBehaviour
         currentState = playerState.Guard;
         playerAnimator.SetBool("Turn", false);
         Debug.Log(name + " is Guarding and current def is " + actualDEF);
+        guardIcon.gameObject.SetActive(true);
         uiBTL.EndTurn();
-        battleManager.NextOnQueue();
     }
     public void EndGuard()
     {
         actualDEF = actualDefBeforeGuard;
         currentState = playerState.Idle;
+        guardIcon.gameObject.SetActive(false);
     }
 
     public void TakeDamage(float enemyATK)
