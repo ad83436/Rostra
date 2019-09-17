@@ -81,24 +81,32 @@ public struct PlayerSkills {
     // When called, it will search for the ID that was provided by the 
     // caller and return those stats in an array
     public float[] SkillStats(int skillID) {
-        float[] skillStats = { 0.0f, 0.0f, 0.0f };
-        // Idk what to make these values yet so I just put three for now
-        // I was thinking the first is the damage it deals, the second
-        // is its accuracy, and then the third could be how much time it
-        // takes to execute the skill when in battle or some shit
+        float[] skillStat = { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f };
+        // NOTE -- Element 0 is the skill's damage/healing capabilities
+        //         Element 1 is the skill's accuracy out of 100, I guess
+        //         Element 2 is the skill's is how long it will take to execute the skill after casting it
+        //         Element 3 is the skill's total range
+        //         Element 4 is the skill's damage/healing size (Single Target, AoE, Full Row, etc)
+        //                      0.0f == Single Target, 1.0f == AoE, 2.0f == Full Row
+        //                      3.0f == Single Player Heal, 4.0 == Full Party Heal
+        //         Element 5 is the skill's total MP usage
 
         // Find the required stats and return those to the caller
         switch (skillID) {
             case (int)SKILLS.TEST_SKILL1:
+                skillStat[4] = (int)SKILL_TYPE.SINGLE_TARGET_ATK;
                 break;
             case (int)SKILLS.TEST_SKILL2:
+                skillStat[4] = (int)SKILL_TYPE.ALL_TARGETS_ATK;
                 break;
             case (int)SKILLS.TEST_SKILL3:
+                skillStat[4] = (int)SKILL_TYPE.FULL_ROW_ATK;
                 break;
             case (int)SKILLS.TEST_SKILL4:
+                skillStat[4] = (int)SKILL_TYPE.SINGLE_PLAYER_HEAL;
                 break;
         }
 
-        return skillStats;
+        return skillStat;
     }
 }
