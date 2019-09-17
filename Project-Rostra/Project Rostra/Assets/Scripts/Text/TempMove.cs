@@ -83,6 +83,5 @@ public class TempMove : MonoBehaviour
 			Debug.Log("Triggered the convo");
 			ct.TriggerChoiceDependantConvo();
 		}
-		
 	}
 }
