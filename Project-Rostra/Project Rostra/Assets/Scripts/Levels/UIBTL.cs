@@ -255,33 +255,55 @@ public class UIBTL : MonoBehaviour
                 image6.gameObject.SetActive(false);
                 image7.gameObject.SetActive(false);
                 image8.gameObject.SetActive(false);
-                
+
+                image0.sprite = imagesQ[0];
+                image1.sprite = imagesQ[1];
+                image2.sprite = imagesQ[2];
+                image3.sprite = imagesQ[3];
+                image4.sprite = imagesQ[4];
+
                 break;
             case 6:
                 imageRecyclePos = image5.transform.localPosition;
                 image6.gameObject.SetActive(false);
                 image7.gameObject.SetActive(false);
                 image8.gameObject.SetActive(false);
+
+                image0.sprite = imagesQ[0];
+                image1.sprite = imagesQ[1];
+                image2.sprite = imagesQ[2];
+                image3.sprite = imagesQ[3];
+                image4.sprite = imagesQ[4];
+                image5.sprite = imagesQ[5];
                 break;
             case 7:
                 imageRecyclePos = image6.transform.localPosition;
                 image7.gameObject.SetActive(false);
                 image8.gameObject.SetActive(false);
+
+                image0.sprite = imagesQ[0];
+                image1.sprite = imagesQ[1];
+                image2.sprite = imagesQ[2];
+                image3.sprite = imagesQ[3];
+                image4.sprite = imagesQ[4];
+                image5.sprite = imagesQ[5];
+                image6.sprite = imagesQ[6];
+
                 break;
             case 8:
-                imageRecyclePos = image7.transform.localPosition;
-                image8.gameObject.SetActive(false);
+                imageRecyclePos = image8.transform.localPosition;
+                image0.sprite = imagesQ[0];
+                image1.sprite = imagesQ[1];
+                image2.sprite = imagesQ[2];
+                image3.sprite = imagesQ[3];
+                image4.sprite = imagesQ[4];
+                image5.sprite = imagesQ[5];
+                image6.sprite = imagesQ[6];
+                image7.sprite = imagesQ[7];
+                image8.sprite = imagesQ[8];
                 break;
         }
-        image0.sprite = imagesQ[0];
-        image1.sprite = imagesQ[1];
-        image2.sprite = imagesQ[2];
-        image3.sprite = imagesQ[3];
-        image4.sprite = imagesQ[4];
-        image5.sprite = imagesQ[5];
-        image6.sprite = imagesQ[6];
-        image7.sprite = imagesQ[7];
-        image8.sprite = imagesQ[8];
+
     }
 
     public void moveQImages()

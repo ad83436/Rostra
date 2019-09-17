@@ -12,16 +12,19 @@ public class PlayerMove : MonoBehaviour
     private Vector2 moveVelocity;
     float horizontalMove;
     float verticalMove;
+    Vector2 moveInput;
 
     void Start()
     {
-
         rb = GetComponent<Rigidbody2D>();
+        moveInput = new Vector2(0.0f, 0.0f);
     }
 
     void Update()
     {
-        Vector2 moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        
+        moveInput.x = Input.GetAxisRaw("Horizontal");
+        moveInput.y = Input.GetAxisRaw("Vertical");
         moveVelocity = moveInput.normalized * Speed;
         horizontalMove = Input.GetAxisRaw("Horizontal") * Speed;
         verticalMove = Input.GetAxisRaw("Vertical") * Speed;
@@ -31,9 +34,8 @@ public class PlayerMove : MonoBehaviour
         animator.SetFloat("Speed", moveVelocity.sqrMagnitude);
 
     }
-    
 
-            void FixedUpdate()
+    void FixedUpdate()
             {
                 rb.MovePosition(rb.position + moveVelocity * Time.fixedDeltaTime);
             }

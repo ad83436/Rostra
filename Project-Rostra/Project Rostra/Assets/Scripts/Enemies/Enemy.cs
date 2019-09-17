@@ -172,7 +172,7 @@ public class Enemy : MonoBehaviour
 
     void DumbAttack()
     {
-        attackThisPlayer = battleManager.players[GetRandomNumber()].playerReference;
+        attackThisPlayer = battleManager.players[Random.Range(0, 4)].playerReference;
         //if the player is dead, try again
         if (attackThisPlayer.currentHP <= 0.0f)
         {
@@ -184,6 +184,7 @@ public class Enemy : MonoBehaviour
             CalculateHit();
             animator.SetBool("Attack", true);
         }
+        
     }
        
     //Called from the animator once the attack anaimation ends
