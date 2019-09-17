@@ -2,7 +2,7 @@
 using UnityEngine;
 
 // Code Written By:     Christopher Brine
-// Last Updated:        September 11th, 2019
+// Last Updated:        September 17th, 2019
 
 public class MainInventory : MonoBehaviour {
     public static MainInventory invInstance;    // Holds the current inventory instance in a single variable
