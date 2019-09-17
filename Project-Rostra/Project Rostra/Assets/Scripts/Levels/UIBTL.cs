@@ -248,23 +248,29 @@ public class UIBTL : MonoBehaviour
         switch(imagesQ.Count)
         {
             //Minimum size of Q is 5 since we will not be removing the images when characters die
+            //Change the image recycler position depending on the size of the Q
             case 5:
-                imagesQ.Add(imagesQ[0]);
-                imagesQ.Add(imagesQ[1]);
-                imagesQ.Add(imagesQ[2]);
-                imagesQ.Add(imagesQ[3]);
+                imageRecyclePos = image4.transform.localPosition;
+                image5.gameObject.SetActive(false);
+                image6.gameObject.SetActive(false);
+                image7.gameObject.SetActive(false);
+                image8.gameObject.SetActive(false);
+                
                 break;
             case 6:
-                imagesQ.Add(imagesQ[0]);
-                imagesQ.Add(imagesQ[1]);
-                imagesQ.Add(imagesQ[2]);
+                imageRecyclePos = image5.transform.localPosition;
+                image6.gameObject.SetActive(false);
+                image7.gameObject.SetActive(false);
+                image8.gameObject.SetActive(false);
                 break;
             case 7:
-                imagesQ.Add(imagesQ[0]);
-                imagesQ.Add(imagesQ[1]);
+                imageRecyclePos = image6.transform.localPosition;
+                image7.gameObject.SetActive(false);
+                image8.gameObject.SetActive(false);
                 break;
             case 8:
-                imagesQ.Add(imagesQ[0]);
+                imageRecyclePos = image7.transform.localPosition;
+                image8.gameObject.SetActive(false);
                 break;
         }
         image0.sprite = imagesQ[0];

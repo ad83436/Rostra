@@ -366,14 +366,6 @@ public class BattleManager : MonoBehaviour
         //Otherwise, tell the UI system to show the Q
         else
         {
-            if(battleQueue.Count<9)
-            {
-                //The Q should always be of size 9
-                for(int i = 0; battleQueue.Count<9; i++)
-                {
-                    battleQueue.Add(battleQueue[i]);
-                }
-            }
             uiBtl.QueueIsReady();
         }
     }
