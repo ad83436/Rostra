@@ -40,6 +40,8 @@ public struct PlayerSkills {
     public int[] equippedSkills;        // The skills that the player currently has equipped to the character
     public int[] learnedSkills;         // The array of skills that the character has unlocked
 
+    public int numSkillsLearned;        // The number of skills that the character has learned so far 
+
     // Initialize the player's list of learnable skills
     public PlayerSkills(int[] uSkills) {
         unlockableSkills = uSkills;
@@ -56,6 +58,7 @@ public struct PlayerSkills {
             (int)SKILLS.NO_SKILL,
             (int)SKILLS.NO_SKILL,
         };
+        numSkillsLearned = 0;
     }
 
     // Attempts to equip a skill to the current player's active skills. If the skill list is full, it will let the player swap a
