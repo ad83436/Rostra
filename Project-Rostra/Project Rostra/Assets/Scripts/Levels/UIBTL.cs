@@ -248,34 +248,62 @@ public class UIBTL : MonoBehaviour
         switch(imagesQ.Count)
         {
             //Minimum size of Q is 5 since we will not be removing the images when characters die
+            //Change the image recycler position depending on the size of the Q
             case 5:
-                imagesQ.Add(imagesQ[0]);
-                imagesQ.Add(imagesQ[1]);
-                imagesQ.Add(imagesQ[2]);
-                imagesQ.Add(imagesQ[3]);
+                imageRecyclePos = image4.transform.localPosition;
+                image5.gameObject.SetActive(false);
+                image6.gameObject.SetActive(false);
+                image7.gameObject.SetActive(false);
+                image8.gameObject.SetActive(false);
+
+                image0.sprite = imagesQ[0];
+                image1.sprite = imagesQ[1];
+                image2.sprite = imagesQ[2];
+                image3.sprite = imagesQ[3];
+                image4.sprite = imagesQ[4];
+
                 break;
             case 6:
-                imagesQ.Add(imagesQ[0]);
-                imagesQ.Add(imagesQ[1]);
-                imagesQ.Add(imagesQ[2]);
+                imageRecyclePos = image5.transform.localPosition;
+                image6.gameObject.SetActive(false);
+                image7.gameObject.SetActive(false);
+                image8.gameObject.SetActive(false);
+
+                image0.sprite = imagesQ[0];
+                image1.sprite = imagesQ[1];
+                image2.sprite = imagesQ[2];
+                image3.sprite = imagesQ[3];
+                image4.sprite = imagesQ[4];
+                image5.sprite = imagesQ[5];
                 break;
             case 7:
-                imagesQ.Add(imagesQ[0]);
-                imagesQ.Add(imagesQ[1]);
+                imageRecyclePos = image6.transform.localPosition;
+                image7.gameObject.SetActive(false);
+                image8.gameObject.SetActive(false);
+
+                image0.sprite = imagesQ[0];
+                image1.sprite = imagesQ[1];
+                image2.sprite = imagesQ[2];
+                image3.sprite = imagesQ[3];
+                image4.sprite = imagesQ[4];
+                image5.sprite = imagesQ[5];
+                image6.sprite = imagesQ[6];
+
                 break;
             case 8:
-                imagesQ.Add(imagesQ[0]);
+                imageRecyclePos = image8.transform.localPosition;
+                image0.sprite = imagesQ[0];
+                image1.sprite = imagesQ[1];
+                image2.sprite = imagesQ[2];
+                image3.sprite = imagesQ[3];
+                image4.sprite = imagesQ[4];
+                image5.sprite = imagesQ[5];
+                image6.sprite = imagesQ[6];
+                image7.sprite = imagesQ[7];
+                image8.sprite = imagesQ[8];
                 break;
         }
-        image0.sprite = imagesQ[0];
-        image1.sprite = imagesQ[1];
-        image2.sprite = imagesQ[2];
-        image3.sprite = imagesQ[3];
-        image4.sprite = imagesQ[4];
-        image5.sprite = imagesQ[5];
-        image6.sprite = imagesQ[6];
-        image7.sprite = imagesQ[7];
-        image8.sprite = imagesQ[8];
+
     }
 
     public void moveQImages()

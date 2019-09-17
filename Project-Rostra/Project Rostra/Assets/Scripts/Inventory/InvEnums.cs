@@ -1,5 +1,5 @@
 ﻿// Code Written By:     Christopher Brine
-// Last Updated:        September 11th, 2019
+// Last Updated:        September 15th, 2019
 
 // IMPORTANT -- Make sure you put (int) before referencing the enum values in this file.
 //                      Example:    (int)ITEM_ID.NO_ITEM;

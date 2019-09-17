@@ -2,7 +2,7 @@
 using UnityEngine;
 
 // Code Written By:     Christopher Brine
-// Last Updated:        September 11th, 2019
+// Last Updated:        September 17th, 2019
 
 public class MainInventory : MonoBehaviour {
     public static MainInventory invInstance;    // Holds the current inventory instance in a single variable
@@ -12,8 +12,9 @@ public class MainInventory : MonoBehaviour {
     //         Element 1 is how many items currently occupy the slot in the inventory
     //         Element 2 is what character has this item equipped (Ex. armor and weapons)
 
-    // The fonts that are used for drawing the Inventory's GUI
+    // The variables that are used for drawing the GUI to the screen
     public Font GuiSmall;
+    public bool isVisible = false;
 
     // Variables for holding a to-be-swapped item in the inventory
     private int[] itemToSwap = new int[3];      // Holds data about the item being swapped in the inventory

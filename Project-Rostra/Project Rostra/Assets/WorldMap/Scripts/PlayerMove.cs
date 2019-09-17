@@ -18,8 +18,8 @@ public class PlayerMove : MonoBehaviour
 	}
 	void Start()
     {
-
         rb = GetComponent<Rigidbody2D>();
+        moveInput = new Vector2(0.0f, 0.0f);
     }
 
     void Update()
