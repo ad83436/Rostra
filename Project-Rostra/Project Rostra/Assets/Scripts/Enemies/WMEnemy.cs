@@ -23,7 +23,7 @@ public class WMEnemy : MonoBehaviour
             {
                 enemySpwn.AddEnemyToSpawn(enemies[i], i, enemyLevels[i]);
             }
-            SceneManager.LoadScene("Queue Scene");
+            SceneManager.LoadScene("Queue Scene",LoadSceneMode.Additive);
         }
 
     }
