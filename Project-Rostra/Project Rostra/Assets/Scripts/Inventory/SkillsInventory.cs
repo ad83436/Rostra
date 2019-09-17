@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class SkillsInventory : MonoBehaviour {
     public static SkillsInventory invInstance;  // Holds the current inventory instance in a single variable
-    public PlayerSkills currentPlayer;          // Holds whatever player'sskill are currently being viewed right now
+    public CharacterSkills currentPlayer;       // Holds whatever player'sskill are currently being viewed right now
 
     // The variables that are used for drawing the GUI to the screen
     public Font GuiSmall;
@@ -74,14 +74,14 @@ public class SkillsInventory : MonoBehaviour {
                 if (playerIndex > 3) {
                     playerIndex = 0;
                 }
-                currentPlayer = CharacterSkills.skills[playerIndex];
+                currentPlayer = PartySkills.skills[playerIndex];
             } else if (keyLeft) {
                 playerIndex--;
                 // Loop back to the last character's skill inventory
                 if (playerIndex < 0) {
                     playerIndex = 3;
                 }
-                currentPlayer = CharacterSkills.skills[playerIndex];
+                currentPlayer = PartySkills.skills[playerIndex];
             }
 
             // Selecting a Skill
@@ -114,13 +114,12 @@ public class SkillsInventory : MonoBehaviour {
         bool unlockSuccess = false;
 
         // Check if the current player is able to learn this skill
-        PlayerSkills player = CharacterSkills.skills[playerIndex];
-        var length = player.unlockableSkills.Length;
+        var length = currentPlayer.unlockableSkills.Length;
         for (int i = 0; i < length; i++) {
             // Skill found, add to unlocked skills
-            if (player.unlockableSkills[i] == skillID) {
-                player.learnedSkills[player.numSkillsLearned] = skillID;
-                player.numSkillsLearned++;
+            if (currentPlayer.unlockableSkills[i] == skillID) {
+                currentPlayer.learnedSkills[currentPlayer.numSkillsLearned] = skillID;
+                currentPlayer.numSkillsLearned++;
                 unlockSuccess = true;
                 i = length; // Exit the loop
             }
