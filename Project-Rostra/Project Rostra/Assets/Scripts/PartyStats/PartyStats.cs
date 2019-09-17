@@ -1,4 +1,6 @@
-﻿
+﻿// Code Written By:     Christopher Brine and Domara "Lastname" Jones
+// Last Updated:        September 17th, 2019
+
 public static class PartyStats {
     public static CharacterStats[] chara ={
         new CharacterStats(
