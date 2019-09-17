@@ -927,7 +927,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 1927818603
-  m_SortingOrder: 30
+  m_SortingOrder: 40
   m_TargetDisplay: 0
 --- !u!114 &230563280832064221
 MonoBehaviour:
@@ -1388,7 +1388,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 232.6, y: 68.99997}
+  m_AnchoredPosition: {x: 232.60004, y: 68.99997}
   m_SizeDelta: {x: 425.8, y: 136}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &230563281012434234
@@ -3929,15 +3929,16 @@ MonoBehaviour:
   currentMP: {fileID: 230563281815413269}
   maxMP: {fileID: 230563280731941133}
   mpBar: {fileID: 230563281777120002}
-  image0: {fileID: 230563281415247870}
-  image1: {fileID: 230563281355117934}
-  image2: {fileID: 230563280730478774}
-  image3: {fileID: 230563282112732136}
-  image4: {fileID: 230563281752187386}
-  image5: {fileID: 230563281119678469}
-  image6: {fileID: 230563282586069681}
-  image7: {fileID: 230563280698934317}
-  image8: {fileID: 230563281349326980}
+  images:
+  - {fileID: 230563281415247870}
+  - {fileID: 230563281355117934}
+  - {fileID: 230563280730478774}
+  - {fileID: 230563282112732136}
+  - {fileID: 230563281752187386}
+  - {fileID: 230563281119678469}
+  - {fileID: 230563282586069681}
+  - {fileID: 230563280698934317}
+  - {fileID: 230563281349326980}
   enemies: []
   enemiesDead: 
   numberOfEnemies: 0
@@ -6575,7 +6576,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.69803923}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:

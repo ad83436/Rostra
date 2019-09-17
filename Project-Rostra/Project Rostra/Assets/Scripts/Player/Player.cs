@@ -328,6 +328,7 @@ public class Player : MonoBehaviour
         actualATK = atk;
         actualDEF = def;
         healable = true;
+        canRage = false;
         QCounter = 0;
         rageModeIndicator.gameObject.SetActive(false);
         rageImage.fillAmount = 0.0f;  //Update the UI
