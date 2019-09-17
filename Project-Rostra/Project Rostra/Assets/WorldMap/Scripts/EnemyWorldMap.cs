@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Enemy : MonoBehaviour
+public class EnemyWorldMap : MonoBehaviour
 {
     public int index;
     public string levelName;
