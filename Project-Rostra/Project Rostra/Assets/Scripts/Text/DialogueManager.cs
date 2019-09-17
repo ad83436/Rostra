@@ -101,6 +101,10 @@ public class DialogueManager : MonoBehaviour
 
 	public void StartConversation(Dialogue d)
 	{
+		if (d.isChoice == true)
+		{
+			d.hasPlayed = true;
+		}
 		if (nextDialogue == true)
 		{
 			text.text = "";
@@ -157,7 +161,6 @@ public class DialogueManager : MonoBehaviour
 
 	public void NextSentence()
 	{
-		canEnter = false;
 		// wipe the previous text
 		text.text = "";
 		continueButton.SetActive(false);
@@ -337,6 +340,11 @@ public class DialogueManager : MonoBehaviour
 		{
 			StartConversation(dia.choiceCare2.dialogue);
 		}
+	}
+
+	public void PlayNormalDialogue(Dialogue d)
+	{
+		StartConversation(d.normal.dialogue);
 	}
 	// check our keyboard pressed and do things accordingly
 	public void CheckInput()
