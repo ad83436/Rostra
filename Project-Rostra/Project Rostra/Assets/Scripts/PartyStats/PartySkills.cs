@@ -87,23 +87,21 @@ public struct PlayerSkills {
         //         Element 2 is the skill's is how long it will take to execute the skill after casting it
         //         Element 3 is the skill's total range
         //         Element 4 is the skill's damage/healing size (Single Target, AoE, Full Row, etc)
-        //                      0.0f == Single Target, 1.0f == AoE, 2.0f == Full Row
-        //                      3.0f == Single Player Heal, 4.0 == Full Party Heal
         //         Element 5 is the skill's total MP usage
 
         // Find the required stats and return those to the caller
         switch (skillID) {
             case (int)SKILLS.TEST_SKILL1:
-                skillStat[4] = (int)SKILL_TYPE.SINGLE_TARGET_ATK;
+                skillStat[4] = (float)SKILL_TYPE.SINGLE_TARGET_ATK;
                 break;
             case (int)SKILLS.TEST_SKILL2:
-                skillStat[4] = (int)SKILL_TYPE.ALL_TARGETS_ATK;
+                skillStat[4] = (float)SKILL_TYPE.ALL_TARGETS_ATK;
                 break;
             case (int)SKILLS.TEST_SKILL3:
-                skillStat[4] = (int)SKILL_TYPE.FULL_ROW_ATK;
+                skillStat[4] = (float)SKILL_TYPE.FULL_ROW_ATK;
                 break;
             case (int)SKILLS.TEST_SKILL4:
-                skillStat[4] = (int)SKILL_TYPE.SINGLE_PLAYER_HEAL;
+                skillStat[4] = (float)SKILL_TYPE.SINGLE_PLAYER_HEAL;
                 break;
         }
 
