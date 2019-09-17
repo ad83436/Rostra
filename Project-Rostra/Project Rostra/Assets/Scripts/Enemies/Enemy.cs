@@ -17,7 +17,6 @@ public class Enemy : MonoBehaviour
     public float eStrength;
     public float eBaseLevel;
     public int eCurrentLevel;
-    private int Chance = 100;
     public string eName;
     public float eRange;
     public float eCritical;

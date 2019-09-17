@@ -1,4 +1,4 @@
-﻿// written by: Sean Fowke
+﻿// Written by: Sean Fowke
 
 using System.Collections;
 using System.Collections.Generic;
@@ -56,6 +56,13 @@ public class DialogueManager : MonoBehaviour
 	// stores a local copy of which choice set we will be using
 	private float choiceSet;
 	private bool[] choices;
+	// determines weather the player can walk or not
+	public bool canWalk;
+	private bool startUpdating;
+	public bool nextDialogue;
+	private float nextDialogueCount;
+	public float nextDialogueCountInitial;
+	public bool isActive;
 	void Awake()
     {
 		// singleton notation
@@ -65,11 +72,13 @@ public class DialogueManager : MonoBehaviour
 		}
 		else
 		{
-			print("The Dialogue Guy is missing and sweet Jesus I can't find him");
+			Debug.LogError("The Dialogue Guy is missing and sweet Jesus I can't find him");
 		}
+		DontDestroyOnLoad(this.gameObject);
 		// set everything to its default 
 		textElements = new Queue<string>();
-		choices = new bool[7];
+		choices = new bool[6];
+		change = 0;
 		currentChange = 0;
 		boxCount = 0;
 		continueCount = 0;
@@ -83,55 +92,75 @@ public class DialogueManager : MonoBehaviour
 		choiceNum = 0;
 		highlight1.SetActive(false);
 		highlight2.SetActive(false);
+		canWalk = true;
+		startUpdating = false;
+		nextDialogue = true;
+		nextDialogueCount = nextDialogueCountInitial;
+		isActive = false;
 	}
 
 	public void StartConversation(Dialogue d)
 	{
-		//turn off the highlighting and set everything to default in case it wasn't reset
-		highlight1.SetActive(false);
-		highlight2.SetActive(false);
-		canEnter = false;
-		choiceNum = 0;
-		anim.SetBool("isOpen", true);
-		// save a local copy of the dialogue we pass in
-		dia = d;
-		// display the first name and portraits
-		charName.text = d.names[0];
-		portrait.sprite = d.portrait[0];
-		textElements.Clear(); // wipe the slate clean make sure 
-		// this loop is going to go through each individual text and add it to the queue
-		foreach (string s in d.sentences)
+		if (d.isChoice == true)
 		{
-			// loop and queue up the elements
-			textElements.Enqueue(s);
+			d.hasPlayed = true;
+		}
+		if (nextDialogue == true)
+		{
+			text.text = "";
+			//turn off the highlighting and set everything to default in case it wasn't reset
+			highlight1.SetActive(false);
+			highlight2.SetActive(false);
+			canEnter = false;
+			choiceNum = 0;
+			anim.SetBool("isOpen", true);
+			// save a local copy of the dialogue we pass in
+			dia = d;
+			// display the first name and portraits
+			charName.text = d.names[0];
+			portrait.sprite = d.portrait[0];
+			textElements.Clear(); // wipe the slate clean make sure 
+			// this loop is going to go through each individual text and add it to the queue
+			foreach (string s in d.sentences)
+			{
+				// loop and queue up the elements
+				textElements.Enqueue(s);
+			}
+
+			NextSentence(); // show the next sentence call the end script if no more text
+							// get the lenght of our povchange array
+			lenght = d.povChange.Length;
+			continueButton.SetActive(false);
+			//if we set the boolean to enable a choice tree we save a local copy of it
+			if (dia.isChoice == true)
+			{
+				choiceCount = dia.choiceLine;
+			}
+			if (choiceCount > dia.sentences.Length && dia.isChoice == true)
+			{
+				Debug.LogError("You set the choice to be on a line that doesn't exist, fix it");
+			}
+			// disable the choice markers
+			choice1.gameObject.SetActive(false);
+			choice2.gameObject.SetActive(false);
+			// check to see if the choice presented will be remembered and which choice set will we be remembering
+			if (d.willRemember == true)
+			{
+				choiceSet = d.choiceSet;
+			}
+			else
+			{
+				choiceSet = 0;
+			}
+			canWalk = false;
+			startUpdating = true;
+			isActive = true;
 		}
 		
-		NextSentence(); // show the next sentence call the end script if no more text
-		// get the lenght of our povchange array
-		lenght = d.povChange.Length;
-		continueButton.SetActive(false);
-		//if we set the boolean to enable a choice tree we save a local copy of it
-		if (dia.isChoice == true)
-		{
-			choiceCount = dia.choiceLine;
-		}
-		// disable the choice markers
-		choice1.gameObject.SetActive(false);
-		choice2.gameObject.SetActive(false);
-		// check to see if the choice presented will be remembered and which choice set will we be remembering
-		if (d.willRemember == true)
-		{
-			choiceSet = d.choiceSet;
-		}
-		else
-		{
-			choiceSet = 0;
-		}
 	}
 
 	public void NextSentence()
 	{
-		canEnter = false;
 		// wipe the previous text
 		text.text = "";
 		continueButton.SetActive(false);
@@ -159,10 +188,14 @@ public class DialogueManager : MonoBehaviour
 			charName.text = dia.names[currentChange];
 			portrait.sprite = dia.portrait[currentChange];
 		}
+		if (change > dia.sentences.Length && dia.isChoice == true)
+		{
+			change = -1;
+			Debug.LogError("The Line change float is more lines than the array contains, fix it!"); 
+		}
 		// this is just going to take the first sentence out of the queue.
 		string sentence = textElements.Dequeue();
 		StartCoroutine(TypeLetters(sentence));
-		
 		boxCount++;
 	}
 	// go home you done
@@ -180,6 +213,10 @@ public class DialogueManager : MonoBehaviour
 		choiceNum = 0;
 		highlight1.SetActive(false);
 		highlight2.SetActive(false);
+		canWalk = true;
+		startUpdating = false;
+		nextDialogue = false;
+		isActive = false;
 	}
 	// this is a coroutine that will take our chars from the string and print one at a time 
 	IEnumerator TypeLetters(string s)
@@ -213,7 +250,7 @@ public class DialogueManager : MonoBehaviour
 		}
 	}
 	// did you pick door 1 
-	public void selectFirstChoice()
+	public void SelectFirstChoice()
 	{
 		if (dia.willRemember == true)
 		{
@@ -235,12 +272,18 @@ public class DialogueManager : MonoBehaviour
 					Debug.LogError("You wanted a story choice but passed no choice set, fix it you idiot");
 					break;
 			}
+			End();
+			if (dia.choice1 != null && dia.choice1.dialogue != null)
+			{
+				nextDialogue = true;
+				StartConversation(dia.choice1.dialogue);
+
+			}
 		}
-		End();
-		StartConversation(dia.choice1.dialogue);
+		
 	}
 	// or door two
-	public void selectSecondChoice()
+	public void SelectSecondChoice()
 	{
 		if (dia.willRemember == true)
 		{
@@ -262,25 +305,49 @@ public class DialogueManager : MonoBehaviour
 					Debug.LogError("You wanted a story choice but passed no choice set, fix it you idiot");
 					break;
 			}
+			End();
+			if  (dia.choice2 != null && dia.choice2.dialogue != null)
+			{
+				nextDialogue = true;
+				StartConversation(dia.choice2.dialogue);
+			}
 		}
-		End();
-		StartConversation(dia.choice2.dialogue);
+		
 	}
 	// call this method when a conversation depends of choices made
-	public void choiceDependantConvo(float choice, Dialogue d)
+	public void ChoiceDependantConvo(float choice, Dialogue d)
 	{
 		dia = d;
-		if (choices[(int)choice] == true)
+		// if the choice is more than half of the array take away half the array to get it's counterpart
+		if (choice > choices.Length / 2 && (choices[(int)choice] == false && choices[(int)choice - choices.Length / 2] == false))
+		{
+			StartConversation(dia.normal.dialogue);
+			Debug.Log((int)choice - choices.Length / 2);
+		}
+		// if it's less than half add half
+		else if (choice <= choices.Length / 2 && (choices[(int)choice] == false && choices[(int)choice + choices.Length / 2] == false))
+		{
+			StartConversation(dia.normal.dialogue);
+			Debug.Log((int)choice + choices.Length / 2);
+		}
+		// init dialogue 1
+		else if (choices[(int)choice] == true)
 		{
 			StartConversation(dia.choiceCare1.dialogue);
 		}
+		// init dialogue 2
 		else if (choices[(int)choice] == false)
 		{
 			StartConversation(dia.choiceCare2.dialogue);
 		}
 	}
+
+	public void PlayNormalDialogue(Dialogue d)
+	{
+		StartConversation(d.normal.dialogue);
+	}
 	// check our keyboard pressed and do things accordingly
-	public void checkInput()
+	public void CheckInput()
 	{
 		if (Input.GetKeyDown(KeyCode.Return) && canEnter == true)
 		{
@@ -294,13 +361,13 @@ public class DialogueManager : MonoBehaviour
 		{
 			choiceNum = 1;
 		}
-		if (Input.GetKeyDown(KeyCode.Return) && choiceNum == 1 && boxCount == choiceCount)
+		if (Input.GetKeyDown(KeyCode.Return) && choiceNum == 1 && boxCount == choiceCount && dia.isChoice == true)
 		{
-			selectSecondChoice();
+			SelectSecondChoice();
 		}
-		else if (Input.GetKeyDown(KeyCode.Return) && choiceNum == 2 && boxCount == choiceCount)
+		else if (Input.GetKeyDown(KeyCode.Return) && choiceNum == 2 && boxCount == choiceCount && dia.isChoice == true)
 		{
-			selectFirstChoice();
+			SelectFirstChoice();
 		}
 		if (choiceNum == 1)
 		{
@@ -316,6 +383,18 @@ public class DialogueManager : MonoBehaviour
 	// Update..... I don't know what to put here
 	public void Update()
 	{
-		checkInput();
+		if (startUpdating == true)
+		{
+			CheckInput();
+		}
+		if (nextDialogue == false)
+		{
+			nextDialogueCount -= Time.deltaTime;
+		}
+		if (nextDialogueCount < 0)
+		{
+			nextDialogue = true;
+			nextDialogueCount = nextDialogueCountInitial;
+		}
 	}
 }

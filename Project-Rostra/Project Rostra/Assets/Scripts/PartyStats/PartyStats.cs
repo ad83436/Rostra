@@ -1,17 +1,67 @@
 ﻿
 public static class PartyStats {
-	public static CharacterStats[] chara = 
-		{ new CharacterStats(4), new CharacterStats(4), new CharacterStats(4), new CharacterStats(4) };
+    public static CharacterStats[] chara ={
+        new CharacterStats(
+            new int[]{ 
+                // Equipable Weapons for Fargas
+                (int)WEAPON_TYPE.AXE,
+                (int)WEAPON_TYPE.SWORD,
+                (int)WEAPON_TYPE.MACE,
+                // Equipable Armor for Fargas
+                (int)ARMOR_TYPE.LEATHER,
+                (int)ARMOR_TYPE.HIDE_CLOTHES,
+                (int)ARMOR_TYPE.CHAINMAIL,
+                (int)ARMOR_TYPE.COPPER
+            }),
+		new CharacterStats(
+            new int[]{ 
+                // Equipable Weapons for Oberon
+                (int)WEAPON_TYPE.SPEAR,
+                (int)WEAPON_TYPE.JAVELIN,
+                (int)WEAPON_TYPE.STAFF,
+                // Equipable Armor for Oberon
+                (int)ARMOR_TYPE.HIDE_CLOTHES,
+                (int)ARMOR_TYPE.LEATHER,
+                (int)ARMOR_TYPE.PLATED_STEEL,
+                (int)ARMOR_TYPE.CHAINMAIL,
+                (int)ARMOR_TYPE.COPPER,
+                (int)ARMOR_TYPE.IRON,
+                (int)ARMOR_TYPE.STEEL
+            }),
+		new CharacterStats(
+            new int[]{ 
+                // Equipable Weapons for Frea
+                (int)WEAPON_TYPE.DAGGER,
+                (int)WEAPON_TYPE.BOW,
+                // Equipable Weapons for Frea
+                (int)ARMOR_TYPE.HIDE_CLOTHES,
+                (int)ARMOR_TYPE.LEATHER,
+                (int)ARMOR_TYPE.IRON,
+                (int)ARMOR_TYPE.CHAINMAIL
+            }),
+        new CharacterStats(
+            new int[]{ 
+                // Equipable Weapons for Arcelus
+                (int)WEAPON_TYPE.STAFF,
+                (int)WEAPON_TYPE.SPEAR,
+                (int)WEAPON_TYPE.SWORD,
+                // Equipable Armor for Arcelus
+                (int)ARMOR_TYPE.HIDE_CLOTHES,
+                (int)ARMOR_TYPE.LEATHER,
+                (int)ARMOR_TYPE.ROBE,
+                (int)ARMOR_TYPE.CHAINMAIL
+            }),
+    };
 
 	//returns a reference to the corisponding character
-	public static ref CharacterStats CharaOne   => ref chara[0]; 
-	public static ref CharacterStats CharaTwo   => ref chara[1]; 
-	public static ref CharacterStats CharaThree => ref chara[2]; 
-	public static ref CharacterStats CharaFour  => ref chara[3]; 
+	public static ref CharacterStats CharaOne => ref chara[0];              // Fargas  == 0
+	public static ref CharacterStats CharaTwo => ref chara[1];              // Oberon  == 1
+	public static ref CharacterStats CharaThree => ref chara[2];            // Frea    == 2
+	public static ref CharacterStats CharaFour => ref chara[3];             // Arcelus == 3
 }
 
 public struct CharacterStats {
-	public CharacterStats(int i) {
+	public CharacterStats(int[] vEquipables) {
 		attack = 0.0f;
 		attackMod = 0.0f;
 
@@ -34,13 +84,17 @@ public struct CharacterStats {
 
 		agility = 0.0f;
 		agilityMod = 0.0f;
-		
+
+		rage = 0.0f;
+
 		level = 1;
-		currentExperience = 0;				       
+		currentExperience = 0;
 		neededExperience = 500;
 		statPoints = 0;
+
+        validEquipables = vEquipables;
 	}
-	
+
 	// stats								       
 	public float attack, attackMod;
 	public float defence, defenceMod;
@@ -49,16 +103,20 @@ public struct CharacterStats {
 	public float strength, strengthMod;
 	public float critical, criticalMod;
 	public float agility, agilityMod;
+	public float rage;
+
+    // The weapon and armor types each player can equip
+	readonly public int[] validEquipables;
 
 	///returns the total of each
-	public float TotalAttack    => attack    + attackMod;
-	public float TotalDefence   => defence   + defenceMod;
+	public float TotalAttack => attack + attackMod;
+	public float TotalDefence => defence + defenceMod;
 	public float TotalMaxHealth => maxHealth + maxHealthMod;
-	public float TotalMaxMana   => maxMana   + maxManaMod;
-	public float TotalStrength  => strength  + strengthMod;
-	public float TotalCritical  => critical  + criticalMod;
-	public float TotalAgility   => agility   + agilityMod;
-	
+	public float TotalMaxMana => maxMana + maxManaMod;
+	public float TotalStrength => strength + strengthMod;
+	public float TotalCritical => critical + criticalMod;
+	public float TotalAgility => agility + agilityMod;
+
 	//experience, level, and skill points
 	public int level;
 	public int currentExperience;

@@ -28,6 +28,7 @@ public class MainInventory : MonoBehaviour {
     // Variables for selecting the player to use a consumable item
     private bool playerChooseWindow = false;    // If true, the inventory needs a player to be chosen (For using consumable items)
     private int curPlayerOption = 0;            // Which player is being chosen to use the given item
+    private bool[] canPlayerEquip = { true, true, true, true };
 
     // Variables for drawing the inventory to the screen
     private int firstToDraw = 0;                // The first item from the inventory array to draw out of the full inventory
@@ -170,15 +171,20 @@ public class MainInventory : MonoBehaviour {
 
                 // Using an item on the player that is currently highlighted
                 if (keySelect) {
-                    ItemUseFunction(invItem[curOption, 0], curPlayerOption);
-                    playerChooseWindow = false;
-                    subCurOption = 0;
-                    selectedOption = -1;
+                    // Equip the item only if it can be equipped
+                    if (canPlayerEquip[curPlayerOption]) {
+                        ItemUseFunction(invItem[curOption, 0], curPlayerOption);
+                        playerChooseWindow = false;
+                        curPlayerOption = 0;
+                        subCurOption = 0;
+                        selectedOption = -1;
+                    }
                 }
 
                 // Returning to the item's sub-menu, exiting out of the player selection menu
                 if (keyReturn) {
                     playerChooseWindow = false;
+                    curPlayerOption = 0;
                 }
             }
         }
@@ -232,10 +238,12 @@ public class MainInventory : MonoBehaviour {
         if (playerChooseWindow) {
             for (int i = 0; i < 4; i++) {
                 GUI.Label(new Rect(770.0f, 15.0f + (fontHeight * i), 150.0f, 50.0f), "Player" + (i + 1), style);
+                if (curPlayerOption == i) { GUI.Label(new Rect(750.0f, 15.0f + (fontHeight * i), 50.0f, 50.0f), ">", style); }
             }
-            GUI.Label(new Rect(750.0f, 15.0f + (20.0f * curPlayerOption), 50.0f, 50.0f), ">", style);
         }
     }
+
+    #region Item/Inventory Manipulation Scripts
 
     // Swaps two items within the inventory
     public void SwapItems(int slot1, int slot2) {
@@ -309,7 +317,9 @@ public class MainInventory : MonoBehaviour {
         }
     }
 
-    // All Methods Below Hold Important Information About Every Item (Name, Description, Function, etc.) //////////////////////////////////
+    #endregion
+
+    #region Item Names
 
     // Returns the name of the specified item based on its ID
     public string ItemName(int itemID) {
@@ -336,6 +346,10 @@ public class MainInventory : MonoBehaviour {
         return name;
     }
 
+    #endregion
+
+    #region Item Descriptions
+
     // Returns the item's description based of the itemID specified
     public string ItemDescription(int itemID) {
         string description = "";
@@ -361,6 +375,10 @@ public class MainInventory : MonoBehaviour {
 
         return description;
     }
+
+    #endregion
+
+    #region Item Options and Their Functionality
 
     // Returns a full list of options that an item can have based on its type
     public List<string> ItemOptions(int itemID) {
@@ -421,7 +439,29 @@ public class MainInventory : MonoBehaviour {
 
         // Using a consumable item or equipping a piece of armor or weapon
         if (option.Equals("Use") || option.Equals("Equip")) {
-            playerChooseWindow = true;
+            if (ItemType(invItem[curOption, 0]) != (int)ITEM_TYPE.KEY_ITEM) {
+                // Determine which players can equip the current item
+                if (ItemType(invItem[curOption, 0]) == (int)ITEM_TYPE.EQUIPABLE) {
+                    float[] itemStats = ItemStats(invItem[curOption, 0]);
+                    // Loop through the items that the selected player can equip
+                    for (int i = 0; i < 4; i++) {
+                        CharacterStats player = PartyStats.chara[i];
+                        var length = player.validEquipables.Length;
+                        for (int ii = 0; ii < length; ii++) {
+                            if (player.validEquipables[ii] == itemStats[7]) { // Item is valid, selected player can equip it
+                                canPlayerEquip[i] = true;
+                                ii = length; // Exit the loop
+                            } else { // Item is not valid, selected player cannot equip it
+                                canPlayerEquip[i] = false;
+                            }
+                        }
+                    }
+                }
+                // Open up the player choose window
+                playerChooseWindow = true;
+            } else {
+                // TODO -- Add code for turning in quest items
+            }
             return;
         }
 
@@ -465,6 +505,10 @@ public class MainInventory : MonoBehaviour {
         }
     }
 
+    #endregion
+
+    #region An item's "Type", which determines funcaitonality
+
     // Returns the "Type" of the item based on the itemID. This is used to determined what options the player can use in tandem with the item
     public int ItemType(int itemID) {
         int itemType = (int)ITEM_TYPE.CONSUMABLE;
@@ -487,6 +531,10 @@ public class MainInventory : MonoBehaviour {
         return itemType;
     }
 
+    #endregion
+
+    #region Stack Limit of Items in a Single Inventory Space
+
     // Returns the maximum stack limit for an item given the itemID
     public int ItemStackLimit(int itemID) {
         int stackSize = 1; // Default stack limit is 1
@@ -504,10 +552,14 @@ public class MainInventory : MonoBehaviour {
         return stackSize;
     }
 
+    #endregion
+
+    #region Weapon, Armor, and Accessory Statistics 
+
     // Holds stats for every single weapon and piece of armor in the game
     // If no values have been set, the item's stats will be defaulted to 0
     public float[] ItemStats(int itemID) {
-        float[] stat = { 0, 0, 0, 0, 0, 0, 0 };
+        float[] stat = { 0, 0, 0, 0, 0, 0, 0, 0 };
         // NOTE -- Element 0 is the item's attack-buff property
         //         Element 1 is the item's defense-buff property
         //         Element 2 is the item's strength-buff property
@@ -515,6 +567,7 @@ public class MainInventory : MonoBehaviour {
         //         Element 4 is the item's critical-buff property
         //         Element 5 is the item's hitpoint-buff property
         //         Element 6 is the item's magicpoint-buff property
+		//		   Element 7 is the item's class property
 
         // Find out an item's stats based on its ID
         switch (itemID) {
@@ -522,15 +575,21 @@ public class MainInventory : MonoBehaviour {
                 stat[1] = 5;
                 stat[5] = 10;
                 stat[6] = 2;
+				stat[7] = (float)ARMOR_TYPE.LEATHER;
                 break;
             case (int)ITEM_ID.TEST_WEAPON1:
                 stat[0] = 8;
                 stat[4] = 2;
+				stat[7] = (float)WEAPON_TYPE.SWORD;
                 break;
         }
 
         return stat;
     }
+
+    #endregion
+
+    #region Methods for Updating Player Statistics
 
     // Updates the player's HP when a health potion or similar is used in the inventory
     private void UpdatePlayerHitpoints(int amount, int playerID) {
@@ -560,6 +619,7 @@ public class MainInventory : MonoBehaviour {
     private void UpdatePlayerStats(int playerID, int itemID, bool isEquipped) {
         CharacterStats player = PartyStats.chara[playerID];
         float[] itemStats = ItemStats(itemID);
+		// This array will ignore the final element in the array (The weapon's class)
 
         if (!isEquipped) { // Equipping the item onto the specified player
             // Add the item to the current player
@@ -595,4 +655,6 @@ public class MainInventory : MonoBehaviour {
             invItem[curOption, 2] = -1;
         }
     }
+
+    #endregion
 }

@@ -38,5 +38,9 @@ public class Dialogue
 	public string choiceText1;
 	[TextArea(3, 15)]
 	public string choiceText2;
+	// dialogue triggered if both choices are false
+	public ConversationTrigger normal;
+	// don't change this
+	public bool hasPlayed;
 
 }

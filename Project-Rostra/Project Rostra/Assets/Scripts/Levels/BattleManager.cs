@@ -26,13 +26,11 @@ public class BattleManager : MonoBehaviour
         public Enemy enemyReference;
     }
 
-    //At the beginning of each battle, each player and enemy will use the singleton to update their stats
-    #region singleton
-
     public static BattleManager instance;
 
     private UIBTL uiBtl;
     private EnemySpawner enemySpawner;
+    private ExpManager expManager;
 
     public PlayerInformtion[] players;
     public PlayerInformtion[] enemies;
@@ -52,10 +50,16 @@ public class BattleManager : MonoBehaviour
     private bool allPlayersAdded = false;
     public int numberOfPlayers = 4; //Should be private. Public for testing purposes as its updated from the player's side
 
-    public GameObject[] enemyPos = new GameObject[5];
+    public GameObject[] enemyPos = new GameObject[5]; //Used to inform the spawner where to place the enemies
 
-    public bool addEnemies;
+    public bool addEnemies; //Turned true after all the players have been added
+    //Temp
+    private int totalLevels;//The sum of the enemies level
+    public int expGain; //Determined by the enemy levels
+    public bool battleHasEnded;
 
+    //At the beginning of each battle, each player and enemy will use the singleton to update their stats
+    #region singleton
 
     private void Awake()
     {
@@ -95,30 +99,54 @@ public class BattleManager : MonoBehaviour
             removedEnemyIndexes[i] = -1;
         }
         addEnemies = false;
+
+        expGain = 0;
+        totalLevels = 0;
     }
 
     #endregion
 
     private void Start()
     {
+        Debug.Log("BTL Start");
         uiBtl = UIBTL.instance;
         enemySpawner = EnemySpawner.instance;
+        expManager = ExpManager.instance;
         uiBtl.numberOfEnemies = numberOfEnemies = enemySpawner.numberOfEnemies;
+        Debug.Log("____ " + numberOfEnemies);
         for(int i =0;i<5;i++)
         {
             enemySpawner.AddPos(enemyPos[i], i);
         }
         //Each player and enemy would have an index that stores their information
+
+        //Get player stats from partystats file
+        for(int i=0;i<players.Length;i++)
+        {
+            players[i].currentHP = PartyStats.chara[i].hitpoints;
+            players[i].maxHP = PartyStats.chara[i].TotalMaxHealth;
+            players[i].currentMP = PartyStats.chara[i].magicpoints;
+            players[i].maxMP = PartyStats.chara[i].TotalMaxMana;
+            players[i].atk = PartyStats.chara[i].TotalAttack;
+            players[i].def = PartyStats.chara[i].TotalDefence;
+            players[i].agi = PartyStats.chara[i].TotalAgility;
+            players[i].crit = PartyStats.chara[i].TotalCritical;
+            players[i].str = PartyStats.chara[i].TotalStrength;
+            players[i].exp = PartyStats.chara[i].currentExperience;
+            players[i].expNeededForNextLevel = PartyStats.chara[i].neededExperience;
+        }
     }
 
 
     private void Update()
     {
-
+       // Debug.Log(numberOfPlayers);
+        //Number of players is decreased by the player scripts
         if(numberOfPlayers<=0 && allPlayersAdded == false)
         {
             allPlayersAdded = true;
             addEnemies = true;
+            battleHasEnded = false;
             for (int i = 0; i < 5; i++)
             {
                 enemySpawner.AddPos(enemyPos[i],i);
@@ -150,12 +178,18 @@ public class BattleManager : MonoBehaviour
             enemies[enemyIndex].enemyReference = enemyRef;
             enemies[enemyIndex].name = name;
 
+        //Temp code
+        totalLevels += enemyRef.eCurrentLevel;
+
 
         numberOfEnemies--; //Update the number of enemies after adding an enemy. This number is obtained from the WM
 
         if (numberOfEnemies<=0)
         {
             allEnemiesAdded = true;
+            //Temp code
+            expGain = 3 * totalLevels;
+            Debug.Log("EXP GAINNN " + expGain);
         }
 
         //This will probably need to change to avoid race conditions between startbattle and build Q
@@ -170,6 +204,7 @@ public class BattleManager : MonoBehaviour
         {
             if (p.playerReference != null)//Make sure all the entries have players (i.e. what if we have less than 4 players)
             {
+                Debug.Log(p.playerReference.name + " Has been added to sort");
                 pAgilities.Add(p.agi);
             }
         }
@@ -190,14 +225,15 @@ public class BattleManager : MonoBehaviour
 
 
         BuildQueue();
-       // Debug.Log(battleQueue.Count);
-       // Debug.Log("At the end of the Q is " + battleQueue[battleQueue.Count - 1].name + " And " + battleQueue[battleQueue.Count - 2].name);
-        NextOnQueue();
+
+        if (!battleHasEnded)
+        {
+            NextOnQueue();
+        }
     }
 
     public void NextOnQueue()
     {
-        //Debug.Log("Next on Q is " + battleQueue[0].name);
         //Check if the next on Q is a player or an enemy and call the correct function
         if (battleQueue[0].playerReference != null && battleQueue[0].enemyReference == null)
         {
@@ -233,6 +269,7 @@ public class BattleManager : MonoBehaviour
                     {
                         //If it is a player we've already added to the queue, move on...
                         continue;
+                        
                         
                     }
                     else
@@ -343,15 +380,17 @@ public class BattleManager : MonoBehaviour
 
 
     //Called by each player at the end of each battle
-    public void EndOfBattle(int playerIndex, float remainingHP, float remainingMP )
+    public void EndOfBattle()
     {
-        players[playerIndex].currentHP = remainingHP;
-        players[playerIndex].currentMP = remainingMP;
-        players[playerIndex].exp += 5; //Arbitrary number. How will we decide how much exp we'll get from each battle?
-        
-        if(players[playerIndex].exp>= players[playerIndex].expNeededForNextLevel)
+        battleHasEnded = true;
+        for (int i =0; i<4;i++)
         {
-            LevelUp(playerIndex);
+            //Update the remaining HP of players in the btl manager and the partystats
+            players[i].currentHP = PartyStats.chara[i].hitpoints = players[i].playerReference.currentHP;
+            players[i].currentMP = PartyStats.chara[i].magicpoints = players[i].playerReference.currentMP;
+            players[i].exp += expGain;
+            PartyStats.chara[i].currentExperience = players[i].exp;
+            enemySpawner.numberOfEnemies = 0; //Reset the enemy spawner to get ready for the next battle
         }
 
         //Clear out the enemies array
@@ -359,6 +398,7 @@ public class BattleManager : MonoBehaviour
         {
             enemies[i] = null;
         }
+
     }
 
     //Called by the inventory manager to update the player's stats when the player changes gear and on awake
@@ -383,18 +423,24 @@ public class BattleManager : MonoBehaviour
     }
     
 
-    private void LevelUp(int playerIndex)
+    public void LevelUp(int playerIndex)
     {
+       // Debug.Log(players[playerIndex].playerReference.name + " has leveled up!");
         //The new EXP is what remains after reaching the new level
         players[playerIndex].exp = players[playerIndex].exp - players[playerIndex].expNeededForNextLevel;
+        //Update the party stats
+        PartyStats.chara[playerIndex].currentExperience = players[playerIndex].exp;
         //Update UI and do level up audio
 
         //Call the EXP manager to level up --> This should update the expNeededForNextLevel
-
+        expManager.LevelUp(playerIndex);
+        //Update the needed exp for next levelup
+        players[playerIndex].expNeededForNextLevel = PartyStats.chara[playerIndex].neededExperience;
+        Debug.Log("You need this much to level up again! " + players[playerIndex].expNeededForNextLevel);
         //If the player gains enough EXP to level up more than once
-        if (players[playerIndex].exp >= players[playerIndex].expNeededForNextLevel)
-        {
-            LevelUp(playerIndex);
-        }
+       // if (players[playerIndex].exp >= players[playerIndex].expNeededForNextLevel)
+       // {
+       //     LevelUp(playerIndex);
+       // }
     }
 }

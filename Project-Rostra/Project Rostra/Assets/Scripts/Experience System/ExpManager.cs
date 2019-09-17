@@ -23,11 +23,69 @@ public class ExpManager : MonoBehaviour {
 		if (instance == this) instance = null;
 	}
 
-	#endregion
+    private void Start()
+    {
+        //Give initial values for stats
+        //Will be changed to use a load file instead
 
-	#region exp & leveling
+        //Fargas
+        PartyStats.chara[0].hitpoints = 200.0f;
+        PartyStats.chara[0].maxHealth = 200.0f;
+        PartyStats.chara[0].magicpoints = 200.0f;
+        PartyStats.chara[0].maxMana = 200.0f;
+        PartyStats.chara[0].attack = 100.0f;
+        PartyStats.chara[0].defence = 15.0f;
+        PartyStats.chara[0].agility = 18.0f;
+        PartyStats.chara[0].strength = 16.0f;
+        PartyStats.chara[0].critical = 5.0f;
+        PartyStats.chara[0].currentExperience = 0;
+        PartyStats.chara[0].neededExperience = 150;
 
-	public void LevelUp(int playerIndex) {
+        //Oberon
+        PartyStats.chara[1].hitpoints = 250.0f;
+        PartyStats.chara[1].maxHealth = 250.0f;
+        PartyStats.chara[1].magicpoints = 150.0f;
+        PartyStats.chara[1].maxMana = 150.0f;
+        PartyStats.chara[1].attack = 100.0f;
+        PartyStats.chara[1].defence = 20.0f;
+        PartyStats.chara[1].agility = 13.0f;
+        PartyStats.chara[1].strength = 14.0f;
+        PartyStats.chara[1].critical = 3.0f;
+        PartyStats.chara[1].currentExperience = 0;
+        PartyStats.chara[1].neededExperience = 150;
+
+        //Frea
+        PartyStats.chara[2].hitpoints = 180.0f;
+        PartyStats.chara[2].maxHealth = 180.0f;
+        PartyStats.chara[2].magicpoints = 200.0f;
+        PartyStats.chara[2].maxMana = 200.0f;
+        PartyStats.chara[2].attack = 100.0f;
+        PartyStats.chara[2].defence = 14.0f;
+        PartyStats.chara[2].agility = 17.0f;
+        PartyStats.chara[2].strength = 15.0f;
+        PartyStats.chara[2].critical = 5.0f;
+        PartyStats.chara[2].currentExperience = 0;
+        PartyStats.chara[2].neededExperience = 150;
+
+        //Arcelus
+        PartyStats.chara[3].hitpoints = 160.0f;
+        PartyStats.chara[3].maxHealth = 160.0f;
+        PartyStats.chara[3].magicpoints = 250.0f;
+        PartyStats.chara[3].maxMana = 250.0f;
+        PartyStats.chara[3].attack = 100.0f;
+        PartyStats.chara[3].defence = 15.0f;
+        PartyStats.chara[3].agility = 19.0f;
+        PartyStats.chara[3].strength = 13.0f;
+        PartyStats.chara[3].critical = 3.0f;
+        PartyStats.chara[3].currentExperience = 0;
+        PartyStats.chara[3].neededExperience = 150;
+    }
+
+    #endregion
+
+    #region exp & leveling
+
+    public void LevelUp(int playerIndex) {
 		//checks if the playerIndex is valid
 		if (playerIndex < 0 || playerIndex > 3) {
 			Debug.LogError("Player number " + playerIndex + " does not exist!");
@@ -68,7 +126,7 @@ public class ExpManager : MonoBehaviour {
 		///500 is the base exp needed
 		///250 * (level - 1) adds 250 for each level gained
 		///eg: level 30, exp needed is 7,750
-	}
+	}	
 
 	/* TODO: Add functionality */
 	#region functions that give each player their skills
