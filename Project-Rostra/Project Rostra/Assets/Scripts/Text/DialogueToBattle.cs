@@ -28,6 +28,7 @@ public class DialogueToBattle : MonoBehaviour
 	{
 		if (dm.GetChoice(ce) == true)
 		{
+			dm.SetChoice(ce, false);
 			dm.StartConversation(ct.dialogue);
 		}
 	}

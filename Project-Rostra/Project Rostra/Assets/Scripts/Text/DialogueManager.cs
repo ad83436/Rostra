@@ -96,6 +96,10 @@ public class DialogueManager : MonoBehaviour
 	{
 		return choices[(int)choice];
 	}
+	public void SetChoice(ChoiceEnum choice, bool b)
+	{
+		choices[(int)choice] = b;
+	}
 
 	void Awake()
     {
