@@ -31,4 +31,9 @@ public class ConversationTrigger : MonoBehaviour
 	{
 		FindObjectOfType<DialogueManager>().PlayNormalDialogue(dialogue);
 	}
+
+	public void TriggerBoolConvo()
+	{
+		FindObjectOfType<DialogueManager>().StartConversation(dialogue);
+	}
 }
