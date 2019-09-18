@@ -127,7 +127,10 @@ public class UIBTL : MonoBehaviour
     private int oberonExpGain;
     private bool oberonAddinExp;
 
+    //Dialogue after battle
     public static bool conversationAfterBattle = false; //If true, a conversation will start right after the battle ends
+    private DialogueManager dialogueManager;
+    private DialogueContainer dialogueContainer;
 
     #region singleton
     public static UIBTL instance;
@@ -198,6 +201,10 @@ public class UIBTL : MonoBehaviour
         //Skills and Items
 
         skillsItemsPanel.gameObject.SetActive(false);
+
+        //Dialogue after battle
+        dialogueManager = DialogueManager.instance;
+        dialogueContainer = DialogueContainer.instance;
     }
 
 
@@ -919,7 +926,7 @@ public class UIBTL : MonoBehaviour
             //If there's a conversation right after the battle, invoke the function in the dialogue manager
             if(conversationAfterBattle)
             {
-
+                dialogueManager.StartConversation(dialogueContainer.doneFight);
             }
         }
         
