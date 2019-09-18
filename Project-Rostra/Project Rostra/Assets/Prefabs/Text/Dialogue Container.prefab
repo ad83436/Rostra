@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6270804076228166892
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6270804076228166895}
+  - component: {fileID: 6270804076228166894}
+  m_Layer: 0
+  m_Name: Dialogue Container
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6270804076228166895
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6270804076228166892}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.6943347, y: -1.4437969, z: -948.4938}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6270804076228166894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6270804076228166892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4078b65beb8a7714f8dbe4cd9dde4e9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doneTalkingToNPCS:
+    names:
+    - Dingus Dongus
+    sentences:
+    - Floooooooorboooooooo
+    portrait:
+    - {fileID: 21300000, guid: 06a4de0e889d6584eacade4a523fe7bf, type: 3}
+    povChange: []
+    typingSpeed: 0.001
+    isChoice: 0
+    choiceLine: 0
+    choice1: {fileID: 0}
+    choice2: {fileID: 0}
+    willRemember: 0
+    choiceSet: 0
+    choiceCare1: {fileID: 0}
+    choiceCare2: {fileID: 0}
+    choiceText1: 
+    choiceText2: 
+    normal: {fileID: 0}
+    hasPlayed: 0
+    willCount: 0
+    maxWillCount: 0
