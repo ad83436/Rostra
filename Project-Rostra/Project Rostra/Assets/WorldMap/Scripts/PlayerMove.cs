@@ -86,6 +86,11 @@ public class PlayerMove : MonoBehaviour
 			ct.TriggerChoiceDependantConvo();
 		}
 	}
+
+    public static void Test()
+    {
+        Debug.Log("event invoked");
+    }
 }
     
 

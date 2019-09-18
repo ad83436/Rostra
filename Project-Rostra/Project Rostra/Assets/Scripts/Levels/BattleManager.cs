@@ -57,8 +57,11 @@ public class BattleManager : MonoBehaviour
     //Temp
     private int totalLevels;//The sum of the enemies level
     public int expGain; //Determined by the enemy levels
+
+    //Battle progress
     public bool battleHasEnded;
     public static bool battleInProgress = false;
+
 
     //At the beginning of each battle, each player and enemy will use the singleton to update their stats
     #region singleton
@@ -104,6 +107,7 @@ public class BattleManager : MonoBehaviour
 
         expGain = 0;
         totalLevels = 0;
+        
     }
 
     #endregion
@@ -395,7 +399,6 @@ public class BattleManager : MonoBehaviour
         {
             enemies[i] = null;
         }
-
     }
 
     //Called by the inventory manager to update the player's stats when the player changes gear and on awake
