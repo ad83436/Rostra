@@ -195,8 +195,11 @@ MonoBehaviour:
     choiceText2: 
     normal: {fileID: 0}
     hasPlayed: 0
+    willCount: 0
+    maxWillCount: 0
   choiceCare: 0
   isChoiceDepend: 0
+  isOneShot: 0
 --- !u!114 &216655360
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,8 +238,11 @@ MonoBehaviour:
     choiceText2: 
     normal: {fileID: 0}
     hasPlayed: 0
+    willCount: 0
+    maxWillCount: 0
   choiceCare: 0
   isChoiceDepend: 0
+  isOneShot: 0
 --- !u!114 &216655361
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -340,8 +346,11 @@ MonoBehaviour:
     choiceText2: Nah he looks cool
     normal: {fileID: 0}
     hasPlayed: 0
+    willCount: 0
+    maxWillCount: 0
   choiceCare: 0
   isChoiceDepend: 0
+  isOneShot: 0
 --- !u!114 &216655363
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1090,8 +1099,11 @@ MonoBehaviour:
     choiceText2: 
     normal: {fileID: 0}
     hasPlayed: 0
+    willCount: 0
+    maxWillCount: 0
   choiceCare: 0
   isChoiceDepend: 0
+  isOneShot: 0
 --- !u!61 &509744099
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1813,7 +1825,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1036406562
 Transform:
   m_ObjectHideFlags: 0
@@ -1934,8 +1946,11 @@ MonoBehaviour:
     choiceText2: 
     normal: {fileID: 0}
     hasPlayed: 0
+    willCount: 0
+    maxWillCount: 0
   choiceCare: 1
   isChoiceDepend: 1
+  isOneShot: 0
 --- !u!61 &1199132784
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2233,8 +2248,11 @@ MonoBehaviour:
     choiceText2: Cherry
     normal: {fileID: 0}
     hasPlayed: 0
+    willCount: 0
+    maxWillCount: 0
   choiceCare: 0
   isChoiceDepend: 0
+  isOneShot: 0
 --- !u!114 &1373896237 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5887905130029879196, guid: 245f068009b070f40a585947167a718b,
@@ -56475,8 +56493,11 @@ MonoBehaviour:
     choiceText2: 
     normal: {fileID: 0}
     hasPlayed: 0
+    willCount: 0
+    maxWillCount: 0
   choiceCare: 0
   isChoiceDepend: 0
+  isOneShot: 0
 --- !u!61 &1514396275
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -59537,8 +59558,11 @@ MonoBehaviour:
     choiceText2: Spare
     normal: {fileID: 0}
     hasPlayed: 0
+    willCount: 0
+    maxWillCount: 0
   choiceCare: 0
   isChoiceDepend: 0
+  isOneShot: 0
 --- !u!61 &2001573740
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -59754,8 +59778,11 @@ MonoBehaviour:
     choiceText2: 
     normal: {fileID: 0}
     hasPlayed: 0
+    willCount: 0
+    maxWillCount: 0
   choiceCare: 0
   isChoiceDepend: 0
+  isOneShot: 0
 --- !u!114 &2143556915
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59789,8 +59816,11 @@ MonoBehaviour:
     choiceText2: 
     normal: {fileID: 0}
     hasPlayed: 0
+    willCount: 0
+    maxWillCount: 0
   choiceCare: 0
   isChoiceDepend: 0
+  isOneShot: 0
 --- !u!114 &2143556916
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59821,8 +59851,11 @@ MonoBehaviour:
     choiceText2: 
     normal: {fileID: 0}
     hasPlayed: 0
+    willCount: 0
+    maxWillCount: 0
   choiceCare: 1
   isChoiceDepend: 0
+  isOneShot: 0
 --- !u!114 &2143556917
 MonoBehaviour:
   m_ObjectHideFlags: 0
