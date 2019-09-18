@@ -35,9 +35,10 @@ public class ExpManager : MonoBehaviour {
         PartyStats.chara[0].maxMana = 200.0f;
         PartyStats.chara[0].attack = 22.0f;
         PartyStats.chara[0].defence = 15.0f;
-        PartyStats.chara[0].agility = 18.0f;
+        PartyStats.chara[0].agility = 14.0f;
         PartyStats.chara[0].strength = 16.0f;
         PartyStats.chara[0].critical = 5.0f;
+        PartyStats.chara[0].speed = 16.0f;
         PartyStats.chara[0].currentExperience = 0;
         PartyStats.chara[0].neededExperience = 150;
 
@@ -48,9 +49,10 @@ public class ExpManager : MonoBehaviour {
         PartyStats.chara[1].maxMana = 150.0f;
         PartyStats.chara[1].attack = 17.0f;
         PartyStats.chara[1].defence = 20.0f;
-        PartyStats.chara[1].agility = 13.0f;
+        PartyStats.chara[1].agility = 10.0f;
         PartyStats.chara[1].strength = 14.0f;
         PartyStats.chara[1].critical = 3.0f;
+        PartyStats.chara[1].speed = 9.0f;
         PartyStats.chara[1].currentExperience = 0;
         PartyStats.chara[1].neededExperience = 150;
 
@@ -61,9 +63,10 @@ public class ExpManager : MonoBehaviour {
         PartyStats.chara[2].maxMana = 200.0f;
         PartyStats.chara[2].attack = 23.0f;
         PartyStats.chara[2].defence = 14.0f;
-        PartyStats.chara[2].agility = 17.0f;
+        PartyStats.chara[2].agility = 13.0f;
         PartyStats.chara[2].strength = 15.0f;
         PartyStats.chara[2].critical = 5.0f;
+        PartyStats.chara[2].speed = 14.0f;
         PartyStats.chara[2].currentExperience = 0;
         PartyStats.chara[2].neededExperience = 150;
 
@@ -74,9 +77,10 @@ public class ExpManager : MonoBehaviour {
         PartyStats.chara[3].maxMana = 250.0f;
         PartyStats.chara[3].attack = 14.0f;
         PartyStats.chara[3].defence = 15.0f;
-        PartyStats.chara[3].agility = 19.0f;
+        PartyStats.chara[3].agility = 17.0f;
         PartyStats.chara[3].strength = 13.0f;
         PartyStats.chara[3].critical = 3.0f;
+        PartyStats.chara[3].speed = 12.0f;
         PartyStats.chara[3].currentExperience = 0;
         PartyStats.chara[3].neededExperience = 150;
     }
@@ -194,8 +198,8 @@ public class ExpManager : MonoBehaviour {
 		if (PartyStats.chara[playerIndex].statPoints == 0) return;
 
 		PartyStats.chara[playerIndex].statPoints--;
-		PartyStats.chara[playerIndex].maxHealth += 1f;
-		PartyStats.chara[playerIndex].hitpoints += 1f;
+		PartyStats.chara[playerIndex].maxHealth += 75f;
+		PartyStats.chara[playerIndex].hitpoints += 75f;
 	}
 
 	public void UsePointOnMana(int playerIndex) {
@@ -207,8 +211,8 @@ public class ExpManager : MonoBehaviour {
 		if (PartyStats.chara[playerIndex].statPoints == 0) return;
 
 		PartyStats.chara[playerIndex].statPoints--;
-		PartyStats.chara[playerIndex].maxMana += 1f;
-		PartyStats.chara[playerIndex].magicpoints += 1f;
+		PartyStats.chara[playerIndex].maxMana += 75f;
+		PartyStats.chara[playerIndex].magicpoints += 75f;
 	}
 
 	public void UsePointOnStrength(int playerIndex) {
@@ -247,6 +251,18 @@ public class ExpManager : MonoBehaviour {
 		PartyStats.chara[playerIndex].agility += 1f;
 	}
 
+	public void UsePointOnSpeed(int playerIndex) {
+		//checks if the playerIndex is valid
+		if (playerIndex < 0 || playerIndex > 3) {
+			Debug.LogError("Player number " + playerIndex + " does not exist!");
+			return;
+		}
+		if (PartyStats.chara[playerIndex].statPoints == 0) return;
+
+		PartyStats.chara[playerIndex].statPoints--;
+		PartyStats.chara[playerIndex].speed += 1f;
+	}
+
 	#endregion
 
 	#region GUI
@@ -266,8 +282,8 @@ public class ExpManager : MonoBehaviour {
 
 		if (up) currentItem--;
 		else if (down) currentItem++;
-		if (currentItem == -1) currentItem = 9;
-		if (currentItem == 10) currentItem = 0;
+		if (currentItem == -1) currentItem = 10;
+		if (currentItem == 11) currentItem = 0;
 		up = false;
 		down = false;
 
@@ -294,12 +310,12 @@ public class ExpManager : MonoBehaviour {
 		else GUI.Label(rect, "   Defence " + PartyStats.chara[currentPlayer].defence);
 
 		rect.y += 80;
-		if (currentItem == 4) GUI.Label(rect, "> Health " + PartyStats.chara[currentPlayer].hitpoints);
-		else GUI.Label(rect, "   Health " + PartyStats.chara[currentPlayer].hitpoints);
+		if (currentItem == 4) GUI.Label(rect, "> Health " + PartyStats.chara[currentPlayer].maxHealth);
+		else GUI.Label(rect, "   Health " + PartyStats.chara[currentPlayer].maxHealth);
 
 		rect.y += 80;
-		if (currentItem == 5) GUI.Label(rect, "> Mana " + PartyStats.chara[currentPlayer].magicpoints);
-		else GUI.Label(rect, "   Mana " + PartyStats.chara[currentPlayer].magicpoints);
+		if (currentItem == 5) GUI.Label(rect, "> Mana " + PartyStats.chara[currentPlayer].maxMana);
+		else GUI.Label(rect, "   Mana " + PartyStats.chara[currentPlayer].maxMana);
 
 		rect.y += 80;
 		if (currentItem == 6) GUI.Label(rect, "> Strength " + PartyStats.chara[currentPlayer].strength);
@@ -312,6 +328,10 @@ public class ExpManager : MonoBehaviour {
 		rect.y += 80;
 		if (currentItem == 8) GUI.Label(rect, "> Agility " + PartyStats.chara[currentPlayer].agility);
 		else GUI.Label(rect, "   Agility " + PartyStats.chara[currentPlayer].agility);
+
+		rect.y += 80;
+		if (currentItem == 9) GUI.Label(rect, "> Speed " + PartyStats.chara[currentPlayer].speed);
+		else GUI.Label(rect, "   Speed " + PartyStats.chara[currentPlayer].speed);
 
 		if (use) {
 			switch (currentItem) {
@@ -327,6 +347,7 @@ public class ExpManager : MonoBehaviour {
 				case 6: UsePointOnStrength(currentPlayer);	break;
 				case 7: UsePointOnCritical(currentPlayer);	break;
 				case 8: UsePointOnAgility(currentPlayer);	break;
+				case 9: UsePointOnSpeed(currentPlayer);		break;
 				default: break;
 			}
 		}

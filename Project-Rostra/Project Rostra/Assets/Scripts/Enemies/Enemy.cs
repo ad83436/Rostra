@@ -15,6 +15,7 @@ public class Enemy : MonoBehaviour
     public float eAgility;
     public float eDefence;
     public float eStrength;
+    public float eSpeed;
     public float eBaseLevel;
     public int eCurrentLevel;
     public string eName;
@@ -32,8 +33,8 @@ public class Enemy : MonoBehaviour
     private Animator animator;
 
     public Image HP;
-    private float maxHP;
-    private float currentHP;
+    public float maxHP;
+    public float currentHP;
     public GameObject enemyCanvas;
 
     private bool haveAddedMyself;
@@ -48,8 +49,6 @@ public class Enemy : MonoBehaviour
         spriteColor = spriteRenderer.color;
         animator = gameObject.GetComponent<Animator>();
 
-        maxHP = currentHP = 100.0f;
-
         haveAddedMyself = false;
         hit = false;
         dead = false;
@@ -58,12 +57,6 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.T))
-        {
-            battleManager.AddEnemy(enemyIndexInBattleManager, Mathf.RoundToInt(eAgility), Mathf.RoundToInt(eStrength), Mathf.RoundToInt(eCritical), this,name);
-            Debug.Log("Added enemy to battlemanager");
-        }
-
         //If the enemy is yet to add itself to the Q and the btl manager is currently adding enemies, then add this enemy to the Q
         if(!haveAddedMyself&&battleManager.addEnemies)
         {
@@ -82,29 +75,34 @@ public class Enemy : MonoBehaviour
             switch (enemyClassType)
             {
                 case "DPS":
-                    eAttack = Mathf.CeilToInt(eAttack += (skillPoints * 0.6f));
-                    eAgility = Mathf.CeilToInt(eAgility += +(skillPoints * 0.4f));
-                    currentHP += skillPoints * 35.0f * 0.5f;
+                    eAttack = Mathf.CeilToInt(eAttack += (skillPoints * 0.4f));
+                    eAgility = Mathf.CeilToInt(eAgility += (skillPoints * 0.2f));
+                    eSpeed = Mathf.CeilToInt(eSpeed += (skillPoints * 0.2f));
+                    currentHP += skillPoints * 35.0f * 0.5f;                    
 
                 break;
 
                 case "Tank":
-                    eAttack = Mathf.CeilToInt(eAttack += (skillPoints * 0.3f));
-                    eDefence = Mathf.CeilToInt(eDefence += (skillPoints * 0.7f));
+                    eAttack = Mathf.CeilToInt(eAttack += (skillPoints * 0.1f));
+                    eDefence = Mathf.CeilToInt(eDefence += (skillPoints * 0.6f));
+                    eSpeed = Mathf.CeilToInt(eSpeed += (skillPoints * 0.2f));
                     currentHP += skillPoints * 60.0f * 0.5f;
                 break;
 
                 case "Support":
-                    eAttack = Mathf.CeilToInt(eAttack += (skillPoints * 0.4f));
-                    eAgility = Mathf.CeilToInt(eAttack += (skillPoints * 0.6f));
+                    eSpeed = Mathf.CeilToInt(eAttack += (skillPoints * 0.4f));
+                    eAgility = Mathf.CeilToInt(eAttack += (skillPoints * 0.4f));
+                    eDefence = Mathf.CeilToInt(eDefence += (skillPoints * 0.2f));
                     currentHP += skillPoints * 85.0f * 0.5f;
                 break;
             }
+
+        maxHP = currentHP;
     }
 
     public void AddEnemyToBattle()
     {
-        battleManager.AddEnemy(enemyIndexInBattleManager, Mathf.RoundToInt(eAgility), Mathf.RoundToInt(eStrength), Mathf.RoundToInt(eCritical), this, name);
+        battleManager.AddEnemy(enemyIndexInBattleManager, Mathf.RoundToInt(eAgility), Mathf.RoundToInt(eStrength), Mathf.RoundToInt(eCritical), Mathf.RoundToInt(eSpeed), this, name);
     }
 
     public void EnemyTurn()

@@ -89,6 +89,9 @@ public struct CharacterStats {
 
 		rage = 0.0f;
 
+		speed = 0.0f;
+		speedMod = 0.0f;
+
 		level = 1;
 		currentExperience = 0;
 		neededExperience = 500;
@@ -106,6 +109,7 @@ public struct CharacterStats {
 	public float critical, criticalMod;
 	public float agility, agilityMod;
 	public float rage;
+	public float speed, speedMod;
 
     // The weapon and armor types each player can equip
 	readonly public int[] validEquipables;
@@ -116,8 +120,9 @@ public struct CharacterStats {
 	public float TotalMaxHealth => maxHealth + maxHealthMod;
 	public float TotalMaxMana => maxMana + maxManaMod;
 	public float TotalStrength => strength + strengthMod;
-	public float TotalCritical => critical + criticalMod;
 	public float TotalAgility => agility + agilityMod;
+	public float TotalCritical => critical + criticalMod;
+	public float TotalSpeed => speed + speedMod;
 
 	//experience, level, and skill points
 	public int level;

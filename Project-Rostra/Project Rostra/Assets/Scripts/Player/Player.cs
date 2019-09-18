@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
     public float agi;
     public float str;
     public float crit;
+    public float speed;
     public int playerIndex;
     public string name;
     public string[] equippedSkills = new string [4];
@@ -148,6 +149,7 @@ public class Player : MonoBehaviour
 
     private void StartBattle()
     {
+        Debug.Log("Player start battle baby");
         //Get the information from the party stats file
         currentHP = PartyStats.chara[playerIndex].hitpoints;
         maxHP = PartyStats.chara[playerIndex].TotalMaxHealth;
@@ -158,6 +160,7 @@ public class Player : MonoBehaviour
         agi = PartyStats.chara[playerIndex].TotalAgility;
         crit = PartyStats.chara[playerIndex].TotalCritical;
         str = PartyStats.chara[playerIndex].TotalStrength;
+        speed = PartyStats.chara[playerIndex].TotalSpeed;
         currentRage = PartyStats.chara[playerIndex].rage;
         battleManager.players[playerIndex].playerIndex = playerIndex;
         battleManager.players[playerIndex].playerReference = this;
