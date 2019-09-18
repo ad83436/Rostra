@@ -20,6 +20,10 @@ public class ConversationTrigger : MonoBehaviour
 			FindObjectOfType<DialogueManager>().StartConversation(dialogue);
 			isOneShot = false;
 		}
+		else
+		{
+			FindObjectOfType<DialogueManager>().StartConversation(dialogue);
+		}
 	}
 	// 1 = dwarf, 2 = guild, 3 = kill, 4 = spare, 5 = tell, 6 = lie
 	public void TriggerChoiceDependantConvo()

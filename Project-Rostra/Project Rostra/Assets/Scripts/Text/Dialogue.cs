@@ -42,5 +42,8 @@ public class Dialogue
 	public ConversationTrigger normal;
 	// don't change this
 	public bool hasPlayed;
+	//
+	public bool willCount;
+	public float maxWillCount;
 
 }
