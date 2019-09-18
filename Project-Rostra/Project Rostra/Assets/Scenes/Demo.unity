@@ -8044,14 +8044,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogue:
     names:
-    - Guard
+    - Arcelus
+    - Solider
     - Fargas
+    - Soldier
     sentences:
+    - 'Fargas, we''ve got company. They don''t look like the sitting down for a drink
+      type. '
     - Fargas, Frea, Oberon and Arcelus I hereby arrest you in the name of the Ocrestian
       Military
+    - I cannot surrender, please let us both go our separate ways. This does not need
+      to come to bloodshed
+    - You think I can let a traitor like you poison these good people with your presence.
+      I will enjoy carving you up.
     portrait:
-    - {fileID: 21300000, guid: 60ca9ec4b6d4ab94689907e719fed4b6, type: 3}
-    povChange: []
+    - {fileID: 21300000, guid: f40486206916ccc4a9bf37f57f448dee, type: 3}
+    - {fileID: 21300000, guid: 910efa03995549e41a60118736af3ece, type: 3}
+    - {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825, type: 3}
+    - {fileID: 21300000, guid: 910efa03995549e41a60118736af3ece, type: 3}
+    povChange:
+    - 1
+    - 2
+    - 3
+    - 3
     typingSpeed: 0.001
     isChoice: 0
     choiceLine: 0
