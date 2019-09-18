@@ -250,7 +250,7 @@ public class UIBTL : MonoBehaviour
 
                 for(int i =0;i<5;i++)
                 {
-                    //0 - 5
+                    //0 - 4
                     images[i].sprite = imagesQ[i];
                 }
 
@@ -297,7 +297,7 @@ public class UIBTL : MonoBehaviour
     public void moveQImages()
     {
 
-        //Turn off the indicator next to the "RAGE" word and return the text color to normal if the previous player was in rage
+        //Once the images start moving, turn off the indicator next to the "RAGE" word and return the text color to normal if the previous player was in rage
         if (playerInControl.currentState == Player.playerState.Rage)
         {
             rageModeIndicator1.gameObject.SetActive(false);
