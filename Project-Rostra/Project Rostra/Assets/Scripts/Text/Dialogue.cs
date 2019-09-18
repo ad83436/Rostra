@@ -45,5 +45,7 @@ public class Dialogue
 	//
 	public bool willCount;
 	public float maxWillCount;
+	//
+	public bool isBattle;
 
 }

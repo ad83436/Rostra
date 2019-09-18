@@ -45,11 +45,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doneTalkingToNPCS:
     names:
-    - Dingus Dongus
+    - Fargas
     sentences:
-    - Floooooooorboooooooo
+    - No one seems to be giving me any useful information. Perhaps I should look elsewhere.
     portrait:
-    - {fileID: 21300000, guid: 06a4de0e889d6584eacade4a523fe7bf, type: 3}
+    - {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825, type: 3}
     povChange: []
     typingSpeed: 0.001
     isChoice: 0

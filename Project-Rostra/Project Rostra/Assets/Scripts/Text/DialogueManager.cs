@@ -5,6 +5,18 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 
+public enum ChoiceEnum
+{
+	dwarf = 0,
+	guild = 1,
+	kill =  2,
+	spare = 3,
+	tell =  4,
+	lie =   5,
+	demo =  6,
+}
+
+
 public class DialogueManager : MonoBehaviour
 {
 	public static DialogueManager instance;
@@ -55,17 +67,36 @@ public class DialogueManager : MonoBehaviour
 	//set 3 ^
 	// stores a local copy of which choice set we will be using
 	private float choiceSet;
-	private bool[] choices;
+	public bool[] choices;
 	// determines weather the player can walk or not
 	public bool canWalk;
+	// tells the DM if we should be checking for input
 	private bool startUpdating;
+	// can the next dialogue start
 	public bool nextDialogue;
+	// when can the next dialogue start
 	private float nextDialogueCount;
 	public float nextDialogueCountInitial;
+	// is a textbox active
 	public bool isActive;
+	// how many conversations have we had
 	public float willCount;
+	// has the will count been triggered
 	private bool hasCountTriggered;
+	// a dialogue container that has any we need that's not attached to a specific object
 	public DialogueContainer dc;
+	//refernce to the fade object
+	public Fade fade;
+	// will this convo result in a battle
+	private bool battle;
+	// a story bool i use only for the demo
+	public bool demo;
+	// returns the story choice that you want
+	public bool GetChoice(ChoiceEnum choice)
+	{
+		return choices[(int)choice];
+	}
+
 	void Awake()
     {
 		// singleton notation
@@ -80,7 +111,7 @@ public class DialogueManager : MonoBehaviour
 		DontDestroyOnLoad(this.gameObject);
 		// set everything to its default 
 		textElements = new Queue<string>();
-		choices = new bool[6];
+		choices = new bool[7];
 		change = 0;
 		currentChange = 0;
 		boxCount = 0;
@@ -102,6 +133,8 @@ public class DialogueManager : MonoBehaviour
 		isActive = false;
 		willCount = 0;
 		hasCountTriggered = false;
+		battle = false;
+		demo = false;
 	}
 
 	public void StartConversation(Dialogue d)
@@ -112,7 +145,7 @@ public class DialogueManager : MonoBehaviour
 			d.willCount = false;
 			Debug.Log("Do the thing");
 		}
-
+		
 		if (d.isChoice == true)
 		{
 			d.hasPlayed = true;
@@ -236,16 +269,21 @@ public class DialogueManager : MonoBehaviour
 			dia = null;
 			hasCountTriggered = false;
 		}
+		if (dia != null && dia.isBattle == true)
+		{
+			fade = GameObject.Find("Fade").GetComponent<Fade>();
+			battle = true;
+		}
 	}
 	// this is a coroutine that will take our chars from the string and print one at a time 
 	IEnumerator TypeLetters(string s)
 	{
+		canEnter = false;
 		text.text = "";
 		continueCountTotal = s.ToCharArray().Length;
 		foreach (char l in s.ToCharArray())
 		{
 			text.text += l;
-			yield return new WaitForSeconds(dia.typingSpeed);
 			continueCount++;
 			// if the string has stopped printing then you can continue
 			if (continueCount == continueCountTotal)
@@ -255,17 +293,18 @@ public class DialogueManager : MonoBehaviour
 				continueCountTotal = 0;
 				continueCount = 0;
 			}
+			
 			// diable the continue and show our choices
 			if (boxCount == choiceCount)
 			{
 				continueButton.SetActive(false);
 				canEnter = false;
-				
 				choice1.gameObject.SetActive(true);
 				choice2.gameObject.SetActive(true);
 				choice1.text = dia.choiceText1;
 				choice2.text = dia.choiceText2;
 			}
+			yield return new WaitForSeconds(dia.typingSpeed);
 		}
 	}
 	// did you pick door 1 
@@ -390,13 +429,17 @@ public class DialogueManager : MonoBehaviour
 		}
 		if (choiceNum == 1)
 		{
-			highlight1.SetActive(true);
-			highlight2.SetActive(false);
+			//highlight1.SetActive(true);
+			//highlight2.SetActive(false);
+			choice1.color = Color.white;
+			choice2.color = Color.yellow;
 		}
 		else if (choiceNum == 2)
 		{
-			highlight1.SetActive(false);
-			highlight2.SetActive(true);
+			//highlight1.SetActive(false);
+			//highlight2.SetActive(true);
+			choice1.color = Color.yellow;
+			choice2.color = Color.white;
 		}
 	}
 	// Update..... I don't know what to put here
@@ -416,11 +459,19 @@ public class DialogueManager : MonoBehaviour
 			nextDialogue = true;
 			nextDialogueCount = nextDialogueCountInitial;
 		}
-		if (dia != null && willCount == dia.maxWillCount && nextDialogue == true && isActive == false)
+		if (dia != null && willCount == dia.maxWillCount && nextDialogue == true && isActive == false && dia.maxWillCount != 0)
 		{
 			hasCountTriggered = true;
 			StartConversation(dc.doneTalkingToNPCS);
+			// temporary just for demo
+			choices[6] = true;
 			Debug.Log("and make it work");
 		}
+		if (battle == true && isActive == false)
+		{
+			fade.flipFade();
+			battle = false;
+		}
+		
 	}
 }

@@ -12,6 +12,7 @@ public class PlayerMove : MonoBehaviour
     float verticalMove;
 	private ConversationTrigger ct;
 	private DialogueManager dm;
+	DialogueToBattle dtm;
     private Vector2 moveInput;
 
     private void Awake()
