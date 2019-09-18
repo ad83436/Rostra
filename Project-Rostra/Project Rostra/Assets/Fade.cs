@@ -33,6 +33,11 @@ public class Fade : MonoBehaviour
         }
     }
 
+    public void flipFade()
+    {
+        fadeOut = !fadeOut;
+    }
+
     public void TransitionIntoBattle()
     {
         enemyHolder.TransitionIntoBattle();
