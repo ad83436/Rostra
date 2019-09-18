@@ -30,13 +30,13 @@ public class PlayerMove : MonoBehaviour
 		if (dm.canWalk == true)
 		{
 			moveInput.x = Input.GetAxisRaw("Horizontal");
-			moveInput.y = -Input.GetAxisRaw("Vertical");
+			moveInput.y = Input.GetAxisRaw("Vertical");
 			moveVelocity = moveInput.normalized * Speed;
 			horizontalMove = Input.GetAxisRaw("Horizontal") * Speed;
 			verticalMove = Input.GetAxisRaw("Vertical") * Speed;
 
 			animator.SetFloat("Horizontal", horizontalMove);
-			animator.SetFloat("Horizontal", verticalMove);
+			animator.SetFloat("Vertical", verticalMove);
 			animator.SetFloat("Speed", moveVelocity.sqrMagnitude);
 		}
 		else if(dm.canWalk == false)
@@ -48,7 +48,10 @@ public class PlayerMove : MonoBehaviour
     
     void FixedUpdate()
     {
-		rb.MovePosition(rb.position + moveVelocity * Time.fixedDeltaTime);
+        if (!BattleManager.battleInProgress)
+        {
+            rb.MovePosition(rb.position + moveVelocity * Time.fixedDeltaTime);
+        }
     }
 
 	// this is all code for handeling getting the collision with the NPC and getting it's dialogue
