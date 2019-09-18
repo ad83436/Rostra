@@ -44,6 +44,10 @@ public class UIBTL : MonoBehaviour
     public Text maxMP;
     public Image mpBar;
 
+    //Skills and Items Control Panel
+    public GameObject skillsItemsPanel;
+    public Text skillsItemsText;
+
 
     //Q UI Images
 
@@ -188,6 +192,10 @@ public class UIBTL : MonoBehaviour
         arcelusLevelUpFore.gameObject.SetActive(false);
         oberonLevelUpBack.gameObject.SetActive(false);
         oberonLevelUpFore.gameObject.SetActive(false);
+
+        //Skills and Items
+
+        skillsItemsPanel.gameObject.SetActive(false);
     }
 
 
@@ -507,6 +515,8 @@ public class UIBTL : MonoBehaviour
                     }
                     else if (Input.GetKeyDown(KeyCode.Space)) //Player has chosen Skills
                     {
+                        skillsItemsPanel.gameObject.SetActive(true);
+                        skillsItemsText.text = "Your skills are in another castle...ughh In another build 0.015 ;)";
                         currentState = btlUIState.choosingSkillsCommand;
                     }
                     break;
@@ -529,6 +539,8 @@ public class UIBTL : MonoBehaviour
                     }
                     else if (Input.GetKeyDown(KeyCode.Space)) //Player has chosen Items
                     {
+                        skillsItemsPanel.gameObject.SetActive(true);
+                        skillsItemsText.text = "Error 404 Items not found...Oh wait...Found them...In another build 0.015 ;)";
                         currentState = btlUIState.choosingItemsCommand;
                     }
                     break;
@@ -567,6 +579,12 @@ public class UIBTL : MonoBehaviour
 
     private void choosingSkillsCommand()
     {
+        if(Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Space))
+        {
+            skillsItemsPanel.gameObject.SetActive(false);
+            currentState = btlUIState.choosingBasicCommand;
+        }
+
         switch (controlsIndicator)
         {
             case 0:
@@ -584,11 +602,22 @@ public class UIBTL : MonoBehaviour
 
     private void choosingItemsCommand()
     {
-
+        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Space))
+        {
+            skillsItemsPanel.gameObject.SetActive(false);
+            currentState = btlUIState.choosingBasicCommand;
+        }
     }
 
     private void choosingEnemy()
     {
+        //Leave choosing enemy
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            ResetVisibilityForAllEnemies();
+            enemyToAttackIndicator.gameObject.SetActive(false);
+            currentState = btlUIState.choosingBasicCommand;
+        }
         //If we're at the same enemy, don't call the visible function again
         if (previousEnemyIndicatorIndex != enemyIndicatorIndex)
         {

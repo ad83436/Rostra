@@ -148,6 +148,7 @@ public class Player : MonoBehaviour
 
     private void StartBattle()
     {
+        Debug.Log("Player start battle baby");
         //Get the information from the party stats file
         currentHP = PartyStats.chara[playerIndex].hitpoints;
         maxHP = PartyStats.chara[playerIndex].TotalMaxHealth;
