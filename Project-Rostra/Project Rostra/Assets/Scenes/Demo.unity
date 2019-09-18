@@ -5455,6 +5455,47 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6270804076228166894, guid: 2cacdf46bbfb98e4bbd1ee060b64a995,
+        type: 3}
+      propertyPath: doneFight.names.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6270804076228166894, guid: 2cacdf46bbfb98e4bbd1ee060b64a995,
+        type: 3}
+      propertyPath: doneFight.sentences.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6270804076228166894, guid: 2cacdf46bbfb98e4bbd1ee060b64a995,
+        type: 3}
+      propertyPath: doneFight.portrait.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6270804076228166894, guid: 2cacdf46bbfb98e4bbd1ee060b64a995,
+        type: 3}
+      propertyPath: doneFight.names.Array.data[0]
+      value: Oberon
+      objectReference: {fileID: 0}
+    - target: {fileID: 6270804076228166894, guid: 2cacdf46bbfb98e4bbd1ee060b64a995,
+        type: 3}
+      propertyPath: doneFight.portrait.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: e24a4049526ca704eb781c65db5c188d,
+        type: 3}
+    - target: {fileID: 6270804076228166894, guid: 2cacdf46bbfb98e4bbd1ee060b64a995,
+        type: 3}
+      propertyPath: doneFight.typingSpeed
+      value: 0.001
+      objectReference: {fileID: 0}
+    - target: {fileID: 6270804076228166894, guid: 2cacdf46bbfb98e4bbd1ee060b64a995,
+        type: 3}
+      propertyPath: doneFight.sentences.Array.data[0]
+      value: 'Wow! That was fun! '
+      objectReference: {fileID: 0}
+    - target: {fileID: 6270804076228166894, guid: 2cacdf46bbfb98e4bbd1ee060b64a995,
+        type: 3}
+      propertyPath: doneFight.sentences.Array.data[1]
+      value: Now let's get out of here!
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2cacdf46bbfb98e4bbd1ee060b64a995, type: 3}
 --- !u!114 &1000949359 stripped

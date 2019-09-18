@@ -433,15 +433,15 @@ public class DialogueManager : MonoBehaviour
 		}
 		if (choiceNum == 1)
 		{
-			//highlight1.SetActive(true);
-			//highlight2.SetActive(false);
+			highlight1.SetActive(true);
+			highlight2.SetActive(false);
 			choice1.color = Color.white;
 			choice2.color = Color.yellow;
 		}
 		else if (choiceNum == 2)
 		{
-			//highlight1.SetActive(false);
-			//highlight2.SetActive(true);
+			highlight1.SetActive(false);
+			highlight2.SetActive(true);
 			choice1.color = Color.yellow;
 			choice2.color = Color.white;
 		}
@@ -475,6 +475,7 @@ public class DialogueManager : MonoBehaviour
 		{
 			fade.flipFade();
 			battle = false;
+			UIBTL.conversationAfterBattle = true;
 		}
 		
 	}
