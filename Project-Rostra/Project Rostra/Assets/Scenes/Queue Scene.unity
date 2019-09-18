@@ -906,6 +906,8 @@ MonoBehaviour:
   hit: 0
   qImage: {fileID: 0}
   HP: {fileID: 366957623}
+  maxHP: 0
+  currentHP: 0
   enemyCanvas: {fileID: 0}
   dead: 0
 --- !u!1 &667189818
@@ -1018,6 +1020,8 @@ MonoBehaviour:
   hit: 0
   qImage: {fileID: 0}
   HP: {fileID: 1313233602}
+  maxHP: 0
+  currentHP: 0
   enemyCanvas: {fileID: 0}
   dead: 0
 --- !u!1 &934564987
@@ -1206,6 +1210,8 @@ MonoBehaviour:
   hit: 0
   qImage: {fileID: 21300000, guid: bdbf2e65e71cca14ea98d84250dfb3c8, type: 3}
   HP: {fileID: 1745057574}
+  maxHP: 0
+  currentHP: 0
   enemyCanvas: {fileID: 0}
   dead: 0
 --- !u!1 &1313233601

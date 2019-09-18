@@ -32,8 +32,8 @@ public class Enemy : MonoBehaviour
     private Animator animator;
 
     public Image HP;
-    private float maxHP;
-    private float currentHP;
+    public float maxHP;
+    public float currentHP;
     public GameObject enemyCanvas;
 
     private bool haveAddedMyself;
@@ -47,8 +47,6 @@ public class Enemy : MonoBehaviour
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         spriteColor = spriteRenderer.color;
         animator = gameObject.GetComponent<Animator>();
-
-        maxHP = currentHP = 100.0f;
 
         haveAddedMyself = false;
         hit = false;
@@ -84,7 +82,7 @@ public class Enemy : MonoBehaviour
                 case "DPS":
                     eAttack = Mathf.CeilToInt(eAttack += (skillPoints * 0.6f));
                     eAgility = Mathf.CeilToInt(eAgility += +(skillPoints * 0.4f));
-                    currentHP += skillPoints * 35.0f * 0.5f;
+                    currentHP += skillPoints * 35.0f * 0.5f;                    
 
                 break;
 
@@ -100,6 +98,8 @@ public class Enemy : MonoBehaviour
                     currentHP += skillPoints * 85.0f * 0.5f;
                 break;
             }
+
+        maxHP = currentHP;
     }
 
     public void AddEnemyToBattle()
