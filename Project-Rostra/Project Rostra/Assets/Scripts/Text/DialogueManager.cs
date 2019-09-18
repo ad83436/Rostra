@@ -63,6 +63,9 @@ public class DialogueManager : MonoBehaviour
 	private float nextDialogueCount;
 	public float nextDialogueCountInitial;
 	public bool isActive;
+	public float willCount;
+	private bool hasCountTriggered;
+	public DialogueContainer dc;
 	void Awake()
     {
 		// singleton notation
@@ -97,14 +100,24 @@ public class DialogueManager : MonoBehaviour
 		nextDialogue = true;
 		nextDialogueCount = nextDialogueCountInitial;
 		isActive = false;
+		willCount = 0;
+		hasCountTriggered = false;
 	}
 
 	public void StartConversation(Dialogue d)
 	{
+		if (d.willCount == true)
+		{
+			willCount++;
+			d.willCount = false;
+			Debug.Log("Do the thing");
+		}
+
 		if (d.isChoice == true)
 		{
 			d.hasPlayed = true;
 		}
+
 		if (nextDialogue == true)
 		{
 			text.text = "";
@@ -217,6 +230,12 @@ public class DialogueManager : MonoBehaviour
 		startUpdating = false;
 		nextDialogue = false;
 		isActive = false;
+		if (willCount == dia.maxWillCount && hasCountTriggered == true)
+		{
+			willCount = 0;
+			dia = null;
+			hasCountTriggered = false;
+		}
 	}
 	// this is a coroutine that will take our chars from the string and print one at a time 
 	IEnumerator TypeLetters(string s)
@@ -386,6 +405,7 @@ public class DialogueManager : MonoBehaviour
 		if (startUpdating == true)
 		{
 			CheckInput();
+
 		}
 		if (nextDialogue == false)
 		{
@@ -395,6 +415,12 @@ public class DialogueManager : MonoBehaviour
 		{
 			nextDialogue = true;
 			nextDialogueCount = nextDialogueCountInitial;
+		}
+		if (dia != null && willCount == dia.maxWillCount && nextDialogue == true && isActive == false)
+		{
+			hasCountTriggered = true;
+			StartConversation(dc.doneTalkingToNPCS);
+			Debug.Log("and make it work");
 		}
 	}
 }

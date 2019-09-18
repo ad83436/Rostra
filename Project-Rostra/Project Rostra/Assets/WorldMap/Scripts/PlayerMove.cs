@@ -28,15 +28,19 @@ public class PlayerMove : MonoBehaviour
     {
 		if (dm.canWalk == true)
 		{
-            moveInput.x = Input.GetAxisRaw("Horizontal");
-            moveInput.y = -Input.GetAxisRaw("Vertical");
-            moveVelocity = moveInput.normalized * Speed;
+			moveInput.x = Input.GetAxisRaw("Horizontal");
+			moveInput.y = -Input.GetAxisRaw("Vertical");
+			moveVelocity = moveInput.normalized * Speed;
 			horizontalMove = Input.GetAxisRaw("Horizontal") * Speed;
 			verticalMove = Input.GetAxisRaw("Vertical") * Speed;
 
 			animator.SetFloat("Horizontal", horizontalMove);
 			animator.SetFloat("Horizontal", verticalMove);
 			animator.SetFloat("Speed", moveVelocity.sqrMagnitude);
+		}
+		else if(dm.canWalk == false)
+		{
+			moveVelocity = Vector2.zero;
 		}
 		TalkToNPC();
 	}
