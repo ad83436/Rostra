@@ -127,6 +127,8 @@ public class UIBTL : MonoBehaviour
     private int oberonExpGain;
     private bool oberonAddinExp;
 
+    public static bool conversationAfterBattle = false; //If true, a conversation will start right after the battle ends
+
     #region singleton
     public static UIBTL instance;
 
@@ -913,8 +915,12 @@ public class UIBTL : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Space) && !fargasAddinExp && !freaAddinExp && !oberonAddinExp && !arcelusAddinExp)
         {
-
             SceneManager.UnloadSceneAsync(SceneManager.GetSceneByName("Queue Scene"));
+            //If there's a conversation right after the battle, invoke the function in the dialogue manager
+            if(conversationAfterBattle)
+            {
+
+            }
         }
         
         //Fargas

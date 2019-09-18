@@ -57,7 +57,11 @@ public class BattleManager : MonoBehaviour
     //Temp
     private int totalLevels;//The sum of the enemies level
     public int expGain; //Determined by the enemy levels
+
+    //Battle progress
     public bool battleHasEnded;
+    public static bool battleInProgress = false;
+
 
     //At the beginning of each battle, each player and enemy will use the singleton to update their stats
     #region singleton
@@ -103,6 +107,7 @@ public class BattleManager : MonoBehaviour
 
         expGain = 0;
         totalLevels = 0;
+        
     }
 
     #endregion
@@ -202,8 +207,8 @@ public class BattleManager : MonoBehaviour
     public void StartBattle()
     {
         //Store and sort the agilities of the players and enemies in ascending order
-
-        foreach(PlayerInformtion p in players)
+        battleInProgress = true;
+        foreach (PlayerInformtion p in players)
         {
             if (p.playerReference != null)//Make sure all the entries have players (i.e. what if we have less than 4 players)
             {
@@ -378,6 +383,7 @@ public class BattleManager : MonoBehaviour
     public void EndOfBattle()
     {
         battleHasEnded = true;
+        battleInProgress = false;
         for (int i =0; i<4;i++)
         {
             //Update the remaining HP of players in the btl manager and the partystats
@@ -393,7 +399,6 @@ public class BattleManager : MonoBehaviour
         {
             enemies[i] = null;
         }
-
     }
 
     //Called by the inventory manager to update the player's stats when the player changes gear and on awake

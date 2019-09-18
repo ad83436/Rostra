@@ -118,23 +118,6 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Y))
-        {
-            //Temp code until we have stats in the stat file
-         //   battleManager.players[playerIndex].playerIndex = playerIndex;
-         //   battleManager.players[playerIndex].agi = agi;
-         //   battleManager.players[playerIndex].playerReference = this;
-         //   battleManager.players[playerIndex].atk = actualATK;
-         //   battleManager.players[playerIndex].def = actualDEF;
-         //   battleManager.players[playerIndex].crit = actualCRIT;
-         //    battleManager.players[playerIndex].str = actualSTR;
-            //Debug.Log("Added player to BTL manager");
-        }
-        if(Input.GetKeyDown(KeyCode.A))
-        {
-            StartBattle();
-        }
-
         if(Input.GetKeyDown(KeyCode.L))
         {
             //Testing the damage formula and rage calculations

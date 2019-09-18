@@ -45,6 +45,7 @@ public class EnemySpawner : MonoBehaviour
     //Called from BTL Manager
     public void SpawnEnemies()
     {
+        Debug.Log("I have a question: What the actual fuck?");
         for(int i=0;i<enemiesToSpawn.Length;i++)
         {
             if (enemiesToSpawn[i] != null)
