@@ -59,7 +59,7 @@ public class PauseMenuController : MonoBehaviour {
 			if (isPaused) {
 				//onPause logic
 				currentListItem = 0;
-				listItems[currentListItem].color = Color.blue;
+				listItems[currentListItem].color = Color.yellow;
 				group.alpha = 1f;
 			} else {
 				//onUnPause logic
@@ -87,7 +87,7 @@ public class PauseMenuController : MonoBehaviour {
 			
 			if (Up || Down) {
 				for (int i = 0; i < listItems.Length; i++) {
-					if (currentListItem == i) listItems[i].color = Color.blue;
+					if (currentListItem == i) listItems[i].color = Color.yellow;
 					else listItems[i].color = Color.white;
 				}
 				for (int i = 0; i < allSubMenus.Length; i++) {

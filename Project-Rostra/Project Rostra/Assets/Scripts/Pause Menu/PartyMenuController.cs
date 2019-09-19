@@ -17,6 +17,9 @@ public class PartyMenuController : SubMenu {
 
 	#endregion
 
+	[SerializeField] CanvasGroup partyGroup;
+	[SerializeField] CanvasGroup statsGroup;
+
 	public override void MenuUpdate() {
 
 	}
