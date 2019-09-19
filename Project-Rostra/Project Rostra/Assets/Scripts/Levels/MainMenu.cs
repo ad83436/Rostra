@@ -16,6 +16,7 @@ public class MainMenu : MonoBehaviour
 
     void Start()
     {
+        Cursor.visible = false;
         hilighter.transform.localPosition = hPos0.transform.localPosition;
         menuIndex = 0;
         fade.fillAmount = 0.0f;

@@ -40,10 +40,14 @@ public class Enemy : MonoBehaviour
     private bool haveAddedMyself;
     public bool dead;
 
+    private GameObject demoEffect;
+    private ObjectPooler objPooler;
+
 
     private void Start()
     {
         battleManager = BattleManager.instance;
+        objPooler = ObjectPooler.instance;
         uiBTL = UIBTL.instance;
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         spriteColor = spriteRenderer.color;
@@ -138,6 +142,9 @@ public class Enemy : MonoBehaviour
                 case "Straegist":
 
                     break;
+                case "Demo":
+                    DumbAttack();
+                    break;
 
             }
         }
@@ -184,7 +191,12 @@ public class Enemy : MonoBehaviour
         }
         
     }
-       
+
+    private void DemoAttackEffect()
+    {
+        demoEffect = objPooler.SpawnFromPool("DemoAttack", attackThisPlayer.gameObject.transform.position, gameObject.transform.rotation);
+    }
+
     //Called from the animator once the attack anaimation ends
     private void CompleteAttack()
     {

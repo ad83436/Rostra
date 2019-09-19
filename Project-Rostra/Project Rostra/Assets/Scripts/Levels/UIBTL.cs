@@ -425,6 +425,15 @@ public class UIBTL : MonoBehaviour
             guardText.color = Color.grey;
             rageText.color = Color.yellow;
         }
+        else
+        {
+            rageModeIndicator1.gameObject.SetActive(false);
+            rageModeIndicator2.gameObject.SetActive(false);
+            skillsText.color = Color.white;
+            itemsText.color = Color.white;
+            guardText.color = Color.white;
+            RageOptionTextColor();
+        }
 
         switch (playerIndex)
         {
@@ -851,6 +860,12 @@ public class UIBTL : MonoBehaviour
 
     public void EndTurn()
     {
+        if(playerInControl.currentState==Player.playerState.Rage)
+        {
+            //Make sure to turn off the indicators at the end of the turn, this is to make sure the end screen does not show the indicators
+            rageModeIndicator1.gameObject.SetActive(false);
+            rageModeIndicator2.gameObject.SetActive(false);
+        }
         playerTurnIndicator.SetActive(false);
         enemyToAttackIndicator.SetActive(false);
         controlsPanel.gameObject.SetActive(false);
@@ -911,6 +926,9 @@ public class UIBTL : MonoBehaviour
                     arcelusExpGain = btlManager.expGain;
 
                     currentState = btlUIState.battleEnd;
+                    //Make sure to turn off the indicators at the end of the turn, this is to make sure the end screen does not show the indicators
+                    rageModeIndicator1.gameObject.SetActive(false);
+                    rageModeIndicator2.gameObject.SetActive(false);
                     battleHasEnded = true;
                     btlManager.EndOfBattle();
                 }
