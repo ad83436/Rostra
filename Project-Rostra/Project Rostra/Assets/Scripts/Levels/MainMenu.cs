@@ -35,6 +35,7 @@ public class MainMenu : MonoBehaviour
                 }
                 else if(Input.GetKeyDown(KeyCode.Space))
                 {
+                    UIBTL.conversationAfterBattle = false;
                     startFading = true;
                 }
                 break;
