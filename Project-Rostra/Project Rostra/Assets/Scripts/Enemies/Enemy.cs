@@ -15,6 +15,7 @@ public class Enemy : MonoBehaviour
     public float eAgility;
     public float eDefence;
     public float eStrength;
+    public float eSpeed;
     public float eBaseLevel;
     public int eCurrentLevel;
     public string eName;
@@ -39,10 +40,14 @@ public class Enemy : MonoBehaviour
     private bool haveAddedMyself;
     public bool dead;
 
+    private GameObject demoEffect;
+    private ObjectPooler objPooler;
+
 
     private void Start()
     {
         battleManager = BattleManager.instance;
+        objPooler = ObjectPooler.instance;
         uiBTL = UIBTL.instance;
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         spriteColor = spriteRenderer.color;
@@ -56,12 +61,6 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.T))
-        {
-            battleManager.AddEnemy(enemyIndexInBattleManager, Mathf.RoundToInt(eAgility), Mathf.RoundToInt(eStrength), Mathf.RoundToInt(eCritical), this,name);
-            Debug.Log("Added enemy to battlemanager");
-        }
-
         //If the enemy is yet to add itself to the Q and the btl manager is currently adding enemies, then add this enemy to the Q
         if(!haveAddedMyself&&battleManager.addEnemies)
         {
@@ -80,21 +79,24 @@ public class Enemy : MonoBehaviour
             switch (enemyClassType)
             {
                 case "DPS":
-                    eAttack = Mathf.CeilToInt(eAttack += (skillPoints * 0.6f));
-                    eAgility = Mathf.CeilToInt(eAgility += +(skillPoints * 0.4f));
+                    eAttack = Mathf.CeilToInt(eAttack += (skillPoints * 0.4f));
+                    eAgility = Mathf.CeilToInt(eAgility += (skillPoints * 0.2f));
+                    eSpeed = Mathf.CeilToInt(eSpeed += (skillPoints * 0.2f));
                     currentHP += skillPoints * 35.0f * 0.5f;                    
 
                 break;
 
                 case "Tank":
-                    eAttack = Mathf.CeilToInt(eAttack += (skillPoints * 0.3f));
-                    eDefence = Mathf.CeilToInt(eDefence += (skillPoints * 0.7f));
+                    eAttack = Mathf.CeilToInt(eAttack += (skillPoints * 0.1f));
+                    eDefence = Mathf.CeilToInt(eDefence += (skillPoints * 0.6f));
+                    eSpeed = Mathf.CeilToInt(eSpeed += (skillPoints * 0.2f));
                     currentHP += skillPoints * 60.0f * 0.5f;
                 break;
 
                 case "Support":
-                    eAttack = Mathf.CeilToInt(eAttack += (skillPoints * 0.4f));
-                    eAgility = Mathf.CeilToInt(eAttack += (skillPoints * 0.6f));
+                    eSpeed = Mathf.CeilToInt(eAttack += (skillPoints * 0.4f));
+                    eAgility = Mathf.CeilToInt(eAttack += (skillPoints * 0.4f));
+                    eDefence = Mathf.CeilToInt(eDefence += (skillPoints * 0.2f));
                     currentHP += skillPoints * 85.0f * 0.5f;
                 break;
             }
@@ -104,7 +106,7 @@ public class Enemy : MonoBehaviour
 
     public void AddEnemyToBattle()
     {
-        battleManager.AddEnemy(enemyIndexInBattleManager, Mathf.RoundToInt(eAgility), Mathf.RoundToInt(eStrength), Mathf.RoundToInt(eCritical), this, name);
+        battleManager.AddEnemy(enemyIndexInBattleManager, Mathf.RoundToInt(eAgility), Mathf.RoundToInt(eStrength), Mathf.RoundToInt(eCritical), Mathf.RoundToInt(eSpeed), this, name);
     }
 
     public void EnemyTurn()
@@ -139,6 +141,9 @@ public class Enemy : MonoBehaviour
 
                 case "Straegist":
 
+                    break;
+                case "Demo":
+                    DumbAttack();
                     break;
 
             }
@@ -186,7 +191,12 @@ public class Enemy : MonoBehaviour
         }
         
     }
-       
+
+    private void DemoAttackEffect()
+    {
+        demoEffect = objPooler.SpawnFromPool("DemoAttack", attackThisPlayer.gameObject.transform.position, gameObject.transform.rotation);
+    }
+
     //Called from the animator once the attack anaimation ends
     private void CompleteAttack()
     {

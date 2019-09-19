@@ -28,6 +28,7 @@ public class Fade : MonoBehaviour
             if (thisImage.fillAmount >= 1.0f)
             {
                 TransitionIntoBattle();
+                thisImage.fillAmount = 0.00f;
                 gameObject.SetActive(false);
             }
         }

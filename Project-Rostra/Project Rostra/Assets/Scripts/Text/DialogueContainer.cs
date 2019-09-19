@@ -6,6 +6,7 @@ public class DialogueContainer : MonoBehaviour
 {
 	public static DialogueContainer instance;
 	public Dialogue doneTalkingToNPCS;
+	public Dialogue doneFight;
 	private void Awake()
 	{
 		if (instance == null)

@@ -19,6 +19,7 @@ public class BattleManager : MonoBehaviour
         public float agi;
         public float str;
         public float crit;
+        public float speed;
         public string name;
         public int exp;
         public int expNeededForNextLevel;
@@ -36,13 +37,13 @@ public class BattleManager : MonoBehaviour
     public PlayerInformtion[] enemies;
     private List<PlayerInformtion> battleQueue;
 
-    private List<float> pAgilities;
-    private List<float> eAgilities;
+    private List<float> pSpeeds;
+    private List<float> eSpeeds;
 
-    private float maxPlayerAgi = 0;
+    private float maxPlayerSpeed = 0;
     private int maxPlayerIndex = 0;
     private int[] removedPlayerIndexes; //We need to keep track of which players and enemies have been accounted for in the queue
-    private float maxEnemyAgi = 0;
+    private float maxEnemySpeed = 0;
     private int maxEnemyIndex = 0;
     private int[] removedEnemyIndexes;
     public int numberOfEnemies; // Updated from the world map. Need to make sure all enemies are added before building the Q
@@ -56,7 +57,11 @@ public class BattleManager : MonoBehaviour
     //Temp
     private int totalLevels;//The sum of the enemies level
     public int expGain; //Determined by the enemy levels
+
+    //Battle progress
     public bool battleHasEnded;
+    public static bool battleInProgress = false;
+
 
     //At the beginning of each battle, each player and enemy will use the singleton to update their stats
     #region singleton
@@ -74,8 +79,8 @@ public class BattleManager : MonoBehaviour
 
         players = new PlayerInformtion[4]; //max 4 players
         enemies = new PlayerInformtion[5];//max 5 enemies
-        pAgilities = new List<float>();
-        eAgilities = new List<float>();
+        pSpeeds = new List<float>();
+        eSpeeds = new List<float>();
         battleQueue = new List<PlayerInformtion>();
         removedPlayerIndexes = new int[4];
         removedEnemyIndexes = new int[5];
@@ -102,6 +107,7 @@ public class BattleManager : MonoBehaviour
 
         expGain = 0;
         totalLevels = 0;
+        
     }
 
     #endregion
@@ -132,6 +138,7 @@ public class BattleManager : MonoBehaviour
             players[i].agi = PartyStats.chara[i].TotalAgility;
             players[i].crit = PartyStats.chara[i].TotalCritical;
             players[i].str = PartyStats.chara[i].TotalStrength;
+            players[i].speed = PartyStats.chara[i].TotalSpeed;
             players[i].exp = PartyStats.chara[i].currentExperience;
             players[i].expNeededForNextLevel = PartyStats.chara[i].neededExperience;
         }
@@ -169,10 +176,11 @@ public class BattleManager : MonoBehaviour
     }
 
     //Called at the beginning of the battle to store references to current enemies. Needed to be able to update the queue
-    public void AddEnemy(int enemyIndex, int agi, int str, int crit, Enemy enemyRef, string name)
+    public void AddEnemy(int enemyIndex, int agi, int str, int crit, int speed, Enemy enemyRef, string name)
     {
             enemies[enemyIndex].playerIndex = enemyIndex;
             enemies[enemyIndex].agi = agi;
+            enemies[enemyIndex].speed = speed;
             enemies[enemyIndex].str = str;
             enemies[enemyIndex].crit = crit;
             enemies[enemyIndex].enemyReference = enemyRef;
@@ -199,29 +207,29 @@ public class BattleManager : MonoBehaviour
     public void StartBattle()
     {
         //Store and sort the agilities of the players and enemies in ascending order
-
-        foreach(PlayerInformtion p in players)
+        battleInProgress = true;
+        foreach (PlayerInformtion p in players)
         {
             if (p.playerReference != null)//Make sure all the entries have players (i.e. what if we have less than 4 players)
             {
                 Debug.Log(p.playerReference.name + " Has been added to sort");
-                pAgilities.Add(p.agi);
+                pSpeeds.Add(p.speed);
             }
         }
             
 
-        pAgilities.Sort();
+        pSpeeds.Sort();
 
 
         foreach (PlayerInformtion e in enemies)
         {
             if (e.enemyReference != null) //Make sure all the entries have enemies (i.e. what if we have less than 5 enemies)
             {
-                eAgilities.Add(e.agi);
+                eSpeeds.Add(e.speed);
             }
         }
 
-        eAgilities.Sort();
+        eSpeeds.Sort();
 
 
         BuildQueue();
@@ -252,18 +260,18 @@ public class BattleManager : MonoBehaviour
 
     public void BuildQueue()
     {
-        //Compare the player with the highest agility to the enemy with the highest agility
-        if (pAgilities.Count > 0)
+        //Compare the player with the highest speed to the enemy with the highest speed
+        if (pSpeeds.Count > 0)
         {
-            //Since the list is sorted, the last element has the highest agility
-            maxPlayerAgi = pAgilities[pAgilities.Count - 1];
+            //Since the list is sorted, the last element has the highest speed
+            maxPlayerSpeed = pSpeeds[pSpeeds.Count - 1];
 
             foreach (PlayerInformtion e in players)
             {
-                //Is this the player that has the highest agility?
-                if (maxPlayerAgi == e.agi)
+                //Is this the player that has the highest speed?
+                if (maxPlayerSpeed == e.speed)
                 {
-                    //What if two players have the same agility? Make sure you are checking a different player each time
+                    //What if two players have the same speed? Make sure you are checking a different player each time
                     if (e.playerIndex == removedPlayerIndexes[0] || e.playerIndex == removedPlayerIndexes[1]
                         || e.playerIndex == removedPlayerIndexes[2] || e.playerIndex == removedPlayerIndexes[3])
                     {
@@ -282,17 +290,17 @@ public class BattleManager : MonoBehaviour
             }
         }
 
-        if (eAgilities.Count > 0)
+        if (eSpeeds.Count > 0)
         {
-            //Enemy list is sorted. Last element has the highest agility
-            maxEnemyAgi = eAgilities[eAgilities.Count - 1];
+            //Enemy list is sorted. Last element has the highest speed
+            maxEnemySpeed = eSpeeds[eSpeeds.Count - 1];
 
             foreach (PlayerInformtion e in enemies)
             {
-                //Is this the enemy with the highest agility?
-                if (maxEnemyAgi == e.agi)
+                //Is this the enemy with the highest speed?
+                if (maxEnemySpeed == e.speed)
                 {
-                    //What if two enemies have the same agility? Make sure we don't add the same enemy to the Q twice
+                    //What if two enemies have the same speed? Make sure we don't add the same enemy to the Q twice
                     if (e.playerIndex == removedEnemyIndexes[0] || e.playerIndex == removedEnemyIndexes[1] 
                         || e.playerIndex == removedEnemyIndexes[2] || e.playerIndex == removedEnemyIndexes[3] 
                         || e.playerIndex == removedEnemyIndexes[4])
@@ -312,16 +320,16 @@ public class BattleManager : MonoBehaviour
         }
 
         //If both player agility and enemy agility lists are not empty, see which of them has the character with the highest agility
-        if (pAgilities.Count > 0 && eAgilities.Count > 0)
+        if (pSpeeds.Count > 0 && eSpeeds.Count > 0)
         {
-            if (maxPlayerAgi >= maxEnemyAgi)
+            if (maxPlayerSpeed >= maxEnemySpeed)
             {
                //The player has a higher agility
                battleQueue.Add(players[maxPlayerIndex]);
                //Add the player's image to the UI
                uiBtl.AddImageToQ(players[maxPlayerIndex].playerReference.qImage);
                //Remove the player's agility from the list
-               pAgilities.RemoveAt(pAgilities.Count - 1);
+               pSpeeds.RemoveAt(pSpeeds.Count - 1);
                //Add the player's index to the array of removed players
                removedPlayerIndexes[maxPlayerIndex] = maxPlayerIndex;
 
@@ -333,33 +341,33 @@ public class BattleManager : MonoBehaviour
                 //Add the enemy's image to the UI
                 uiBtl.AddImageToQ(enemies[maxEnemyIndex].enemyReference.qImage);
                 //Remove the enemy's agility from the list
-                eAgilities.RemoveAt(eAgilities.Count - 1);
+                eSpeeds.RemoveAt(eSpeeds.Count - 1);
                 //Add the enemy's index to the array of removed enemy
                 removedEnemyIndexes[maxEnemyIndex] = maxEnemyIndex;
 
             }
         }
         //If all the enemies have been added to the Q already, add the remaining players to the Q directly
-        else if(pAgilities.Count>0 && eAgilities.Count<=0)
+        else if(pSpeeds.Count>0 && eSpeeds.Count<=0)
         {
             battleQueue.Add(players[maxPlayerIndex]);
             //Add the player's image to the UI
             uiBtl.AddImageToQ(players[maxPlayerIndex].playerReference.qImage);
-            pAgilities.RemoveAt(pAgilities.Count - 1);
+            pSpeeds.RemoveAt(pSpeeds.Count - 1);
             removedPlayerIndexes[maxPlayerIndex] = maxPlayerIndex;
         }
         //If all the players have already been added to the Q, add the remaining enemies to the Q directly.
-        else if(pAgilities.Count<=0 && eAgilities.Count>0)
+        else if(pSpeeds.Count<=0 && eSpeeds.Count>0)
         {
             battleQueue.Add(enemies[maxEnemyIndex]);
             //Add the enemy's image to the UI
             uiBtl.AddImageToQ(enemies[maxEnemyIndex].enemyReference.qImage);
-            eAgilities.RemoveAt(eAgilities.Count - 1);
+            eSpeeds.RemoveAt(eSpeeds.Count - 1);
             removedEnemyIndexes[maxEnemyIndex] = maxEnemyIndex;
         }
 
         //If either of the agility lists isn't empty, run the function again
-        if (pAgilities.Count>0 || eAgilities.Count>0)
+        if (pSpeeds.Count>0 || eSpeeds.Count>0)
         {
             BuildQueue();
         }
@@ -375,6 +383,7 @@ public class BattleManager : MonoBehaviour
     public void EndOfBattle()
     {
         battleHasEnded = true;
+        battleInProgress = false;
         for (int i =0; i<4;i++)
         {
             //Update the remaining HP of players in the btl manager and the partystats
@@ -390,7 +399,6 @@ public class BattleManager : MonoBehaviour
         {
             enemies[i] = null;
         }
-
     }
 
     //Called by the inventory manager to update the player's stats when the player changes gear and on awake

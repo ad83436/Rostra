@@ -127,6 +127,11 @@ public class UIBTL : MonoBehaviour
     private int oberonExpGain;
     private bool oberonAddinExp;
 
+    //Dialogue after battle
+    public static bool conversationAfterBattle = false; //If true, a conversation will start right after the battle ends
+    private DialogueManager dialogueManager;
+    private DialogueContainer dialogueContainer;
+
     #region singleton
     public static UIBTL instance;
 
@@ -196,6 +201,10 @@ public class UIBTL : MonoBehaviour
         //Skills and Items
 
         skillsItemsPanel.gameObject.SetActive(false);
+
+        //Dialogue after battle
+        dialogueManager = DialogueManager.instance;
+        dialogueContainer = DialogueContainer.instance;
     }
 
 
@@ -415,6 +424,15 @@ public class UIBTL : MonoBehaviour
             itemsText.color = Color.grey;
             guardText.color = Color.grey;
             rageText.color = Color.yellow;
+        }
+        else
+        {
+            rageModeIndicator1.gameObject.SetActive(false);
+            rageModeIndicator2.gameObject.SetActive(false);
+            skillsText.color = Color.white;
+            itemsText.color = Color.white;
+            guardText.color = Color.white;
+            RageOptionTextColor();
         }
 
         switch (playerIndex)
@@ -842,6 +860,12 @@ public class UIBTL : MonoBehaviour
 
     public void EndTurn()
     {
+        if(playerInControl.currentState==Player.playerState.Rage)
+        {
+            //Make sure to turn off the indicators at the end of the turn, this is to make sure the end screen does not show the indicators
+            rageModeIndicator1.gameObject.SetActive(false);
+            rageModeIndicator2.gameObject.SetActive(false);
+        }
         playerTurnIndicator.SetActive(false);
         enemyToAttackIndicator.SetActive(false);
         controlsPanel.gameObject.SetActive(false);
@@ -902,6 +926,9 @@ public class UIBTL : MonoBehaviour
                     arcelusExpGain = btlManager.expGain;
 
                     currentState = btlUIState.battleEnd;
+                    //Make sure to turn off the indicators at the end of the turn, this is to make sure the end screen does not show the indicators
+                    rageModeIndicator1.gameObject.SetActive(false);
+                    rageModeIndicator2.gameObject.SetActive(false);
                     battleHasEnded = true;
                     btlManager.EndOfBattle();
                 }
@@ -913,8 +940,12 @@ public class UIBTL : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Space) && !fargasAddinExp && !freaAddinExp && !oberonAddinExp && !arcelusAddinExp)
         {
-
             SceneManager.UnloadSceneAsync(SceneManager.GetSceneByName("Queue Scene"));
+            //If there's a conversation right after the battle, invoke the function in the dialogue manager
+            if(conversationAfterBattle)
+            {
+                dialogueManager.StartConversation(dialogueContainer.doneFight);
+            }
         }
         
         //Fargas
