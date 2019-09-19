@@ -282,11 +282,13 @@ public class DialogueManager : MonoBehaviour
 	// this is a coroutine that will take our chars from the string and print one at a time 
 	IEnumerator TypeLetters(string s)
 	{
-		canEnter = false;
+
 		text.text = "";
+		continueCountTotal = 0;
 		continueCountTotal = s.ToCharArray().Length;
 		foreach (char l in s.ToCharArray())
 		{
+			canEnter = false;
 			text.text += l;
 			continueCount++;
 			// if the string has stopped printing then you can continue
@@ -415,11 +417,11 @@ public class DialogueManager : MonoBehaviour
 		{
 			NextSentence();
 		}
-		if (boxCount == choiceCount && Input.GetKeyDown(KeyCode.LeftArrow))
+		if (dia.isChoice == true && boxCount == choiceCount && Input.GetKeyDown(KeyCode.LeftArrow))
 		{
 			choiceNum = 2;
 		}
-		else if (boxCount == choiceCount && Input.GetKeyDown(KeyCode.RightArrow))
+		else if (dia.isChoice == true && boxCount == choiceCount && Input.GetKeyDown(KeyCode.RightArrow))
 		{
 			choiceNum = 1;
 		}

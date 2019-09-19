@@ -5521,17 +5521,22 @@ PrefabInstance:
     - target: {fileID: 6270804076228166894, guid: 2cacdf46bbfb98e4bbd1ee060b64a995,
         type: 3}
       propertyPath: doneFight.names.Array.size
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6270804076228166894, guid: 2cacdf46bbfb98e4bbd1ee060b64a995,
         type: 3}
       propertyPath: doneFight.sentences.Array.size
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6270804076228166894, guid: 2cacdf46bbfb98e4bbd1ee060b64a995,
         type: 3}
       propertyPath: doneFight.portrait.Array.size
-      value: 1
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6270804076228166894, guid: 2cacdf46bbfb98e4bbd1ee060b64a995,
+        type: 3}
+      propertyPath: doneFight.povChange.Array.size
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6270804076228166894, guid: 2cacdf46bbfb98e4bbd1ee060b64a995,
         type: 3}
@@ -5552,12 +5557,75 @@ PrefabInstance:
     - target: {fileID: 6270804076228166894, guid: 2cacdf46bbfb98e4bbd1ee060b64a995,
         type: 3}
       propertyPath: doneFight.sentences.Array.data[0]
-      value: 'Wow! That was fun! '
+      value: Wow! That was fun! Are the soldiers really that bad?
       objectReference: {fileID: 0}
     - target: {fileID: 6270804076228166894, guid: 2cacdf46bbfb98e4bbd1ee060b64a995,
         type: 3}
       propertyPath: doneFight.sentences.Array.data[1]
-      value: Now let's get out of here!
+      value: Makes sense Oberon, I mean they were from your regiment.
+      objectReference: {fileID: 0}
+    - target: {fileID: 6270804076228166894, guid: 2cacdf46bbfb98e4bbd1ee060b64a995,
+        type: 3}
+      propertyPath: doneFight.names.Array.data[1]
+      value: Arcelus
+      objectReference: {fileID: 0}
+    - target: {fileID: 6270804076228166894, guid: 2cacdf46bbfb98e4bbd1ee060b64a995,
+        type: 3}
+      propertyPath: doneFight.names.Array.data[2]
+      value: Oberon
+      objectReference: {fileID: 0}
+    - target: {fileID: 6270804076228166894, guid: 2cacdf46bbfb98e4bbd1ee060b64a995,
+        type: 3}
+      propertyPath: doneFight.sentences.Array.data[2]
+      value: Why you little b...
+      objectReference: {fileID: 0}
+    - target: {fileID: 6270804076228166894, guid: 2cacdf46bbfb98e4bbd1ee060b64a995,
+        type: 3}
+      propertyPath: doneFight.names.Array.data[3]
+      value: Frea
+      objectReference: {fileID: 0}
+    - target: {fileID: 6270804076228166894, guid: 2cacdf46bbfb98e4bbd1ee060b64a995,
+        type: 3}
+      propertyPath: doneFight.sentences.Array.data[3]
+      value: Stop acting like children! We need to get out of here
+      objectReference: {fileID: 0}
+    - target: {fileID: 6270804076228166894, guid: 2cacdf46bbfb98e4bbd1ee060b64a995,
+        type: 3}
+      propertyPath: doneFight.portrait.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: f40486206916ccc4a9bf37f57f448dee,
+        type: 3}
+    - target: {fileID: 6270804076228166894, guid: 2cacdf46bbfb98e4bbd1ee060b64a995,
+        type: 3}
+      propertyPath: doneFight.portrait.Array.data[2]
+      value: 
+      objectReference: {fileID: 21300000, guid: e24a4049526ca704eb781c65db5c188d,
+        type: 3}
+    - target: {fileID: 6270804076228166894, guid: 2cacdf46bbfb98e4bbd1ee060b64a995,
+        type: 3}
+      propertyPath: doneFight.portrait.Array.data[3]
+      value: 
+      objectReference: {fileID: 21300000, guid: 1f1660c1b92d23a4fb0b75fcca80183d,
+        type: 3}
+    - target: {fileID: 6270804076228166894, guid: 2cacdf46bbfb98e4bbd1ee060b64a995,
+        type: 3}
+      propertyPath: doneFight.povChange.Array.data[0]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6270804076228166894, guid: 2cacdf46bbfb98e4bbd1ee060b64a995,
+        type: 3}
+      propertyPath: doneFight.povChange.Array.data[1]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6270804076228166894, guid: 2cacdf46bbfb98e4bbd1ee060b64a995,
+        type: 3}
+      propertyPath: doneFight.povChange.Array.data[2]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6270804076228166894, guid: 2cacdf46bbfb98e4bbd1ee060b64a995,
+        type: 3}
+      propertyPath: doneFight.povChange.Array.data[3]
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2cacdf46bbfb98e4bbd1ee060b64a995, type: 3}
@@ -8152,25 +8220,28 @@ MonoBehaviour:
     - Solider
     - Fargas
     - Soldier
+    - Fargas
     sentences:
     - 'Fargas, we''ve got company. They don''t look like the sitting down for a drink
       type. '
     - Fargas, Frea, Oberon and Arcelus I hereby arrest you in the name of the Ocrestian
-      Military
-    - I cannot surrender, please let us both go our separate ways. This does not need
-      to come to bloodshed
-    - You think I can let a traitor like you poison these good people with your presence.
-      I will enjoy carving you up.
+      Military!
+    - We aren't going anywhere.
+    - Unacceptable! I am honour bound to serve in the name of Ocrest! Prepare to die
+      scum!
+    - God, did I used to sound like this?
     portrait:
     - {fileID: 21300000, guid: f40486206916ccc4a9bf37f57f448dee, type: 3}
     - {fileID: 21300000, guid: 910efa03995549e41a60118736af3ece, type: 3}
     - {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825, type: 3}
     - {fileID: 21300000, guid: 910efa03995549e41a60118736af3ece, type: 3}
+    - {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825, type: 3}
     povChange:
     - 1
     - 2
     - 3
-    - 3
+    - 4
+    - 4
     typingSpeed: 0.001
     isChoice: 0
     choiceLine: 0
