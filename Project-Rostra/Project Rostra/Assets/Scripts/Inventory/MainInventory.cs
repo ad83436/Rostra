@@ -658,6 +658,7 @@ public class MainInventory : MonoBehaviour {
                 oPlayer.criticalMod -= itemStats[4];
                 oPlayer.maxHealthMod -= itemStats[5];
                 oPlayer.maxManaMod -= itemStats[6];
+                PartyStats.chara[invItem[curOption, 2]] = oPlayer;
             }
             // Set the inventory item's "Who's Equipped This" element to the current player's ID
             invItem[curOption, 2] = playerID;
@@ -672,6 +673,7 @@ public class MainInventory : MonoBehaviour {
             // Tell the inventory that the item isn't equipped by anybody anymore
             invItem[curOption, 2] = -1;
         }
+        PartyStats.chara[invItem[curOption, 2]] = player;
     }
 
     #endregion
