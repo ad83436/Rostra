@@ -76,14 +76,17 @@ public class PlayerMove : MonoBehaviour
 		if ((dm.nextDialogue == true && dm.isActive == false) && Input.GetKeyDown(KeyCode.Return) && ct != null && ct.isChoiceDepend == false && ct.dialogue.hasPlayed == false)
 		{
 			ct.TriggerConvo();
+			Debug.Log("Talking");
 		}
 		else if ((dm.nextDialogue == true && dm.isActive == false) && Input.GetKeyDown(KeyCode.Return) && ct != null && ct.dialogue.isChoice == true && ct.dialogue.hasPlayed == true)
 		{
 			ct.TriggerNormalDialogue();
+			Debug.Log("Talking");
 		}
 		else if ((dm.nextDialogue == true && dm.isActive == false) && Input.GetKeyDown(KeyCode.Return) && ct != null && ct.isChoiceDepend == true)
 		{
 			ct.TriggerChoiceDependantConvo();
+			Debug.Log("Talking");
 		}
 	}
 

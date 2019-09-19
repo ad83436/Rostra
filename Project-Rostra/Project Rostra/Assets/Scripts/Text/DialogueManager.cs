@@ -110,7 +110,7 @@ public class DialogueManager : MonoBehaviour
 		}
 		else
 		{
-			Debug.LogError("The Dialogue Guy is missing and sweet Jesus I can't find him");
+			Destroy(gameObject);
 		}
 		DontDestroyOnLoad(this.gameObject);
 		// set everything to its default 
@@ -143,6 +143,7 @@ public class DialogueManager : MonoBehaviour
 
 	public void StartConversation(Dialogue d)
 	{
+		Debug.Log("StartConvo");
 		if (d.willCount == true)
 		{
 			willCount++;
