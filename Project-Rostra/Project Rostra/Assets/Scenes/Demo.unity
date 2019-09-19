@@ -4156,7 +4156,7 @@ MonoBehaviour:
     sentences:
     - Well... let's agree to disagree
     portrait:
-    - {fileID: 21300000, guid: 91b768bb8988d8c4db8c80b0b6059d47, type: 3}
+    - {fileID: 21300000, guid: d2e026a2aaf23124792a008c0f2478f5, type: 3}
     povChange: []
     typingSpeed: 0
     isChoice: 0
@@ -4195,7 +4195,7 @@ MonoBehaviour:
     sentences:
     - Excellent choice! You have excellent taste in pies.
     portrait:
-    - {fileID: 21300000, guid: 91b768bb8988d8c4db8c80b0b6059d47, type: 3}
+    - {fileID: 21300000, guid: d2e026a2aaf23124792a008c0f2478f5, type: 3}
     povChange: []
     typingSpeed: 0
     isChoice: 0
@@ -4241,9 +4241,9 @@ MonoBehaviour:
     - It's nothing like that awful cherry pie that people keep telling me is good.
     - Which do you prefer?
     portrait:
-    - {fileID: 21300000, guid: f40486206916ccc4a9bf37f57f448dee, type: 3}
+    - {fileID: 21300000, guid: d2e026a2aaf23124792a008c0f2478f5, type: 3}
     - {fileID: 21300000, guid: a827ee53aaa7a564398fad564e06d291, type: 3}
-    - {fileID: 21300000, guid: 91b768bb8988d8c4db8c80b0b6059d47, type: 3}
+    - {fileID: 21300000, guid: d2e026a2aaf23124792a008c0f2478f5, type: 3}
     povChange:
     - 2
     - 3
@@ -4284,7 +4284,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 2}
+    oldSize: {x: 0.68, y: 1.16}
     newSize: {x: 2, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -4310,7 +4310,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 2}
+    oldSize: {x: 0.68, y: 1.16}
     newSize: {x: 2, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -4357,7 +4357,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 2ba897076aaeef841bc7293bc673e3e3, type: 3}
+  m_Sprite: {fileID: -8783339428778159921, guid: 3f627871631f52844b4916624e796d6a,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -5681,7 +5682,7 @@ MonoBehaviour:
     - Only two people live on the outskirts. Brenna, and a dwarven fellow named Domel.
     - Haven't seen either in a while come to think of it.
     portrait:
-    - {fileID: 21300000, guid: f40486206916ccc4a9bf37f57f448dee, type: 3}
+    - {fileID: 21300000, guid: 26feff2f0d4e92349a70bba8a0c18d31, type: 3}
     povChange: []
     typingSpeed: 0.001
     isChoice: 0
@@ -5719,7 +5720,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 2}
+    oldSize: {x: 0.68, y: 1.16}
     newSize: {x: 2, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -5745,7 +5746,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 2}
+    oldSize: {x: 0.68, y: 1.16}
     newSize: {x: 2, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -5792,7 +5793,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 2ba897076aaeef841bc7293bc673e3e3, type: 3}
+  m_Sprite: {fileID: 3522160335945259904, guid: 45834460d99aa374ab7910e41f9c556d,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -6067,7 +6069,7 @@ MonoBehaviour:
     - The dispute between the Dwarves and the Guild is getting pretty serious.
     - I'm scared for everyone in this town.
     portrait:
-    - {fileID: 21300000, guid: f40486206916ccc4a9bf37f57f448dee, type: 3}
+    - {fileID: 21300000, guid: d2e026a2aaf23124792a008c0f2478f5, type: 3}
     povChange: []
     typingSpeed: 0
     isChoice: 0
@@ -6105,7 +6107,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 2}
+    oldSize: {x: 0.68, y: 1.16}
     newSize: {x: 2, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -6131,7 +6133,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 2}
+    oldSize: {x: 0.68, y: 1.16}
     newSize: {x: 2, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -6178,7 +6180,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 2ba897076aaeef841bc7293bc673e3e3, type: 3}
+  m_Sprite: {fileID: 4445226746073404532, guid: 3f627871631f52844b4916624e796d6a,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -6620,7 +6623,7 @@ MonoBehaviour:
     - The village of Hadria serves as one of the Alchemy Guild's largest mines.
     - 'It''s why the ongoing conflict is so serious. '
     portrait:
-    - {fileID: 21300000, guid: f40486206916ccc4a9bf37f57f448dee, type: 3}
+    - {fileID: 21300000, guid: 26feff2f0d4e92349a70bba8a0c18d31, type: 3}
     povChange: []
     typingSpeed: 0
     isChoice: 0
@@ -6658,7 +6661,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 2}
+    oldSize: {x: 0.68, y: 1.2}
     newSize: {x: 2, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -6684,7 +6687,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 2}
+    oldSize: {x: 0.68, y: 1.2}
     newSize: {x: 2, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -6731,7 +6734,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 2ba897076aaeef841bc7293bc673e3e3, type: 3}
+  m_Sprite: {fileID: -2693724678846489391, guid: 11e32376ec40f1342a213cb044cebe46,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -6797,7 +6801,7 @@ MonoBehaviour:
     sentences:
     - 'I am an expert on pies. '
     portrait:
-    - {fileID: 21300000, guid: f40486206916ccc4a9bf37f57f448dee, type: 3}
+    - {fileID: 21300000, guid: d2e026a2aaf23124792a008c0f2478f5, type: 3}
     povChange: []
     typingSpeed: 0
     isChoice: 0
@@ -6837,7 +6841,7 @@ MonoBehaviour:
     - I've heard you like cherry pie.
     - Everybody likes cherry
     portrait:
-    - {fileID: 21300000, guid: f40486206916ccc4a9bf37f57f448dee, type: 3}
+    - {fileID: 21300000, guid: d2e026a2aaf23124792a008c0f2478f5, type: 3}
     povChange: []
     typingSpeed: 0
     isChoice: 0
@@ -6877,7 +6881,7 @@ MonoBehaviour:
     - I've heard you like apple pie.
     - It's... okay I guess.
     portrait:
-    - {fileID: 21300000, guid: f40486206916ccc4a9bf37f57f448dee, type: 3}
+    - {fileID: 21300000, guid: d2e026a2aaf23124792a008c0f2478f5, type: 3}
     povChange: []
     typingSpeed: 0
     isChoice: 0
@@ -6952,7 +6956,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 2}
+    oldSize: {x: 0.68, y: 1.12}
     newSize: {x: 2, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -6978,7 +6982,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 2}
+    oldSize: {x: 0.68, y: 1.12}
     newSize: {x: 2, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -7025,7 +7029,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 2ba897076aaeef841bc7293bc673e3e3, type: 3}
+  m_Sprite: {fileID: 1466213367912908611, guid: 3f627871631f52844b4916624e796d6a,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
