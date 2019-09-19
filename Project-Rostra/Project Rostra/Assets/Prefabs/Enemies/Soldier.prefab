@@ -146,7 +146,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1927818603
-  m_SortingLayer: 2
+  m_SortingLayer: 1
   m_SortingOrder: 22
   m_Sprite: {fileID: 1506670206671948361, guid: 14a1ebe6b1dd395408ec513069f7e35c,
     type: 3}
@@ -175,7 +175,7 @@ MonoBehaviour:
   enemyIndexInBattleManager: 1
   eMana: 0
   eAttack: 22
-  eAgility: 16
+  eAgility: 13
   eDefence: 14
   eStrength: 10
   eSpeed: 10

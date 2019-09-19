@@ -11,6 +11,7 @@ public class EndCollider : MonoBehaviour
 
     void Update()
     {
+
         if(fadeOut)
         {
             fadeImage.fillAmount += 0.02f;
