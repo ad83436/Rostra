@@ -113,8 +113,8 @@ public class DialogueManager : MonoBehaviour
 			Destroy(gameObject);
 		}
 		DontDestroyOnLoad(this.gameObject);
-		// set everything to its default 
-		textElements = new Queue<string>();
+        // set everything to its default 
+        textElements = new Queue<string>();
 		choices = new bool[7];
 		change = 0;
 		currentChange = 0;

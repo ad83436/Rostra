@@ -9,7 +9,7 @@ public class Credits : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            SceneManager.LoadScene("Main Menu");
+            Application.Quit();
         }
     }
 }
