@@ -17,22 +17,22 @@ public class ConversationTrigger : MonoBehaviour
 	{
 		if (isOneShot == true)
 		{
-			FindObjectOfType<DialogueManager>().StartConversation(dialogue);
+			DialogueManager.instance.StartConversation(dialogue);
 			isOneShot = false;
 		}
 		else
 		{
-			FindObjectOfType<DialogueManager>().StartConversation(dialogue);
+			//FindObjectOfType<DialogueManager>().StartConversation(dialogue);
 		}
 	}
 	// 1 = dwarf, 2 = guild, 3 = kill, 4 = spare, 5 = tell, 6 = lie
 	public void TriggerChoiceDependantConvo()
 	{
-		FindObjectOfType<DialogueManager>().ChoiceDependantConvo(choiceCare, dialogue);
+		DialogueManager.instance.ChoiceDependantConvo(choiceCare, dialogue);
 	}
 
 	public void TriggerNormalDialogue()
 	{
-		FindObjectOfType<DialogueManager>().PlayNormalDialogue(dialogue);
+		DialogueManager.instance.PlayNormalDialogue(dialogue);
 	}
 }
