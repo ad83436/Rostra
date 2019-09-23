@@ -22,7 +22,7 @@ public class ConversationTrigger : MonoBehaviour
 		}
 		else
 		{
-			//FindObjectOfType<DialogueManager>().StartConversation(dialogue);
+			FindObjectOfType<DialogueManager>().StartConversation(dialogue);
 		}
 	}
 	// 1 = dwarf, 2 = guild, 3 = kill, 4 = spare, 5 = tell, 6 = lie
