@@ -322,6 +322,49 @@ public class MainInventory : MonoBehaviour {
         return slot;
     }
 
+    // Sorts the Inventory based on the sorting method that was selected for use. There will be a total of _ methods of sorting the inventory:
+    // Type 1 will sort the inventory based on equipment and armor for; followed by key items, and consumables
+    // Type 2 will sort the inventory based on key items; followed by equipment, armor, and consumables
+    // Type 3 will sort the inventory based on consumables; followed by key items, equipment, and armor
+    /*public void SortInventory(int sortMethod) {
+        int[] sortingOrder = null;
+        if (sortMethod == 0) { // Sorting by equipment and armor
+            sortingOrder = new int[] { (int)ITEM_TYPE.EQUIPABLE, (int)ITEM_TYPE.KEY_ITEM, (int)ITEM_TYPE.CONSUMABLE };
+        } else if (sortMethod == 1) { // Sorting by key items
+            sortingOrder = new int[] { (int)ITEM_TYPE.KEY_ITEM, (int)ITEM_TYPE.EQUIPABLE, (int)ITEM_TYPE.CONSUMABLE };
+        } else if (sortMethod == 2) { // Sorting by consumables
+            sortingOrder = new int[] { (int)ITEM_TYPE.CONSUMABLE, (int)ITEM_TYPE.KEY_ITEM, (int)ITEM_TYPE.EQUIPABLE };
+        }
+
+        // Only attempt to sort the inventory if a valid sorting method was chosen
+        if (sortingOrder != null) {
+            var length = sortingOrder.Length;
+        }
+    }
+
+    private int[] QuickSort(int[] itemList, int pivotNum) {
+        if (itemList.Length <= 1) {
+            return itemList;
+        } else {
+            List<int> lessThanPivot  = new List<int>();
+            List<int> greaterThanPivot = new List<int>();
+            int pivot = itemList[pivotNum];
+            var length = itemList.Length;
+            for (int i = 0; i < length; i++) {
+                if (itemList[i] < pivot) {
+                    lessThanPivot.Add(itemList[i]);
+                } else {
+                    greaterThanPivot.Add(itemList[i]);
+                }
+            }
+            // Combine the two sorted lists together and return the result
+            List<int> result = new List<int>();
+            result.AddRange(lessThanPivot);
+            result.AddRange(greaterThanPivot);
+            return result.ToArray();
+        }
+    }*/
+
     // Removes an item from the specified slot in the inventory, if 0 items remain after word, empty the slot completely
     public void RemoveItem(int slot, int numToRemove = 1) {
        invItem[slot, 1] -= numToRemove;
