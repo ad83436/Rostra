@@ -6,7 +6,10 @@ using UnityEngine.SceneManagement;
 
 public class UIBTL : MonoBehaviour
 {
+    //Instances
     private BattleManager btlManager;
+    private MainInventory inventory;
+
     public GameObject playerTurnIndicator;
     public GameObject enemyToAttackIndicator;
     public GameObject playerIndicatorPos0;
@@ -44,9 +47,18 @@ public class UIBTL : MonoBehaviour
     public Text maxMP;
     public Image mpBar;
 
-    //Skills and Items Control Panel
-    public GameObject skillsItemsPanel;
-    public Text skillsItemsText;
+    //Skills Control Panel
+    public GameObject skillsPanel;
+    public Text skillsTextDescription;
+
+    //Items Control Panel
+    public GameObject itemsPanel;
+    public Sprite[] itemIcons; //Stores the icon of each item --> Temporary until the itemIcons array is ready in the MainInventory
+    public Image[] itemIconsInPanel; //Stores references to the icons inside the panel
+    public Text[] itemNames; //Displayes item name
+    public Text[] itemCount; //Displays item count
+    public Image itemsHighlighter; //Moves with the itemsPanelIndex to tell which item the player is currently using
+    private int itemsPanelIndex; //Which item are we at now? Also represents the item ID since items will be ordered based on their IDs
 
 
     //Q UI Images
@@ -200,7 +212,7 @@ public class UIBTL : MonoBehaviour
 
         //Skills and Items
 
-        skillsItemsPanel.gameObject.SetActive(false);
+        skillsPanel.gameObject.SetActive(false);
 
         //Dialogue after battle
         dialogueManager = DialogueManager.instance;
@@ -533,8 +545,8 @@ public class UIBTL : MonoBehaviour
                     }
                     else if (Input.GetKeyDown(KeyCode.Space)) //Player has chosen Skills
                     {
-                        skillsItemsPanel.gameObject.SetActive(true);
-                        skillsItemsText.text = "Your skills are in another castle...ughh In another build 0.015 ;)";
+                        skillsPanel.gameObject.SetActive(true);
+                        skillsTextDescription.text = "Your skills are in another castle...ughh In another build 0.015 ;)";
                         currentState = btlUIState.choosingSkillsCommand;
                     }
                     break;
@@ -557,8 +569,8 @@ public class UIBTL : MonoBehaviour
                     }
                     else if (Input.GetKeyDown(KeyCode.Space)) //Player has chosen Items
                     {
-                        skillsItemsPanel.gameObject.SetActive(true);
-                        skillsItemsText.text = "Error 404 Items not found...Oh wait...Found them...In another build 0.015 ;)";
+                        skillsPanel.gameObject.SetActive(true);
+                        skillsTextDescription.text = "Error 404 Items not found...Oh wait...Found them...In another build 0.015 ;)";
                         currentState = btlUIState.choosingItemsCommand;
                     }
                     break;
@@ -599,7 +611,7 @@ public class UIBTL : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Space))
         {
-            skillsItemsPanel.gameObject.SetActive(false);
+            skillsPanel.gameObject.SetActive(false);
             currentState = btlUIState.choosingBasicCommand;
         }
 
@@ -622,7 +634,7 @@ public class UIBTL : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Space))
         {
-            skillsItemsPanel.gameObject.SetActive(false);
+            skillsPanel.gameObject.SetActive(false);
             currentState = btlUIState.choosingBasicCommand;
         }
     }
