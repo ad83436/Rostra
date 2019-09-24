@@ -2,7 +2,7 @@
 using UnityEngine;
 
 // Code Written By:     Christopher Brine
-// Last Updated:        September 17th, 2019
+// Last Updated:        September 24th, 2019
 
 public class MainInventory : MonoBehaviour {
     public static MainInventory invInstance;    // Holds the current inventory instance in a single variable
@@ -562,7 +562,7 @@ public class MainInventory : MonoBehaviour {
 
         // Remove the item (Or one from the stack) if it was consumed by the player
         if (itemType == (int)ITEM_TYPE.CONSUMABLE) {
-            RemoveItem(invItem[curOption, 0]);
+            RemoveItem(curOption);
         }
     }
 
@@ -662,6 +662,7 @@ public class MainInventory : MonoBehaviour {
         } else if (player.hitpoints < 0) {
             player.hitpoints = 0;
         }
+        PartyStats.chara[invItem[curOption, 2]] = player;
     } 
 
     // Updates the player's MP when a mana potion or similar is used in the inventory
@@ -674,6 +675,7 @@ public class MainInventory : MonoBehaviour {
         } else if (player.magicpoints < 0) {
             player.magicpoints = 0;
         }
+        PartyStats.chara[invItem[curOption, 2]] = player;
     }
 
     // Updates player stats whenever an item like a piece of armor or weapon is equipped or unequipped
