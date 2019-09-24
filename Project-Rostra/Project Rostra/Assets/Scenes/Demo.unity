@@ -6360,7 +6360,7 @@ MonoBehaviour:
     isBattle: 0
   choiceCare: 0
   isChoiceDepend: 0
-  isOneShot: 1
+  isOneShot: 0
 --- !u!61 &1360666119
 BoxCollider2D:
   m_ObjectHideFlags: 0

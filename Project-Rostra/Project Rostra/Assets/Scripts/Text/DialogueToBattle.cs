@@ -12,7 +12,7 @@ public class DialogueToBattle : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-		dm = DialogueManager.instance;
+		dm = FindObjectOfType<DialogueManager>();
 		ct = GetComponent<ConversationTrigger>();
     }
 	
