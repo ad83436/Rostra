@@ -593,14 +593,14 @@ public class UIBTL : MonoBehaviour
                         upArrow.gameObject.SetActive(false);
                         downArrow.gameObject.SetActive(true);
                         itemsPanelIndex = 0;
-                        itemIconsInPanel[0].sprite = itemIcons[0];
-                        itemNames[0].text = inventory.ItemName(0);
+                        itemIconsInPanel[0].sprite = itemIcons[inventory.invItem[0, 0]];
+                        itemNames[0].text = inventory.ItemName(inventory.invItem[0,0]);
                         itemCount[0].text = inventory.invItem[0, 1].ToString();
-                        itemIconsInPanel[1].sprite = itemIcons[1];
-                        itemNames[1].text = inventory.ItemName(1);
+                        itemIconsInPanel[1].sprite = itemIcons[inventory.invItem[1, 0]];
+                        itemNames[1].text = inventory.ItemName(inventory.invItem[1, 0]);
                         itemCount[1].text = inventory.invItem[1, 1].ToString();
-                        itemIconsInPanel[2].sprite = itemIcons[2];
-                        itemNames[2].text = inventory.ItemName(2);
+                        itemIconsInPanel[2].sprite = itemIcons[inventory.invItem[2, 0]];
+                        itemNames[2].text = inventory.ItemName(inventory.invItem[2, 0]);
                         itemCount[2].text = inventory.invItem[2, 1].ToString();
                         currentState = btlUIState.choosingItemsCommand;
                     }
@@ -699,14 +699,15 @@ public class UIBTL : MonoBehaviour
             itemDescription.text = inventory.ItemDescription(itemsPanelIndex);
             if(itemsPanelIndex%3 == 0)
             {
-                itemIconsInPanel[0].sprite = itemIcons[itemsPanelIndex];
-                itemNames[0].text = inventory.ItemName(itemsPanelIndex);
+                //We're mirroring the order of the items in the inventory UI
+                itemIconsInPanel[0].sprite = itemIcons[inventory.invItem[itemsPanelIndex, 0]];
+                itemNames[0].text = inventory.ItemName(inventory.invItem[itemsPanelIndex, 0]);
                 itemCount[0].text = inventory.invItem[itemsPanelIndex, 1].ToString();
-                itemIconsInPanel[1].sprite = itemIcons[itemsPanelIndex + 1];
-                itemNames[1].text = inventory.ItemName(itemsPanelIndex + 1);
+                itemIconsInPanel[1].sprite = itemIcons[inventory.invItem[itemsPanelIndex + 1, 0]];
+                itemNames[1].text = inventory.ItemName(inventory.invItem[itemsPanelIndex + 1, 0]);
                 itemCount[1].text = inventory.invItem[itemsPanelIndex + 1, 1].ToString();
-                itemIconsInPanel[2].sprite = itemIcons[itemsPanelIndex + 2];
-                itemNames[2].text = inventory.ItemName(itemsPanelIndex + 2);
+                itemIconsInPanel[2].sprite = itemIcons[inventory.invItem[itemsPanelIndex + 2, 0]];
+                itemNames[2].text = inventory.ItemName(inventory.invItem[itemsPanelIndex + 2, 0]);
                 itemCount[2].text = inventory.invItem[itemsPanelIndex + 2, 1].ToString();
 
                 //Check if we're at the last three items -->This should be changed to work with the inventory count. Will change once we decide on the inventory count
@@ -734,14 +735,14 @@ public class UIBTL : MonoBehaviour
             //Check if we're back to the previous 3 items
             if (itemsPanelIndex % 3 != 0 && itemHPosIndex < 0)
             {
-                itemIconsInPanel[0].sprite = itemIcons[itemsPanelIndex - 2];
-                itemNames[0].text = inventory.ItemName(itemsPanelIndex - 2);
+                itemIconsInPanel[0].sprite = itemIcons[inventory.invItem[itemsPanelIndex - 2, 0]];
+                itemNames[0].text = inventory.ItemName(inventory.invItem[itemsPanelIndex - 2, 0]);
                 itemCount[0].text = inventory.invItem[itemsPanelIndex - 2, 1].ToString();
-                itemIconsInPanel[1].sprite = itemIcons[itemsPanelIndex - 1];
-                itemNames[1].text = inventory.ItemName(itemsPanelIndex - 1);
+                itemIconsInPanel[1].sprite = itemIcons[inventory.invItem[itemsPanelIndex - 1, 0]];
+                itemNames[1].text = inventory.ItemName(inventory.invItem[itemsPanelIndex - 1, 0]);
                 itemCount[1].text = inventory.invItem[itemsPanelIndex - 1, 1].ToString();
-                itemIconsInPanel[2].sprite = itemIcons[itemsPanelIndex];
-                itemNames[2].text = inventory.ItemName(itemsPanelIndex);
+                itemIconsInPanel[2].sprite = itemIcons[inventory.invItem[itemsPanelIndex, 0]];
+                itemNames[2].text = inventory.ItemName(inventory.invItem[itemsPanelIndex, 0]);
                 itemCount[2].text = inventory.invItem[itemsPanelIndex, 1].ToString();
 
                 itemsHighlighter.transform.position = itemsHPos2.transform.position;
@@ -853,13 +854,15 @@ public class UIBTL : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-           // Debug.Log("itemsPanelindex " + itemsPanelIndex);
-           // Debug.Log("hilighterPos " + itemHPosIndex);
-            inventory.ItemUseFunction(itemsPanelIndex, playerIndicatorIndex);
+            // Debug.Log("itemsPanelindex " + itemsPanelIndex);
+            // Debug.Log("hilighterPos " + itemHPosIndex);
+            inventory.curOption = itemsPanelIndex; //Update the cursor in the inventory UI as that's used in the itemUseFunction to decrease the count of the used item
+            inventory.ItemUseFunction(inventory.invItem[itemsPanelIndex, 0], playerIndicatorIndex);
             //Debug.Log(inventory.invItem[itemsPanelIndex, 1]);
            // Debug.Log(inventory.ItemName(itemsPanelIndex));
             itemCount[itemHPosIndex].text = inventory.invItem[itemsPanelIndex, 1].ToString();
             UpdatePlayerStats(playerIndicatorIndex);
+            inventory.curOption = itemsPanelIndex = 0; //Reset the itemsPanelIndex
             EndTurn();
         }
     }

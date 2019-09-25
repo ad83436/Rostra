@@ -22,7 +22,7 @@ public class MainInventory : MonoBehaviour {
     private bool swappingItems = false;         // If true, the inventory will be in an "Item Swap" state. Meaning, no items can be selected until the swap is declined or completed
 
     // Variables for selecting options and inventory items
-    private int curOption = 0;                  // The current inventory item the player has their cursor over
+    public int curOption = 0;                  // The current inventory item the player has their cursor over
     private int selectedOption = -1;            // The item that the player has selected in the inventory
     private int subCurOption = 0;               // The current option the player has their cursor over after selecting an item
 
