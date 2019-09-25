@@ -341,6 +341,10 @@ public class Player : MonoBehaviour
             currentRage = maxRage;
             canRage = true;
         }
+        else
+        {
+            canRage = false;
+        }
     }
 
     public void ForcePlayerTurnAnimationOff()

@@ -656,13 +656,14 @@ public class MainInventory : MonoBehaviour {
     private void UpdatePlayerHitpoints(int amount, int playerID) {
         CharacterStats player = PartyStats.chara[playerID];
         player.hitpoints += amount;
+        player.rage -= amount * 1.2f;
         // Make sure the hitpoints don't go below zero or above the player's maximum HP
         if (player.hitpoints > player.TotalMaxHealth) {
             player.hitpoints = player.TotalMaxHealth;
         } else if (player.hitpoints < 0) {
             player.hitpoints = 0;
         }
-        PartyStats.chara[invItem[curOption, 2]] = player;
+        PartyStats.chara[playerID] = player;
     } 
 
     // Updates the player's MP when a mana potion or similar is used in the inventory
