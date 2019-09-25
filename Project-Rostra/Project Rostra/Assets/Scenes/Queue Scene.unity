@@ -1633,6 +1633,54 @@ PrefabInstance:
       propertyPath: m_FontData.m_FontSize
       value: 12
       objectReference: {fileID: 0}
+    - target: {fileID: 1384640434, guid: 9f72b6d54aeb3c844871b64d15a60701, type: 3}
+      propertyPath: m_Text
+      value: Unusable in battle
+      objectReference: {fileID: 0}
+    - target: {fileID: 1384640434, guid: 9f72b6d54aeb3c844871b64d15a60701, type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 1384640434, guid: 9f72b6d54aeb3c844871b64d15a60701, type: 3}
+      propertyPath: m_FontData.m_MinSize
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 719863820, guid: 9f72b6d54aeb3c844871b64d15a60701, type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 719863820, guid: 9f72b6d54aeb3c844871b64d15a60701, type: 3}
+      propertyPath: m_FontData.m_MinSize
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1376151874, guid: 9f72b6d54aeb3c844871b64d15a60701, type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 1376151874, guid: 9f72b6d54aeb3c844871b64d15a60701, type: 3}
+      propertyPath: m_FontData.m_MinSize
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 365104591, guid: 9f72b6d54aeb3c844871b64d15a60701, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 78.49999
+      objectReference: {fileID: 0}
+    - target: {fileID: 2142132119, guid: 9f72b6d54aeb3c844871b64d15a60701, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 171.98
+      objectReference: {fileID: 0}
+    - target: {fileID: 2142132119, guid: 9f72b6d54aeb3c844871b64d15a60701, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 198.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 1501990278, guid: 9f72b6d54aeb3c844871b64d15a60701, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 78.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1285865189, guid: 9f72b6d54aeb3c844871b64d15a60701, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 78.49999
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f72b6d54aeb3c844871b64d15a60701, type: 3}
 --- !u!114 &230563281654219756 stripped
