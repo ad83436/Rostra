@@ -593,41 +593,22 @@ public class UIBTL : MonoBehaviour
                         upArrow.gameObject.SetActive(false);
                         downArrow.gameObject.SetActive(true);
                         itemsPanelIndex = 0;
-                        if (inventory.ItemType(inventory.invItem[itemsPanelIndex, 0]) != (int)ITEM_TYPE.EQUIPABLE)
+
+                        //Show three the first three items in the inventory
+                        for(int i =0;i<3;i++)
                         {
-                            itemIconsInPanel[0].sprite = itemIcons[inventory.invItem[0, 0]];
-                            itemNames[0].text = inventory.ItemName(inventory.invItem[0, 0]);
-                            itemCount[0].text = inventory.invItem[0, 1].ToString();
-                        }
-                        else
-                        {
-                            itemIconsInPanel[0].sprite = itemIcons[0];
-                            itemNames[0].text = "Unusable in battle";
-                            itemCount[0].text = "0";
-                        }
-                        if (inventory.ItemType(inventory.invItem[itemsPanelIndex + 1, 0]) != (int)ITEM_TYPE.EQUIPABLE)
-                        {
-                            itemIconsInPanel[1].sprite = itemIcons[inventory.invItem[1, 0]];
-                            itemNames[1].text = inventory.ItemName(inventory.invItem[1, 0]);
-                            itemCount[1].text = inventory.invItem[1, 1].ToString();
-                        }
-                        else
-                        {
-                            itemIconsInPanel[1].sprite = itemIcons[0];
-                            itemNames[1].text = "Unusable in battle";
-                            itemCount[1].text = "0";
-                        }
-                        if (inventory.ItemType(inventory.invItem[itemsPanelIndex + 2, 0]) != (int)ITEM_TYPE.EQUIPABLE)
-                        {
-                            itemIconsInPanel[2].sprite = itemIcons[inventory.invItem[2, 0]];
-                            itemNames[2].text = inventory.ItemName(inventory.invItem[2, 0]);
-                            itemCount[2].text = inventory.invItem[2, 1].ToString();
-                        }
-                        else
-                        {
-                            itemIconsInPanel[2].sprite = itemIcons[0];
-                            itemNames[2].text = "Unusable in battle";
-                            itemCount[2].text = "0";
+                            if (inventory.ItemType(inventory.invItem[itemsPanelIndex + i, 0]) != (int)ITEM_TYPE.EQUIPABLE)
+                            {
+                                itemIconsInPanel[i].sprite = itemIcons[inventory.invItem[itemsPanelIndex + i, 0]];
+                                itemNames[i].text = inventory.ItemName(inventory.invItem[itemsPanelIndex + i, 0]);
+                                itemCount[i].text = inventory.invItem[itemsPanelIndex + i, 1].ToString();
+                            }
+                            else
+                            {
+                                itemIconsInPanel[i].sprite = itemIcons[0];
+                                itemNames[i].text = "Unusable in battle";
+                                itemCount[i].text = "0";
+                            }
                         }
                         currentState = btlUIState.choosingItemsCommand;
                     }
@@ -693,6 +674,7 @@ public class UIBTL : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             itemsPanel.gameObject.SetActive(false);
+            inventory.curOption = itemsPanelIndex = 0;
             currentState = btlUIState.choosingBasicCommand;
         }
         else if(Input.GetKeyDown(KeyCode.Space))//Player has chosen an item
@@ -731,41 +713,20 @@ public class UIBTL : MonoBehaviour
             if(itemsPanelIndex%3 == 0)
             {
                 //We're mirroring the order of the items in the inventory UI and only showing usable items
-                if (inventory.ItemType(inventory.invItem[itemsPanelIndex, 0]) != (int)ITEM_TYPE.EQUIPABLE)
+                for (int i = 0; i < 3; i++)
                 {
-                    itemIconsInPanel[0].sprite = itemIcons[inventory.invItem[itemsPanelIndex, 0]];
-                    itemNames[0].text = inventory.ItemName(inventory.invItem[itemsPanelIndex, 0]);
-                    itemCount[0].text = inventory.invItem[itemsPanelIndex, 1].ToString();
-                }
-                else
-                {
-                    itemIconsInPanel[0].sprite = itemIcons[0];
-                    itemNames[0].text = "Unusable in battle";
-                    itemCount[0].text = "0";
-                }
-                if (inventory.ItemType(inventory.invItem[itemsPanelIndex + 1, 0]) != (int)ITEM_TYPE.EQUIPABLE)
-                {
-                    itemIconsInPanel[1].sprite = itemIcons[inventory.invItem[itemsPanelIndex + 1, 0]];
-                    itemNames[1].text = inventory.ItemName(inventory.invItem[itemsPanelIndex + 1, 0]);
-                    itemCount[1].text = inventory.invItem[itemsPanelIndex + 1, 1].ToString();
-                }
-                else
-                {
-                    itemIconsInPanel[1].sprite = itemIcons[0];
-                    itemNames[1].text = "Unusable in battle";
-                    itemCount[1].text = "0";
-                }
-                if (inventory.ItemType(inventory.invItem[itemsPanelIndex + 2, 0]) != (int)ITEM_TYPE.EQUIPABLE)
-                {
-                    itemIconsInPanel[2].sprite = itemIcons[inventory.invItem[itemsPanelIndex + 2, 0]];
-                    itemNames[2].text = inventory.ItemName(inventory.invItem[itemsPanelIndex + 2, 0]);
-                    itemCount[2].text = inventory.invItem[itemsPanelIndex + 2, 1].ToString();
-                }
-                else
-                {
-                    itemIconsInPanel[2].sprite = itemIcons[0];
-                    itemNames[2].text = "Unusable in battle";
-                    itemCount[2].text = "0";
+                    if (inventory.ItemType(inventory.invItem[itemsPanelIndex + i, 0]) != (int)ITEM_TYPE.EQUIPABLE)
+                    {
+                        itemIconsInPanel[i].sprite = itemIcons[inventory.invItem[itemsPanelIndex + i, 0]];
+                        itemNames[i].text = inventory.ItemName(inventory.invItem[itemsPanelIndex + i, 0]);
+                        itemCount[i].text = inventory.invItem[itemsPanelIndex + i, 1].ToString();
+                    }
+                    else
+                    {
+                        itemIconsInPanel[i].sprite = itemIcons[0];
+                        itemNames[i].text = "Unusable in battle";
+                        itemCount[i].text = "0";
+                    }
                 }
 
                 //Check if we're at the last three items -->This should be changed to work with the inventory count. Will change once we decide on the inventory count
@@ -791,6 +752,7 @@ public class UIBTL : MonoBehaviour
 
             itemDescription.text = inventory.ItemDescription(itemsPanelIndex);
             //Check if we're back to the previous 3 items
+            //Will turn it into a for loop when I'm smart enough
             if (itemsPanelIndex % 3 != 0 && itemHPosIndex < 0)
             {
                 if (inventory.ItemType(inventory.invItem[itemsPanelIndex - 2, 0]) != (int)ITEM_TYPE.EQUIPABLE)
