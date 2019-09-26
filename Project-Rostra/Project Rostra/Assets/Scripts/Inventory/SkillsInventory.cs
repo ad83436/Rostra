@@ -144,7 +144,7 @@ public class SkillsInventory : MonoBehaviour {
         for (int i = 0; i < length; i++) {
             // Skill found, add to unlocked skills
             if (PartySkills.skills[playerIndex].unlockableSkills[i] == skillID) {
-                PartySkills.skills[playerIndex].learnedSkills[currentPlayer.numSkillsLearned] = skillID;
+                PartySkills.skills[playerIndex].learnedSkills[PartySkills.skills[playerIndex].numSkillsLearned] = skillID;
                 PartySkills.skills[playerIndex].numSkillsLearned++;
                 unlockSuccess = true;
                 i = length; // Exit the loop
