@@ -4,9 +4,38 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+//Code written by: Your moma and I
+//Date: Who the fuck knows
 
 public class Enemy : MonoBehaviour
 {
+    public enum EnemyClassType
+    {
+        DPS,    
+        Tank,   
+        Support 
+    };
+
+    public enum EnemyAttackType
+    {
+        Dumb,
+        Opportunistic,
+        Assassin,
+        Bruiser,
+        Healer,
+        Heal_Support,
+        Straegist,
+        Demo
+    };
+
+    enum PlayerStatReference
+    {
+        Health,
+        Agility,
+        Defence
+
+    };
+
     public int enemyIndexInBattleManager;
     private BattleManager battleManager;
     private UIBTL uiBTL;
@@ -20,11 +49,8 @@ public class Enemy : MonoBehaviour
     public int eCurrentLevel;
     public string eName;
     public float eRange;
+    public List <float> playerStatNeeded;
     public float eCritical;
-    public string enemyClassType;
-    public string enemyType;// Determins which player enemy will attack
-    public bool hit;
-    float minPlayerHp;
     public Sprite qImage;
     Player attackThisPlayer;
 
@@ -39,10 +65,14 @@ public class Enemy : MonoBehaviour
 
     private bool haveAddedMyself;
     public bool dead;
+    private bool skillPointAdded;
+    public bool hit;
 
     private GameObject demoEffect;
     private ObjectPooler objPooler;
 
+    public EnemyClassType enemyClass;
+    public EnemyAttackType enemyAttack;
 
     private void Start()
     {
@@ -57,12 +87,13 @@ public class Enemy : MonoBehaviour
         hit = false;
         dead = false;
 
+        IncreaseStatsBasedOnLevel(eCurrentLevel);
     }
 
     private void Update()
     {
         //If the enemy is yet to add itself to the Q and the btl manager is currently adding enemies, then add this enemy to the Q
-        if(!haveAddedMyself&&battleManager.addEnemies)
+        if (!haveAddedMyself && battleManager.addEnemies)
         {
             AddEnemyToBattle();
             haveAddedMyself = true;
@@ -72,34 +103,33 @@ public class Enemy : MonoBehaviour
     //Every enemy scales differently based on its warrior class (DPS,Tanks, Support)
     public void IncreaseStatsBasedOnLevel(int enemyCurrentLevel)
     {
-        
         eCurrentLevel = enemyCurrentLevel;
         //eHP increase is still temporary until we agree how much each class'es HP increases with leveling up
-            float skillPoints = enemyCurrentLevel - eBaseLevel;
-            switch (enemyClassType)
-            {
-                case "DPS":
-                    eAttack = Mathf.CeilToInt(eAttack += (skillPoints * 0.4f));
-                    eAgility = Mathf.CeilToInt(eAgility += (skillPoints * 0.2f));
-                    eSpeed = Mathf.CeilToInt(eSpeed += (skillPoints * 0.2f));
-                    currentHP += skillPoints * 35.0f * 0.5f;                    
+        float skillPoints = enemyCurrentLevel - eBaseLevel;
 
+        switch (enemyClass)
+        {
+            case EnemyClassType.DPS:
+                eAttack = Mathf.CeilToInt(eAttack + (skillPoints * 0.6f));
+                eAgility = Mathf.CeilToInt(eAgility + (skillPoints * 0.4f));
+                currentHP = Mathf.CeilToInt(currentHP + (skillPoints * 35.0f * 0.5f));
+                Debug.Log(eName + " is a " + enemyClass + " Class of enemy");
                 break;
 
-                case "Tank":
-                    eAttack = Mathf.CeilToInt(eAttack += (skillPoints * 0.1f));
-                    eDefence = Mathf.CeilToInt(eDefence += (skillPoints * 0.6f));
-                    eSpeed = Mathf.CeilToInt(eSpeed += (skillPoints * 0.2f));
-                    currentHP += skillPoints * 60.0f * 0.5f;
+            case EnemyClassType.Tank:
+                eAttack = Mathf.CeilToInt(eAttack + (skillPoints * 0.3f));
+                eAgility = Mathf.CeilToInt(eDefence + (skillPoints * 0.7f));
+                currentHP = Mathf.CeilToInt(currentHP + (skillPoints * 60.0f * 0.5f));
+                Debug.Log(eName + " is a " + enemyClass + " Class of enemy");
                 break;
 
-                case "Support":
-                    eSpeed = Mathf.CeilToInt(eAttack += (skillPoints * 0.4f));
-                    eAgility = Mathf.CeilToInt(eAttack += (skillPoints * 0.4f));
-                    eDefence = Mathf.CeilToInt(eDefence += (skillPoints * 0.2f));
-                    currentHP += skillPoints * 85.0f * 0.5f;
+            case EnemyClassType.Support:
+                eAttack = Mathf.CeilToInt(eAttack + (skillPoints * 0.4f));
+                eAgility = Mathf.CeilToInt(eAttack + (skillPoints * 0.6f));
+                currentHP = Mathf.CeilToInt(currentHP + (skillPoints * 85.0f * 0.5f));
+                Debug.Log(eName + " is a " + enemyClass + " Class of enemy");
                 break;
-            }
+        }
 
         maxHP = currentHP;
     }
@@ -111,43 +141,48 @@ public class Enemy : MonoBehaviour
 
     public void EnemyTurn()
     {
+        float attackChance = Random.Range(0, 100); // determins if the ememy will use its type attack or a dumb attack 
+
         if (!dead)
         {
-            switch (enemyType)
+            switch (enemyAttack)
             {
-                case "":
+                case EnemyAttackType.Dumb:
                     DumbAttack();
                     break;
 
-                case "Opportunistic":
+                case EnemyAttackType.Opportunistic:
 
                     break;
 
-                case "Assassin":
+                case EnemyAttackType.Assassin:
                     AttackLowHp();
                     break;
 
-                case "Bruiser":
+                case EnemyAttackType.Bruiser:
+              
+                    break;
+
+                case EnemyAttackType.Healer:
 
                     break;
 
-                case "Healer":
+                case EnemyAttackType.Heal_Support:
 
                     break;
 
-                case "Heal-Support":
+                case EnemyAttackType.Straegist:
 
                     break;
 
-                case "Straegist":
+                case EnemyAttackType.Demo:
 
-                    break;
-                case "Demo":
                     DumbAttack();
-                    break;
 
+                    break;
             }
         }
+
         else
         {
             uiBTL.EndTurn();
@@ -177,12 +212,13 @@ public class Enemy : MonoBehaviour
 
     void DumbAttack()
     {
-        attackThisPlayer = battleManager.players[Random.Range(0, 4)].playerReference;
+        attackThisPlayer = battleManager.players[Random.Range(0,4)].playerReference;
         //if the player is dead, try again
         if (attackThisPlayer.currentHP <= 0.0f)
         {
             DumbAttack();
         }
+
         else
         {
             //Run the animation
@@ -207,11 +243,13 @@ public class Enemy : MonoBehaviour
                 Debug.Log("Critical Hit from Enemy");
                 attackThisPlayer.TakeDamage(eAttack * 1.2f);
             }
+
             else
             {
                 attackThisPlayer.TakeDamage(eAttack);
             }           
         }
+
         else
         {
             Debug.Log("Enemy has missed");
@@ -223,30 +261,43 @@ public class Enemy : MonoBehaviour
    
     void AttackLowHp()
     {
+        StatNeeded(PlayerStatReference.Health);
+         for (int i = 0; i < 4; i++)
+         {
+            //checking if hp stat for BM is the same as the smallest value in the list is so do yo thang 
+             if (battleManager.players[i].currentHP == Mathf.Min(playerStatNeeded.ToArray()))
+             {
+                attackThisPlayer = battleManager.players[i].playerReference;
+                 print(eName + " Attacked " + battleManager.players[i].name + " Who has a health of " + battleManager.players[i].currentHP);
+                 CalculateHit();
+                 animator.SetBool("Attack", true);
+             }
+         }
+         //clear the list for the next use 
+        playerStatNeeded.Clear();
 
     }
 
-
-    //returns a int between 0 and 4 
-    public int GetRandomNumber()
+    // returns the stat needed for the enemies that attack based on player stats 
+    void StatNeeded(PlayerStatReference statNeeded)
     {
-        int randomNumber;
-        return randomNumber = Random.Range(0, 4);
-    }
-
-    public float LowestStat()
-    {
-        float lowestHp;
-        float[] health = new float[4];
-
-        for (int i = 0; i < 4; i++)
+        //returns the lowest HP of the party 
+        if (statNeeded == PlayerStatReference.Health)
         {
-            health[i] = battleManager.players[i].playerReference.currentHP;
-            Debug.Log(battleManager.players[i].playerReference.name + " Health is " + health[i]);
-        }
+           foreach(BattleManager.PlayerInformtion stat in battleManager.players)
+           {
+                //checks if player current hp from battlemanager is above 0 and if player exist if that's the case add to list
+                if (stat.playerReference != null && stat.currentHP > 0)
+                {
+                    playerStatNeeded.Add(stat.currentHP);
 
-        lowestHp = Mathf.Min(health);
-        return lowestHp;
+                }
+           }
+           //sort the list DUH
+            playerStatNeeded.Sort();
+
+            //TODO: check if 2 player have the same hp if so pick one 
+        }
     }
 
     public void becomeLessVisbile() //Called from UIBTL when this enemy is NOT chosen for attack
@@ -289,6 +340,4 @@ public class Enemy : MonoBehaviour
         dead = true;
         uiBTL.EnemyIsDead(enemyIndexInBattleManager);
     }
-
-
 }

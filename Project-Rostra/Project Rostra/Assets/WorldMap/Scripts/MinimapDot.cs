@@ -5,8 +5,6 @@ using UnityEngine;
 public class MinimapDot : MonoBehaviour
 {
     public float Speed;
-
-
     private Rigidbody2D rb;
     private Vector2 moveVelocity;
     float horizontalMove;
@@ -24,10 +22,6 @@ public class MinimapDot : MonoBehaviour
         moveVelocity = moveInput.normalized * Speed;
         horizontalMove = Input.GetAxisRaw("Horizontal") * Speed;
         verticalMove = Input.GetAxisRaw("Vertical") * Speed;
-
-
-
-
     }
 
     void FixedUpdate()
