@@ -18,14 +18,21 @@ public class MinimapDot : MonoBehaviour
 
     void Update()
     {
+
         Vector2 moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         moveVelocity = moveInput.normalized * Speed;
         horizontalMove = Input.GetAxisRaw("Horizontal") * Speed;
         verticalMove = Input.GetAxisRaw("Vertical") * Speed;
+
+
+
     }
 
     void FixedUpdate()
     {
-        rb.MovePosition(rb.position + moveVelocity * Time.fixedDeltaTime);
+        if (!BattleManager.battleInProgress)
+        {
+            rb.MovePosition(rb.position + moveVelocity * Time.fixedDeltaTime);
+        }
     }
 }

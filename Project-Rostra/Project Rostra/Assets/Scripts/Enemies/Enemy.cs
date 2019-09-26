@@ -308,6 +308,7 @@ public class Enemy : MonoBehaviour
 
     public void resetVisibility() //Called from UIBTL when this enemy is NOT chosen for attack, and either the player doesn't attack or the attack finishes
     {
+        
         spriteColor.a = 1.0f;
         spriteRenderer.color = spriteColor;
     }

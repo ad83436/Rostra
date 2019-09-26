@@ -1,4 +1,4 @@
-﻿// Code Written By:     Christopher Brine and Domara "Lastname" Jones
+﻿// Code Written By:     Christopher Brine and Domara Shlimon
 // Last Updated:        September 17th, 2019
 
 public static class PartyStats {
