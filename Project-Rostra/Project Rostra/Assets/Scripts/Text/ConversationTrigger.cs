@@ -17,7 +17,7 @@ public class ConversationTrigger : MonoBehaviour
 	{
 		if (isOneShot == true && dialogue.hasPlayed == false)
 		{
-			DialogueManager.instance.StartConversation(dialogue);
+			FindObjectOfType<DialogueManager>().StartConversation(dialogue);
 			isOneShot = false;
 		}
 		else
@@ -28,12 +28,12 @@ public class ConversationTrigger : MonoBehaviour
 	// 1 = dwarf, 2 = guild, 3 = kill, 4 = spare, 5 = tell, 6 = lie
 	public void TriggerChoiceDependantConvo()
 	{
-		DialogueManager.instance.ChoiceDependantConvo(choiceCare, dialogue);
+		FindObjectOfType<DialogueManager>().ChoiceDependantConvo(choiceCare, dialogue);
 	}
 
 	public void TriggerNormalDialogue()
 	{
-		DialogueManager.instance.PlayNormalDialogue(dialogue);
+		FindObjectOfType<DialogueManager>().PlayNormalDialogue(dialogue);
 	}
 
 	public void TriggerCutsceneDialogue()

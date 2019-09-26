@@ -89,8 +89,8 @@ public class Player : MonoBehaviour
 
         //Rage
         maxRage = 100.0f;
-        canRage = false;
         rageModeIndicator.gameObject.SetActive(false);
+        canRage = false;
 
         //Guard
         guardIcon.gameObject.SetActive(false);
@@ -132,19 +132,9 @@ public class Player : MonoBehaviour
 
     private void StartBattle()
     {
-        Debug.Log("Player start battle baby");
+
         //Get the information from the party stats file
-        currentHP = PartyStats.chara[playerIndex].hitpoints;
-        maxHP = PartyStats.chara[playerIndex].TotalMaxHealth;
-        currentMP = PartyStats.chara[playerIndex].magicpoints;
-        maxMP = PartyStats.chara[playerIndex].TotalMaxMana;
-        atk = PartyStats.chara[playerIndex].TotalAttack;
-        def = PartyStats.chara[playerIndex].TotalDefence;
-        agi = PartyStats.chara[playerIndex].TotalAgility;
-        crit = PartyStats.chara[playerIndex].TotalCritical;
-        str = PartyStats.chara[playerIndex].TotalStrength;
-        speed = PartyStats.chara[playerIndex].TotalSpeed;
-        currentRage = PartyStats.chara[playerIndex].rage;
+        UpdatePlayerStats();
         battleManager.players[playerIndex].playerIndex = playerIndex;
         battleManager.players[playerIndex].playerReference = this;
         battleManager.players[playerIndex].name = name;
@@ -317,6 +307,7 @@ public class Player : MonoBehaviour
     {
         Debug.Log("Rage has cooled down");
         currentRage = 0.0f;
+        PartyStats.chara[playerIndex].rage = currentRage;
         actualATK = atk;
         actualDEF = def;
         healable = true;
@@ -325,5 +316,39 @@ public class Player : MonoBehaviour
         rageModeIndicator.gameObject.SetActive(false);
         rageImage.fillAmount = 0.0f;  //Update the UI
         currentState = playerState.Idle;
+    }
+
+    //Called whenever a player is healed, or stats their stats changed
+    public void UpdatePlayerStats()
+    {
+        currentHP = PartyStats.chara[playerIndex].hitpoints;
+        maxHP = PartyStats.chara[playerIndex].TotalMaxHealth;
+        currentMP = PartyStats.chara[playerIndex].magicpoints;
+        maxMP = PartyStats.chara[playerIndex].TotalMaxMana;
+        atk = PartyStats.chara[playerIndex].TotalAttack;
+        def = PartyStats.chara[playerIndex].TotalDefence;
+        agi = PartyStats.chara[playerIndex].TotalAgility;
+        crit = PartyStats.chara[playerIndex].TotalCritical;
+        str = PartyStats.chara[playerIndex].TotalStrength;
+        speed = PartyStats.chara[playerIndex].TotalSpeed;
+        currentRage = PartyStats.chara[playerIndex].rage;
+
+        hpImage.fillAmount = currentHP / maxHP;
+        rageImage.fillAmount = currentRage / maxRage;
+
+        if(currentRage>=maxRage)
+        {
+            currentRage = maxRage;
+            canRage = true;
+        }
+        else
+        {
+            canRage = false;
+        }
+    }
+
+    public void ForcePlayerTurnAnimationOff()
+    {
+        playerAnimator.SetBool("Turn", false);
     }
 }

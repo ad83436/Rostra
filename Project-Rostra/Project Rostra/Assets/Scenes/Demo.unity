@@ -6360,7 +6360,7 @@ MonoBehaviour:
     isBattle: 0
   choiceCare: 0
   isChoiceDepend: 0
-  isOneShot: 1
+  isOneShot: 0
 --- !u!61 &1360666119
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7870,137 +7870,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &1942399294
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1942399296}
-  - component: {fileID: 1942399295}
-  - component: {fileID: 1942399297}
-  - component: {fileID: 1942399298}
-  m_Layer: 0
-  m_Name: DialogueToCombat
-  m_TagString: DialogueTrigger
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1942399295
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1942399294}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43509005be49f1c4f973fd54f9269559, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialogue:
-    names:
-    - Arcelus
-    - Solider
-    - Fargas
-    - Soldier
-    - Fargas
-    sentences:
-    - 'Fargas, we''ve got company. They don''t look like the sitting down for a drink
-      type. '
-    - Fargas, Frea, Oberon and Arcelus I hereby arrest you in the name of the Ocrestian
-      Military!
-    - We aren't going anywhere.
-    - Unacceptable! I am honour bound to serve in the name of Ocrest! Prepare to die
-      scum!
-    - God, I used to sound like this?
-    portrait:
-    - {fileID: 21300000, guid: f40486206916ccc4a9bf37f57f448dee, type: 3}
-    - {fileID: 21300000, guid: 910efa03995549e41a60118736af3ece, type: 3}
-    - {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825, type: 3}
-    - {fileID: 21300000, guid: 910efa03995549e41a60118736af3ece, type: 3}
-    - {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825, type: 3}
-    povChange:
-    - 1
-    - 2
-    - 3
-    - 4
-    - 4
-    typingSpeed: 0.001
-    isChoice: 0
-    choiceLine: 0
-    choice1: {fileID: 0}
-    choice2: {fileID: 0}
-    willRemember: 0
-    choiceSet: 0
-    choiceCare1: {fileID: 0}
-    choiceCare2: {fileID: 0}
-    choiceText1: 
-    choiceText2: 
-    normal: {fileID: 0}
-    hasPlayed: 0
-    willCount: 0
-    maxWillCount: 0
-    isBattle: 1
-  choiceCare: 0
-  isChoiceDepend: 0
-  isOneShot: 1
---- !u!4 &1942399296
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1942399294}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15.37, y: 7.74, z: -601.58435}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 19
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &1942399297
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1942399294}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.07852745, y: 0.0981617}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 2.649086, y: 3.2380524}
-  m_EdgeRadius: 0
---- !u!114 &1942399298
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1942399294}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4aa10e7e6479f464aac569691ed2f11d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ce: 6
 --- !u!1 &1958178333
 GameObject:
   m_ObjectHideFlags: 0
@@ -8396,3 +8265,72 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &2205216450200401291
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2205216448283696309, guid: 9b09bcf73104b9f4caa616632450e362,
+        type: 3}
+      propertyPath: m_Name
+      value: DialogueToCombat
+      objectReference: {fileID: 0}
+    - target: {fileID: 2205216448283696331, guid: 9b09bcf73104b9f4caa616632450e362,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 15.37
+      objectReference: {fileID: 0}
+    - target: {fileID: 2205216448283696331, guid: 9b09bcf73104b9f4caa616632450e362,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 7.74
+      objectReference: {fileID: 0}
+    - target: {fileID: 2205216448283696331, guid: 9b09bcf73104b9f4caa616632450e362,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -601.58435
+      objectReference: {fileID: 0}
+    - target: {fileID: 2205216448283696331, guid: 9b09bcf73104b9f4caa616632450e362,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2205216448283696331, guid: 9b09bcf73104b9f4caa616632450e362,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2205216448283696331, guid: 9b09bcf73104b9f4caa616632450e362,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2205216448283696331, guid: 9b09bcf73104b9f4caa616632450e362,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2205216448283696331, guid: 9b09bcf73104b9f4caa616632450e362,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 2205216448283696331, guid: 9b09bcf73104b9f4caa616632450e362,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2205216448283696331, guid: 9b09bcf73104b9f4caa616632450e362,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2205216448283696331, guid: 9b09bcf73104b9f4caa616632450e362,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9b09bcf73104b9f4caa616632450e362, type: 3}
