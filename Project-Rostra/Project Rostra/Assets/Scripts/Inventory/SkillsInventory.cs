@@ -2,7 +2,7 @@
 using UnityEngine;
 
 // Code Written By:     Christopher Brine
-// Last Updated:        September 24th, 2019
+// Last Updated:        September 26h, 2019
 
 public class SkillsInventory : MonoBehaviour {
     public static SkillsInventory invInstance;  // Holds the current inventory instance in a single variable
@@ -104,6 +104,8 @@ public class SkillsInventory : MonoBehaviour {
         }
     }
 
+    #region Skill Manipulation Scripts (Adding, Removing, Unlocking)
+
     // Attempts to equip a skill to the current player's active skills. If the skill list is full, it will let the player swap a
     // currently equipped skill with the newly selected one
     public bool EquipSkill(int skillID) {
@@ -154,6 +156,10 @@ public class SkillsInventory : MonoBehaviour {
         return unlockSuccess;
     }
 
+    #endregion
+
+    #region Skill Names
+
     // Finds the name of the skill relative to the ID provided in the argument
     public string SkillName(int skillID) {
         string name = "";
@@ -177,6 +183,10 @@ public class SkillsInventory : MonoBehaviour {
         return name;
     }
 
+    #endregion
+
+    #region Skill Descriptions
+
     // Finds the skill's description relative to the ID provided in the argument parameter
     public string SkillDescription(int skillID) {
         string description = "";
@@ -195,6 +205,10 @@ public class SkillsInventory : MonoBehaviour {
 
         return description;
     }
+
+    #endregion
+
+    #region Skill Stats
 
     // This method holds the stats for every single skill in the game
     // When called, it will search for the ID that was provided by the 
@@ -226,4 +240,6 @@ public class SkillsInventory : MonoBehaviour {
 
         return skillStat;
     }
+
+    #endregion
 }

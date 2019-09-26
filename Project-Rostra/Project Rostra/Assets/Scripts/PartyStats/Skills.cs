@@ -1,5 +1,5 @@
-﻿// Code Written By:     Christopher Brine and Domara "Lastname" Jones
-// Last Updated:        September 17th, 2019
+﻿// Code Written By:     Christopher Brine and Domara Shlimon
+// Last Updated:        September 26th, 2019
 
 // IMPORTANT -- Make sure you put (int) before referencing the enum values in this file.
 //                      Example:    (int)SKILLS.NO_SKILL;

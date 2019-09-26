@@ -1,5 +1,5 @@
 ﻿// Code Written By:     Christopher Brine
-// Last Updated:        September 17th, 2019
+// Last Updated:        September 26th, 2019
 
 public static class PartySkills {
     // This value represents the maximum number of skills that a player can haave equipped at once
