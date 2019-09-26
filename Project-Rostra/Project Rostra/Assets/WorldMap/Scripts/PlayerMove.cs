@@ -60,14 +60,16 @@ public class PlayerMove : MonoBehaviour
 		if (col.CompareTag("NPC"))
 		{
 			ct = col.GetComponent<ConversationTrigger>();
+			
 		}
 	}
 	// set your CT to null once you exit the range of the NPC
 	private void OnTriggerExit2D(Collider2D col)
 	{
-		if (col.CompareTag("NPC"))
+		if (col.CompareTag("NPC") && col.GetComponent<ConversationTrigger>() == ct)
 		{
 			ct = null;
+			Debug.Log(col.GetComponent<ConversationTrigger>());
 		}
 	}
 	// this is will handle talking to the NPC 

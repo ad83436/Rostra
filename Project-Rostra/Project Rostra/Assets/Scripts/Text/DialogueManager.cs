@@ -143,12 +143,10 @@ public class DialogueManager : MonoBehaviour
 
 	public void StartConversation(Dialogue d)
 	{
-		Debug.Log("StartConvo");
 		if (d.willCount == true)
 		{
 			willCount++;
 			d.willCount = false;
-			Debug.Log("Do the thing");
 		}
 		
 		if (d.isChoice == true)
@@ -472,7 +470,6 @@ public class DialogueManager : MonoBehaviour
 			StartConversation(dc.doneTalkingToNPCS);
 			// temporary just for demo
 			choices[6] = true;
-			Debug.Log("and make it work");
 		}
 		if (battle == true && isActive == false)
 		{
