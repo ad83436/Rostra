@@ -24,7 +24,7 @@ public class Enemy : MonoBehaviour
         Bruiser,
         Healer,
         Heal_Support,
-        Straegist,
+        Strategist,
         Demo
     };
 
@@ -152,7 +152,7 @@ public class Enemy : MonoBehaviour
                     break;
 
                 case EnemyAttackType.Opportunistic:
-
+                    AttackLowDef();
                     break;
 
                 case EnemyAttackType.Assassin:
@@ -171,8 +171,8 @@ public class Enemy : MonoBehaviour
 
                     break;
 
-                case EnemyAttackType.Straegist:
-
+                case EnemyAttackType.Strategist:
+                    AttackHighAgi();
                     break;
 
                 case EnemyAttackType.Demo:
@@ -278,25 +278,95 @@ public class Enemy : MonoBehaviour
 
     }
 
+    void AttackLowDef()
+    {
+        StatNeeded(PlayerStatReference.Defence);
+        for (int i = 0; i < 4; i++)
+        {
+            if (battleManager.players[i].def == Mathf.Min(playerStatNeeded.ToArray()))
+            {
+                attackThisPlayer = battleManager.players[i].playerReference;
+                print(eName + " Attacked " + battleManager.players[i].name + " Who has a defence of " + battleManager.players[i].def);
+                CalculateHit();
+                animator.SetBool("Attack", true);
+            }
+        }
+
+        //clear the list for the next use 
+        playerStatNeeded.Clear();
+    }
+
+    void AttackHighAgi()
+    {
+        StatNeeded(PlayerStatReference.Agility);
+        for (int i = 0; i < 4; i++)
+        { 
+            if (battleManager.players[i].agi == Mathf.Max(playerStatNeeded.ToArray()))
+            {
+                attackThisPlayer = battleManager.players[i].playerReference;
+                print(eName + " Attacked " + battleManager.players[i].name + " Who has a agility of " + battleManager.players[i].agi);
+                CalculateHit();
+                animator.SetBool("Attack", true);
+            }
+        }
+
+        //clear the list for the next use 
+        playerStatNeeded.Clear();
+    }
+
     // returns the stat needed for the enemies that attack based on player stats 
     void StatNeeded(PlayerStatReference statNeeded)
     {
+        ////polish Later(reluctantly) store in array and loop options why cause i can that's why 
+        
         //returns the lowest HP of the party 
         if (statNeeded == PlayerStatReference.Health)
         {
-           foreach(BattleManager.PlayerInformtion stat in battleManager.players)
-           {
+            foreach (BattleManager.PlayerInformtion stat in battleManager.players)
+            {
                 //checks if player current hp from battlemanager is above 0 and if player exist if that's the case add to list
                 if (stat.playerReference != null && stat.currentHP > 0)
                 {
                     playerStatNeeded.Add(stat.currentHP);
 
                 }
-           }
-           //sort the list DUH
+
+                //sort the list DUH
+                playerStatNeeded.Sort();
+
+                //TODO: check if 2 player have the same hp if so pick one, and also other stuffs
+            }
+        }
+
+        else if(statNeeded == PlayerStatReference.Agility)
+        {
+            foreach (BattleManager.PlayerInformtion stat in battleManager.players)
+            {
+                //same idea as with hp
+                if (stat.playerReference != null && stat.currentHP > 0)
+                {
+                    playerStatNeeded.Add(stat.agi);
+                }
+            }
             playerStatNeeded.Sort();
 
-            //TODO: check if 2 player have the same hp if so pick one 
+            //TODO: check if 2 player have the same agi if so pick one, and also other stuffs
+        }
+
+        else
+        {
+            //you get it by now 
+            foreach (BattleManager.PlayerInformtion stat in battleManager.players)
+            {
+                //same idea as with the other two ... just incase you forgot if you are Dead you didnt make the cut
+                if (stat.playerReference != null && stat.currentHP > 0)
+                {
+                    playerStatNeeded.Add(stat.def);
+                }
+            }
+            playerStatNeeded.Sort();
+
+            //TODO: check if 2 player have the same agi if so pick one, and also other stuffs
         }
     }
 
