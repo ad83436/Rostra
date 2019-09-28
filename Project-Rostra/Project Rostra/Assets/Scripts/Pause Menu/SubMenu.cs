@@ -42,7 +42,7 @@ public abstract class SubMenu : MonoBehaviour {
 
 	protected void ExitMenu() {
 		IsActive = false;
-		PauseMenuController.instance.activeMenu = true;
+		PauseMenuController.instance.ActiveMenu = true;
 	}
 
 }

@@ -8,9 +8,16 @@ public class PauseMenuController : MonoBehaviour {
 	public static PauseMenuController instance;
 
 	public static bool isPaused = false;
-	public bool activeMenu = true;
+	private bool activeMenu = true;
+	public bool ActiveMenu {
+		get => activeMenu;
+		set {
+			activeMenu = value;
+			listItems[currentListItem].color = Color.yellow;
+		}
+	}
 	private CanvasGroup group;
-	
+
 	[SerializeField] private UnityEngine.UI.Text[] listItems;
 	[SerializeField] private SubMenu[] allSubMenus;
 
@@ -21,7 +28,7 @@ public class PauseMenuController : MonoBehaviour {
 	#endregion
 
 	#region InputVariables
-	
+
 	public bool Up { get; private set; }
 	public bool Down { get; private set; }
 	public bool Left { get; private set; }
@@ -61,10 +68,12 @@ public class PauseMenuController : MonoBehaviour {
 				currentListItem = 0;
 				listItems[currentListItem].color = Color.yellow;
 				group.alpha = 1f;
+				allSubMenus[currentListItem].OnActive();
 			} else {
 				//onUnPause logic
 				listItems[currentListItem].color = Color.white;
 				group.alpha = 0f;
+				allSubMenus[currentListItem].OnInactive();
 			}
 		}
 
@@ -77,14 +86,14 @@ public class PauseMenuController : MonoBehaviour {
 
 		Confirm = Input.GetButtonDown("Confirm");
 		Cancel = Input.GetButtonDown("Cancel");
-		
+
 		if (activeMenu) {
 			//do main list
-			if (Up) currentListItem++;
-			else if (Down) currentListItem--;
+			if (Down) currentListItem++;
+			else if (Up) currentListItem--;
 			if (currentListItem > listItems.Length - 1) currentListItem = 0;
 			else if (currentListItem < 0) currentListItem = listItems.Length - 1;
-			
+
 			if (Up || Down) {
 				for (int i = 0; i < listItems.Length; i++) {
 					if (currentListItem == i) listItems[i].color = Color.yellow;
@@ -96,7 +105,11 @@ public class PauseMenuController : MonoBehaviour {
 				}
 			}
 
-			if (Confirm) allSubMenus[currentListItem].IsActive = true;
+			if (Confirm) {
+				allSubMenus[currentListItem].IsActive = true;
+				activeMenu = false;
+				listItems[currentListItem].color = Color.white;
+			}
 
 		} else { // currently in a submenu or submenu is visible
 			foreach (SubMenu item in allSubMenus) {
@@ -105,7 +118,7 @@ public class PauseMenuController : MonoBehaviour {
 		}
 
 	}
-	
+
 	#endregion
 
 }
