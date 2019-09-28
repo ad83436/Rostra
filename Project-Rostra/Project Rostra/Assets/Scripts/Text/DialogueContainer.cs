@@ -15,7 +15,7 @@ public class DialogueContainer : MonoBehaviour
 		}
 		else
 		{
-			Debug.LogError("The Dialogue Container is missing and sweet Jesus I can't find him");
+			Destroy(gameObject);
 		}
 		DontDestroyOnLoad(this.gameObject);
 	}

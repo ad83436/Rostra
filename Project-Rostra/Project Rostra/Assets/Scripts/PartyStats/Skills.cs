@@ -1,5 +1,5 @@
-﻿// Code Written By:     Christopher Brine and Domara "Lastname" Jones
-// Last Updated:        September 17th, 2019
+﻿// Code Written By:     Christopher Brine and Domara Shlimon
+// Last Updated:        September 26th, 2019
 
 // IMPORTANT -- Make sure you put (int) before referencing the enum values in this file.
 //                      Example:    (int)SKILLS.NO_SKILL;
@@ -18,4 +18,9 @@ public enum SKILL_TYPE{ // Minimum Value -- 0xFFF0, Maximum Value -- 0xFFFF (16 
     ALL_TARGETS_ATK =       0XFFF2,     // Skills of this type will target all enemies on the field
     SINGLE_PLAYER_HEAL =    0xFFF3,     // Skills of this type will heal a single player character
     ALL_PLAYER_HEAL =       0xFFF4,     // Skills of this type will heal all player characters
+    SINGLE_PLAYER_BUFF =    0xFFF5,     // Skills of this type will buff a single player character's stats
+    ALL_PLAYER_BUFF =       0XFFF6,     // Skills of this type will buff alll player character's stats
+    SINGLE_TARGET_DEBUFF =  0xFFF7,     // Skills of this type will debuff a single enemy's stats
+    FULL_ROW_DEBUFF =       0xFFF8,     // Skills of this type will debuff an entire row of enemies
+    ALL_TARGETS_DEBUFF =    0xFFF9,     // Skills os this type will debuff every enemy on the field
 };

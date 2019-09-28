@@ -5,8 +5,6 @@ using UnityEngine;
 public class MinimapDot : MonoBehaviour
 {
     public float Speed;
-
-
     private Rigidbody2D rb;
     private Vector2 moveVelocity;
     float horizontalMove;
@@ -20,6 +18,7 @@ public class MinimapDot : MonoBehaviour
 
     void Update()
     {
+
         Vector2 moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         moveVelocity = moveInput.normalized * Speed;
         horizontalMove = Input.GetAxisRaw("Horizontal") * Speed;
@@ -27,11 +26,13 @@ public class MinimapDot : MonoBehaviour
 
 
 
-
     }
 
     void FixedUpdate()
     {
-        rb.MovePosition(rb.position + moveVelocity * Time.fixedDeltaTime);
+        if (!BattleManager.battleInProgress)
+        {
+            rb.MovePosition(rb.position + moveVelocity * Time.fixedDeltaTime);
+        }
     }
 }

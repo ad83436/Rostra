@@ -2,11 +2,10 @@
 using UnityEngine;
 
 // Code Written By:     Christopher Brine
-// Last Updated:        September 17th, 2019
+// Last Updated:        September 26h, 2019
 
 public class SkillsInventory : MonoBehaviour {
     public static SkillsInventory invInstance;  // Holds the current inventory instance in a single variable
-    public CharacterSkills currentPlayer;       // Holds whatever player'sskill are currently being viewed right now
 
     // The variables that are used for drawing the GUI to the screen
     public Font GuiSmall;
@@ -45,7 +44,7 @@ public class SkillsInventory : MonoBehaviour {
         // Moving through the unlocked skills list
         if (selectedOption == -1) {
             if (keyUp) { // Moving up through the list
-                int numSkills = currentPlayer.numSkillsLearned;
+                int numSkills = PartySkills.skills[playerIndex].numSkillsLearned;
                 curOption--;
                 // Shifting the skill list's view up
                 if (curOption < firstToDraw + (numToDraw / 2) - 1 && firstToDraw > 0) {
@@ -56,7 +55,7 @@ public class SkillsInventory : MonoBehaviour {
                     curOption = numSkills - 1;
                 }
             } else if (keyDown) { // Moving down through the list
-                int numSkills = currentPlayer.numSkillsLearned;
+                int numSkills = PartySkills.skills[playerIndex].numSkillsLearned;
                 curOption++;
                 // Shifting the skill list's view down
                 if (curOption > firstToDraw + (numToDraw / 2) + 1 && firstToDraw < numSkills - 1 - numToDraw) {
@@ -74,14 +73,12 @@ public class SkillsInventory : MonoBehaviour {
                 if (playerIndex > 3) {
                     playerIndex = 0;
                 }
-                currentPlayer = PartySkills.skills[playerIndex];
             } else if (keyLeft) {
                 playerIndex--;
                 // Loop back to the last character's skill inventory
                 if (playerIndex < 0) {
                     playerIndex = 3;
                 }
-                currentPlayer = PartySkills.skills[playerIndex];
             }
 
             // Selecting a Skill
@@ -107,6 +104,37 @@ public class SkillsInventory : MonoBehaviour {
         }
     }
 
+    #region Skill Manipulation Scripts (Adding, Removing, Unlocking)
+
+    // Attempts to equip a skill to the current player's active skills. If the skill list is full, it will let the player swap a
+    // currently equipped skill with the newly selected one
+    public bool EquipSkill(int skillID) {
+        bool emptySlotExists = false;
+        // Find an empty slot in the equipped skill list
+        var length = PartySkills.skills[playerIndex].equippedSkills.Length;
+        for (int i = 0; i < length; i++) {
+            // Equip the skill when an empty slot is found
+            if (PartySkills.skills[playerIndex].equippedSkills[i] == (int)SKILLS.NO_SKILL) {
+                PartySkills.skills[playerIndex].equippedSkills[i] = skillID;
+                emptySlotExists = true;
+                i = length; // Exit the loop
+            }
+        }
+        // NOTE -- If this returns false, the skill inventory will open up the option to swap an equipped skill with
+        // the current one the player is trying to equip
+        return emptySlotExists;
+    }
+
+    // Attempts to remove an equipped skill for the respective array. If it cannot remove the skill because the slot provided
+    // was out of bounds of there was no skill equipped, this code will return false.
+    public bool UnequipSkill(int skillSlot) {
+        if (skillSlot >= 0 && skillSlot < PartySkills.MAX_SKILLS) {
+            PartySkills.skills[playerIndex].equippedSkills[skillSlot] = (int)SKILLS.NO_SKILL;
+            return true;
+        }
+        return false;
+    }
+
     // Unlocks a skill for the player to use. In order to do this, the method will check if the player can actually use the
     // skill given its ID. If the skill is one that the player can learn, it will be added to the unlocked list. Otherwise,
     // the skill will not be able to be added to the list of unlocked skills.
@@ -114,12 +142,12 @@ public class SkillsInventory : MonoBehaviour {
         bool unlockSuccess = false;
 
         // Check if the current player is able to learn this skill
-        var length = currentPlayer.unlockableSkills.Length;
+        var length = PartySkills.skills[playerIndex].unlockableSkills.Length;
         for (int i = 0; i < length; i++) {
             // Skill found, add to unlocked skills
-            if (currentPlayer.unlockableSkills[i] == skillID) {
-                currentPlayer.learnedSkills[currentPlayer.numSkillsLearned] = skillID;
-                currentPlayer.numSkillsLearned++;
+            if (PartySkills.skills[playerIndex].unlockableSkills[i] == skillID) {
+                PartySkills.skills[playerIndex].learnedSkills[PartySkills.skills[playerIndex].numSkillsLearned] = skillID;
+                PartySkills.skills[playerIndex].numSkillsLearned++;
                 unlockSuccess = true;
                 i = length; // Exit the loop
             }
@@ -127,4 +155,91 @@ public class SkillsInventory : MonoBehaviour {
 
         return unlockSuccess;
     }
+
+    #endregion
+
+    #region Skill Names
+
+    // Finds the name of the skill relative to the ID provided in the argument
+    public string SkillName(int skillID) {
+        string name = "";
+
+        // Find the name relative to the ID given
+        switch (skillID) {
+            case (int)SKILLS.TEST_SKILL1:
+                name = "Booty Destroyer";
+                break;
+            case (int)SKILLS.TEST_SKILL2:
+                name = "Spinng Ass Shot";
+                break;
+            case (int)SKILLS.TEST_SKILL3:
+                name = "Implant Popper";
+                break;
+            case (int)SKILLS.TEST_SKILL4:
+                name = "Healing Anal Needle";
+                break;
+        }
+
+        return name;
+    }
+
+    #endregion
+
+    #region Skill Descriptions
+
+    // Finds the skill's description relative to the ID provided in the argument parameter
+    public string SkillDescription(int skillID) {
+        string description = "";
+
+        // Find the description relative to the ID given
+        switch (skillID) {
+            case (int)SKILLS.TEST_SKILL1:
+                break;
+            case (int)SKILLS.TEST_SKILL2:
+                break;
+            case (int)SKILLS.TEST_SKILL3:
+                break;
+            case (int)SKILLS.TEST_SKILL4:
+                break;
+        }
+
+        return description;
+    }
+
+    #endregion
+
+    #region Skill Stats
+
+    // This method holds the stats for every single skill in the game
+    // When called, it will search for the ID that was provided by the 
+    // caller and return those stats in an array
+    public float[] SkillStats(int skillID) {
+        float[] skillStat = { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f };
+        // NOTE -- Element 0 is the skill's damage/healing capabilities
+        //         Element 1 is the skill's accuracy out of 100, I guess
+        //         Element 2 is the skill's is how long it will take to execute the skill after casting it
+        //         Element 3 is the skill's total range
+        //         Element 4 is the skill's damage/healing size (Single Target, AoE, Full Row, etc)
+        //         Element 5 is the skill's total MP usage
+
+        // Find the required stats and return those to the caller
+        switch (skillID) {
+            case (int)SKILLS.TEST_SKILL1:
+                skillStat[4] = (float)SKILL_TYPE.SINGLE_TARGET_ATK;
+                break;
+            case (int)SKILLS.TEST_SKILL2:
+                skillStat[4] = (float)SKILL_TYPE.ALL_TARGETS_ATK;
+                break;
+            case (int)SKILLS.TEST_SKILL3:
+                skillStat[4] = (float)SKILL_TYPE.FULL_ROW_ATK;
+                break;
+            case (int)SKILLS.TEST_SKILL4:
+                skillStat[4] = (float)SKILL_TYPE.SINGLE_PLAYER_HEAL;
+                break;
+        }
+
+        return skillStat;
+    }
+
+    #endregion
 }

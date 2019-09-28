@@ -15,7 +15,11 @@ public class ExpManager : MonoBehaviour {
             instance = this;
             DontDestroyOnLoad(this.gameObject);
         }
-        else Debug.LogError("There is more than one instance of the ExpManager or the instance variable was not cleared on destroy");
+        else
+        {
+            Destroy(gameObject);
+           
+        }
 	}
 
 	private void OnDestroy() {

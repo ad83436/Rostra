@@ -2,7 +2,7 @@
 using UnityEngine;
 
 // Code Written By:     Christopher Brine
-// Last Updated:        September 17th, 2019
+// Last Updated:        September 26th, 2019+
 
 public class MainInventory : MonoBehaviour {
     public static MainInventory invInstance;    // Holds the current inventory instance in a single variable
@@ -11,6 +11,9 @@ public class MainInventory : MonoBehaviour {
     // NOTE -- Element 0 is the item's ID value that will point to its name, description, icon, etc.
     //         Element 1 is how many items currently occupy the slot in the inventory
     //         Element 2 is what character has this item equipped (Ex. armor and weapons)
+
+    // A list to store the slots of all consumable items within the player's inventory (Used in battles only)
+    public List<int> consumableInv = new List<int>();
 
     // The variables that are used for drawing the GUI to the screen
     public Font GuiSmall;
@@ -22,7 +25,7 @@ public class MainInventory : MonoBehaviour {
     private bool swappingItems = false;         // If true, the inventory will be in an "Item Swap" state. Meaning, no items can be selected until the swap is declined or completed
 
     // Variables for selecting options and inventory items
-    private int curOption = 0;                  // The current inventory item the player has their cursor over
+    public int curOption = 0;                  // The current inventory item the player has their cursor over
     private int selectedOption = -1;            // The item that the player has selected in the inventory
     private int subCurOption = 0;               // The current option the player has their cursor over after selecting an item
 
@@ -51,13 +54,16 @@ public class MainInventory : MonoBehaviour {
     // FOR TESTING
     private void Start() {
         invItem[0, 0] = (int)ITEM_ID.TEST_WEAPON1;
-        invItem[0, 1] = ItemStackLimit((int)ITEM_ID.TEST_QUEST_ITEM);
+        invItem[0, 1] = 1;
 
         invItem[1, 0] = (int)ITEM_ID.TEST_POTION_HP;
         invItem[1, 1] = ItemStackLimit((int)ITEM_ID.TEST_POTION_HP);
 
         invItem[2, 0] = (int)ITEM_ID.TEST_POTION_MP;
         invItem[2, 1] = ItemStackLimit((int)ITEM_ID.TEST_POTION_MP);
+
+        invItem[3, 0] = (int)ITEM_ID.TEST_ARMOR1;
+        invItem[3, 1] = 1;
     }
 
     // Handling keyboard functionality
@@ -332,7 +338,7 @@ public class MainInventory : MonoBehaviour {
             if (invItem[slot, 2] != -1) {
                 UpdatePlayerStats(invItem[slot, 2], invItem[slot, 0], true);
             }
-        }
+       }
     }
 
     #endregion
@@ -463,10 +469,9 @@ public class MainInventory : MonoBehaviour {
                     float[] itemStats = ItemStats(invItem[curOption, 0]);
                     // Loop through the items that the selected player can equip
                     for (int i = 0; i < 4; i++) {
-                        CharacterStats player = PartyStats.chara[i];
-                        var length = player.validEquipables.Length;
+                        var length = PartyStats.chara[i].validEquipables.Length;
                         for (int ii = 0; ii < length; ii++) {
-                            if (player.validEquipables[ii] == itemStats[7]) { // Item is valid, selected player can equip it
+                            if (PartyStats.chara[i].validEquipables[ii] == itemStats[7]) { // Item is valid, selected player can equip it
                                 canPlayerEquip[i] = true;
                                 ii = length; // Exit the loop
                             } else { // Item is not valid, selected player cannot equip it
@@ -519,7 +524,7 @@ public class MainInventory : MonoBehaviour {
 
         // Remove the item (Or one from the stack) if it was consumed by the player
         if (itemType == (int)ITEM_TYPE.CONSUMABLE) {
-            RemoveItem(invItem[curOption, 0]);
+            RemoveItem(curOption);
         }
     }
 
@@ -611,67 +616,66 @@ public class MainInventory : MonoBehaviour {
 
     // Updates the player's HP when a health potion or similar is used in the inventory
     private void UpdatePlayerHitpoints(int amount, int playerID) {
-        CharacterStats player = PartyStats.chara[playerID];
-        player.hitpoints += amount;
+        PartyStats.chara[playerID].hitpoints += amount;
         // Make sure the hitpoints don't go below zero or above the player's maximum HP
-        if (player.hitpoints > player.TotalMaxHealth) {
-            player.hitpoints = player.TotalMaxHealth;
-        } else if (player.hitpoints < 0) {
-            player.hitpoints = 0;
+        if (PartyStats.chara[playerID].hitpoints > PartyStats.chara[playerID].TotalMaxHealth) {
+            PartyStats.chara[playerID].hitpoints = PartyStats.chara[playerID].TotalMaxHealth;
+        } else if (PartyStats.chara[playerID].hitpoints < 0) {
+            PartyStats.chara[playerID].hitpoints = 0;
         }
+        Debug.Log("\nHealth: " + PartyStats.chara[playerID].hitpoints + "/" + PartyStats.chara[playerID].TotalMaxHealth);
     } 
 
     // Updates the player's MP when a mana potion or similar is used in the inventory
     private void UpdatePlayerMagicpoints(int amount, int playerID) {
-        CharacterStats player = PartyStats.chara[playerID];
-        player.magicpoints += amount;
+        PartyStats.chara[playerID].magicpoints += amount;
         // Make sure the magicpoints don't go below zero or above the player's maximum MP
-        if (player.magicpoints > player.TotalMaxMana) {
-            player.magicpoints = player.TotalMaxMana;
-        } else if (player.magicpoints < 0) {
-            player.magicpoints = 0;
+        if (PartyStats.chara[playerID].magicpoints > PartyStats.chara[playerID].TotalMaxMana) {
+            PartyStats.chara[playerID].magicpoints = PartyStats.chara[playerID].TotalMaxMana;
+        } else if (PartyStats.chara[playerID].magicpoints < 0) {
+            PartyStats.chara[playerID].magicpoints = 0;
         }
+        Debug.Log("\nMana: " + PartyStats.chara[playerID].magicpoints + "/" + PartyStats.chara[playerID].TotalMaxMana);
     }
 
     // Updates player stats whenever an item like a piece of armor or weapon is equipped or unequipped
     private void UpdatePlayerStats(int playerID, int itemID, bool isEquipped) {
-        CharacterStats player = PartyStats.chara[playerID];
+        // This array will ignore the final element in the array (The weapon's class)
         float[] itemStats = ItemStats(itemID);
-		// This array will ignore the final element in the array (The weapon's class)
-
         if (!isEquipped) { // Equipping the item onto the specified player
             // Add the item to the current player
-            player.attackMod += itemStats[0];
-            player.defenceMod += itemStats[1];
-            player.strengthMod += itemStats[2];
-            player.agilityMod += itemStats[3];
-            player.criticalMod += itemStats[4];
-            player.maxHealthMod += itemStats[5];
-            player.maxManaMod += itemStats[6];
+            PartyStats.chara[playerID].attackMod += itemStats[0];
+            PartyStats.chara[playerID].defenceMod += itemStats[1];
+            PartyStats.chara[playerID].strengthMod += itemStats[2];
+            PartyStats.chara[playerID].agilityMod += itemStats[3];
+            PartyStats.chara[playerID].criticalMod += itemStats[4];
+            PartyStats.chara[playerID].maxHealthMod += itemStats[5];
+            PartyStats.chara[playerID].maxManaMod += itemStats[6];
             // Remove this item from another player if it is equipped to them
             if (invItem[curOption, 2] != -1) {
-                CharacterStats oPlayer = PartyStats.chara[invItem[curOption, 2]];
-                oPlayer.attackMod -= itemStats[0];
-                oPlayer.defenceMod -= itemStats[1];
-                oPlayer.strengthMod -= itemStats[2];
-                oPlayer.agilityMod -= itemStats[3];
-                oPlayer.criticalMod -= itemStats[4];
-                oPlayer.maxHealthMod -= itemStats[5];
-                oPlayer.maxManaMod -= itemStats[6];
+                int oPlayerID = invItem[curOption, 2];
+                PartyStats.chara[oPlayerID].attackMod -= itemStats[0];
+                PartyStats.chara[oPlayerID].defenceMod -= itemStats[1];
+                PartyStats.chara[oPlayerID].strengthMod -= itemStats[2];
+                PartyStats.chara[oPlayerID].agilityMod -= itemStats[3];
+                PartyStats.chara[oPlayerID].criticalMod -= itemStats[4];
+                PartyStats.chara[oPlayerID].maxHealthMod -= itemStats[5];
+                PartyStats.chara[oPlayerID].maxManaMod -= itemStats[6];
             }
             // Set the inventory item's "Who's Equipped This" element to the current player's ID
             invItem[curOption, 2] = playerID;
         } else { // Unequipping the item from the specified player
-            player.attackMod -= itemStats[0];
-            player.defenceMod -= itemStats[1];
-            player.strengthMod -= itemStats[2];
-            player.agilityMod -= itemStats[3];
-            player.criticalMod -= itemStats[4];
-            player.maxHealthMod -= itemStats[5];
-            player.maxManaMod -= itemStats[6];
+            PartyStats.chara[playerID].attackMod -= itemStats[0];
+            PartyStats.chara[playerID].defenceMod -= itemStats[1];
+            PartyStats.chara[playerID].strengthMod -= itemStats[2];
+            PartyStats.chara[playerID].agilityMod -= itemStats[3];
+            PartyStats.chara[playerID].criticalMod -= itemStats[4];
+            PartyStats.chara[playerID].maxHealthMod -= itemStats[5];
+            PartyStats.chara[playerID].maxManaMod -= itemStats[6];
             // Tell the inventory that the item isn't equipped by anybody anymore
             invItem[curOption, 2] = -1;
         }
+        Debug.Log("\nAttack: " + PartyStats.chara[playerID].TotalAttack + " Defence: " + PartyStats.chara[playerID].TotalDefence + " Strength: " + PartyStats.chara[playerID].TotalStrength + " Agility: " + PartyStats.chara[playerID].TotalAgility + " Critical: " + PartyStats.chara[playerID].TotalCritical + " Maximum Health: " + PartyStats.chara[playerID].TotalMaxHealth + " Maximum Mana: " + PartyStats.chara[playerID].TotalMaxMana);
     }
 
     #endregion

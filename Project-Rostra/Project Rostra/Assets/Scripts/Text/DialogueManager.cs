@@ -110,11 +110,11 @@ public class DialogueManager : MonoBehaviour
 		}
 		else
 		{
-			Debug.LogError("The Dialogue Guy is missing and sweet Jesus I can't find him");
+			Destroy(gameObject);
 		}
 		DontDestroyOnLoad(this.gameObject);
-		// set everything to its default 
-		textElements = new Queue<string>();
+        // set everything to its default 
+        textElements = new Queue<string>();
 		choices = new bool[7];
 		change = 0;
 		currentChange = 0;
@@ -147,7 +147,6 @@ public class DialogueManager : MonoBehaviour
 		{
 			willCount++;
 			d.willCount = false;
-			Debug.Log("Do the thing");
 		}
 		
 		if (d.isChoice == true)
@@ -471,7 +470,6 @@ public class DialogueManager : MonoBehaviour
 			StartConversation(dc.doneTalkingToNPCS);
 			// temporary just for demo
 			choices[6] = true;
-			Debug.Log("and make it work");
 		}
 		if (battle == true && isActive == false)
 		{

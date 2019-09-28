@@ -15,14 +15,14 @@ public class ConversationTrigger : MonoBehaviour
 	public bool isOneShot;
 	public void TriggerConvo()
 	{
-		if (isOneShot == true)
+		if (isOneShot == true && dialogue.hasPlayed == false)
 		{
 			FindObjectOfType<DialogueManager>().StartConversation(dialogue);
 			isOneShot = false;
 		}
 		else
 		{
-			FindObjectOfType<DialogueManager>().StartConversation(dialogue);
+			DialogueManager.instance.StartConversation(dialogue);
 		}
 	}
 	// 1 = dwarf, 2 = guild, 3 = kill, 4 = spare, 5 = tell, 6 = lie
@@ -34,5 +34,10 @@ public class ConversationTrigger : MonoBehaviour
 	public void TriggerNormalDialogue()
 	{
 		FindObjectOfType<DialogueManager>().PlayNormalDialogue(dialogue);
+	}
+
+	public void TriggerCutsceneDialogue()
+	{
+		DialogueManager.instance.StartConversation(dialogue);
 	}
 }
