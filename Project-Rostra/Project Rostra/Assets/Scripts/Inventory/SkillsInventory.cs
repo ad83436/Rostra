@@ -133,14 +133,14 @@ public class SkillsInventory : MonoBehaviour {
 
     // Attempts to equip a skill to the current player's active skills. If the skill list is full, it will let the player swap a
     // currently equipped skill with the newly selected one
-    public bool EquipSkill(int skillID) {
+    public bool EquipSkill(int skillID, int playerID) {
         bool emptySlotExists = false;
         // Find an empty slot in the equipped skill list
-        var length = PartySkills.skills[playerIndex].equippedSkills.Length;
+        var length = PartySkills.skills[playerID].equippedSkills.Length;
         for (int i = 0; i < length; i++) {
             // Equip the skill when an empty slot is found
-            if (PartySkills.skills[playerIndex].equippedSkills[i] == (int)SKILLS.NO_SKILL) {
-                PartySkills.skills[playerIndex].equippedSkills[i] = skillID;
+            if (PartySkills.skills[playerID].equippedSkills[i] == (int)SKILLS.NO_SKILL) {
+                PartySkills.skills[playerID].equippedSkills[i] = skillID;
                 emptySlotExists = true;
                 i = length; // Exit the loop
             }
@@ -152,9 +152,9 @@ public class SkillsInventory : MonoBehaviour {
 
     // Attempts to remove an equipped skill for the respective array. If it cannot remove the skill because the slot provided
     // was out of bounds of there was no skill equipped, this code will return false.
-    public bool UnequipSkill(int skillSlot) {
+    public bool UnequipSkill(int skillSlot, int playerID) {
         if (skillSlot >= 0 && skillSlot < PartySkills.MAX_SKILLS) {
-            PartySkills.skills[playerIndex].equippedSkills[skillSlot] = (int)SKILLS.NO_SKILL;
+            PartySkills.skills[playerID].equippedSkills[skillSlot] = (int)SKILLS.NO_SKILL;
             return true;
         }
         return false;
@@ -163,16 +163,16 @@ public class SkillsInventory : MonoBehaviour {
     // Unlocks a skill for the player to use. In order to do this, the method will check if the player can actually use the
     // skill given its ID. If the skill is one that the player can learn, it will be added to the unlocked list. Otherwise,
     // the skill will not be able to be added to the list of unlocked skills.
-    public bool AddToUnlockedSkills(int skillID) {
+    public bool AddToUnlockedSkills(int skillID, int playerID) {
         bool unlockSuccess = false;
 
         // Check if the current player is able to learn this skill
-        var length = PartySkills.skills[playerIndex].unlockableSkills.Length;
+        var length = PartySkills.skills[playerID].unlockableSkills.Length;
         for (int i = 0; i < length; i++) {
             // Skill found, add to unlocked skills
-            if (PartySkills.skills[playerIndex].unlockableSkills[i] == skillID) {
-                PartySkills.skills[playerIndex].learnedSkills[PartySkills.skills[playerIndex].numSkillsLearned] = skillID;
-                PartySkills.skills[playerIndex].numSkillsLearned++;
+            if (PartySkills.skills[playerID].unlockableSkills[i] == skillID) {
+                PartySkills.skills[playerID].learnedSkills[PartySkills.skills[playerID].numSkillsLearned] = skillID;
+                PartySkills.skills[playerID].numSkillsLearned++;
                 unlockSuccess = true;
                 i = length; // Exit the loop
             }
