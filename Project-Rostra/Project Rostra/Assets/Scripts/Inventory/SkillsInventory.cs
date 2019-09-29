@@ -19,7 +19,7 @@ public class SkillsInventory : MonoBehaviour {
 
     // Variables for drawing the unlocked skills list to the screen
     private int firstToDraw = 0;                // The first item from the unlocked skills array to draw out of the full list
-    private int numToDraw = 15;                 // The number of skills that are visible to the player at any given time
+    private int numToDraw = 5;                  // The number of skills that are visible to the player at any given time
 
     // Set the skill inventory instance to this one if no skill inventory is active, delete otherwise
     public void Awake() {
@@ -33,13 +33,25 @@ public class SkillsInventory : MonoBehaviour {
     // Handling keyboard functionality
     private void Update() {
         // Getting Keyboard Input
-        bool keySelect, keyReturn, keyUp, keyDown, keyLeft, keyRight;
+        bool keyOpen, keySelect, keyReturn, keyUp, keyDown, keyLeft, keyRight;
+        keyOpen = Input.GetKeyDown(KeyCode.S);
         keySelect = Input.GetKeyDown(KeyCode.Z);
         keyReturn = Input.GetKeyDown(KeyCode.X);
         keyUp = Input.GetKeyDown(KeyCode.UpArrow);
         keyDown = Input.GetKeyDown(KeyCode.DownArrow);
         keyLeft = Input.GetKeyDown(KeyCode.RightArrow);
         keyRight = Input.GetKeyDown(KeyCode.LeftArrow);
+
+        // Opening and Closing the Inventory Window
+        if (keyOpen) {
+            isVisible = !isVisible;
+            return;
+        }
+
+        // Don't allow any input functionality when the skill inventory is not open
+        if (!isVisible) {
+            return;
+        }
 
         // Moving through the unlocked skills list
         if (selectedOption == -1) {
@@ -53,6 +65,13 @@ public class SkillsInventory : MonoBehaviour {
                 // Looping to the end of the skill list if the player presses up when on the first element in the list
                 if (curOption < 0) {
                     curOption = numSkills - 1;
+                    firstToDraw = curOption - numToDraw;
+                    if (firstToDraw < 0) {
+                        firstToDraw = 0;
+                    }
+                    if (numSkills <= 0) {
+                        curOption = 0;
+                    }
                 }
             } else if (keyDown) { // Moving down through the list
                 int numSkills = PartySkills.skills[playerIndex].numSkillsLearned;
@@ -64,6 +83,7 @@ public class SkillsInventory : MonoBehaviour {
                 // Looping to the start of the skill list if the player presses down when on the last element in the list
                 if (curOption >= numSkills) {
                     curOption = 0;
+                    firstToDraw = 0;
                 }
             }
             // Shifting to another player's skill page
@@ -90,15 +110,20 @@ public class SkillsInventory : MonoBehaviour {
 
     // Drawing the Skill Inventory to the Screen
     private void OnGUI() {
+        // Don't allow the skill inventory to be drawn when it isn't open
+        if (!isVisible) {
+            return;
+        }
+
         GUIStyle style = new GUIStyle(GUI.skin.label) {
             font = GuiSmall,
             fontSize = 30,
         };
         var fontHeight = style.lineHeight;
 
-        // Drawing the inventory items
+        // Drawing the skill inventory items
         for (int i = firstToDraw; i <= firstToDraw + numToDraw; i++) {
-            GUI.Label(new Rect(45.0f, 15.0f + (fontHeight * (i - firstToDraw)), 200.0f, 50.0f), "", style);
+            GUI.Label(new Rect(45.0f, 15.0f + (fontHeight * (i - firstToDraw)), 200.0f, 50.0f), SkillName(PartySkills.skills[playerIndex].learnedSkills[i]), style);
             // Drawing a cursor that points to the item the player has highlighted
             GUI.Label(new Rect(25.0f, 15.0f + (fontHeight * (curOption - firstToDraw)), 50.0f, 50.0f), ">", style);
         }
@@ -108,14 +133,14 @@ public class SkillsInventory : MonoBehaviour {
 
     // Attempts to equip a skill to the current player's active skills. If the skill list is full, it will let the player swap a
     // currently equipped skill with the newly selected one
-    public bool EquipSkill(int skillID) {
+    public bool EquipSkill(int skillID, int playerID) {
         bool emptySlotExists = false;
         // Find an empty slot in the equipped skill list
-        var length = PartySkills.skills[playerIndex].equippedSkills.Length;
+        var length = PartySkills.skills[playerID].equippedSkills.Length;
         for (int i = 0; i < length; i++) {
             // Equip the skill when an empty slot is found
-            if (PartySkills.skills[playerIndex].equippedSkills[i] == (int)SKILLS.NO_SKILL) {
-                PartySkills.skills[playerIndex].equippedSkills[i] = skillID;
+            if (PartySkills.skills[playerID].equippedSkills[i] == (int)SKILLS.NO_SKILL) {
+                PartySkills.skills[playerID].equippedSkills[i] = skillID;
                 emptySlotExists = true;
                 i = length; // Exit the loop
             }
@@ -127,9 +152,9 @@ public class SkillsInventory : MonoBehaviour {
 
     // Attempts to remove an equipped skill for the respective array. If it cannot remove the skill because the slot provided
     // was out of bounds of there was no skill equipped, this code will return false.
-    public bool UnequipSkill(int skillSlot) {
+    public bool UnequipSkill(int skillSlot, int playerID) {
         if (skillSlot >= 0 && skillSlot < PartySkills.MAX_SKILLS) {
-            PartySkills.skills[playerIndex].equippedSkills[skillSlot] = (int)SKILLS.NO_SKILL;
+            PartySkills.skills[playerID].equippedSkills[skillSlot] = (int)SKILLS.NO_SKILL;
             return true;
         }
         return false;
@@ -138,16 +163,16 @@ public class SkillsInventory : MonoBehaviour {
     // Unlocks a skill for the player to use. In order to do this, the method will check if the player can actually use the
     // skill given its ID. If the skill is one that the player can learn, it will be added to the unlocked list. Otherwise,
     // the skill will not be able to be added to the list of unlocked skills.
-    public bool AddToUnlockedSkills(int skillID) {
+    public bool AddToUnlockedSkills(int skillID, int playerID) {
         bool unlockSuccess = false;
 
         // Check if the current player is able to learn this skill
-        var length = PartySkills.skills[playerIndex].unlockableSkills.Length;
+        var length = PartySkills.skills[playerID].unlockableSkills.Length;
         for (int i = 0; i < length; i++) {
             // Skill found, add to unlocked skills
-            if (PartySkills.skills[playerIndex].unlockableSkills[i] == skillID) {
-                PartySkills.skills[playerIndex].learnedSkills[PartySkills.skills[playerIndex].numSkillsLearned] = skillID;
-                PartySkills.skills[playerIndex].numSkillsLearned++;
+            if (PartySkills.skills[playerID].unlockableSkills[i] == skillID) {
+                PartySkills.skills[playerID].learnedSkills[PartySkills.skills[playerID].numSkillsLearned] = skillID;
+                PartySkills.skills[playerID].numSkillsLearned++;
                 unlockSuccess = true;
                 i = length; // Exit the loop
             }
@@ -169,7 +194,7 @@ public class SkillsInventory : MonoBehaviour {
                 name = "Booty Destroyer";
                 break;
             case (int)SKILLS.TEST_SKILL2:
-                name = "Spinng Ass Shot";
+                name = "Spinning Ass Shot";
                 break;
             case (int)SKILLS.TEST_SKILL3:
                 name = "Implant Popper";
@@ -224,16 +249,28 @@ public class SkillsInventory : MonoBehaviour {
         // Find the required stats and return those to the caller
         switch (skillID) {
             case (int)SKILLS.TEST_SKILL1:
+                skillStat[0] = 25;
+                skillStat[1] = 95;
                 skillStat[4] = (float)SKILL_TYPE.SINGLE_TARGET_ATK;
+                skillStat[5] = 50;
                 break;
             case (int)SKILLS.TEST_SKILL2:
+                skillStat[0] = 70;
+                skillStat[1] = 80;
                 skillStat[4] = (float)SKILL_TYPE.ALL_TARGETS_ATK;
+                skillStat[5] = 190;
                 break;
             case (int)SKILLS.TEST_SKILL3:
+                skillStat[0] = 50;
+                skillStat[1] = 85;
                 skillStat[4] = (float)SKILL_TYPE.FULL_ROW_ATK;
+                skillStat[5] = 115;
                 break;
             case (int)SKILLS.TEST_SKILL4:
+                skillStat[0] = 20;
+                skillStat[1] = 100;
                 skillStat[4] = (float)SKILL_TYPE.SINGLE_PLAYER_HEAL;
+                skillStat[5] = 40;
                 break;
         }
 
