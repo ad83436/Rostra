@@ -617,9 +617,16 @@ public class MainInventory : MonoBehaviour {
     // Updates the player's HP when a health potion or similar is used in the inventory
     private void UpdatePlayerHitpoints(int amount, int playerID) {
         PartyStats.chara[playerID].hitpoints += amount;
+        PartyStats.chara[playerID].rage -= amount * 2.0f;
+
+        if(PartyStats.chara[playerID].rage<0.0f)
+        {
+            PartyStats.chara[playerID].rage = 0.0f;
+        }
         // Make sure the hitpoints don't go below zero or above the player's maximum HP
         if (PartyStats.chara[playerID].hitpoints > PartyStats.chara[playerID].TotalMaxHealth) {
             PartyStats.chara[playerID].hitpoints = PartyStats.chara[playerID].TotalMaxHealth;
+            PartyStats.chara[playerID].rage = 0.0f; //If health is full, then rage is zero
         } else if (PartyStats.chara[playerID].hitpoints < 0) {
             PartyStats.chara[playerID].hitpoints = 0;
         }

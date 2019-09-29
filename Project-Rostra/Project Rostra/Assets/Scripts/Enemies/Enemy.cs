@@ -238,6 +238,7 @@ public class Enemy : MonoBehaviour
     {
         if (hit)
         {
+            objPooler.SpawnFromPool("EnemyNormalAttack", attackThisPlayer.gameObject.transform.position, gameObject.transform.rotation);
             if(CalculateCrit() <= eCritical)
             {
                 Debug.Log("Critical Hit from Enemy");
