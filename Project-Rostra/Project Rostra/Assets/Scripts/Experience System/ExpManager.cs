@@ -6,20 +6,52 @@ public class ExpManager : MonoBehaviour {
 	//singleton
 	public static ExpManager instance;
 
+	#region skills per player
+
+	private static int[][] playeroneskills = new int[4][];
+
+	private static int[][] playertwoskills = new int[4][];
+
+	private static int[][] playerthreeskills = new int[4][];
+
+	private static int[][] playerfourskills = new int[4][];
+
+	//temporary available skills lists
+	private List<SKILLS> playeroneunlockedskills = new List<SKILLS>();
+	private List<SKILLS> playertwounlockedskills = new List<SKILLS>();
+	private List<SKILLS> playerthreeunlockedskills = new List<SKILLS>();
+	private List<SKILLS> playerfourunlockedskills = new List<SKILLS>();
+
+	#endregion
+
 	#region Initialization & Destruction
 
 	private void Awake() {
-        //initialize singleton
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(this.gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-           
-        }
+		//initialize singleton
+		if (instance == null) {
+			instance = this;
+			DontDestroyOnLoad(this.gameObject);
+		} else {
+			Destroy(gameObject);
+
+		}
+
+		playeroneskills[0] = new int[] { (int)SKILLS.TEST_SKILL1, 0, 0, 0, 0, 0, 0, 0 };
+		playeroneskills[1] = new int[] { (int)SKILLS.TEST_SKILL1, 0, 0, 0, 0, 0, 0, 0 };
+		playeroneskills[2] = new int[] { (int)SKILLS.TEST_SKILL1, 0, 0, 0, 0, 0, 0, 0 };
+		playeroneskills[3] = new int[] { (int)SKILLS.TEST_SKILL1, 0, 0, 0, 0, 0, 0, 0 };
+		playertwoskills[0] = new int[] { (int)SKILLS.TEST_SKILL1, 0, 0, 0, 0, 0, 0, 0 };
+		playertwoskills[1] = new int[] { (int)SKILLS.TEST_SKILL1, 0, 0, 0, 0, 0, 0, 0 };
+		playertwoskills[2] = new int[] { (int)SKILLS.TEST_SKILL1, 0, 0, 0, 0, 0, 0, 0 };
+		playertwoskills[3] = new int[] { (int)SKILLS.TEST_SKILL1, 0, 0, 0, 0, 0, 0, 0 };
+		playerthreeskills[0] = new int[] { (int)SKILLS.TEST_SKILL1, 0, 0, 0, 0, 0, 0, 0 };
+		playerthreeskills[1] = new int[] { (int)SKILLS.TEST_SKILL1, 0, 0, 0, 0, 0, 0, 0 };
+		playerthreeskills[2] = new int[] { (int)SKILLS.TEST_SKILL1, 0, 0, 0, 0, 0, 0, 0 };
+		playerthreeskills[3] = new int[] { (int)SKILLS.TEST_SKILL1, 0, 0, 0, 0, 0, 0, 0 };
+		playerfourskills[0] = new int[] { (int)SKILLS.TEST_SKILL1, 0, 0, 0, 0, 0, 0, 0 };
+		playerfourskills[1] = new int[] { (int)SKILLS.TEST_SKILL1, 0, 0, 0, 0, 0, 0, 0 };
+		playerfourskills[2] = new int[] { (int)SKILLS.TEST_SKILL1, 0, 0, 0, 0, 0, 0, 0 };
+		playerfourskills[3] = new int[] { (int)SKILLS.TEST_SKILL1, 0, 0, 0, 0, 0, 0, 0 };
 	}
 
 	private void OnDestroy() {
@@ -27,73 +59,72 @@ public class ExpManager : MonoBehaviour {
 		if (instance == this) instance = null;
 	}
 
-    private void Start()
-    {
-        //Give initial values for stats
-        //Will be changed to use a load file instead
+	private void Start() {
+		//Give initial values for stats
+		//Will be changed to use a load file instead
 
-        //Fargas
-        PartyStats.chara[0].hitpoints = 200.0f;
-        PartyStats.chara[0].maxHealth = 200.0f;
-        PartyStats.chara[0].magicpoints = 200.0f;
-        PartyStats.chara[0].maxMana = 200.0f;
-        PartyStats.chara[0].attack = 100.0f;
-        PartyStats.chara[0].defence = 15.0f;
-        PartyStats.chara[0].agility = 14.0f;
-        PartyStats.chara[0].strength = 16.0f;
-        PartyStats.chara[0].critical = 5.0f;
-        PartyStats.chara[0].speed = 16.0f;
-        PartyStats.chara[0].currentExperience = 0;
-        PartyStats.chara[0].neededExperience = 150;
+		//Fargas
+		PartyStats.chara[0].hitpoints = 200.0f;
+		PartyStats.chara[0].maxHealth = 200.0f;
+		PartyStats.chara[0].magicpoints = 200.0f;
+		PartyStats.chara[0].maxMana = 200.0f;
+		PartyStats.chara[0].attack = 100.0f;
+		PartyStats.chara[0].defence = 15.0f;
+		PartyStats.chara[0].agility = 14.0f;
+		PartyStats.chara[0].strength = 16.0f;
+		PartyStats.chara[0].critical = 5.0f;
+		PartyStats.chara[0].speed = 16.0f;
+		PartyStats.chara[0].currentExperience = 0;
+		PartyStats.chara[0].neededExperience = 150;
 
-        //Oberon
-        PartyStats.chara[1].hitpoints = 250.0f;
-        PartyStats.chara[1].maxHealth = 250.0f;
-        PartyStats.chara[1].magicpoints = 150.0f;
-        PartyStats.chara[1].maxMana = 150.0f;
-        PartyStats.chara[1].attack = 100.0f;
-        PartyStats.chara[1].defence = 20.0f;
-        PartyStats.chara[1].agility = 10.0f;
-        PartyStats.chara[1].strength = 14.0f;
-        PartyStats.chara[1].critical = 3.0f;
-        PartyStats.chara[1].speed = 9.0f;
-        PartyStats.chara[1].currentExperience = 0;
-        PartyStats.chara[1].neededExperience = 150;
+		//Oberon
+		PartyStats.chara[1].hitpoints = 250.0f;
+		PartyStats.chara[1].maxHealth = 250.0f;
+		PartyStats.chara[1].magicpoints = 150.0f;
+		PartyStats.chara[1].maxMana = 150.0f;
+		PartyStats.chara[1].attack = 100.0f;
+		PartyStats.chara[1].defence = 20.0f;
+		PartyStats.chara[1].agility = 10.0f;
+		PartyStats.chara[1].strength = 14.0f;
+		PartyStats.chara[1].critical = 3.0f;
+		PartyStats.chara[1].speed = 9.0f;
+		PartyStats.chara[1].currentExperience = 0;
+		PartyStats.chara[1].neededExperience = 150;
 
-        //Frea
-        PartyStats.chara[2].hitpoints = 180.0f;
-        PartyStats.chara[2].maxHealth = 180.0f;
-        PartyStats.chara[2].magicpoints = 200.0f;
-        PartyStats.chara[2].maxMana = 200.0f;
-        PartyStats.chara[2].attack = 100.0f;
-        PartyStats.chara[2].defence = 14.0f;
-        PartyStats.chara[2].agility = 13.0f;
-        PartyStats.chara[2].strength = 15.0f;
-        PartyStats.chara[2].critical = 5.0f;
-        PartyStats.chara[2].speed = 14.0f;
-        PartyStats.chara[2].currentExperience = 0;
-        PartyStats.chara[2].neededExperience = 150;
+		//Frea
+		PartyStats.chara[2].hitpoints = 180.0f;
+		PartyStats.chara[2].maxHealth = 180.0f;
+		PartyStats.chara[2].magicpoints = 200.0f;
+		PartyStats.chara[2].maxMana = 200.0f;
+		PartyStats.chara[2].attack = 100.0f;
+		PartyStats.chara[2].defence = 14.0f;
+		PartyStats.chara[2].agility = 13.0f;
+		PartyStats.chara[2].strength = 15.0f;
+		PartyStats.chara[2].critical = 5.0f;
+		PartyStats.chara[2].speed = 14.0f;
+		PartyStats.chara[2].currentExperience = 0;
+		PartyStats.chara[2].neededExperience = 150;
 
-        //Arcelus
-        PartyStats.chara[3].hitpoints = 160.0f;
-        PartyStats.chara[3].maxHealth = 160.0f;
-        PartyStats.chara[3].magicpoints = 250.0f;
-        PartyStats.chara[3].maxMana = 250.0f;
-        PartyStats.chara[3].attack = 100.0f;
-        PartyStats.chara[3].defence = 15.0f;
-        PartyStats.chara[3].agility = 17.0f;
-        PartyStats.chara[3].strength = 13.0f;
-        PartyStats.chara[3].critical = 3.0f;
-        PartyStats.chara[3].speed = 12.0f;
-        PartyStats.chara[3].currentExperience = 0;
-        PartyStats.chara[3].neededExperience = 150;
-    }
+		//Arcelus
+		PartyStats.chara[3].hitpoints = 160.0f;
+		PartyStats.chara[3].maxHealth = 160.0f;
+		PartyStats.chara[3].magicpoints = 250.0f;
+		PartyStats.chara[3].maxMana = 250.0f;
+		PartyStats.chara[3].attack = 100.0f;
+		PartyStats.chara[3].defence = 15.0f;
+		PartyStats.chara[3].agility = 17.0f;
+		PartyStats.chara[3].strength = 13.0f;
+		PartyStats.chara[3].critical = 3.0f;
+		PartyStats.chara[3].speed = 12.0f;
+		PartyStats.chara[3].currentExperience = 0;
+		PartyStats.chara[3].neededExperience = 150;
+	}
 
-    #endregion
+	#endregion
 
-    #region exp & leveling
+	#region exp & leveling
 
-    public void LevelUp(int playerIndex) {
+	public void LevelUp(int playerIndex) {
 		//checks if the playerIndex is valid
 		if (playerIndex < 0 || playerIndex > 3) {
 			Debug.LogError("Player number " + playerIndex + " does not exist!");
@@ -104,15 +135,6 @@ public class ExpManager : MonoBehaviour {
 		PartyStats.chara[playerIndex].level++;
 		//set current exp to 0
 		PartyStats.chara[playerIndex].currentExperience = 0;
-
-		//calls the corisponding player function to update the gained abilities
-		switch (playerIndex) {
-			case 0: CharaOneLevelUp(PartyStats.chara[playerIndex].level); break;
-			case 1: CharaTwoLevelUp(PartyStats.chara[playerIndex].level); break;
-			case 2: CharaThreeLevelUp(PartyStats.chara[playerIndex].level); break;
-			case 3: CharaFourLevelUp(PartyStats.chara[playerIndex].level); break;
-			default: Debug.LogError("If your reading this its too late (tell Domara)"); break;
-		}
 
 		//calculate the number of stat points gained
 		///number of points increases by 1 each level
@@ -134,138 +156,142 @@ public class ExpManager : MonoBehaviour {
 		///500 is the base exp needed
 		///250 * (level - 1) adds 250 for each level gained
 		///eg: level 30, exp needed is 7,750
-	}	
-
-	/* TODO: Add functionality */
-	#region functions that give each player their skills
-
-	private void CharaOneLevelUp(int level) {
-		switch (level) {
-			default: /*Debug.LogError("Current level is not valid"); /**/ break;
-		}
 	}
 
-	private void CharaTwoLevelUp(int level) {
-		switch (level) {
-			default: /*Debug.LogError("Current level is not valid"); /**/ break;
-		}
-	}
-
-	private void CharaThreeLevelUp(int level) {
-		switch (level) {
-			default: /*Debug.LogError("Current level is not valid"); /**/ break;
-		}
-	}
-
-	private void CharaFourLevelUp(int level) {
-		switch (level) {
-			default: /*Debug.LogError("Current level is not valid"); /**/ break;
-		}
-	}
 
 	#endregion
 
-	#endregion
+	#region Using upgrade points & unlocking skills
 
-	#region Using upgrade points
+	#region Using points
 
 	public void UsePointOnAttack(int playerIndex) {
 		//checks if the playerIndex is valid
-		if (playerIndex < 0 || playerIndex > 3) {
-			Debug.LogError("Player number " + playerIndex + " does not exist!");
-			return;
-		}
+		if (playerIndex < 0 || playerIndex > 3) { Debug.LogError("Player number " + playerIndex + " does not exist!"); return; }
 		if (PartyStats.chara[playerIndex].statPoints == 0) return;
 
 		PartyStats.chara[playerIndex].statPoints--;
 		PartyStats.chara[playerIndex].attack++;
+		UpdatePlayerSkills(playerIndex);
 	}
 
 	public void UsePointOnDefence(int playerIndex) {
 		//checks if the playerIndex is valid
-		if (playerIndex < 0 || playerIndex > 3) {
-			Debug.LogError("Player number " + playerIndex + " does not exist!");
-			return;
-		}
+		if (playerIndex < 0 || playerIndex > 3) { Debug.LogError("Player number " + playerIndex + " does not exist!"); return; }
 		if (PartyStats.chara[playerIndex].statPoints == 0) return;
 
 		PartyStats.chara[playerIndex].statPoints--;
 		PartyStats.chara[playerIndex].defence += 1f;
+		UpdatePlayerSkills(playerIndex);
 	}
 
 	public void UsePointOnHealth(int playerIndex) {
 		//checks if the playerIndex is valid
-		if (playerIndex < 0 || playerIndex > 3) {
-			Debug.LogError("Player number " + playerIndex + " does not exist!");
-			return;
-		}
+		if (playerIndex < 0 || playerIndex > 3) { Debug.LogError("Player number " + playerIndex + " does not exist!"); return; }
 		if (PartyStats.chara[playerIndex].statPoints == 0) return;
 
 		PartyStats.chara[playerIndex].statPoints--;
 		PartyStats.chara[playerIndex].maxHealth += 75f;
 		PartyStats.chara[playerIndex].hitpoints += 75f;
+		UpdatePlayerSkills(playerIndex);
 	}
 
 	public void UsePointOnMana(int playerIndex) {
 		//checks if the playerIndex is valid
-		if (playerIndex < 0 || playerIndex > 3) {
-			Debug.LogError("Player number " + playerIndex + " does not exist!");
-			return;
-		}
+		if (playerIndex < 0 || playerIndex > 3) { Debug.LogError("Player number " + playerIndex + " does not exist!"); return; }
 		if (PartyStats.chara[playerIndex].statPoints == 0) return;
 
 		PartyStats.chara[playerIndex].statPoints--;
 		PartyStats.chara[playerIndex].maxMana += 75f;
 		PartyStats.chara[playerIndex].magicpoints += 75f;
+		UpdatePlayerSkills(playerIndex);
 	}
 
 	public void UsePointOnStrength(int playerIndex) {
 		//checks if the playerIndex is valid
-		if (playerIndex < 0 || playerIndex > 3) {
-			Debug.LogError("Player number " + playerIndex + " does not exist!");
-			return;
-		}
+		if (playerIndex < 0 || playerIndex > 3) { Debug.LogError("Player number " + playerIndex + " does not exist!"); return; }
 		if (PartyStats.chara[playerIndex].statPoints == 0) return;
 
 		PartyStats.chara[playerIndex].statPoints--;
 		PartyStats.chara[playerIndex].strength += 1f;
+		UpdatePlayerSkills(playerIndex);
 	}
 
 	public void UsePointOnCritical(int playerIndex) {
 		//checks if the playerIndex is valid
-		if (playerIndex < 0 || playerIndex > 3) {
-			Debug.LogError("Player number " + playerIndex + " does not exist!");
-			return;
-		}
+		if (playerIndex < 0 || playerIndex > 3) { Debug.LogError("Player number " + playerIndex + " does not exist!"); return; }
 		if (PartyStats.chara[playerIndex].statPoints == 0) return;
 
 		PartyStats.chara[playerIndex].statPoints--;
 		PartyStats.chara[playerIndex].critical += 1f;
+		UpdatePlayerSkills(playerIndex);
 	}
 
 	public void UsePointOnAgility(int playerIndex) {
 		//checks if the playerIndex is valid
-		if (playerIndex < 0 || playerIndex > 3) {
-			Debug.LogError("Player number " + playerIndex + " does not exist!");
-			return;
-		}
+		if (playerIndex < 0 || playerIndex > 3) { Debug.LogError("Player number " + playerIndex + " does not exist!"); return; }
 		if (PartyStats.chara[playerIndex].statPoints == 0) return;
 
 		PartyStats.chara[playerIndex].statPoints--;
 		PartyStats.chara[playerIndex].agility += 1f;
+		UpdatePlayerSkills(playerIndex);
 	}
 
 	public void UsePointOnSpeed(int playerIndex) {
 		//checks if the playerIndex is valid
-		if (playerIndex < 0 || playerIndex > 3) {
-			Debug.LogError("Player number " + playerIndex + " does not exist!");
-			return;
-		}
+		if (playerIndex < 0 || playerIndex > 3) { Debug.LogError("Player number " + playerIndex + " does not exist!"); return; }
 		if (PartyStats.chara[playerIndex].statPoints == 0) return;
 
 		PartyStats.chara[playerIndex].statPoints--;
 		PartyStats.chara[playerIndex].speed += 1f;
+		UpdatePlayerSkills(playerIndex);
 	}
+
+	#endregion
+
+	#region Unlock skills
+
+	private void UpdatePlayerSkills(int index) {
+		switch (index) {
+			case 0: UpdatePlayerOneSkills(); break;
+			case 1: UpdatePlayerTwoSkills(); break;
+			case 2: UpdatePlayerThreeSkills(); break;
+			case 3: UpdatePlayerFourSkills(); break;
+			default: Debug.LogError("something happened but i dont know what"); break;
+		}
+	}
+
+	private bool CheckForMinimumVals(int[] arr, int[] min) {
+		if (arr.Length != min.Length + 1) { Debug.LogError("AAAAAAAAAAAAAAAA"); return false; }
+		for (int i = 1; i < arr.Length; i++) {
+			if (arr[i] < min[i - 1]) return false;
+		}
+		return true;
+	}
+
+	private void UpdatePlayerOneSkills() {
+		for (int i = 0; i < playeroneskills.Length; i++) {
+			if (playeroneunlockedskills.Contains((SKILLS)playeroneskills[i][0])) continue;
+			if (CheckForMinimumVals(playeroneskills[i], new int[] { 0, 0, 0, 0, 0, 0, 0, 0 })) {
+				/* TODO: Unlock skill in skills inventory */
+				playeroneunlockedskills.Add((SKILLS)playeroneskills[i][0]);
+			}
+		}
+	}
+
+	private void UpdatePlayerTwoSkills() {
+
+	}
+
+	private void UpdatePlayerThreeSkills() {
+
+	}
+
+	private void UpdatePlayerFourSkills() {
+
+	}
+
+	#endregion
 
 	#endregion
 
@@ -343,15 +369,15 @@ public class ExpManager : MonoBehaviour {
 					currentPlayer++;
 					if (currentPlayer == 4) currentPlayer = 0;
 					break;
-				case 1: LevelUp(currentPlayer);				break;
-				case 2: UsePointOnAttack(currentPlayer);	break;
-				case 3: UsePointOnDefence(currentPlayer);	break;
-				case 4: UsePointOnHealth(currentPlayer);	break;
-				case 5: UsePointOnMana(currentPlayer);		break;
-				case 6: UsePointOnStrength(currentPlayer);	break;
-				case 7: UsePointOnCritical(currentPlayer);	break;
-				case 8: UsePointOnAgility(currentPlayer);	break;
-				case 9: UsePointOnSpeed(currentPlayer);		break;
+				case 1: LevelUp(currentPlayer); break;
+				case 2: UsePointOnAttack(currentPlayer); break;
+				case 3: UsePointOnDefence(currentPlayer); break;
+				case 4: UsePointOnHealth(currentPlayer); break;
+				case 5: UsePointOnMana(currentPlayer); break;
+				case 6: UsePointOnStrength(currentPlayer); break;
+				case 7: UsePointOnCritical(currentPlayer); break;
+				case 8: UsePointOnAgility(currentPlayer); break;
+				case 9: UsePointOnSpeed(currentPlayer); break;
 				default: break;
 			}
 		}

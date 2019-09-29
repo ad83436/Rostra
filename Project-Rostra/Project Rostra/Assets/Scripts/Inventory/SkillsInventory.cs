@@ -152,7 +152,6 @@ public class SkillsInventory : MonoBehaviour {
                 i = length; // Exit the loop
             }
         }
-
         return unlockSuccess;
     }
 
