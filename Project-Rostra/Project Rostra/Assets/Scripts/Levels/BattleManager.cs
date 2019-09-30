@@ -441,7 +441,6 @@ public class BattleManager : MonoBehaviour
 
     public void UpdatePlayerStats(int playerIndex)
     {
-        players[playerIndex].playerReference.UpdatePlayerStats();
         players[playerIndex].currentHP = PartyStats.chara[playerIndex].hitpoints;
         players[playerIndex].maxHP = PartyStats.chara[playerIndex].TotalMaxHealth;
         players[playerIndex].currentMP = PartyStats.chara[playerIndex].magicpoints;
@@ -454,5 +453,6 @@ public class BattleManager : MonoBehaviour
         players[playerIndex].speed = PartyStats.chara[playerIndex].TotalSpeed;
         players[playerIndex].exp = PartyStats.chara[playerIndex].currentExperience;
         players[playerIndex].expNeededForNextLevel = PartyStats.chara[playerIndex].neededExperience;
+        players[playerIndex].playerReference.UpdatePlayerStats();
     }
 }

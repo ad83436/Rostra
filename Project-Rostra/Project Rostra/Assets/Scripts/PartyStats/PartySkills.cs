@@ -10,21 +10,49 @@ public static class PartySkills {
             new int[] {
                 // Unlockable Skills for Fargas
                 (int)SKILLS.TEST_SKILL1,
+                (int)SKILLS.TEST_SKILL2,
+                (int)SKILLS.TEST_SKILL3,
+                (int)SKILLS.TEST_SKILL4,
+                (int)SKILLS.TEST_SKILL1,
+                (int)SKILLS.TEST_SKILL2,
+                (int)SKILLS.TEST_SKILL3,
+                (int)SKILLS.TEST_SKILL4,
             }),
         new CharacterSkills(
             new int[] {
                 // Unlockable Skills for Oberon
                 (int)SKILLS.TEST_SKILL2,
+                (int)SKILLS.NO_SKILL,
+                (int)SKILLS.NO_SKILL,
+                (int)SKILLS.NO_SKILL,
+                (int)SKILLS.NO_SKILL,
+                (int)SKILLS.NO_SKILL,
+                (int)SKILLS.NO_SKILL,
+                (int)SKILLS.NO_SKILL,
             }),
         new CharacterSkills(
             new int[] {
                 // Unlockable Skills for Frea
                 (int)SKILLS.TEST_SKILL3,
+                (int)SKILLS.NO_SKILL,
+                (int)SKILLS.NO_SKILL,
+                (int)SKILLS.NO_SKILL,
+                (int)SKILLS.NO_SKILL,
+                (int)SKILLS.NO_SKILL,
+                (int)SKILLS.NO_SKILL,
+                (int)SKILLS.NO_SKILL,
             }),
         new CharacterSkills(
             new int[] {
                 // Unlockable Skills for Arcelus
                 (int)SKILLS.TEST_SKILL4,
+                (int)SKILLS.NO_SKILL,
+                (int)SKILLS.NO_SKILL,
+                (int)SKILLS.NO_SKILL,
+                (int)SKILLS.NO_SKILL,
+                (int)SKILLS.NO_SKILL,
+                (int)SKILLS.NO_SKILL,
+                (int)SKILLS.NO_SKILL,
             }),
     };
 
@@ -45,11 +73,13 @@ public struct CharacterSkills {
     // Initialize the player's list of learnable skills
     public CharacterSkills(int[] uSkills) {
         unlockableSkills = uSkills;
+        numSkillsLearned = 0;
         learnedSkills = new int[unlockableSkills.Length];
         // Set the current learned skill to the deafult value (int)SKILLS.NO_SKILL
         var length = learnedSkills.Length;
         for (int i = 0; i < length; i++) {
-            learnedSkills[i] = (int)SKILLS.NO_SKILL;
+            learnedSkills[i] = unlockableSkills[i];
+            numSkillsLearned++;
         }
         // Set the character's current equipped skills to the default value as well
         equippedSkills = new int[PartySkills.MAX_SKILLS]{
@@ -58,6 +88,5 @@ public struct CharacterSkills {
             (int)SKILLS.NO_SKILL,
             (int)SKILLS.NO_SKILL,
         };
-        numSkillsLearned = 0;
     }
 }
