@@ -152,7 +152,7 @@ public class Enemy : MonoBehaviour
                     break;
 
                 case EnemyAttackType.Opportunistic:
-                    AttackLowDef();
+                   // AttackLowDef();
                     break;
 
                 case EnemyAttackType.Assassin:
@@ -172,7 +172,7 @@ public class Enemy : MonoBehaviour
                     break;
 
                 case EnemyAttackType.Strategist:
-                    AttackHighAgi();
+                   // AttackHighAgi();
                     break;
 
                 case EnemyAttackType.Demo:
@@ -258,7 +258,6 @@ public class Enemy : MonoBehaviour
         uiBTL.EndTurn();
     }
 
-   
     void AttackLowHp()
     {
         StatNeeded(PlayerStatReference.Health);
@@ -300,7 +299,7 @@ public class Enemy : MonoBehaviour
     {
         StatNeeded(PlayerStatReference.Agility);
         for (int i = 0; i < 4; i++)
-        { 
+        {
             if (battleManager.players[i].agi == Mathf.Max(playerStatNeeded.ToArray()))
             {
                 attackThisPlayer = battleManager.players[i].playerReference;
@@ -317,8 +316,8 @@ public class Enemy : MonoBehaviour
     // returns the stat needed for the enemies that attack based on player stats 
     void StatNeeded(PlayerStatReference statNeeded)
     {
-        ////polish Later(reluctantly) store in array and loop options why cause i can that's why 
-        
+        float whateverStatNeeded;
+
         //returns the lowest HP of the party 
         if (statNeeded == PlayerStatReference.Health)
         {
@@ -328,14 +327,11 @@ public class Enemy : MonoBehaviour
                 if (stat.playerReference != null && stat.currentHP > 0)
                 {
                     playerStatNeeded.Add(stat.currentHP);
-
                 }
-
-                //sort the list DUH
-                playerStatNeeded.Sort();
-
-                //TODO: check if 2 player have the same hp if so pick one, and also other stuffs
             }
+
+            //sort the list DUH
+            playerStatNeeded.Sort();
         }
 
         else if(statNeeded == PlayerStatReference.Agility)
@@ -348,8 +344,9 @@ public class Enemy : MonoBehaviour
                     playerStatNeeded.Add(stat.agi);
                 }
             }
+         
             playerStatNeeded.Sort();
-
+           
             //TODO: check if 2 player have the same agi if so pick one, and also other stuffs
         }
 
@@ -365,7 +362,6 @@ public class Enemy : MonoBehaviour
                 }
             }
             playerStatNeeded.Sort();
-
             //TODO: check if 2 player have the same agi if so pick one, and also other stuffs
         }
     }
