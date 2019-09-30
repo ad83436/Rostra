@@ -152,7 +152,7 @@ public class Enemy : MonoBehaviour
                     break;
 
                 case EnemyAttackType.Opportunistic:
-                   // AttackLowDef();
+                    AttackLowDef();
                     break;
 
                 case EnemyAttackType.Assassin:
@@ -172,7 +172,7 @@ public class Enemy : MonoBehaviour
                     break;
 
                 case EnemyAttackType.Strategist:
-                   // AttackHighAgi();
+                    AttackHighAgi();
                     break;
 
                 case EnemyAttackType.Demo:
@@ -238,7 +238,6 @@ public class Enemy : MonoBehaviour
     {
         if (hit)
         {
-            objPooler.SpawnFromPool("EnemyNormalAttack", attackThisPlayer.gameObject.transform.position, gameObject.transform.rotation);
             if(CalculateCrit() <= eCritical)
             {
                 Debug.Log("Critical Hit from Enemy");
@@ -275,7 +274,6 @@ public class Enemy : MonoBehaviour
          }
          //clear the list for the next use 
         playerStatNeeded.Clear();
-
     }
 
     void AttackLowDef()
@@ -317,8 +315,6 @@ public class Enemy : MonoBehaviour
     // returns the stat needed for the enemies that attack based on player stats 
     void StatNeeded(PlayerStatReference statNeeded)
     {
-        float whateverStatNeeded;
-
         //returns the lowest HP of the party 
         if (statNeeded == PlayerStatReference.Health)
         {
