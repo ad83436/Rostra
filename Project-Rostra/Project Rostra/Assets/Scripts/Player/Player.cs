@@ -96,7 +96,7 @@ public class Player : MonoBehaviour
         playerAnimator = gameObject.GetComponent<Animator>();
 
         //Rage
-        maxRage = 100.0f;
+        maxRage = maxHP * 0.65f; //Max rage is 65% of max health
         rageModeIndicator.gameObject.SetActive(false);
         canRage = false;
 
