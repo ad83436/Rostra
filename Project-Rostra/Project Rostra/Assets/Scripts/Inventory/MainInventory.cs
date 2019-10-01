@@ -56,14 +56,39 @@ public class MainInventory : MonoBehaviour {
         invItem[0, 0] = (int)ITEM_ID.TEST_WEAPON1;
         invItem[0, 1] = 1;
 
+        if(ItemType(invItem[0,0]) == (int)ITEM_TYPE.CONSUMABLE)
+        {
+            consumableInv.Add(0);
+        }
+
         invItem[1, 0] = (int)ITEM_ID.TEST_POTION_HP;
         invItem[1, 1] = ItemStackLimit((int)ITEM_ID.TEST_POTION_HP);
+
+        if (ItemType(invItem[1, 0]) == (int)ITEM_TYPE.CONSUMABLE)
+        {
+            consumableInv.Add(1);
+        }
 
         invItem[2, 0] = (int)ITEM_ID.TEST_POTION_MP;
         invItem[2, 1] = ItemStackLimit((int)ITEM_ID.TEST_POTION_MP);
 
+        if (ItemType(invItem[2, 0]) == (int)ITEM_TYPE.CONSUMABLE)
+        {
+            consumableInv.Add(2);
+        }
+
         invItem[3, 0] = (int)ITEM_ID.TEST_ARMOR1;
         invItem[3, 1] = 1;
+
+        if (ItemType(invItem[3, 0]) == (int)ITEM_TYPE.CONSUMABLE)
+        {
+            consumableInv.Add(3);
+        }
+
+        for(int i =0; i<consumableInv.Count; i++)
+        {
+            Debug.Log(consumableInv[i]);
+        }
     }
 
     // Handling keyboard functionality
