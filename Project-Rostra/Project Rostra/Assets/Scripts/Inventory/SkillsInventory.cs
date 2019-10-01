@@ -2,7 +2,7 @@
 using UnityEngine;
 
 // Code Written By:     Christopher Brine
-// Last Updated:        September 26h, 2019
+// Last Updated:        September 30th, 2019
 
 public class SkillsInventory : MonoBehaviour {
     public static SkillsInventory invInstance;  // Holds the current inventory instance in a single variable
@@ -11,7 +11,7 @@ public class SkillsInventory : MonoBehaviour {
     public Font GuiSmall;
     public bool isVisible = false;
 
-    // Variables for selecting the unlocked skills to equip/uneuqip them
+    // Variables for selecting the unlocked skills to equip/unequip them
     private int curOption = 0;                  // The current skill the player has their cursor over
     private int selectedOption = -1;            // The skill that the player has selected
     private int subCurOption = 0;               // The current option the player has their cursor over after selecting a skill
@@ -101,9 +101,36 @@ public class SkillsInventory : MonoBehaviour {
                 }
             }
 
-            // Selecting a Skill
+            // Selecting a Skill and opening the option menu
             if (keySelect) {
                 selectedOption = curOption;
+            }
+        } else { // Equipping/unequipping skills from the four equipped skills the player can have at once
+            // Shifting up and down through the sub-menu options
+            if (keyUp) {
+                subCurOption--;
+                if (subCurOption < 0) {
+                    subCurOption = PartySkills.skills[playerIndex].equippedSkills.Length - 1;
+                }
+            } else if (keyDown) {
+                subCurOption++;
+                if (subCurOption > PartySkills.skills[playerIndex].equippedSkills.Length - 1) {
+                    subCurOption = 0;
+                }
+            }
+
+            // Selecting one of the given options
+            if (keySelect) {
+                EquipSkill(PartySkills.skills[playerIndex].learnedSkills[selectedOption], subCurOption, playerIndex);
+                // Exit out of the sub-menu
+                selectedOption = -1;
+                subCurOption = 0;
+            }
+
+            // Unselecting the current item, returning the player back to the main inventory window
+            if (keyReturn) {
+                selectedOption = -1;
+                subCurOption = 0;
             }
         }
     }
@@ -121,9 +148,26 @@ public class SkillsInventory : MonoBehaviour {
         };
         var fontHeight = style.lineHeight;
 
+        // Drawing the player's equipped skills
+        var length = PartySkills.skills[playerIndex].equippedSkills.Length;
+        for (int e = 0; e < length; e++) {
+            GUI.Label(new Rect(45.0f, 265.0f + (fontHeight * e), 200.0f, 50.0f), SkillName(PartySkills.skills[playerIndex].equippedSkills[e]), style);
+            // Drawing a cursor that points to the item the player has highlighted
+            if (selectedOption != -1) { GUI.Label(new Rect(25.0f, 265.0f + (fontHeight * subCurOption), 50.0f, 50.0f), ">", style); }
+        }
+
         // Drawing the skill inventory items
         for (int i = firstToDraw; i <= firstToDraw + numToDraw; i++) {
-            GUI.Label(new Rect(45.0f, 15.0f + (fontHeight * (i - firstToDraw)), 200.0f, 50.0f), SkillName(PartySkills.skills[playerIndex].learnedSkills[i]), style);
+            if (PartySkills.skills[playerIndex].learnedSkills[i] != (int)SKILLS.NO_SKILL) {
+                GUI.Label(new Rect(45.0f, 15.0f + (fontHeight * (i - firstToDraw)), 200.0f, 50.0f), SkillName(PartySkills.skills[playerIndex].learnedSkills[i]), style);
+                // Check if this skill has been equipped by the current player
+                for (int ii = 0; ii < length; ii++) {
+                    if (PartySkills.skills[playerIndex].learnedSkills[i] == PartySkills.skills[playerIndex].equippedSkills[ii]) {
+                        GUI.Label(new Rect(510.0f, 15.0f + (fontHeight * (i - firstToDraw)), 50.0f, 50.0f), "(E)", style);
+                        ii = length; // Exit the loop
+                    }
+                }
+            }
             // Drawing a cursor that points to the item the player has highlighted
             GUI.Label(new Rect(25.0f, 15.0f + (fontHeight * (curOption - firstToDraw)), 50.0f, 50.0f), ">", style);
         }
@@ -133,31 +177,17 @@ public class SkillsInventory : MonoBehaviour {
 
     // Attempts to equip a skill to the current player's active skills. If the skill list is full, it will let the player swap a
     // currently equipped skill with the newly selected one
-    public bool EquipSkill(int skillID, int playerID) {
-        bool emptySlotExists = false;
-        // Find an empty slot in the equipped skill list
+    public void EquipSkill(int skillID, int slotID, int playerID) {
+        // Equip the skill to the currently selected slot
+        PartySkills.skills[playerID].equippedSkills[slotID] = skillID;
+        // Check through the four slots to stop any duplicate skills from being equipped
         var length = PartySkills.skills[playerID].equippedSkills.Length;
         for (int i = 0; i < length; i++) {
-            // Equip the skill when an empty slot is found
-            if (PartySkills.skills[playerID].equippedSkills[i] == (int)SKILLS.NO_SKILL) {
-                PartySkills.skills[playerID].equippedSkills[i] = skillID;
-                emptySlotExists = true;
-                i = length; // Exit the loop
+            // Remove the duplicate if one exists
+            if (i != slotID && PartySkills.skills[playerID].equippedSkills[i] == PartySkills.skills[playerID].equippedSkills[slotID]) {
+                PartySkills.skills[playerID].equippedSkills[i] = (int)SKILLS.NO_SKILL;
             }
         }
-        // NOTE -- If this returns false, the skill inventory will open up the option to swap an equipped skill with
-        // the current one the player is trying to equip
-        return emptySlotExists;
-    }
-
-    // Attempts to remove an equipped skill for the respective array. If it cannot remove the skill because the slot provided
-    // was out of bounds of there was no skill equipped, this code will return false.
-    public bool UnequipSkill(int skillSlot, int playerID) {
-        if (skillSlot >= 0 && skillSlot < PartySkills.MAX_SKILLS) {
-            PartySkills.skills[playerID].equippedSkills[skillSlot] = (int)SKILLS.NO_SKILL;
-            return true;
-        }
-        return false;
     }
 
     // Unlocks a skill for the player to use. In order to do this, the method will check if the player can actually use the
@@ -187,7 +217,7 @@ public class SkillsInventory : MonoBehaviour {
 
     // Finds the name of the skill relative to the ID provided in the argument
     public string SkillName(int skillID) {
-        string name = "";
+        string name = "---";
 
         // Find the name relative to the ID given
         switch (skillID) {

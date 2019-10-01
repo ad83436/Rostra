@@ -22,5 +22,5 @@ public enum SKILL_TYPE{ // Minimum Value -- 0xFFF0, Maximum Value -- 0xFFFF (16 
     ALL_PLAYER_BUFF =       0XFFF6,     // Skills of this type will buff alll player character's stats
     SINGLE_TARGET_DEBUFF =  0xFFF7,     // Skills of this type will debuff a single enemy's stats
     FULL_ROW_DEBUFF =       0xFFF8,     // Skills of this type will debuff an entire row of enemies
-    ALL_TARGETS_DEBUFF =    0xFFF9,     // Skills os this type will debuff every enemy on the field
+    ALL_TARGETS_DEBUFF =    0xFFF9,     // Skills of this type will debuff every enemy on the field
 };

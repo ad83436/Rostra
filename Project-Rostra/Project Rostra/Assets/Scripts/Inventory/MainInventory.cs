@@ -2,7 +2,7 @@
 using UnityEngine;
 
 // Code Written By:     Christopher Brine
-// Last Updated:        September 26th, 2019+
+// Last Updated:        September 30th, 2019
 
 public class MainInventory : MonoBehaviour {
     public static MainInventory invInstance;    // Holds the current inventory instance in a single variable
@@ -141,7 +141,7 @@ public class MainInventory : MonoBehaviour {
                         itemToSwap[i] = 0;
                     }
                 } else {
-                    // TODO -- Make this block of code exit out of the inventory
+                    isVisible = false;
                 }
             }
         } else { // Input functionality for when the player has selected an item (The option menu)
@@ -153,8 +153,7 @@ public class MainInventory : MonoBehaviour {
                     if (subCurOption < 0) {
                         subCurOption = menuLength - 1;
                     }
-                }
-                if (keyDown) {
+                } else if (keyDown) {
                     subCurOption++;
                     if (subCurOption > menuLength - 1) {
                         subCurOption = 0;
@@ -428,12 +427,12 @@ public class MainInventory : MonoBehaviour {
         switch (itemType) {
             case (int)ITEM_TYPE.CONSUMABLE:
                 options.Add("Use");
-                options.Add("Switch");
+                options.Add("Move");
                 options.Add("Drop");
                 break;
             case (int)ITEM_TYPE.KEY_ITEM:
                 options.Add("Use");
-                options.Add("Switch");
+                options.Add("Move");
                 break;
             case (int)ITEM_TYPE.EQUIPABLE:
                 if (invItem[curOption, 2] == -1) { // Shot "Equip" if nobody has the item equipped
@@ -441,7 +440,7 @@ public class MainInventory : MonoBehaviour {
                 } else { // Show "Unequip" if the item is equipped by a player already
                     options.Add("Unequip");
                 }
-                options.Add("Switch");
+                options.Add("Move");
                 options.Add("Drop");
                 break;
         }
