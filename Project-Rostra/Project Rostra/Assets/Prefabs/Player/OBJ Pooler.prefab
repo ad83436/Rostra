@@ -48,3 +48,10 @@ MonoBehaviour:
     prefab: {fileID: 6138812186572825609, guid: 24b126998563b334fbbd2cc238ce441f,
       type: 3}
     poolSize: 1
+  - tag: PlayerNormalAttack
+    prefab: {fileID: 178210354572094198, guid: 77cdbb535d062294eb327de07e57e8a9, type: 3}
+    poolSize: 5
+  - tag: EnemyNormalAttack
+    prefab: {fileID: 7127042623674397408, guid: 3e11f4e1c4a0ba44f97b12c0caf201c9,
+      type: 3}
+    poolSize: 5

@@ -5,7 +5,6 @@ using UnityEngine;
 public class MinimapDot : MonoBehaviour
 {
     public float Speed;
-
     private Rigidbody2D rb;
     private Vector2 moveVelocity;
     float horizontalMove;

@@ -72,7 +72,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1927818603
-  m_SortingLayer: 2
+  m_SortingLayer: 1
   m_SortingOrder: 25
   m_Sprite: {fileID: 21300000, guid: f78129dcb3712c14ebcfe59c14cbde61, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -124,6 +124,7 @@ MonoBehaviour:
   guardIcon: {fileID: 5704479074670986662}
   hpImage: {fileID: 3631274367401168766}
   rageImage: {fileID: 3631274367637930099}
+  btlCam: {fileID: 0}
   healable: 0
   currentState: 0
 --- !u!95 &3631274366451639315
@@ -315,7 +316,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1927818603
-  m_SortingLayer: 2
+  m_SortingLayer: 1
   m_SortingOrder: 30
   m_Sprite: {fileID: 21300000, guid: 182a0e9b9f6984948ba41dbc47de54d8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -717,7 +718,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1927818603
-  m_SortingLayer: 2
+  m_SortingLayer: 1
   m_SortingOrder: 50
   m_Sprite: {fileID: 21300000, guid: 8c8dc27cab4f56f43ad7966ded7f9e3d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

@@ -14,7 +14,7 @@ public class WMEnemy : MonoBehaviour
     {
         enemySpwn = EnemySpawner.instance;
     }
-
+    
 
     private void OnTriggerEnter2D(Collider2D col)
     {

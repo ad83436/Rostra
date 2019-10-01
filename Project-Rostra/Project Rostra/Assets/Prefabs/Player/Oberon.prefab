@@ -68,7 +68,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1927818603
-  m_SortingLayer: 2
+  m_SortingLayer: 1
   m_SortingOrder: 50
   m_Sprite: {fileID: 21300000, guid: 8c8dc27cab4f56f43ad7966ded7f9e3d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -244,7 +244,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1927818603
-  m_SortingLayer: 2
+  m_SortingLayer: 1
   m_SortingOrder: 30
   m_Sprite: {fileID: 21300000, guid: 182a0e9b9f6984948ba41dbc47de54d8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -676,7 +676,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1927818603
-  m_SortingLayer: 2
+  m_SortingLayer: 1
   m_SortingOrder: 22
   m_Sprite: {fileID: 2399377829659310209, guid: 2c5d6149109a3864dbcf29b53615fc7f,
     type: 3}
@@ -712,6 +712,7 @@ MonoBehaviour:
   agi: 10
   str: 13
   crit: 3
+  speed: 0
   playerIndex: 1
   name: Oberon
   equippedSkills:
@@ -728,6 +729,7 @@ MonoBehaviour:
   guardIcon: {fileID: 2408502902028901399}
   hpImage: {fileID: 3066886500271616531}
   rageImage: {fileID: 3066886499981674024}
+  btlCam: {fileID: 0}
   healable: 0
   currentState: 0
 --- !u!95 &3066886500637916762
