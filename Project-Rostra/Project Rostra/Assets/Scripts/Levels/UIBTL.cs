@@ -101,51 +101,11 @@ public class UIBTL : MonoBehaviour
     private int playerIndicatorIndex; //Used to keep track where the playerindicator is when using items or skills
 
     //End Battle Screen
+    public Fade fadePanel;
+    public GameObject victoryPanel;
+    public GameObject defeatPanel;
     private bool battleHasEnded;
-    public GameObject endScreenPanel;
-    public Text fargasLevelUpBack;
-    public Text fargasLevelUpFore;
-    public Image fargasHP;
-    public Image fargasMP;
-    public Image fargasExp;
-    private float fargasCurrentExp;
-    private float fargasMaxExp;
-    private float fargasExpStep; //Used to know by how much to increase the exp bar == 1/maxExp
-    private int fargasExpGain;
-    private bool fargasAddinExp; //Used in update to increase EXP bar
-   
-    public Text freaLevelUpBack;
-    public Text freaLevelUpFore;
-    public Image freaHP;
-    public Image freaMP;
-    public Image freaExp;
-    private float freaCurrentExp;
-    private float freaMaxExp;
-    private float freaExpStep;
-    private int freaExpGain;
-    private bool freaAddinExp;
-
-    public Text arcelusLevelUpBack;
-    public Text arcelusLevelUpFore;
-    public Image arcelusHP;
-    public Image arcelusMP;
-    public Image arcelusExp;
-    private float arcelusCurrentExp;
-    private float arcelusMaxExp;
-    private float arcelusExpStep;
-    private int arcelusExpGain;
-    private bool arcelusAddinExp;
-
-    public Text oberonLevelUpBack;
-    public Text oberonLevelUpFore;
-    public Image oberonHP;
-    public Image oberonMP;
-    public Image oberonExp;
-    private float oberonCurrentExp;
-    private float oberonMaxExp;
-    private float oberonExpStep;
-    private int oberonExpGain;
-    private bool oberonAddinExp;
+    
 
     //Dialogue after battle
     public static bool conversationAfterBattle = false; //If true, a conversation will start right after the battle ends
@@ -209,15 +169,8 @@ public class UIBTL : MonoBehaviour
 
         //End Battle
         battleHasEnded = false;
-        endScreenPanel.SetActive(false);
-        fargasLevelUpBack.gameObject.SetActive(false);
-        fargasLevelUpFore.gameObject.SetActive(false);
-        freaLevelUpBack.gameObject.SetActive(false);
-        freaLevelUpFore.gameObject.SetActive(false);
-        arcelusLevelUpBack.gameObject.SetActive(false);
-        arcelusLevelUpFore.gameObject.SetActive(false);
-        oberonLevelUpBack.gameObject.SetActive(false);
-        oberonLevelUpFore.gameObject.SetActive(false);
+        victoryPanel.gameObject.SetActive(false);
+
 
         //Skills
         skillsPanel.gameObject.SetActive(false);
@@ -593,22 +546,23 @@ public class UIBTL : MonoBehaviour
                         upArrow.gameObject.SetActive(false);
                         downArrow.gameObject.SetActive(true);
                         itemsPanelIndex = 0;
-
+                        Debug.Log("Count " + inventory.consumableInv.Count);
                         //Show three the first three items in the inventory
-                        for(int i =0;i<3;i++)
+                        for(int i =0;i<3 && i<inventory.consumableInv.Count;i++)
                         {
-                            if (inventory.ItemType(inventory.invItem[itemsPanelIndex + i, 0]) != (int)ITEM_TYPE.EQUIPABLE)
-                            {
-                                itemIconsInPanel[i].sprite = itemIcons[inventory.invItem[itemsPanelIndex + i, 0]];
-                                itemNames[i].text = inventory.ItemName(inventory.invItem[itemsPanelIndex + i, 0]);
-                                itemCount[i].text = inventory.invItem[itemsPanelIndex + i, 1].ToString();
-                            }
-                            else
-                            {
-                                itemIconsInPanel[i].sprite = itemIcons[0];
-                                itemNames[i].text = "Unusable in battle";
-                                itemCount[i].text = "0";
-                            }
+                           // if (inventory.ItemType(inventory.invItem[itemsPanelIndex + i, 0]) != (int)ITEM_TYPE.EQUIPABLE)
+                           // {
+                                Debug.Log(inventory.consumableInv[itemsPanelIndex + i]);
+                                itemIconsInPanel[i].sprite = itemIcons[inventory.invItem[inventory.consumableInv[itemsPanelIndex + i], 0]];
+                                itemNames[i].text = inventory.ItemName(inventory.invItem[inventory.consumableInv[itemsPanelIndex + i], 0]);
+                                itemCount[i].text = inventory.invItem[inventory.consumableInv[itemsPanelIndex + i], 1].ToString();
+                          //  }
+                          //  else
+                          //  {
+                              //  itemIconsInPanel[i].sprite = itemIcons[0];
+                             //   itemNames[i].text = "Unusable in battle";
+                               // itemCount[i].text = "0";
+                          //  }
                         }
                         currentState = btlUIState.choosingItemsCommand;
                     }
@@ -680,18 +634,22 @@ public class UIBTL : MonoBehaviour
         else if(Input.GetKeyDown(KeyCode.Space))//Player has chosen an item
         {
             //Make sure you choose an item that is usable and not equipable
-            if (inventory.ItemType(inventory.invItem[itemsPanelIndex, 0]) != (int)ITEM_TYPE.EQUIPABLE)
-            {
-                previousState = btlUIState.choosingItemsCommand; //Needed to know what to reference when choosing the player
-                playerTurnIndicator.transform.position = playerIndicatorPos0.transform.position; //Move the player indicator on top of Fargas for now
-                playerIndicatorIndex = 0;
-                currentState = btlUIState.choosingPlayer;
-            }
+            previousState = btlUIState.choosingItemsCommand; //Needed to know what to reference when choosing the player
+            playerTurnIndicator.transform.position = playerIndicatorPos0.transform.position; //Move the player indicator on top of Fargas for now
+            playerIndicatorIndex = 0;
+            currentState = btlUIState.choosingPlayer;
         }
         else if(Input.GetKeyDown(KeyCode.DownArrow) && itemsPanelIndex < 29)
         {
             //Keep track of where the highlighter is
-            itemHPosIndex++;
+            if (itemHPosIndex + 1 < inventory.consumableInv.Count)
+            {
+                itemHPosIndex++;
+
+                //Know which items to display
+                itemsPanelIndex++;
+            }
+
             if(itemHPosIndex==1)
             {
                 itemsHighlighter.transform.position = itemsHPos1.transform.position;
@@ -706,27 +664,17 @@ public class UIBTL : MonoBehaviour
                 itemsHighlighter.transform.position = itemsHPos0.transform.position;
             }
 
-            //Know which items to display
-            itemsPanelIndex++;
 
-            itemDescription.text = inventory.ItemDescription(itemsPanelIndex);
+            itemDescription.text = inventory.ItemDescription(inventory.invItem[inventory.consumableInv[itemsPanelIndex],0]);
             if(itemsPanelIndex%3 == 0)
             {
                 //We're mirroring the order of the items in the inventory UI and only showing usable items
-                for (int i = 0; i < 3; i++)
+                for (int i = 0; i < 3 && i < inventory.consumableInv.Count; i++)
                 {
-                    if (inventory.ItemType(inventory.invItem[itemsPanelIndex + i, 0]) != (int)ITEM_TYPE.EQUIPABLE)
-                    {
-                        itemIconsInPanel[i].sprite = itemIcons[inventory.invItem[itemsPanelIndex + i, 0]];
-                        itemNames[i].text = inventory.ItemName(inventory.invItem[itemsPanelIndex + i, 0]);
-                        itemCount[i].text = inventory.invItem[itemsPanelIndex + i, 1].ToString();
-                    }
-                    else
-                    {
-                        itemIconsInPanel[i].sprite = itemIcons[0];
-                        itemNames[i].text = "Unusable in battle";
-                        itemCount[i].text = "0";
-                    }
+                        itemIconsInPanel[i].sprite = itemIcons[inventory.invItem[inventory.consumableInv[itemsPanelIndex + i], 0]];
+                        itemNames[i].text = inventory.ItemName(inventory.invItem[inventory.consumableInv[itemsPanelIndex + i], 0]);
+                        itemCount[i].text = inventory.invItem[inventory.consumableInv[itemsPanelIndex + i], 1].ToString();
+
                 }
 
                 //Check if we're at the last three items -->This should be changed to work with the inventory count. Will change once we decide on the inventory count
@@ -745,52 +693,31 @@ public class UIBTL : MonoBehaviour
         }
         else if(Input.GetKeyDown(KeyCode.UpArrow) && itemsPanelIndex > 0)
         {
-            itemHPosIndex--;
+            if (itemHPosIndex - 1 >= 0)
+            {
+                itemHPosIndex--;
+                //Know which items to display
+                itemsPanelIndex--;
+            }
 
-            //Know which items to display
-            itemsPanelIndex--;
 
-            itemDescription.text = inventory.ItemDescription(itemsPanelIndex);
+
+            itemDescription.text = inventory.ItemDescription(inventory.invItem[inventory.consumableInv[itemsPanelIndex],0]);
             //Check if we're back to the previous 3 items
             //Will turn it into a for loop when I'm smart enough
             if (itemsPanelIndex % 3 != 0 && itemHPosIndex < 0)
             {
-                if (inventory.ItemType(inventory.invItem[itemsPanelIndex - 2, 0]) != (int)ITEM_TYPE.EQUIPABLE)
-                {
-                    itemIconsInPanel[0].sprite = itemIcons[inventory.invItem[itemsPanelIndex - 2, 0]];
-                    itemNames[0].text = inventory.ItemName(inventory.invItem[itemsPanelIndex - 2, 0]);
-                    itemCount[0].text = inventory.invItem[itemsPanelIndex - 2, 1].ToString();
-                }
-                else
-                {
-                    itemIconsInPanel[0].sprite = itemIcons[0];
-                    itemNames[0].text = "Unusable in battle";
-                    itemCount[0].text = "0";
-                }
-                if (inventory.ItemType(inventory.invItem[itemsPanelIndex - 1, 0]) != (int)ITEM_TYPE.EQUIPABLE)
-                {
-                    itemIconsInPanel[1].sprite = itemIcons[inventory.invItem[itemsPanelIndex - 1, 0]];
-                    itemNames[1].text = inventory.ItemName(inventory.invItem[itemsPanelIndex - 1, 0]);
-                    itemCount[1].text = inventory.invItem[itemsPanelIndex - 1, 1].ToString();
-                }
-                else
-                {
-                    itemIconsInPanel[1].sprite = itemIcons[0];
-                    itemNames[1].text = "Unusable in battle";
-                    itemCount[1].text = "0";
-                }
-                if (inventory.ItemType(inventory.invItem[itemsPanelIndex, 0]) != (int)ITEM_TYPE.EQUIPABLE)
-                {
-                    itemIconsInPanel[2].sprite = itemIcons[inventory.invItem[itemsPanelIndex, 0]];
-                    itemNames[2].text = inventory.ItemName(inventory.invItem[itemsPanelIndex, 0]);
-                    itemCount[2].text = inventory.invItem[itemsPanelIndex, 1].ToString();
-                }
-                else
-                {
-                    itemIconsInPanel[2].sprite = itemIcons[0];
-                    itemNames[2].text = "Unusable in battle";
-                    itemCount[2].text = "0";
-                }
+                    itemIconsInPanel[0].sprite = itemIcons[inventory.invItem[inventory.consumableInv[itemsPanelIndex - 2], 0]];
+                    itemNames[0].text = inventory.ItemName(inventory.invItem[inventory.consumableInv[itemsPanelIndex - 2], 0]);
+                    itemCount[0].text = inventory.invItem[inventory.consumableInv[itemsPanelIndex - 2], 1].ToString();
+
+                    itemIconsInPanel[1].sprite = itemIcons[inventory.invItem[inventory.consumableInv[itemsPanelIndex - 1], 0]];
+                    itemNames[1].text = inventory.ItemName(inventory.invItem[inventory.consumableInv[itemsPanelIndex - 1], 0]);
+                    itemCount[1].text = inventory.invItem[inventory.consumableInv[itemsPanelIndex - 1], 1].ToString();
+             
+                    itemIconsInPanel[2].sprite = itemIcons[inventory.invItem[inventory.consumableInv[itemsPanelIndex], 0]];
+                    itemNames[2].text = inventory.ItemName(inventory.invItem[inventory.consumableInv[itemsPanelIndex], 0]);
+                    itemCount[2].text = inventory.invItem[inventory.consumableInv[itemsPanelIndex], 1].ToString();
 
                 itemsHighlighter.transform.position = itemsHPos2.transform.position;
                 itemHPosIndex = 2;
@@ -901,16 +828,14 @@ public class UIBTL : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            // Debug.Log("itemsPanelindex " + itemsPanelIndex);
-            // Debug.Log("hilighterPos " + itemHPosIndex);
-            inventory.curOption = itemsPanelIndex; //Update the cursor in the inventory UI as that's used in the itemUseFunction to decrease the count of the used item
-            inventory.ItemUseFunction(inventory.invItem[itemsPanelIndex, 0], playerIndicatorIndex);
-            //Debug.Log(inventory.invItem[itemsPanelIndex, 1]);
-           // Debug.Log(inventory.ItemName(itemsPanelIndex));
-            itemCount[itemHPosIndex].text = inventory.invItem[itemsPanelIndex, 1].ToString();
-            UpdatePlayerStats(playerIndicatorIndex);
-            inventory.curOption = itemsPanelIndex = 0; //Reset the itemsPanelIndex
-            EndTurn();
+            if (btlManager.players[playerIndicatorIndex].playerReference.currentState != Player.playerState.Rage)
+            {
+                inventory.ItemUseFunction(inventory.invItem[inventory.consumableInv[itemsPanelIndex], 0], playerIndicatorIndex);
+                itemCount[itemHPosIndex].text = inventory.invItem[inventory.consumableInv[itemsPanelIndex], 1].ToString();
+                UpdatePlayerStats(playerIndicatorIndex);
+                itemsPanelIndex = 0; //Reset the itemsPanelIndex
+                EndTurn();
+            }
         }
     }
 
@@ -1167,51 +1092,9 @@ public class UIBTL : MonoBehaviour
                 i++;
                 if(i>=numberOfEnemies)
                 {
-
-                    //Enable the screen and start increasing the EXP
-                    //Must check if all the players are still alive but for now they are
-                    endScreenPanel.gameObject.SetActive(true);
-
-                    fargasAddinExp = true;
-                    fargasHP.fillAmount = btlManager.players[0].playerReference.hpImage.fillAmount;
-                    fargasMP.fillAmount = btlManager.players[0].playerReference.currentMP/ btlManager.players[0].playerReference.maxMP;
-                    fargasCurrentExp = btlManager.players[0].exp;
-                    fargasMaxExp = btlManager.players[0].expNeededForNextLevel;
-                    Debug.Log("Fargas current EXP: " + fargasCurrentExp);
-                    Debug.Log("Fargas max EXP: " + fargasMaxExp);
-                    fargasExp.fillAmount = btlManager.players[0].exp / fargasMaxExp;
-                    fargasExpStep = 1.0f/ fargasMaxExp;
-                    fargasExpGain = btlManager.expGain;
-
-
-                    oberonAddinExp = true;
-                    oberonHP.fillAmount = btlManager.players[1].playerReference.hpImage.fillAmount;
-                    oberonMP.fillAmount = btlManager.players[1].playerReference.currentMP / btlManager.players[1].playerReference.maxMP;
-                    oberonCurrentExp = btlManager.players[1].exp;
-                    oberonMaxExp = btlManager.players[1].expNeededForNextLevel;
-                    oberonExp.fillAmount = btlManager.players[1].exp / oberonMaxExp;
-                    oberonExpStep = 1.0f/ oberonMaxExp;
-                    oberonExpGain = btlManager.expGain; 
-
-                    freaAddinExp = true;
-                    freaHP.fillAmount = btlManager.players[2].playerReference.hpImage.fillAmount;
-                    freaMP.fillAmount = btlManager.players[2].playerReference.currentMP / btlManager.players[2].playerReference.maxMP;
-                    freaCurrentExp = btlManager.players[2].exp;
-                    freaMaxExp = btlManager.players[2].expNeededForNextLevel;
-                    freaExp.fillAmount = btlManager.players[2].exp / freaMaxExp;
-                    freaExpStep = 1.0f/ freaMaxExp;
-                    freaExpGain = btlManager.expGain;
-
-                    arcelusAddinExp = true;
-                    arcelusHP.fillAmount = btlManager.players[3].playerReference.hpImage.fillAmount;
-                    arcelusMP.fillAmount = btlManager.players[3].playerReference.currentMP / btlManager.players[3].playerReference.maxMP;
-                    arcelusCurrentExp = btlManager.players[3].exp;
-                    arcelusMaxExp = btlManager.players[3].expNeededForNextLevel;
-                    arcelusExp.fillAmount = btlManager.players[3].exp / arcelusMaxExp;
-                    arcelusExpStep = 1.0f / arcelusMaxExp;
-                    arcelusExpGain = btlManager.expGain;
-
-                    currentState = btlUIState.battleEnd;
+                    //Start fading in the end battle screen
+                    fadePanel.FlipFadeToVictory();
+                    
                     //Make sure to turn off the indicators at the end of the turn, this is to make sure the end screen does not show the indicators
                     rageModeIndicator1.gameObject.SetActive(false);
                     rageModeIndicator2.gameObject.SetActive(false);
@@ -1224,118 +1107,25 @@ public class UIBTL : MonoBehaviour
 
     private void EndBattleUI()
     {
-        if(Input.GetKeyDown(KeyCode.Space) && !fargasAddinExp && !freaAddinExp && !oberonAddinExp && !arcelusAddinExp)
-        {
-            SceneManager.UnloadSceneAsync(SceneManager.GetSceneByName("Queue Scene"));
             //If there's a conversation right after the battle, invoke the function in the dialogue manager
-            if(conversationAfterBattle)
-            {
-                dialogueManager.StartConversation(dialogueContainer.doneFight);
-            }
-        }
-        
-        //Fargas
-        if(fargasAddinExp)
-        {
-            if(fargasExp.fillAmount < 1.0f && fargasCurrentExp < fargasMaxExp && fargasExpGain>0)
-            {
-                fargasCurrentExp++;
-                fargasExpGain--;
-                fargasExp.fillAmount += fargasExpStep;
-            }
-            //If the player has leveled up, get the new max exp and 
-            else if(fargasCurrentExp >= fargasMaxExp || fargasExp.fillAmount>=1.0f)
-            {
-                btlManager.LevelUp(0);
-                fargasMaxExp = btlManager.players[0].expNeededForNextLevel;
-                Debug.Log("UI stuff: Current: " + fargasCurrentExp + "  Max:  " + fargasMaxExp);
-                fargasExpStep = 1.0f / fargasMaxExp;
-                fargasExp.fillAmount = 0.0f;
-                fargasLevelUpBack.gameObject.SetActive(true);
-                fargasLevelUpFore.gameObject.SetActive(true);
-            }
-            //If we have reached the exp gain, stop
-            else if(fargasExpGain<=0)
-            {
-                fargasAddinExp = false;
-            }
-        }
+           // if(conversationAfterBattle)
+           // {
+           //     dialogueManager.StartConversation(dialogueContainer.doneFight);
+           // }
+       
+    }
 
-        //Oberon
-        if (oberonAddinExp)
+    public void StartShowingEndScreen(bool isVictory)
+    {
+        if(isVictory)
         {
-            if (oberonExp.fillAmount < 1.0 && oberonCurrentExp < oberonMaxExp && oberonExpGain > 0)
-            {
-                oberonCurrentExp++;
-                oberonExpGain--;
-                oberonExp.fillAmount += oberonExpStep;
-            }
-            //If the player has leveled up, get the new max exp and 
-            else if (oberonCurrentExp >= oberonMaxExp || oberonExp.fillAmount >= 1.0f)
-            {
-                btlManager.LevelUp(1);
-                oberonMaxExp = btlManager.players[1].expNeededForNextLevel;
-                oberonExpStep = 1.0f / oberonMaxExp;
-                oberonExp.fillAmount = 0.0f;
-                oberonLevelUpBack.gameObject.SetActive(true);
-                oberonLevelUpFore.gameObject.SetActive(true);
-            }
-            else if (oberonExpGain <= 0)
-            {
-                oberonAddinExp = false;
-            }
+            currentState = btlUIState.battleEnd;
+            victoryPanel.gameObject.SetActive(true);
         }
+        else
+        {
 
-        //Frea
-        if (freaAddinExp)
-        {
-            if (freaExp.fillAmount < 1.0f && freaCurrentExp < freaMaxExp && freaExpGain > 0)
-            {
-                freaCurrentExp++;
-                freaExpGain--;
-                freaExp.fillAmount += freaExpStep;
-            }
-            //If the player has leveled up, get the new max exp and 
-            else if (freaCurrentExp >= freaMaxExp || freaExp.fillAmount >= 1.0f)
-            {
-                btlManager.LevelUp(2);
-                freaMaxExp = btlManager.players[2].expNeededForNextLevel;
-                freaExpStep = 1.0f / freaMaxExp;
-                freaExp.fillAmount = 0.0f;
-                freaLevelUpBack.gameObject.SetActive(true);
-                freaLevelUpFore.gameObject.SetActive(true);
-            }
-            else if (freaExpGain <= 0 )
-            {
-                freaAddinExp = false;
-            }
         }
-        
-        //Arcelus
-        if (arcelusAddinExp)
-        {
-            if (arcelusExp.fillAmount < 1.0f && arcelusCurrentExp < arcelusMaxExp && arcelusExpGain > 0)
-            {
-                arcelusCurrentExp++;
-                arcelusExpGain--;
-                arcelusExp.fillAmount += arcelusExpStep;
-            }
-            //If the player has leveled up, get the new max exp and 
-            else if (arcelusCurrentExp >= arcelusMaxExp || arcelusExp.fillAmount >= 1.0f)
-            {
-                btlManager.LevelUp(3);
-                arcelusMaxExp = btlManager.players[3].expNeededForNextLevel;
-                arcelusExpStep = 1.0f / arcelusMaxExp;
-                arcelusExp.fillAmount = 0.0f;
-                arcelusLevelUpBack.gameObject.SetActive(true);
-                arcelusLevelUpFore.gameObject.SetActive(true);
-            }
-            else if (arcelusExpGain <= 0)
-            {
-                arcelusAddinExp = false;
-            }
-        }
-
     }
 
     private void UpdatePlayerStats(int playerIndex)
