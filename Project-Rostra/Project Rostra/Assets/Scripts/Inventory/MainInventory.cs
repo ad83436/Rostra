@@ -273,6 +273,12 @@ public class MainInventory : MonoBehaviour {
     public void SwapItems(int slot1, int slot2) {
         if (slot1 != slot2) {
             int[] tempItem = { invItem[slot1, 0], invItem[slot1, 1], invItem[slot1, 2] };
+            // If the item is a consumable, make sure to update the list for its new slot
+            if (ItemType(invItem[slot1, 0]) == (int)ITEM_TYPE.CONSUMABLE) {
+                int index = consumableInv.IndexOf(slot1);
+                consumableInv.RemoveAt(index);
+                consumableInv.Insert(index, slot2);
+            }
             // Move the second item into the first item's slot
             invItem[slot1, 0] = invItem[slot2, 0];
             invItem[slot1, 1] = invItem[slot2, 1];
@@ -295,10 +301,14 @@ public class MainInventory : MonoBehaviour {
                     invItem[i, 0] = itemID;
                     invItem[i, 1] += numToAdd;
                     numToAdd = 0;
+                    // Add it to the list of consumables
+                    if (ItemType(itemID) == (int)ITEM_TYPE.CONSUMABLE) { consumableInv.Add(i); }
                 } else { // No more space in a stack, try to find an empty spot
                     int remainder = stackSize - invItem[i, 1];
                     invItem[i, 1] = stackSize;
                     numToAdd -= remainder;
+                    // Add it to the list of consumables
+                    if (ItemType(itemID) == (int)ITEM_TYPE.CONSUMABLE) { consumableInv.Add(i); }
                     // NOTE -- If the inventory cannot find a spot for the remaining items it will just discard them.
                     // When this happens a message should be displayed for the player to let them know those items couldn't be picked up.
                 }
@@ -330,15 +340,20 @@ public class MainInventory : MonoBehaviour {
 
     // Removes an item from the specified slot in the inventory, if 0 items remain after word, empty the slot completely
     public void RemoveItem(int slot, int numToRemove = 1) {
-       invItem[slot, 1] -= numToRemove;
-       // Completely remove the item if all in the stack have been used
-       if (invItem[slot, 1] <= 0) {
+        invItem[slot, 1] -= numToRemove;
+        // Completely remove the item if all in the stack have been used
+        if (invItem[slot, 1] <= 0) {
             invItem[slot, 0] = (int)ITEM_ID.NO_ITEM;
             // Remove the item from a player object if one had the dropped item equipped
             if (invItem[slot, 2] != -1) {
                 UpdatePlayerStats(invItem[slot, 2], invItem[slot, 0], true);
             }
-       }
+            // If the item is a consumable, make sure to update the list and remove the slot value
+            if (ItemType(invItem[slot, 0]) == (int)ITEM_TYPE.CONSUMABLE) {
+                int index = consumableInv.IndexOf(slot);
+                consumableInv.RemoveAt(index);
+            }
+        }
     }
 
     #endregion
@@ -618,15 +633,14 @@ public class MainInventory : MonoBehaviour {
     private void UpdatePlayerHitpoints(int amount, int playerID) {
         PartyStats.chara[playerID].hitpoints += amount;
         PartyStats.chara[playerID].rage -= amount * 2.0f;
-
-        if(PartyStats.chara[playerID].rage<0.0f)
-        {
+        // Lower the player's rage value based on their health recovered doubled
+        if(PartyStats.chara[playerID].rage < 0.0f) {
             PartyStats.chara[playerID].rage = 0.0f;
         }
         // Make sure the hitpoints don't go below zero or above the player's maximum HP
         if (PartyStats.chara[playerID].hitpoints > PartyStats.chara[playerID].TotalMaxHealth) {
             PartyStats.chara[playerID].hitpoints = PartyStats.chara[playerID].TotalMaxHealth;
-            PartyStats.chara[playerID].rage = 0.0f; //If health is full, then rage is zero
+            PartyStats.chara[playerID].rage = 0.0f; // If health is full, then rage is zero
         } else if (PartyStats.chara[playerID].hitpoints < 0) {
             PartyStats.chara[playerID].hitpoints = 0;
         }
