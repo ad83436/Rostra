@@ -27,6 +27,7 @@ public class Player : MonoBehaviour
     public string[] equippedSkills = new string [4];
     public int range; //Range of player standard attack
     public int initialPos; //Position of the player 0 being Frontline and -1 being Ranged
+    public bool dead;
 
     //Queue
     public Sprite qImage;
@@ -117,6 +118,7 @@ public class Player : MonoBehaviour
         actualCRIT = crit;
         actualSTR = str;
         healable = false;
+        dead = false;
 
         //UI
         hpImage.fillAmount = currentHP / maxHP;
@@ -153,12 +155,19 @@ public class Player : MonoBehaviour
     //Called from the UIBTL to turn on the animation
     public void PlayerTurn()
     {
-        playerAnimator.SetBool("Turn", true);
-
-        //If the it's my turn again, and I have been guarding, end the guard since guarding only lasts for 1 turn
-        if(currentState == playerState.Guard)
+        if (!dead)
         {
-            EndGuard();
+            playerAnimator.SetBool("Turn", true);
+
+            //If the it's my turn again, and I have been guarding, end the guard since guarding only lasts for 1 turn
+            if (currentState == playerState.Guard)
+            {
+                EndGuard();
+            }
+        }
+        else
+        {
+            uiBTL.EndTurn();
         }
     }
 
@@ -250,7 +259,17 @@ public class Player : MonoBehaviour
         float damage = enemyATK - ((def / (20.0f + def)) * enemyATK);
         currentHP -= damage;
         battleManager.players[playerIndex].currentHP = currentHP; //Update the BTL manager with the new health
-        hpImage.fillAmount = currentHP / maxHP;
+
+        if (currentHP <= 0.0f)
+        {
+            hpImage.fillAmount = 0.0f;
+            dead = true;
+            playerAnimator.SetBool("Dead", true);
+        }
+        else
+        {
+            hpImage.fillAmount = currentHP / maxHP;
+        }
         if (currentRage < maxRage && currentState!=playerState.Rage) //If there's still capacity for rage while we're not actually in rage, increase the rage meter
         {
             currentRage += damage * 1.05f; //Rage amount is always 5% more than the health lost
