@@ -102,7 +102,6 @@ public class CutsceneManager : MonoBehaviour
 					Debug.Log("Triggered Dialogue");
 					entranceCount++;
 					Debug.Log("triggered dialogue and entrance count upped");
-					
 				}
 			}
 			if (clip != null && current == songEntrance)
@@ -118,12 +117,10 @@ public class CutsceneManager : MonoBehaviour
 			}
 			if (povCount <= povChangesCM.Length - 1 && current == povChangesCM[povCount] && actorsCM.Length > 0 && povChangesCM.Length > 0)
 			{
-
 				actorCount++;
 				povCount++;
 				actorsCM[actorCount - 1].GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
 			}
-			
 		}
 		else
 		{
@@ -142,6 +139,5 @@ public class CutsceneManager : MonoBehaviour
 		actorCount = 0;
 		povCount = 0;
 		dialogueCount = 0;
-	}
-		
+	}	
 }
