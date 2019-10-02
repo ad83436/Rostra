@@ -56,39 +56,18 @@ public class MainInventory : MonoBehaviour {
         invItem[0, 0] = (int)ITEM_ID.TEST_WEAPON1;
         invItem[0, 1] = 1;
 
-        if(ItemType(invItem[0,0]) == (int)ITEM_TYPE.CONSUMABLE)
-        {
-            consumableInv.Add(0);
-        }
-
         invItem[1, 0] = (int)ITEM_ID.TEST_POTION_HP;
         invItem[1, 1] = ItemStackLimit((int)ITEM_ID.TEST_POTION_HP);
-
-        if (ItemType(invItem[1, 0]) == (int)ITEM_TYPE.CONSUMABLE)
-        {
-            consumableInv.Add(1);
-        }
+        consumableInv.Add(1);
 
         invItem[2, 0] = (int)ITEM_ID.TEST_POTION_MP;
         invItem[2, 1] = ItemStackLimit((int)ITEM_ID.TEST_POTION_MP);
-
-        if (ItemType(invItem[2, 0]) == (int)ITEM_TYPE.CONSUMABLE)
-        {
-            consumableInv.Add(2);
-        }
+        consumableInv.Add(2);
 
         invItem[3, 0] = (int)ITEM_ID.TEST_ARMOR1;
         invItem[3, 1] = 1;
 
-        if (ItemType(invItem[3, 0]) == (int)ITEM_TYPE.CONSUMABLE)
-        {
-            consumableInv.Add(3);
-        }
-
-        for(int i =0; i<consumableInv.Count; i++)
-        {
-            Debug.Log(consumableInv[i]);
-        }
+        Debug.Log(consumableInv[0].ToString() + ", " + consumableInv[1].ToString());
     }
 
     // Handling keyboard functionality
@@ -215,7 +194,7 @@ public class MainInventory : MonoBehaviour {
                 if (keySelect) {
                     // Equip the item only if it can be equipped
                     if (canPlayerEquip[curPlayerOption]) {
-                        ItemUseFunction(invItem[curOption, 0], curPlayerOption);
+                        ItemUseFunction(invItem[curOption, 0], curOption, curPlayerOption);
                         playerChooseWindow = false;
                         curPlayerOption = 0;
                         subCurOption = 0;
@@ -365,6 +344,7 @@ public class MainInventory : MonoBehaviour {
     // Removes an item from the specified slot in the inventory, if 0 items remain after word, empty the slot completely
     public void RemoveItem(int slot, int numToRemove = 1) {
         invItem[slot, 1] -= numToRemove;
+        Debug.Log("Number of Items: " + invItem[slot, 1].ToString() + ", Slot Value: " + slot.ToString());
         // Completely remove the item if all in the stack have been used
         if (invItem[slot, 1] <= 0) {
             invItem[slot, 0] = (int)ITEM_ID.NO_ITEM;
@@ -537,12 +517,12 @@ public class MainInventory : MonoBehaviour {
 
     // A method that holds all the functionality for every item in the game. If the item slot is empty after use, delete the item.
     // This method will not equip or unequip any item, but it will provide functionality for CONSUMABLE items.
-    public void ItemUseFunction(int itemID, int playerID) {
+    public void ItemUseFunction(int itemID, int slotID, int playerID) {
         int itemType = ItemType(itemID);
         bool isEquipped = false;
         // Only check if an item is equipped or not if the item CAN BE EQUIPPED (Ex. Weapons and Armor)
         if (itemType == (int)ITEM_TYPE.EQUIPABLE) {
-            if (invItem[curOption, 2] == playerID) {
+            if (invItem[slotID, 2] == playerID) {
                 isEquipped = true;
             }
         }
@@ -563,7 +543,7 @@ public class MainInventory : MonoBehaviour {
 
         // Remove the item (Or one from the stack) if it was consumed by the player
         if (itemType == (int)ITEM_TYPE.CONSUMABLE) {
-            RemoveItem(curOption);
+            RemoveItem(slotID);
         }
     }
 
