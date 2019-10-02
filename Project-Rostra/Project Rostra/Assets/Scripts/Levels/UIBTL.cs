@@ -552,7 +552,6 @@ public class UIBTL : MonoBehaviour
                         {
                            // if (inventory.ItemType(inventory.invItem[itemsPanelIndex + i, 0]) != (int)ITEM_TYPE.EQUIPABLE)
                            // {
-                                Debug.Log(inventory.consumableInv[itemsPanelIndex + i]);
                                 itemIconsInPanel[i].sprite = itemIcons[inventory.invItem[inventory.consumableInv[itemsPanelIndex + i], 0]];
                                 itemNames[i].text = inventory.ItemName(inventory.invItem[inventory.consumableInv[itemsPanelIndex + i], 0]);
                                 itemCount[i].text = inventory.invItem[inventory.consumableInv[itemsPanelIndex + i], 1].ToString();
@@ -674,7 +673,6 @@ public class UIBTL : MonoBehaviour
                         itemIconsInPanel[i].sprite = itemIcons[inventory.invItem[inventory.consumableInv[itemsPanelIndex + i], 0]];
                         itemNames[i].text = inventory.ItemName(inventory.invItem[inventory.consumableInv[itemsPanelIndex + i], 0]);
                         itemCount[i].text = inventory.invItem[inventory.consumableInv[itemsPanelIndex + i], 1].ToString();
-
                 }
 
                 //Check if we're at the last three items -->This should be changed to work with the inventory count. Will change once we decide on the inventory count
@@ -830,9 +828,8 @@ public class UIBTL : MonoBehaviour
         {
             if (btlManager.players[playerIndicatorIndex].playerReference.currentState != Player.playerState.Rage)
             {
-                inventory.ItemUseFunction(inventory.invItem[inventory.consumableInv[itemsPanelIndex], 0], playerIndicatorIndex);
-                itemCount[itemHPosIndex].text = inventory.invItem[inventory.consumableInv[itemsPanelIndex], 1].ToString();
-                UpdatePlayerStats(playerIndicatorIndex);
+                inventory.ItemUseFunction(inventory.invItem[inventory.consumableInv[itemsPanelIndex], 0], inventory.consumableInv[itemsPanelIndex], playerIndicatorIndex);
+                itemCount[itemHPosIndex].text = inventory.invItem[inventory.consumableInv[0], 1].ToString();
                 itemsPanelIndex = 0; //Reset the itemsPanelIndex
                 EndTurn();
             }
