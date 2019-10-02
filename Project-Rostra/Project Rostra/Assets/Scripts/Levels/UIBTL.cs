@@ -707,6 +707,7 @@ public class UIBTL : MonoBehaviour
             //Will turn it into a for loop when I'm smart enough
             if (itemsPanelIndex % 3 != 0 && itemHPosIndex < 0)
             {
+                ////////////////////////////////////// NEED TO CHECK CONSUMABLES SIZE ////////////////////////////////////
                     itemIconsInPanel[0].sprite = itemIcons[inventory.invItem[inventory.consumableInv[itemsPanelIndex - 2], 0]];
                     itemNames[0].text = inventory.ItemName(inventory.invItem[inventory.consumableInv[itemsPanelIndex - 2], 0]);
                     itemCount[0].text = inventory.invItem[inventory.consumableInv[itemsPanelIndex - 2], 1].ToString();
