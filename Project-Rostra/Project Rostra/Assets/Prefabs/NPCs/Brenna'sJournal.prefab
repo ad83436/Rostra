@@ -1,0 +1,179 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &5930709205017481200
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1926159650230788894, guid: 1309d511b4973af42bb142858c2a9923,
+        type: 3}
+      propertyPath: m_Name
+      value: NPC
+      objectReference: {fileID: 0}
+    - target: {fileID: 1423538016614697603, guid: 1309d511b4973af42bb142858c2a9923,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 15.73
+      objectReference: {fileID: 0}
+    - target: {fileID: 1423538016614697603, guid: 1309d511b4973af42bb142858c2a9923,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 15.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 1423538016614697603, guid: 1309d511b4973af42bb142858c2a9923,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1423538016614697603, guid: 1309d511b4973af42bb142858c2a9923,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1423538016614697603, guid: 1309d511b4973af42bb142858c2a9923,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1423538016614697603, guid: 1309d511b4973af42bb142858c2a9923,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1423538016614697603, guid: 1309d511b4973af42bb142858c2a9923,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1423538016614697603, guid: 1309d511b4973af42bb142858c2a9923,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1423538016614697603, guid: 1309d511b4973af42bb142858c2a9923,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1423538016614697603, guid: 1309d511b4973af42bb142858c2a9923,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1423538016614697603, guid: 1309d511b4973af42bb142858c2a9923,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8101897329901126756, guid: 1309d511b4973af42bb142858c2a9923,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.size
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 8101897329901126756, guid: 1309d511b4973af42bb142858c2a9923,
+        type: 3}
+      propertyPath: dialogue.names.Array.data[0]
+      value: Brenna's Journal
+      objectReference: {fileID: 0}
+    - target: {fileID: 8101897329901126756, guid: 1309d511b4973af42bb142858c2a9923,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[0]
+      value: Yodris is dead. My husband fell suddenly ill. It must have been something
+        he ate...
+      objectReference: {fileID: 0}
+    - target: {fileID: 8101897329901126756, guid: 1309d511b4973af42bb142858c2a9923,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[1]
+      value: ' but I can''t for the life of me think of what did this to him...'
+      objectReference: {fileID: 0}
+    - target: {fileID: 8101897329901126756, guid: 1309d511b4973af42bb142858c2a9923,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[2]
+      value: He seemed fine only yesterday.
+      objectReference: {fileID: 0}
+    - target: {fileID: 8101897329901126756, guid: 1309d511b4973af42bb142858c2a9923,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[3]
+      value: I've sent a letter to Fargas, I hope he can find some way to see me.
+      objectReference: {fileID: 0}
+    - target: {fileID: 8101897329901126756, guid: 1309d511b4973af42bb142858c2a9923,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[4]
+      value: 'A man came by today and was asking for some spare gold. With Yodris
+        dead I need every spare bit of gold I have. '
+      objectReference: {fileID: 0}
+    - target: {fileID: 8101897329901126756, guid: 1309d511b4973af42bb142858c2a9923,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[5]
+      value: He was understanding though and left. Such a nice man, very few people
+        would be as understanding as he was.
+      objectReference: {fileID: 0}
+    - target: {fileID: 8101897329901126756, guid: 1309d511b4973af42bb142858c2a9923,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[6]
+      value: ' Especially to a new widow...'
+      objectReference: {fileID: 0}
+    - target: {fileID: 8101897329901126756, guid: 1309d511b4973af42bb142858c2a9923,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[7]
+      value: 'Fifth Day of Yavara: Something strange happened to me today. I was walking
+        into town to look for somewhere to work. '
+      objectReference: {fileID: 0}
+    - target: {fileID: 8101897329901126756, guid: 1309d511b4973af42bb142858c2a9923,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[8]
+      value: ' The same man from yesterday approched me today. He was still asking
+        for donations. I politely declined but I''m starting to get worried.'
+      objectReference: {fileID: 0}
+    - target: {fileID: 8101897329901126756, guid: 1309d511b4973af42bb142858c2a9923,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[9]
+      value: I was alone when I left the house and only me and  live on the  of town.
+      objectReference: {fileID: 0}
+    - target: {fileID: 8101897329901126756, guid: 1309d511b4973af42bb142858c2a9923,
+        type: 3}
+      propertyPath: dialogue.portrait.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: dd3d4b940a009d14dbfe8b78c3b4f6ca,
+        type: 3}
+    - target: {fileID: 8101897329901126756, guid: 1309d511b4973af42bb142858c2a9923,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[10]
+      value: 'How did he know where to find me? '
+      objectReference: {fileID: 0}
+    - target: {fileID: 8101897329901126756, guid: 1309d511b4973af42bb142858c2a9923,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[11]
+      value: ' I''m getting myself nervous for nothing. If he knew where to find me
+        previously he could find me again right?'
+      objectReference: {fileID: 0}
+    - target: {fileID: 8101897329901126756, guid: 1309d511b4973af42bb142858c2a9923,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[12]
+      value: 'Sixth day of Yavara: This is becoming unnerving. The man from before
+        is just standing outside my door he refuses to leave.'
+      objectReference: {fileID: 0}
+    - target: {fileID: 8101897329901126756, guid: 1309d511b4973af42bb142858c2a9923,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[13]
+      value: My children are frightened.
+      objectReference: {fileID: 0}
+    - target: {fileID: 8101897329901126756, guid: 1309d511b4973af42bb142858c2a9923,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[14]
+      value: ' I don''t know what to do....'
+      objectReference: {fileID: 0}
+    - target: {fileID: 8101897329901126756, guid: 1309d511b4973af42bb142858c2a9923,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[15]
+      value: ' I need to go see Domel'
+      objectReference: {fileID: 0}
+    - target: {fileID: 8101897329901126756, guid: 1309d511b4973af42bb142858c2a9923,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[16]
+      value: I just hope the old dwarf isn't working in the mines right now.
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1309d511b4973af42bb142858c2a9923, type: 3}

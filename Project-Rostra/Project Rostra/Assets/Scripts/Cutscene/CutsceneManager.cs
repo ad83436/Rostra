@@ -7,23 +7,27 @@ using UnityEngine;
 public class CutsceneManager : MonoBehaviour
 {
 	public static CutsceneManager instance;
-	Cutscene copy;
-	Dialogue[] dialogues;
-	Vector2[] moves;
-	private float[] timings;
-	private float[] dialogueEntrance;
-	private GameObject[] actors;
-	private float[] povChanges;
+	private Cutscene copy;
+	private Dialogue[] dialoguesCM;
+	private Vector2[] movesCM;
+	private float[] timingsCM;
+	private float[] dialogueEntranceCM;
+	private GameObject[] actorsCM;
+	private float[] povChangesCM;
 	private int current;
 	private int moveCount;
 	private int entranceCount;
 	private int dialogueCount;
+	private float dialogueLenght;
 	private int timingCount;
 	private float moveLenght;
 	private float moveLenghtInitial;
 	private int actorCount;
 	private int povCount;
 	public bool isActive = false;
+	private float songEntrance;
+	private AudioClip clip;
+	private AudioSource audios;
 
 	// Start is called before the first frame update
 	void Awake()
@@ -42,6 +46,7 @@ public class CutsceneManager : MonoBehaviour
 		moveCount = 0;
 		actorCount = 0;
 		povCount = 0;
+		audios = GetComponent<AudioSource>();
 	}
 
     // Update is called once per frame
@@ -55,22 +60,26 @@ public class CutsceneManager : MonoBehaviour
 
 	public void StartCutscene(Cutscene cs)
 	{
-		copy = cs;
-		moves = cs.moves;
-		timings = cs.timings;
-		dialogues = cs.dialogues;
-		dialogueEntrance = cs.dialogueEntrance;
-		timings = cs.timings;
-		actors = cs.actors;
-		povChanges = cs.povChanges;
-		moveLenght = moves.Length - 1;
-		moveLenghtInitial = moves.Length - 1;
+		copy = new Cutscene(cs);
+
+		dialoguesCM = copy.dialogues;
+		dialogueEntranceCM = copy.dialogueEntrance;
+		timingsCM = copy.timings;
+		actorsCM = copy.actors;
+		povChangesCM = copy.povChanges;
+		movesCM = copy.moves;
+		moveLenght = movesCM.Length - 1;
+		moveLenghtInitial = movesCM.Length - 1;
 		isActive = true;
 		current = 0;
 		entranceCount = 0;
 		moveCount = 0;
 		actorCount = 0;
 		povCount = 0;
+		dialogueCount = 0;
+		dialogueLenght = copy.dialogueEntrance.Length - 1;
+		clip = copy.song;
+		songEntrance = copy.songEntrance;
 	}
 
 	public void NextAction()
@@ -79,46 +88,60 @@ public class CutsceneManager : MonoBehaviour
 		{
 			if (DialogueManager.instance.isActive == false && moveLenght >= 0)
 			{
-				actors[actorCount].GetComponent<Rigidbody2D>().velocity = moves[current];
-				timings[current] -= Time.deltaTime;
+				actorsCM[actorCount].GetComponent<Rigidbody2D>().velocity = movesCM[current];
+				timingsCM[current] -= Time.deltaTime;
 			}
-			if (current == dialogueEntrance[entranceCount])
+			if (dialogueCount <= dialogueLenght && current == dialogueEntranceCM[entranceCount])
 			{
-				actors[actorCount].GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-				DialogueManager.instance.StartConversation(dialogues[dialogueCount]);
+				actorsCM[actorCount].GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+				DialogueManager.instance.StartConversation(dialoguesCM[dialogueCount]);
 				if (DialogueManager.instance.nextDialogue == true)
 				{
 					dialogueCount++;
 					current++;
-					if (entranceCount <= povChanges.Length - 1)
-					{
-						entranceCount++;
-					}
+					Debug.Log("Triggered Dialogue");
+					entranceCount++;
+					Debug.Log("triggered dialogue and entrance count upped");
+					
 				}
 			}
-			if (isActive == true && timings[current] <= 0 && moveLenght >= 0)
+			if (clip != null && current == songEntrance)
+			{
+				audios.clip = copy.song;
+				audios.Play();
+				Debug.Log("Triggered Song");
+			}
+			if (isActive == true && timingsCM[current] <= 0 && moveLenght >= 0)
 			{
 				current++;
 				moveLenght--;
 			}
-			if (povCount <= povChanges.Length - 1 && current == povChanges[povCount] && actors.Length > 0 && povChanges.Length > 0)
+			if (povCount <= povChangesCM.Length - 1 && current == povChangesCM[povCount] && actorsCM.Length > 0 && povChangesCM.Length > 0)
 			{
 
 				actorCount++;
 				povCount++;
-				actors[actorCount - 1].GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+				actorsCM[actorCount - 1].GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
 			}
-			if (moveLenght <= 0)
-			{
-				
-				
-			}
+			
 		}
 		else
 		{
-			actors[actors.Length - 1].GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+			actorsCM[actorsCM.Length - 1].GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 			isActive = false;
+			End();
+			
 		}
+	}
+
+	public void End()
+	{
+		current = 0;
+		entranceCount = 0;
+		moveCount = 0;
+		actorCount = 0;
+		povCount = 0;
+		dialogueCount = 0;
 	}
 		
 }

@@ -196,7 +196,7 @@ public class BattleManager : MonoBehaviour
     public void StartBattle()
     {
         //Store and sort the agilities of the players and enemies in ascending order
-        battleInProgress = true;
+       
         foreach (PlayerInformtion p in players)
         {
             if (p.playerReference != null)//Make sure all the entries have players (i.e. what if we have less than 4 players)
@@ -441,7 +441,6 @@ public class BattleManager : MonoBehaviour
 
     public void UpdatePlayerStats(int playerIndex)
     {
-        players[playerIndex].playerReference.UpdatePlayerStats();
         players[playerIndex].currentHP = PartyStats.chara[playerIndex].hitpoints;
         players[playerIndex].maxHP = PartyStats.chara[playerIndex].TotalMaxHealth;
         players[playerIndex].currentMP = PartyStats.chara[playerIndex].magicpoints;
@@ -454,5 +453,6 @@ public class BattleManager : MonoBehaviour
         players[playerIndex].speed = PartyStats.chara[playerIndex].TotalSpeed;
         players[playerIndex].exp = PartyStats.chara[playerIndex].currentExperience;
         players[playerIndex].expNeededForNextLevel = PartyStats.chara[playerIndex].neededExperience;
+        players[playerIndex].playerReference.UpdatePlayerStats();
     }
 }

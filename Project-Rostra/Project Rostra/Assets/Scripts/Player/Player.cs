@@ -5,6 +5,11 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
+    //Instances
+    private BattleManager battleManager;
+    private UIBTL uiBTL;
+    private ObjectPooler objPooler;
+
     //Player stats
     public float atk;
     public float def;
@@ -22,14 +27,13 @@ public class Player : MonoBehaviour
     public string[] equippedSkills = new string [4];
     public int range; //Range of player standard attack
     public int initialPos; //Position of the player 0 being Frontline and -1 being Ranged
+    public bool dead;
 
     //Queue
     public Sprite qImage;
     private int QCounter; //Used to count turns since the player went in rage or decided to go in waiting state.
 
-    //Instances
-    private BattleManager battleManager;
-    private UIBTL uiBTL;
+
 
     //Components
     private Animator playerAnimator;
@@ -46,6 +50,9 @@ public class Player : MonoBehaviour
     //UI
     public Image hpImage;
     public Image rageImage;
+
+    //Camera
+    public BattleCamera btlCam;
 
     //Actual stats --> Stats after they've been modified in battle
     private float actualATK;
@@ -80,6 +87,7 @@ public class Player : MonoBehaviour
         //Instances
         battleManager = BattleManager.instance;
         uiBTL = UIBTL.instance;
+        objPooler = ObjectPooler.instance;
 
         //States
         currentState = playerState.Idle;
@@ -88,7 +96,7 @@ public class Player : MonoBehaviour
         playerAnimator = gameObject.GetComponent<Animator>();
 
         //Rage
-        maxRage = 100.0f;
+        maxRage = maxHP * 0.65f; //Max rage is 65% of max health
         rageModeIndicator.gameObject.SetActive(false);
         canRage = false;
 
@@ -110,6 +118,7 @@ public class Player : MonoBehaviour
         actualCRIT = crit;
         actualSTR = str;
         healable = false;
+        dead = false;
 
         //UI
         hpImage.fillAmount = currentHP / maxHP;
@@ -146,12 +155,19 @@ public class Player : MonoBehaviour
     //Called from the UIBTL to turn on the animation
     public void PlayerTurn()
     {
-        playerAnimator.SetBool("Turn", true);
-
-        //If the it's my turn again, and I have been guarding, end the guard since guarding only lasts for 1 turn
-        if(currentState == playerState.Guard)
+        if (!dead)
         {
-            EndGuard();
+            playerAnimator.SetBool("Turn", true);
+
+            //If the it's my turn again, and I have been guarding, end the guard since guarding only lasts for 1 turn
+            if (currentState == playerState.Guard)
+            {
+                EndGuard();
+            }
+        }
+        else
+        {
+            uiBTL.EndTurn();
         }
     }
 
@@ -170,6 +186,10 @@ public class Player : MonoBehaviour
         CalculateHit();
         if (hit)
         {
+            //Attack Effect
+            objPooler.SpawnFromPool("PlayerNormalAttack", attackingThisEnemy.gameObject.transform.position, gameObject.transform.rotation);
+            //Shake the camera
+            btlCam.CameraShake();
             //Check for critical hits
             if (CalculateCrit() <= crit)
             {
@@ -235,13 +255,24 @@ public class Player : MonoBehaviour
 
     public void TakeDamage(float enemyATK)
     {
+        btlCam.CameraShake();
         float damage = enemyATK - ((def / (20.0f + def)) * enemyATK);
         currentHP -= damage;
         battleManager.players[playerIndex].currentHP = currentHP; //Update the BTL manager with the new health
-        hpImage.fillAmount = currentHP / maxHP;
+
+        if (currentHP <= 0.0f)
+        {
+            hpImage.fillAmount = 0.0f;
+            dead = true;
+            playerAnimator.SetBool("Dead", true);
+        }
+        else
+        {
+            hpImage.fillAmount = currentHP / maxHP;
+        }
         if (currentRage < maxRage && currentState!=playerState.Rage) //If there's still capacity for rage while we're not actually in rage, increase the rage meter
         {
-            currentRage += damage * 1.2f; //Rage amount is always 20% more than the health lost
+            currentRage += damage * 1.05f; //Rage amount is always 5% more than the health lost
             rageImage.fillAmount = currentRage / maxRage;
             
             if(currentRage>=maxRage)
@@ -278,7 +309,7 @@ public class Player : MonoBehaviour
             uiBTL.RageOptionTextColor();
         }
 
-        currentRage -= healAmount * 1.2f; //Rage goes down by 20% more than the health gained
+        currentRage -= healAmount * 1.5f; //Rage goes down by 20% more than the health gained
 
         if(currentRage < 0.0f)
         {

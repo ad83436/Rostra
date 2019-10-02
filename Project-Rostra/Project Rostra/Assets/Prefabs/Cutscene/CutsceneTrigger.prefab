@@ -1,0 +1,169 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8985207403294694731
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8985207403294694729}
+  - component: {fileID: 8985207403294694728}
+  m_Layer: 0
+  m_Name: CutsceneTrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8985207403294694729
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8985207403294694731}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 71.62404, y: 14.764892, z: -932.2746}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8985207403294694728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8985207403294694731}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef37ba45b5f9cc74ab6dc9712fff2b91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cs:
+    dialogues:
+    - names:
+      - Fargas
+      sentences:
+      - Oberon... I need to talk about somethig
+      portrait:
+      - {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825, type: 3}
+      povChange: []
+      typingSpeed: 0
+      isChoice: 0
+      choiceLine: 0
+      choice1: {fileID: 0}
+      choice2: {fileID: 0}
+      willRemember: 0
+      choiceSet: 0
+      choiceCare1: {fileID: 0}
+      choiceCare2: {fileID: 0}
+      choiceText1: 
+      choiceText2: 
+      normal: {fileID: 0}
+      hasPlayed: 0
+      willCount: 0
+      maxWillCount: 0
+      isBattle: 0
+    - names:
+      - Oberon
+      - 
+      - Fargas
+      - Oberon
+      - Fargas
+      - Oberon
+      - Fargas
+      - Oberon
+      - Fargas
+      - Oberon
+      - Fargas
+      - Oberon
+      sentences:
+      - Hey hey, how's my old stick in the mud doing? How can I be of service?
+      - 'Oberon. A high born Aszartian lute player turned spearman for the Ocrestian
+        Army. '
+      - It's about Brenna I haven't been receiving letters from her recently.
+      - I wouldn't worry too much. Maybe she just hasn't had the time to write back?
+      - Her husband died recently and she wanted to see me. Does that sound like a
+        reason for her to stop writing.
+      - Hmmmmm that does sound strange.
+      - Look... I want to go see her. I've talked to the commanders but they've all
+        forbidden me to go.
+      - Can I trust your silence if I were to go?
+      - I'll do you one better. I'll come with you.
+      - I could never put your life in danger like that.
+      - Listen, when you found me in Udrasil I was a spoiled brat who got whatever
+        he wanted at the drop of a hat.
+      - I wasted my life in the taverns. Until you came and talked some sense to me.
+      - I've made something of myself and I'd be honored to fight at your side.
+      - Besides how could you turn down having the greatest spearman in all Ocrest?
+      - Oberon... I... thank you.
+      - What kind of friend would I be if I were to leave you when you needed me most?
+        Now come on stop being so dramatic.
+      portrait:
+      - {fileID: 21300000, guid: e24a4049526ca704eb781c65db5c188d, type: 3}
+      - {fileID: 21300000, guid: dd3d4b940a009d14dbfe8b78c3b4f6ca, type: 3}
+      - {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825, type: 3}
+      - {fileID: 21300000, guid: e24a4049526ca704eb781c65db5c188d, type: 3}
+      - {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825, type: 3}
+      - {fileID: 21300000, guid: e24a4049526ca704eb781c65db5c188d, type: 3}
+      - {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825, type: 3}
+      - {fileID: 21300000, guid: e24a4049526ca704eb781c65db5c188d, type: 3}
+      - {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825, type: 3}
+      - {fileID: 21300000, guid: e24a4049526ca704eb781c65db5c188d, type: 3}
+      - {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825, type: 3}
+      - {fileID: 21300000, guid: e24a4049526ca704eb781c65db5c188d, type: 3}
+      povChange:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 8
+      - 9
+      - 10
+      - 14
+      - 15
+      - 15
+      typingSpeed: 0
+      isChoice: 0
+      choiceLine: 0
+      choice1: {fileID: 0}
+      choice2: {fileID: 0}
+      willRemember: 0
+      choiceSet: 0
+      choiceCare1: {fileID: 0}
+      choiceCare2: {fileID: 0}
+      choiceText1: 
+      choiceText2: 
+      normal: {fileID: 0}
+      hasPlayed: 0
+      willCount: 0
+      maxWillCount: 0
+      isBattle: 0
+    moves:
+    - {x: -2, y: 0}
+    - {x: -1, y: 0}
+    - {x: -1, y: 0}
+    - {x: -1, y: 0}
+    - {x: 0.01, y: 0}
+    - {x: 0.01, y: 0}
+    timings:
+    - 5
+    - 0.5
+    - 1
+    - 1
+    - 1
+    - 1
+    dialogueEntrance:
+    - 2
+    - 4
+    actors:
+    - {fileID: 0}
+    povChanges: []
+    songEntrance: 5
+    song: {fileID: 8300000, guid: f69970ec4ee322d439bd41946159b0d6, type: 3}

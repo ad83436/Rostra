@@ -658,6 +658,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GuiSmall: {fileID: 12800000, guid: 8cd005d600c706945b313ab1374fb2ea, type: 3}
   isVisible: 0
+  curOption: 0
 --- !u!4 &194883477
 Transform:
   m_ObjectHideFlags: 0
