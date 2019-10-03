@@ -418,7 +418,7 @@ public class BattleManager : MonoBehaviour
 
     public void LevelUp(int playerIndex)
     {
-       // Debug.Log(players[playerIndex].playerReference.name + " has leveled up!");
+        //Called from the Victory Screen
         //The new EXP is what remains after reaching the new level
         players[playerIndex].exp = players[playerIndex].exp - players[playerIndex].expNeededForNextLevel;
         //Update the party stats
@@ -430,11 +430,6 @@ public class BattleManager : MonoBehaviour
         //Update the needed exp for next levelup
         players[playerIndex].expNeededForNextLevel = PartyStats.chara[playerIndex].neededExperience;
         Debug.Log("You need this much to level up again! " + players[playerIndex].expNeededForNextLevel);
-        //If the player gains enough EXP to level up more than once
-       // if (players[playerIndex].exp >= players[playerIndex].expNeededForNextLevel)
-       // {
-       //     LevelUp(playerIndex);
-       // }
     }
 
     public void UpdatePlayerStats(int playerIndex)

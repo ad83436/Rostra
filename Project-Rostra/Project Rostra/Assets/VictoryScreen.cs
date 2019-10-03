@@ -4,6 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+
+/// <summary>
+/// Things to add:
+/// + Skip animation if the player presses space
+/// + Right now the player can press space and not get the exp 
+/// </summary>
+
+
 public class VictoryScreen : MonoBehaviour
 {
     //Instances
@@ -152,11 +160,12 @@ public class VictoryScreen : MonoBehaviour
         victoryTextBack.color = victoryTextFore.color = panelItemsColor;
     }
 
-    // Update is called once per frame
     void Update()
     {
+        //Screen active is set to true by the Fade object that transitions into the victory screen
         if (screenActive)
         {
+            //Start fading in the victory panel itself and the defeat text
             if(thisImage.fillAmount<1.0f && fadingIn)
             {
                 thisImage.fillAmount += 0.05f;
@@ -170,6 +179,7 @@ public class VictoryScreen : MonoBehaviour
             }
             else if(fadingIn)
             {
+                //If we've completed the fade in, reset the panel items color and get the stats of the player
                 panelItemsColor.r = panelItemsColor.g = panelItemsColor.b = 1.0f;
                 panelItemsColor.a = 0.0f;
                 fadingIn = false;
@@ -179,9 +189,10 @@ public class VictoryScreen : MonoBehaviour
             //Fargas
             if (startFadingFargasIn)
             {
+                //Fade in the character's portrait and bars
                 if(FadeInItems(ref fargasPortrait, ref fargasPortraitBack, ref fargasHP, ref fargasHPBack, ref fargasCurrentHPText, ref fargasMaxHPText, ref fargasMP, ref fargasMPBack, ref fargasCurrentMPText, ref fargasMaxMPText, ref fargasExp, ref fargasExpBack, ref fargasCurrentExpText, ref fargasMaxExpText))
                 {
-                    Debug.Log("Hitttt");
+                    //After the fade in is complete start adding the exp
                     fargasAddinExp = true;
                     startFadingFargasIn = false;
                 }               
@@ -348,21 +359,27 @@ public class VictoryScreen : MonoBehaviour
 
     private void IncreaseExp(ref Image expBar, ref float currentExp, ref float maxExp, ref int expGain, ref float expStep, ref Text expText, ref Text maxExpText , int playerIndex)
     {
+        //Keep increasing the current exp by 1 and decreasing the exp gain by 1
         if (expBar.fillAmount < 1.0f && currentExp < maxExp && expGain > 0)
         {
             currentExp++;
+            btlManager.players[playerIndex].exp = Mathf.RoundToInt(currentExp); //Update the battle manager
             expText.text = currentExp.ToString() + " / ";
             expGain--;
             expBar.fillAmount += expStep;
         }
-        //If the player has leveled up, get the new max exp and 
+        //If you surpass the max exp, level up
+        //also get the new max exp
         else if (currentExp >= maxExp || expBar.fillAmount >= 1.0f)
         {
             btlManager.LevelUp(playerIndex);
+            currentExp = btlManager.players[playerIndex].exp;
             maxExp = btlManager.players[playerIndex].expNeededForNextLevel;
+            expText.text = currentExp.ToString() + " / ";
             maxExpText.text = maxExp.ToString();
             expStep = 1.0f / maxExp;
             expBar.fillAmount = 0.0f;
+
             switch (playerIndex)
             {
                 case 0:
@@ -387,7 +404,7 @@ public class VictoryScreen : MonoBehaviour
         //If we have reached the exp gain, stop
         else if (expGain <= 0)
         {
-            //Update
+            //Update the party stats with the new exp. The battle manager will get them next time a battle starts
             PartyStats.chara[playerIndex].currentExperience = Mathf.RoundToInt(currentExp);
             switch (playerIndex)
             {
