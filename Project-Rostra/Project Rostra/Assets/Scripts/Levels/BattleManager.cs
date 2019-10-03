@@ -384,8 +384,6 @@ public class BattleManager : MonoBehaviour
                 PartyStats.chara[i].rage = 0.0f;
                 players[i].playerReference.canRage = false;
             }
-            players[i].exp += expGain;
-            PartyStats.chara[i].currentExperience = players[i].exp;
             enemySpawner.numberOfEnemies = 0; //Reset the enemy spawner to get ready for the next battle
         }
 
