@@ -234,7 +234,7 @@ public class BattleManager : MonoBehaviour
         //Check if the next on Q is a player or an enemy and call the correct function
         if (battleQueue[0].playerReference != null && battleQueue[0].enemyReference == null)
         {
-            uiBtl.showThisPlayerUI(battleQueue[0].playerIndex, battleQueue[0].name, battleQueue[0].playerReference);
+            uiBtl.ShowThisPlayerUI(battleQueue[0].playerIndex, battleQueue[0].name, battleQueue[0].playerReference);
         }
         else if (battleQueue[0].playerReference == null && battleQueue[0].enemyReference != null)
         {
