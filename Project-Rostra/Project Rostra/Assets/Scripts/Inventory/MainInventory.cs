@@ -421,6 +421,35 @@ public class MainInventory : MonoBehaviour {
 
     #endregion
 
+    #region Item Prices for Purchasing
+
+    public int ItemPrice(int itemID) {
+        int price = 0;
+
+        // Find out the item's price based on the ID provided
+        switch (itemID) {
+            case (int)ITEM_ID.TEST_POTION_HP:
+                price = 69;
+                break;
+            case (int)ITEM_ID.TEST_POTION_MP:
+                price = 420;
+                break;
+            case (int)ITEM_ID.TEST_QUEST_ITEM:
+                price = 666;
+                break;
+            case (int)ITEM_ID.TEST_ARMOR1:
+                price = 6969;
+                break;
+            case (int)ITEM_ID.TEST_WEAPON1:
+                price = 42069;
+                break;
+        }
+
+        return price;
+    }
+
+    #endregion
+
     #region Item Options and Their Functionality
 
     // Returns a full list of options that an item can have based on its type

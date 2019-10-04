@@ -169,7 +169,7 @@ public class UIBTL : MonoBehaviour
 
         //End Battle
         battleHasEnded = false;
-        victoryPanel.gameObject.SetActive(false);
+        //victoryPanel.gameObject.SetActive(false);
 
 
         //Skills
@@ -192,26 +192,26 @@ public class UIBTL : MonoBehaviour
         if(moveImagesNow)
         {
             //Called on End Turn
-            moveQImages();
+            MoveQImages();
             
         }
 
         switch(currentState)
         {
             case btlUIState.choosingBasicCommand:
-                choosingBasicCommand();
+                ChoosingBasicCommand();
                 break;
             case btlUIState.choosingSkillsCommand:
-                choosingSkillsCommand();
+                ChoosingSkillsCommand();
                 break;
             case btlUIState.choosingItemsCommand:
-                choosingItemsCommand();
+                ChoosingItemsCommand();
                 break;
             case btlUIState.choosingEnemy:
-                choosingEnemy();
+                ChoosingEnemy();
                 break;
             case btlUIState.choosingPlayer:
-                choosingPlayer();
+                ChoosingPlayer();
                 break;
             case btlUIState.battleEnd:
                 EndBattleUI();
@@ -290,7 +290,7 @@ public class UIBTL : MonoBehaviour
 
     }
 
-    public void moveQImages()
+    public void MoveQImages()
     {
 
         //Once the images start moving, turn off the indicator next to the "RAGE" word and return the text color to normal if the previous player was in rage
@@ -335,7 +335,7 @@ public class UIBTL : MonoBehaviour
     }
 
     //Called when the image at the far right of the Q collides with the recycle image collider
-    public void imageRecycle(int imageIndex)
+    public void ImageRecycle(int imageIndex)
     {
         //We've hit the recycler, stop moving!
         moveImagesNow = false;
@@ -374,7 +374,7 @@ public class UIBTL : MonoBehaviour
     }
 
     //Called from the BTL Manager to update the UI based on which player's turn it is
-    public void showThisPlayerUI(int playerIndex, string name, Player playerReference)
+    public void ShowThisPlayerUI(int playerIndex, string name, Player playerReference)
     {
         if(playerReference.currentState != Player.playerState.Waiting && !battleHasEnded)
         {
@@ -431,9 +431,8 @@ public class UIBTL : MonoBehaviour
         }
     }
 
-    private void choosingBasicCommand()
+    private void ChoosingBasicCommand()
     {
-        //Debug.Log("Choosing Basic Commands");
         if (!moveImagesNow) //Don't allow the player to choose a command until the Q has settled down
         {
             switch (controlsIndicator)
@@ -546,22 +545,12 @@ public class UIBTL : MonoBehaviour
                         upArrow.gameObject.SetActive(false);
                         downArrow.gameObject.SetActive(true);
                         itemsPanelIndex = 0;
-                        Debug.Log("Count " + inventory.consumableInv.Count);
                         //Show three the first three items in the inventory
                         for(int i =0;i<3 && i<inventory.consumableInv.Count;i++)
                         {
-                           // if (inventory.ItemType(inventory.invItem[itemsPanelIndex + i, 0]) != (int)ITEM_TYPE.EQUIPABLE)
-                           // {
                                 itemIconsInPanel[i].sprite = itemIcons[inventory.invItem[inventory.consumableInv[itemsPanelIndex + i], 0]];
                                 itemNames[i].text = inventory.ItemName(inventory.invItem[inventory.consumableInv[itemsPanelIndex + i], 0]);
                                 itemCount[i].text = inventory.invItem[inventory.consumableInv[itemsPanelIndex + i], 1].ToString();
-                          //  }
-                          //  else
-                          //  {
-                              //  itemIconsInPanel[i].sprite = itemIcons[0];
-                             //   itemNames[i].text = "Unusable in battle";
-                               // itemCount[i].text = "0";
-                          //  }
                         }
                         currentState = btlUIState.choosingItemsCommand;
                     }
@@ -599,7 +588,7 @@ public class UIBTL : MonoBehaviour
         }
     }
 
-    private void choosingSkillsCommand()
+    private void ChoosingSkillsCommand()
     {
         if(Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Space))
         {
@@ -622,7 +611,7 @@ public class UIBTL : MonoBehaviour
         }
     }
 
-    private void choosingItemsCommand()
+    private void ChoosingItemsCommand()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -745,7 +734,7 @@ public class UIBTL : MonoBehaviour
     }
 
 
-    private void choosingPlayer()
+    private void ChoosingPlayer()
     {
         if(Input.GetKeyDown(KeyCode.Escape))
         {
@@ -831,12 +820,14 @@ public class UIBTL : MonoBehaviour
                 inventory.ItemUseFunction(inventory.invItem[inventory.consumableInv[itemsPanelIndex], 0], inventory.consumableInv[itemsPanelIndex], playerIndicatorIndex);
                 itemCount[itemHPosIndex].text = inventory.invItem[inventory.consumableInv[0], 1].ToString();
                 itemsPanelIndex = 0; //Reset the itemsPanelIndex
+                btlManager.players[playerIndicatorIndex].playerReference.UpdatePlayerStats();
+                playerInControl.ForcePlayerTurnAnimationOff();
                 EndTurn();
             }
         }
     }
 
-    private void choosingEnemy()
+    private void ChoosingEnemy()
     {
         //Leave choosing enemy
         if(Input.GetKeyDown(KeyCode.Escape))
@@ -1080,6 +1071,8 @@ public class UIBTL : MonoBehaviour
 
     public void EnemyIsDead(int enemyIndex)
     {
+        Debug.Log("Hit");
+
         enemiesDead[enemyIndex] = true;
 
         for(int i = 0, j=0; j<enemies.Length;j++)
@@ -1089,6 +1082,7 @@ public class UIBTL : MonoBehaviour
                 i++;
                 if(i>=numberOfEnemies)
                 {
+                    Debug.Log("End it ");
                     //Start fading in the end battle screen
                     fadePanel.FlipFadeToVictory();
                     
@@ -1116,8 +1110,7 @@ public class UIBTL : MonoBehaviour
     {
         if(isVictory)
         {
-            currentState = btlUIState.battleEnd;
-            victoryPanel.gameObject.SetActive(true);
+            currentState = btlUIState.battleEnd;         
         }
         else
         {

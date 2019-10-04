@@ -14,7 +14,7 @@ public class Fade : MonoBehaviour
     private bool transitionToDefeat;
     private bool transitionToWorldMap;
 
-    public GameObject victoryPanel;
+    public VictoryScreen victoryPanel;
     public GameObject defeatPanel;
     private UIBTL uiBtl;
     
@@ -40,6 +40,7 @@ public class Fade : MonoBehaviour
         else
         {
             thisImage.fillAmount += 0.02f;
+            
             if (thisImage.fillAmount >= 1.0f)
             {
                 if (transitionToBattle)
@@ -65,7 +66,6 @@ public class Fade : MonoBehaviour
                     transitionToWorldMap = false;
                     SceneManager.UnloadSceneAsync(SceneManager.GetSceneByName("Queue Scene"));
                 }
-                thisImage.fillAmount = 0.0f;
                 
             }
         }
@@ -104,7 +104,7 @@ public class Fade : MonoBehaviour
     
     public void TransitionIntoVictory()
     {
-        victoryPanel.gameObject.SetActive(true);
+        victoryPanel.VictoryFadeIn();
     }
     
     public void TransitionIntoDefeat()
