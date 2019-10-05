@@ -25,6 +25,7 @@ public class SkillsInventory : MonoBehaviour {
     public void Awake() {
         if (invInstance == null) {
             invInstance = this;
+            DontDestroyOnLoad(gameObject);
         } else {
             Destroy(gameObject);
         }
@@ -34,7 +35,7 @@ public class SkillsInventory : MonoBehaviour {
     private void Update() {
         // Getting Keyboard Input
         bool keyOpen, keySelect, keyReturn, keyUp, keyDown, keyLeft, keyRight;
-        keyOpen = Input.GetKeyDown(KeyCode.S);
+        keyOpen = Input.GetKeyDown(KeyCode.K);
         keySelect = Input.GetKeyDown(KeyCode.Z);
         keyReturn = Input.GetKeyDown(KeyCode.X);
         keyUp = Input.GetKeyDown(KeyCode.UpArrow);
@@ -233,6 +234,9 @@ public class SkillsInventory : MonoBehaviour {
             case (int)SKILLS.TEST_SKILL4:
                 name = "Healing Anal Needle";
                 break;
+            default: //In case no skill is equipped at that slot
+                name = "---";
+                break;
         }
 
         return name;
@@ -302,6 +306,12 @@ public class SkillsInventory : MonoBehaviour {
                 skillStat[1] = 100;
                 skillStat[4] = (float)SKILL_TYPE.SINGLE_PLAYER_HEAL;
                 skillStat[5] = 40;
+                break;
+            default:
+                skillStat[0] = 0;
+                skillStat[1] = 0;
+                skillStat[4] = (float)SKILL_TYPE.SINGLE_PLAYER_HEAL;
+                skillStat[5] = 0;
                 break;
         }
 

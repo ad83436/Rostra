@@ -576,18 +576,6 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void becomeLessVisbile() //Called from UIBTL when this enemy is NOT chosen for attack
-    {
-        spriteColor.a = 0.5f;
-        spriteRenderer.color = spriteColor;
-    }
-
-    public void resetVisibility() //Called from UIBTL when this enemy is NOT chosen for attack, and either the player doesn't attack or the attack finishes
-    {
-        
-        spriteColor.a = 1.0f;
-        spriteRenderer.color = spriteColor;
-    }
 
     //Calcualte the damage
     public void TakeDamage(float playerAttack)
