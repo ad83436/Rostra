@@ -33,11 +33,11 @@ public class Player : MonoBehaviour
     public Sprite qImage;
     private int QCounter; //Used to count turns since the player went in rage or decided to go in waiting state.
 
-
-
     //Components
     private Animator playerAnimator;
 
+    //Skills
+    private int chosenSkill;
 
     //Rage
     public float currentRage;
@@ -94,6 +94,9 @@ public class Player : MonoBehaviour
 
         //Components
         playerAnimator = gameObject.GetComponent<Animator>();
+
+        //Skills
+        chosenSkill = 0;
 
         //Rage
         maxRage = maxHP * 0.65f; //Max rage is 65% of max health
@@ -200,7 +203,6 @@ public class Player : MonoBehaviour
                 attackingThisEnemy.TakeDamage(actualATK);
             }
         }
-        uiBTL.ResetVisibilityForAllEnemies();
         uiBTL.EndTurn();
 
         //If the player is in rage state, they can only attack so it makes sense to check if we were in rage mode when attacking
@@ -381,5 +383,26 @@ public class Player : MonoBehaviour
     public void ForcePlayerTurnAnimationOff()
     {
         playerAnimator.SetBool("Turn", false);
+    }
+
+    public bool SkillSearch(int skillID)
+    {
+        chosenSkill = skillID;
+
+        switch(skillID)
+        {
+            case (int)SKILLS.TEST_SKILL1:
+                return true;
+            case (int)SKILLS.TEST_SKILL2:
+                return true;
+            case (int)SKILLS.TEST_SKILL3:
+                return false;
+            case (int)SKILLS.TEST_SKILL4:
+                return false;
+            default:
+                return true;
+        }
+        //return true if this skill targets enemies
+        //return false if this skill targets players
     }
 }
