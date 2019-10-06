@@ -6,52 +6,16 @@ public class ExpManager : MonoBehaviour {
 	//singleton
 	public static ExpManager instance;
 
-	#region skills per player
-
-	private static int[][] playeroneskills = new int[4][];
-
-	private static int[][] playertwoskills = new int[4][];
-
-	private static int[][] playerthreeskills = new int[4][];
-
-	private static int[][] playerfourskills = new int[4][];
-
-	//temporary available skills lists
-	private List<SKILLS> playeroneunlockedskills = new List<SKILLS>();
-	private List<SKILLS> playertwounlockedskills = new List<SKILLS>();
-	private List<SKILLS> playerthreeunlockedskills = new List<SKILLS>();
-	private List<SKILLS> playerfourunlockedskills = new List<SKILLS>();
-
-	#endregion
-
 	#region Initialization & Destruction
 
 	private void Awake() {
 		//initialize singleton
 		if (instance == null) {
 			instance = this;
-			DontDestroyOnLoad(this.gameObject);
+			DontDestroyOnLoad(gameObject);
 		} else {
 			Destroy(gameObject);
-
 		}
-
-		playeroneskills[0] = new int[] { (int)SKILLS.TEST_SKILL1, 0, 0, 0, 0, 0, 0, 0 };
-		playeroneskills[1] = new int[] { (int)SKILLS.TEST_SKILL1, 0, 0, 0, 0, 0, 0, 0 };
-		playeroneskills[2] = new int[] { (int)SKILLS.TEST_SKILL1, 0, 0, 0, 0, 0, 0, 0 };
-		playeroneskills[3] = new int[] { (int)SKILLS.TEST_SKILL1, 0, 0, 0, 0, 0, 0, 0 };
-		playertwoskills[0] = new int[] { (int)SKILLS.TEST_SKILL1, 0, 0, 0, 0, 0, 0, 0 };
-		playertwoskills[1] = new int[] { (int)SKILLS.TEST_SKILL1, 0, 0, 0, 0, 0, 0, 0 };
-		playertwoskills[2] = new int[] { (int)SKILLS.TEST_SKILL1, 0, 0, 0, 0, 0, 0, 0 };
-		playertwoskills[3] = new int[] { (int)SKILLS.TEST_SKILL1, 0, 0, 0, 0, 0, 0, 0 };
-		playerthreeskills[0] = new int[] { (int)SKILLS.TEST_SKILL1, 0, 0, 0, 0, 0, 0, 0 };
-		playerthreeskills[1] = new int[] { (int)SKILLS.TEST_SKILL1, 0, 0, 0, 0, 0, 0, 0 };
-		playerthreeskills[2] = new int[] { (int)SKILLS.TEST_SKILL1, 0, 0, 0, 0, 0, 0, 0 };
-		playerthreeskills[3] = new int[] { (int)SKILLS.TEST_SKILL1, 0, 0, 0, 0, 0, 0, 0 };
-		playerfourskills[0] = new int[] { (int)SKILLS.TEST_SKILL1, 0, 0, 0, 0, 0, 0, 0 };
-		playerfourskills[1] = new int[] { (int)SKILLS.TEST_SKILL1, 0, 0, 0, 0, 0, 0, 0 };
-		playerfourskills[2] = new int[] { (int)SKILLS.TEST_SKILL1, 0, 0, 0, 0, 0, 0, 0 };
-		playerfourskills[3] = new int[] { (int)SKILLS.TEST_SKILL1, 0, 0, 0, 0, 0, 0, 0 };
 	}
 
 	private void OnDestroy() {
@@ -161,8 +125,6 @@ public class ExpManager : MonoBehaviour {
 
 	#endregion
 
-	#region Using upgrade points & unlocking skills
-
 	#region Using points
 
 	public void UsePointOnAttack(int playerIndex) {
@@ -251,51 +213,104 @@ public class ExpManager : MonoBehaviour {
 
 	#region Unlock skills
 
+	#region Getting required stats
+	
+	private int[] RequiredStats(SKILLS skill, int playerindex) {
+		switch (playerindex) {
+			case 0:
+				switch (skill) {
+					case SKILLS.TEST_SKILL1: return new int[] { 110, 15, 200, 200, 16, 14, 16 };
+					case SKILLS.TEST_SKILL2: return new int[] { 110, 15, 200, 200, 16, 14, 16 };
+					case SKILLS.TEST_SKILL3: return new int[] { 100, 20, 200, 200, 16, 14, 16 };
+					case SKILLS.TEST_SKILL4: return new int[] { 100, 15, 210, 200, 16, 14, 16 };
+					case SKILLS.TEST_SKILL5: return new int[] { 110, 15, 200, 200, 16, 14, 16 };
+					case SKILLS.TEST_SKILL6: return new int[] { 110, 15, 200, 200, 16, 14, 16 };
+					case SKILLS.TEST_SKILL7: return new int[] { 100, 20, 200, 200, 16, 14, 16 };
+					case SKILLS.TEST_SKILL8: return new int[] { 100, 15, 210, 200, 16, 14, 16 };
+					case SKILLS.TEST_SKILL9: return new int[] { 100, 15, 210, 200, 16, 14, 16 };
+					case SKILLS.TEST_SKILL10: return new int[] { 100, 15, 210, 200, 16, 14, 16 };
+					case SKILLS.TEST_SKILL11: return new int[] { 100, 15, 210, 200, 16, 14, 16 };
+					default: return new int[0];
+				}
+			case 1:
+				switch (skill) {
+					case SKILLS.TEST_SKILL1: return new int[] { 110, 15, 200, 200, 16, 14, 16 };
+					case SKILLS.TEST_SKILL2: return new int[] { 110, 15, 200, 200, 16, 14, 16 };
+					case SKILLS.TEST_SKILL3: return new int[] { 100, 20, 200, 200, 16, 14, 16 };
+					case SKILLS.TEST_SKILL4: return new int[] { 100, 15, 210, 200, 16, 14, 16 };
+					case SKILLS.TEST_SKILL5: return new int[] { 110, 15, 200, 200, 16, 14, 16 };
+					case SKILLS.TEST_SKILL6: return new int[] { 110, 15, 200, 200, 16, 14, 16 };
+					case SKILLS.TEST_SKILL7: return new int[] { 100, 20, 200, 200, 16, 14, 16 };
+					case SKILLS.TEST_SKILL8: return new int[] { 100, 15, 210, 200, 16, 14, 16 };
+					case SKILLS.TEST_SKILL9: return new int[] { 100, 15, 210, 200, 16, 14, 16 };
+					case SKILLS.TEST_SKILL10: return new int[] { 100, 15, 210, 200, 16, 14, 16 };
+					case SKILLS.TEST_SKILL11: return new int[] { 100, 15, 210, 200, 16, 14, 16 };
+					default: return new int[0];
+				}
+			case 2:
+				switch (skill) {
+					case SKILLS.TEST_SKILL1: return new int[] { 110, 15, 200, 200, 16, 14, 16 };
+					case SKILLS.TEST_SKILL2: return new int[] { 110, 15, 200, 200, 16, 14, 16 };
+					case SKILLS.TEST_SKILL3: return new int[] { 100, 20, 200, 200, 16, 14, 16 };
+					case SKILLS.TEST_SKILL4: return new int[] { 100, 15, 210, 200, 16, 14, 16 };
+					case SKILLS.TEST_SKILL5: return new int[] { 110, 15, 200, 200, 16, 14, 16 };
+					case SKILLS.TEST_SKILL6: return new int[] { 110, 15, 200, 200, 16, 14, 16 };
+					case SKILLS.TEST_SKILL7: return new int[] { 100, 20, 200, 200, 16, 14, 16 };
+					case SKILLS.TEST_SKILL8: return new int[] { 100, 15, 210, 200, 16, 14, 16 };
+					case SKILLS.TEST_SKILL9: return new int[] { 100, 15, 210, 200, 16, 14, 16 };
+					case SKILLS.TEST_SKILL10: return new int[] { 100, 15, 210, 200, 16, 14, 16 };
+					case SKILLS.TEST_SKILL11: return new int[] { 100, 15, 210, 200, 16, 14, 16 };
+					default: return new int[0];
+				}
+			case 3:
+				switch (skill) {
+					case SKILLS.TEST_SKILL1: return new int[] { 110, 15, 200, 200, 16, 14, 16 };
+					case SKILLS.TEST_SKILL2: return new int[] { 110, 15, 200, 200, 16, 14, 16 };
+					case SKILLS.TEST_SKILL3: return new int[] { 100, 20, 200, 200, 16, 14, 16 };
+					case SKILLS.TEST_SKILL4: return new int[] { 100, 15, 210, 200, 16, 14, 16 };
+					case SKILLS.TEST_SKILL5: return new int[] { 110, 15, 200, 200, 16, 14, 16 };
+					case SKILLS.TEST_SKILL6: return new int[] { 110, 15, 200, 200, 16, 14, 16 };
+					case SKILLS.TEST_SKILL7: return new int[] { 100, 20, 200, 200, 16, 14, 16 };
+					case SKILLS.TEST_SKILL8: return new int[] { 100, 15, 210, 200, 16, 14, 16 };
+					case SKILLS.TEST_SKILL9: return new int[] { 100, 15, 210, 200, 16, 14, 16 };
+					case SKILLS.TEST_SKILL10: return new int[] { 100, 15, 210, 200, 16, 14, 16 };
+					case SKILLS.TEST_SKILL11: return new int[] { 100, 15, 210, 200, 16, 14, 16 };
+					default: return new int[0];
+				}
+			default: return new int[0];
+		}
+	}
+
+	#endregion
+
 	private void UpdatePlayerSkills(int index) {
-		switch (index) {
-			case 0: UpdatePlayerOneSkills(); break;
-			case 1: UpdatePlayerTwoSkills(); break;
-			case 2: UpdatePlayerThreeSkills(); break;
-			case 3: UpdatePlayerFourSkills(); break;
-			default: Debug.LogError("something happened but i dont know what"); break;
-		}
-	}
-
-	private bool CheckForMinimumVals(int[] arr, int[] min) {
-		if (arr.Length != min.Length + 1) { Debug.LogError("AAAAAAAAAAAAAAAA"); return false; }
-		for (int i = 1; i < arr.Length; i++) {
-			if (arr[i] < min[i - 1]) return false;
-		}
-		return true;
-	}
-
-	private void UpdatePlayerOneSkills() {
-		for (int i = 0; i < playeroneskills.Length; i++) {
-			if (playeroneunlockedskills.Contains((SKILLS)playeroneskills[i][0])) continue;
-			if (CheckForMinimumVals(playeroneskills[i], new int[] { 0, 0, 0, 0, 0, 0, 0, 0 })) {
-				/* TODO: Unlock skill in skills inventory */
-				playeroneunlockedskills.Add((SKILLS)playeroneskills[i][0]);
+		int[] arr = new int[] { (int)PartyStats.chara[index].attack,        (int)PartyStats.chara[index].defence,   (int)PartyStats.chara[index].hitpoints,
+								(int)PartyStats.chara[index].magicpoints,   (int)PartyStats.chara[index].strength,  (int)PartyStats.chara[index].agility,
+								(int)PartyStats.chara[index].speed };
+		for (int i = 0; i < PartySkills.skills[index].unlockableSkills.Length; i++) {
+			
+			if (CheckForMinimumVals(arr, RequiredStats((SKILLS)PartySkills.skills[index].unlockableSkills[i], index))) {
+				SkillsInventory.invInstance.AddToUnlockedSkills((int)PartySkills.skills[index].unlockableSkills[i], index);
 			}
 		}
 	}
 
-	private void UpdatePlayerTwoSkills() {
-
+	private bool CheckForMinimumVals(int[] cur, int[] min) {
+		if (cur.Length != min.Length) return false;
+		for (int i = 0; i < cur.Length; i++) {
+			if (cur[i] < min[i]) {
+				return false;
+			}
+		}
+		return true;
 	}
 
-	private void UpdatePlayerThreeSkills() {
-
-	}
-
-	private void UpdatePlayerFourSkills() {
-
-	}
-
-	#endregion
 
 	#endregion
 
 	#region GUI
+
+#if DEBUG
 
 	private bool showGUI = false;
 	private bool use = false;
@@ -322,6 +337,8 @@ public class ExpManager : MonoBehaviour {
 		Rect rect = new Rect(40, 50, 400, 80);
 
 		GUI.Label(rect, "   skillPoints " + PartyStats.chara[currentPlayer].statPoints);
+
+		#region Draw left side
 
 		rect.y += 80;
 		if (currentItem == 0) GUI.Label(rect, "> Current Player " + currentPlayer);
@@ -363,6 +380,8 @@ public class ExpManager : MonoBehaviour {
 		if (currentItem == 9) GUI.Label(rect, "> Speed " + PartyStats.chara[currentPlayer].speed);
 		else GUI.Label(rect, "   Speed " + PartyStats.chara[currentPlayer].speed);
 
+		#endregion
+
 		if (use) {
 			switch (currentItem) {
 				case 0:
@@ -375,13 +394,27 @@ public class ExpManager : MonoBehaviour {
 				case 4: UsePointOnHealth(currentPlayer); break;
 				case 5: UsePointOnMana(currentPlayer); break;
 				case 6: UsePointOnStrength(currentPlayer); break;
-				case 7: UsePointOnCritical(currentPlayer); break;
+				//case 7: UsePointOnCritical(currentPlayer); break;
 				case 8: UsePointOnAgility(currentPlayer); break;
 				case 9: UsePointOnSpeed(currentPlayer); break;
 				default: break;
 			}
 		}
 		use = false;
+
+		rect = new Rect(1440, 50, 400, 80);
+
+		for (int j = 0; j < PartySkills.skills[currentPlayer].unlockableSkills.Length; j++) {
+			GUI.Label(rect, "" + (SKILLS)PartySkills.skills[currentPlayer].unlockableSkills[j]);
+			rect.y += 80;
+		}
+
+		rect = new Rect(840, 50, 400, 80);
+
+		for (int i = 0; i < PartySkills.skills[currentPlayer].learnedSkills.Length; i++) {
+			GUI.Label(rect, "" + (SKILLS)PartySkills.skills[currentPlayer].learnedSkills[i]);
+			rect.y += 80;
+		}
 	}
 
 	private void Update() {
@@ -390,6 +423,8 @@ public class ExpManager : MonoBehaviour {
 		up = Input.GetButtonDown("expUp");
 		down = Input.GetButtonDown("expDown");
 	}
+
+#endif
 
 	#endregion
 }

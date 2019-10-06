@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+#pragma warning disable CS0649
+
 public abstract class SubMenu : MonoBehaviour {
 	
 	private CanvasGroup group;

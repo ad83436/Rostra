@@ -203,6 +203,7 @@ public class SkillsInventory : MonoBehaviour {
             // Skill found, add to unlocked skills
             if (PartySkills.skills[playerID].unlockableSkills[i] == skillID) {
                 PartySkills.skills[playerID].learnedSkills[PartySkills.skills[playerID].numSkillsLearned] = skillID;
+				PartySkills.skills[playerID].unlockableSkills[i] = (int)SKILLS.NO_SKILL;
                 PartySkills.skills[playerID].numSkillsLearned++;
                 unlockSuccess = true;
                 i = length; // Exit the loop

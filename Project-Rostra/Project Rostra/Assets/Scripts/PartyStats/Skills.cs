@@ -10,6 +10,13 @@ public enum SKILLS { // Minimum Value -- 0x0000, Maximum Value -- 0xFFEF (65519 
     TEST_SKILL2 =           0x0002,
     TEST_SKILL3 =           0x0003,
     TEST_SKILL4 =           0x0004,
+    TEST_SKILL5 =           0x0005,
+    TEST_SKILL6 =           0x0006,
+    TEST_SKILL7 =           0x0007,
+    TEST_SKILL8 =           0x0008,
+    TEST_SKILL9 =           0x0009,
+    TEST_SKILL10 =          0x000A,
+    TEST_SKILL11 =          0x000B,
 };
 
 public enum SKILL_TYPE{ // Minimum Value -- 0xFFF0, Maximum Value -- 0xFFFF (16 possible skill types)

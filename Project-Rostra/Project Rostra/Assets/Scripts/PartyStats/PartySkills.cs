@@ -13,10 +13,10 @@ public static class PartySkills {
                 (int)SKILLS.TEST_SKILL2,
                 (int)SKILLS.TEST_SKILL3,
                 (int)SKILLS.TEST_SKILL4,
-                (int)SKILLS.TEST_SKILL1,
-                (int)SKILLS.TEST_SKILL2,
-                (int)SKILLS.TEST_SKILL3,
-                (int)SKILLS.TEST_SKILL4,
+                (int)SKILLS.TEST_SKILL5,
+                (int)SKILLS.TEST_SKILL6,
+                (int)SKILLS.TEST_SKILL7,
+                (int)SKILLS.TEST_SKILL8,
             }),
         new CharacterSkills(
             new int[] {
@@ -78,8 +78,7 @@ public struct CharacterSkills {
         // Set the current learned skill to the deafult value (int)SKILLS.NO_SKILL
         var length = learnedSkills.Length;
         for (int i = 0; i < length; i++) {
-            learnedSkills[i] = unlockableSkills[i];
-            numSkillsLearned++;
+            learnedSkills[i] = (int)SKILLS.NO_SKILL;
         }
         // Set the character's current equipped skills to the default value as well
         equippedSkills = new int[PartySkills.MAX_SKILLS]{
