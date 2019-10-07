@@ -657,31 +657,7 @@ public class UIBTL : MonoBehaviour
 
         skillsHighlighter.gameObject.transform.position = skillsHPos[controlsIndicator].transform.position;
         skillDescription.text = skills.SkillDescription(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator]).ToString();
-
-        //Determine what to show (Heal/ATK/Buff/Debuff
-        if (skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[4] == (float)SKILL_TYPE.SINGLE_PLAYER_HEAL
-            || skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[4] == (float)SKILL_TYPE.ALL_PLAYER_HEAL)
-        {
-            skillAtkValueText.text = "Heal: " + skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[0].ToString();
-
-        }
-        else if (skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[4] == (float)SKILL_TYPE.SINGLE_TARGET_ATK
-            || skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[4] == (float)SKILL_TYPE.ALL_TARGETS_ATK
-            || skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[4] == (float)SKILL_TYPE.FULL_ROW_ATK)
-        {
-            skillAtkValueText.text = "ATK: " + skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[0].ToString();
-        }
-        else if (skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[4] == (float)SKILL_TYPE.SINGLE_PLAYER_BUFF
-            || skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[4] == (float)SKILL_TYPE.ALL_PLAYER_BUFF)
-        {
-            skillAtkValueText.text = "Buff: " + skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[0].ToString();
-        }
-        else if (skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[4] == (float)SKILL_TYPE.SINGLE_TARGET_DEBUFF
-            || skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[4] == (float)SKILL_TYPE.ALL_TARGETS_DEBUFF
-            || skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[4] == (float)SKILL_TYPE.FULL_ROW_DEBUFF)
-        {
-            skillAtkValueText.text = "Debuff: " + skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[0].ToString();
-        }
+        skillAtkValueText.text = "ATK: " + skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[0].ToString();
 
     }
 
