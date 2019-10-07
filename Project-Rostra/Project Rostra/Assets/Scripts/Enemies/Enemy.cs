@@ -580,6 +580,7 @@ public class Enemy : MonoBehaviour
     //Calcualte the damage
     public void TakeDamage(float playerAttack)
     {
+        Debug.Log("Received player attack: " + playerAttack);
         float damage = playerAttack - ((eDefence / (20.0f + eDefence)) * playerAttack);
         currentHP -= damage;
         battleManager.enemies[enemyIndexInBattleManager].currentHP = currentHP; //Update the BTL manager with the new health

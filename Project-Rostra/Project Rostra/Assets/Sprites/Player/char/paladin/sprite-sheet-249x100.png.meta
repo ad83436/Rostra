@@ -76,28 +76,28 @@ TextureImporter:
     second: sprite-sheet-249x100_23
   - first:
       213: -6632047995552750301
-    second: sprite-sheet-249x100_24
+    second: ASkill0
   - first:
       213: -4633149616323996092
-    second: sprite-sheet-249x100_25
+    second: ASkill1
   - first:
       213: 8356485366382868613
-    second: sprite-sheet-249x100_26
+    second: ASkill2
   - first:
       213: -4061380520215030878
-    second: sprite-sheet-249x100_27
+    second: ASkill3
   - first:
       213: -3629878756419059036
-    second: sprite-sheet-249x100_28
+    second: ASkill4
   - first:
       213: -2425382465978509080
-    second: sprite-sheet-249x100_29
+    second: ASkill5
   - first:
       213: 7525348938034381734
     second: sprite-sheet-249x100_30
   - first:
       213: 490070667003992671
-    second: sprite-sheet-249x100_31
+    second: ASkill6
   - first:
       213: 3040157198031161620
     second: sprite-sheet-249x100_32
@@ -109,22 +109,22 @@ TextureImporter:
     second: sprite-sheet-249x100_34
   - first:
       213: -5029846570485910795
-    second: sprite-sheet-249x100_35
+    second: ASkill7
   - first:
       213: -6556984259340593470
-    second: sprite-sheet-249x100_36
+    second: ASkill8
   - first:
       213: -2510673650037105437
-    second: sprite-sheet-249x100_37
+    second: ASkill9
   - first:
       213: 1711748637350433867
-    second: sprite-sheet-249x100_38
+    second: ASkill10
   - first:
       213: -5496679626655491183
-    second: sprite-sheet-249x100_39
+    second: ASkill11
   - first:
       213: -2125269103213533256
-    second: sprite-sheet-249x100_40
+    second: ASkill12
   - first:
       213: 7965964854897163731
     second: sprite-sheet-249x100_41
@@ -139,16 +139,16 @@ TextureImporter:
     second: sprite-sheet-249x100_44
   - first:
       213: -8108752889346682240
-    second: sprite-sheet-249x100_45
+    second: ASkill13
   - first:
       213: -6717678323116777161
-    second: sprite-sheet-249x100_46
+    second: ASkill14
   - first:
       213: -2907611103063319793
-    second: sprite-sheet-249x100_47
+    second: ASkill15
   - first:
       213: -679597777879207744
-    second: sprite-sheet-249x100_48
+    second: ASkill16
   - first:
       213: 3569316856446673837
     second: sprite-sheet-249x100_49
@@ -719,7 +719,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-sheet-249x100_24
+      name: ASkill0
       rect:
         serializedVersion: 2
         x: 1357
@@ -740,7 +740,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-sheet-249x100_25
+      name: ASkill1
       rect:
         serializedVersion: 2
         x: 113
@@ -761,7 +761,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-sheet-249x100_26
+      name: ASkill2
       rect:
         serializedVersion: 2
         x: 362
@@ -782,7 +782,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-sheet-249x100_27
+      name: ASkill3
       rect:
         serializedVersion: 2
         x: 612
@@ -803,11 +803,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-sheet-249x100_28
+      name: ASkill4
       rect:
         serializedVersion: 2
         x: 867
-        y: 202
+        y: 203
         width: 122
         height: 94
       alignment: 0
@@ -824,10 +824,10 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-sheet-249x100_29
+      name: ASkill5
       rect:
         serializedVersion: 2
-        x: 1118
+        x: 1119
         y: 202
         width: 121
         height: 92
@@ -845,7 +845,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-sheet-249x100_31
+      name: ASkill6
       rect:
         serializedVersion: 2
         x: 1360
@@ -866,7 +866,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-sheet-249x100_35
+      name: ASkill7
       rect:
         serializedVersion: 2
         x: 116
@@ -887,7 +887,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-sheet-249x100_36
+      name: ASkill8
       rect:
         serializedVersion: 2
         x: 379
@@ -908,7 +908,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-sheet-249x100_37
+      name: ASkill9
       rect:
         serializedVersion: 2
         x: 628
@@ -929,7 +929,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-sheet-249x100_38
+      name: ASkill10
       rect:
         serializedVersion: 2
         x: 877
@@ -950,7 +950,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-sheet-249x100_39
+      name: ASkill11
       rect:
         serializedVersion: 2
         x: 1126
@@ -971,7 +971,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-sheet-249x100_40
+      name: ASkill12
       rect:
         serializedVersion: 2
         x: 1263
@@ -992,7 +992,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-sheet-249x100_45
+      name: ASkill13
       rect:
         serializedVersion: 2
         x: 5
@@ -1013,7 +1013,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-sheet-249x100_46
+      name: ASkill14
       rect:
         serializedVersion: 2
         x: 250
@@ -1034,7 +1034,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-sheet-249x100_47
+      name: ASkill15
       rect:
         serializedVersion: 2
         x: 510
@@ -1055,11 +1055,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-sheet-249x100_48
+      name: ASkill16
       rect:
         serializedVersion: 2
         x: 847
-        y: 5
+        y: 6
         width: 111
         height: 82
       alignment: 0

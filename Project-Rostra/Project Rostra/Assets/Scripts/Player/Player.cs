@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     private BattleManager battleManager;
     private UIBTL uiBTL;
     private ObjectPooler objPooler;
+    private SkillsInventory skills;
 
     //Player stats
     public float atk;
@@ -38,6 +39,7 @@ public class Player : MonoBehaviour
 
     //Skills
     private int chosenSkill;
+    private int skillTarget;
 
     //Rage
     public float currentRage;
@@ -88,6 +90,7 @@ public class Player : MonoBehaviour
         battleManager = BattleManager.instance;
         uiBTL = UIBTL.instance;
         objPooler = ObjectPooler.instance;
+        skills = SkillsInventory.invInstance;
 
         //States
         currentState = playerState.Idle;
@@ -385,24 +388,73 @@ public class Player : MonoBehaviour
         playerAnimator.SetBool("Turn", false);
     }
 
-    public bool SkillSearch(int skillID)
+    //---------------------------------------------------Skills---------------------------------------------------//
+    public int SkillSearch(int skillID)
     {
+        Debug.Log("Skill ID");
         chosenSkill = skillID;
 
-        switch(skillID)
+        //0: Target one enemy
+        //1: Target all enemies
+        //2: Target row of enemies
+        //4: Target one player
+        //5: Target all players
+
+        switch (skillID)
         {
-            case (int)SKILLS.TEST_SKILL1:
-                return true;
+            case (int)SKILLS.TEST_SKILL1: 
+                return skillTarget = 0;
             case (int)SKILLS.TEST_SKILL2:
-                return true;
-            case (int)SKILLS.TEST_SKILL3:
-                return false;
+                return skillTarget = 1;
+            case (int)SKILLS.TEST_SKILL3: 
+                return skillTarget = 4;
             case (int)SKILLS.TEST_SKILL4:
-                return false;
+                return skillTarget = 4;
             default:
-                return true;
+                return skillTarget = 0;
         }
-        //return true if this skill targets enemies
-        //return false if this skill targets players
+    }
+
+    public void UseSkillOnPlayer(Player playerReference)
+    {
+        if(skillTarget == 5)
+        {
+            //Affect all players
+        }
+        else
+        {
+            //Affect the playerReference
+        }
+    }
+
+    public void UseSkillOnEnemy(Enemy enemyReference)
+    {
+        Debug.Log("Skill Target " + skillTarget);
+        if(skillTarget  == 1)
+        {
+
+        }
+        else if(skillTarget  == 2)
+        {
+
+        }
+        else
+        {
+            Debug.Log("HIT");
+            playerAnimator.SetBool("ASkill", true);
+           // playerAnimator.SetBool("Turn", false);
+            attackingThisEnemy = enemyReference;
+        }
+    }
+
+    public void SkillDamageEnemy()
+    {
+        if (skillTarget == 0) // Damaging one enemy
+        {
+            Debug.Log("Damage enemy");
+            attackingThisEnemy.TakeDamage(0.5f * actualATK + skills.SkillStats(chosenSkill)[0]); //Damage is the half the player's attack stat and the skill's attack stat
+            playerAnimator.SetBool("ASkill", false);
+            uiBTL.EndTurn(); 
+        }
     }
 }
