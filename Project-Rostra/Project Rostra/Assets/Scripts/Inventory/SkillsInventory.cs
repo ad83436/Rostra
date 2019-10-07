@@ -223,16 +223,16 @@ public class SkillsInventory : MonoBehaviour {
         // Find the name relative to the ID given
         switch (skillID) {
             case (int)SKILLS.TEST_SKILL1:
-                name = "Booty Destroyer";
+                name = "Offense Skill 1";
                 break;
             case (int)SKILLS.TEST_SKILL2:
-                name = "Spinning Ass Shot";
+                name = "Offense Skill 2";
                 break;
             case (int)SKILLS.TEST_SKILL3:
-                name = "Implant Popper";
+                name = "Buff Skill 1";
                 break;
             case (int)SKILLS.TEST_SKILL4:
-                name = "Healing Anal Needle";
+                name = "Heal Skill 1";
                 break;
             default: //In case no skill is equipped at that slot
                 name = "---";
@@ -253,13 +253,13 @@ public class SkillsInventory : MonoBehaviour {
         // Find the description relative to the ID given
         switch (skillID) {
             case (int)SKILLS.TEST_SKILL1:
-                break;
+                return "Offense skill 1 targets enemies";
             case (int)SKILLS.TEST_SKILL2:
-                break;
+               return "Offense skill 2 targets enemies";
             case (int)SKILLS.TEST_SKILL3:
-                break;
+                return "Buff skill 1 targets players";
             case (int)SKILLS.TEST_SKILL4:
-                break;
+                return "Heal skill 1 targets players";
         }
 
         return description;
@@ -298,7 +298,7 @@ public class SkillsInventory : MonoBehaviour {
             case (int)SKILLS.TEST_SKILL3:
                 skillStat[0] = 50;
                 skillStat[1] = 85;
-                skillStat[4] = (float)SKILL_TYPE.FULL_ROW_ATK;
+                skillStat[4] = (float)SKILL_TYPE.SINGLE_PLAYER_BUFF;
                 skillStat[5] = 115;
                 break;
             case (int)SKILLS.TEST_SKILL4:

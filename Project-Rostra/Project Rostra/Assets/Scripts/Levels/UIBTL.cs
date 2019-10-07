@@ -515,7 +515,7 @@ public class UIBTL : MonoBehaviour
                             for (int i = 0; i < 4; i++)
                             {
                                 skillNames[i].text = skills.SkillName(PartySkills.skills[playerInControl.playerIndex].equippedSkills[i]);
-                                mpCosts[i].text = skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[i])[5].ToString();
+                                mpCosts[i].text = "MP: " + skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[i])[5].ToString();
                             }
                             firstTimeOpenedSkillsPanel = true;
                         }
