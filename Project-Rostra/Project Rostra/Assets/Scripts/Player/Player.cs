@@ -40,6 +40,7 @@ public class Player : MonoBehaviour
     //Skills
     private int chosenSkill;
     private int skillTarget;
+    private float mpCost;
 
     //Rage
     public float currentRage;
@@ -393,6 +394,7 @@ public class Player : MonoBehaviour
     {
         Debug.Log("Skill ID");
         chosenSkill = skillID;
+        mpCost = skills.SkillStats(chosenSkill)[5]; //Get the MP cost
 
         //0: Target one enemy
         //1: Target all enemies
@@ -400,19 +402,20 @@ public class Player : MonoBehaviour
         //4: Target one player
         //5: Target all players
 
-        switch (skillID)
-        {
-            case (int)SKILLS.TEST_SKILL1: 
-                return skillTarget = 0;
-            case (int)SKILLS.TEST_SKILL2:
-                return skillTarget = 1;
-            case (int)SKILLS.TEST_SKILL3: 
-                return skillTarget = 4;
-            case (int)SKILLS.TEST_SKILL4:
-                return skillTarget = 4;
-            default:
-                return skillTarget = 0;
-        }
+
+            switch (skillID)
+            {
+                case (int)SKILLS.TEST_SKILL1:
+                    return skillTarget = 0;
+                case (int)SKILLS.TEST_SKILL2:
+                    return skillTarget = 1;
+                case (int)SKILLS.TEST_SKILL3:
+                    return skillTarget = 4;
+                case (int)SKILLS.TEST_SKILL4:
+                    return skillTarget = 4;
+                default:
+                    return skillTarget = 0;
+            }
     }
 
     public void UseSkillOnPlayer(Player playerReference)
@@ -454,6 +457,8 @@ public class Player : MonoBehaviour
             Debug.Log("Damage enemy");
             attackingThisEnemy.TakeDamage(0.5f * actualATK + skills.SkillStats(chosenSkill)[0]); //Damage is the half the player's attack stat and the skill's attack stat
             playerAnimator.SetBool("ASkill", false);
+            currentMP -= mpCost;
+            uiBTL.UpdatePlayerMPControlPanel();
             uiBTL.EndTurn(); 
         }
     }

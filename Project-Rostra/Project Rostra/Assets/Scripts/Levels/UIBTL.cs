@@ -640,36 +640,39 @@ public class UIBTL : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Space))
         {
-            skillsPanel.gameObject.SetActive(false);
-            //Choose skill, check if it targets players or enemies
 
-            switch(playerInControl.SkillSearch(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator]))
+            //Choose skill, make sure you have enough MP to use it, then check if it targets players or enemies       
+            if (playerInControl.currentMP >= skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[5])
             {
-                //0: Target one enemy
-                //1: Target all enemies
-                //2: Target row of enemies
-                //4: Target one player
-                //5: Target all players
+                skillsPanel.gameObject.SetActive(false);
+                switch (playerInControl.SkillSearch(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator]))
+                {
+                    //0: Target one enemy
+                    //1: Target all enemies
+                    //2: Target row of enemies
+                    //4: Target one player
+                    //5: Target all players
 
-                case 0:
-                    Debug.Log("Skill search yeileded 0");
-                    enemyIndicatorIndex = 0; //Reset the enemy indicator index
-                    enemyToAttackIndicator.SetActive(true);
-                    previousState = btlUIState.choosingSkillsCommand;
-                    currentState = btlUIState.choosingEnemy;
-                    break;
-                case 1:
-                    break;
-                case 2:
-                    break;
-                case 3:
-                    break;
-                case 4:
-                    break;
-                case 5:
-                    previousState = btlUIState.choosingSkillsCommand;
-                    currentState = btlUIState.choosingPlayer;
-                    break;
+                    case 0:
+                        Debug.Log("Skill search yeileded 0");
+                        enemyIndicatorIndex = 0; //Reset the enemy indicator index
+                        enemyToAttackIndicator.SetActive(true);
+                        previousState = btlUIState.choosingSkillsCommand;
+                        currentState = btlUIState.choosingEnemy;
+                        break;
+                    case 1:
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        break;
+                    case 5:
+                        previousState = btlUIState.choosingSkillsCommand;
+                        currentState = btlUIState.choosingPlayer;
+                        break;
+                }
             }
         }
 

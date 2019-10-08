@@ -293,7 +293,7 @@ public class SkillsInventory : MonoBehaviour {
                 skillStat[0] = 70;
                 skillStat[1] = 80;
                 skillStat[4] = (float)SKILL_TYPE.ALL_TARGETS_ATK;
-                skillStat[5] = 190;
+                skillStat[5] = 210;
                 break;
             case (int)SKILLS.TEST_SKILL3:
                 skillStat[0] = 50;
