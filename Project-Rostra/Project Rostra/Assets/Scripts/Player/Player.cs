@@ -458,6 +458,7 @@ public class Player : MonoBehaviour
             attackingThisEnemy.TakeDamage(0.5f * actualATK + skills.SkillStats(chosenSkill)[0]); //Damage is the half the player's attack stat and the skill's attack stat
             playerAnimator.SetBool("ASkill", false);
             currentMP -= mpCost;
+            battleManager.players[playerIndex].currentMP = currentMP;
             uiBTL.UpdatePlayerMPControlPanel();
             uiBTL.EndTurn(); 
         }

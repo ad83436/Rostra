@@ -459,16 +459,8 @@ public class UIBTL : MonoBehaviour
                         enemyToAttackIndicator.SetActive(true);
                         activeRange = playerInControl.range;
 
-                        //Make sure the indicator starts at an alive enemy
-                        for(int i =0;i<enemiesDead.Length;i++)
-                        {
-                            if(enemiesDead[i] == false)
-                            {
-                                enemyToAttackIndicator.transform.position = enemyIndicatorPosArray[i].transform.position;
-                                enemyIndicatorIndex = i;
-                                break;
-                            }
-                        }
+                        MoveEnemyIndicatorToFirstAliveEnemy();
+
                     }
                     break;
 
@@ -655,7 +647,7 @@ public class UIBTL : MonoBehaviour
 
                     case 0:
                         Debug.Log("Skill search yeileded 0");
-                        enemyIndicatorIndex = 0; //Reset the enemy indicator index
+                        MoveEnemyIndicatorToFirstAliveEnemy();
                         enemyToAttackIndicator.SetActive(true);
                         previousState = btlUIState.choosingSkillsCommand;
                         currentState = btlUIState.choosingEnemy;
@@ -1122,6 +1114,7 @@ public class UIBTL : MonoBehaviour
         itemsPanel.gameObject.SetActive(false);
         moveImagesNow = true;
         firstTimeOpenedSkillsPanel = false; //Get ready for the next player in case they want to use thier skills
+        controlsIndicator = 0;
         highlighter.gameObject.transform.position = highlighiterPos[0].transform.position;
         playerInControl.ForcePlayerTurnAnimationOff();
     }
@@ -1179,5 +1172,19 @@ public class UIBTL : MonoBehaviour
         playerInControl.ForcePlayerTurnAnimationOff();
     }
 
+   
+    private void MoveEnemyIndicatorToFirstAliveEnemy()
+    {
+        //Make sure the indicator starts at an alive enemy
+        for (int i = 0; i < enemiesDead.Length; i++)
+        {
+            if (enemiesDead[i] == false)
+            {
+                enemyToAttackIndicator.transform.position = enemyIndicatorPosArray[i].transform.position;
+                enemyIndicatorIndex = i;
+                break;
+            }
+        }
+    }
 
 }
