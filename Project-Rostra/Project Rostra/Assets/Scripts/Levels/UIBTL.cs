@@ -515,7 +515,7 @@ public class UIBTL : MonoBehaviour
                             for (int i = 0; i < 4; i++)
                             {
                                 skillNames[i].text = skills.SkillName(PartySkills.skills[playerInControl.playerIndex].equippedSkills[i]);
-                                mpCosts[i].text = skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[i])[5].ToString();
+                                mpCosts[i].text = "MP: " + skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[i])[5].ToString();
                             }
                             firstTimeOpenedSkillsPanel = true;
                         }
@@ -640,48 +640,45 @@ public class UIBTL : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Space))
         {
-            skillsPanel.gameObject.SetActive(false);
-            //Choose skill, check if it targets players or enemies
-            if(playerInControl.SkillSearch(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator]))
+
+            //Choose skill, make sure you have enough MP to use it, then check if it targets players or enemies       
+            if (playerInControl.currentMP >= skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[5])
             {
-                enemyToAttackIndicator.SetActive(true);
-                previousState = btlUIState.choosingSkillsCommand;
-                currentState = btlUIState.choosingEnemy;
-            }
-            else
-            {
-                previousState = btlUIState.choosingSkillsCommand;
-                currentState = btlUIState.choosingPlayer;
+                skillsPanel.gameObject.SetActive(false);
+                switch (playerInControl.SkillSearch(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator]))
+                {
+                    //0: Target one enemy
+                    //1: Target all enemies
+                    //2: Target row of enemies
+                    //4: Target one player
+                    //5: Target all players
+
+                    case 0:
+                        Debug.Log("Skill search yeileded 0");
+                        enemyIndicatorIndex = 0; //Reset the enemy indicator index
+                        enemyToAttackIndicator.SetActive(true);
+                        previousState = btlUIState.choosingSkillsCommand;
+                        currentState = btlUIState.choosingEnemy;
+                        break;
+                    case 1:
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        break;
+                    case 5:
+                        previousState = btlUIState.choosingSkillsCommand;
+                        currentState = btlUIState.choosingPlayer;
+                        break;
+                }
             }
         }
 
         skillsHighlighter.gameObject.transform.position = skillsHPos[controlsIndicator].transform.position;
         skillDescription.text = skills.SkillDescription(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator]).ToString();
-
-        //Determine what to show (Heal/ATK/Buff/Debuff
-        if (skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[4] == (float)SKILL_TYPE.SINGLE_PLAYER_HEAL
-            || skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[4] == (float)SKILL_TYPE.ALL_PLAYER_HEAL)
-        {
-            skillAtkValueText.text = "Heal: " + skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[0].ToString();
-
-        }
-        else if (skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[4] == (float)SKILL_TYPE.SINGLE_TARGET_ATK
-            || skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[4] == (float)SKILL_TYPE.ALL_TARGETS_ATK
-            || skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[4] == (float)SKILL_TYPE.FULL_ROW_ATK)
-        {
-            skillAtkValueText.text = "ATK: " + skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[0].ToString();
-        }
-        else if (skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[4] == (float)SKILL_TYPE.SINGLE_PLAYER_BUFF
-            || skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[4] == (float)SKILL_TYPE.ALL_PLAYER_BUFF)
-        {
-            skillAtkValueText.text = "Buff: " + skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[0].ToString();
-        }
-        else if (skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[4] == (float)SKILL_TYPE.SINGLE_TARGET_DEBUFF
-            || skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[4] == (float)SKILL_TYPE.ALL_TARGETS_DEBUFF
-            || skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[4] == (float)SKILL_TYPE.FULL_ROW_DEBUFF)
-        {
-            skillAtkValueText.text = "Debuff: " + skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[0].ToString();
-        }
+        skillAtkValueText.text = "ATK: " + skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[0].ToString();
 
     }
 
@@ -897,14 +894,21 @@ public class UIBTL : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (btlManager.players[playerIndicatorIndex].playerReference.currentState != Player.playerState.Rage)
+            if (previousState == btlUIState.choosingItemsCommand)
             {
-                inventory.ItemUseFunction(inventory.invItem[inventory.consumableInv[itemsPanelIndex], 0], inventory.consumableInv[itemsPanelIndex], playerIndicatorIndex);
-                itemCount[itemHPosIndex].text = inventory.invItem[inventory.consumableInv[0], 1].ToString();
-                itemsPanelIndex = 0; //Reset the itemsPanelIndex
-                btlManager.players[playerIndicatorIndex].playerReference.UpdatePlayerStats();
-                playerInControl.ForcePlayerTurnAnimationOff();
-                EndTurn();
+                if (btlManager.players[playerIndicatorIndex].playerReference.currentState != Player.playerState.Rage)
+                {
+                    inventory.ItemUseFunction(inventory.invItem[inventory.consumableInv[itemsPanelIndex], 0], inventory.consumableInv[itemsPanelIndex], playerIndicatorIndex);
+                    itemCount[itemHPosIndex].text = inventory.invItem[inventory.consumableInv[0], 1].ToString();
+                    itemsPanelIndex = 0; //Reset the itemsPanelIndex
+                    btlManager.players[playerIndicatorIndex].playerReference.UpdatePlayerStats();
+                    playerInControl.ForcePlayerTurnAnimationOff();
+                    EndTurn();
+                }
+            }
+            else if(previousState == btlUIState.choosingSkillsCommand)
+            {
+
             }
         }
     }
@@ -1065,7 +1069,15 @@ public class UIBTL : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            playerInControl.Attack(enemies[enemyIndicatorIndex]);
+            if (previousState == btlUIState.choosingBasicCommand)
+            {
+                playerInControl.Attack(enemies[enemyIndicatorIndex]);
+            }
+            else if(previousState == btlUIState.choosingSkillsCommand)
+            {
+                Debug.Log("Enemy has been chosen");
+                playerInControl.UseSkillOnEnemy(enemies[enemyIndicatorIndex]);
+            }
         }
     }
 
@@ -1110,12 +1122,12 @@ public class UIBTL : MonoBehaviour
         itemsPanel.gameObject.SetActive(false);
         moveImagesNow = true;
         firstTimeOpenedSkillsPanel = false; //Get ready for the next player in case they want to use thier skills
+        highlighter.gameObject.transform.position = highlighiterPos[0].transform.position;
+        playerInControl.ForcePlayerTurnAnimationOff();
     }
 
     public void EnemyIsDead(int enemyIndex)
     {
-        Debug.Log("Hit");
-
         enemiesDead[enemyIndex] = true;
 
         for(int i = 0, j=0; j<enemies.Length;j++)
