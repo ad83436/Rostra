@@ -39,7 +39,18 @@ public class Player : MonoBehaviour
 
     //Skills
     private int chosenSkill;
-    private int skillTarget;
+    //Skill target is used when calling skills to know what we are targeting
+    //0: Single enemy attack
+    //1: Full row enemies attack
+    //2: All enemies attack
+    //3: Single enemy debuff
+    //4: Full row enemies debuff
+    //5: All enemies debuff
+    //6: Single player heal
+    //7: All players heal
+
+    private int skillTarget; 
+    
     private float mpCost;
 
     //Rage
@@ -237,6 +248,21 @@ public class Player : MonoBehaviour
         Debug.Log("Hit is " + hit);
     }
 
+    private void CalculateHitForSkill()
+    {
+        //20 sided die + skill accuracy <? enemy agility
+        if (Random.Range(0.0f, 20.0f) + skills.SkillStats(chosenSkill)[1] < attackingThisEnemy.eAgility)
+        {
+            hit = false;
+        }
+        else
+        {
+            hit = true;
+        }
+
+        Debug.Log("Hit is " + hit);
+    }
+
     private float CalculateCrit()
     {
         return Random.Range(0.0f, 100.0f);
@@ -390,34 +416,6 @@ public class Player : MonoBehaviour
     }
 
     //---------------------------------------------------Skills---------------------------------------------------//
-    public int SkillSearch(int skillID)
-    {
-        Debug.Log("Skill ID");
-        chosenSkill = skillID;
-        mpCost = skills.SkillStats(chosenSkill)[5]; //Get the MP cost
-
-        //0: Target one enemy
-        //1: Target all enemies
-        //2: Target row of enemies
-        //4: Target one player
-        //5: Target all players
-
-
-            switch (skillID)
-            {
-                case (int)SKILLS.TEST_SKILL1:
-                    return skillTarget = 0;
-                case (int)SKILLS.TEST_SKILL2:
-                    return skillTarget = 1;
-                case (int)SKILLS.TEST_SKILL3:
-                    return skillTarget = 4;
-                case (int)SKILLS.TEST_SKILL4:
-                    return skillTarget = 4;
-                default:
-                    return skillTarget = 0;
-            }
-    }
-
     public void UseSkillOnPlayer(Player playerReference)
     {
         if(skillTarget == 5)
@@ -430,37 +428,75 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void UseSkillOnEnemy(Enemy enemyReference)
+    public void UseSkillOnEnemy(int skillID, float manaCost, Enemy enemyReference)
     {
-        Debug.Log("Skill Target " + skillTarget);
-        if(skillTarget  == 1)
-        {
+        Debug.Log("Skill Target " + skillID);
 
+        skillTarget = 0;
+        chosenSkill = skillID;
+        mpCost = manaCost;
+        //Check which skill to know which animation to run
+        if (skillID == 1)
+        {
+            Debug.Log("HIT");
+            playerAnimator.SetBool("ASkill", true);
+            // playerAnimator.SetBool("Turn", false);
+            attackingThisEnemy = enemyReference;
         }
-        else if(skillTarget  == 2)
+        else if(skillID == 2)
         {
 
         }
         else
         {
-            Debug.Log("HIT");
-            playerAnimator.SetBool("ASkill", true);
-           // playerAnimator.SetBool("Turn", false);
-            attackingThisEnemy = enemyReference;
+
         }
     }
 
-    public void SkillDamageEnemy()
+    public void SkillEffect()
     {
+        //Skill target is used when calling skills to know what we are targeting
+        //0: Single enemy attack
+        //1: Full row enemies attack
+        //2: All enemies attack
+        //3: Single enemy debuff
+        //4: Full row enemies debuff
+        //5: All enemies debuff
+        //6: Single player heal
+        //7: All players heal
+
         if (skillTarget == 0) // Damaging one enemy
         {
             Debug.Log("Damage enemy");
-            attackingThisEnemy.TakeDamage(0.5f * actualATK + skills.SkillStats(chosenSkill)[0]); //Damage is the half the player's attack stat and the skill's attack stat
-            playerAnimator.SetBool("ASkill", false);
+            CalculateHitForSkill();
+            if(hit)
+            {
+                Debug.Log("Skill hit");
+                //Summon effect here
+                btlCam.CameraShake();
+                if(CalculateCrit()<=crit)
+                {
+                    Debug.Log("Skill Crit");
+                    attackingThisEnemy.TakeDamage(0.7f * actualATK + skills.SkillStats(chosenSkill)[0]); //Damage is the half the player's attack stat and the skill's attack stat
+                }
+                else
+                {
+                    Debug.Log("No Skill Crit");
+                    attackingThisEnemy.TakeDamage(0.5f * actualATK + skills.SkillStats(chosenSkill)[0]); //Damage is the half the player's attack stat and the skill's attack stat
+                }
+
+            }
+            else
+            {
+                Debug.Log("Skill miss");
+            }
+
             currentMP -= mpCost;
             battleManager.players[playerIndex].currentMP = currentMP;
             uiBTL.UpdatePlayerMPControlPanel();
-            uiBTL.EndTurn(); 
+            playerAnimator.SetBool("ASkill", false);
+            uiBTL.EndTurn();
+
         }
     }
 }

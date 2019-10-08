@@ -637,7 +637,7 @@ public class UIBTL : MonoBehaviour
             if (playerInControl.currentMP >= skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[5])
             {
                 skillsPanel.gameObject.SetActive(false);
-                switch (playerInControl.SkillSearch(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator]))
+                switch (skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[4])
                 {
                     //0: Target one enemy
                     //1: Target all enemies
@@ -645,24 +645,33 @@ public class UIBTL : MonoBehaviour
                     //4: Target one player
                     //5: Target all players
 
-                    case 0:
-                        Debug.Log("Skill search yeileded 0");
+                    case (float)SKILL_TYPE.SINGLE_TARGET_ATK:
                         MoveEnemyIndicatorToFirstAliveEnemy();
                         enemyToAttackIndicator.SetActive(true);
                         previousState = btlUIState.choosingSkillsCommand;
                         currentState = btlUIState.choosingEnemy;
                         break;
-                    case 1:
-                        break;
-                    case 2:
-                        break;
-                    case 3:
-                        break;
-                    case 4:
-                        break;
-                    case 5:
+                    case (float)SKILL_TYPE.SINGLE_TARGET_DEBUFF:
+                        MoveEnemyIndicatorToFirstAliveEnemy();
+                        enemyToAttackIndicator.SetActive(true);
                         previousState = btlUIState.choosingSkillsCommand;
-                        currentState = btlUIState.choosingPlayer;
+                        currentState = btlUIState.choosingEnemy;
+                        break;
+                    case (float)SKILL_TYPE.ALL_TARGETS_ATK:
+                        break;
+                    case (float)SKILL_TYPE.ALL_TARGETS_DEBUFF:
+                        break;
+                    case (float)SKILL_TYPE.FULL_ROW_ATK:
+                        break;
+                    case (float)SKILL_TYPE.FULL_ROW_DEBUFF:
+                        break;
+                    case (float)SKILL_TYPE.SINGLE_PLAYER_HEAL:
+                        break;
+                    case (float)SKILL_TYPE.ALL_PLAYER_HEAL:
+                        break;
+                    case (float)SKILL_TYPE.SINGLE_PLAYER_BUFF:
+                        break;
+                    case (float)SKILL_TYPE.ALL_PLAYER_BUFF:
                         break;
                 }
             }
@@ -1068,7 +1077,7 @@ public class UIBTL : MonoBehaviour
             else if(previousState == btlUIState.choosingSkillsCommand)
             {
                 Debug.Log("Enemy has been chosen");
-                playerInControl.UseSkillOnEnemy(enemies[enemyIndicatorIndex]);
+                playerInControl.UseSkillOnEnemy(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator], skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[5], enemies[enemyIndicatorIndex]);
             }
         }
     }
