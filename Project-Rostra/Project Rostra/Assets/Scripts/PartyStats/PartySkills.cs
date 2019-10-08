@@ -21,7 +21,7 @@ public static class PartySkills {
         new CharacterSkills(
             new int[] {
                 // Unlockable Skills for Oberon
-                (int)SKILLS.TEST_SKILL2,
+                (int)SKILLS.TEST_SKILL3,
                 (int)SKILLS.NO_SKILL,
                 (int)SKILLS.NO_SKILL,
                 (int)SKILLS.NO_SKILL,
@@ -33,7 +33,7 @@ public static class PartySkills {
         new CharacterSkills(
             new int[] {
                 // Unlockable Skills for Frea
-                (int)SKILLS.TEST_SKILL3,
+                (int)SKILLS.TEST_SKILL2,
                 (int)SKILLS.NO_SKILL,
                 (int)SKILLS.NO_SKILL,
                 (int)SKILLS.NO_SKILL,

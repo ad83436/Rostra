@@ -48,10 +48,12 @@ public class Player : MonoBehaviour
     //5: All enemies debuff
     //6: Single player heal
     //7: All players heal
+    //8: Single player buff
+    //9: All players buff
 
     private int skillTarget; 
-    
     private float mpCost;
+    private Player healThisPlayer;
 
     //Rage
     public float currentRage;
@@ -416,19 +418,28 @@ public class Player : MonoBehaviour
     }
 
     //---------------------------------------------------Skills---------------------------------------------------//
-    public void UseSkillOnPlayer(Player playerReference)
+    public void UseSkillOnOnePlayer(int skillID, float manaCost , Player playerReference)
     {
-        if(skillTarget == 5)
+        Debug.Log("Skill Target" + skillID);
+
+
+        chosenSkill = skillID;
+        mpCost = manaCost;
+        healThisPlayer = playerReference;
+
+        if (skillID == 4) //Heal
         {
-            //Affect all players
+            skillTarget = 6; //Single player heal
+            playerAnimator.SetBool("Heal", true);
+
         }
-        else
+        else if (skillID == 5) //Buff
         {
-            //Affect the playerReference
+            skillTarget = 8; //Single player buff
         }
     }
 
-    public void UseSkillOnEnemy(int skillID, float manaCost, Enemy enemyReference)
+    public void UseSkillOnOneEnemy(int skillID, float manaCost, Enemy enemyReference)
     {
         Debug.Log("Skill Target " + skillID);
 
@@ -436,21 +447,13 @@ public class Player : MonoBehaviour
         chosenSkill = skillID;
         mpCost = manaCost;
         //Check which skill to know which animation to run
-        if (skillID == 1)
+        if (skillID == 1 || skillID == 2) //Fargas and Freya basic attack skills
         {
             Debug.Log("HIT");
             playerAnimator.SetBool("ASkill", true);
-            // playerAnimator.SetBool("Turn", false);
             attackingThisEnemy = enemyReference;
         }
-        else if(skillID == 2)
-        {
 
-        }
-        else
-        {
-
-        }
     }
 
     public void SkillEffect()
@@ -464,6 +467,8 @@ public class Player : MonoBehaviour
         //5: All enemies debuff
         //6: Single player heal
         //7: All players heal
+        //8: Single player buff
+        //9: All players buff
 
         if (skillTarget == 0) // Damaging one enemy
         {
@@ -491,12 +496,20 @@ public class Player : MonoBehaviour
                 Debug.Log("Skill miss");
             }
 
-            currentMP -= mpCost;
-            battleManager.players[playerIndex].currentMP = currentMP;
-            uiBTL.UpdatePlayerMPControlPanel();
+
             playerAnimator.SetBool("ASkill", false);
-            uiBTL.EndTurn();
+
 
         }
+        else if(skillTarget == 6)
+        {
+            healThisPlayer.Heal(0.1f * (0.5f * actualATK + skills.SkillStats(chosenSkill)[0]));
+            playerAnimator.SetBool("Heal", false);
+        }
+
+        currentMP -= mpCost;
+        battleManager.players[playerIndex].currentMP = currentMP;
+        uiBTL.UpdatePlayerMPControlPanel();
+        uiBTL.EndTurn();
     }
 }
