@@ -55,6 +55,15 @@ public class Player : MonoBehaviour
     private float mpCost;
     private Player healThisPlayer;
 
+    //Buffs
+    //Booleans are used in case the player's stats were debuffed by an enemy and when buffed, the debuff effects will be negated. The Q counter will not be affected
+    private bool defenseBuffed = false;
+    private bool attackBuffed = false;
+    private bool agilityBuffed = false;
+    private float defenseBuffSkillQCounter = 0 ; //How many turns until the defense buff is reversed. Need three counters as multiple stats could be buffed/debuffed at the same time
+    private float attackBuffSkillQCounter = 0;
+    private float agilityBuffSkillQCounter = 0;
+
     //Rage
     public float currentRage;
     public float maxRage;
@@ -184,6 +193,10 @@ public class Player : MonoBehaviour
             {
                 EndGuard();
             }
+
+            //Check for buffs
+            CheckForBuffs();
+           
         }
         else
         {
@@ -325,37 +338,6 @@ public class Player : MonoBehaviour
         playerAnimator.SetBool("Hit", false);
     }
 
-    //Heal function. Different heal skills will heal the player by different percentages
-    public void Heal(float percentage)
-    {
-        float healAmount = percentage * maxHP;
-        currentHP += healAmount;
-        battleManager.players[playerIndex].currentHP = currentHP;
-
-        if(currentHP>maxHP)
-        {
-            currentHP = maxHP;
-        }
-        //If the player could rage, now they could not since they healed
-        if(canRage)
-        {
-            canRage = false;
-            uiBTL.RageOptionTextColor();
-        }
-
-        currentRage -= healAmount * 1.5f; //Rage goes down by 20% more than the health gained
-
-        if(currentRage < 0.0f)
-        {
-            currentRage = 0.0f;
-        }
-
-        //Update the UI
-        hpImage.fillAmount = currentHP / maxHP;
-        rageImage.fillAmount = currentRage / maxRage;
-        uiBTL.UpdatePlayerHPControlPanel();
-        PartyStats.chara[playerIndex].rage = currentRage; //Update the party stats
-    }
 
     //Called by the UIBTl when the player chooses to go into rage mode
     public void Rage()
@@ -422,7 +404,6 @@ public class Player : MonoBehaviour
     {
         Debug.Log("Skill Target" + skillID);
 
-
         chosenSkill = skillID;
         mpCost = manaCost;
         healThisPlayer = playerReference;
@@ -433,9 +414,10 @@ public class Player : MonoBehaviour
             playerAnimator.SetBool("Heal", true);
 
         }
-        else if (skillID == 5) //Buff
+        else if (skillID == 3) //Buff defense skill
         {
             skillTarget = 8; //Single player buff
+            playerAnimator.SetBool("BuffDef", true);
         }
     }
 
@@ -456,6 +438,7 @@ public class Player : MonoBehaviour
 
     }
 
+    //Called from the animator
     public void SkillEffect()
     {
         //Skill target is used when calling skills to know what we are targeting
@@ -506,10 +489,151 @@ public class Player : MonoBehaviour
             healThisPlayer.Heal(0.1f * (0.5f * actualATK + skills.SkillStats(chosenSkill)[0]));
             playerAnimator.SetBool("Heal", false);
         }
+        else if(skillTarget == 8) //Buff single player
+        {
+            if(chosenSkill == 3)//Defense Buff
+            {
+                healThisPlayer.BuffStats("Defense", skills.SkillStats(chosenSkill)[0], skills.SkillStats(chosenSkill)[2]);
+                playerAnimator.SetBool("BuffDef", false);
+            }
+
+        }
 
         currentMP -= mpCost;
         battleManager.players[playerIndex].currentMP = currentMP;
         uiBTL.UpdatePlayerMPControlPanel();
         uiBTL.EndTurn();
+    }
+
+    //Heal function. Different heal skills will heal the player by different percentages
+    public void Heal(float percentage)
+    {
+        float healAmount = percentage * maxHP;
+        currentHP += healAmount;
+        battleManager.players[playerIndex].currentHP = currentHP;
+
+        if (currentHP > maxHP)
+        {
+            currentHP = maxHP;
+        }
+        //If the player could rage, now they could not since they healed
+        if (canRage)
+        {
+            canRage = false;
+            uiBTL.RageOptionTextColor();
+        }
+
+        currentRage -= healAmount * 1.5f; //Rage goes down by 20% more than the health gained
+
+        if (currentRage < 0.0f)
+        {
+            currentRage = 0.0f;
+        }
+
+        //Update the UI
+        hpImage.fillAmount = currentHP / maxHP;
+        rageImage.fillAmount = currentRage / maxRage;
+        uiBTL.UpdatePlayerHPControlPanel();
+        PartyStats.chara[playerIndex].rage = currentRage; //Update the party stats
+    }
+
+    public void BuffStats(string statToBuff, float amount, float lastsNumberOfTurns)
+    {
+        lastsNumberOfTurns++; //Add one more turn since the system should count the number of turns based on the caster not the receiver. This way ensures that the queue goes around equal to the number of turns it the buff/debuff is supposed to last
+        switch(statToBuff)
+        {
+            case "Defense":
+                if(defenseBuffed && actualDEF<def) //Check for debuffs first
+                {
+                    actualDEF = def;
+                    defenseBuffSkillQCounter = 0; //Negate the debuff completely
+                }
+                else if(defenseBuffed && actualDEF > def) //If defense has already been buffed, update the Q counter
+                {
+                    defenseBuffSkillQCounter = lastsNumberOfTurns;
+                }
+                else if(!defenseBuffed) //No buffs or debuffs have occurred so far
+                {
+                    defenseBuffed = true;
+                    actualDEF = def + amount;
+                    defenseBuffSkillQCounter = lastsNumberOfTurns;
+
+                    Debug.Log("Actual defense now for " + name + " is: " + actualDEF);
+                    Debug.Log("Counter: " + defenseBuffSkillQCounter);
+                }
+                break;
+            case "Attack":
+                if (attackBuffed && actualATK < def) //Check for debuffs first
+                {
+                    actualATK = atk;
+                    attackBuffSkillQCounter = 0; //Negate the debuff completely
+                }
+                else if (attackBuffed && actualATK > def) //If attack has already been buffed, update the Q counter
+                {
+                    attackBuffSkillQCounter = lastsNumberOfTurns;
+                }
+                else if (!attackBuffed) //No buffs or debuffs have occurred so far
+                {
+                    attackBuffed = true;
+                    actualATK = atk + amount;
+                    attackBuffSkillQCounter = lastsNumberOfTurns;
+                }
+                break;
+            case "Agility":
+                if (agilityBuffed && actualAgi < def) //Check for debuffs first
+                {
+                    actualAgi = agi;
+                    agilityBuffSkillQCounter = 0; //Negate the debuff completely
+                }
+                else if (agilityBuffed && actualAgi > def) //If agility has already been buffed, update the Q counter
+                {
+                    agilityBuffSkillQCounter = lastsNumberOfTurns;
+                }
+                else if (!agilityBuffed) //No buffs or debuffs have occurred so far
+                {
+                    agilityBuffed = true;
+                    actualAgi = agi + amount;
+                    agilityBuffSkillQCounter = lastsNumberOfTurns;
+                }
+                break;
+        }
+    }
+
+    private void CheckForBuffs()
+    {
+        if (defenseBuffed && defenseBuffSkillQCounter > 0)
+        {
+            defenseBuffSkillQCounter--;
+            Debug.Log("Buff counter: " + defenseBuffSkillQCounter);
+            if (defenseBuffSkillQCounter <= 0)
+            {
+                defenseBuffSkillQCounter = 0;
+                defenseBuffed = false;
+                actualDEF = def;
+                Debug.Log("Buff has ended");
+            }
+        }
+
+        if (attackBuffed && attackBuffSkillQCounter > 0)
+        {
+            attackBuffSkillQCounter--;
+            if (attackBuffSkillQCounter <= 0)
+            {
+                attackBuffSkillQCounter = 0;
+                attackBuffed = false;
+                actualATK = atk;
+            }
+        }
+
+        if (agilityBuffed && agilityBuffSkillQCounter > 0)
+        {
+            agilityBuffSkillQCounter--;
+            if (agilityBuffSkillQCounter <= 0)
+            {
+                agilityBuffSkillQCounter = 0;
+                agilityBuffed = false;
+                actualAgi = agi;
+            }
+        }
     }
 }

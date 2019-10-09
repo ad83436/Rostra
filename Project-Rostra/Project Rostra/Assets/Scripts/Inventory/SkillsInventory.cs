@@ -222,16 +222,16 @@ public class SkillsInventory : MonoBehaviour {
 
         // Find the name relative to the ID given
         switch (skillID) {
-            case (int)SKILLS.TEST_SKILL1:
+            case (int)SKILLS.TEST_Fargas:
                 name = "Offense Skill 1";
                 break;
-            case (int)SKILLS.TEST_SKILL2:
+            case (int)SKILLS.TEST_Frea:
                 name = "Offense Skill 2";
                 break;
-            case (int)SKILLS.TEST_SKILL3:
+            case (int)SKILLS.TEST_Oberon:
                 name = "Buff Skill 1";
                 break;
-            case (int)SKILLS.TEST_SKILL4:
+            case (int)SKILLS.TEST_Arcelus:
                 name = "Heal Skill 1";
                 break;
             default: //In case no skill is equipped at that slot
@@ -252,13 +252,13 @@ public class SkillsInventory : MonoBehaviour {
 
         // Find the description relative to the ID given
         switch (skillID) {
-            case (int)SKILLS.TEST_SKILL1:
+            case (int)SKILLS.TEST_Fargas:
                 return "Offense skill 1 targets enemies";
-            case (int)SKILLS.TEST_SKILL2:
+            case (int)SKILLS.TEST_Frea:
                return "Offense skill 2 targets enemies";
-            case (int)SKILLS.TEST_SKILL3:
+            case (int)SKILLS.TEST_Oberon:
                 return "Buff skill 1 targets players";
-            case (int)SKILLS.TEST_SKILL4:
+            case (int)SKILLS.TEST_Arcelus:
                 return "Heal skill 1 targets players";
         }
 
@@ -283,25 +283,26 @@ public class SkillsInventory : MonoBehaviour {
 
         // Find the required stats and return those to the caller
         switch (skillID) {
-            case (int)SKILLS.TEST_SKILL1:
+            case (int)SKILLS.TEST_Fargas:
                 skillStat[0] = 25;
                 skillStat[1] = 95;
                 skillStat[4] = (float)SKILL_TYPE.SINGLE_TARGET_ATK;
                 skillStat[5] = 50;
                 break;
-            case (int)SKILLS.TEST_SKILL2:
+            case (int)SKILLS.TEST_Frea:
                 skillStat[0] = 70;
                 skillStat[1] = 80;
                 skillStat[4] = (float)SKILL_TYPE.SINGLE_TARGET_ATK;
                 skillStat[5] = 45;
                 break;
-            case (int)SKILLS.TEST_SKILL3:
+            case (int)SKILLS.TEST_Oberon:
                 skillStat[0] = 50;
                 skillStat[1] = 85;
+                skillStat[2] = 2;
                 skillStat[4] = (float)SKILL_TYPE.SINGLE_PLAYER_BUFF;
                 skillStat[5] = 115;
                 break;
-            case (int)SKILLS.TEST_SKILL4:
+            case (int)SKILLS.TEST_Arcelus:
                 skillStat[0] = 20;
                 skillStat[1] = 100;
                 skillStat[4] = (float)SKILL_TYPE.SINGLE_PLAYER_HEAL;
