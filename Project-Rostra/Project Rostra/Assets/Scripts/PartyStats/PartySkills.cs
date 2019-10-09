@@ -9,19 +9,19 @@ public static class PartySkills {
         new CharacterSkills(
             new int[] {
                 // Unlockable Skills for Fargas
-                (int)SKILLS.TEST_SKILL1,
-                (int)SKILLS.TEST_SKILL2,
-                (int)SKILLS.TEST_SKILL3,
-                (int)SKILLS.TEST_SKILL4,
-                (int)SKILLS.TEST_SKILL5,
-                (int)SKILLS.TEST_SKILL6,
-                (int)SKILLS.TEST_SKILL7,
-                (int)SKILLS.TEST_SKILL8,
+                (int)SKILLS.TEST_Fargas,
+                (int)SKILLS.TEST_Frea,
+                (int)SKILLS.TEST_Oberon,
+                (int)SKILLS.TEST_Arcelus,
+                (int)SKILLS.TEST_Fargas,
+                (int)SKILLS.TEST_Frea,
+                (int)SKILLS.TEST_Oberon,
+                (int)SKILLS.TEST_Arcelus,
             }),
         new CharacterSkills(
             new int[] {
                 // Unlockable Skills for Oberon
-                (int)SKILLS.TEST_SKILL2,
+                (int)SKILLS.TEST_Oberon,
                 (int)SKILLS.NO_SKILL,
                 (int)SKILLS.NO_SKILL,
                 (int)SKILLS.NO_SKILL,
@@ -33,7 +33,7 @@ public static class PartySkills {
         new CharacterSkills(
             new int[] {
                 // Unlockable Skills for Frea
-                (int)SKILLS.TEST_SKILL3,
+                (int)SKILLS.TEST_Frea,
                 (int)SKILLS.NO_SKILL,
                 (int)SKILLS.NO_SKILL,
                 (int)SKILLS.NO_SKILL,
@@ -45,7 +45,7 @@ public static class PartySkills {
         new CharacterSkills(
             new int[] {
                 // Unlockable Skills for Arcelus
-                (int)SKILLS.TEST_SKILL4,
+                (int)SKILLS.TEST_Arcelus,
                 (int)SKILLS.NO_SKILL,
                 (int)SKILLS.NO_SKILL,
                 (int)SKILLS.NO_SKILL,

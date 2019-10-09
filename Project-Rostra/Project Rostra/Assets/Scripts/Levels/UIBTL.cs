@@ -459,16 +459,8 @@ public class UIBTL : MonoBehaviour
                         enemyToAttackIndicator.SetActive(true);
                         activeRange = playerInControl.range;
 
-                        //Make sure the indicator starts at an alive enemy
-                        for(int i =0;i<enemiesDead.Length;i++)
-                        {
-                            if(enemiesDead[i] == false)
-                            {
-                                enemyToAttackIndicator.transform.position = enemyIndicatorPosArray[i].transform.position;
-                                enemyIndicatorIndex = i;
-                                break;
-                            }
-                        }
+                        MoveEnemyIndicatorToFirstAliveEnemy();
+
                     }
                     break;
 
@@ -645,7 +637,7 @@ public class UIBTL : MonoBehaviour
             if (playerInControl.currentMP >= skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[5])
             {
                 skillsPanel.gameObject.SetActive(false);
-                switch (playerInControl.SkillSearch(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator]))
+                switch (skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[4])
                 {
                     //0: Target one enemy
                     //1: Target all enemies
@@ -653,24 +645,37 @@ public class UIBTL : MonoBehaviour
                     //4: Target one player
                     //5: Target all players
 
-                    case 0:
-                        Debug.Log("Skill search yeileded 0");
-                        enemyIndicatorIndex = 0; //Reset the enemy indicator index
+                    case (float)SKILL_TYPE.SINGLE_TARGET_ATK:
+                        MoveEnemyIndicatorToFirstAliveEnemy();
                         enemyToAttackIndicator.SetActive(true);
                         previousState = btlUIState.choosingSkillsCommand;
                         currentState = btlUIState.choosingEnemy;
                         break;
-                    case 1:
+                    case (float)SKILL_TYPE.SINGLE_TARGET_DEBUFF:
+                        MoveEnemyIndicatorToFirstAliveEnemy();
+                        enemyToAttackIndicator.SetActive(true);
+                        previousState = btlUIState.choosingSkillsCommand;
+                        currentState = btlUIState.choosingEnemy;
                         break;
-                    case 2:
+                    case (float)SKILL_TYPE.ALL_TARGETS_ATK:
                         break;
-                    case 3:
+                    case (float)SKILL_TYPE.ALL_TARGETS_DEBUFF:
                         break;
-                    case 4:
+                    case (float)SKILL_TYPE.FULL_ROW_ATK:
                         break;
-                    case 5:
+                    case (float)SKILL_TYPE.FULL_ROW_DEBUFF:
+                        break;
+                    case (float)SKILL_TYPE.SINGLE_PLAYER_HEAL:
                         previousState = btlUIState.choosingSkillsCommand;
                         currentState = btlUIState.choosingPlayer;
+                        break;
+                    case (float)SKILL_TYPE.ALL_PLAYER_HEAL:
+                        break;
+                    case (float)SKILL_TYPE.SINGLE_PLAYER_BUFF:
+                        previousState = btlUIState.choosingSkillsCommand;
+                        currentState = btlUIState.choosingPlayer;
+                        break;
+                    case (float)SKILL_TYPE.ALL_PLAYER_BUFF:
                         break;
                 }
             }
@@ -908,7 +913,10 @@ public class UIBTL : MonoBehaviour
             }
             else if(previousState == btlUIState.choosingSkillsCommand)
             {
-
+                if (btlManager.players[playerIndicatorIndex].playerReference.currentState != Player.playerState.Rage)
+                {
+                    playerInControl.UseSkillOnOnePlayer(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator], skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[5], btlManager.players[playerIndicatorIndex].playerReference);
+                }
             }
         }
     }
@@ -1076,7 +1084,7 @@ public class UIBTL : MonoBehaviour
             else if(previousState == btlUIState.choosingSkillsCommand)
             {
                 Debug.Log("Enemy has been chosen");
-                playerInControl.UseSkillOnEnemy(enemies[enemyIndicatorIndex]);
+                playerInControl.UseSkillOnOneEnemy(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator], skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[5], enemies[enemyIndicatorIndex]);
             }
         }
     }
@@ -1122,6 +1130,7 @@ public class UIBTL : MonoBehaviour
         itemsPanel.gameObject.SetActive(false);
         moveImagesNow = true;
         firstTimeOpenedSkillsPanel = false; //Get ready for the next player in case they want to use thier skills
+        controlsIndicator = 0;
         highlighter.gameObject.transform.position = highlighiterPos[0].transform.position;
         playerInControl.ForcePlayerTurnAnimationOff();
     }
@@ -1179,5 +1188,19 @@ public class UIBTL : MonoBehaviour
         playerInControl.ForcePlayerTurnAnimationOff();
     }
 
+   
+    private void MoveEnemyIndicatorToFirstAliveEnemy()
+    {
+        //Make sure the indicator starts at an alive enemy
+        for (int i = 0; i < enemiesDead.Length; i++)
+        {
+            if (enemiesDead[i] == false)
+            {
+                enemyToAttackIndicator.transform.position = enemyIndicatorPosArray[i].transform.position;
+                enemyIndicatorIndex = i;
+                break;
+            }
+        }
+    }
 
 }
