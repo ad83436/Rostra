@@ -680,6 +680,8 @@ public class UIBTL : MonoBehaviour
                         break;
                     case (float)SKILL_TYPE.SINGLE_PLAYER_HEAL:
                         choosePlayerArrow.gameObject.SetActive(true);
+                        playerIndicatorIndex = 0;
+                        choosePlayerArrow.transform.position = playerIndicatorPos0.transform.position;
                         previousState = btlUIState.choosingSkillsCommand;
                         currentState = btlUIState.choosingPlayer;
                         break;
@@ -687,6 +689,8 @@ public class UIBTL : MonoBehaviour
                         break;
                     case (float)SKILL_TYPE.SINGLE_PLAYER_BUFF:
                         choosePlayerArrow.gameObject.SetActive(true);
+                        playerIndicatorIndex = 0;
+                        choosePlayerArrow.transform.position = playerIndicatorPos0.transform.position;
                         previousState = btlUIState.choosingSkillsCommand;
                         currentState = btlUIState.choosingPlayer;
                         break;
@@ -716,7 +720,7 @@ public class UIBTL : MonoBehaviour
         {
             //Make sure you choose an item that is usable and not equipable
             previousState = btlUIState.choosingItemsCommand; //Needed to know what to reference when choosing the player
-            playerTurnIndicator.transform.position = playerIndicatorPos0.transform.position; //Move the player indicator on top of Fargas for now
+            choosePlayerArrow.transform.position = playerIndicatorPos0.transform.position; //Move the player indicator on top of Fargas for now
             playerIndicatorIndex = 0;
             itemsPanel.gameObject.SetActive(false);
             choosePlayerArrow.gameObject.SetActive(true);
