@@ -9,6 +9,8 @@ using UnityEngine.SceneManagement;
 /// Things to add:
 /// + Skip animation if the player presses space
 /// + Right now the player can press space and not get the exp 
+/// + Improve background
+/// + Change the awful victory text
 /// </summary>
 
 
@@ -334,15 +336,16 @@ public class VictoryScreen : MonoBehaviour
         currentHPText.color = maxHPText.color = panelItemsColor;
 
         //MP
-        panelItemsColor.r = 0.5568628f;
-        panelItemsColor.b = 0.5058824f;
-        panelItemsColor.g = 0.2901961f;
-        currentMPText.color = maxMPText.color = panelItemsColor;
-
-        //EXP
         panelItemsColor.r = 0.2705882f;
         panelItemsColor.b = 0.8078432f;
         panelItemsColor.g = 0.5764706f;
+
+        currentMPText.color = maxMPText.color = panelItemsColor;
+
+        //EXP
+        panelItemsColor.r = 0.5568628f;
+        panelItemsColor.b = 0.5058824f;
+        panelItemsColor.g = 0.2901961f;
         currentExpText.color = maxExpText.color = panelItemsColor;
 
         if (panelItemsColor.a >= 1.0f)
@@ -405,6 +408,7 @@ public class VictoryScreen : MonoBehaviour
         else if (expGain <= 0)
         {
             //Update the party stats with the new exp. The battle manager will get them next time a battle starts
+            //Normally the victory screen should not directly communicate with the PartyStats but as this is a simple write, going through the btlmanager seems and over complication
             PartyStats.chara[playerIndex].currentExperience = Mathf.RoundToInt(currentExp);
             switch (playerIndex)
             {
@@ -427,6 +431,7 @@ public class VictoryScreen : MonoBehaviour
         }
     }
 
+    //Called from the Fade object transitioning into victory
     public void VictoryFadeIn()
     {
         screenActive = true;

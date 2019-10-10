@@ -38,6 +38,9 @@ public class MainInventory : MonoBehaviour {
     private int firstToDraw = 0;                // The first item from the inventory array to draw out of the full inventory
     private int numToDraw = 15;                 // How many inventory items that can be visible to the player at any given time
 
+    //Amounts
+    public int itemAddAmount = 0;
+
     // Set the main inventory instance to this one if no inventory is active, delete otherwise
     public void Awake() {
         if (invInstance == null) {
@@ -559,10 +562,12 @@ public class MainInventory : MonoBehaviour {
         // Check which functionality to use based on the itemID provided
         switch (itemID) {
             case (int)ITEM_ID.TEST_POTION_HP:
-                UpdatePlayerHitpoints(10, playerID);
+                itemAddAmount = 10;
+                UpdatePlayerHitpoints(itemAddAmount, playerID);
                 break;
             case (int)ITEM_ID.TEST_POTION_MP:
-                UpdatePlayerMagicpoints(20, playerID);
+                itemAddAmount = 20;
+                UpdatePlayerMagicpoints(itemAddAmount, playerID);
                 break;
             case (int)ITEM_ID.TEST_ARMOR1:
             case (int)ITEM_ID.TEST_WEAPON1:

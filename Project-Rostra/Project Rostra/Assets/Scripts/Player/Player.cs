@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     private BattleManager battleManager;
     private UIBTL uiBTL;
     private ObjectPooler objPooler;
+    private SkillsInventory skills;
 
     //Player stats
     public float atk;
@@ -33,23 +34,59 @@ public class Player : MonoBehaviour
     public Sprite qImage;
     private int QCounter; //Used to count turns since the player went in rage or decided to go in waiting state.
 
-
-
     //Components
     private Animator playerAnimator;
 
+    //Skills
+    private int chosenSkill;
+    //Skill target is used when calling skills to know what we are targeting
+    //0: Single enemy attack
+    //1: Full row enemies attack
+    //2: All enemies attack
+    //3: Single enemy debuff
+    //4: Full row enemies debuff
+    //5: All enemies debuff
+    //6: Single player heal
+    //7: All players heal
+    //8: Single player buff
+    //9: All players buff
+
+    private int skillTarget; 
+    private float mpCost;
+    private Player healThisPlayer;
+    private string skillNameForObjPooler;
+
+    //Buffs
+    //Booleans are used in case the player's stats were debuffed by an enemy and when buffed, the debuff effects will be negated. The Q counter will not be affected
+    private bool defenseBuffed = false;
+    private bool attackBuffed = false;
+    private bool agilityBuffed = false;
+    private float defenseBuffSkillQCounter = 0 ; //How many turns until the defense buff is reversed. Need three counters as multiple stats could be buffed/debuffed at the same time
+    private float attackBuffSkillQCounter = 0;
+    private float agilityBuffSkillQCounter = 0;
 
     //Rage
     public float currentRage;
     public float maxRage;
-    public GameObject rageModeIndicator;
 
-    //Guard
+
+    //Effects
+    //Gurad
     public GameObject guardIcon;
+    //Rage
+    public GameObject rageModeIndicator;
+    //Heal
+    public GameObject healEffect;
+    //Buffs
+    public GameObject defBuffEffect;
+    public GameObject atkBuffEffect;
+    public GameObject agiBuffEffect;
 
     //UI
     public Image hpImage;
     public Image rageImage;
+    public Text damageText;
+    public Text healText;
 
     //Camera
     public BattleCamera btlCam;
@@ -88,6 +125,7 @@ public class Player : MonoBehaviour
         battleManager = BattleManager.instance;
         uiBTL = UIBTL.instance;
         objPooler = ObjectPooler.instance;
+        skills = SkillsInventory.invInstance;
 
         //States
         currentState = playerState.Idle;
@@ -95,13 +133,23 @@ public class Player : MonoBehaviour
         //Components
         playerAnimator = gameObject.GetComponent<Animator>();
 
+        //Skills
+        chosenSkill = 0;
+
         //Rage
         maxRage = maxHP * 0.65f; //Max rage is 65% of max health
-        rageModeIndicator.gameObject.SetActive(false);
         canRage = false;
 
+        //Effects
         //Guard
         guardIcon.gameObject.SetActive(false);
+        //Rage
+        rageModeIndicator.gameObject.SetActive(false);
+        //Heal
+        healEffect.gameObject.SetActive(false);
+        defBuffEffect.gameObject.SetActive(false);
+        atkBuffEffect.gameObject.SetActive(false);
+        agiBuffEffect.gameObject.SetActive(false);
 
         //Targeted enemy info
         attackingThisEnemy = null;
@@ -123,6 +171,8 @@ public class Player : MonoBehaviour
         //UI
         hpImage.fillAmount = currentHP / maxHP;
         rageImage.fillAmount = currentRage / maxRage;
+        damageText.gameObject.SetActive(false);
+        healText.gameObject.SetActive(false);
     }
 
     private void Update()
@@ -164,6 +214,10 @@ public class Player : MonoBehaviour
             {
                 EndGuard();
             }
+
+            //Check for buffs
+            CheckForBuffs();
+           
         }
         else
         {
@@ -200,7 +254,6 @@ public class Player : MonoBehaviour
                 attackingThisEnemy.TakeDamage(actualATK);
             }
         }
-        uiBTL.ResetVisibilityForAllEnemies();
         uiBTL.EndTurn();
 
         //If the player is in rage state, they can only attack so it makes sense to check if we were in rage mode when attacking
@@ -220,6 +273,21 @@ public class Player : MonoBehaviour
     {
         //20 sided die + str <? enemy agility
         if(Random.Range(0.0f,20.0f) + str < attackingThisEnemy.eAgility)
+        {
+            hit = false;
+        }
+        else
+        {
+            hit = true;
+        }
+
+        Debug.Log("Hit is " + hit);
+    }
+
+    private void CalculateHitForSkill()
+    {
+        //20 sided die + skill accuracy <? enemy agility
+        if (Random.Range(0.0f, 20.0f) + skills.SkillStats(chosenSkill)[1] < attackingThisEnemy.eAgility)
         {
             hit = false;
         }
@@ -258,6 +326,8 @@ public class Player : MonoBehaviour
         btlCam.CameraShake();
         float damage = enemyATK - ((def / (20.0f + def)) * enemyATK);
         currentHP -= damage;
+        damageText.gameObject.SetActive(true);
+        damageText.text = Mathf.RoundToInt(damage).ToString();
         battleManager.players[playerIndex].currentHP = currentHP; //Update the BTL manager with the new health
 
         if (currentHP <= 0.0f)
@@ -291,37 +361,6 @@ public class Player : MonoBehaviour
         playerAnimator.SetBool("Hit", false);
     }
 
-    //Heal function. Different heal skills will heal the player by different percentages
-    public void Heal(float percentage)
-    {
-        float healAmount = percentage * maxHP;
-        currentHP += healAmount;
-        battleManager.players[playerIndex].currentHP = currentHP;
-
-        if(currentHP>maxHP)
-        {
-            currentHP = maxHP;
-        }
-        //If the player could rage, now they could not since they healed
-        if(canRage)
-        {
-            canRage = false;
-            uiBTL.RageOptionTextColor();
-        }
-
-        currentRage -= healAmount * 1.5f; //Rage goes down by 20% more than the health gained
-
-        if(currentRage < 0.0f)
-        {
-            currentRage = 0.0f;
-        }
-
-        //Update the UI
-        hpImage.fillAmount = currentHP / maxHP;
-        rageImage.fillAmount = currentRage / maxRage;
-        uiBTL.UpdatePlayerHPControlPanel();
-        PartyStats.chara[playerIndex].rage = currentRage; //Update the party stats
-    }
 
     //Called by the UIBTl when the player chooses to go into rage mode
     public void Rage()
@@ -381,5 +420,273 @@ public class Player : MonoBehaviour
     public void ForcePlayerTurnAnimationOff()
     {
         playerAnimator.SetBool("Turn", false);
+    }
+
+    //---------------------------------------------------Skills---------------------------------------------------//
+    public void UseSkillOnOnePlayer(int skillID, float manaCost , Player playerReference)
+    {
+        Debug.Log("Skill Target" + skillID);
+
+        chosenSkill = skillID;
+        mpCost = manaCost;
+        healThisPlayer = playerReference;
+
+        if (skillID == 4) //Heal
+        {
+            skillTarget = 6; //Single player heal
+            playerAnimator.SetBool("Heal", true);
+
+        }
+        else if (skillID == 3) //Buff defense skill
+        {
+            skillTarget = 8; //Single player buff
+            playerAnimator.SetBool("BuffDef", true);
+        }
+    }
+
+    public void UseSkillOnOneEnemy(int skillID, float manaCost, Enemy enemyReference)
+    {
+        Debug.Log("Skill Target " + skillID);
+
+        skillTarget = 0;
+        chosenSkill = skillID;
+        mpCost = manaCost;
+        //Check which skill to know which animation to run
+        if (skillID == 1 || skillID == 2) //Fargas and Freya basic attack skills
+        {
+            Debug.Log("HIT");
+            skillNameForObjPooler = "FFSkill1";
+            playerAnimator.SetBool("ASkill", true);
+            attackingThisEnemy = enemyReference;
+        }
+
+    }
+
+    //Called from the animator
+    public void SkillEffect()
+    {
+        //Skill target is used when calling skills to know what we are targeting
+        //0: Single enemy attack
+        //1: Full row enemies attack
+        //2: All enemies attack
+        //3: Single enemy debuff
+        //4: Full row enemies debuff
+        //5: All enemies debuff
+        //6: Single player heal
+        //7: All players heal
+        //8: Single player buff
+        //9: All players buff
+
+        if (skillTarget == 0) // Damaging one enemy
+        {
+            Debug.Log("Damage enemy");
+            CalculateHitForSkill();
+            if(hit)
+            {
+                objPooler.SpawnFromPool(skillNameForObjPooler, attackingThisEnemy.gameObject.transform.position, gameObject.transform.rotation);
+                Debug.Log("Skill hit");
+                //Summon effect here
+                btlCam.CameraShake();
+                if(CalculateCrit()<=crit)
+                {
+                    Debug.Log("Skill Crit");
+                    attackingThisEnemy.TakeDamage(0.7f * actualATK + skills.SkillStats(chosenSkill)[0]); //Damage is the half the player's attack stat and the skill's attack stat
+                }
+                else
+                {
+                    Debug.Log("No Skill Crit");
+                    attackingThisEnemy.TakeDamage(0.5f * actualATK + skills.SkillStats(chosenSkill)[0]); //Damage is the half the player's attack stat and the skill's attack stat
+                }
+
+            }
+            else
+            {
+                Debug.Log("Skill miss");
+            }
+
+
+            playerAnimator.SetBool("ASkill", false);
+
+
+        }
+        else if(skillTarget == 6)
+        {
+            healThisPlayer.Heal(0.1f * (0.5f * actualATK + skills.SkillStats(chosenSkill)[0]));
+            playerAnimator.SetBool("Heal", false);
+        }
+        else if(skillTarget == 8) //Buff single player
+        {
+            if(chosenSkill == 3)//Defense Buff
+            {
+                healThisPlayer.BuffStats("Defense", skills.SkillStats(chosenSkill)[0], skills.SkillStats(chosenSkill)[2]);
+                playerAnimator.SetBool("BuffDef", false);
+            }
+
+        }
+
+        currentMP -= mpCost;
+        battleManager.players[playerIndex].currentMP = currentMP;
+        uiBTL.UpdatePlayerMPControlPanel();
+        uiBTL.EndTurn();
+    }
+
+    //Heal function. Different heal skills will heal the player by different percentages
+    public void Heal(float percentage)
+    {
+        EnableEffect("Heal", 0);
+        float healAmount = percentage * maxHP;
+        currentHP += healAmount;
+        healText.gameObject.SetActive(true);
+        healText.text = Mathf.RoundToInt(healAmount).ToString();
+        battleManager.players[playerIndex].currentHP = currentHP;
+
+        if (currentHP > maxHP)
+        {
+            currentHP = maxHP;
+        }
+        //If the player could rage, now they could not since they healed
+        if (canRage)
+        {
+            canRage = false;
+            uiBTL.RageOptionTextColor();
+        }
+
+        currentRage -= healAmount * 1.5f; //Rage goes down by 20% more than the health gained
+
+        if (currentRage < 0.0f)
+        {
+            currentRage = 0.0f;
+        }
+
+        //Update the UI
+        hpImage.fillAmount = currentHP / maxHP;
+        rageImage.fillAmount = currentRage / maxRage;
+        uiBTL.UpdatePlayerHPControlPanel();
+        PartyStats.chara[playerIndex].rage = currentRage; //Update the party stats
+    }
+
+    public void BuffStats(string statToBuff, float amount, float lastsNumberOfTurns)
+    {
+        lastsNumberOfTurns++; //Add one more turn since the system should count the number of turns based on the caster not the receiver. This way ensures that the queue goes around equal to the number of turns it the buff/debuff is supposed to last
+        switch(statToBuff)
+        {
+            case "Defense":
+                if(defenseBuffed && actualDEF<def) //Check for debuffs first
+                {
+                    actualDEF = def;
+                    defenseBuffSkillQCounter = 0; //Negate the debuff completely
+                }
+                else if(defenseBuffed && actualDEF > def) //If defense has already been buffed, update the Q counter
+                {
+                    defenseBuffSkillQCounter = lastsNumberOfTurns;
+                }
+                else if(!defenseBuffed) //No buffs or debuffs have occurred so far
+                {
+                    EnableEffect("DefBuff",0);
+                    defenseBuffed = true;
+                    actualDEF = def + amount;
+                    defenseBuffSkillQCounter = lastsNumberOfTurns;
+
+                    Debug.Log("Actual defense now for " + name + " is: " + actualDEF);
+                    Debug.Log("Counter: " + defenseBuffSkillQCounter);
+                }
+                break;
+            case "Attack":
+                if (attackBuffed && actualATK < def) //Check for debuffs first
+                {
+                    actualATK = atk;
+                    attackBuffSkillQCounter = 0; //Negate the debuff completely
+                }
+                else if (attackBuffed && actualATK > def) //If attack has already been buffed, update the Q counter
+                {
+                    attackBuffSkillQCounter = lastsNumberOfTurns;
+                }
+                else if (!attackBuffed) //No buffs or debuffs have occurred so far
+                {
+                    attackBuffed = true;
+                    actualATK = atk + amount;
+                    attackBuffSkillQCounter = lastsNumberOfTurns;
+                }
+                break;
+            case "Agility":
+                if (agilityBuffed && actualAgi < def) //Check for debuffs first
+                {
+                    actualAgi = agi;
+                    agilityBuffSkillQCounter = 0; //Negate the debuff completely
+                }
+                else if (agilityBuffed && actualAgi > def) //If agility has already been buffed, update the Q counter
+                {
+                    agilityBuffSkillQCounter = lastsNumberOfTurns;
+                }
+                else if (!agilityBuffed) //No buffs or debuffs have occurred so far
+                {
+                    agilityBuffed = true;
+                    actualAgi = agi + amount;
+                    agilityBuffSkillQCounter = lastsNumberOfTurns;
+                }
+                break;
+        }
+    }
+
+    private void CheckForBuffs()
+    {
+        if (defenseBuffed && defenseBuffSkillQCounter > 0)
+        {
+            defenseBuffSkillQCounter--;
+            Debug.Log("Buff counter: " + defenseBuffSkillQCounter);
+            if (defenseBuffSkillQCounter <= 0)
+            {
+                defenseBuffSkillQCounter = 0;
+                defenseBuffed = false;
+                actualDEF = def;
+                Debug.Log("Buff has ended");
+            }
+        }
+
+        if (attackBuffed && attackBuffSkillQCounter > 0)
+        {
+            attackBuffSkillQCounter--;
+            if (attackBuffSkillQCounter <= 0)
+            {
+                attackBuffSkillQCounter = 0;
+                attackBuffed = false;
+                actualATK = atk;
+            }
+        }
+
+        if (agilityBuffed && agilityBuffSkillQCounter > 0)
+        {
+            agilityBuffSkillQCounter--;
+            if (agilityBuffSkillQCounter <= 0)
+            {
+                agilityBuffSkillQCounter = 0;
+                agilityBuffed = false;
+                actualAgi = agi;
+            }
+        }
+    }
+
+    public void EnableEffect(string effectName, int value)
+    {
+        switch(effectName)
+        {
+            case "Heal":
+                healEffect.gameObject.SetActive(true);
+                if(value > 0)
+                {
+                    healText.gameObject.SetActive(true);
+                    healText.text = value.ToString();
+                }
+                break;
+            case "DefBuff":
+                defBuffEffect.gameObject.SetActive(true);
+                break;
+            case "AtkBuff":
+                atkBuffEffect.gameObject.SetActive(true);
+                break;
+            case "AgiBuff":
+                agiBuffEffect.gameObject.SetActive(true);
+                break;
+        }
     }
 }
