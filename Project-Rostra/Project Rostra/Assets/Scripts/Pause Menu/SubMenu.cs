@@ -5,7 +5,7 @@ using UnityEngine;
 #pragma warning disable CS0649
 
 public abstract class SubMenu : MonoBehaviour {
-	
+
 	private CanvasGroup group;
 
 	private bool active = false;
@@ -24,7 +24,10 @@ public abstract class SubMenu : MonoBehaviour {
 
 	public bool Visible {
 		get => group.alpha == 1f;
-		set => group.alpha = value ? 1f : 0f;
+		set {
+			if (value == true && group.alpha != 1f) OnVisible();
+			group.alpha = value ? 1f : 0f;
+		}
 	}
 
 	protected bool Up => PauseMenuController.instance.Up;
@@ -34,11 +37,12 @@ public abstract class SubMenu : MonoBehaviour {
 	protected bool Confirm => PauseMenuController.instance.Confirm;
 	protected bool Cancel => PauseMenuController.instance.Cancel;
 
-	private void Awake() {
+	protected virtual void Awake() {
 		group = GetComponent<CanvasGroup>();
 	}
 
 	public abstract void MenuUpdate();
+	public abstract void OnVisible();
 	public abstract void OnActive();
 	public abstract void OnInactive();
 

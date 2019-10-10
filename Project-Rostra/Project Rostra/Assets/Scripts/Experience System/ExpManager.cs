@@ -219,65 +219,53 @@ public class ExpManager : MonoBehaviour {
 		switch (playerindex) {
 			case 0:
 				switch (skill) {
-					case SKILLS.TEST_SKILL1: return new int[] { 110, 15, 200, 200, 16, 14, 16 };
-					case SKILLS.TEST_SKILL2: return new int[] { 110, 15, 200, 200, 16, 14, 16 };
-					case SKILLS.TEST_SKILL3: return new int[] { 100, 20, 200, 200, 16, 14, 16 };
-					case SKILLS.TEST_SKILL4: return new int[] { 100, 15, 210, 200, 16, 14, 16 };
-					case SKILLS.TEST_SKILL5: return new int[] { 110, 15, 200, 200, 16, 14, 16 };
-					case SKILLS.TEST_SKILL6: return new int[] { 110, 15, 200, 200, 16, 14, 16 };
-					case SKILLS.TEST_SKILL7: return new int[] { 100, 20, 200, 200, 16, 14, 16 };
-					case SKILLS.TEST_SKILL8: return new int[] { 100, 15, 210, 200, 16, 14, 16 };
-					case SKILLS.TEST_SKILL9: return new int[] { 100, 15, 210, 200, 16, 14, 16 };
-					case SKILLS.TEST_SKILL10: return new int[] { 100, 15, 210, 200, 16, 14, 16 };
-					case SKILLS.TEST_SKILL11: return new int[] { 100, 15, 210, 200, 16, 14, 16 };
-					default: return new int[0];
+					case SKILLS.TEST_Fargas:	return new int[] { 110, 15, 200, 200, 16, 14, 16 };
+					case SKILLS.TEST_Frea:		return new int[] { 110, 15, 200, 200, 16, 14, 16 };
+					case SKILLS.TEST_Oberon:	return new int[] { 100, 20, 200, 200, 16, 14, 16 };
+					case SKILLS.TEST_Arcelus:	return new int[] { 100, 15, 210, 200, 16, 14, 16 };
+					case SKILLS.TEST_Fargas2:	return new int[] { 110, 15, 200, 200, 16, 14, 16 };
+					case SKILLS.TEST_Frea2:		return new int[] { 110, 15, 200, 200, 16, 14, 16 };
+					case SKILLS.TEST_Oberon2:	return new int[] { 100, 20, 200, 200, 16, 14, 16 };
+					case SKILLS.TEST_Arcelus2:	return new int[] { 100, 15, 210, 200, 16, 14, 16 };
+					default: return null;
 				}
 			case 1:
 				switch (skill) {
-					case SKILLS.TEST_SKILL1: return new int[] { 110, 15, 200, 200, 16, 14, 16 };
-					case SKILLS.TEST_SKILL2: return new int[] { 110, 15, 200, 200, 16, 14, 16 };
-					case SKILLS.TEST_SKILL3: return new int[] { 100, 20, 200, 200, 16, 14, 16 };
-					case SKILLS.TEST_SKILL4: return new int[] { 100, 15, 210, 200, 16, 14, 16 };
-					case SKILLS.TEST_SKILL5: return new int[] { 110, 15, 200, 200, 16, 14, 16 };
-					case SKILLS.TEST_SKILL6: return new int[] { 110, 15, 200, 200, 16, 14, 16 };
-					case SKILLS.TEST_SKILL7: return new int[] { 100, 20, 200, 200, 16, 14, 16 };
-					case SKILLS.TEST_SKILL8: return new int[] { 100, 15, 210, 200, 16, 14, 16 };
-					case SKILLS.TEST_SKILL9: return new int[] { 100, 15, 210, 200, 16, 14, 16 };
-					case SKILLS.TEST_SKILL10: return new int[] { 100, 15, 210, 200, 16, 14, 16 };
-					case SKILLS.TEST_SKILL11: return new int[] { 100, 15, 210, 200, 16, 14, 16 };
-					default: return new int[0];
+					case SKILLS.TEST_Fargas:	return new int[] { 110, 15, 200, 200, 16, 14, 16 };
+					case SKILLS.TEST_Frea:		return new int[] { 110, 15, 200, 200, 16, 14, 16 };
+					case SKILLS.TEST_Oberon:	return new int[] { 100, 20, 200, 200, 16, 14, 16 };
+					case SKILLS.TEST_Arcelus:	return new int[] { 100, 15, 210, 200, 16, 14, 16 };
+					case SKILLS.TEST_Fargas2:	return new int[] { 110, 15, 200, 200, 16, 14, 16 };
+					case SKILLS.TEST_Frea2:		return new int[] { 110, 15, 200, 200, 16, 14, 16 };
+					case SKILLS.TEST_Oberon2:	return new int[] { 100, 20, 200, 200, 16, 14, 16 };
+					case SKILLS.TEST_Arcelus2:	return new int[] { 100, 15, 210, 200, 16, 14, 16 };
+					default: return null;
 				}
 			case 2:
 				switch (skill) {
-					case SKILLS.TEST_SKILL1: return new int[] { 110, 15, 200, 200, 16, 14, 16 };
-					case SKILLS.TEST_SKILL2: return new int[] { 110, 15, 200, 200, 16, 14, 16 };
-					case SKILLS.TEST_SKILL3: return new int[] { 100, 20, 200, 200, 16, 14, 16 };
-					case SKILLS.TEST_SKILL4: return new int[] { 100, 15, 210, 200, 16, 14, 16 };
-					case SKILLS.TEST_SKILL5: return new int[] { 110, 15, 200, 200, 16, 14, 16 };
-					case SKILLS.TEST_SKILL6: return new int[] { 110, 15, 200, 200, 16, 14, 16 };
-					case SKILLS.TEST_SKILL7: return new int[] { 100, 20, 200, 200, 16, 14, 16 };
-					case SKILLS.TEST_SKILL8: return new int[] { 100, 15, 210, 200, 16, 14, 16 };
-					case SKILLS.TEST_SKILL9: return new int[] { 100, 15, 210, 200, 16, 14, 16 };
-					case SKILLS.TEST_SKILL10: return new int[] { 100, 15, 210, 200, 16, 14, 16 };
-					case SKILLS.TEST_SKILL11: return new int[] { 100, 15, 210, 200, 16, 14, 16 };
-					default: return new int[0];
+					case SKILLS.TEST_Fargas:	return new int[] { 110, 15, 200, 200, 16, 14, 16 };
+					case SKILLS.TEST_Frea:		return new int[] { 110, 15, 200, 200, 16, 14, 16 };
+					case SKILLS.TEST_Oberon:	return new int[] { 100, 20, 200, 200, 16, 14, 16 };
+					case SKILLS.TEST_Arcelus:	return new int[] { 100, 15, 210, 200, 16, 14, 16 };
+					case SKILLS.TEST_Fargas2:	return new int[] { 110, 15, 200, 200, 16, 14, 16 };
+					case SKILLS.TEST_Frea2:		return new int[] { 110, 15, 200, 200, 16, 14, 16 };
+					case SKILLS.TEST_Oberon2:	return new int[] { 100, 20, 200, 200, 16, 14, 16 };
+					case SKILLS.TEST_Arcelus2:	return new int[] { 100, 15, 210, 200, 16, 14, 16 };
+					default: return null;
 				}
 			case 3:
 				switch (skill) {
-					case SKILLS.TEST_SKILL1: return new int[] { 110, 15, 200, 200, 16, 14, 16 };
-					case SKILLS.TEST_SKILL2: return new int[] { 110, 15, 200, 200, 16, 14, 16 };
-					case SKILLS.TEST_SKILL3: return new int[] { 100, 20, 200, 200, 16, 14, 16 };
-					case SKILLS.TEST_SKILL4: return new int[] { 100, 15, 210, 200, 16, 14, 16 };
-					case SKILLS.TEST_SKILL5: return new int[] { 110, 15, 200, 200, 16, 14, 16 };
-					case SKILLS.TEST_SKILL6: return new int[] { 110, 15, 200, 200, 16, 14, 16 };
-					case SKILLS.TEST_SKILL7: return new int[] { 100, 20, 200, 200, 16, 14, 16 };
-					case SKILLS.TEST_SKILL8: return new int[] { 100, 15, 210, 200, 16, 14, 16 };
-					case SKILLS.TEST_SKILL9: return new int[] { 100, 15, 210, 200, 16, 14, 16 };
-					case SKILLS.TEST_SKILL10: return new int[] { 100, 15, 210, 200, 16, 14, 16 };
-					case SKILLS.TEST_SKILL11: return new int[] { 100, 15, 210, 200, 16, 14, 16 };
-					default: return new int[0];
+					case SKILLS.TEST_Fargas:	return new int[] { 110, 15, 200, 200, 16, 14, 16 };
+					case SKILLS.TEST_Frea:		return new int[] { 110, 15, 200, 200, 16, 14, 16 };
+					case SKILLS.TEST_Oberon:	return new int[] { 100, 20, 200, 200, 16, 14, 16 };
+					case SKILLS.TEST_Arcelus:	return new int[] { 100, 15, 210, 200, 16, 14, 16 };
+					case SKILLS.TEST_Fargas2:	return new int[] { 110, 15, 200, 200, 16, 14, 16 };
+					case SKILLS.TEST_Frea2:		return new int[] { 110, 15, 200, 200, 16, 14, 16 };
+					case SKILLS.TEST_Oberon2:	return new int[] { 100, 20, 200, 200, 16, 14, 16 };
+					case SKILLS.TEST_Arcelus2:	return new int[] { 100, 15, 210, 200, 16, 14, 16 };
+					default: return null;
 				}
-			default: return new int[0];
+			default: return null;
 		}
 	}
 
@@ -296,6 +284,7 @@ public class ExpManager : MonoBehaviour {
 	}
 
 	private bool CheckForMinimumVals(int[] cur, int[] min) {
+		if (min == null) return false;
 		if (cur.Length != min.Length) return false;
 		for (int i = 0; i < cur.Length; i++) {
 			if (cur[i] < min[i]) {

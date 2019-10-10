@@ -61,6 +61,8 @@ public class PartyMenuController : SubMenu {
 	[SerializeField] private UnityEngine.UI.Text[] charanames;
 	[SerializeField] private UnityEngine.UI.Text statsName;
 
+	public ItemMenu statsMenu;
+
 	#endregion
 
 	#region Character Images
@@ -68,6 +70,14 @@ public class PartyMenuController : SubMenu {
 	[SerializeField] private UnityEngine.UI.Image[] charaImages;
 
 	#endregion
+	
+	public override void OnVisible() { }
+
+	protected override void Awake() {
+		base.Awake();
+		statsMenu.pressedDelegate = IncreaseStat;
+		statsMenu.exitDelegate = CloseStatsMenu;
+	}
 
 	private bool IsInStatsMenu {
 		get => statsGroup.alpha > 0.5f && partyGroup.alpha < 0.5f;
@@ -118,14 +128,14 @@ public class PartyMenuController : SubMenu {
 				default: Debug.LogError("partymenu character index broke at" + playerIndex); break;
 			}
 		} else {
-			if (Cancel) {
-				CloseStatsMenu();
-				return;
-			}
+			if (Cancel) { CloseStatsMenu(); return; }
+			statsMenu.UpdateItemSelected(Down, Up, Left, Right, Confirm, Cancel);
+
 		}
 	}
 
 	private void OpenStatsMenu() {
+		statsMenu.ResetSelected();
 		IsInStatsMenu = true;
 		UpdateStats();
 
@@ -133,10 +143,10 @@ public class PartyMenuController : SubMenu {
 			if (i == playerIndex) {
 				charaImages[i].enabled = true;
 				switch (playerIndex) {
-					case 0: statsName.text = "Fargas";	break;
-					case 1: statsName.text = "Oberon";	break;
-					case 2: statsName.text = "Frea";	break;
-					case 3: statsName.text = "Arcelus";	break;
+					case 0: statsName.text = "Fargas"; break;
+					case 1: statsName.text = "Oberon"; break;
+					case 2: statsName.text = "Frea"; break;
+					case 3: statsName.text = "Arcelus"; break;
 					default: Debug.LogError("WOWSERS"); break;
 				}
 
@@ -144,7 +154,8 @@ public class PartyMenuController : SubMenu {
 		}
 	}
 
-	private void CloseStatsMenu() {
+	public void CloseStatsMenu() {
+		statsMenu.ResetSelected();
 		IsInStatsMenu = false;
 	}
 
@@ -162,5 +173,21 @@ public class PartyMenuController : SubMenu {
 		} else {
 			UpdateMeters();
 		}
+	}
+
+	public void IncreaseStat(ButtonController button) {
+		switch (button.buttonName) {
+			case "Attack": ExpManager.instance.UsePointOnAttack(playerIndex); break;
+			case "Defence": ExpManager.instance.UsePointOnDefence(playerIndex); break;
+			case "Health": ExpManager.instance.UsePointOnHealth(playerIndex); break;
+			case "Mana": ExpManager.instance.UsePointOnMana(playerIndex); break;
+			case "Strength": ExpManager.instance.UsePointOnStrength(playerIndex); break;
+			case "Agility": ExpManager.instance.UsePointOnAgility(playerIndex); break;
+			case "Speed": ExpManager.instance.UsePointOnSpeed(playerIndex); break;
+			case "Critical": break;
+			default: Debug.LogError("Stat button name did not match"); break;
+		}
+		print("reached end");
+		UpdateStats();
 	}
 }

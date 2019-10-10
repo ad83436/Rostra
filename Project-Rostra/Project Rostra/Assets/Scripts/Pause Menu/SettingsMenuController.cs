@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class SettingsMenuController : SubMenu {
 	public override void MenuUpdate() { }
+	public override void OnVisible() { }
 	public override void OnActive() { }
 	public override void OnInactive() { }
 }

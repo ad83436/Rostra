@@ -67,7 +67,6 @@ public class MainInventory : MonoBehaviour {
         invItem[3, 0] = (int)ITEM_ID.TEST_ARMOR1;
         invItem[3, 1] = 1;
 
-        Debug.Log(consumableInv[0].ToString() + ", " + consumableInv[1].ToString());
     }
 
     // Handling keyboard functionality
