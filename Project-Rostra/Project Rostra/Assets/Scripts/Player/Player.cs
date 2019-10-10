@@ -54,6 +54,7 @@ public class Player : MonoBehaviour
     private int skillTarget; 
     private float mpCost;
     private Player healThisPlayer;
+    private string skillNameForObjPooler;
 
     //Buffs
     //Booleans are used in case the player's stats were debuffed by an enemy and when buffed, the debuff effects will be negated. The Q counter will not be affected
@@ -67,14 +68,25 @@ public class Player : MonoBehaviour
     //Rage
     public float currentRage;
     public float maxRage;
-    public GameObject rageModeIndicator;
 
-    //Guard
+
+    //Effects
+    //Gurad
     public GameObject guardIcon;
+    //Rage
+    public GameObject rageModeIndicator;
+    //Heal
+    public GameObject healEffect;
+    //Buffs
+    public GameObject defBuffEffect;
+    public GameObject atkBuffEffect;
+    public GameObject agiBuffEffect;
 
     //UI
     public Image hpImage;
     public Image rageImage;
+    public Text damageText;
+    public Text healText;
 
     //Camera
     public BattleCamera btlCam;
@@ -126,11 +138,18 @@ public class Player : MonoBehaviour
 
         //Rage
         maxRage = maxHP * 0.65f; //Max rage is 65% of max health
-        rageModeIndicator.gameObject.SetActive(false);
         canRage = false;
 
+        //Effects
         //Guard
         guardIcon.gameObject.SetActive(false);
+        //Rage
+        rageModeIndicator.gameObject.SetActive(false);
+        //Heal
+        healEffect.gameObject.SetActive(false);
+        defBuffEffect.gameObject.SetActive(false);
+        atkBuffEffect.gameObject.SetActive(false);
+        agiBuffEffect.gameObject.SetActive(false);
 
         //Targeted enemy info
         attackingThisEnemy = null;
@@ -152,6 +171,8 @@ public class Player : MonoBehaviour
         //UI
         hpImage.fillAmount = currentHP / maxHP;
         rageImage.fillAmount = currentRage / maxRage;
+        damageText.gameObject.SetActive(false);
+        healText.gameObject.SetActive(false);
     }
 
     private void Update()
@@ -305,6 +326,8 @@ public class Player : MonoBehaviour
         btlCam.CameraShake();
         float damage = enemyATK - ((def / (20.0f + def)) * enemyATK);
         currentHP -= damage;
+        damageText.gameObject.SetActive(true);
+        damageText.text = Mathf.RoundToInt(damage).ToString();
         battleManager.players[playerIndex].currentHP = currentHP; //Update the BTL manager with the new health
 
         if (currentHP <= 0.0f)
@@ -432,6 +455,7 @@ public class Player : MonoBehaviour
         if (skillID == 1 || skillID == 2) //Fargas and Freya basic attack skills
         {
             Debug.Log("HIT");
+            skillNameForObjPooler = "FFSkill1";
             playerAnimator.SetBool("ASkill", true);
             attackingThisEnemy = enemyReference;
         }
@@ -459,6 +483,7 @@ public class Player : MonoBehaviour
             CalculateHitForSkill();
             if(hit)
             {
+                objPooler.SpawnFromPool(skillNameForObjPooler, attackingThisEnemy.gameObject.transform.position, gameObject.transform.rotation);
                 Debug.Log("Skill hit");
                 //Summon effect here
                 btlCam.CameraShake();
@@ -508,8 +533,11 @@ public class Player : MonoBehaviour
     //Heal function. Different heal skills will heal the player by different percentages
     public void Heal(float percentage)
     {
+        EnableEffect("Heal", 0);
         float healAmount = percentage * maxHP;
         currentHP += healAmount;
+        healText.gameObject.SetActive(true);
+        healText.text = Mathf.RoundToInt(healAmount).ToString();
         battleManager.players[playerIndex].currentHP = currentHP;
 
         if (currentHP > maxHP)
@@ -554,6 +582,7 @@ public class Player : MonoBehaviour
                 }
                 else if(!defenseBuffed) //No buffs or debuffs have occurred so far
                 {
+                    EnableEffect("DefBuff",0);
                     defenseBuffed = true;
                     actualDEF = def + amount;
                     defenseBuffSkillQCounter = lastsNumberOfTurns;
@@ -634,6 +663,30 @@ public class Player : MonoBehaviour
                 agilityBuffed = false;
                 actualAgi = agi;
             }
+        }
+    }
+
+    public void EnableEffect(string effectName, int value)
+    {
+        switch(effectName)
+        {
+            case "Heal":
+                healEffect.gameObject.SetActive(true);
+                if(value > 0)
+                {
+                    healText.gameObject.SetActive(true);
+                    healText.text = value.ToString();
+                }
+                break;
+            case "DefBuff":
+                defBuffEffect.gameObject.SetActive(true);
+                break;
+            case "AtkBuff":
+                atkBuffEffect.gameObject.SetActive(true);
+                break;
+            case "AgiBuff":
+                agiBuffEffect.gameObject.SetActive(true);
+                break;
         }
     }
 }
