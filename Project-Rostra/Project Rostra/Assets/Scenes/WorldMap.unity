@@ -20922,7 +20922,7 @@ PrefabInstance:
     - target: {fileID: 5887905129812110855, guid: 245f068009b070f40a585947167a718b,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -7.500002
+      value: -7.5
       objectReference: {fileID: 0}
     - target: {fileID: 5887905130917377167, guid: 245f068009b070f40a585947167a718b,
         type: 3}
@@ -22511,6 +22511,27 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6595024453704713425, guid: 553abd6f34f56904592869472cdfc65b,
+        type: 3}
+      propertyPath: listOfPools.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6595024453704713425, guid: 553abd6f34f56904592869472cdfc65b,
+        type: 3}
+      propertyPath: listOfPools.Array.data[3].tag
+      value: FFSkill1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6595024453704713425, guid: 553abd6f34f56904592869472cdfc65b,
+        type: 3}
+      propertyPath: listOfPools.Array.data[3].prefab
+      value: 
+      objectReference: {fileID: 8086483546740591391, guid: 602587776ca962f4e8ca233979ca04de,
+        type: 3}
+    - target: {fileID: 6595024453704713425, guid: 553abd6f34f56904592869472cdfc65b,
+        type: 3}
+      propertyPath: listOfPools.Array.data[3].poolSize
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 553abd6f34f56904592869472cdfc65b, type: 3}
