@@ -38,7 +38,6 @@ public class UInvItem {
 		equippedBy = -1;
 		description = "";
 		isequipable = 0;
-		isunequipable = false;
 		isconsumeable = false;
 		isdroppable = false;
 	}
@@ -53,9 +52,9 @@ public class UInvItem {
 	public string description;
 	//uses
 	public int isequipable; /* 0 is not equipable; 1 is equipable; 2 is unequipable; */
-	public bool isunequipable;
 	public bool isconsumeable;
 	public bool isdroppable;
+	public bool isswappable;
 }
 
 public class ItemsMenuController : SubMenu {
@@ -65,11 +64,20 @@ public class ItemsMenuController : SubMenu {
 	public Color UnhighlightColor;
 	public Color AvailOptionColor;
 	public Color UnavailOptionColor;
-	public CanvasGroup mainInventoryUI;
+	public Color SwappingColor;
+	public CanvasGroup mainInventoryGroup;
+	public CanvasGroup equipPanelGroup;
+	public CanvasGroup usePanelGroup;
+	public CanvasGroup peekPanelGroup;
 	public UnityEngine.UI.Image[] ItemImages;
-	public UItemController[] mainList;
+	public UItemController[] mainUItemsList;
+	public UItemController[] equipUItemsList;
 	public UnityEngine.UI.Image[] Options;
 	public UnityEngine.UI.Text[] OptionsText;
+	public UnityEngine.UI.Image[] EquipSelectionImages;
+	public UnityEngine.UI.Image[] UseOptionsImages;
+	public UnityEngine.UI.Text description;
+	public UItemController[] peekItems;
 
 	//reference to invetory
 	private ref MainInventory invinst {
@@ -87,7 +95,17 @@ public class ItemsMenuController : SubMenu {
 
 	//options list variables
 	private int optionsIndex = 0;
-	private bool[] availOptions = new bool[5];
+	private bool[] availOptions;
+
+	//equip list variables
+	private int equipIndexX = 0;
+	private int equipIndexY = 0;
+
+	//use list variables
+	private int useOptionsIndex = 0;
+
+	//swap variables
+	private int selectedIndex = 0;
 
 	//menu state
 	private int state = 0;
@@ -95,25 +113,33 @@ public class ItemsMenuController : SubMenu {
 	/// 1 = item options
 	/// 2 = equip menu
 	/// 3 = consume menu
+	/// 4 = main list swap mode
+	/// 5 = unequip confim
+	/// 6 = drop confirm
 
 	#region Initialization
 
 	protected override void Awake() {
 		base.Awake();
+		availOptions = new bool[5];
 		for (int i = 0; i < availOptions.Length; i++) {
 			availOptions[i] = false;
 		}
+		mainInventoryGroup.alpha = 0f;
+		equipPanelGroup.alpha = 0f;
+		usePanelGroup.alpha = 0f;
+		peekPanelGroup.alpha = 0f;
 	}
 
 	private void Start() {
+		invinst.invItem[0, 2] = 3;
 	}
 
 	#endregion
 
 	#region Submenu Functions
 
-	public void Update() {
-	}
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	public override void MenuUpdate() {
 		//if this breaks i throw an error
@@ -121,11 +147,17 @@ public class ItemsMenuController : SubMenu {
 			Debug.LogError("The deque broke: deque.Count = " + itemDeque.Count + " ITEMS_PER_PAGE = " + ITEMS_PER_PAGE);
 
 		switch (state) {
-			case 0: // main list state
-				mainList[RelativeIndex].UnHighlightItem(UnhighlightColor);
+			case 0: { /// main list state
+				if (Cancel) {
+					UpdatePeekUI();
+					mainUItemsList[RelativeIndex].UnHighlightItem(UnhighlightColor);
+					ExitMenu();
+					break;
+				}
+				mainUItemsList[RelativeIndex].UnHighlightItem(UnhighlightColor);
 				ScrollUpMain();
 				ScrollDownMain();
-				mainList[RelativeIndex].HighlightItem(HighlightColor);
+				mainUItemsList[RelativeIndex].HighlightItem(HighlightColor);
 				HandleOptionsList();
 				if (Confirm) {
 					state = 1;
@@ -136,80 +168,264 @@ public class ItemsMenuController : SubMenu {
 						}
 					}
 					Options[optionsIndex].color = HighlightColor;
-					goto case 1; // goto options state
 				}
 				break;
-			case 1: // options state
+			} /// main list state
+			case 1: {/// options state
 				if (Cancel) {
 					state = 0;
-					optionsIndex = 0;
 					Options[optionsIndex].color = UnhighlightColor;
-					goto case 0;
+					optionsIndex = 0;
+					break;
 				}
+
 				Options[optionsIndex].color = UnhighlightColor;
 				ScrollDownOptions();
 				ScrollUpOptions();
-
 				Options[optionsIndex].color = HighlightColor;
+
 				if (Confirm && availOptions[optionsIndex]) {
-					if (optionsIndex == 0) state = 2;
-					if (optionsIndex == 1) state = 2; /* TODO: Change to unequip */
+					Options[optionsIndex].color = UnhighlightColor;
+					if (optionsIndex == 0) { /// Equip
+						state = 2;
+						equipPanelGroup.alpha = 1f;
+						UpdateEquipmentUI();
+						break;
+					}
+					if (optionsIndex == 2) { /// Use
+						state = 3;
+						usePanelGroup.alpha = 1f;
+						break;
+					}
+					if (optionsIndex == 3) { /// Swap
+						state = 4;
+						selectedIndex = itemindex;
+					Options[optionsIndex].color = HighlightColor;
+						break;
+					}
+					if (optionsIndex == 1) { /// Unequip
+						state = 5;
+						Options[optionsIndex].color = HighlightColor;
+						OptionsText[1].text = "Confirm?";
+						break;
+					}
+					if (optionsIndex == 4) { /// Drop
+						state = 6;
+						Options[optionsIndex].color = HighlightColor;
+						OptionsText[4].text = "Confirm?";
+						break;
+					}
 				}
 				break;
-			case 2: // eqipmen state
-
+			} /// options state
+			case 2: { /// eqipmen state
+				if (Cancel) {
+					state = 0;
+					Options[optionsIndex].color = UnhighlightColor;
+					optionsIndex = 0;
+					equipPanelGroup.alpha = 0f;
+					EquipSelectionImages[equipIndexY * 2 + equipIndexX].color = UnhighlightColor;
+					equipIndexX = 0;
+					equipIndexY = 0;
+					break;
+				}
+				EquipSelectionImages[equipIndexY * 2 + equipIndexX].color = UnhighlightColor;
+				if (equipIndexX == 0 && Right) equipIndexX = 1;
+				else if (equipIndexX == 1 && Left) equipIndexX = 0;
+				if (equipIndexY == 0 && Down) equipIndexY = 1;
+				else if (equipIndexY == 1 && Up) equipIndexY = 0;
+				EquipSelectionImages[equipIndexY * 2 + equipIndexX].color = HighlightColor;
+				if (Confirm) {
+					invinst.curOption = itemindex;
+					invinst.ItemUseFunction(itemDeque[RelativeIndex].itemID, itemindex, equipIndexY * 2 + equipIndexX);
+					itemDeque[RelativeIndex] = GenerateItem(itemindex);
+					UpdateUItem(RelativeIndex);
+					HandleOptionsList();
+					state = 0;
+					Options[optionsIndex].color = UnhighlightColor;
+					optionsIndex = 0;
+					equipPanelGroup.alpha = 0f;
+					EquipSelectionImages[equipIndexY * 2 + equipIndexX].color = UnhighlightColor;
+					equipIndexX = 0;
+					equipIndexY = 0;
+					break;
+				}
 				break;
-			case 3: // consume state 
+			} /// eqipmen state
+			case 3: { /// consume state 
+				if (Cancel) {
+					state = 0;
+					Options[optionsIndex].color = UnhighlightColor;
+					optionsIndex = 0;
+					usePanelGroup.alpha = 0f;
+					useOptionsIndex = 0;
+					break;
+				}
 
+				UseOptionsImages[useOptionsIndex].color = UnhighlightColor;
+				if (Up && useOptionsIndex != 0) useOptionsIndex--;
+				else if (Down && useOptionsIndex != 3) useOptionsIndex++;
+				UseOptionsImages[useOptionsIndex].color = HighlightColor;
+
+				if (Confirm) {
+					UseOptionsImages[useOptionsIndex].color = UnhighlightColor;
+					usePanelGroup.alpha = 0f;
+
+					if (useOptionsIndex < 4 && useOptionsIndex > -1)
+						invinst.ItemUseFunction(itemDeque[itemindex].itemID, itemindex, useOptionsIndex);
+					else
+						Debug.LogError("Chara " + useOptionsIndex + " does not exist");
+
+					itemDeque[itemindex] = GenerateItem(itemindex);
+					UpdateUItem(RelativeIndex);
+					state = 0;
+					Options[optionsIndex].color = UnhighlightColor;
+					optionsIndex = 0;
+					useOptionsIndex = 0;
+					break;
+				}
 				break;
+			} /// consume state 
+			case 4: { /// main list swap state
+				if (Cancel) {
+					state = 0;
+					if (selectedIndex - topofListIndex > -1 && selectedIndex - topofListIndex < ITEMS_PER_PAGE)
+						mainUItemsList[selectedIndex - topofListIndex].HighlightItem(UnhighlightColor);
+					Options[optionsIndex].color = UnhighlightColor;
+					optionsIndex = 0;
+					break;
+				}
+
+				if (selectedIndex - topofListIndex > -1 && selectedIndex - topofListIndex < ITEMS_PER_PAGE)
+					mainUItemsList[selectedIndex - topofListIndex].HighlightItem(UnhighlightColor);
+				mainUItemsList[RelativeIndex].UnHighlightItem(UnhighlightColor);
+				ScrollUpMain();
+				ScrollDownMain();
+				mainUItemsList[RelativeIndex].HighlightItem(HighlightColor);
+				if (selectedIndex - topofListIndex > -1 && selectedIndex - topofListIndex < ITEMS_PER_PAGE)
+					mainUItemsList[selectedIndex - topofListIndex].HighlightItem(SwappingColor);
+
+				if (Confirm) {
+					print(selectedIndex + ", " + itemindex);
+					invinst.SwapItems(selectedIndex, itemindex);
+					itemDeque[RelativeIndex] = GenerateItem(itemindex);
+					if (selectedIndex - topofListIndex > -1 && selectedIndex - topofListIndex < ITEMS_PER_PAGE)
+						itemDeque[selectedIndex - topofListIndex] = GenerateItem(selectedIndex - topofListIndex);
+					UpdateListUI();
+					state = 0;
+					if (selectedIndex - topofListIndex > -1 && selectedIndex - topofListIndex < ITEMS_PER_PAGE)
+						mainUItemsList[selectedIndex - topofListIndex].HighlightItem(UnhighlightColor);
+					Options[optionsIndex].color = UnhighlightColor;
+					optionsIndex = 0;
+					break;
+				}
+				break;
+			} /// main list swap state
+			case 5: { /// unequip confirm
+				if (Cancel) {
+					state = 0;
+					Options[optionsIndex].color = UnhighlightColor;
+					optionsIndex = 0;
+					OptionsText[1].text = "Unequip";
+					break;
+				}
+
+				if (Confirm) {
+					invinst.curOption = itemindex;
+					OptionsText[1].text = "Unequip";
+					invinst.ItemUseFunction(itemDeque[RelativeIndex].itemID, itemindex, itemDeque[RelativeIndex].equippedBy);
+					itemDeque[RelativeIndex] = GenerateItem(itemindex);
+					UpdateUItem(RelativeIndex);
+					HandleOptionsList();
+					state = 0;
+					Options[optionsIndex].color = UnhighlightColor;
+					optionsIndex = 0;
+					break;
+				}
+				break;
+			} /// unequip confirm
+			case 6: { /// drop confirm
+				if (Cancel) {
+					state = 0;
+					Options[optionsIndex].color = UnhighlightColor;
+					optionsIndex = 0;
+					OptionsText[4].text = "Drop";
+					break;
+				}
+				if (Confirm) {
+					HandleOptionsList();
+					OptionsText[4].text = "Drop";
+					invinst.RemoveItem(itemindex);
+					itemDeque[RelativeIndex] = GenerateItem(itemindex);
+					UpdateUItem(RelativeIndex);
+					HandleOptionsList();
+					state = 0;
+					Options[optionsIndex].color = UnhighlightColor;
+					optionsIndex = 0;
+					break;
+				}
+				break;
+			} /// drop confirm
 			default: break;
 		}
 	}
 
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 	public override void OnVisible() {
+		peekPanelGroup.alpha = 1f;
+		//update the view
+		UpdatePeekUI();
+	}
+
+	public override void OnInvisible() {
+		peekPanelGroup.alpha = 0f;
+	}
+
+	public override void OnActive() {
 		itemindex = 0;
 		topofListIndex = 0;
 		InitializeDeque();
 		UpdateListUI();
 		HandleOptionsList();
-	}
-
-	public override void OnActive() {
-
+		mainInventoryGroup.alpha = 1;
+		UpdateDescription();
 	}
 
 	public override void OnInactive() {
 		ClearDeque();
+		mainInventoryGroup.alpha = 0;
 	}
+
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	#endregion
 
 	#region UI Updating
 
-	private void ScrollDownMain() {
-		if (Up && itemindex > 0) --itemindex;
-		else return;
-		if (itemindex < topofListIndex) {
-			itemDeque.push_start(GenerateItem(itemindex));
-			itemDeque.pop_end();
-			--topofListIndex;
-			UpdateListUI();
+	private void UpdateUItem(int relativeindex) {
+		string charaname = "";
+		switch (itemDeque[relativeindex].equippedBy) {
+			case 0:
+				charaname += "Fargas";
+				break;
+			case 1:
+				charaname += "Oberon";
+				break;
+			case 2:
+				charaname += "Frea";
+				break;
+			case 3:
+				charaname += "Arcelus";
+				break;
+			default: break;
 		}
-	}
-
-	private void ScrollUpMain() {
-		if (Down && itemindex < MainInventory.INVENTORY_SIZE - 1) ++itemindex;
-		else return;
-		if (itemindex > topofListIndex + ITEMS_PER_PAGE - 1) {
-			itemDeque.push_end(GenerateItem(itemindex));
-			itemDeque.pop_start();
-			++topofListIndex;
-			UpdateListUI();
-		}
+		mainUItemsList[relativeindex].SetNormalItem(null, itemDeque[relativeindex].name, charaname,
+									 itemDeque[relativeindex].count > 1 ? "" + itemDeque[relativeindex].count : "");
 	}
 
 	private void UpdateListUI() {
-		for (int i = 0; i < mainList.Length; i++) {
+		for (int i = 0; i < mainUItemsList.Length; i++) {
 			string charaname = "";
 			switch (itemDeque[i].equippedBy) {
 				case 0:
@@ -226,13 +442,37 @@ public class ItemsMenuController : SubMenu {
 					break;
 				default: break;
 			}
-			mainList[i].SetNormalItem(null, itemDeque[i].name, charaname, itemDeque[i].count > 1 ? "" + itemDeque[i].count : "");
+			mainUItemsList[i].SetNormalItem(null, itemDeque[i].name, charaname, itemDeque[i].count > 1 ? "" + itemDeque[i].count : "");
 		}
+	}
+
+	private void ScrollDownMain() {
+		if (Up && itemindex > 0) --itemindex;
+		else return;
+		if (itemindex < topofListIndex) {
+			itemDeque.push_start(GenerateItem(itemindex));
+			itemDeque.pop_end();
+			--topofListIndex;
+			UpdateListUI();
+		}
+		UpdateDescription();
+	}
+
+	private void ScrollUpMain() {
+		if (Down && itemindex < MainInventory.INVENTORY_SIZE - 1) ++itemindex;
+		else return;
+		if (itemindex > topofListIndex + ITEMS_PER_PAGE - 1) {
+			itemDeque.push_end(GenerateItem(itemindex));
+			itemDeque.pop_start();
+			++topofListIndex;
+			UpdateListUI();
+		}
+		UpdateDescription();
 	}
 
 	private void ScrollDownOptions() {
 		if (Up && optionsIndex > 0) --optionsIndex;
-		else return;	
+		else return;
 	}
 
 	private void ScrollUpOptions() {
@@ -241,17 +481,53 @@ public class ItemsMenuController : SubMenu {
 	}
 
 	private void HandleOptionsList() {
-		if (itemDeque[itemindex].isequipable == 1)	availOptions[0] = true;
-		if (itemDeque[itemindex].isequipable == 2)	availOptions[1] = true;
-		if (itemDeque[itemindex].isconsumeable)		availOptions[2] = true;
-													availOptions[3] = true; /// this should always be true
-		if (itemDeque[itemindex].isdroppable)		availOptions[4] = true;
+		for (int i = 0; i < availOptions.Length; i++) {
+			availOptions[i] = false;
+		}
+
+		if (itemDeque[RelativeIndex].isequipable == 1) availOptions[0] = true;
+		if (itemDeque[RelativeIndex].isequipable == 2) availOptions[1] = true;
+		if (itemDeque[RelativeIndex].isconsumeable) availOptions[2] = true;
+		if (itemDeque[RelativeIndex].isswappable) availOptions[3] = true;
+		if (itemDeque[RelativeIndex].isdroppable) availOptions[4] = true;
 
 		for (int i = 0; i < availOptions.Length; i++) {
 			if (availOptions[i]) {
 				OptionsText[i].color = AvailOptionColor;
 			} else {
 				OptionsText[i].color = UnavailOptionColor;
+			}
+		}
+	}
+
+	private void UpdateEquipmentUI() {
+		for (int i = 0; i < 12; i++) {
+			equipUItemsList[i].SetSmallItem(invinst.ItemName((int)ITEM_ID.NO_ITEM));
+		}
+		int listItem = 0;
+		for (int j = 0; j < MainInventory.INVENTORY_SIZE; j++) {
+			if (invinst.ItemType(invinst.invItem[j, 0]) == (int)ITEM_TYPE.EQUIPABLE && invinst.invItem[j, 2] != -1) {
+				equipUItemsList[invinst.invItem[j, 2] * 3 + listItem].SetSmallItem(invinst.ItemName(invinst.invItem[j, 0]));
+				++listItem;
+				if (listItem == 12) break;
+			}
+		}
+	}
+
+	private void UpdateDescription() {
+		description.text = itemDeque[RelativeIndex].name + "\n\n" + itemDeque[RelativeIndex].description;
+	}
+
+	private void UpdatePeekUI() {
+		for (int i = 0; i < 12; i++) {
+			peekItems[i].SetSmallItem(invinst.ItemName((int)ITEM_ID.NO_ITEM));
+		}
+		int listItem = 0;
+		for (int j = 0; j < MainInventory.INVENTORY_SIZE; j++) {
+			if (invinst.ItemType(invinst.invItem[j, 0]) == (int)ITEM_TYPE.EQUIPABLE && invinst.invItem[j, 2] != -1) {
+				peekItems[invinst.invItem[j, 2] * 3 + listItem].SetSmallItem(invinst.ItemName(invinst.invItem[j, 0]));
+				++listItem;
+				if (listItem == 12) break;
 			}
 		}
 	}
@@ -268,6 +544,7 @@ public class ItemsMenuController : SubMenu {
 
 		for (int i = 0; i < ITEMS_PER_PAGE; i++) {
 			itemDeque.push_end(GenerateItem(i));
+			//print(itemDeque[i].equippedBy + " for item " + (ITEM_ID)itemDeque[i].itemID);
 		}
 	}
 
@@ -284,16 +561,17 @@ public class ItemsMenuController : SubMenu {
 		item.count = invinst.invItem[index, 1];
 		item.subtext = invinst.ItemDescription(item.itemID);
 		item.equippedBy = invinst.invItem[index, 2];
-		item.description = ""; /* TODO: add proper description */
+		item.description = invinst.ItemDescription(item.itemID);
 
-		string[] itemOptions = invinst.ItemOptions(item.itemID).ToArray();
+		invinst.curOption = index;
+		string[] itemOptions = invinst.ItemOptions(item.itemID, index).ToArray();
 		foreach (string option in itemOptions) {
 			switch (option) {
 				case "Use":
 					item.isconsumeable = true;
 					break;
 				case "Move":
-					Debug.Log("Why is the item moveable?");
+					item.isswappable = true;
 					break;
 				case "Drop":
 					item.isdroppable = true;

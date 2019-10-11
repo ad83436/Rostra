@@ -26,6 +26,7 @@ public abstract class SubMenu : MonoBehaviour {
 		get => group.alpha == 1f;
 		set {
 			if (value == true && group.alpha != 1f) OnVisible();
+			else if (value == false && group.alpha != 0) OnInvisible();
 			group.alpha = value ? 1f : 0f;
 		}
 	}
@@ -43,6 +44,7 @@ public abstract class SubMenu : MonoBehaviour {
 
 	public abstract void MenuUpdate();
 	public abstract void OnVisible();
+	public abstract void OnInvisible();
 	public abstract void OnActive();
 	public abstract void OnInactive();
 

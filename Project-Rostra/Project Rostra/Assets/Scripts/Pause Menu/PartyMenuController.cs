@@ -175,6 +175,8 @@ public class PartyMenuController : SubMenu {
 		}
 	}
 
+	public override void OnInvisible() { }
+
 	public void IncreaseStat(ButtonController button) {
 		switch (button.buttonName) {
 			case "Attack": ExpManager.instance.UsePointOnAttack(playerIndex); break;

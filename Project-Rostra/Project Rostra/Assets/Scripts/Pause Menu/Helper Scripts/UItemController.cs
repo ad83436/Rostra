@@ -29,4 +29,8 @@ public class UItemController : MonoBehaviour {
 		count.text = count_;
 	}
 
+	public void SetSmallItem(string itemName_) {
+		itemName.text = itemName_;
+	}
+
 }

@@ -62,20 +62,24 @@ public class PauseMenuController : MonoBehaviour {
 	private void Update() {
 		//update inputs
 		pause = Input.GetButtonDown("Pause");
+		Cancel = Input.GetButtonDown("Cancel");
 
-		if (pause) {
+		if ((pause && activeMenu) || (isPaused && activeMenu && Cancel)) {
 			isPaused = !isPaused;
 			if (isPaused) {
 				//onPause logic
 				currentListItem = 0;
 				listItems[currentListItem].color = Color.yellow;
 				group.alpha = 1f;
+				allSubMenus[currentListItem].Visible = true;
 				allSubMenus[currentListItem].OnActive();
 			} else {
 				//onUnPause logic
 				listItems[currentListItem].color = Color.white;
 				group.alpha = 0f;
+				allSubMenus[currentListItem].Visible = false;
 				allSubMenus[currentListItem].OnInactive();
+				currentListItem = 0;
 			}
 		}
 
@@ -87,7 +91,6 @@ public class PauseMenuController : MonoBehaviour {
 		Right = Input.GetButtonDown("Right");
 
 		Confirm = Input.GetButtonDown("Confirm");
-		Cancel = Input.GetButtonDown("Cancel");
 
 		if (activeMenu) {
 			//do main list
