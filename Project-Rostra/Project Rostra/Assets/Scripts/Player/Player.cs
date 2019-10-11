@@ -37,7 +37,7 @@ public class Player : MonoBehaviour
     private Animator playerAnimator;
 
     //Skills
-    private int chosenSkill;
+
     //Skill target is used when calling skills to know what we are targeting
     //0: Single enemy attack
     //1: Full row enemies attack
@@ -50,8 +50,10 @@ public class Player : MonoBehaviour
     //8: Single player buff
     //9: All players buff
 
+    private int chosenSkill;
     private int skillTarget; 
     private float mpCost;
+    private float skillWaitTime;
     private Player healThisPlayer;
     private string skillNameForObjPooler;
 
@@ -212,6 +214,46 @@ public class Player : MonoBehaviour
             if (currentState == playerState.Guard)
             {
                 EndGuard();
+            }
+            else if(currentState == playerState.Waiting)
+            {
+                skillWaitTime--;
+                if(skillWaitTime<=0)
+                {
+                    Debug.Log("Hittt  " + skillTarget);
+                    switch(skillTarget) //use the skill target to know which function to call
+                    {
+                        case 0:
+                            UseSkillOnOneEnemy(chosenSkill, mpCost, 0, attackingThisEnemy);
+                            break;
+                        case 1:
+                            break;
+                        case 2:
+                            break;
+                        case 3:
+                            break;
+                        case 4:
+                            break;
+                        case 5:
+                            break;
+                        case 6:
+                            UseSkillOnOnePlayer(chosenSkill, mpCost, 0, healThisPlayer);
+                            break;
+                        case 7:
+                            break;
+                        case 8:
+                            UseSkillOnOnePlayer(chosenSkill, mpCost, 0, healThisPlayer);
+                            break;
+                        case 9:
+                            break;
+                    }
+                    
+                }
+                else
+                {
+                    Debug.Log("Wait time: " + skillWaitTime);
+                    uiBTL.EndTurn();
+                }
             }
 
             //Check for buffs
@@ -422,41 +464,75 @@ public class Player : MonoBehaviour
     }
 
     //---------------------------------------------------Skills---------------------------------------------------//
-    public void UseSkillOnOnePlayer(int skillID, float manaCost , int waitTime, Player playerReference)
+    public void UseSkillOnOnePlayer(int skillID, float manaCost , float waitTime, Player playerReference)
     {
         Debug.Log("Skill Target" + skillID);
 
+        skillWaitTime = waitTime;
         chosenSkill = skillID;
         mpCost = manaCost;
         healThisPlayer = playerReference;
 
-        if (skillID == 4) //Heal
+        if (waitTime <= 0)
         {
-            skillTarget = 6; //Single player heal
-            playerAnimator.SetBool("Heal", true);
 
+            if (skillID == 4) //Heal
+            {
+                
+                skillTarget = 6;//Single player heal
+                playerAnimator.SetBool("Heal", true);
+
+            }
+            else if (skillID == 3) //Buff defense skill
+            {
+                skillTarget = 8; //Single player buff
+                playerAnimator.SetBool("BuffDef", true);
+                Debug.Log("BUFF DEF");
+            }
         }
-        else if (skillID == 3) //Buff defense skill
+        else
         {
-            skillTarget = 8; //Single player buff
-            playerAnimator.SetBool("BuffDef", true);
+
+            switch (skillID)
+            {
+                case 3:
+                    skillTarget = 8;//Single player buff
+                    break;
+                case 4:
+                    skillTarget = 6;//Single player heal
+                    break;
+
+            }
+            //If there's waiting time, go to wait state and end the turn 
+            currentState = playerState.Waiting;
+            uiBTL.EndTurn();
         }
     }
 
-    public void UseSkillOnOneEnemy(int skillID, float manaCost, int waitTime, Enemy enemyReference)
+    public void UseSkillOnOneEnemy(int skillID, float manaCost, float waitTime, Enemy enemyReference)
     {
-        Debug.Log("Skill Target " + skillID);
 
+        skillWaitTime = waitTime;
         skillTarget = 0;
         chosenSkill = skillID;
         mpCost = manaCost;
-        //Check which skill to know which animation to run
-        if (skillID == 1 || skillID == 2) //Fargas and Freya basic attack skills
+        attackingThisEnemy = enemyReference;
+
+        if (waitTime <= 0)
         {
-            Debug.Log("HIT");
-            skillNameForObjPooler = "FFSkill1";
-            playerAnimator.SetBool("ASkill", true);
-            attackingThisEnemy = enemyReference;
+            //Check which skill to know which animation to run
+            if (skillID == 1 || skillID == 2) //Fargas and Freya basic attack skills
+            {
+                Debug.Log("HIT");
+                skillNameForObjPooler = "FFSkill1";
+                playerAnimator.SetBool("ASkill", true);
+            }
+        }
+        else
+        {
+            //If there's waiting time, go to wait state and end the turn 
+            currentState = playerState.Waiting;
+            uiBTL.EndTurn();
         }
 
     }

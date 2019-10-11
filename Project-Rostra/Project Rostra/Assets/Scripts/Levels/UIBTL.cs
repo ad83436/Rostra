@@ -952,7 +952,10 @@ public class UIBTL : MonoBehaviour
                 if (btlManager.players[playerIndicatorIndex].playerReference.currentState != Player.playerState.Rage)
                 {
                     UpdateActivityText((skills.SkillName(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])));
-                    playerInControl.UseSkillOnOnePlayer(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator], skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[5], btlManager.players[playerIndicatorIndex].playerReference);
+                    playerInControl.UseSkillOnOnePlayer(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator],
+                                                        skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[5],
+                                                        skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[2],
+                                                        btlManager.players[playerIndicatorIndex].playerReference);
                 }
             }
         }
@@ -1122,7 +1125,10 @@ public class UIBTL : MonoBehaviour
             {
                 Debug.Log("Enemy has been chosen");
                 UpdateActivityText(skills.SkillName(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator]));
-                playerInControl.UseSkillOnOneEnemy(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator], skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[5], enemies[enemyIndicatorIndex]);
+                playerInControl.UseSkillOnOneEnemy(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator],
+                                                   skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[5],
+                                                   skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[2],
+                                                   enemies[enemyIndicatorIndex]);
             }
         }
     }

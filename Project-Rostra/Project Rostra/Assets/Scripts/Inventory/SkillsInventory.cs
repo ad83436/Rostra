@@ -286,31 +286,35 @@ public class SkillsInventory : MonoBehaviour {
             case (int)SKILLS.TEST_Fargas:
                 skillStat[0] = 25;
                 skillStat[1] = 95;
+                skillStat[2] = 2;
                 skillStat[4] = (float)SKILL_TYPE.SINGLE_TARGET_ATK;
                 skillStat[5] = 50;
                 break;
             case (int)SKILLS.TEST_Frea:
                 skillStat[0] = 70;
                 skillStat[1] = 80;
+                skillStat[2] = 0;
                 skillStat[4] = (float)SKILL_TYPE.SINGLE_TARGET_ATK;
                 skillStat[5] = 45;
                 break;
             case (int)SKILLS.TEST_Oberon:
                 skillStat[0] = 50;
                 skillStat[1] = 85;
-                skillStat[2] = 2;
+                skillStat[2] = 1;
                 skillStat[4] = (float)SKILL_TYPE.SINGLE_PLAYER_BUFF;
                 skillStat[5] = 115;
                 break;
             case (int)SKILLS.TEST_Arcelus:
                 skillStat[0] = 20;
                 skillStat[1] = 100;
+                skillStat[2] = 0;
                 skillStat[4] = (float)SKILL_TYPE.SINGLE_PLAYER_HEAL;
                 skillStat[5] = 40;
                 break;
             default:
                 skillStat[0] = 0;
                 skillStat[1] = 0;
+                skillStat[2] = 0;
                 skillStat[4] = (float)SKILL_TYPE.SINGLE_PLAYER_HEAL;
                 skillStat[5] = 0;
                 break;
