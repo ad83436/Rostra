@@ -60,6 +60,7 @@ public class PartyMenuController : SubMenu {
 
 	[SerializeField] private UnityEngine.UI.Text[] charanames;
 	[SerializeField] private UnityEngine.UI.Text statsName;
+	[SerializeField] private UnityEngine.UI.Text statPointCounter;
 
 	public ItemMenu statsMenu;
 
@@ -130,7 +131,8 @@ public class PartyMenuController : SubMenu {
 		} else {
 			if (Cancel) { CloseStatsMenu(); return; }
 			statsMenu.UpdateItemSelected(Down, Up, Left, Right, Confirm, Cancel);
-
+			statPointCounter.text = PartyStats.chara[playerIndex].statPoints + " StatPoints";
+			if (Input.GetKeyDown(KeyCode.V)) PartyStats.chara[playerIndex].statPoints++;
 		}
 	}
 
