@@ -626,13 +626,8 @@ MonoBehaviour:
   speed: 0
   playerIndex: 3
   name: Arcelus
-  equippedSkills:
-  - 
-  - 
-  - 
-  - 
-  range: 0
-  initialPos: 0
+  range: 3
+  initialPos: -1
   dead: 0
   qImage: {fileID: 21300000, guid: 5005770727f9818449cb6c3f9e817267, type: 3}
   currentRage: 0

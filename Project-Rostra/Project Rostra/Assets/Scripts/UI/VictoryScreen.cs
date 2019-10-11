@@ -22,6 +22,7 @@ public class VictoryScreen : MonoBehaviour
     //Fading in
     private bool screenActive;
     private bool fadingIn;
+    private bool initiatedFadeOut = false; //Turns true the first time the player presses Space
     public Fade fadePanelToWorldMap;
 
     //General Victory Screen elements
@@ -55,6 +56,7 @@ public class VictoryScreen : MonoBehaviour
     private bool fargasAddinExp; //Used in update to increase EXP bar
     private bool startFadingFargasIn;
 
+    //Frea
     public Text freaLevelUpBack;
     public Text freaLevelUpFore;
     public Image freaPortrait;
@@ -78,6 +80,7 @@ public class VictoryScreen : MonoBehaviour
     private bool freaAddinExp;
     private bool startFadingFreaIn;
 
+    //Arcelus
     public Text arcelusLevelUpBack;
     public Text arcelusLevelUpFore;
     public Image arcelusPortrait;
@@ -101,6 +104,7 @@ public class VictoryScreen : MonoBehaviour
     private bool arcelusAddinExp;
     private bool startFadingArcelusIn;
 
+    //Oberon
     public Text oberonLevelUpBack;
     public Text oberonLevelUpFore;
     public Image oberonPortrait;
@@ -245,8 +249,9 @@ public class VictoryScreen : MonoBehaviour
             {
                 IncreaseExp(ref arcelusExp, ref arcelusCurrentExp, ref arcelusMaxExp, ref arcelusExpGain, ref arcelusExpStep, ref arcelusCurrentExpText, ref arcelusMaxExpText, 3);
             }
-            else if (Input.GetKeyDown(KeyCode.Space) && !fargasAddinExp && !freaAddinExp && !oberonAddinExp && !arcelusAddinExp)
+            else if (Input.GetKeyDown(KeyCode.Space) && !fargasAddinExp && !freaAddinExp && !oberonAddinExp && !arcelusAddinExp && !initiatedFadeOut)
             {
+                initiatedFadeOut = true;
                 fadePanelToWorldMap.TransitionBackToWorldMapFromBattle();
             }
         }

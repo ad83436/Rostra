@@ -4,8 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-//Code written by: Your moma and I
-//Date: Who the fuck knows
+
 
 public class Enemy : MonoBehaviour
 {
@@ -156,6 +155,7 @@ public class Enemy : MonoBehaviour
 
     public void EnemyTurn()
     {
+        Debug.Log(name + "  Hitttttt  " + dead);
         uiBTL.DisableActivtyText();
         float attackChance = Random.Range(0, 100); // determines if the ememy will use its type attack or a dumb attack 
         float skillChance = Random.Range(0, 60);// determines if the enemy will use a skill or not //TEMP VALUES//
@@ -313,6 +313,7 @@ public class Enemy : MonoBehaviour
 
         else
         {
+            Debug.Log("ELSSSEEEEE");
             uiBTL.EndTurn();
         }
     }
@@ -599,6 +600,10 @@ public class Enemy : MonoBehaviour
         {
             animator.SetBool("Death", true);
         }
+        else
+        {
+            uiBTL.EndTurn(); //Only end the turn after the damage has been taken
+        }
     }
 
     public void EndHitAnimation()
@@ -614,6 +619,7 @@ public class Enemy : MonoBehaviour
             enemyCanvas.SetActive(false);
             dead = true;
             uiBTL.EnemyIsDead(enemyIndexInBattleManager);
+            uiBTL.EndTurn(); //Only end the turn after the enemy is dead
         }
     }
 }

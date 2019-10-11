@@ -329,6 +329,7 @@ public class BattleManager : MonoBehaviour
                 battleQueue.Add(enemies[maxEnemyIndex]);
                 //Add the enemy's image to the UI
                 uiBtl.AddImageToQ(enemies[maxEnemyIndex].enemyReference.qImage);
+                Debug.Log(enemies[maxEnemyIndex].enemyReference.qImage);
                 //Remove the enemy's agility from the list
                 eSpeeds.RemoveAt(eSpeeds.Count - 1);
                 //Add the enemy's index to the array of removed enemy
@@ -351,6 +352,7 @@ public class BattleManager : MonoBehaviour
             battleQueue.Add(enemies[maxEnemyIndex]);
             //Add the enemy's image to the UI
             uiBtl.AddImageToQ(enemies[maxEnemyIndex].enemyReference.qImage);
+            Debug.Log(enemies[maxEnemyIndex].enemyReference.qImage);
             eSpeeds.RemoveAt(eSpeeds.Count - 1);
             removedEnemyIndexes[maxEnemyIndex] = maxEnemyIndex;
         }

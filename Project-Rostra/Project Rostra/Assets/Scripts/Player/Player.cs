@@ -25,7 +25,6 @@ public class Player : MonoBehaviour
     public float speed;
     public int playerIndex;
     public string name;
-    public string[] equippedSkills = new string [4];
     public int range; //Range of player standard attack
     public int initialPos; //Position of the player 0 being Frontline and -1 being Ranged
     public bool dead;
@@ -254,7 +253,7 @@ public class Player : MonoBehaviour
                 attackingThisEnemy.TakeDamage(actualATK);
             }
         }
-        uiBTL.EndTurn();
+        //uiBTL.EndTurn();
 
         //If the player is in rage state, they can only attack so it makes sense to check if we were in rage mode when attacking
         if(currentState==playerState.Rage)
@@ -527,7 +526,6 @@ public class Player : MonoBehaviour
         currentMP -= mpCost;
         battleManager.players[playerIndex].currentMP = currentMP;
         uiBTL.UpdatePlayerMPControlPanel();
-        uiBTL.EndTurn();
     }
 
     //Heal function. Different heal skills will heal the player by different percentages
@@ -563,6 +561,7 @@ public class Player : MonoBehaviour
         rageImage.fillAmount = currentRage / maxRage;
         uiBTL.UpdatePlayerHPControlPanel();
         PartyStats.chara[playerIndex].rage = currentRage; //Update the party stats
+        uiBTL.EndTurn(); //End the turn of the current player (i.e. the healer) after the healing is done
     }
 
     public void BuffStats(string statToBuff, float amount, float lastsNumberOfTurns)
@@ -626,6 +625,8 @@ public class Player : MonoBehaviour
                 }
                 break;
         }
+
+        uiBTL.EndTurn(); //End the turn of the current player (i.e. the buffer) when the buffing is done
     }
 
     private void CheckForBuffs()
