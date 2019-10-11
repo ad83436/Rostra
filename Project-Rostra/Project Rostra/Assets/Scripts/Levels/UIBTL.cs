@@ -97,7 +97,10 @@ public class UIBTL : MonoBehaviour
     //Enemies
     public Enemy[] enemies;
     public bool [] enemiesDead;
-    public int numberOfEnemies;
+    public int numberOfEnemies; //Populated by the battle manager at the start of the battle
+    private int numberOfDeadEnemies = 0;
+    private bool moveRangedRowToFrontRoW = false; //Turend true when there are 4 or more enemies and 0,1,2 are dead
+
 
     //Players
     private Player playerInControl;
@@ -241,7 +244,7 @@ public class UIBTL : MonoBehaviour
     public void QueueIsReady()
     {
         //Called from the BTL manager when the Q has been built
-
+        Debug.Log("Images count " + imagesQ.Count);
         //Fill up the Q until its of size 9. Only 6 will be on screen at a time however.
         switch(imagesQ.Count)
         {
@@ -296,6 +299,14 @@ public class UIBTL : MonoBehaviour
                     images[i].sprite = imagesQ[i];
                 }
                 break;
+            case 9:
+                for (int i = 0; i < 9; i++)
+                {
+                    //0 - 8
+                    images[i].sprite = imagesQ[i];
+                }
+                break;
+
         }
 
     }
@@ -647,57 +658,53 @@ public class UIBTL : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Space))
         {
-
-            //Choose skill, make sure you have enough MP to use it, then check if it targets players or enemies       
-            if (playerInControl.currentMP >= skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[5])
+            if (PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator] != (int)SKILLS.NO_SKILL)
             {
-                skillsPanel.gameObject.SetActive(false);
-                switch (skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[4])
+                //Choose skill, make sure you have enough MP to use it, then check if it targets players or enemies       
+                if (playerInControl.currentMP >= skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[5])
                 {
-                    //0: Target one enemy
-                    //1: Target all enemies
-                    //2: Target row of enemies
-                    //4: Target one player
-                    //5: Target all players
-
-                    case (float)SKILL_TYPE.SINGLE_TARGET_ATK:
-                        MoveEnemyIndicatorToFirstAliveEnemy();
-                        chooseEnemyArrow.SetActive(true);
-                        previousState = btlUIState.choosingSkillsCommand;
-                        currentState = btlUIState.choosingEnemy;
-                        break;
-                    case (float)SKILL_TYPE.SINGLE_TARGET_DEBUFF:
-                        MoveEnemyIndicatorToFirstAliveEnemy();
-                        chooseEnemyArrow.SetActive(true);
-                        previousState = btlUIState.choosingSkillsCommand;
-                        currentState = btlUIState.choosingEnemy;
-                        break;
-                    case (float)SKILL_TYPE.ALL_TARGETS_ATK:
-                        break;
-                    case (float)SKILL_TYPE.ALL_TARGETS_DEBUFF:
-                        break;
-                    case (float)SKILL_TYPE.FULL_ROW_ATK:
-                        break;
-                    case (float)SKILL_TYPE.FULL_ROW_DEBUFF:
-                        break;
-                    case (float)SKILL_TYPE.SINGLE_PLAYER_HEAL:
-                        choosePlayerArrow.gameObject.SetActive(true);
-                        playerIndicatorIndex = 0;
-                        choosePlayerArrow.transform.position = choosePlayerPos[0].transform.position;
-                        previousState = btlUIState.choosingSkillsCommand;
-                        currentState = btlUIState.choosingPlayer;
-                        break;
-                    case (float)SKILL_TYPE.ALL_PLAYER_HEAL:
-                        break;
-                    case (float)SKILL_TYPE.SINGLE_PLAYER_BUFF:
-                        choosePlayerArrow.gameObject.SetActive(true);
-                        playerIndicatorIndex = 0;
-                        choosePlayerArrow.transform.position = choosePlayerPos[0].transform.position;
-                        previousState = btlUIState.choosingSkillsCommand;
-                        currentState = btlUIState.choosingPlayer;
-                        break;
-                    case (float)SKILL_TYPE.ALL_PLAYER_BUFF:
-                        break;
+                    skillsPanel.gameObject.SetActive(false);
+                    switch (skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[4])
+                    {
+                        case (float)SKILL_TYPE.SINGLE_TARGET_ATK:
+                            MoveEnemyIndicatorToFirstAliveEnemy();
+                            chooseEnemyArrow.SetActive(true);
+                            previousState = btlUIState.choosingSkillsCommand;
+                            currentState = btlUIState.choosingEnemy;
+                            break;
+                        case (float)SKILL_TYPE.SINGLE_TARGET_DEBUFF:
+                            MoveEnemyIndicatorToFirstAliveEnemy();
+                            chooseEnemyArrow.SetActive(true);
+                            previousState = btlUIState.choosingSkillsCommand;
+                            currentState = btlUIState.choosingEnemy;
+                            break;
+                        case (float)SKILL_TYPE.ALL_TARGETS_ATK:
+                            break;
+                        case (float)SKILL_TYPE.ALL_TARGETS_DEBUFF:
+                            break;
+                        case (float)SKILL_TYPE.FULL_ROW_ATK:
+                            break;
+                        case (float)SKILL_TYPE.FULL_ROW_DEBUFF:
+                            break;
+                        case (float)SKILL_TYPE.SINGLE_PLAYER_HEAL:
+                            choosePlayerArrow.gameObject.SetActive(true);
+                            playerIndicatorIndex = 0;
+                            choosePlayerArrow.transform.position = choosePlayerPos[0].transform.position;
+                            previousState = btlUIState.choosingSkillsCommand;
+                            currentState = btlUIState.choosingPlayer;
+                            break;
+                        case (float)SKILL_TYPE.ALL_PLAYER_HEAL:
+                            break;
+                        case (float)SKILL_TYPE.SINGLE_PLAYER_BUFF:
+                            choosePlayerArrow.gameObject.SetActive(true);
+                            playerIndicatorIndex = 0;
+                            choosePlayerArrow.transform.position = choosePlayerPos[0].transform.position;
+                            previousState = btlUIState.choosingSkillsCommand;
+                            currentState = btlUIState.choosingPlayer;
+                            break;
+                        case (float)SKILL_TYPE.ALL_PLAYER_BUFF:
+                            break;
+                    }
                 }
             }
         }
@@ -1169,8 +1176,20 @@ public class UIBTL : MonoBehaviour
     public void EnemyIsDead(int enemyIndex)
     {
         enemiesDead[enemyIndex] = true;
+        numberOfDeadEnemies++;
 
-        for(int i = 0, j=0; j<enemies.Length;j++)
+        if(numberOfDeadEnemies >=numberOfEnemies)
+        {
+            fadePanel.FlipFadeToVictory();
+
+            //Make sure to turn off the indicators at the end of the turn, this is to make sure the end screen does not show the indicators
+            rageModeIndicator1.gameObject.SetActive(false);
+            rageModeIndicator2.gameObject.SetActive(false);
+            battleHasEnded = true;
+            btlManager.EndOfBattle();
+        }
+
+       /* for(int i = 0, j=0; j<enemies.Length;j++)
         {
             if(enemies[j]!=null && enemiesDead[j]==true)
             {
@@ -1189,6 +1208,7 @@ public class UIBTL : MonoBehaviour
                 }
             }
         }
+       */
     }
 
     private void EndBattleUI()

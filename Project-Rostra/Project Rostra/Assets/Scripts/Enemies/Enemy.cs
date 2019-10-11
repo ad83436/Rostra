@@ -4,8 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-//Code written by: Your moma and I
-//Date: Who the fuck knows
+
 
 public class Enemy : MonoBehaviour
 {

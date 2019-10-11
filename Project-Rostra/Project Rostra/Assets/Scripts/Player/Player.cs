@@ -25,7 +25,6 @@ public class Player : MonoBehaviour
     public float speed;
     public int playerIndex;
     public string name;
-    public string[] equippedSkills = new string [4];
     public int range; //Range of player standard attack
     public int initialPos; //Position of the player 0 being Frontline and -1 being Ranged
     public bool dead;

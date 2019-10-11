@@ -891,13 +891,8 @@ MonoBehaviour:
   speed: 0
   playerIndex: 2
   name: Frea
-  equippedSkills:
-  - 
-  - 
-  - 
-  - 
-  range: 0
-  initialPos: 0
+  range: 3
+  initialPos: -1
   dead: 0
   qImage: {fileID: 21300000, guid: 1618e1866f426ca4dbddf5442facf976, type: 3}
   currentRage: 0
