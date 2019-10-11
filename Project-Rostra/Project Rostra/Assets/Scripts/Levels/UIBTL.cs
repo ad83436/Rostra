@@ -44,6 +44,7 @@ public class UIBTL : MonoBehaviour
     public Image mpBar;
 
     //Skills Control Panel
+
     public Image skillsPanel;
     public GameObject[] skillsHPos;
     public GameObject skillsHighlighter;
@@ -54,6 +55,7 @@ public class UIBTL : MonoBehaviour
     private bool firstTimeOpenedSkillsPanel; //Used to make sure we get the skills information only once per player per turn
 
     //Items Control Panel
+    public GameObject[] choosePlayerPos;
     public GameObject choosePlayerArrow;
     public GameObject itemsPanel;
     public Text itemDescription;
@@ -681,7 +683,7 @@ public class UIBTL : MonoBehaviour
                     case (float)SKILL_TYPE.SINGLE_PLAYER_HEAL:
                         choosePlayerArrow.gameObject.SetActive(true);
                         playerIndicatorIndex = 0;
-                        choosePlayerArrow.transform.position = playerIndicatorPos0.transform.position;
+                        choosePlayerArrow.transform.position = choosePlayerPos[0].transform.position;
                         previousState = btlUIState.choosingSkillsCommand;
                         currentState = btlUIState.choosingPlayer;
                         break;
@@ -690,7 +692,7 @@ public class UIBTL : MonoBehaviour
                     case (float)SKILL_TYPE.SINGLE_PLAYER_BUFF:
                         choosePlayerArrow.gameObject.SetActive(true);
                         playerIndicatorIndex = 0;
-                        choosePlayerArrow.transform.position = playerIndicatorPos0.transform.position;
+                        choosePlayerArrow.transform.position = choosePlayerPos[0].transform.position;
                         previousState = btlUIState.choosingSkillsCommand;
                         currentState = btlUIState.choosingPlayer;
                         break;
@@ -720,7 +722,7 @@ public class UIBTL : MonoBehaviour
         {
             //Make sure you choose an item that is usable and not equipable
             previousState = btlUIState.choosingItemsCommand; //Needed to know what to reference when choosing the player
-            choosePlayerArrow.transform.position = playerIndicatorPos0.transform.position; //Move the player indicator on top of Fargas for now
+            choosePlayerArrow.transform.position = choosePlayerPos[0].transform.position; //Move the player indicator on top of Fargas for now
             playerIndicatorIndex = 0;
             itemsPanel.gameObject.SetActive(false);
             choosePlayerArrow.gameObject.SetActive(true);
@@ -868,13 +870,13 @@ public class UIBTL : MonoBehaviour
             if(Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.UpArrow))
             {
                 playerIndicatorIndex = 1;//Go to Oberon
-                choosePlayerArrow.transform.position = playerIndicatorPos1.transform.position;
+                choosePlayerArrow.transform.position = choosePlayerPos[1].transform.position;
 
             }
             else if(Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow))
             {
                 playerIndicatorIndex = 3;//Go to Arcelus
-                choosePlayerArrow.transform.position = playerIndicatorPos3.transform.position;
+                choosePlayerArrow.transform.position = choosePlayerPos[3].transform.position;
             }
 
         }
@@ -883,13 +885,13 @@ public class UIBTL : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.UpArrow))
             {
                 playerIndicatorIndex = 0;//Go to Fargas
-                choosePlayerArrow.transform.position = playerIndicatorPos0.transform.position;
+                choosePlayerArrow.transform.position = choosePlayerPos[0].transform.position;
 
             }
             else if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow))
             {
                 playerIndicatorIndex = 2;//Go to Frea
-                choosePlayerArrow.transform.position = playerIndicatorPos2.transform.position;
+                choosePlayerArrow.transform.position = choosePlayerPos[2].transform.position;
             }
         }
         else if (playerIndicatorIndex == 2)
@@ -897,13 +899,13 @@ public class UIBTL : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.UpArrow))
             {
                 playerIndicatorIndex = 3;//Go to Arcelus
-                choosePlayerArrow.transform.position = playerIndicatorPos3.transform.position;
+                choosePlayerArrow.transform.position = choosePlayerPos[3].transform.position;
 
             }
             else if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow))
             {
                 playerIndicatorIndex = 1;//Go to Oberon
-                choosePlayerArrow.transform.position = playerIndicatorPos1.transform.position;
+                choosePlayerArrow.transform.position = choosePlayerPos[1].transform.position;
             }
         }
         else if (playerIndicatorIndex == 3)
@@ -911,13 +913,13 @@ public class UIBTL : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.UpArrow))
             {
                 playerIndicatorIndex = 2;//Go to Frea
-                choosePlayerArrow.transform.position = playerIndicatorPos2.transform.position;
+                choosePlayerArrow.transform.position = choosePlayerPos[2].transform.position;
 
             }
             else if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow))
             {
                 playerIndicatorIndex = 0;//Go to Fargas
-                choosePlayerArrow.transform.position = playerIndicatorPos0.transform.position;
+                choosePlayerArrow.transform.position = choosePlayerPos[0].transform.position;
             }
         }
 
