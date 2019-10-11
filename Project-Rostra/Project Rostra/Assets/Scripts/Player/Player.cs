@@ -422,7 +422,7 @@ public class Player : MonoBehaviour
     }
 
     //---------------------------------------------------Skills---------------------------------------------------//
-    public void UseSkillOnOnePlayer(int skillID, float manaCost , Player playerReference)
+    public void UseSkillOnOnePlayer(int skillID, float manaCost , int waitTime, Player playerReference)
     {
         Debug.Log("Skill Target" + skillID);
 
@@ -443,7 +443,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void UseSkillOnOneEnemy(int skillID, float manaCost, Enemy enemyReference)
+    public void UseSkillOnOneEnemy(int skillID, float manaCost, int waitTime, Enemy enemyReference)
     {
         Debug.Log("Skill Target " + skillID);
 
