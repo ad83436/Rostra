@@ -164,6 +164,9 @@ public class VictoryScreen : MonoBehaviour
         arcelusCurrentHPText.color = arcelusMaxHPText.color = arcelusCurrentMPText.color = arcelusMaxMPText.color = arcelusCurrentExpText.color = arcelusMaxExpText.color =
 
         victoryTextBack.color = victoryTextFore.color = panelItemsColor;
+
+        // I put the consumableInv emptying here because it's the victory screen and the battle be done pls forgive
+        MainInventory.invInstance.consumableInv.Clear();
     }
 
     void Update()
