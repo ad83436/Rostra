@@ -278,14 +278,20 @@ public class MainInventory : MonoBehaviour {
 	public void SwapItems(int slot1, int slot2) {
 		if (slot1 != slot2) {
 			int[] tempItem = { invItem[slot1, 0], invItem[slot1, 1], invItem[slot1, 2] };
-			// If the item is a consumable, make sure to update the list for its new slot
+			// If the first item is a consumable, make sure to update the list for its new slot
 			if (ItemType(invItem[slot1, 0]) == (int)ITEM_TYPE.CONSUMABLE) {
 				int index = consumableInv.IndexOf(slot1);
 				consumableInv.RemoveAt(index);
 				consumableInv.Insert(index, slot2);
 			}
-			// Move the second item into the first item's slot
-			invItem[slot1, 0] = invItem[slot2, 0];
+            // If the second item is a consumable, make sure to update the list for its new slot
+            if (ItemType(invItem[slot2, 0]) == (int)ITEM_TYPE.CONSUMABLE) {
+                int index = consumableInv.IndexOf(slot2);
+                consumableInv.RemoveAt(index);
+                consumableInv.Insert(index, slot1);
+            }
+            // Move the second item into the first item's slot
+            invItem[slot1, 0] = invItem[slot2, 0];
 			invItem[slot1, 1] = invItem[slot2, 1];
 			invItem[slot1, 2] = invItem[slot2, 2];
 			// Move the first item into the second item's slot
