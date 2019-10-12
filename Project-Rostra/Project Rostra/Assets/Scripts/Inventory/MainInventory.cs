@@ -496,7 +496,7 @@ public class MainInventory : MonoBehaviour {
 		int itemType = ItemType(itemID);
 
 		// Starting up the item swapping
-		if (option.Equals("Switch")) {
+		if (option.Equals("Move")) {
 			if (!swappingItems) {
 				swappingItems = true;
 				slotToSwapTo = curOption;
