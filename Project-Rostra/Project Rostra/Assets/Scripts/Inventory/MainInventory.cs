@@ -342,14 +342,10 @@ public class MainInventory : MonoBehaviour {
                     invItem[i, 0] = itemID;
                     invItem[i, 1] += numToAdd;
                     numToAdd = 0;
-                    // Add it to the list of consumables
-                    if (ItemType(itemID) == (int)ITEM_TYPE.CONSUMABLE) { consumableInv.Add(i); }
                 } else { // No more space in a stack, try to find an empty spot
                     int remainder = stackSize - invItem[i, 1];
                     invItem[i, 1] = stackSize;
                     numToAdd -= remainder;
-                    // Add it to the list of consumables
-                    if (ItemType(itemID) == (int)ITEM_TYPE.CONSUMABLE) { consumableInv.Add(i); }
                     // NOTE -- If the inventory cannot find a spot for the remaining items it will just discard them.
                     // When this happens a message should be displayed for the player to let them know those items couldn't be picked up.
                 }
