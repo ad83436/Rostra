@@ -581,9 +581,11 @@ public class MainInventory : MonoBehaviour {
 	public int ItemType(int itemID) {
 		int itemType = (int)ITEM_TYPE.CONSUMABLE;
 
-		// Search for the item's type based on its ID
+        // Search for the item's type based on its ID
+
 		switch (itemID) {
-			case (int)ITEM_ID.TEST_POTION_HP:
+
+            case (int)ITEM_ID.TEST_POTION_HP:
 			case (int)ITEM_ID.TEST_POTION_MP:
 				itemType = (int)ITEM_TYPE.CONSUMABLE;
 				break;
@@ -594,6 +596,9 @@ public class MainInventory : MonoBehaviour {
 			case (int)ITEM_ID.TEST_ARMOR1:
 				itemType = (int)ITEM_TYPE.EQUIPABLE;
 				break;
+            default:
+                itemType = 0;
+                break;
 		}
 
 		return itemType;

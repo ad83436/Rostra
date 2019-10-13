@@ -735,10 +735,10 @@ public class UIBTL : MonoBehaviour
             choosePlayerArrow.gameObject.SetActive(true);
             currentState = btlUIState.choosingPlayer;
         }
-        else if(Input.GetKeyDown(KeyCode.DownArrow) && itemsPanelIndex < 29)
+        else if(Input.GetKeyDown(KeyCode.DownArrow) && itemsPanelIndex < inventory.consumableInv.Count)
         {
             //Keep track of where the highlighter is
-            if (itemHPosIndex + 1 < inventory.consumableInv.Count)
+            if (itemsPanelIndex + 1 < inventory.consumableInv.Count)
             {
                 itemHPosIndex++;
 
@@ -765,15 +765,26 @@ public class UIBTL : MonoBehaviour
             if(itemsPanelIndex%3 == 0)
             {
                 //We're mirroring the order of the items in the inventory UI and only showing usable items
-                for (int i = 0; i < 3 && i < inventory.consumableInv.Count; i++)
+                for (int i = 0; i < 3; i++)
                 {
+                    //Make sure we don't go out of bounds
+                    if (itemsPanelIndex + i < inventory.consumableInv.Count)
+                    {
                         itemIconsInPanel[i].sprite = itemIcons[inventory.invItem[inventory.consumableInv[itemsPanelIndex + i], 0]];
                         itemNames[i].text = inventory.ItemName(inventory.invItem[inventory.consumableInv[itemsPanelIndex + i], 0]);
                         itemCount[i].text = inventory.invItem[inventory.consumableInv[itemsPanelIndex + i], 1].ToString();
+                    }
+                    else
+                    {
+                        itemIconsInPanel[i].sprite = itemIcons[0];
+                        itemNames[i].text = "---";
+                        itemCount[i].text = "---";
+
+                    }
                 }
 
                 //Check if we're at the last three items -->This should be changed to work with the inventory count. Will change once we decide on the inventory count
-                if (itemsPanelIndex == 27)
+                if (itemsPanelIndex >= inventory.consumableInv.Count - 3)
                 {
                     downArrow.gameObject.SetActive(false);
                     upArrow.gameObject.SetActive(true);
@@ -788,7 +799,7 @@ public class UIBTL : MonoBehaviour
         }
         else if(Input.GetKeyDown(KeyCode.UpArrow) && itemsPanelIndex > 0)
         {
-            if (itemHPosIndex - 1 >= 0)
+            if (itemsPanelIndex - 1 >= 0)
             {
                 itemHPosIndex--;
                 //Know which items to display

@@ -131,14 +131,6 @@ public class BattleManager : MonoBehaviour
         {
             UpdatePlayerStats(i);
         }
-
-        // I'm gonna stick the loading the consumableInv list here because I'm 99% sure this is where the battle starts
-        var length = MainInventory.INVENTORY_SIZE;
-        for (int i = 0; i < length; i++) {
-            if (MainInventory.invInstance.ItemType(MainInventory.invInstance.invItem[i, 0]) == (int)ITEM_TYPE.CONSUMABLE) {
-                MainInventory.invInstance.consumableInv.Add(i);
-            }
-        }
     }
 
 
@@ -230,6 +222,9 @@ public class BattleManager : MonoBehaviour
 
 
         BuildQueue();
+
+        //Update the consumable inventory
+        TellInventoryToUpdateConsumables();
 
         if (!battleHasEnded)
         {
@@ -457,5 +452,19 @@ public class BattleManager : MonoBehaviour
         players[playerIndex].exp = PartyStats.chara[playerIndex].currentExperience;
         players[playerIndex].expNeededForNextLevel = PartyStats.chara[playerIndex].neededExperience;
         players[playerIndex].playerReference.UpdatePlayerStats();
+    }
+
+    private void TellInventoryToUpdateConsumables()
+    {
+
+        var length = MainInventory.INVENTORY_SIZE;
+        for (int i = 0; i < length; i++)
+        {
+            if (MainInventory.invInstance.ItemType(MainInventory.invInstance.invItem[i, 0]) == (int)ITEM_TYPE.CONSUMABLE)
+            {
+                MainInventory.invInstance.consumableInv.Add(i);
+            }
+        }
+        //Debug.Log("Consumables Count is: " + MainInventory.invInstance.consumableInv.Count);
     }
 }

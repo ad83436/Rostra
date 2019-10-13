@@ -165,7 +165,7 @@ public class VictoryScreen : MonoBehaviour
 
         victoryTextBack.color = victoryTextFore.color = panelItemsColor;
 
-        // I put the consumableInv emptying here because it's the victory screen and the battle be done pls forgive
+        // Clear out the consumables list
         MainInventory.invInstance.consumableInv.Clear();
     }
 
