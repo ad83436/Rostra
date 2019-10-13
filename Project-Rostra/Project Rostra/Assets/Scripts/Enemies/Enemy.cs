@@ -4,8 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-//Code written by: Your moma and I
-//Date: Who the fuck knows
+
 
 public class Enemy : MonoBehaviour
 {
@@ -599,6 +598,10 @@ public class Enemy : MonoBehaviour
         {
             animator.SetBool("Death", true);
         }
+        else
+        {
+            uiBTL.EndTurn(); //Only end the turn after the damage has been taken
+        }
     }
 
     public void EndHitAnimation()
@@ -614,6 +617,7 @@ public class Enemy : MonoBehaviour
             enemyCanvas.SetActive(false);
             dead = true;
             uiBTL.EnemyIsDead(enemyIndexInBattleManager);
+            uiBTL.EndTurn(); //Only end the turn after the enemy is dead
         }
     }
 }

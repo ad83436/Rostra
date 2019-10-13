@@ -25,7 +25,6 @@ public class Player : MonoBehaviour
     public float speed;
     public int playerIndex;
     public string name;
-    public string[] equippedSkills = new string [4];
     public int range; //Range of player standard attack
     public int initialPos; //Position of the player 0 being Frontline and -1 being Ranged
     public bool dead;
@@ -38,7 +37,7 @@ public class Player : MonoBehaviour
     private Animator playerAnimator;
 
     //Skills
-    private int chosenSkill;
+
     //Skill target is used when calling skills to know what we are targeting
     //0: Single enemy attack
     //1: Full row enemies attack
@@ -51,10 +50,14 @@ public class Player : MonoBehaviour
     //8: Single player buff
     //9: All players buff
 
+    private int chosenSkill;
     private int skillTarget; 
     private float mpCost;
+    private float skillWaitTime;
     private Player healThisPlayer;
     private string skillNameForObjPooler;
+    private int skillWaitingIndex = 0;
+    private string skillAnimatorName = "";
 
     //Buffs
     //Booleans are used in case the player's stats were debuffed by an enemy and when buffed, the debuff effects will be negated. The Q counter will not be affected
@@ -87,6 +90,7 @@ public class Player : MonoBehaviour
     public Image rageImage;
     public Text damageText;
     public Text healText;
+    public Text waitTimeText;
 
     //Camera
     public BattleCamera btlCam;
@@ -173,6 +177,7 @@ public class Player : MonoBehaviour
         rageImage.fillAmount = currentRage / maxRage;
         damageText.gameObject.SetActive(false);
         healText.gameObject.SetActive(false);
+        waitTimeText.gameObject.SetActive(false);
     }
 
     private void Update()
@@ -214,6 +219,47 @@ public class Player : MonoBehaviour
             {
                 EndGuard();
             }
+            else if(currentState == playerState.Waiting)
+            {
+                skillWaitTime--;
+
+                if(skillWaitTime<=0)
+                {
+                    waitTimeText.gameObject.SetActive(false);
+                    switch (skillTarget) //use the skill target to know which function to call
+                    {
+                        case 0:
+                            UseSkillOnOneEnemy(chosenSkill, mpCost, 0, attackingThisEnemy);
+                            break;
+                        case 1:
+                            break;
+                        case 2:
+                            break;
+                        case 3:
+                            break;
+                        case 4:
+                            break;
+                        case 5:
+                            break;
+                        case 6:
+                            UseSkillOnOnePlayer(chosenSkill, mpCost, 0, healThisPlayer);
+                            break;
+                        case 7:
+                            break;
+                        case 8:
+                            UseSkillOnOnePlayer(chosenSkill, mpCost, 0, healThisPlayer);
+                            break;
+                        case 9:
+                            break;
+                    }
+                    
+                }
+                else
+                {
+                    waitTimeText.text = skillWaitTime.ToString();
+                    uiBTL.EndTurn();
+                }
+            }
 
             //Check for buffs
             CheckForBuffs();
@@ -254,7 +300,7 @@ public class Player : MonoBehaviour
                 attackingThisEnemy.TakeDamage(actualATK);
             }
         }
-        uiBTL.EndTurn();
+        //uiBTL.EndTurn();
 
         //If the player is in rage state, they can only attack so it makes sense to check if we were in rage mode when attacking
         if(currentState==playerState.Rage)
@@ -353,7 +399,10 @@ public class Player : MonoBehaviour
             PartyStats.chara[playerIndex].rage = currentRage; //Update the party stats
         }
 
-        playerAnimator.SetBool("Hit", true);
+        if (currentState != playerState.Waiting)
+        {
+            playerAnimator.SetBool("Hit", true);
+        }
     }
 
     private void EndHit()
@@ -423,41 +472,80 @@ public class Player : MonoBehaviour
     }
 
     //---------------------------------------------------Skills---------------------------------------------------//
-    public void UseSkillOnOnePlayer(int skillID, float manaCost , Player playerReference)
+    public void UseSkillOnOnePlayer(int skillID, float manaCost , float waitTime, Player playerReference)
     {
         Debug.Log("Skill Target" + skillID);
 
+        skillWaitTime = waitTime;
         chosenSkill = skillID;
         mpCost = manaCost;
         healThisPlayer = playerReference;
 
-        if (skillID == 4) //Heal
+        //Check if the skill is immediate or if the player needs to wait a number of turns
+  if (skillID == 4) //Heal
         {
-            skillTarget = 6; //Single player heal
-            playerAnimator.SetBool("Heal", true);
-
+            skillTarget = 6;//Single player heal
+            skillAnimatorName = "Heal";
+            skillWaitingIndex = 1;
         }
         else if (skillID == 3) //Buff defense skill
         {
             skillTarget = 8; //Single player buff
-            playerAnimator.SetBool("BuffDef", true);
+            skillAnimatorName = "BuffDef";
+            skillWaitingIndex = 1;
+        }
+
+        //If there's waiting time, go to wait state and end the turn 
+        if (waitTime <= 0)
+        {
+            skillWaitingIndex = 0;
+            playerAnimator.SetInteger("WaitingIndex", 0);
+            playerAnimator.SetBool(skillAnimatorName, true);
+        }
+        else
+        {
+            waitTimeText.gameObject.SetActive(true);
+            waitTimeText.text = skillWaitTime.ToString();
+            playerAnimator.SetInteger("WaitingIndex", skillWaitingIndex);
+            currentState = playerState.Waiting;
+            uiBTL.EndTurn();
         }
     }
 
-    public void UseSkillOnOneEnemy(int skillID, float manaCost, Enemy enemyReference)
+    public void UseSkillOnOneEnemy(int skillID, float manaCost, float waitTime, Enemy enemyReference)
     {
-        Debug.Log("Skill Target " + skillID);
 
+        skillWaitTime = waitTime;
         skillTarget = 0;
         chosenSkill = skillID;
         mpCost = manaCost;
+        attackingThisEnemy = enemyReference;
+
         //Check which skill to know which animation to run
         if (skillID == 1 || skillID == 2) //Fargas and Freya basic attack skills
         {
             Debug.Log("HIT");
             skillNameForObjPooler = "FFSkill1";
-            playerAnimator.SetBool("ASkill", true);
-            attackingThisEnemy = enemyReference;
+            skillAnimatorName = "ASkill";
+            skillWaitingIndex = 1;
+        }
+
+        //Do we have to wait?
+        if (waitTime <= 0)
+        {
+
+            skillWaitingIndex = 0;
+            playerAnimator.SetInteger("WaitingIndex", 0);
+            playerAnimator.SetBool(skillAnimatorName, true);
+        }
+        else
+        {
+            //If there's waiting time, go to wait state and end the turn 
+            waitTimeText.gameObject.SetActive(true);
+            waitTimeText.text = skillWaitTime.ToString();
+            playerAnimator.SetInteger("WaitingIndex", skillWaitingIndex);
+            currentState = playerState.Waiting;
+            uiBTL.EndTurn();
         }
 
     }
@@ -527,7 +615,7 @@ public class Player : MonoBehaviour
         currentMP -= mpCost;
         battleManager.players[playerIndex].currentMP = currentMP;
         uiBTL.UpdatePlayerMPControlPanel();
-        uiBTL.EndTurn();
+        currentState = playerState.Idle;
     }
 
     //Heal function. Different heal skills will heal the player by different percentages
@@ -563,6 +651,7 @@ public class Player : MonoBehaviour
         rageImage.fillAmount = currentRage / maxRage;
         uiBTL.UpdatePlayerHPControlPanel();
         PartyStats.chara[playerIndex].rage = currentRage; //Update the party stats
+        uiBTL.EndTurn(); //End the turn of the current player (i.e. the healer) after the healing is done
     }
 
     public void BuffStats(string statToBuff, float amount, float lastsNumberOfTurns)
@@ -626,6 +715,8 @@ public class Player : MonoBehaviour
                 }
                 break;
         }
+
+        uiBTL.EndTurn(); //End the turn of the current player (i.e. the buffer) when the buffing is done
     }
 
     private void CheckForBuffs()

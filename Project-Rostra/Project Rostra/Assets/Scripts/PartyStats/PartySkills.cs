@@ -78,8 +78,7 @@ public struct CharacterSkills {
         // Set the current learned skill to the deafult value (int)SKILLS.NO_SKILL
         var length = learnedSkills.Length;
         for (int i = 0; i < length; i++) {
-            learnedSkills[i] = unlockableSkills[i];
-            numSkillsLearned++;
+            learnedSkills[i] = (int)SKILLS.NO_SKILL;
         }
         // Set the character's current equipped skills to the default value as well
         equippedSkills = new int[PartySkills.MAX_SKILLS]{

@@ -44,6 +44,7 @@ public class UIBTL : MonoBehaviour
     public Image mpBar;
 
     //Skills Control Panel
+
     public Image skillsPanel;
     public GameObject[] skillsHPos;
     public GameObject skillsHighlighter;
@@ -54,6 +55,7 @@ public class UIBTL : MonoBehaviour
     private bool firstTimeOpenedSkillsPanel; //Used to make sure we get the skills information only once per player per turn
 
     //Items Control Panel
+    public GameObject[] choosePlayerPos;
     public GameObject choosePlayerArrow;
     public GameObject itemsPanel;
     public Text itemDescription;
@@ -95,7 +97,10 @@ public class UIBTL : MonoBehaviour
     //Enemies
     public Enemy[] enemies;
     public bool [] enemiesDead;
-    public int numberOfEnemies;
+    public int numberOfEnemies; //Populated by the battle manager at the start of the battle
+    private int numberOfDeadEnemies = 0;
+    private bool moveRangedRowToFrontRoW = false; //Turend true when there are 4 or more enemies and 0,1,2 are dead
+
 
     //Players
     private Player playerInControl;
@@ -239,7 +244,7 @@ public class UIBTL : MonoBehaviour
     public void QueueIsReady()
     {
         //Called from the BTL manager when the Q has been built
-
+        Debug.Log("Images count " + imagesQ.Count);
         //Fill up the Q until its of size 9. Only 6 will be on screen at a time however.
         switch(imagesQ.Count)
         {
@@ -294,6 +299,14 @@ public class UIBTL : MonoBehaviour
                     images[i].sprite = imagesQ[i];
                 }
                 break;
+            case 9:
+                for (int i = 0; i < 9; i++)
+                {
+                    //0 - 8
+                    images[i].sprite = imagesQ[i];
+                }
+                break;
+
         }
 
     }
@@ -385,26 +398,24 @@ public class UIBTL : MonoBehaviour
     public void ShowThisPlayerUI(int playerIndex, string name, Player playerReference)
     {
         DisableActivtyText();
+        playerInControl = playerReference;
         if (playerReference.currentState != Player.playerState.Waiting && !battleHasEnded)
         {
             currentState = btlUIState.choosingBasicCommand;
+
+            playerTurnIndicator.SetActive(true);
+            controlsPanel.gameObject.SetActive(true);
+
+            playerName.text = name;
+            UpdatePlayerHPControlPanel();
+            UpdatePlayerMPControlPanel();
+            RageOptionTextColor();
         }
 
-        //Debug.Log("Player index " + playerIndex);
-
-        playerTurnIndicator.SetActive(true);
-        controlsPanel.gameObject.SetActive(true);
-
-        playerName.text = name;
-        playerInControl = playerReference;
-        UpdatePlayerHPControlPanel();
-        UpdatePlayerMPControlPanel();
         playerInControl.PlayerTurn();
-        RageOptionTextColor();
 
-       
         //Turn on the indicator if the player is in rage mode
-        if(playerInControl.currentState==Player.playerState.Rage)
+        if (playerInControl.currentState==Player.playerState.Rage)
         {
             rageModeIndicator1.gameObject.SetActive(true);
             rageModeIndicator2.gameObject.SetActive(true);
@@ -645,57 +656,53 @@ public class UIBTL : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Space))
         {
-
-            //Choose skill, make sure you have enough MP to use it, then check if it targets players or enemies       
-            if (playerInControl.currentMP >= skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[5])
+            if (PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator] != (int)SKILLS.NO_SKILL)
             {
-                skillsPanel.gameObject.SetActive(false);
-                switch (skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[4])
+                //Choose skill, make sure you have enough MP to use it, then check if it targets players or enemies       
+                if (playerInControl.currentMP >= skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[5])
                 {
-                    //0: Target one enemy
-                    //1: Target all enemies
-                    //2: Target row of enemies
-                    //4: Target one player
-                    //5: Target all players
-
-                    case (float)SKILL_TYPE.SINGLE_TARGET_ATK:
-                        MoveEnemyIndicatorToFirstAliveEnemy();
-                        chooseEnemyArrow.SetActive(true);
-                        previousState = btlUIState.choosingSkillsCommand;
-                        currentState = btlUIState.choosingEnemy;
-                        break;
-                    case (float)SKILL_TYPE.SINGLE_TARGET_DEBUFF:
-                        MoveEnemyIndicatorToFirstAliveEnemy();
-                        chooseEnemyArrow.SetActive(true);
-                        previousState = btlUIState.choosingSkillsCommand;
-                        currentState = btlUIState.choosingEnemy;
-                        break;
-                    case (float)SKILL_TYPE.ALL_TARGETS_ATK:
-                        break;
-                    case (float)SKILL_TYPE.ALL_TARGETS_DEBUFF:
-                        break;
-                    case (float)SKILL_TYPE.FULL_ROW_ATK:
-                        break;
-                    case (float)SKILL_TYPE.FULL_ROW_DEBUFF:
-                        break;
-                    case (float)SKILL_TYPE.SINGLE_PLAYER_HEAL:
-                        choosePlayerArrow.gameObject.SetActive(true);
-                        playerIndicatorIndex = 0;
-                        choosePlayerArrow.transform.position = playerIndicatorPos0.transform.position;
-                        previousState = btlUIState.choosingSkillsCommand;
-                        currentState = btlUIState.choosingPlayer;
-                        break;
-                    case (float)SKILL_TYPE.ALL_PLAYER_HEAL:
-                        break;
-                    case (float)SKILL_TYPE.SINGLE_PLAYER_BUFF:
-                        choosePlayerArrow.gameObject.SetActive(true);
-                        playerIndicatorIndex = 0;
-                        choosePlayerArrow.transform.position = playerIndicatorPos0.transform.position;
-                        previousState = btlUIState.choosingSkillsCommand;
-                        currentState = btlUIState.choosingPlayer;
-                        break;
-                    case (float)SKILL_TYPE.ALL_PLAYER_BUFF:
-                        break;
+                    skillsPanel.gameObject.SetActive(false);
+                    switch (skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[4])
+                    {
+                        case (float)SKILL_TYPE.SINGLE_TARGET_ATK:
+                            MoveEnemyIndicatorToFirstAliveEnemy();
+                            chooseEnemyArrow.SetActive(true);
+                            previousState = btlUIState.choosingSkillsCommand;
+                            currentState = btlUIState.choosingEnemy;
+                            break;
+                        case (float)SKILL_TYPE.SINGLE_TARGET_DEBUFF:
+                            MoveEnemyIndicatorToFirstAliveEnemy();
+                            chooseEnemyArrow.SetActive(true);
+                            previousState = btlUIState.choosingSkillsCommand;
+                            currentState = btlUIState.choosingEnemy;
+                            break;
+                        case (float)SKILL_TYPE.ALL_TARGETS_ATK:
+                            break;
+                        case (float)SKILL_TYPE.ALL_TARGETS_DEBUFF:
+                            break;
+                        case (float)SKILL_TYPE.FULL_ROW_ATK:
+                            break;
+                        case (float)SKILL_TYPE.FULL_ROW_DEBUFF:
+                            break;
+                        case (float)SKILL_TYPE.SINGLE_PLAYER_HEAL:
+                            choosePlayerArrow.gameObject.SetActive(true);
+                            playerIndicatorIndex = 0;
+                            choosePlayerArrow.transform.position = choosePlayerPos[0].transform.position;
+                            previousState = btlUIState.choosingSkillsCommand;
+                            currentState = btlUIState.choosingPlayer;
+                            break;
+                        case (float)SKILL_TYPE.ALL_PLAYER_HEAL:
+                            break;
+                        case (float)SKILL_TYPE.SINGLE_PLAYER_BUFF:
+                            choosePlayerArrow.gameObject.SetActive(true);
+                            playerIndicatorIndex = 0;
+                            choosePlayerArrow.transform.position = choosePlayerPos[0].transform.position;
+                            previousState = btlUIState.choosingSkillsCommand;
+                            currentState = btlUIState.choosingPlayer;
+                            break;
+                        case (float)SKILL_TYPE.ALL_PLAYER_BUFF:
+                            break;
+                    }
                 }
             }
         }
@@ -720,16 +727,16 @@ public class UIBTL : MonoBehaviour
         {
             //Make sure you choose an item that is usable and not equipable
             previousState = btlUIState.choosingItemsCommand; //Needed to know what to reference when choosing the player
-            choosePlayerArrow.transform.position = playerIndicatorPos0.transform.position; //Move the player indicator on top of Fargas for now
+            choosePlayerArrow.transform.position = choosePlayerPos[0].transform.position; //Move the player indicator on top of Fargas for now
             playerIndicatorIndex = 0;
             itemsPanel.gameObject.SetActive(false);
             choosePlayerArrow.gameObject.SetActive(true);
             currentState = btlUIState.choosingPlayer;
         }
-        else if(Input.GetKeyDown(KeyCode.DownArrow) && itemsPanelIndex < 29)
+        else if(Input.GetKeyDown(KeyCode.DownArrow) && itemsPanelIndex < inventory.consumableInv.Count)
         {
             //Keep track of where the highlighter is
-            if (itemHPosIndex + 1 < inventory.consumableInv.Count)
+            if (itemsPanelIndex + 1 < inventory.consumableInv.Count)
             {
                 itemHPosIndex++;
 
@@ -756,15 +763,26 @@ public class UIBTL : MonoBehaviour
             if(itemsPanelIndex%3 == 0)
             {
                 //We're mirroring the order of the items in the inventory UI and only showing usable items
-                for (int i = 0; i < 3 && i < inventory.consumableInv.Count; i++)
+                for (int i = 0; i < 3; i++)
                 {
+                    //Make sure we don't go out of bounds
+                    if (itemsPanelIndex + i < inventory.consumableInv.Count)
+                    {
                         itemIconsInPanel[i].sprite = itemIcons[inventory.invItem[inventory.consumableInv[itemsPanelIndex + i], 0]];
                         itemNames[i].text = inventory.ItemName(inventory.invItem[inventory.consumableInv[itemsPanelIndex + i], 0]);
                         itemCount[i].text = inventory.invItem[inventory.consumableInv[itemsPanelIndex + i], 1].ToString();
+                    }
+                    else
+                    {
+                        itemIconsInPanel[i].sprite = itemIcons[0];
+                        itemNames[i].text = "---";
+                        itemCount[i].text = "---";
+
+                    }
                 }
 
                 //Check if we're at the last three items -->This should be changed to work with the inventory count. Will change once we decide on the inventory count
-                if (itemsPanelIndex == 27)
+                if (itemsPanelIndex >= inventory.consumableInv.Count - 3)
                 {
                     downArrow.gameObject.SetActive(false);
                     upArrow.gameObject.SetActive(true);
@@ -779,7 +797,7 @@ public class UIBTL : MonoBehaviour
         }
         else if(Input.GetKeyDown(KeyCode.UpArrow) && itemsPanelIndex > 0)
         {
-            if (itemHPosIndex - 1 >= 0)
+            if (itemsPanelIndex - 1 >= 0)
             {
                 itemHPosIndex--;
                 //Know which items to display
@@ -868,13 +886,13 @@ public class UIBTL : MonoBehaviour
             if(Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.UpArrow))
             {
                 playerIndicatorIndex = 1;//Go to Oberon
-                choosePlayerArrow.transform.position = playerIndicatorPos1.transform.position;
+                choosePlayerArrow.transform.position = choosePlayerPos[1].transform.position;
 
             }
             else if(Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow))
             {
                 playerIndicatorIndex = 3;//Go to Arcelus
-                choosePlayerArrow.transform.position = playerIndicatorPos3.transform.position;
+                choosePlayerArrow.transform.position = choosePlayerPos[3].transform.position;
             }
 
         }
@@ -883,13 +901,13 @@ public class UIBTL : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.UpArrow))
             {
                 playerIndicatorIndex = 0;//Go to Fargas
-                choosePlayerArrow.transform.position = playerIndicatorPos0.transform.position;
+                choosePlayerArrow.transform.position = choosePlayerPos[0].transform.position;
 
             }
             else if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow))
             {
                 playerIndicatorIndex = 2;//Go to Frea
-                choosePlayerArrow.transform.position = playerIndicatorPos2.transform.position;
+                choosePlayerArrow.transform.position = choosePlayerPos[2].transform.position;
             }
         }
         else if (playerIndicatorIndex == 2)
@@ -897,13 +915,13 @@ public class UIBTL : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.UpArrow))
             {
                 playerIndicatorIndex = 3;//Go to Arcelus
-                choosePlayerArrow.transform.position = playerIndicatorPos3.transform.position;
+                choosePlayerArrow.transform.position = choosePlayerPos[3].transform.position;
 
             }
             else if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow))
             {
                 playerIndicatorIndex = 1;//Go to Oberon
-                choosePlayerArrow.transform.position = playerIndicatorPos1.transform.position;
+                choosePlayerArrow.transform.position = choosePlayerPos[1].transform.position;
             }
         }
         else if (playerIndicatorIndex == 3)
@@ -911,13 +929,13 @@ public class UIBTL : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.UpArrow))
             {
                 playerIndicatorIndex = 2;//Go to Frea
-                choosePlayerArrow.transform.position = playerIndicatorPos2.transform.position;
+                choosePlayerArrow.transform.position = choosePlayerPos[2].transform.position;
 
             }
             else if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow))
             {
                 playerIndicatorIndex = 0;//Go to Fargas
-                choosePlayerArrow.transform.position = playerIndicatorPos0.transform.position;
+                choosePlayerArrow.transform.position = choosePlayerPos[0].transform.position;
             }
         }
 
@@ -943,7 +961,10 @@ public class UIBTL : MonoBehaviour
                 if (btlManager.players[playerIndicatorIndex].playerReference.currentState != Player.playerState.Rage)
                 {
                     UpdateActivityText((skills.SkillName(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])));
-                    playerInControl.UseSkillOnOnePlayer(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator], skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[5], btlManager.players[playerIndicatorIndex].playerReference);
+                    playerInControl.UseSkillOnOnePlayer(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator],
+                                                        skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[5],
+                                                        skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[2],
+                                                        btlManager.players[playerIndicatorIndex].playerReference);
                 }
             }
         }
@@ -1113,7 +1134,10 @@ public class UIBTL : MonoBehaviour
             {
                 Debug.Log("Enemy has been chosen");
                 UpdateActivityText(skills.SkillName(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator]));
-                playerInControl.UseSkillOnOneEnemy(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator], skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[5], enemies[enemyIndicatorIndex]);
+                playerInControl.UseSkillOnOneEnemy(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator],
+                                                   skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[5],
+                                                   skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[2],
+                                                   enemies[enemyIndicatorIndex]);
             }
         }
     }
@@ -1167,8 +1191,20 @@ public class UIBTL : MonoBehaviour
     public void EnemyIsDead(int enemyIndex)
     {
         enemiesDead[enemyIndex] = true;
+        numberOfDeadEnemies++;
 
-        for(int i = 0, j=0; j<enemies.Length;j++)
+        if(numberOfDeadEnemies >=numberOfEnemies)
+        {
+            fadePanel.FlipFadeToVictory();
+
+            //Make sure to turn off the indicators at the end of the turn, this is to make sure the end screen does not show the indicators
+            rageModeIndicator1.gameObject.SetActive(false);
+            rageModeIndicator2.gameObject.SetActive(false);
+            battleHasEnded = true;
+            btlManager.EndOfBattle();
+        }
+
+       /* for(int i = 0, j=0; j<enemies.Length;j++)
         {
             if(enemies[j]!=null && enemiesDead[j]==true)
             {
@@ -1187,6 +1223,7 @@ public class UIBTL : MonoBehaviour
                 }
             }
         }
+       */
     }
 
     private void EndBattleUI()

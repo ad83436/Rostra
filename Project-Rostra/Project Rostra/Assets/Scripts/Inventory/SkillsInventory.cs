@@ -203,12 +203,12 @@ public class SkillsInventory : MonoBehaviour {
             // Skill found, add to unlocked skills
             if (PartySkills.skills[playerID].unlockableSkills[i] == skillID) {
                 PartySkills.skills[playerID].learnedSkills[PartySkills.skills[playerID].numSkillsLearned] = skillID;
+				PartySkills.skills[playerID].unlockableSkills[i] = (int)SKILLS.NO_SKILL;
                 PartySkills.skills[playerID].numSkillsLearned++;
                 unlockSuccess = true;
                 i = length; // Exit the loop
             }
         }
-
         return unlockSuccess;
     }
 
@@ -218,28 +218,19 @@ public class SkillsInventory : MonoBehaviour {
 
     // Finds the name of the skill relative to the ID provided in the argument
     public string SkillName(int skillID) {
-        string name = "---";
-
         // Find the name relative to the ID given
         switch (skillID) {
             case (int)SKILLS.TEST_Fargas:
-                name = "Offense Skill 1";
-                break;
+                return "Offense Skill 1";
             case (int)SKILLS.TEST_Frea:
-                name = "Offense Skill 2";
-                break;
+                return "Offense Skill 2";
             case (int)SKILLS.TEST_Oberon:
-                name = "Buff Skill 1";
-                break;
+                return "Buff Skill 1";
             case (int)SKILLS.TEST_Arcelus:
-                name = "Heal Skill 1";
-                break;
+                return "Heal Skill 1";
             default: //In case no skill is equipped at that slot
-                name = "---";
-                break;
+                return "---";
         }
-
-        return name;
     }
 
     #endregion
@@ -248,21 +239,19 @@ public class SkillsInventory : MonoBehaviour {
 
     // Finds the skill's description relative to the ID provided in the argument parameter
     public string SkillDescription(int skillID) {
-        string description = "";
 
         // Find the description relative to the ID given
         switch (skillID) {
             case (int)SKILLS.TEST_Fargas:
-                return "Offense skill 1 targets enemies";
+                return "Offense skill \n\n1 targets enemies";
             case (int)SKILLS.TEST_Frea:
-               return "Offense skill 2 targets enemies";
+               return "Offense skill 2 \n\ntargets enemies";
             case (int)SKILLS.TEST_Oberon:
-                return "Buff skill 1 targets players";
+                return "Buff skill 1 \n\ntargets players";
             case (int)SKILLS.TEST_Arcelus:
-                return "Heal skill 1 targets players";
+                return "Heal skill 1 \n\ntargets players";
+			default: return "";
         }
-
-        return description;
     }
 
     #endregion
@@ -286,31 +275,35 @@ public class SkillsInventory : MonoBehaviour {
             case (int)SKILLS.TEST_Fargas:
                 skillStat[0] = 25;
                 skillStat[1] = 95;
+                skillStat[2] = 2;
                 skillStat[4] = (float)SKILL_TYPE.SINGLE_TARGET_ATK;
                 skillStat[5] = 50;
                 break;
             case (int)SKILLS.TEST_Frea:
                 skillStat[0] = 70;
                 skillStat[1] = 80;
+                skillStat[2] = 0;
                 skillStat[4] = (float)SKILL_TYPE.SINGLE_TARGET_ATK;
                 skillStat[5] = 45;
                 break;
             case (int)SKILLS.TEST_Oberon:
                 skillStat[0] = 50;
                 skillStat[1] = 85;
-                skillStat[2] = 2;
+                skillStat[2] = 0;
                 skillStat[4] = (float)SKILL_TYPE.SINGLE_PLAYER_BUFF;
                 skillStat[5] = 115;
                 break;
             case (int)SKILLS.TEST_Arcelus:
                 skillStat[0] = 20;
                 skillStat[1] = 100;
+                skillStat[2] = 1;
                 skillStat[4] = (float)SKILL_TYPE.SINGLE_PLAYER_HEAL;
                 skillStat[5] = 40;
                 break;
             default:
                 skillStat[0] = 0;
                 skillStat[1] = 0;
+                skillStat[2] = 0;
                 skillStat[4] = (float)SKILL_TYPE.SINGLE_PLAYER_HEAL;
                 skillStat[5] = 0;
                 break;
