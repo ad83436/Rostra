@@ -398,26 +398,24 @@ public class UIBTL : MonoBehaviour
     public void ShowThisPlayerUI(int playerIndex, string name, Player playerReference)
     {
         DisableActivtyText();
+        playerInControl = playerReference;
         if (playerReference.currentState != Player.playerState.Waiting && !battleHasEnded)
         {
             currentState = btlUIState.choosingBasicCommand;
+
+            playerTurnIndicator.SetActive(true);
+            controlsPanel.gameObject.SetActive(true);
+
+            playerName.text = name;
+            UpdatePlayerHPControlPanel();
+            UpdatePlayerMPControlPanel();
+            RageOptionTextColor();
         }
 
-        //Debug.Log("Player index " + playerIndex);
-
-        playerTurnIndicator.SetActive(true);
-        controlsPanel.gameObject.SetActive(true);
-
-        playerName.text = name;
-        playerInControl = playerReference;
-        UpdatePlayerHPControlPanel();
-        UpdatePlayerMPControlPanel();
         playerInControl.PlayerTurn();
-        RageOptionTextColor();
 
-       
         //Turn on the indicator if the player is in rage mode
-        if(playerInControl.currentState==Player.playerState.Rage)
+        if (playerInControl.currentState==Player.playerState.Rage)
         {
             rageModeIndicator1.gameObject.SetActive(true);
             rageModeIndicator2.gameObject.SetActive(true);
