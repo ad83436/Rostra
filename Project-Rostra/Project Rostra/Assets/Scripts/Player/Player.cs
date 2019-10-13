@@ -482,38 +482,31 @@ public class Player : MonoBehaviour
         healThisPlayer = playerReference;
 
         //Check if the skill is immediate or if the player needs to wait a number of turns
+  if (skillID == 4) //Heal
+        {
+            skillTarget = 6;//Single player heal
+            skillAnimatorName = "Heal";
+            skillWaitingIndex = 1;
+        }
+        else if (skillID == 3) //Buff defense skill
+        {
+            skillTarget = 8; //Single player buff
+            skillAnimatorName = "BuffDef";
+            skillWaitingIndex = 1;
+        }
+
+        //If there's waiting time, go to wait state and end the turn 
         if (waitTime <= 0)
         {
-
-            if (skillID == 4) //Heal
-            {
-                
-                skillTarget = 6;//Single player heal
-                playerAnimator.SetBool("Heal", true);
-
-            }
-            else if (skillID == 3) //Buff defense skill
-            {
-                skillTarget = 8; //Single player buff
-                playerAnimator.SetBool("BuffDef", true);
-                Debug.Log("BUFF DEF");
-            }
+            skillWaitingIndex = 0;
+            playerAnimator.SetInteger("WaitingIndex", 0);
+            playerAnimator.SetBool(skillAnimatorName, true);
         }
         else
         {
-
-            switch (skillID)
-            {
-                case 3:
-                    skillTarget = 8;//Single player buff
-                    break;
-                case 4:
-                    skillTarget = 6;//Single player heal
-                    break;
-
-            }
-            //If there's waiting time, go to wait state and end the turn 
-            playerAnimator.SetInteger("WaitingIndex", 1);
+            waitTimeText.gameObject.SetActive(true);
+            waitTimeText.text = skillWaitTime.ToString();
+            playerAnimator.SetInteger("WaitingIndex", skillWaitingIndex);
             currentState = playerState.Waiting;
             uiBTL.EndTurn();
         }
@@ -547,7 +540,6 @@ public class Player : MonoBehaviour
         }
         else
         {
-
             //If there's waiting time, go to wait state and end the turn 
             waitTimeText.gameObject.SetActive(true);
             waitTimeText.text = skillWaitTime.ToString();
