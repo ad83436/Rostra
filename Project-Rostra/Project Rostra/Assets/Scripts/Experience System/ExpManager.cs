@@ -220,7 +220,7 @@ public class ExpManager : MonoBehaviour {
 			case 0:
 				switch (skill) {
 					case SKILLS.TEST_Fargas:	return new int[] { 110, 15, 200, 200, 16, 14, 16 };
-					case SKILLS.TEST_Frea:		return new int[] { 110, 15, 200, 200, 16, 14, 16 };
+					case SKILLS.TEST_Frea:		return new int[] { 120, 15, 200, 200, 16, 14, 16 };
 					case SKILLS.TEST_Oberon:	return new int[] { 100, 20, 200, 200, 16, 14, 16 };
 					case SKILLS.TEST_Arcelus:	return new int[] { 100, 15, 210, 200, 16, 14, 16 };
 					case SKILLS.TEST_Fargas2:	return new int[] { 110, 15, 200, 200, 16, 14, 16 };

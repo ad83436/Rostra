@@ -132,7 +132,9 @@ public class PartyMenuController : SubMenu {
 			if (Cancel) { CloseStatsMenu(); return; }
 			statsMenu.UpdateItemSelected(Down, Up, Left, Right, Confirm, Cancel);
 			statPointCounter.text = PartyStats.chara[playerIndex].statPoints + " StatPoints";
-			if (Input.GetKeyDown(KeyCode.V)) PartyStats.chara[playerIndex].statPoints++;
+			if (Input.GetKeyDown(KeyCode.V) && !(statsMenu.xIndex == 1 && statsMenu.yIndex == 3)) {
+				PartyStats.chara[playerIndex].statPoints++; statsMenu.UpdateItemSelected(false, false, false, false, true, false);
+			}
 		}
 	}
 
@@ -191,7 +193,6 @@ public class PartyMenuController : SubMenu {
 			case "Critical": break;
 			default: Debug.LogError("Stat button name did not match"); break;
 		}
-		print("reached end");
 		UpdateStats();
 	}
 }
