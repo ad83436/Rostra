@@ -2,15 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+#pragma warning disable CS0649
+
 public class PauseMenuController : MonoBehaviour {
 
 	//singleton
 	public static PauseMenuController instance;
 
 	public static bool isPaused = false;
-	public bool activeMenu = true;
+	private bool activeMenu = true;
+	public bool ActiveMenu {
+		get => activeMenu;
+		set {
+			activeMenu = value;
+			listItems[currentListItem].color = Color.yellow;
+		}
+	}
 	private CanvasGroup group;
-	
+
 	[SerializeField] private UnityEngine.UI.Text[] listItems;
 	[SerializeField] private SubMenu[] allSubMenus;
 
@@ -21,7 +30,7 @@ public class PauseMenuController : MonoBehaviour {
 	#endregion
 
 	#region InputVariables
-	
+
 	public bool Up { get; private set; }
 	public bool Down { get; private set; }
 	public bool Left { get; private set; }
@@ -53,18 +62,24 @@ public class PauseMenuController : MonoBehaviour {
 	private void Update() {
 		//update inputs
 		pause = Input.GetButtonDown("Pause");
+		Cancel = Input.GetButtonDown("Cancel");
 
-		if (pause) {
+		if ((pause && activeMenu) || (isPaused && activeMenu && Cancel)) {
 			isPaused = !isPaused;
 			if (isPaused) {
 				//onPause logic
 				currentListItem = 0;
-				listItems[currentListItem].color = Color.blue;
+				listItems[currentListItem].color = Color.yellow;
 				group.alpha = 1f;
+				allSubMenus[currentListItem].Visible = true;
+				allSubMenus[currentListItem].OnActive();
 			} else {
 				//onUnPause logic
 				listItems[currentListItem].color = Color.white;
 				group.alpha = 0f;
+				allSubMenus[currentListItem].Visible = false;
+				allSubMenus[currentListItem].OnInactive();
+				currentListItem = 0;
 			}
 		}
 
@@ -76,18 +91,17 @@ public class PauseMenuController : MonoBehaviour {
 		Right = Input.GetButtonDown("Right");
 
 		Confirm = Input.GetButtonDown("Confirm");
-		Cancel = Input.GetButtonDown("Cancel");
-		
+
 		if (activeMenu) {
 			//do main list
-			if (Up) currentListItem++;
-			else if (Down) currentListItem--;
+			if (Down) currentListItem++;
+			else if (Up) currentListItem--;
 			if (currentListItem > listItems.Length - 1) currentListItem = 0;
 			else if (currentListItem < 0) currentListItem = listItems.Length - 1;
-			
+
 			if (Up || Down) {
 				for (int i = 0; i < listItems.Length; i++) {
-					if (currentListItem == i) listItems[i].color = Color.blue;
+					if (currentListItem == i) listItems[i].color = Color.yellow;
 					else listItems[i].color = Color.white;
 				}
 				for (int i = 0; i < allSubMenus.Length; i++) {
@@ -96,7 +110,11 @@ public class PauseMenuController : MonoBehaviour {
 				}
 			}
 
-			if (Confirm) allSubMenus[currentListItem].IsActive = true;
+			if (Confirm) {
+				allSubMenus[currentListItem].IsActive = true;
+				activeMenu = false;
+				listItems[currentListItem].color = Color.white;
+			}
 
 		} else { // currently in a submenu or submenu is visible
 			foreach (SubMenu item in allSubMenus) {
@@ -105,7 +123,7 @@ public class PauseMenuController : MonoBehaviour {
 		}
 
 	}
-	
+
 	#endregion
 
 }

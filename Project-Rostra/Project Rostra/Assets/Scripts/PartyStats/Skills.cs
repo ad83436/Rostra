@@ -6,10 +6,14 @@
 
 public enum SKILLS { // Minimum Value -- 0x0000, Maximum Value -- 0xFFEF (65519 possible skills)
 	NO_SKILL =              0x0000,
-    TEST_SKILL1 =           0x0001,
-    TEST_SKILL2 =           0x0002,
-    TEST_SKILL3 =           0x0003,
-    TEST_SKILL4 =           0x0004,
+    TEST_Fargas =           0x0001,
+    TEST_Frea =             0x0002,
+    TEST_Oberon =           0x0003,
+    TEST_Arcelus =          0x0004,
+    TEST_Fargas2 =          0x0005,
+    TEST_Frea2 =            0x0006,
+    TEST_Oberon2 =          0x0007,
+    TEST_Arcelus2 =         0x0008,
 };
 
 public enum SKILL_TYPE{ // Minimum Value -- 0xFFF0, Maximum Value -- 0xFFFF (16 possible skill types)

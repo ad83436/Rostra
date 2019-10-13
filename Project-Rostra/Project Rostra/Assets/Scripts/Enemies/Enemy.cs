@@ -4,8 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-//Code written by: Your moma and I
-//Date: Who the fuck knows
+
 
 public class Enemy : MonoBehaviour
 {
@@ -62,6 +61,8 @@ public class Enemy : MonoBehaviour
     public Image HP;
     public float maxHP;
     public float currentHP;
+    public Text damageText;
+    public Text healText;
     public GameObject enemyCanvas;
 
     private bool haveAddedMyself;
@@ -83,6 +84,9 @@ public class Enemy : MonoBehaviour
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         spriteColor = spriteRenderer.color;
         animator = gameObject.GetComponent<Animator>();
+
+        damageText.gameObject.SetActive(false);
+        healText.gameObject.SetActive(false);
 
         haveAddedMyself = false;
         hit = false;
@@ -151,6 +155,7 @@ public class Enemy : MonoBehaviour
 
     public void EnemyTurn()
     {
+        uiBTL.DisableActivtyText();
         float attackChance = Random.Range(0, 100); // determines if the ememy will use its type attack or a dumb attack 
         float skillChance = Random.Range(0, 60);// determines if the enemy will use a skill or not //TEMP VALUES//
 
@@ -580,15 +585,22 @@ public class Enemy : MonoBehaviour
     //Calcualte the damage
     public void TakeDamage(float playerAttack)
     {
+        Debug.Log("Received player attack: " + playerAttack);
         float damage = playerAttack - ((eDefence / (20.0f + eDefence)) * playerAttack);
         currentHP -= damage;
+        damageText.gameObject.SetActive(true);
+        damageText.text = Mathf.RoundToInt(damage).ToString();
         battleManager.enemies[enemyIndexInBattleManager].currentHP = currentHP; //Update the BTL manager with the new health
         HP.fillAmount = currentHP / maxHP;
         animator.SetBool("Hit", true);
 
         if (currentHP <= 0.0f)
         {
-            Death();
+            animator.SetBool("Death", true);
+        }
+        else
+        {
+            uiBTL.EndTurn(); //Only end the turn after the damage has been taken
         }
     }
 
@@ -599,9 +611,13 @@ public class Enemy : MonoBehaviour
 
     private void Death()
     {
-        spriteRenderer.enabled = false;
-        enemyCanvas.SetActive(false);
-        dead = true;
-        uiBTL.EnemyIsDead(enemyIndexInBattleManager);
+        if (!dead)
+        {
+            spriteRenderer.enabled = false;
+            enemyCanvas.SetActive(false);
+            dead = true;
+            uiBTL.EnemyIsDead(enemyIndexInBattleManager);
+            uiBTL.EndTurn(); //Only end the turn after the enemy is dead
+        }
     }
 }
