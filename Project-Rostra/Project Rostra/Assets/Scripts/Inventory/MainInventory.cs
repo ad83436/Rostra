@@ -2,10 +2,11 @@
 using UnityEngine;
 
 // Code Written By:     Christopher Brine
-// Last Updated:        September 30th, 2019
+// Last Updated:        October 10th, 2019
 
 public class MainInventory : MonoBehaviour {
     public static MainInventory invInstance;    // Holds the current inventory instance in a single variable
+    public static int totalMoney = 0;           // The amount of money the player has
     public static int INVENTORY_SIZE = 60;      // The maximum size of the inventory
     public int[,] invItem = new int[INVENTORY_SIZE, 3];
     // NOTE -- Element 0 is the item's ID value that will point to its name, description, icon, etc.
@@ -42,13 +43,12 @@ public class MainInventory : MonoBehaviour {
     public void Awake() {
         if (invInstance == null) {
             invInstance = this;
+            DontDestroyOnLoad(gameObject);
         } else {
             Destroy(gameObject);
         }
         // Set all 3rd elements in the array to -1 (Equipped by nobody) 
-        for (int i = 0; i < INVENTORY_SIZE; i++) {
-            invItem[i, 2] = -1;
-        }
+        for (int i = 0; i < INVENTORY_SIZE; i++) {invItem[i, 2] = -1;}
     }
 
     // FOR TESTING
@@ -446,6 +446,33 @@ public class MainInventory : MonoBehaviour {
         }
 
         return price;
+    }
+
+    #endregion
+
+    #region Item Classes for Merchants
+
+    public int ItemClass(int itemID) {
+        int itemClass = 0;
+
+        // Find the item's class based on its ID
+        switch (itemID) {
+            case (int)ITEM_ID.TEST_POTION_HP:
+            case (int)ITEM_ID.TEST_POTION_MP:
+                itemClass = (int)ITEM_CLASS.POTIONS;
+                break;
+            case (int)ITEM_ID.TEST_QUEST_ITEM:
+                itemClass = (int)ITEM_CLASS.UNSELLABLE;
+                break;
+            case (int)ITEM_ID.TEST_ARMOR1:
+                itemClass = (int)ITEM_CLASS.ARMOR;
+                break;
+            case (int)ITEM_ID.TEST_WEAPON1:
+                itemClass = (int)ITEM_CLASS.WEAPON;
+                break;
+        }
+
+        return itemClass;
     }
 
     #endregion

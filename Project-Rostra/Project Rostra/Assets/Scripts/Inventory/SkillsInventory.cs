@@ -2,7 +2,7 @@
 using UnityEngine;
 
 // Code Written By:     Christopher Brine
-// Last Updated:        September 30th, 2019
+// Last Updated:        October 3rd, 2019
 
 public class SkillsInventory : MonoBehaviour {
     public static SkillsInventory invInstance;  // Holds the current inventory instance in a single variable
