@@ -7,6 +7,8 @@ using UnityEngine;
 [System.Serializable]
 public class Cutscene
 {
+	// where do we want the camera to be positioned
+	public Vector3 camLocation;
 	// what dialogues are we gonna store
     public Dialogue[] dialogues;
 	// what vectors are we gonna pass to the player

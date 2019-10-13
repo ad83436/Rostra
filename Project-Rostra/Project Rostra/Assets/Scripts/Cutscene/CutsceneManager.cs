@@ -3,6 +3,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CutsceneManager : MonoBehaviour
 {
@@ -28,7 +29,10 @@ public class CutsceneManager : MonoBehaviour
 	private float songEntrance;
 	private AudioClip clip;
 	private AudioSource audios;
-
+	private Animator anim;
+	private AnimationClip fadeOut;
+	private float transitionTime;
+	private Camera cam;
 	// Start is called before the first frame update
 	void Awake()
     {
@@ -56,12 +60,13 @@ public class CutsceneManager : MonoBehaviour
 		{
 			NextAction();
 		}
+
     }
 
 	public void StartCutscene(Cutscene cs)
 	{
 		copy = new Cutscene(cs);
-
+		cam.transform.position = cs.camLocation;
 		dialoguesCM = copy.dialogues;
 		dialogueEntranceCM = copy.dialogueEntrance;
 		timingsCM = copy.timings;
@@ -80,6 +85,8 @@ public class CutsceneManager : MonoBehaviour
 		dialogueLenght = copy.dialogueEntrance.Length - 1;
 		clip = copy.song;
 		songEntrance = copy.songEntrance;
+		anim = actorsCM[0].GetComponent<Animator>();
+		
 	}
 
 	public void NextAction()
@@ -88,43 +95,45 @@ public class CutsceneManager : MonoBehaviour
 		{
 			if (DialogueManager.instance.isActive == false && moveLenght >= 0)
 			{
-				actorsCM[actorCount].GetComponent<Rigidbody2D>().velocity = movesCM[current];
+				//fade in
+				if (timingsCM[current] <= anim.GetCurrentAnimatorStateInfo(0).length)
+				{
+					anim.SetBool("FadeIn", true);
+				}
 				timingsCM[current] -= Time.deltaTime;
 			}
 			if (dialogueCount <= dialogueLenght && current == dialogueEntranceCM[entranceCount])
 			{
-				actorsCM[actorCount].GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
 				DialogueManager.instance.StartConversation(dialoguesCM[dialogueCount]);
+				anim.SetBool("FadeIn", false);
 				if (DialogueManager.instance.nextDialogue == true)
 				{
 					dialogueCount++;
 					current++;
-					Debug.Log("Triggered Dialogue");
 					entranceCount++;
-					Debug.Log("triggered dialogue and entrance count upped");
 				}
 			}
 			if (clip != null && current == songEntrance)
 			{
 				audios.clip = copy.song;
 				audios.Play();
-				Debug.Log("Triggered Song");
 			}
 			if (isActive == true && timingsCM[current] <= 0 && moveLenght >= 0)
 			{
 				current++;
 				moveLenght--;
+				actorsCM[actorCount].transform.position = movesCM[current];
+				anim.SetBool("FadeIn", false);
 			}
 			if (povCount <= povChangesCM.Length - 1 && current == povChangesCM[povCount] && actorsCM.Length > 0 && povChangesCM.Length > 0)
 			{
 				actorCount++;
 				povCount++;
-				actorsCM[actorCount - 1].GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+				anim = actorsCM[actorCount].GetComponent<Animator>();
 			}
 		}
 		else
 		{
-			actorsCM[actorsCM.Length - 1].GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 			isActive = false;
 			End();
 			
@@ -139,5 +148,8 @@ public class CutsceneManager : MonoBehaviour
 		actorCount = 0;
 		povCount = 0;
 		dialogueCount = 0;
+		SceneManager.UnloadSceneAsync(SceneManager.GetSceneByName("World Map"));
 	}	
+
+	
 }

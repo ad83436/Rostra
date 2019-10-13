@@ -3,13 +3,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CutsceneTrigger : MonoBehaviour
 {
 	public Cutscene cs;
-	// Start is called before the first frame update
 	public void TriggerCutscene()
 	{
 		CutsceneManager.instance.StartCutscene(cs);
+	}
+
+	private void OnTriggerEnter2D(Collider2D col)
+	{
+		if (col.CompareTag("Player"))
+		{
+			TriggerCutscene();
+		}
+
 	}
 }
