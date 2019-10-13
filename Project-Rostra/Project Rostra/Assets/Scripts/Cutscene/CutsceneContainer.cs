@@ -25,7 +25,7 @@ public class CutsceneContainer : MonoBehaviour
 		switch (name)
 		{
 			case "test":
-				CutsceneManager.instance.StartCutscene(test);
+				//CutsceneManager.instance.StartCutscene(test);
 				break;
 			case null:
 				Debug.LogError("Hey cock sucker you forgot to input the string god damn it");

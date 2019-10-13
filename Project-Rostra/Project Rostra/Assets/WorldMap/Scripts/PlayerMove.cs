@@ -17,7 +17,9 @@ public class PlayerMove : MonoBehaviour
 
     private void Awake()
 	{
-		dm = FindObjectOfType<DialogueManager>();
+		//dm = FindObjectOfType<DialogueManager>();
+		dm = DialogueManager.instance;
+		
 	}
 	void Start()
     {

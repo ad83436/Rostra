@@ -43,30 +43,29 @@ public class Fade : MonoBehaviour
             
             if (thisImage.fillAmount >= 1.0f)
             {
-                if (transitionToBattle)
-                {
-                    transitionToBattle = false;
-                    TransitionIntoBattle();
-                    fadeOut = false;
-                }
-                else if(transitionToVictory)
-                {
-                    transitionToVictory = false;
-                    TransitionIntoVictory();
-                    uiBtl.StartShowingEndScreen(true); //Show the victory screen stats now
-                }
-                else if(transitionToDefeat)
-                {
-                    transitionToDefeat = false;
-                    TransitionIntoDefeat();
-                    uiBtl.StartShowingEndScreen(false); //Show the defeat screen
-                }
-                else if(transitionToWorldMap)
-                {
-                    transitionToWorldMap = false;
-                    SceneManager.UnloadSceneAsync(SceneManager.GetSceneByName("Queue Scene"));
-                }
-                
+				if (transitionToBattle)
+				{
+					transitionToBattle = false;
+					TransitionIntoBattle();
+					fadeOut = false;
+				}
+				else if (transitionToVictory)
+				{
+					transitionToVictory = false;
+					TransitionIntoVictory();
+					uiBtl.StartShowingEndScreen(true); //Show the victory screen stats now
+				}
+				else if (transitionToDefeat)
+				{
+					transitionToDefeat = false;
+					TransitionIntoDefeat();
+					uiBtl.StartShowingEndScreen(false); //Show the defeat screen
+				}
+				else if (transitionToWorldMap)
+				{
+					transitionToWorldMap = false;
+					SceneManager.UnloadSceneAsync(SceneManager.GetSceneByName("Queue Scene"));
+				}
             }
         }
     }
@@ -94,7 +93,6 @@ public class Fade : MonoBehaviour
     {
         fadeOut = !fadeOut;
         transitionToDefeat = true;
-
     }
 
     public void TransitionIntoBattle()

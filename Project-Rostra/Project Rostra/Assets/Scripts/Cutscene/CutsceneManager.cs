@@ -32,7 +32,8 @@ public class CutsceneManager : MonoBehaviour
 	private Animator anim;
 	private AnimationClip fadeOut;
 	private float transitionTime;
-	private Camera cam;
+	public GameObject pl;
+	private Vector2 returnPosition;
 	// Start is called before the first frame update
 	void Awake()
     {
@@ -63,10 +64,12 @@ public class CutsceneManager : MonoBehaviour
 
     }
 
-	public void StartCutscene(Cutscene cs)
+	public void StartCutscene(Cutscene cs, Vector2 returnPos)
 	{
 		copy = new Cutscene(cs);
-		cam.transform.position = cs.camLocation;
+		pl.transform.position = cs.camLocation;
+		returnPosition = returnPos;
+		pl.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);
 		dialoguesCM = copy.dialogues;
 		dialogueEntranceCM = copy.dialogueEntrance;
 		timingsCM = copy.timings;
@@ -86,7 +89,7 @@ public class CutsceneManager : MonoBehaviour
 		clip = copy.song;
 		songEntrance = copy.songEntrance;
 		anim = actorsCM[0].GetComponent<Animator>();
-		
+		DialogueManager.instance.canWalk = false;
 	}
 
 	public void NextAction()
@@ -148,7 +151,9 @@ public class CutsceneManager : MonoBehaviour
 		actorCount = 0;
 		povCount = 0;
 		dialogueCount = 0;
-		SceneManager.UnloadSceneAsync(SceneManager.GetSceneByName("World Map"));
+		pl.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
+		pl.transform.position = returnPosition;
+		DialogueManager.instance.canWalk = true;
 	}	
 
 	
