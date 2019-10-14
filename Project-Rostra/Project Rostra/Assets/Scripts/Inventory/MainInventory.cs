@@ -5,51 +5,8 @@ using UnityEngine;
 // Last Updated:        October 10th, 2019
 
 public class MainInventory : MonoBehaviour {
-    public static MainInventory invInstance;    // Holds the current inventory instance in a single variable
-    public static int totalMoney = 0;           // The amount of money the player has
-    public static int INVENTORY_SIZE = 60;      // The maximum size of the inventory
-    public int[,] invItem = new int[INVENTORY_SIZE, 3];
-    // NOTE -- Element 0 is the item's ID value that will point to its name, description, icon, etc.
-    //         Element 1 is how many items currently occupy the slot in the inventory
-    //         Element 2 is what character has this item equipped (Ex. armor and weapons)
-
-    // A list to store the slots of all consumable items within the player's inventory (Used in battles only)
-    public List<int> consumableInv = new List<int>();
-
-    // The variables that are used for drawing the GUI to the screen
-    public Font GuiSmall;
-    public bool isVisible = false;
-
-    // Variables for holding a to-be-swapped item in the inventory
-    private int[] itemToSwap = new int[3];      // Holds data about the item being swapped in the inventory
-    private int slotToSwapTo = -1;              // The slot the the selected item will send the other item to
-    private bool swappingItems = false;         // If true, the inventory will be in an "Item Swap" state. Meaning, no items can be selected until the swap is declined or completed
-
-    // Variables for selecting options and inventory items
-    public int curOption = 0;                  // The current inventory item the player has their cursor over
-    private int selectedOption = -1;            // The item that the player has selected in the inventory
-    private int subCurOption = 0;               // The current option the player has their cursor over after selecting an item
-
-    // Variables for selecting the player to use a consumable item
-    private bool playerChooseWindow = false;    // If true, the inventory needs a player to be chosen (For using consumable items)
-    private int curPlayerOption = 0;            // Which player is being chosen to use the given item
-    private bool[] canPlayerEquip = { true, true, true, true };
-
-    // Variables for drawing the inventory to the screen
-    private int firstToDraw = 0;                // The first item from the inventory array to draw out of the full inventory
-    private int numToDraw = 15;                 // How many inventory items that can be visible to the player at any given time
-
-    // Set the main inventory instance to this one if no inventory is active, delete otherwise
-    public void Awake() {
-        if (invInstance == null) {
-            invInstance = this;
-            DontDestroyOnLoad(gameObject);
-        } else {
-            Destroy(gameObject);
-        }
-        // Set all 3rd elements in the array to -1 (Equipped by nobody) 
-        for (int i = 0; i < INVENTORY_SIZE; i++) {invItem[i, 2] = -1;}
 	public static MainInventory invInstance;    // Holds the current inventory instance in a single variable
+	public static int totalMoney = 0;           // The amount of money the player has
 	public static int INVENTORY_SIZE = 60;      // The maximum size of the inventory
 	public int[,] invItem = new int[INVENTORY_SIZE, 3];
 	// NOTE -- Element 0 is the item's ID value that will point to its name, description, icon, etc.
@@ -89,13 +46,12 @@ public class MainInventory : MonoBehaviour {
 	public void Awake() {
 		if (invInstance == null) {
 			invInstance = this;
+			DontDestroyOnLoad(gameObject);
 		} else {
 			Destroy(gameObject);
 		}
 		// Set all 3rd elements in the array to -1 (Equipped by nobody) 
-		for (int i = 0; i < INVENTORY_SIZE; i++) {
-			invItem[i, 2] = -1;
-		}
+		for (int i = 0; i < INVENTORY_SIZE; i++) { invItem[i, 2] = -1; }
 	}
 
 	// FOR TESTING
@@ -105,13 +61,16 @@ public class MainInventory : MonoBehaviour {
 
 		invItem[1, 0] = (int)ITEM_ID.TEST_POTION_HP;
 		invItem[1, 1] = ItemStackLimit((int)ITEM_ID.TEST_POTION_HP);
+		consumableInv.Add(1);
 
 		invItem[2, 0] = (int)ITEM_ID.TEST_POTION_MP;
 		invItem[2, 1] = ItemStackLimit((int)ITEM_ID.TEST_POTION_MP);
+		consumableInv.Add(2);
 
 		invItem[3, 0] = (int)ITEM_ID.TEST_ARMOR1;
 		invItem[3, 1] = 1;
 
+		Debug.Log(consumableInv[0].ToString() + ", " + consumableInv[1].ToString());
 	}
 
 	// Handling keyboard functionality
@@ -312,7 +271,7 @@ public class MainInventory : MonoBehaviour {
 				if (curPlayerOption == i) { GUI.Label(new Rect(750.0f, 15.0f + (fontHeight * i), 50.0f, 50.0f), ">", style); }
 			}
 		}
-    }
+	}
 
 	#region Item/Inventory Manipulation Scripts
 
@@ -320,330 +279,14 @@ public class MainInventory : MonoBehaviour {
 	public void SwapItems(int slot1, int slot2) {
 		if (slot1 != slot2) {
 			int[] tempItem = { invItem[slot1, 0], invItem[slot1, 1], invItem[slot1, 2] };
-            // Move the second item into the first item's slot
-            invItem[slot1, 0] = invItem[slot2, 0];
-            invItem[slot1, 1] = invItem[slot2, 1];
-            invItem[slot1, 2] = invItem[slot2, 2];
-            // Move the first item into the second item's slot
-            invItem[slot2, 0] = tempItem[0];
-            invItem[slot2, 1] = tempItem[1];
-            invItem[slot2, 2] = tempItem[2];
-        }
-    }
-
-    // Adds an item into an empty slot in the inventory. Can also add more items to a currently occupied slot if the item can do so
-    public bool AddItem(int itemID, int numToAdd = 1) {
-        for (int i = 0; i < INVENTORY_SIZE; i++) {
-            // If the slot is empty, add the item to the inventory
-            // Also, if the item already has a stack, add these items to the stack as well
-            if ((invItem[i, 0] == 0 || invItem[i, 0] == itemID) && numToAdd > 0) {
-                int stackSize = ItemStackLimit(itemID);
-                if (invItem[i, 1] + numToAdd <= stackSize) { // There is enough space in the stack for the newly found item
-                    invItem[i, 0] = itemID;
-                    invItem[i, 1] += numToAdd;
-                    numToAdd = 0;
-                } else { // No more space in a stack, try to find an empty spot
-                    int remainder = stackSize - invItem[i, 1];
-                    invItem[i, 1] = stackSize;
-                    numToAdd -= remainder;
-                    // NOTE -- If the inventory cannot find a spot for the remaining items it will just discard them.
-                    // When this happens a message should be displayed for the player to let them know those items couldn't be picked up.
-                }
-                if (numToAdd == 0) { return true; }
-            }
-        }
-        // Return false if the item could not be added, allowing for a prompt telling the user the item cannot be added to the inventory
-        return false;
-    }
-
-    // Finds if an item exists in the inventory and returns the slot that the item is in
-    // A side effect of this method of search is that it will find the first instance of the
-    // item relative to the top of the inventory. So, the closest to the top will be prioritized
-    public int FindItem(int itemID) {
-        int slot = -1;
-
-        // Search the entire inventory for the item
-        for (int i = 0; i < INVENTORY_SIZE; i++) {
-            // The item is found
-            if (invItem[i, 0] == itemID) {
-                slot = i;
-                break;
-            }
-        }
-
-        // Return either -1 (Default Value) or the item's slot
-        return slot;
-    }
-
-    // Removes an item from the specified slot in the inventory, if 0 items remain after word, empty the slot completely
-    public void RemoveItem(int slot, int numToRemove = 1) {
-        invItem[slot, 1] -= numToRemove;
-        Debug.Log("Number of Items: " + invItem[slot, 1].ToString() + ", Slot Value: " + slot.ToString());
-        // Completely remove the item if all in the stack have been used
-        if (invItem[slot, 1] <= 0) {
-            invItem[slot, 0] = (int)ITEM_ID.NO_ITEM;
-            // Remove the item from a player object if one had the dropped item equipped
-            if (invItem[slot, 2] != -1) {
-                UpdatePlayerStats(invItem[slot, 2], invItem[slot, 0], true);
-            }
-            // If the item is a consumable, make sure to update the list and remove the slot value
-            if (ItemType(invItem[slot, 0]) == (int)ITEM_TYPE.CONSUMABLE) {
-                int index = consumableInv.IndexOf(slot);
-                consumableInv.RemoveAt(index);
-            }
-        }
-    }
-
-    #endregion
-
-    #region Item Names
-
-    // Returns the name of the specified item based on its ID
-    public string ItemName(int itemID) {
-        string name = "---";
-
-        // Find the item's name based on its ID value
-        switch (itemID) {
-            case (int)ITEM_ID.TEST_POTION_HP:
-                name = "Test Potion (HP)";
-                break;
-            case (int)ITEM_ID.TEST_POTION_MP:
-                name = "Test Potion (MP)";
-                break;
-            case (int)ITEM_ID.TEST_QUEST_ITEM:
-                name = "Test Quest Item";
-                break;
-            case (int)ITEM_ID.TEST_ARMOR1:
-                name = "Test Leather Armor";
-                break;
-            case (int)ITEM_ID.TEST_WEAPON1:
-                name = "Test Iron Sword";
-                break;
-        }
-        return name;
-    }
-
-    #endregion
-
-    #region Item Descriptions
-
-    // Returns the item's description based of the itemID specified
-    public string ItemDescription(int itemID) {
-        string description = "";
-
-        // Find an item's description based on its ID
-        switch (itemID) {
-            case (int)ITEM_ID.TEST_POTION_HP:
-                description = "There's like a 50% chance this will restore the player's HP.";
-                break;
-            case (int)ITEM_ID.TEST_POTION_MP:
-                description = "I think it restores MP, but it might not.";
-                break;
-            case (int)ITEM_ID.TEST_QUEST_ITEM:
-                description = "Some piece of junk. Go give it to someone.";
-                break;
-            case (int)ITEM_ID.TEST_ARMOR1:
-                description = "A piece of leather armor to test the inventory with.";
-                break;
-            case (int)ITEM_ID.TEST_WEAPON1:
-                description = "An Iron Sword used for testing the game's inventory.";
-                break;
-        }
-
-        return description;
-    }
-
-    #endregion
-
-    #region Item Prices for Purchasing
-
-    public int ItemPrice(int itemID) {
-        int price = 0;
-
-        // Find out the item's price based on the ID provided
-        switch (itemID) {
-            case (int)ITEM_ID.TEST_POTION_HP:
-                price = 69;
-                break;
-            case (int)ITEM_ID.TEST_POTION_MP:
-                price = 420;
-                break;
-            case (int)ITEM_ID.TEST_QUEST_ITEM:
-                price = 666;
-                break;
-            case (int)ITEM_ID.TEST_ARMOR1:
-                price = 6969;
-                break;
-            case (int)ITEM_ID.TEST_WEAPON1:
-                price = 42069;
-                break;
-        }
-
-        return price;
-    }
-
-    #endregion
-
-    #region Item Classes for Merchants
-
-    public int ItemClass(int itemID) {
-        int itemClass = 0;
-
-        // Find the item's class based on its ID
-        switch (itemID) {
-            case (int)ITEM_ID.TEST_POTION_HP:
-            case (int)ITEM_ID.TEST_POTION_MP:
-                itemClass = (int)ITEM_CLASS.POTIONS;
-                break;
-            case (int)ITEM_ID.TEST_QUEST_ITEM:
-                itemClass = (int)ITEM_CLASS.UNSELLABLE;
-                break;
-            case (int)ITEM_ID.TEST_ARMOR1:
-                itemClass = (int)ITEM_CLASS.ARMOR;
-                break;
-            case (int)ITEM_ID.TEST_WEAPON1:
-                itemClass = (int)ITEM_CLASS.WEAPON;
-                break;
-        }
-
-        return itemClass;
-    }
-
-    #endregion
-
-    #region Item Options and Their Functionality
-
-    // Returns a full list of options that an item can have based on its type
-    public List<string> ItemOptions(int itemID) {
-        List<string> options = new List<string>();
-        int itemType = ItemType(itemID);
-
-        // Find out the options avaiable to a player bassed on the selected item's ID
-        switch (itemType) {
-            case (int)ITEM_TYPE.CONSUMABLE:
-                options.Add("Use");
-                options.Add("Move");
-                options.Add("Drop");
-                break;
-            case (int)ITEM_TYPE.KEY_ITEM:
-                options.Add("Use");
-                options.Add("Move");
-                break;
-            case (int)ITEM_TYPE.EQUIPABLE:
-                if (invItem[curOption, 2] == -1) { // Shot "Equip" if nobody has the item equipped
-                    options.Add("Equip");
-                } else { // Show "Unequip" if the item is equipped by a player already
-                    options.Add("Unequip");
-                }
-                options.Add("Move");
-                options.Add("Drop");
-                break;
-        }
-
-        return options;
-    }
-
-    // Executes code based upon what option was selected by the user. These include options like equipping, unequipping, switching, dropping, etc.
-    public void ItemOptionsFunction(int itemID, string option) {
-        int itemType = ItemType(itemID);
-
-        // Starting up the item swapping
-        if (option.Equals("Switch")) {
-            if (!swappingItems) {
-                swappingItems = true;
-                slotToSwapTo = curOption;
-                var length = itemToSwap.Length;
-                for (int i = 0; i < length; i++) {
-                    itemToSwap[i] = invItem[curOption, i];
-                }
-            }
-            subCurOption = 0;
-            selectedOption = -1;
-            return;
-        }
-
-        // Removing an item and/or its entire stack from the inventory
-        if (option.Equals("Drop")) {
-            RemoveItem(curOption, invItem[curOption, 1]);
-            subCurOption = 0;
-            selectedOption = -1;
-            return;
-        }
-
-        // Using a consumable item or equipping a piece of armor or weapon
-        if (option.Equals("Use") || option.Equals("Equip")) {
-            if (ItemType(invItem[curOption, 0]) != (int)ITEM_TYPE.KEY_ITEM) {
-                // Determine which players can equip the current item
-                if (ItemType(invItem[curOption, 0]) == (int)ITEM_TYPE.EQUIPABLE) {
-                    float[] itemStats = ItemStats(invItem[curOption, 0]);
-                    // Loop through the items that the selected player can equip
-                    for (int i = 0; i < 4; i++) {
-                        var length = PartyStats.chara[i].validEquipables.Length;
-                        for (int ii = 0; ii < length; ii++) {
-                            if (PartyStats.chara[i].validEquipables[ii] == itemStats[7]) { // Item is valid, selected player can equip it
-                                canPlayerEquip[i] = true;
-                                ii = length; // Exit the loop
-                            } else { // Item is not valid, selected player cannot equip it
-                                canPlayerEquip[i] = false;
-                            }
-                        }
-                    }
-                }
-                // Open up the player choose window
-                playerChooseWindow = true;
-            } else {
-                // TODO -- Add code for turning in quest items
-            }
-            return;
-        }
-
-        // Unequipping a piece of armor or a weapon from a player
-        if (option.Equals("Unequip")) {
-            UpdatePlayerStats(invItem[curOption, 2], itemID, true);
-            selectedOption = -1;
-            return;
-        }
-    }
-
-    // A method that holds all the functionality for every item in the game. If the item slot is empty after use, delete the item.
-    // This method will not equip or unequip any item, but it will provide functionality for CONSUMABLE items.
-    public void ItemUseFunction(int itemID, int slotID, int playerID) {
-        int itemType = ItemType(itemID);
-        bool isEquipped = false;
-        // Only check if an item is equipped or not if the item CAN BE EQUIPPED (Ex. Weapons and Armor)
-        if (itemType == (int)ITEM_TYPE.EQUIPABLE) {
-            if (invItem[slotID, 2] == playerID) {
-                isEquipped = true;
-            }
-        }
-
-        // Check which functionality to use based on the itemID provided
-        switch (itemID) {
-            case (int)ITEM_ID.TEST_POTION_HP:
-                UpdatePlayerHitpoints(10, playerID);
-                break;
-            case (int)ITEM_ID.TEST_POTION_MP:
-                UpdatePlayerMagicpoints(20, playerID);
-                break;
-            case (int)ITEM_ID.TEST_ARMOR1:
-            case (int)ITEM_ID.TEST_WEAPON1:
-                UpdatePlayerStats(playerID, itemID, isEquipped);
-                break;
-        }
-
-        // Remove the item (Or one from the stack) if it was consumed by the player
-        if (itemType == (int)ITEM_TYPE.CONSUMABLE) {
-            RemoveItem(slotID);
-        }
-    }
-
-    #endregion
-
-    #region An item's "Type", which determines funcaitonality
-
-    // Returns the "Type" of the item based on the itemID. This is used to determined what options the player can use in tandem with the item
-    public int ItemType(int itemID) {
-        int itemType = (int)ITEM_TYPE.CONSUMABLE;
+			// If the item is a consumable, make sure to update the list for its new slot
+			if (ItemType(invItem[slot1, 0]) == (int)ITEM_TYPE.CONSUMABLE) {
+				int index = consumableInv.IndexOf(slot1);
+				consumableInv.RemoveAt(index);
+				consumableInv.Insert(index, slot2);
+			}
+			// Move the second item into the first item's slot
+			invItem[slot1, 0] = invItem[slot2, 0];
 			invItem[slot1, 1] = invItem[slot2, 1];
 			invItem[slot1, 2] = invItem[slot2, 2];
 			// Move the first item into the second item's slot
@@ -810,6 +453,33 @@ public class MainInventory : MonoBehaviour {
 
 	#endregion
 
+	#region Item Classes for Merchants
+
+	public int ItemClass(int itemID) {
+		int itemClass = 0;
+
+		// Find the item's class based on its ID
+		switch (itemID) {
+			case (int)ITEM_ID.TEST_POTION_HP:
+			case (int)ITEM_ID.TEST_POTION_MP:
+				itemClass = (int)ITEM_CLASS.POTIONS;
+				break;
+			case (int)ITEM_ID.TEST_QUEST_ITEM:
+				itemClass = (int)ITEM_CLASS.UNSELLABLE;
+				break;
+			case (int)ITEM_ID.TEST_ARMOR1:
+				itemClass = (int)ITEM_CLASS.ARMOR;
+				break;
+			case (int)ITEM_ID.TEST_WEAPON1:
+				itemClass = (int)ITEM_CLASS.WEAPON;
+				break;
+		}
+
+		return itemClass;
+	}
+
+	#endregion
+
 	#region Item Options and Their Functionality
 
 	// Returns a full list of options that an item can have based on its type
@@ -848,7 +518,7 @@ public class MainInventory : MonoBehaviour {
 		int itemType = ItemType(itemID);
 
 		// Starting up the item swapping
-		if (option.Equals("Move")) {
+		if (option.Equals("Switch")) {
 			if (!swappingItems) {
 				swappingItems = true;
 				slotToSwapTo = curOption;
@@ -947,11 +617,9 @@ public class MainInventory : MonoBehaviour {
 	public int ItemType(int itemID) {
 		int itemType = (int)ITEM_TYPE.CONSUMABLE;
 
-        // Search for the item's type based on its ID
-
+		// Search for the item's type based on its ID
 		switch (itemID) {
-
-            case (int)ITEM_ID.TEST_POTION_HP:
+			case (int)ITEM_ID.TEST_POTION_HP:
 			case (int)ITEM_ID.TEST_POTION_MP:
 				itemType = (int)ITEM_TYPE.CONSUMABLE;
 				break;
@@ -962,9 +630,6 @@ public class MainInventory : MonoBehaviour {
 			case (int)ITEM_ID.TEST_ARMOR1:
 				itemType = (int)ITEM_TYPE.EQUIPABLE;
 				break;
-            default:
-                itemType = 0;
-                break;
 		}
 
 		return itemType;
@@ -1097,7 +762,7 @@ public class MainInventory : MonoBehaviour {
 			// Tell the inventory that the item isn't equipped by anybody anymore
 			invItem[curOption, 2] = -1;
 		}
-		//Debug.Log("\nAttack: " + PartyStats.chara[playerID].TotalAttack + " Defence: " + PartyStats.chara[playerID].TotalDefence + " Strength: " + PartyStats.chara[playerID].TotalStrength + " Agility: " + PartyStats.chara[playerID].TotalAgility + " Critical: " + PartyStats.chara[playerID].TotalCritical + " Maximum Health: " + PartyStats.chara[playerID].TotalMaxHealth + " Maximum Mana: " + PartyStats.chara[playerID].TotalMaxMana);
+		Debug.Log("\nAttack: " + PartyStats.chara[playerID].TotalAttack + " Defence: " + PartyStats.chara[playerID].TotalDefence + " Strength: " + PartyStats.chara[playerID].TotalStrength + " Agility: " + PartyStats.chara[playerID].TotalAgility + " Critical: " + PartyStats.chara[playerID].TotalCritical + " Maximum Health: " + PartyStats.chara[playerID].TotalMaxHealth + " Maximum Mana: " + PartyStats.chara[playerID].TotalMaxMana);
 	}
 
 	#endregion
