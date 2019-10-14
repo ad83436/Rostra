@@ -1047,6 +1047,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -4.5996094
       objectReference: {fileID: 0}
+    - target: {fileID: 5887905131246827224, guid: 2662fb6040661474eb9a5c87ff125a0c,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -7.5000153
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2662fb6040661474eb9a5c87ff125a0c, type: 3}
 --- !u!1 &501701997
@@ -1389,8 +1394,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemies:
-  - {fileID: 3829569745243744735, guid: 460a4576a18cf3a45b5553168ae80480, type: 3}
-  - {fileID: 3829569745243744735, guid: 460a4576a18cf3a45b5553168ae80480, type: 3}
   - {fileID: 3829569745243744735, guid: 460a4576a18cf3a45b5553168ae80480, type: 3}
   enemyLevels: 050000000a0000000f000000
   enemySpwn: {fileID: 0}
@@ -22854,8 +22857,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5fc992a38aa05b42b67a5297a4c4e2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  consumableInv: 
   GuiSmall: {fileID: 12800000, guid: 8cd005d600c706945b313ab1374fb2ea, type: 3}
   isVisible: 0
+  curOption: 0
 --- !u!4 &1795119212
 Transform:
   m_ObjectHideFlags: 0

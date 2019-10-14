@@ -220,7 +220,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1927818603
-  m_SortingLayer: 2
+  m_SortingLayer: 1
   m_SortingOrder: 26
   m_Sprite: {fileID: 21300000, guid: e8fe6a2af19042d46ae5068adf01fab4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -246,12 +246,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyIndexInBattleManager: 2
-  agi: 6
-  str: 0
-  crit: 0
-  name: Boar
+  eMana: 0
+  eAttack: 0
+  eAgility: 0
+  eDefence: 0
+  eStrength: 0
+  eSpeed: 0
+  eBaseLevel: 0
+  eCurrentLevel: 0
+  eName: 
+  eRange: 0
+  playerStatNeeded: []
+  enemyStatNeeded: []
+  eCritical: 0
   qImage: {fileID: 21300000, guid: 277c8124f3125aa46b6f2c22f943ab18, type: 3}
   HP: {fileID: 3588559100116211246}
+  maxHP: 0
+  currentHP: 0
+  enemyCanvas: {fileID: 0}
+  dead: 0
+  hit: 0
+  enemyClass: 0
+  enemyAttack: 0
+  theEnemyName: 1
 --- !u!1 &3588559101050574602
 GameObject:
   m_ObjectHideFlags: 0
