@@ -234,6 +234,7 @@ public class Player : MonoBehaviour
                         case 1:
                             break;
                         case 2:
+                            UseSkillOnAllEnemies(chosenSkill, mpCost, 0);
                             break;
                         case 3:
                             break;
@@ -334,6 +335,22 @@ public class Player : MonoBehaviour
     {
         //20 sided die + skill accuracy <? enemy agility
         if (Random.Range(0.0f, 20.0f) + skills.SkillStats(chosenSkill)[1] < attackingThisEnemy.eAgility)
+        {
+            hit = false;
+        }
+        else
+        {
+            hit = true;
+        }
+
+        Debug.Log("Hit is " + hit);
+    }
+
+    //Overloaded function called when targeting all enemies
+    private void CalculateHitForSkill(Enemy target)
+    {
+        //20 sided die + skill accuracy <? enemy agility
+        if (Random.Range(0.0f, 20.0f) + skills.SkillStats(chosenSkill)[1] < target.eAgility)
         {
             hit = false;
         }
@@ -482,7 +499,7 @@ public class Player : MonoBehaviour
         healThisPlayer = playerReference;
 
         //Check if the skill is immediate or if the player needs to wait a number of turns
-  if (skillID == 4) //Heal
+        if (skillID == 4) //Heal
         {
             skillTarget = 6;//Single player heal
             skillAnimatorName = "Heal";
@@ -527,7 +544,7 @@ public class Player : MonoBehaviour
             Debug.Log("HIT");
             skillNameForObjPooler = "FFSkill1";
             skillAnimatorName = "ASkill";
-            skillWaitingIndex = 1;
+            skillWaitingIndex = 1; //Should there be waiting time, this index is used to know which waiting animation to go to
         }
 
         //Do we have to wait?
@@ -548,6 +565,39 @@ public class Player : MonoBehaviour
             uiBTL.EndTurn();
         }
 
+    }
+
+    public void UseSkillOnAllEnemies(int skillID, float manaCost, float waitTime)
+    {
+        skillWaitTime = waitTime;
+        skillTarget = 2;
+        chosenSkill = skillID;
+        mpCost = manaCost;
+
+        //Check which skill to know which animation to run
+        if (skillID == 1) //Fargas  basic attack skill --> Placeholder will be changed once we have the actual skill
+        {
+            Debug.Log("HIT");
+            skillNameForObjPooler = "FFSkill1";
+            skillAnimatorName = "ASkill";
+            skillWaitingIndex = 1;
+        }
+
+        if(waitTime<=0)
+        {
+            skillWaitingIndex = 0;
+            playerAnimator.SetInteger("WaitingIndex", -1);
+            playerAnimator.SetBool(skillAnimatorName, true);
+        }
+        else
+        {
+            //If there's waiting time, go to wait state and end the turn 
+            waitTimeText.gameObject.SetActive(true);
+            waitTimeText.text = skillWaitTime.ToString();
+            playerAnimator.SetInteger("WaitingIndex", skillWaitingIndex);
+            currentState = playerState.Waiting;
+            uiBTL.EndTurn();
+        }
     }
 
     //Called from the animator
@@ -593,9 +643,43 @@ public class Player : MonoBehaviour
             }
 
 
-            playerAnimator.SetBool("ASkill", false);
+            playerAnimator.SetBool(skillAnimatorName, false);
 
-
+        }
+        else if(skillTarget == 2)
+        {
+            for(int i = 0; i<battleManager.enemies.Length; i++)
+            {
+                if(battleManager.enemies[i].enemyReference!=null)
+                {
+                    if(!battleManager.enemies[i].enemyReference.dead)
+                    {
+                        CalculateHitForSkill(battleManager.enemies[i].enemyReference);
+                        if(hit)
+                        {
+                            objPooler.SpawnFromPool(skillNameForObjPooler, battleManager.enemies[i].enemyReference.gameObject.transform.position, gameObject.transform.rotation);
+                            Debug.Log("Skill hit");
+                            //Summon effect here
+                            btlCam.CameraShake();
+                            if (CalculateCrit() <= crit)
+                            {
+                                Debug.Log("Skill Crit");
+                                battleManager.enemies[i].enemyReference.TakeDamage(0.7f * actualATK + skills.SkillStats(chosenSkill)[0]); //Damage is the half the player's attack stat and the skill's attack stat
+                            }
+                            else
+                            {
+                                Debug.Log("No Skill Crit");
+                                battleManager.enemies[i].enemyReference.TakeDamage(0.5f * actualATK + skills.SkillStats(chosenSkill)[0]); //Damage is the half the player's attack stat and the skill's attack stat
+                            }
+                        }
+                        else
+                        {
+                            Debug.Log("Skill miss");
+                        }
+                    }
+                }
+            }
+            playerAnimator.SetBool(skillAnimatorName, false);
         }
         else if(skillTarget == 6)
         {

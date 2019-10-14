@@ -13,6 +13,7 @@ public class UIBTL : MonoBehaviour
 
     public GameObject playerTurnIndicator;
     public GameObject chooseEnemyArrow;
+    public GameObject[] chooseEnemyArrowForSelectAll;
     public GameObject playerIndicatorPos0;
     public GameObject playerIndicatorPos1;
     public GameObject playerIndicatorPos2;
@@ -86,8 +87,11 @@ public class UIBTL : MonoBehaviour
         choosingBasicCommand, //Player still choosing which command to use
         choosingSkillsCommand, //Player chooses between skills
         choosingItemsCommand, //Player chooses items
-        choosingEnemy, //Player has chosen an offense command
+        choosingEnemy, //Player has chosen an offense command that targets one enemy
+        choosingAllEnemies,
+        choosingRowOfEnemies,
         choosingPlayer, //Player has chosen a supporting command
+        choosingAllPlayers,
         battleEnd
     }
 
@@ -200,6 +204,11 @@ public class UIBTL : MonoBehaviour
         //Dialogue after battle
         dialogueManager = DialogueManager.instance;
         dialogueContainer = DialogueContainer.instance;
+
+        for (int i = 0; i < chooseEnemyArrowForSelectAll.Length; i++)
+        {
+            chooseEnemyArrowForSelectAll[i].gameObject.SetActive(false);
+        }
     }
 
 
@@ -226,8 +235,15 @@ public class UIBTL : MonoBehaviour
             case btlUIState.choosingEnemy:
                 ChoosingEnemy();
                 break;
+            case btlUIState.choosingAllEnemies:
+                ChoosingAllEnemies();
+                break;
+            case btlUIState.choosingRowOfEnemies:
+                break;
             case btlUIState.choosingPlayer:
                 ChoosingPlayer();
+                break;
+            case btlUIState.choosingAllPlayers:
                 break;
             case btlUIState.battleEnd:
                 EndBattleUI();
@@ -677,6 +693,16 @@ public class UIBTL : MonoBehaviour
                             currentState = btlUIState.choosingEnemy;
                             break;
                         case (float)SKILL_TYPE.ALL_TARGETS_ATK:
+                            //Activate the indicators for alive enemies only
+                            for(int i = 0;i<enemiesDead.Length;i++)
+                            {
+                                if (enemiesDead[i] == false && btlManager.enemies[i].enemyReference!=null)
+                                {
+                                    chooseEnemyArrowForSelectAll[i].gameObject.SetActive(true);
+                                }
+                            }
+                            previousState = btlUIState.choosingSkillsCommand;
+                            currentState = btlUIState.choosingAllEnemies;
                             break;
                         case (float)SKILL_TYPE.ALL_TARGETS_DEBUFF:
                             break;
@@ -1138,6 +1164,40 @@ public class UIBTL : MonoBehaviour
                                                    skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[5],
                                                    skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[2],
                                                    enemies[enemyIndicatorIndex]);
+            }
+        }
+    }
+
+    private void ChoosingAllEnemies()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            DisableActivtyText();
+            if (previousState == btlUIState.choosingBasicCommand)
+            {
+                currentState = btlUIState.choosingBasicCommand;
+            }
+            else if (previousState == btlUIState.choosingSkillsCommand)
+            {
+                skillsPanel.gameObject.SetActive(true);
+                currentState = btlUIState.choosingSkillsCommand;
+            }
+
+            for (int i = 0; i < chooseEnemyArrowForSelectAll.Length; i++)
+            {
+                chooseEnemyArrowForSelectAll[i].gameObject.SetActive(false);
+            }
+        }
+        else if(Input.GetKeyDown(KeyCode.Space))
+        {
+            UpdateActivityText(skills.SkillName(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator]));
+            playerInControl.UseSkillOnAllEnemies(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator],
+                                               skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[5],
+                                               skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[2]);
+
+            for (int i = 0; i < chooseEnemyArrowForSelectAll.Length; i++)
+            {
+                    chooseEnemyArrowForSelectAll[i].gameObject.SetActive(false);
             }
         }
     }
