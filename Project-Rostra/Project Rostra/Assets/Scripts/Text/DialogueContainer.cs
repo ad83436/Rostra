@@ -19,5 +19,4 @@ public class DialogueContainer : MonoBehaviour
 		}
 		DontDestroyOnLoad(this.gameObject);
 	}
-  
 }

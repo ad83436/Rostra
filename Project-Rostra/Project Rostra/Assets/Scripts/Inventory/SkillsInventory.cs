@@ -2,7 +2,7 @@
 using UnityEngine;
 
 // Code Written By:     Christopher Brine
-// Last Updated:        September 26h, 2019
+// Last Updated:        October 3rd, 2019
 
 public class SkillsInventory : MonoBehaviour {
     public static SkillsInventory invInstance;  // Holds the current inventory instance in a single variable
@@ -11,7 +11,7 @@ public class SkillsInventory : MonoBehaviour {
     public Font GuiSmall;
     public bool isVisible = false;
 
-    // Variables for selecting the unlocked skills to equip/uneuqip them
+    // Variables for selecting the unlocked skills to equip/unequip them
     private int curOption = 0;                  // The current skill the player has their cursor over
     private int selectedOption = -1;            // The skill that the player has selected
     private int subCurOption = 0;               // The current option the player has their cursor over after selecting a skill
@@ -25,6 +25,7 @@ public class SkillsInventory : MonoBehaviour {
     public void Awake() {
         if (invInstance == null) {
             invInstance = this;
+            DontDestroyOnLoad(gameObject);
         } else {
             Destroy(gameObject);
         }
@@ -34,7 +35,7 @@ public class SkillsInventory : MonoBehaviour {
     private void Update() {
         // Getting Keyboard Input
         bool keyOpen, keySelect, keyReturn, keyUp, keyDown, keyLeft, keyRight;
-        keyOpen = Input.GetKeyDown(KeyCode.S);
+        keyOpen = Input.GetKeyDown(KeyCode.K);
         keySelect = Input.GetKeyDown(KeyCode.Z);
         keyReturn = Input.GetKeyDown(KeyCode.X);
         keyUp = Input.GetKeyDown(KeyCode.UpArrow);
@@ -101,9 +102,36 @@ public class SkillsInventory : MonoBehaviour {
                 }
             }
 
-            // Selecting a Skill
+            // Selecting a Skill and opening the option menu
             if (keySelect) {
                 selectedOption = curOption;
+            }
+        } else { // Equipping/unequipping skills from the four equipped skills the player can have at once
+            // Shifting up and down through the sub-menu options
+            if (keyUp) {
+                subCurOption--;
+                if (subCurOption < 0) {
+                    subCurOption = PartySkills.skills[playerIndex].equippedSkills.Length - 1;
+                }
+            } else if (keyDown) {
+                subCurOption++;
+                if (subCurOption > PartySkills.skills[playerIndex].equippedSkills.Length - 1) {
+                    subCurOption = 0;
+                }
+            }
+
+            // Selecting one of the given options
+            if (keySelect) {
+                EquipSkill(PartySkills.skills[playerIndex].learnedSkills[selectedOption], subCurOption, playerIndex);
+                // Exit out of the sub-menu
+                selectedOption = -1;
+                subCurOption = 0;
+            }
+
+            // Unselecting the current item, returning the player back to the main inventory window
+            if (keyReturn) {
+                selectedOption = -1;
+                subCurOption = 0;
             }
         }
     }
@@ -121,9 +149,26 @@ public class SkillsInventory : MonoBehaviour {
         };
         var fontHeight = style.lineHeight;
 
+        // Drawing the player's equipped skills
+        var length = PartySkills.skills[playerIndex].equippedSkills.Length;
+        for (int e = 0; e < length; e++) {
+            GUI.Label(new Rect(45.0f, 265.0f + (fontHeight * e), 200.0f, 50.0f), SkillName(PartySkills.skills[playerIndex].equippedSkills[e]), style);
+            // Drawing a cursor that points to the item the player has highlighted
+            if (selectedOption != -1) { GUI.Label(new Rect(25.0f, 265.0f + (fontHeight * subCurOption), 50.0f, 50.0f), ">", style); }
+        }
+
         // Drawing the skill inventory items
         for (int i = firstToDraw; i <= firstToDraw + numToDraw; i++) {
-            GUI.Label(new Rect(45.0f, 15.0f + (fontHeight * (i - firstToDraw)), 200.0f, 50.0f), SkillName(PartySkills.skills[playerIndex].learnedSkills[i]), style);
+            if (PartySkills.skills[playerIndex].learnedSkills[i] != (int)SKILLS.NO_SKILL) {
+                GUI.Label(new Rect(45.0f, 15.0f + (fontHeight * (i - firstToDraw)), 200.0f, 50.0f), SkillName(PartySkills.skills[playerIndex].learnedSkills[i]), style);
+                // Check if this skill has been equipped by the current player
+                for (int ii = 0; ii < length; ii++) {
+                    if (PartySkills.skills[playerIndex].learnedSkills[i] == PartySkills.skills[playerIndex].equippedSkills[ii]) {
+                        GUI.Label(new Rect(510.0f, 15.0f + (fontHeight * (i - firstToDraw)), 50.0f, 50.0f), "(E)", style);
+                        ii = length; // Exit the loop
+                    }
+                }
+            }
             // Drawing a cursor that points to the item the player has highlighted
             GUI.Label(new Rect(25.0f, 15.0f + (fontHeight * (curOption - firstToDraw)), 50.0f, 50.0f), ">", style);
         }
@@ -133,31 +178,17 @@ public class SkillsInventory : MonoBehaviour {
 
     // Attempts to equip a skill to the current player's active skills. If the skill list is full, it will let the player swap a
     // currently equipped skill with the newly selected one
-    public bool EquipSkill(int skillID, int playerID) {
-        bool emptySlotExists = false;
-        // Find an empty slot in the equipped skill list
+    public void EquipSkill(int skillID, int slotID, int playerID) {
+        // Equip the skill to the currently selected slot
+        PartySkills.skills[playerID].equippedSkills[slotID] = skillID;
+        // Check through the four slots to stop any duplicate skills from being equipped
         var length = PartySkills.skills[playerID].equippedSkills.Length;
         for (int i = 0; i < length; i++) {
-            // Equip the skill when an empty slot is found
-            if (PartySkills.skills[playerID].equippedSkills[i] == (int)SKILLS.NO_SKILL) {
-                PartySkills.skills[playerID].equippedSkills[i] = skillID;
-                emptySlotExists = true;
-                i = length; // Exit the loop
+            // Remove the duplicate if one exists
+            if (i != slotID && PartySkills.skills[playerID].equippedSkills[i] == PartySkills.skills[playerID].equippedSkills[slotID]) {
+                PartySkills.skills[playerID].equippedSkills[i] = (int)SKILLS.NO_SKILL;
             }
         }
-        // NOTE -- If this returns false, the skill inventory will open up the option to swap an equipped skill with
-        // the current one the player is trying to equip
-        return emptySlotExists;
-    }
-
-    // Attempts to remove an equipped skill for the respective array. If it cannot remove the skill because the slot provided
-    // was out of bounds of there was no skill equipped, this code will return false.
-    public bool UnequipSkill(int skillSlot, int playerID) {
-        if (skillSlot >= 0 && skillSlot < PartySkills.MAX_SKILLS) {
-            PartySkills.skills[playerID].equippedSkills[skillSlot] = (int)SKILLS.NO_SKILL;
-            return true;
-        }
-        return false;
     }
 
     // Unlocks a skill for the player to use. In order to do this, the method will check if the player can actually use the
@@ -172,12 +203,12 @@ public class SkillsInventory : MonoBehaviour {
             // Skill found, add to unlocked skills
             if (PartySkills.skills[playerID].unlockableSkills[i] == skillID) {
                 PartySkills.skills[playerID].learnedSkills[PartySkills.skills[playerID].numSkillsLearned] = skillID;
+				PartySkills.skills[playerID].unlockableSkills[i] = (int)SKILLS.NO_SKILL;
                 PartySkills.skills[playerID].numSkillsLearned++;
                 unlockSuccess = true;
                 i = length; // Exit the loop
             }
         }
-
         return unlockSuccess;
     }
 
@@ -187,25 +218,19 @@ public class SkillsInventory : MonoBehaviour {
 
     // Finds the name of the skill relative to the ID provided in the argument
     public string SkillName(int skillID) {
-        string name = "";
-
         // Find the name relative to the ID given
         switch (skillID) {
-            case (int)SKILLS.TEST_SKILL1:
-                name = "Booty Destroyer";
-                break;
-            case (int)SKILLS.TEST_SKILL2:
-                name = "Spinning Ass Shot";
-                break;
-            case (int)SKILLS.TEST_SKILL3:
-                name = "Implant Popper";
-                break;
-            case (int)SKILLS.TEST_SKILL4:
-                name = "Healing Anal Needle";
-                break;
+            case (int)SKILLS.TEST_Fargas:
+                return "Offense Skill 1";
+            case (int)SKILLS.TEST_Frea:
+                return "Offense Skill 2";
+            case (int)SKILLS.TEST_Oberon:
+                return "Buff Skill 1";
+            case (int)SKILLS.TEST_Arcelus:
+                return "Heal Skill 1";
+            default: //In case no skill is equipped at that slot
+                return "---";
         }
-
-        return name;
     }
 
     #endregion
@@ -214,21 +239,19 @@ public class SkillsInventory : MonoBehaviour {
 
     // Finds the skill's description relative to the ID provided in the argument parameter
     public string SkillDescription(int skillID) {
-        string description = "";
 
         // Find the description relative to the ID given
         switch (skillID) {
-            case (int)SKILLS.TEST_SKILL1:
-                break;
-            case (int)SKILLS.TEST_SKILL2:
-                break;
-            case (int)SKILLS.TEST_SKILL3:
-                break;
-            case (int)SKILLS.TEST_SKILL4:
-                break;
+            case (int)SKILLS.TEST_Fargas:
+                return "Offense skill \n\n1 targets enemies";
+            case (int)SKILLS.TEST_Frea:
+               return "Offense skill 2 \n\ntargets enemies";
+            case (int)SKILLS.TEST_Oberon:
+                return "Buff skill 1 \n\ntargets players";
+            case (int)SKILLS.TEST_Arcelus:
+                return "Heal skill 1 \n\ntargets players";
+			default: return "";
         }
-
-        return description;
     }
 
     #endregion
@@ -249,29 +272,40 @@ public class SkillsInventory : MonoBehaviour {
 
         // Find the required stats and return those to the caller
         switch (skillID) {
-            case (int)SKILLS.TEST_SKILL1:
+            case (int)SKILLS.TEST_Fargas:
                 skillStat[0] = 25;
                 skillStat[1] = 95;
-                skillStat[4] = (float)SKILL_TYPE.SINGLE_TARGET_ATK;
+                skillStat[2] = 1;
+                skillStat[4] = (float)SKILL_TYPE.ALL_TARGETS_ATK;
                 skillStat[5] = 50;
                 break;
-            case (int)SKILLS.TEST_SKILL2:
+            case (int)SKILLS.TEST_Frea:
                 skillStat[0] = 70;
                 skillStat[1] = 80;
-                skillStat[4] = (float)SKILL_TYPE.ALL_TARGETS_ATK;
-                skillStat[5] = 190;
+                skillStat[2] = 0;
+                skillStat[4] = (float)SKILL_TYPE.SINGLE_TARGET_ATK;
+                skillStat[5] = 45;
                 break;
-            case (int)SKILLS.TEST_SKILL3:
+            case (int)SKILLS.TEST_Oberon:
                 skillStat[0] = 50;
                 skillStat[1] = 85;
-                skillStat[4] = (float)SKILL_TYPE.FULL_ROW_ATK;
+                skillStat[2] = 0;
+                skillStat[4] = (float)SKILL_TYPE.SINGLE_PLAYER_BUFF;
                 skillStat[5] = 115;
                 break;
-            case (int)SKILLS.TEST_SKILL4:
+            case (int)SKILLS.TEST_Arcelus:
                 skillStat[0] = 20;
                 skillStat[1] = 100;
+                skillStat[2] = 1;
                 skillStat[4] = (float)SKILL_TYPE.SINGLE_PLAYER_HEAL;
                 skillStat[5] = 40;
+                break;
+            default:
+                skillStat[0] = 0;
+                skillStat[1] = 0;
+                skillStat[2] = 0;
+                skillStat[4] = (float)SKILL_TYPE.SINGLE_PLAYER_HEAL;
+                skillStat[5] = 0;
                 break;
         }
 

@@ -198,7 +198,7 @@ public class BattleManager : MonoBehaviour
     public void StartBattle()
     {
         //Store and sort the agilities of the players and enemies in ascending order
-        battleInProgress = true;
+       
         foreach (PlayerInformtion p in players)
         {
             if (p.playerReference != null)//Make sure all the entries have players (i.e. what if we have less than 4 players)
@@ -225,6 +225,9 @@ public class BattleManager : MonoBehaviour
 
         BuildQueue();
 
+        //Update the consumable inventory
+        TellInventoryToUpdateConsumables();
+
         if (!battleHasEnded)
         {
             NextOnQueue();
@@ -236,7 +239,7 @@ public class BattleManager : MonoBehaviour
         //Check if the next on Q is a player or an enemy and call the correct function
         if (battleQueue[0].playerReference != null && battleQueue[0].enemyReference == null)
         {
-            uiBtl.showThisPlayerUI(battleQueue[0].playerIndex, battleQueue[0].name, battleQueue[0].playerReference);
+            uiBtl.ShowThisPlayerUI(battleQueue[0].playerIndex, battleQueue[0].name, battleQueue[0].playerReference);
         }
         else if (battleQueue[0].playerReference == null && battleQueue[0].enemyReference != null)
         {
@@ -331,6 +334,7 @@ public class BattleManager : MonoBehaviour
                 battleQueue.Add(enemies[maxEnemyIndex]);
                 //Add the enemy's image to the UI
                 uiBtl.AddImageToQ(enemies[maxEnemyIndex].enemyReference.qImage);
+                Debug.Log(enemies[maxEnemyIndex].enemyReference.qImage);
                 //Remove the enemy's agility from the list
                 eSpeeds.RemoveAt(eSpeeds.Count - 1);
                 //Add the enemy's index to the array of removed enemy
@@ -353,6 +357,7 @@ public class BattleManager : MonoBehaviour
             battleQueue.Add(enemies[maxEnemyIndex]);
             //Add the enemy's image to the UI
             uiBtl.AddImageToQ(enemies[maxEnemyIndex].enemyReference.qImage);
+            Debug.Log(enemies[maxEnemyIndex].enemyReference.qImage);
             eSpeeds.RemoveAt(eSpeeds.Count - 1);
             removedEnemyIndexes[maxEnemyIndex] = maxEnemyIndex;
         }
@@ -386,8 +391,6 @@ public class BattleManager : MonoBehaviour
                 PartyStats.chara[i].rage = 0.0f;
                 players[i].playerReference.canRage = false;
             }
-            players[i].exp += expGain;
-            PartyStats.chara[i].currentExperience = players[i].exp;
             enemySpawner.numberOfEnemies = 0; //Reset the enemy spawner to get ready for the next battle
         }
 
@@ -422,7 +425,7 @@ public class BattleManager : MonoBehaviour
 
     public void LevelUp(int playerIndex)
     {
-       // Debug.Log(players[playerIndex].playerReference.name + " has leveled up!");
+        //Called from the Victory Screen
         //The new EXP is what remains after reaching the new level
         players[playerIndex].exp = players[playerIndex].exp - players[playerIndex].expNeededForNextLevel;
         //Update the party stats
@@ -434,11 +437,6 @@ public class BattleManager : MonoBehaviour
         //Update the needed exp for next levelup
         players[playerIndex].expNeededForNextLevel = PartyStats.chara[playerIndex].neededExperience;
         Debug.Log("You need this much to level up again! " + players[playerIndex].expNeededForNextLevel);
-        //If the player gains enough EXP to level up more than once
-       // if (players[playerIndex].exp >= players[playerIndex].expNeededForNextLevel)
-       // {
-       //     LevelUp(playerIndex);
-       // }
     }
 
     public void UpdatePlayerStats(int playerIndex)
@@ -456,5 +454,19 @@ public class BattleManager : MonoBehaviour
         players[playerIndex].exp = PartyStats.chara[playerIndex].currentExperience;
         players[playerIndex].expNeededForNextLevel = PartyStats.chara[playerIndex].neededExperience;
         players[playerIndex].playerReference.UpdatePlayerStats();
+    }
+
+    private void TellInventoryToUpdateConsumables()
+    {
+
+        var length = MainInventory.INVENTORY_SIZE;
+        for (int i = 0; i < length; i++)
+        {
+            if (MainInventory.invInstance.ItemType(MainInventory.invInstance.invItem[i, 0]) == (int)ITEM_TYPE.CONSUMABLE)
+            {
+                MainInventory.invInstance.consumableInv.Add(i);
+            }
+        }
+        //Debug.Log("Consumables Count is: " + MainInventory.invInstance.consumableInv.Count);
     }
 }

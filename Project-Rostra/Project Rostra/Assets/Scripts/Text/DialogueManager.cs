@@ -473,7 +473,7 @@ public class DialogueManager : MonoBehaviour
 		}
 		if (battle == true && isActive == false)
 		{
-			fade.flipFade();
+			fade.FlipFadeToBattle();
 			battle = false;
 			UIBTL.conversationAfterBattle = true;
 		}
