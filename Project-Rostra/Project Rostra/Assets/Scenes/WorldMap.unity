@@ -21304,8 +21304,7 @@ MonoBehaviour:
   - {fileID: 8830413635625265082, guid: 09875b434c97e954a8ca9276dca80ae4, type: 3}
   - {fileID: 2487905135032201599, guid: 3c7d329df66cd7349923408792b8e755, type: 3}
   - {fileID: 2487905135032201599, guid: 3c7d329df66cd7349923408792b8e755, type: 3}
-  - {fileID: 2487905135032201599, guid: 3c7d329df66cd7349923408792b8e755, type: 3}
-  enemyLevels: 0100000001000000010000000100000001000000
+  enemyLevels: 01000000010000000100000001000000
   fadePanel: {fileID: 395379547}
   enemySpwn: {fileID: 0}
 --- !u!212 &501701999
@@ -23001,7 +23000,7 @@ PrefabInstance:
     - target: {fileID: 6595024453704713425, guid: 553abd6f34f56904592869472cdfc65b,
         type: 3}
       propertyPath: listOfPools.Array.data[3].poolSize
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 553abd6f34f56904592869472cdfc65b, type: 3}
