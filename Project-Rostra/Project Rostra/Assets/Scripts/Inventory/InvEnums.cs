@@ -1,5 +1,5 @@
 ﻿// Code Written By:     Christopher Brine
-// Last Updated:        September 15th, 2019
+// Last Updated:        October 10th, 2019
 
 // IMPORTANT -- Make sure you put (int) before referencing the enum values in this file.
 //                      Example:    (int)ITEM_ID.NO_ITEM;
@@ -21,7 +21,7 @@ enum ITEM_TYPE { // Minimum Value -- 0xFF00, Maximum Value -- 0xFF4F (64 possibl
 	KEY_ITEM =          0xFF02, // Type for items that are important in the game (Quest Items)
 };
 
-enum ARMOR_TYPE { // Minimum Value -- 0xFF50, Maximum Value -- 0xFFAF (80 possible armor types)
+enum ARMOR_TYPE { // Minimum Value -- 0xFF50, Maximum Value -- 0xFF0F
 	LEATHER =           0xFF50, 
 	CHAINMAIL =         0xFF51,		
 	IRON =              0xFF52,			 
@@ -32,7 +32,7 @@ enum ARMOR_TYPE { // Minimum Value -- 0xFF50, Maximum Value -- 0xFFAF (80 possib
 	PLATED_STEEL =      0xFF57,  
 };
 
-enum WEAPON_TYPE { // Minimum Value -- 0xFFB0, Maximum Value -- 0xFFFF (80 possible weapon types)
+enum WEAPON_TYPE { // Minimum Value -- 0xFFA0, Maximum Value -- 0xFFEF
 	SWORD =             0xFFB0,			
 	AXE =               0xFFB1,			
 	MACE =              0xFFB2,			
@@ -42,3 +42,13 @@ enum WEAPON_TYPE { // Minimum Value -- 0xFFB0, Maximum Value -- 0xFFFF (80 possi
 	BOW =               0xFFB6,			
 	JAVELIN =           0xFFB7,		
 };
+
+// The item's class is how the merchant decides whether they can purchase an item from the player or not
+enum ITEM_CLASS {// Minimum Value -- 0xFFF0, Maximum Value -- 0xFFFF
+    UNSELLABLE =        0xFFF0,     // Items that fall under this class are unsellable to any merchant
+    GENERIC =           0xFFF1,     // Generic items like random sellable loot and stuff
+    WEAPON =            0xFFF2,     // Any type of weaponry
+    ARMOR =             0xFFF3,     // Any type of armor
+    POTIONS =           0xFFF4,     // Any type of consumable potion
+    STAT_BOOSTS =       0xFFF5,     // Any type of permanent stat boosting item
+}   

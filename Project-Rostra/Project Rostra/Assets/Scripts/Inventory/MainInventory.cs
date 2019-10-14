@@ -2,10 +2,11 @@
 using UnityEngine;
 
 // Code Written By:     Christopher Brine
-// Last Updated:        September 30th, 2019
+// Last Updated:        October 10th, 2019
 
 public class MainInventory : MonoBehaviour {
 	public static MainInventory invInstance;    // Holds the current inventory instance in a single variable
+	public static int totalMoney = 0;           // The amount of money the player has
 	public static int INVENTORY_SIZE = 60;      // The maximum size of the inventory
 	public int[,] invItem = new int[INVENTORY_SIZE, 3];
 	// NOTE -- Element 0 is the item's ID value that will point to its name, description, icon, etc.
@@ -45,13 +46,12 @@ public class MainInventory : MonoBehaviour {
 	public void Awake() {
 		if (invInstance == null) {
 			invInstance = this;
+			DontDestroyOnLoad(gameObject);
 		} else {
 			Destroy(gameObject);
 		}
 		// Set all 3rd elements in the array to -1 (Equipped by nobody) 
-		for (int i = 0; i < INVENTORY_SIZE; i++) {
-			invItem[i, 2] = -1;
-		}
+		for (int i = 0; i < INVENTORY_SIZE; i++) { invItem[i, 2] = -1; }
 	}
 
 	// FOR TESTING
@@ -61,13 +61,16 @@ public class MainInventory : MonoBehaviour {
 
 		invItem[1, 0] = (int)ITEM_ID.TEST_POTION_HP;
 		invItem[1, 1] = ItemStackLimit((int)ITEM_ID.TEST_POTION_HP);
+		consumableInv.Add(1);
 
 		invItem[2, 0] = (int)ITEM_ID.TEST_POTION_MP;
 		invItem[2, 1] = ItemStackLimit((int)ITEM_ID.TEST_POTION_MP);
+		consumableInv.Add(2);
 
 		invItem[3, 0] = (int)ITEM_ID.TEST_ARMOR1;
 		invItem[3, 1] = 1;
 
+		Debug.Log(consumableInv[0].ToString() + ", " + consumableInv[1].ToString());
 	}
 
 	// Handling keyboard functionality
@@ -268,7 +271,7 @@ public class MainInventory : MonoBehaviour {
 				if (curPlayerOption == i) { GUI.Label(new Rect(750.0f, 15.0f + (fontHeight * i), 50.0f, 50.0f), ">", style); }
 			}
 		}
-    }
+	}
 
 	#region Item/Inventory Manipulation Scripts
 
@@ -276,8 +279,14 @@ public class MainInventory : MonoBehaviour {
 	public void SwapItems(int slot1, int slot2) {
 		if (slot1 != slot2) {
 			int[] tempItem = { invItem[slot1, 0], invItem[slot1, 1], invItem[slot1, 2] };
-            // Move the second item into the first item's slot
-            invItem[slot1, 0] = invItem[slot2, 0];
+			// If the item is a consumable, make sure to update the list for its new slot
+			if (ItemType(invItem[slot1, 0]) == (int)ITEM_TYPE.CONSUMABLE) {
+				int index = consumableInv.IndexOf(slot1);
+				consumableInv.RemoveAt(index);
+				consumableInv.Insert(index, slot2);
+			}
+			// Move the second item into the first item's slot
+			invItem[slot1, 0] = invItem[slot2, 0];
 			invItem[slot1, 1] = invItem[slot2, 1];
 			invItem[slot1, 2] = invItem[slot2, 2];
 			// Move the first item into the second item's slot
@@ -444,6 +453,33 @@ public class MainInventory : MonoBehaviour {
 
 	#endregion
 
+	#region Item Classes for Merchants
+
+	public int ItemClass(int itemID) {
+		int itemClass = 0;
+
+		// Find the item's class based on its ID
+		switch (itemID) {
+			case (int)ITEM_ID.TEST_POTION_HP:
+			case (int)ITEM_ID.TEST_POTION_MP:
+				itemClass = (int)ITEM_CLASS.POTIONS;
+				break;
+			case (int)ITEM_ID.TEST_QUEST_ITEM:
+				itemClass = (int)ITEM_CLASS.UNSELLABLE;
+				break;
+			case (int)ITEM_ID.TEST_ARMOR1:
+				itemClass = (int)ITEM_CLASS.ARMOR;
+				break;
+			case (int)ITEM_ID.TEST_WEAPON1:
+				itemClass = (int)ITEM_CLASS.WEAPON;
+				break;
+		}
+
+		return itemClass;
+	}
+
+	#endregion
+
 	#region Item Options and Their Functionality
 
 	// Returns a full list of options that an item can have based on its type
@@ -482,7 +518,7 @@ public class MainInventory : MonoBehaviour {
 		int itemType = ItemType(itemID);
 
 		// Starting up the item swapping
-		if (option.Equals("Move")) {
+		if (option.Equals("Switch")) {
 			if (!swappingItems) {
 				swappingItems = true;
 				slotToSwapTo = curOption;
@@ -581,11 +617,9 @@ public class MainInventory : MonoBehaviour {
 	public int ItemType(int itemID) {
 		int itemType = (int)ITEM_TYPE.CONSUMABLE;
 
-        // Search for the item's type based on its ID
-
+		// Search for the item's type based on its ID
 		switch (itemID) {
-
-            case (int)ITEM_ID.TEST_POTION_HP:
+			case (int)ITEM_ID.TEST_POTION_HP:
 			case (int)ITEM_ID.TEST_POTION_MP:
 				itemType = (int)ITEM_TYPE.CONSUMABLE;
 				break;
@@ -596,9 +630,6 @@ public class MainInventory : MonoBehaviour {
 			case (int)ITEM_ID.TEST_ARMOR1:
 				itemType = (int)ITEM_TYPE.EQUIPABLE;
 				break;
-            default:
-                itemType = 0;
-                break;
 		}
 
 		return itemType;
@@ -731,7 +762,7 @@ public class MainInventory : MonoBehaviour {
 			// Tell the inventory that the item isn't equipped by anybody anymore
 			invItem[curOption, 2] = -1;
 		}
-		//Debug.Log("\nAttack: " + PartyStats.chara[playerID].TotalAttack + " Defence: " + PartyStats.chara[playerID].TotalDefence + " Strength: " + PartyStats.chara[playerID].TotalStrength + " Agility: " + PartyStats.chara[playerID].TotalAgility + " Critical: " + PartyStats.chara[playerID].TotalCritical + " Maximum Health: " + PartyStats.chara[playerID].TotalMaxHealth + " Maximum Mana: " + PartyStats.chara[playerID].TotalMaxMana);
+		Debug.Log("\nAttack: " + PartyStats.chara[playerID].TotalAttack + " Defence: " + PartyStats.chara[playerID].TotalDefence + " Strength: " + PartyStats.chara[playerID].TotalStrength + " Agility: " + PartyStats.chara[playerID].TotalAgility + " Critical: " + PartyStats.chara[playerID].TotalCritical + " Maximum Health: " + PartyStats.chara[playerID].TotalMaxHealth + " Maximum Mana: " + PartyStats.chara[playerID].TotalMaxMana);
 	}
 
 	#endregion
