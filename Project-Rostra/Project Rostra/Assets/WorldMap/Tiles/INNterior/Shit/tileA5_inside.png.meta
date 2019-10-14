@@ -1,0 +1,3782 @@
+fileFormatVersion: 2
+guid: af3e591a4261fee48b0b7363fd5dbcf5
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: tileA5_inside_0
+    21300002: tileA5_inside_1
+    21300004: tileA5_inside_2
+    21300006: tileA5_inside_3
+    21300008: tileA5_inside_4
+    21300010: tileA5_inside_5
+    21300012: tileA5_inside_6
+    21300014: tileA5_inside_7
+    21300016: tileA5_inside_8
+    21300018: tileA5_inside_9
+    21300020: tileA5_inside_10
+    21300022: tileA5_inside_11
+    21300024: tileA5_inside_12
+    21300026: tileA5_inside_13
+    21300028: tileA5_inside_14
+    21300030: tileA5_inside_15
+    21300032: tileA5_inside_16
+    21300034: tileA5_inside_17
+    21300036: tileA5_inside_18
+    21300038: tileA5_inside_19
+    21300040: tileA5_inside_20
+    21300042: tileA5_inside_21
+    21300044: tileA5_inside_22
+    21300046: tileA5_inside_23
+    21300048: tileA5_inside_24
+    21300050: tileA5_inside_25
+    21300052: tileA5_inside_26
+    21300054: tileA5_inside_27
+    21300056: tileA5_inside_28
+    21300058: tileA5_inside_29
+    21300060: tileA5_inside_30
+    21300062: tileA5_inside_31
+    21300064: tileA5_inside_32
+    21300066: tileA5_inside_33
+    21300068: tileA5_inside_34
+    21300070: tileA5_inside_35
+    21300072: tileA5_inside_36
+    21300074: tileA5_inside_37
+    21300076: tileA5_inside_38
+    21300078: tileA5_inside_39
+    21300080: tileA5_inside_40
+    21300082: tileA5_inside_41
+    21300084: tileA5_inside_42
+    21300086: tileA5_inside_43
+    21300088: tileA5_inside_44
+    21300090: tileA5_inside_45
+    21300092: tileA5_inside_46
+    21300094: tileA5_inside_47
+    21300096: tileA5_inside_48
+    21300098: tileA5_inside_49
+    21300100: tileA5_inside_50
+    21300102: tileA5_inside_51
+    21300104: tileA5_inside_52
+    21300106: tileA5_inside_53
+    21300108: tileA5_inside_54
+    21300110: tileA5_inside_55
+    21300112: tileA5_inside_56
+    21300114: tileA5_inside_57
+    21300116: tileA5_inside_58
+    21300118: tileA5_inside_59
+    21300120: tileA5_inside_60
+    21300122: tileA5_inside_61
+    21300124: tileA5_inside_62
+    21300126: tileA5_inside_63
+    21300128: tileA5_inside_64
+    21300130: tileA5_inside_65
+    21300132: tileA5_inside_66
+    21300134: tileA5_inside_67
+    21300136: tileA5_inside_68
+    21300138: tileA5_inside_69
+    21300140: tileA5_inside_70
+    21300142: tileA5_inside_71
+    21300144: tileA5_inside_72
+    21300146: tileA5_inside_73
+    21300148: tileA5_inside_74
+    21300150: tileA5_inside_75
+    21300152: tileA5_inside_76
+    21300154: tileA5_inside_77
+    21300156: tileA5_inside_78
+    21300158: tileA5_inside_79
+    21300160: tileA5_inside_80
+    21300162: tileA5_inside_81
+    21300164: tileA5_inside_82
+    21300166: tileA5_inside_83
+    21300168: tileA5_inside_84
+    21300170: tileA5_inside_85
+    21300172: tileA5_inside_86
+    21300174: tileA5_inside_87
+    21300176: tileA5_inside_88
+    21300178: tileA5_inside_89
+    21300180: tileA5_inside_90
+    21300182: tileA5_inside_91
+    21300184: tileA5_inside_92
+    21300186: tileA5_inside_93
+    21300188: tileA5_inside_94
+    21300190: tileA5_inside_95
+    21300192: tileA5_inside_96
+    21300194: tileA5_inside_97
+    21300196: tileA5_inside_98
+    21300198: tileA5_inside_99
+    21300200: tileA5_inside_100
+    21300202: tileA5_inside_101
+    21300204: tileA5_inside_102
+    21300206: tileA5_inside_103
+    21300208: tileA5_inside_104
+    21300210: tileA5_inside_105
+    21300212: tileA5_inside_106
+    21300214: tileA5_inside_107
+    21300216: tileA5_inside_108
+    21300218: tileA5_inside_109
+    21300220: tileA5_inside_110
+    21300222: tileA5_inside_111
+    21300224: tileA5_inside_112
+    21300226: tileA5_inside_113
+    21300228: tileA5_inside_114
+    21300230: tileA5_inside_115
+    21300232: tileA5_inside_116
+    21300234: tileA5_inside_117
+    21300236: tileA5_inside_118
+    21300238: tileA5_inside_119
+    21300240: tileA5_inside_120
+    21300242: tileA5_inside_121
+    21300244: tileA5_inside_122
+    21300246: tileA5_inside_123
+    21300248: tileA5_inside_124
+    21300250: tileA5_inside_125
+    21300252: tileA5_inside_126
+    21300254: tileA5_inside_127
+    21300256: tileA5_inside_128
+    21300258: tileA5_inside_129
+    21300260: tileA5_inside_130
+    21300262: tileA5_inside_131
+    21300264: tileA5_inside_132
+    21300266: tileA5_inside_133
+    21300268: tileA5_inside_134
+    21300270: tileA5_inside_135
+    21300272: tileA5_inside_136
+    21300274: tileA5_inside_137
+    21300276: tileA5_inside_138
+    21300278: tileA5_inside_139
+    21300280: tileA5_inside_140
+    21300282: tileA5_inside_141
+    21300284: tileA5_inside_142
+    21300286: tileA5_inside_143
+    21300288: tileA5_inside_144
+    21300290: tileA5_inside_145
+    21300292: tileA5_inside_146
+    21300294: tileA5_inside_147
+    21300296: tileA5_inside_148
+    21300298: tileA5_inside_149
+    21300300: tileA5_inside_150
+    21300302: tileA5_inside_151
+    21300304: tileA5_inside_152
+    21300306: tileA5_inside_153
+    21300308: tileA5_inside_154
+    21300310: tileA5_inside_155
+    21300312: tileA5_inside_156
+    21300314: tileA5_inside_157
+    21300316: tileA5_inside_158
+    21300318: tileA5_inside_159
+    21300320: tileA5_inside_160
+    21300322: tileA5_inside_161
+    21300324: tileA5_inside_162
+    21300326: tileA5_inside_163
+    21300328: tileA5_inside_164
+    21300330: tileA5_inside_165
+    21300332: tileA5_inside_166
+    21300334: tileA5_inside_167
+    21300336: tileA5_inside_168
+    21300338: tileA5_inside_169
+    21300340: tileA5_inside_170
+    21300342: tileA5_inside_171
+    21300344: tileA5_inside_172
+    21300346: tileA5_inside_173
+    21300348: tileA5_inside_174
+    21300350: tileA5_inside_175
+    21300352: tileA5_inside_176
+    21300354: tileA5_inside_177
+    21300356: tileA5_inside_178
+    21300358: tileA5_inside_179
+    21300360: tileA5_inside_180
+    21300362: tileA5_inside_181
+    21300364: tileA5_inside_182
+    21300366: tileA5_inside_183
+    21300368: tileA5_inside_184
+    21300370: tileA5_inside_185
+    21300372: tileA5_inside_186
+    21300374: tileA5_inside_187
+    21300376: tileA5_inside_188
+    21300378: tileA5_inside_189
+    21300380: tileA5_inside_190
+    21300382: tileA5_inside_191
+    21300384: tileA5_inside_192
+    21300386: tileA5_inside_193
+    21300388: tileA5_inside_194
+    21300390: tileA5_inside_195
+    21300392: tileA5_inside_196
+    21300394: tileA5_inside_197
+    21300396: tileA5_inside_198
+    21300398: tileA5_inside_199
+    21300400: tileA5_inside_200
+    21300402: tileA5_inside_201
+    21300404: tileA5_inside_202
+    21300406: tileA5_inside_203
+    21300408: tileA5_inside_204
+    21300410: tileA5_inside_205
+    21300412: tileA5_inside_206
+    21300414: tileA5_inside_207
+    21300416: tileA5_inside_208
+    21300418: tileA5_inside_209
+    21300420: tileA5_inside_210
+    21300422: tileA5_inside_211
+    21300424: tileA5_inside_212
+    21300426: tileA5_inside_213
+    21300428: tileA5_inside_214
+    21300430: tileA5_inside_215
+    21300432: tileA5_inside_216
+    21300434: tileA5_inside_217
+    21300436: tileA5_inside_218
+    21300438: tileA5_inside_219
+    21300440: tileA5_inside_220
+    21300442: tileA5_inside_221
+    21300444: tileA5_inside_222
+    21300446: tileA5_inside_223
+    21300448: tileA5_inside_224
+    21300450: tileA5_inside_225
+    21300452: tileA5_inside_226
+    21300454: tileA5_inside_227
+    21300456: tileA5_inside_228
+    21300458: tileA5_inside_229
+    21300460: tileA5_inside_230
+    21300462: tileA5_inside_231
+    21300464: tileA5_inside_232
+    21300466: tileA5_inside_233
+    21300468: tileA5_inside_234
+    21300470: tileA5_inside_235
+    21300472: tileA5_inside_236
+    21300474: tileA5_inside_237
+    21300476: tileA5_inside_238
+    21300478: tileA5_inside_239
+    21300480: tileA5_inside_240
+    21300482: tileA5_inside_241
+    21300484: tileA5_inside_242
+    21300486: tileA5_inside_243
+    21300488: tileA5_inside_244
+    21300490: tileA5_inside_245
+    21300492: tileA5_inside_246
+    21300494: tileA5_inside_247
+    21300496: tileA5_inside_248
+    21300498: tileA5_inside_249
+    21300500: tileA5_inside_250
+    21300502: tileA5_inside_251
+    21300504: tileA5_inside_252
+    21300506: tileA5_inside_253
+    21300508: tileA5_inside_254
+    21300510: tileA5_inside_255
+    21300512: tileA5_inside_256
+    21300514: tileA5_inside_257
+    21300516: tileA5_inside_258
+    21300518: tileA5_inside_259
+    21300520: tileA5_inside_260
+    21300522: tileA5_inside_261
+    21300524: tileA5_inside_262
+    21300526: tileA5_inside_263
+    21300528: tileA5_inside_264
+    21300530: tileA5_inside_265
+    21300532: tileA5_inside_266
+    21300534: tileA5_inside_267
+    21300536: tileA5_inside_268
+    21300538: tileA5_inside_269
+    21300540: tileA5_inside_270
+    21300542: tileA5_inside_271
+    21300544: tileA5_inside_272
+    21300546: tileA5_inside_273
+    21300548: tileA5_inside_274
+    21300550: tileA5_inside_275
+    21300552: tileA5_inside_276
+    21300554: tileA5_inside_277
+    21300556: tileA5_inside_278
+    21300558: tileA5_inside_279
+    21300560: tileA5_inside_280
+    21300562: tileA5_inside_281
+    21300564: tileA5_inside_282
+    21300566: tileA5_inside_283
+    21300568: tileA5_inside_284
+    21300570: tileA5_inside_285
+    21300572: tileA5_inside_286
+    21300574: tileA5_inside_287
+    21300576: tileA5_inside_288
+    21300578: tileA5_inside_289
+    21300580: tileA5_inside_290
+    21300582: tileA5_inside_291
+    21300584: tileA5_inside_292
+    21300586: tileA5_inside_293
+    21300588: tileA5_inside_294
+    21300590: tileA5_inside_295
+    21300592: tileA5_inside_296
+    21300594: tileA5_inside_297
+    21300596: tileA5_inside_298
+    21300598: tileA5_inside_299
+    21300600: tileA5_inside_300
+    21300602: tileA5_inside_301
+    21300604: tileA5_inside_302
+    21300606: tileA5_inside_303
+    21300608: tileA5_inside_304
+    21300610: tileA5_inside_305
+    21300612: tileA5_inside_306
+    21300614: tileA5_inside_307
+    21300616: tileA5_inside_308
+    21300618: tileA5_inside_309
+    21300620: tileA5_inside_310
+    21300622: tileA5_inside_311
+    21300624: tileA5_inside_312
+    21300626: tileA5_inside_313
+    21300628: tileA5_inside_314
+    21300630: tileA5_inside_315
+    21300632: tileA5_inside_316
+    21300634: tileA5_inside_317
+    21300636: tileA5_inside_318
+    21300638: tileA5_inside_319
+    21300640: tileA5_inside_320
+    21300642: tileA5_inside_321
+    21300644: tileA5_inside_322
+    21300646: tileA5_inside_323
+    21300648: tileA5_inside_324
+    21300650: tileA5_inside_325
+    21300652: tileA5_inside_326
+    21300654: tileA5_inside_327
+    21300656: tileA5_inside_328
+    21300658: tileA5_inside_329
+    21300660: tileA5_inside_330
+    21300662: tileA5_inside_331
+    21300664: tileA5_inside_332
+    21300666: tileA5_inside_333
+    21300668: tileA5_inside_334
+    21300670: tileA5_inside_335
+    21300672: tileA5_inside_336
+    21300674: tileA5_inside_337
+    21300676: tileA5_inside_338
+    21300678: tileA5_inside_339
+    21300680: tileA5_inside_340
+    21300682: tileA5_inside_341
+    21300684: tileA5_inside_342
+    21300686: tileA5_inside_343
+    21300688: tileA5_inside_344
+    21300690: tileA5_inside_345
+    21300692: tileA5_inside_346
+    21300694: tileA5_inside_347
+    21300696: tileA5_inside_348
+    21300698: tileA5_inside_349
+    21300700: tileA5_inside_350
+    21300702: tileA5_inside_351
+    21300704: tileA5_inside_352
+    21300706: tileA5_inside_353
+    21300708: tileA5_inside_354
+    21300710: tileA5_inside_355
+    21300712: tileA5_inside_356
+    21300714: tileA5_inside_357
+    21300716: tileA5_inside_358
+    21300718: tileA5_inside_359
+    21300720: tileA5_inside_360
+    21300722: tileA5_inside_361
+    21300724: tileA5_inside_362
+    21300726: tileA5_inside_363
+    21300728: tileA5_inside_364
+    21300730: tileA5_inside_365
+    21300732: tileA5_inside_366
+    21300734: tileA5_inside_367
+    21300736: tileA5_inside_368
+    21300738: tileA5_inside_369
+    21300740: tileA5_inside_370
+    21300742: tileA5_inside_371
+    21300744: tileA5_inside_372
+    21300746: tileA5_inside_373
+    21300748: tileA5_inside_374
+    21300750: tileA5_inside_375
+    21300752: tileA5_inside_376
+    21300754: tileA5_inside_377
+    21300756: tileA5_inside_378
+    21300758: tileA5_inside_379
+    21300760: tileA5_inside_380
+    21300762: tileA5_inside_381
+    21300764: tileA5_inside_382
+    21300766: tileA5_inside_383
+    21300768: tileA5_inside_384
+    21300770: tileA5_inside_385
+    21300772: tileA5_inside_386
+    21300774: tileA5_inside_387
+    21300776: tileA5_inside_388
+    21300778: tileA5_inside_389
+    21300780: tileA5_inside_390
+    21300782: tileA5_inside_391
+    21300784: tileA5_inside_392
+    21300786: tileA5_inside_393
+    21300788: tileA5_inside_394
+    21300790: tileA5_inside_395
+    21300792: tileA5_inside_396
+    21300794: tileA5_inside_397
+    21300796: tileA5_inside_398
+    21300798: tileA5_inside_399
+    21300800: tileA5_inside_400
+    21300802: tileA5_inside_401
+    21300804: tileA5_inside_402
+    21300806: tileA5_inside_403
+    21300808: tileA5_inside_404
+    21300810: tileA5_inside_405
+    21300812: tileA5_inside_406
+    21300814: tileA5_inside_407
+    21300816: tileA5_inside_408
+    21300818: tileA5_inside_409
+    21300820: tileA5_inside_410
+    21300822: tileA5_inside_411
+    21300824: tileA5_inside_412
+    21300826: tileA5_inside_413
+    21300828: tileA5_inside_414
+    21300830: tileA5_inside_415
+    21300832: tileA5_inside_416
+    21300834: tileA5_inside_417
+    21300836: tileA5_inside_418
+    21300838: tileA5_inside_419
+    21300840: tileA5_inside_420
+    21300842: tileA5_inside_421
+    21300844: tileA5_inside_422
+    21300846: tileA5_inside_423
+    21300848: tileA5_inside_424
+    21300850: tileA5_inside_425
+    21300852: tileA5_inside_426
+    21300854: tileA5_inside_427
+    21300856: tileA5_inside_428
+    21300858: tileA5_inside_429
+    21300860: tileA5_inside_430
+    21300862: tileA5_inside_431
+    21300864: tileA5_inside_432
+    21300866: tileA5_inside_433
+    21300868: tileA5_inside_434
+    21300870: tileA5_inside_435
+    21300872: tileA5_inside_436
+    21300874: tileA5_inside_437
+    21300876: tileA5_inside_438
+    21300878: tileA5_inside_439
+    21300880: tileA5_inside_440
+    21300882: tileA5_inside_441
+    21300884: tileA5_inside_442
+    21300886: tileA5_inside_443
+    21300888: tileA5_inside_444
+    21300890: tileA5_inside_445
+    21300892: tileA5_inside_446
+    21300894: tileA5_inside_447
+    21300896: tileA5_inside_448
+    21300898: tileA5_inside_449
+    21300900: tileA5_inside_450
+    21300902: tileA5_inside_451
+    21300904: tileA5_inside_452
+    21300906: tileA5_inside_453
+    21300908: tileA5_inside_454
+    21300910: tileA5_inside_455
+    21300912: tileA5_inside_456
+    21300914: tileA5_inside_457
+    21300916: tileA5_inside_458
+    21300918: tileA5_inside_459
+    21300920: tileA5_inside_460
+    21300922: tileA5_inside_461
+    21300924: tileA5_inside_462
+    21300926: tileA5_inside_463
+    21300928: tileA5_inside_464
+    21300930: tileA5_inside_465
+    21300932: tileA5_inside_466
+    21300934: tileA5_inside_467
+    21300936: tileA5_inside_468
+    21300938: tileA5_inside_469
+    21300940: tileA5_inside_470
+    21300942: tileA5_inside_471
+    21300944: tileA5_inside_472
+    21300946: tileA5_inside_473
+    21300948: tileA5_inside_474
+    21300950: tileA5_inside_475
+    21300952: tileA5_inside_476
+    21300954: tileA5_inside_477
+    21300956: tileA5_inside_478
+    21300958: tileA5_inside_479
+    21300960: tileA5_inside_480
+    21300962: tileA5_inside_481
+    21300964: tileA5_inside_482
+    21300966: tileA5_inside_483
+    21300968: tileA5_inside_484
+    21300970: tileA5_inside_485
+    21300972: tileA5_inside_486
+    21300974: tileA5_inside_487
+    21300976: tileA5_inside_488
+    21300978: tileA5_inside_489
+    21300980: tileA5_inside_490
+    21300982: tileA5_inside_491
+    21300984: tileA5_inside_492
+    21300986: tileA5_inside_493
+    21300988: tileA5_inside_494
+    21300990: tileA5_inside_495
+    21300992: tileA5_inside_496
+    21300994: tileA5_inside_497
+    21300996: tileA5_inside_498
+    21300998: tileA5_inside_499
+    21301000: tileA5_inside_500
+    21301002: tileA5_inside_501
+    21301004: tileA5_inside_502
+    21301006: tileA5_inside_503
+    21301008: tileA5_inside_504
+    21301010: tileA5_inside_505
+    21301012: tileA5_inside_506
+    21301014: tileA5_inside_507
+    21301016: tileA5_inside_508
+    21301018: tileA5_inside_509
+    21301020: tileA5_inside_510
+    21301022: tileA5_inside_511
+    21301024: tileA5_inside_512
+    21301026: tileA5_inside_513
+    21301028: tileA5_inside_514
+    21301030: tileA5_inside_515
+    21301032: tileA5_inside_516
+    21301034: tileA5_inside_517
+    21301036: tileA5_inside_518
+    21301038: tileA5_inside_519
+    21301040: tileA5_inside_520
+    21301042: tileA5_inside_521
+    21301044: tileA5_inside_522
+    21301046: tileA5_inside_523
+    21301048: tileA5_inside_524
+    21301050: tileA5_inside_525
+    21301052: tileA5_inside_526
+    21301054: tileA5_inside_527
+    21301056: tileA5_inside_528
+    21301058: tileA5_inside_529
+    21301060: tileA5_inside_530
+    21301062: tileA5_inside_531
+    21301064: tileA5_inside_532
+    21301066: tileA5_inside_533
+    21301068: tileA5_inside_534
+    21301070: tileA5_inside_535
+    21301072: tileA5_inside_536
+    21301074: tileA5_inside_537
+    21301076: tileA5_inside_538
+    21301078: tileA5_inside_539
+    21301080: tileA5_inside_540
+    21301082: tileA5_inside_541
+    21301084: tileA5_inside_542
+    21301086: tileA5_inside_543
+    21301088: tileA5_inside_544
+    21301090: tileA5_inside_545
+    21301092: tileA5_inside_546
+    21301094: tileA5_inside_547
+    21301096: tileA5_inside_548
+    21301098: tileA5_inside_549
+    21301100: tileA5_inside_550
+    21301102: tileA5_inside_551
+    21301104: tileA5_inside_552
+    21301106: tileA5_inside_553
+    21301108: tileA5_inside_554
+    21301110: tileA5_inside_555
+    21301112: tileA5_inside_556
+    21301114: tileA5_inside_557
+    21301116: tileA5_inside_558
+    21301118: tileA5_inside_559
+    21301120: tileA5_inside_560
+    21301122: tileA5_inside_561
+    21301124: tileA5_inside_562
+    21301126: tileA5_inside_563
+    21301128: tileA5_inside_564
+    21301130: tileA5_inside_565
+    21301132: tileA5_inside_566
+    21301134: tileA5_inside_567
+    21301136: tileA5_inside_568
+    21301138: tileA5_inside_569
+    21301140: tileA5_inside_570
+    21301142: tileA5_inside_571
+    21301144: tileA5_inside_572
+    21301146: tileA5_inside_573
+    21301148: tileA5_inside_574
+    21301150: tileA5_inside_575
+    21301152: tileA5_inside_576
+    21301154: tileA5_inside_577
+    21301156: tileA5_inside_578
+    21301158: tileA5_inside_579
+    21301160: tileA5_inside_580
+    21301162: tileA5_inside_581
+    21301164: tileA5_inside_582
+    21301166: tileA5_inside_583
+    21301168: tileA5_inside_584
+    21301170: tileA5_inside_585
+    21301172: tileA5_inside_586
+    21301174: tileA5_inside_587
+    21301176: tileA5_inside_588
+    21301178: tileA5_inside_589
+    21301180: tileA5_inside_590
+    21301182: tileA5_inside_591
+    21301184: tileA5_inside_592
+    21301186: tileA5_inside_593
+    21301188: tileA5_inside_594
+    21301190: tileA5_inside_595
+    21301192: tileA5_inside_596
+    21301194: tileA5_inside_597
+    21301196: tileA5_inside_598
+    21301198: tileA5_inside_599
+    21301200: tileA5_inside_600
+    21301202: tileA5_inside_601
+    21301204: tileA5_inside_602
+    21301206: tileA5_inside_603
+    21301208: tileA5_inside_604
+    21301210: tileA5_inside_605
+    21301212: tileA5_inside_606
+    21301214: tileA5_inside_607
+    21301216: tileA5_inside_608
+    21301218: tileA5_inside_609
+    21301220: tileA5_inside_610
+    21301222: tileA5_inside_611
+    21301224: tileA5_inside_612
+    21301226: tileA5_inside_613
+    21301228: tileA5_inside_614
+    21301230: tileA5_inside_615
+    21301232: tileA5_inside_616
+    21301234: tileA5_inside_617
+    21301236: tileA5_inside_618
+    21301238: tileA5_inside_619
+    21301240: tileA5_inside_620
+    21301242: tileA5_inside_621
+    21301244: tileA5_inside_622
+    21301246: tileA5_inside_623
+    21301248: tileA5_inside_624
+    21301250: tileA5_inside_625
+    21301252: tileA5_inside_626
+    21301254: tileA5_inside_627
+    21301256: tileA5_inside_628
+    21301258: tileA5_inside_629
+    21301260: tileA5_inside_630
+    21301262: tileA5_inside_631
+    21301264: tileA5_inside_632
+    21301266: tileA5_inside_633
+    21301268: tileA5_inside_634
+    21301270: tileA5_inside_635
+    21301272: tileA5_inside_636
+    21301274: tileA5_inside_637
+    21301276: tileA5_inside_638
+    21301278: tileA5_inside_639
+    21301280: tileA5_inside_640
+    21301282: tileA5_inside_641
+    21301284: tileA5_inside_642
+    21301286: tileA5_inside_643
+    21301288: tileA5_inside_644
+    21301290: tileA5_inside_645
+    21301292: tileA5_inside_646
+    21301294: tileA5_inside_647
+    21301296: tileA5_inside_648
+    21301298: tileA5_inside_649
+    21301300: tileA5_inside_650
+    21301302: tileA5_inside_651
+    21301304: tileA5_inside_652
+    21301306: tileA5_inside_653
+    21301308: tileA5_inside_654
+    21301310: tileA5_inside_655
+    21301312: tileA5_inside_656
+    21301314: tileA5_inside_657
+    21301316: tileA5_inside_658
+    21301318: tileA5_inside_659
+    21301320: tileA5_inside_660
+    21301322: tileA5_inside_661
+    21301324: tileA5_inside_662
+    21301326: tileA5_inside_663
+    21301328: tileA5_inside_664
+    21301330: tileA5_inside_665
+    21301332: tileA5_inside_666
+    21301334: tileA5_inside_667
+    21301336: tileA5_inside_668
+    21301338: tileA5_inside_669
+    21301340: tileA5_inside_670
+    21301342: tileA5_inside_671
+    21301344: tileA5_inside_672
+    21301346: tileA5_inside_673
+    21301348: tileA5_inside_674
+    21301350: tileA5_inside_675
+    21301352: tileA5_inside_676
+    21301354: tileA5_inside_677
+    21301356: tileA5_inside_678
+    21301358: tileA5_inside_679
+    21301360: tileA5_inside_680
+    21301362: tileA5_inside_681
+    21301364: tileA5_inside_682
+    21301366: tileA5_inside_683
+    21301368: tileA5_inside_684
+    21301370: tileA5_inside_685
+    21301372: tileA5_inside_686
+    21301374: tileA5_inside_687
+    21301376: tileA5_inside_688
+    21301378: tileA5_inside_689
+    21301380: tileA5_inside_690
+    21301382: tileA5_inside_691
+    21301384: tileA5_inside_692
+    21301386: tileA5_inside_693
+    21301388: tileA5_inside_694
+    21301390: tileA5_inside_695
+    21301392: tileA5_inside_696
+    21301394: tileA5_inside_697
+    21301396: tileA5_inside_698
+    21301398: tileA5_inside_699
+    21301400: tileA5_inside_700
+    21301402: tileA5_inside_701
+    21301404: tileA5_inside_702
+    21301406: tileA5_inside_703
+    21301408: tileA5_inside_704
+    21301410: tileA5_inside_705
+    21301412: tileA5_inside_706
+    21301414: tileA5_inside_707
+    21301416: tileA5_inside_708
+    21301418: tileA5_inside_709
+    21301420: tileA5_inside_710
+    21301422: tileA5_inside_711
+    21301424: tileA5_inside_712
+    21301426: tileA5_inside_713
+    21301428: tileA5_inside_714
+    21301430: tileA5_inside_715
+    21301432: tileA5_inside_716
+    21301434: tileA5_inside_717
+    21301436: tileA5_inside_718
+    21301438: tileA5_inside_719
+    21301440: tileA5_inside_720
+    21301442: tileA5_inside_721
+    21301444: tileA5_inside_722
+    21301446: tileA5_inside_723
+    21301448: tileA5_inside_724
+    21301450: tileA5_inside_725
+    21301452: tileA5_inside_726
+    21301454: tileA5_inside_727
+    21301456: tileA5_inside_728
+    21301458: tileA5_inside_729
+    21301460: tileA5_inside_730
+    21301462: tileA5_inside_731
+    21301464: tileA5_inside_732
+    21301466: tileA5_inside_733
+    21301468: tileA5_inside_734
+    21301470: tileA5_inside_735
+    21301472: tileA5_inside_736
+    21301474: tileA5_inside_737
+    21301476: tileA5_inside_738
+    21301478: tileA5_inside_739
+    21301480: tileA5_inside_740
+    21301482: tileA5_inside_741
+    21301484: tileA5_inside_742
+    21301486: tileA5_inside_743
+    21301488: tileA5_inside_744
+    21301490: tileA5_inside_745
+    21301492: tileA5_inside_746
+    21301494: tileA5_inside_747
+    21301496: tileA5_inside_748
+    21301498: tileA5_inside_749
+    21301500: tileA5_inside_750
+    21301502: tileA5_inside_751
+    21301504: tileA5_inside_752
+    21301506: tileA5_inside_753
+    21301508: tileA5_inside_754
+    21301510: tileA5_inside_755
+    21301512: tileA5_inside_756
+    21301514: tileA5_inside_757
+    21301516: tileA5_inside_758
+    21301518: tileA5_inside_759
+    21301520: tileA5_inside_760
+    21301522: tileA5_inside_761
+    21301524: tileA5_inside_762
+    21301526: tileA5_inside_763
+    21301528: tileA5_inside_764
+    21301530: tileA5_inside_765
+    21301532: tileA5_inside_766
+    21301534: tileA5_inside_767
+    21301536: tileA5_inside_768
+    21301538: tileA5_inside_769
+    21301540: tileA5_inside_770
+    21301542: tileA5_inside_771
+    21301544: tileA5_inside_772
+    21301546: tileA5_inside_773
+    21301548: tileA5_inside_774
+    21301550: tileA5_inside_775
+    21301552: tileA5_inside_776
+    21301554: tileA5_inside_777
+    21301556: tileA5_inside_778
+    21301558: tileA5_inside_779
+    21301560: tileA5_inside_780
+    21301562: tileA5_inside_781
+    21301564: tileA5_inside_782
+    21301566: tileA5_inside_783
+    21301568: tileA5_inside_784
+    21301570: tileA5_inside_785
+    21301572: tileA5_inside_786
+    21301574: tileA5_inside_787
+    21301576: tileA5_inside_788
+    21301578: tileA5_inside_789
+    21301580: tileA5_inside_790
+    21301582: tileA5_inside_791
+    21301584: tileA5_inside_792
+    21301586: tileA5_inside_793
+    21301588: tileA5_inside_794
+    21301590: tileA5_inside_795
+    21301592: tileA5_inside_796
+    21301594: tileA5_inside_797
+    21301596: tileA5_inside_798
+    21301598: tileA5_inside_799
+    21301600: tileA5_inside_800
+    21301602: tileA5_inside_801
+    21301604: tileA5_inside_802
+    21301606: tileA5_inside_803
+    21301608: tileA5_inside_804
+    21301610: tileA5_inside_805
+    21301612: tileA5_inside_806
+    21301614: tileA5_inside_807
+    21301616: tileA5_inside_808
+    21301618: tileA5_inside_809
+    21301620: tileA5_inside_810
+    21301622: tileA5_inside_811
+    21301624: tileA5_inside_812
+    21301626: tileA5_inside_813
+    21301628: tileA5_inside_814
+    21301630: tileA5_inside_815
+    21301632: tileA5_inside_816
+    21301634: tileA5_inside_817
+    21301636: tileA5_inside_818
+    21301638: tileA5_inside_819
+    21301640: tileA5_inside_820
+    21301642: tileA5_inside_821
+    21301644: tileA5_inside_822
+    21301646: tileA5_inside_823
+    21301648: tileA5_inside_824
+    21301650: tileA5_inside_825
+    21301652: tileA5_inside_826
+    21301654: tileA5_inside_827
+    21301656: tileA5_inside_828
+    21301658: tileA5_inside_829
+    21301660: tileA5_inside_830
+    21301662: tileA5_inside_831
+    21301664: tileA5_inside_832
+    21301666: tileA5_inside_833
+    21301668: tileA5_inside_834
+    21301670: tileA5_inside_835
+    21301672: tileA5_inside_836
+    21301674: tileA5_inside_837
+    21301676: tileA5_inside_838
+    21301678: tileA5_inside_839
+    21301680: tileA5_inside_840
+    21301682: tileA5_inside_841
+    21301684: tileA5_inside_842
+    21301686: tileA5_inside_843
+    21301688: tileA5_inside_844
+    21301690: tileA5_inside_845
+    21301692: tileA5_inside_846
+    21301694: tileA5_inside_847
+    21301696: tileA5_inside_848
+    21301698: tileA5_inside_849
+    21301700: tileA5_inside_850
+    21301702: tileA5_inside_851
+    21301704: tileA5_inside_852
+    21301706: tileA5_inside_853
+    21301708: tileA5_inside_854
+    21301710: tileA5_inside_855
+    21301712: tileA5_inside_856
+    21301714: tileA5_inside_857
+    21301716: tileA5_inside_858
+    21301718: tileA5_inside_859
+    21301720: tileA5_inside_860
+    21301722: tileA5_inside_861
+    21301724: tileA5_inside_862
+    21301726: tileA5_inside_863
+    21301728: tileA5_inside_864
+    21301730: tileA5_inside_865
+    21301732: tileA5_inside_866
+    21301734: tileA5_inside_867
+    21301736: tileA5_inside_868
+    21301738: tileA5_inside_869
+    21301740: tileA5_inside_870
+    21301742: tileA5_inside_871
+    21301744: tileA5_inside_872
+    21301746: tileA5_inside_873
+    21301748: tileA5_inside_874
+    21301750: tileA5_inside_875
+    21301752: tileA5_inside_876
+    21301754: tileA5_inside_877
+    21301756: tileA5_inside_878
+    21301758: tileA5_inside_879
+    21301760: tileA5_inside_880
+    21301762: tileA5_inside_881
+    21301764: tileA5_inside_882
+    21301766: tileA5_inside_883
+    21301768: tileA5_inside_884
+    21301770: tileA5_inside_885
+    21301772: tileA5_inside_886
+    21301774: tileA5_inside_887
+    21301776: tileA5_inside_888
+    21301778: tileA5_inside_889
+    21301780: tileA5_inside_890
+    21301782: tileA5_inside_891
+    21301784: tileA5_inside_892
+    21301786: tileA5_inside_893
+    21301788: tileA5_inside_894
+    21301790: tileA5_inside_895
+    21301792: tileA5_inside_896
+    21301794: tileA5_inside_897
+    21301796: tileA5_inside_898
+    21301798: tileA5_inside_899
+    21301800: tileA5_inside_900
+    21301802: tileA5_inside_901
+    21301804: tileA5_inside_902
+    21301806: tileA5_inside_903
+    21301808: tileA5_inside_904
+    21301810: tileA5_inside_905
+    21301812: tileA5_inside_906
+    21301814: tileA5_inside_907
+    21301816: tileA5_inside_908
+    21301818: tileA5_inside_909
+    21301820: tileA5_inside_910
+    21301822: tileA5_inside_911
+    21301824: tileA5_inside_912
+    21301826: tileA5_inside_913
+    21301828: tileA5_inside_914
+    21301830: tileA5_inside_915
+    21301832: tileA5_inside_916
+    21301834: tileA5_inside_917
+    21301836: tileA5_inside_918
+    21301838: tileA5_inside_919
+    21301840: tileA5_inside_920
+    21301842: tileA5_inside_921
+    21301844: tileA5_inside_922
+    21301846: tileA5_inside_923
+    21301848: tileA5_inside_924
+    21301850: tileA5_inside_925
+    21301852: tileA5_inside_926
+    21301854: tileA5_inside_927
+    21301856: tileA5_inside_928
+    21301858: tileA5_inside_929
+    21301860: tileA5_inside_930
+    21301862: tileA5_inside_931
+    21301864: tileA5_inside_932
+    21301866: tileA5_inside_933
+    21301868: tileA5_inside_934
+    21301870: tileA5_inside_935
+    21301872: tileA5_inside_936
+    21301874: tileA5_inside_937
+    21301876: tileA5_inside_938
+    21301878: tileA5_inside_939
+    21301880: tileA5_inside_940
+    21301882: tileA5_inside_941
+    21301884: tileA5_inside_942
+    21301886: tileA5_inside_943
+    21301888: tileA5_inside_944
+    21301890: tileA5_inside_945
+    21301892: tileA5_inside_946
+    21301894: tileA5_inside_947
+    21301896: tileA5_inside_948
+    21301898: tileA5_inside_949
+    21301900: tileA5_inside_950
+    21301902: tileA5_inside_951
+    21301904: tileA5_inside_952
+    21301906: tileA5_inside_953
+    21301908: tileA5_inside_954
+    21301910: tileA5_inside_955
+    21301912: tileA5_inside_956
+    21301914: tileA5_inside_957
+    21301916: tileA5_inside_958
+    21301918: tileA5_inside_959
+    21301920: tileA5_inside_960
+    21301922: tileA5_inside_961
+    21301924: tileA5_inside_962
+    21301926: tileA5_inside_963
+    21301928: tileA5_inside_964
+    21301930: tileA5_inside_965
+    21301932: tileA5_inside_966
+    21301934: tileA5_inside_967
+    21301936: tileA5_inside_968
+    21301938: tileA5_inside_969
+    21301940: tileA5_inside_970
+    21301942: tileA5_inside_971
+    21301944: tileA5_inside_972
+    21301946: tileA5_inside_973
+    21301948: tileA5_inside_974
+    21301950: tileA5_inside_975
+    21301952: tileA5_inside_976
+    21301954: tileA5_inside_977
+    21301956: tileA5_inside_978
+    21301958: tileA5_inside_979
+    21301960: tileA5_inside_980
+    21301962: tileA5_inside_981
+    21301964: tileA5_inside_982
+    21301966: tileA5_inside_983
+    21301968: tileA5_inside_984
+    21301970: tileA5_inside_985
+    21301972: tileA5_inside_986
+    21301974: tileA5_inside_987
+    21301976: tileA5_inside_988
+    21301978: tileA5_inside_989
+    21301980: tileA5_inside_990
+    21301982: tileA5_inside_991
+    21301984: tileA5_inside_992
+    21301986: tileA5_inside_993
+    21301988: tileA5_inside_994
+    21301990: tileA5_inside_995
+    21301992: tileA5_inside_996
+    21301994: tileA5_inside_997
+    21301996: tileA5_inside_998
+    21301998: tileA5_inside_999
+    21302000: tileA5_inside_1000
+    21302002: tileA5_inside_1001
+    21302004: tileA5_inside_1002
+    21302006: tileA5_inside_1003
+    21302008: tileA5_inside_1004
+    21302010: tileA5_inside_1005
+    21302012: tileA5_inside_1006
+    21302014: tileA5_inside_1007
+    21302016: tileA5_inside_1008
+    21302018: tileA5_inside_1009
+    21302020: tileA5_inside_1010
+    21302022: tileA5_inside_1011
+    21302024: tileA5_inside_1012
+    21302026: tileA5_inside_1013
+    21302028: tileA5_inside_1014
+    21302030: tileA5_inside_1015
+    21302032: tileA5_inside_1016
+    21302034: tileA5_inside_1017
+    21302036: tileA5_inside_1018
+    21302038: tileA5_inside_1019
+    21302040: tileA5_inside_1020
+    21302042: tileA5_inside_1021
+    21302044: tileA5_inside_1022
+    21302046: tileA5_inside_1023
+    21302048: tileA5_inside_1024
+    21302050: tileA5_inside_1025
+    21302052: tileA5_inside_1026
+    21302054: tileA5_inside_1027
+    21302056: tileA5_inside_1028
+    21302058: tileA5_inside_1029
+    21302060: tileA5_inside_1030
+    21302062: tileA5_inside_1031
+    21302064: tileA5_inside_1032
+    21302066: tileA5_inside_1033
+    21302068: tileA5_inside_1034
+    21302070: tileA5_inside_1035
+    21302072: tileA5_inside_1036
+    21302074: tileA5_inside_1037
+    21302076: tileA5_inside_1038
+    21302078: tileA5_inside_1039
+    21302080: tileA5_inside_1040
+    21302082: tileA5_inside_1041
+    21302084: tileA5_inside_1042
+    21302086: tileA5_inside_1043
+    21302088: tileA5_inside_1044
+    21302090: tileA5_inside_1045
+    21302092: tileA5_inside_1046
+    21302094: tileA5_inside_1047
+    21302096: tileA5_inside_1048
+    21302098: tileA5_inside_1049
+    21302100: tileA5_inside_1050
+    21302102: tileA5_inside_1051
+    21302104: tileA5_inside_1052
+    21302106: tileA5_inside_1053
+    21302108: tileA5_inside_1054
+    21302110: tileA5_inside_1055
+    21302112: tileA5_inside_1056
+    21302114: tileA5_inside_1057
+    21302116: tileA5_inside_1058
+    21302118: tileA5_inside_1059
+    21302120: tileA5_inside_1060
+    21302122: tileA5_inside_1061
+    21302124: tileA5_inside_1062
+    21302126: tileA5_inside_1063
+    21302128: tileA5_inside_1064
+    21302130: tileA5_inside_1065
+    21302132: tileA5_inside_1066
+    21302134: tileA5_inside_1067
+    21302136: tileA5_inside_1068
+    21302138: tileA5_inside_1069
+    21302140: tileA5_inside_1070
+    21302142: tileA5_inside_1071
+    21302144: tileA5_inside_1072
+    21302146: tileA5_inside_1073
+    21302148: tileA5_inside_1074
+    21302150: tileA5_inside_1075
+    21302152: tileA5_inside_1076
+    21302154: tileA5_inside_1077
+    21302156: tileA5_inside_1078
+    21302158: tileA5_inside_1079
+    21302160: tileA5_inside_1080
+    21302162: tileA5_inside_1081
+    21302164: tileA5_inside_1082
+    21302166: tileA5_inside_1083
+    21302168: tileA5_inside_1084
+    21302170: tileA5_inside_1085
+    21302172: tileA5_inside_1086
+    21302174: tileA5_inside_1087
+    21302176: tileA5_inside_1088
+    21302178: tileA5_inside_1089
+    21302180: tileA5_inside_1090
+    21302182: tileA5_inside_1091
+    21302184: tileA5_inside_1092
+    21302186: tileA5_inside_1093
+    21302188: tileA5_inside_1094
+    21302190: tileA5_inside_1095
+    21302192: tileA5_inside_1096
+    21302194: tileA5_inside_1097
+    21302196: tileA5_inside_1098
+    21302198: tileA5_inside_1099
+    21302200: tileA5_inside_1100
+    21302202: tileA5_inside_1101
+    21302204: tileA5_inside_1102
+    21302206: tileA5_inside_1103
+    21302208: tileA5_inside_1104
+    21302210: tileA5_inside_1105
+    21302212: tileA5_inside_1106
+    21302214: tileA5_inside_1107
+    21302216: tileA5_inside_1108
+    21302218: tileA5_inside_1109
+    21302220: tileA5_inside_1110
+    21302222: tileA5_inside_1111
+    21302224: tileA5_inside_1112
+    21302226: tileA5_inside_1113
+    21302228: tileA5_inside_1114
+    21302230: tileA5_inside_1115
+    21302232: tileA5_inside_1116
+    21302234: tileA5_inside_1117
+    21302236: tileA5_inside_1118
+    21302238: tileA5_inside_1119
+    21302240: tileA5_inside_1120
+    21302242: tileA5_inside_1121
+    21302244: tileA5_inside_1122
+    21302246: tileA5_inside_1123
+    21302248: tileA5_inside_1124
+    21302250: tileA5_inside_1125
+    21302252: tileA5_inside_1126
+    21302254: tileA5_inside_1127
+    21302256: tileA5_inside_1128
+    21302258: tileA5_inside_1129
+    21302260: tileA5_inside_1130
+    21302262: tileA5_inside_1131
+    21302264: tileA5_inside_1132
+    21302266: tileA5_inside_1133
+    21302268: tileA5_inside_1134
+    21302270: tileA5_inside_1135
+    21302272: tileA5_inside_1136
+    21302274: tileA5_inside_1137
+    21302276: tileA5_inside_1138
+    21302278: tileA5_inside_1139
+    21302280: tileA5_inside_1140
+    21302282: tileA5_inside_1141
+    21302284: tileA5_inside_1142
+  externalObjects: {}
+  serializedVersion: 9
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 48
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 2
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: tileA5_inside_0
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 720
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f6368cd3c8eb7624db95607c80ad9174
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_1
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 720
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 50e09be25d1ec58449f4ec8c41f1ca3b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_2
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 720
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43b3db3614de6cc419fa2ba52e97cf17
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_3
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 720
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c08ed4ad288d74d45bff4d182b0e613a
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_4
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 720
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: daf8b189dfe5930489634d596c02fdd2
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_5
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 720
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f5ac383f1d049b24487da9b4c32a7259
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_6
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 720
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 290aaa2392d4b594d9e5359429a9be08
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_7
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 672
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 98ab781dcc591de49bb413bf519eaf30
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_8
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 672
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9fcfb26ecfb7a1446974e4309507cabf
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_9
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 672
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec00c54479d64ca4e9c27b887c0874e0
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_10
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 672
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4faef889e97cab64cbd6a69560bbf2bb
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_11
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 672
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab93509d2ba9e5e4aac8fe5f7ae2a83b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_12
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 672
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b2861c20606762b46b704ef2099ea37a
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_13
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 672
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ac0d10f145601c04596867e67cd37458
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_14
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 672
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c3e944ab98e07504b83b96b26d347f55
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 624
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 21b8940373a39334598e0b2dcc31ec22
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_16
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 624
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6a227c0f3f1e8dc419229f8787226864
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_17
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 624
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee229b55847854a4d953ec826803495e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_18
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 624
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 45677dc1f0f34a64ea1a35010bf8a112
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_19
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 624
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 29df3ed8775b6f942b9936260d20297d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_20
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 624
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ffb902e9180e204c80b4619048c88a9
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_21
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 624
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd34aaabe0f253146917d581931856d1
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_22
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 624
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dfab4d870df7cde4794857871951decc
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_23
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 576
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cb4e07dc3d520a74488fadd2b7c35309
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_24
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 576
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9e298868917f72d4eae91ccaf046049c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_25
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 576
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 94a40ffd1a0c6f94cbfd42bf3267b379
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_26
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 576
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 82bdb40d508aaea498f05e483246773c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_27
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 576
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe296f8c205984c48be8d38eebb9387e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_28
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 576
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1347392bf7062664ab98da71a907a491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_29
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 576
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 36b2e8c5f1f2f12458f133393995fbd6
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_30
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 576
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c6e0682177096c84eb8a8e87b6b95bf6
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_31
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 528
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dece17ec281c99144bc4961fe5922ead
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_32
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 528
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ffc7ad2e5e8596c4b853577625e8752c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_33
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 528
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd27e72531e575145b85a1584bd480d0
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_34
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 528
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a5d94294f8e09cb47b4d1fe25980759d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_35
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 528
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bfe185be03d91774b9dd2d5b46787a0f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_36
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 528
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e80449dc80f7e2342adac059fdefb6d2
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_37
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 528
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 399dc4a9918fd114cacfa7e73123a847
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_38
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 528
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 44fb8538ad91d0f438f824060814f2c1
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_39
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 480
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a05bfe31c2a39b64c9d90f2c1021eb87
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_40
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 480
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a9a69c529a8f9094d9dae09243b16496
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_41
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 480
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6593d91111ed9464c9dd692f5dea1912
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_42
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 480
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c8f94936f7abe24c975b68ab4ed47d7
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_43
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 480
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d2b7e23002ba7f0408c9f3f328445652
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_44
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 480
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 26e4d74adf2afbe4cb2b8b37a40e3fbf
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_45
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 480
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f653d5968e08ea44af5b03fed1877e3
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_46
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 480
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f88ab36d357c95d48834b89bd3f0e851
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_47
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 432
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bbcb3e29c42da1f47b0c1a6627acda2e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_48
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 432
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 750e0df2fab085a4d871d139248a8b62
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_49
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 432
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f89d2d30d8702d04ea9617d07a7c4951
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_50
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 432
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 11f968832ed56b049a742479370b516c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_51
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 432
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d62a5a7447740c4ca8c0ce91b8d4f90
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_52
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 432
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d5d60111c7e9b4f4f976cd2d85080f0b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_53
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 432
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4fb2c780298abdc408aa262c41151b5b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_54
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 432
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 49428e2a8895a4c49b2ad851721e176b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_55
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 384
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 29258dfb88407c24ab094a9023b81ca5
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_56
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 384
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 70c57daaae602ce4299c4c967229d268
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_57
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 384
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fa83082a1acb79d469aee94ea36de4b9
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_58
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 384
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4fd2821bf9a89ff40b4f8ac6f1426617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_59
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 384
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b06480c97a9f9424fb7f8b7266149258
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_60
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 384
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 100dec43e2a576f4c907cb2d76253461
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_61
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 384
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6d452e1de59c2c64794d34a64f39a673
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_62
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 384
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5123d8bc89c838b4292ce2118da6f4a0
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_63
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 336
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d81baf22d8d47de4aa3531df4d1b31a4
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_64
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 336
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 47d8c3da2c17f5b45a20944cca6b7782
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_65
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 336
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9cf7cf0fbb8643d41af09e32e10bf3f1
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_66
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 336
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 431e7b6f2a7b1294fa39cbdad462baef
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_67
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 336
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7818b597e2223c44b08342932e93317
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_68
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 336
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2185dc99ad8fb544ebba64e62a935cbe
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_69
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 336
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7caf61c1ae9f074185a3e9d954a2246
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_70
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 336
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 12ee8bb2b9bb1d14691eb32b74a7f7c5
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_71
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 288
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8feb1559e5b291a488b7b77bf3452b13
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_72
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 288
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9289b79e7e62c6743997dbef92e58034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_73
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 288
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e1b504f529a8c184a99737bb78aeb3d0
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_74
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 288
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 300ba6f10522765439012b7d2f3b412d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_75
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 288
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 52bfad6f7d154fe48914a80d0023deba
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_76
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 288
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 614653db8ee54934ab04956651c68620
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_77
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 288
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c716e3b73c63154596bd4debba00c12
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_78
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 288
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f7bc4f4621eedf4fb5811b6b3d4f63b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_79
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 240
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d6f60dc4b325294894946a82ef98d53
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_80
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 240
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3128e5420d4fa3443b594ec098f30bb6
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_81
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 240
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8648c0f7a1aedaf43b6197fc469f8509
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_82
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 240
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0895ee36e4d74a849894dc916eb9808b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_83
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 240
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b648062e2fed5c40b556b82c20843cf
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_84
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 240
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2706d2a2dfd95db4d924b71d5729e126
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_85
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 240
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fcab226f5c7a68d43b8b586c19218905
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_86
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 240
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c34da484f05937544abaf4d4f92e0114
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_87
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 192
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 89fa168347f990b4b9b76f4dfa3fdeae
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_88
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 192
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7119e8a55d147244eb168a8ce07d7b3a
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_89
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 192
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 90728343af0d79246a9dabaa45c1428c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_90
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 192
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f29704c714c1a842833a03e08ae2949
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_91
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 192
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff075fcb39167b24f95501fd835a0279
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_92
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 192
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 96d93247b23136c4e86782e404e12d6a
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_93
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 192
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 761d9f3ac9ad86f43ad10958f2f2adc1
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_94
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 192
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e4eef52c9bf4214fb9f29b5f2f55246
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_95
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 144
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c5e7a19fceab5441a48555be4f50364
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_96
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 144
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 09b33da420c7f2a4ca3243781fd81541
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_97
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 144
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 466da2632d2f5a34898e06def0600476
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_98
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 144
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6d1e98cce33978c4890ada7de93c57a7
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_99
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 144
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 93c58ecd13cfe4a41a0e950089d4391a
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_100
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 144
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e5f012260d3892443b47e0e8b140abb1
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_101
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 144
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5de90249ef3e8b947ba749b336033f93
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_102
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 144
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 167f7bfe05f333f41a2bde9e09967b50
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_103
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 96
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 18a0cffb1f8836c44a60c993f35178a0
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_104
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 96
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee5da95f21ac10748b66f881adb56d97
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_105
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 96
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c9c017d889e1b4648a5e95c89095b9df
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_106
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 96
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4130b86d14f5504aaa08e4bde2979be
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_107
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 96
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b5b5c92eb602804dbc3d6eeda5e17a5
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_108
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 96
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a1fbe4c123a245d4abe26f86f308bb05
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_109
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 96
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e3ed4650432474428fe5d46b6f99230
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_110
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 96
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8527db5bdc5d2994c925b5058c44072b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_111
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 48
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ca24e38333a506b4c811b9181be0c877
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_112
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 48
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 45cab80f29974bb4faf2b126e51c59ac
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_113
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 48
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6397ad94b37e8a24996f7ba0141b10a7
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_114
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 48
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 58a8716978aeefe419fa18f8fd38b55f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_115
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 48
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3dddbf6e4092dbf4090774f3147fffbd
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_116
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 48
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3a8fa9dc78da75d429d274ded5e2ab09
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_117
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 48
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2dc2e85c38c060d4c8743bb57f6dc411
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_118
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 48
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 39d9be051ea4e794cb9c92f97de19f02
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_119
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 01ca302b4e0cbad4286552913c0f8713
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_120
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 0
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: addafd8c7a87aeb469eca7e5a2d6a064
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_121
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1248b8df6484eda4f929d11c35ef06df
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_122
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 0
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 238d2593b9b08f64da3321fe4cb7b266
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_123
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 028005537d2b9194db15986dbb045245
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_124
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 0
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9417b69d1c17cff4ba722a49282d7e52
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_125
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 0
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d7700bc3c284c0444911b582e5af381b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileA5_inside_126
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 0
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4ef7cc8677943b645a1e4e6f503fe329
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: a1629d5625504024eb615ea8d2edaaaf
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
