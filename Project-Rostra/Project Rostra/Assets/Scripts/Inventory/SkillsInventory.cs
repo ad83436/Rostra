@@ -218,25 +218,19 @@ public class SkillsInventory : MonoBehaviour {
 
     // Finds the name of the skill relative to the ID provided in the argument
     public string SkillName(int skillID) {
-        string skill = "---";
-
         // Find the name relative to the ID given
         switch (skillID) {
             case (int)SKILLS.TEST_Fargas:
-                skill = "Offense Skill 1";
-                break;
+                return "Offense Skill 1";
             case (int)SKILLS.TEST_Frea:
-                skill = "Offense Skill 2";
-                break;
+                return "Offense Skill 2";
             case (int)SKILLS.TEST_Oberon:
-                skill = "Buff Skill 1";
-                break;
+                return "Buff Skill 1";
             case (int)SKILLS.TEST_Arcelus:
-                skill = "Heal Skill 1";
-                break;
+                return "Heal Skill 1";
+            default: //In case no skill is equipped at that slot
+                return "---";
         }
-
-        return skill;
     }
 
     #endregion
@@ -245,25 +239,19 @@ public class SkillsInventory : MonoBehaviour {
 
     // Finds the skill's description relative to the ID provided in the argument parameter
     public string SkillDescription(int skillID) {
-        string description = "";
 
         // Find the description relative to the ID given
         switch (skillID) {
             case (int)SKILLS.TEST_Fargas:
-                description = "Offense skill \n\n1 targets enemies";
-                break;
+                return "Offense skill \n\n1 targets enemies";
             case (int)SKILLS.TEST_Frea:
-                description = "Offense skill 2 \n\ntargets enemies";
-                break;
+               return "Offense skill 2 \n\ntargets enemies";
             case (int)SKILLS.TEST_Oberon:
-                description = "Buff skill 1 \n\ntargets players";
-                break;
+                return "Buff skill 1 \n\ntargets players";
             case (int)SKILLS.TEST_Arcelus:
-                description = "Heal skill 1 \n\ntargets players";
-                break;
+                return "Heal skill 1 \n\ntargets players";
+			default: return "";
         }
-
-        return description;
     }
 
     #endregion
