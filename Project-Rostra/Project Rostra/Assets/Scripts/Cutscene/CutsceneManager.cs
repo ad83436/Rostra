@@ -61,11 +61,12 @@ public class CutsceneManager : MonoBehaviour
 		{
 			NextAction();
 		}
-
     }
 
 	public void StartCutscene(Cutscene cs, Vector2 returnPos)
 	{
+		// call the copy constructor and save a local copy of what cutscene we passed in
+		// set up the current cutscene info
 		copy = new Cutscene(cs);
 		pl.transform.position = cs.camLocation;
 		returnPosition = returnPos;
@@ -94,8 +95,10 @@ public class CutsceneManager : MonoBehaviour
 
 	public void NextAction()
 	{
+		// if our current step is less than the amount of moves that means we can go ahead with the cutscene
 		if (current <= moveLenghtInitial)
 		{
+			// if we aren't already in a cutscene
 			if (DialogueManager.instance.isActive == false && moveLenght >= 0)
 			{
 				//fade in
@@ -105,6 +108,7 @@ public class CutsceneManager : MonoBehaviour
 				}
 				timingsCM[current] -= Time.deltaTime;
 			}
+			// if our current move has dialogue attached to it
 			if (dialogueCount <= dialogueLenght && current == dialogueEntranceCM[entranceCount])
 			{
 				DialogueManager.instance.StartConversation(dialoguesCM[dialogueCount]);
@@ -112,7 +116,6 @@ public class CutsceneManager : MonoBehaviour
 				if (DialogueManager.instance.nextDialogue == true)
 				{
 					dialogueCount++;
-					current++;
 					entranceCount++;
 				}
 			}
@@ -121,13 +124,16 @@ public class CutsceneManager : MonoBehaviour
 				audios.clip = copy.song;
 				audios.Play();
 			}
+			// if our timings is less than zero move onto next move and count up the timers
 			if (isActive == true && timingsCM[current] <= 0 && moveLenght >= 0)
 			{
+				Debug.Log("Next");
 				current++;
 				moveLenght--;
 				actorsCM[actorCount].transform.position = movesCM[current];
 				anim.SetBool("FadeIn", false);
 			}
+			/// 
 			if (povCount <= povChangesCM.Length - 1 && current == povChangesCM[povCount] && actorsCM.Length > 0 && povChangesCM.Length > 0)
 			{
 				actorCount++;
@@ -142,6 +148,7 @@ public class CutsceneManager : MonoBehaviour
 			
 		}
 	}
+	// set will reset everything to default
 
 	public void End()
 	{
