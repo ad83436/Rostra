@@ -289,15 +289,15 @@ public class SkillsInventory : MonoBehaviour {
             case (int)SKILLS.TEST_Oberon:
                 skillStat[0] = 50;
                 skillStat[1] = 85;
-                skillStat[2] = 0;
-                skillStat[4] = (float)SKILL_TYPE.SINGLE_PLAYER_BUFF;
+                skillStat[2] = 1;
+                skillStat[4] = (float)SKILL_TYPE.ALL_PLAYER_BUFF;
                 skillStat[5] = 115;
                 break;
             case (int)SKILLS.TEST_Arcelus:
                 skillStat[0] = 20;
                 skillStat[1] = 100;
-                skillStat[2] = 1;
-                skillStat[4] = (float)SKILL_TYPE.SINGLE_PLAYER_HEAL;
+                skillStat[2] = 2;
+                skillStat[4] = (float)SKILL_TYPE.ALL_PLAYER_HEAL;
                 skillStat[5] = 40;
                 break;
             default:

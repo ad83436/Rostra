@@ -246,11 +246,13 @@ public class Player : MonoBehaviour
                             UseSkillOnOnePlayer(chosenSkill, mpCost, 0, healThisPlayer);
                             break;
                         case 7:
+                            UseSkillOnAllPlayers(chosenSkill, mpCost, 0);
                             break;
                         case 8:
                             UseSkillOnOnePlayer(chosenSkill, mpCost, 0, healThisPlayer);
                             break;
                         case 9:
+                            UseSkillOnAllPlayers(chosenSkill, mpCost, 0);
                             break;
                     }
                     
@@ -529,6 +531,45 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void UseSkillOnAllPlayers(int skillID, float manaCost, float waitTime)
+    {
+        skillWaitTime = waitTime;
+        chosenSkill = skillID;
+        mpCost = manaCost;
+
+        //Placeholders, these skills will be a single character heal/buff
+        //Check if the skill is immediate or if the player needs to wait a number of turns
+        if (skillID == 4) //Heal 
+        {
+            skillTarget = 7;//All player heal
+            skillAnimatorName = "Heal";
+            skillWaitingIndex = 1;
+        }
+        else if (skillID == 3) //Buff defense skill
+        {
+            skillTarget = 9; //All player buff
+            skillAnimatorName = "BuffDef";
+            skillWaitingIndex = 1;
+        }
+
+        if(waitTime<=0)
+        {
+            skillWaitingIndex = 0;
+            playerAnimator.SetInteger("WaitingIndex", -1); //-1 is all animation
+            playerAnimator.SetBool(skillAnimatorName, true);
+        }
+        else
+        {
+            Debug.Log("Now");
+            waitTimeText.gameObject.SetActive(true);
+            waitTimeText.text = skillWaitTime.ToString();
+            playerAnimator.SetInteger("WaitingIndex", skillWaitingIndex);
+            currentState = playerState.Waiting;
+            uiBTL.EndTurn();
+        }
+
+    }
+
     public void UseSkillOnOneEnemy(int skillID, float manaCost, float waitTime, Enemy enemyReference)
     {
 
@@ -681,9 +722,23 @@ public class Player : MonoBehaviour
             }
             playerAnimator.SetBool(skillAnimatorName, false);
         }
-        else if(skillTarget == 6)
+        else if(skillTarget == 6) //Heal one player
         {
-            healThisPlayer.Heal(0.1f * (0.5f * actualATK + skills.SkillStats(chosenSkill)[0]));
+            healThisPlayer.Heal(0.01f * (0.5f * actualATK + skills.SkillStats(chosenSkill)[0])); //Passing in a percentage
+            playerAnimator.SetBool("Heal", false);
+        }
+        else if(skillTarget == 7) //Heal all players
+        {
+            for(int i =0;i<battleManager.players.Length; i++)
+            {
+                if(battleManager.players[i].playerReference!=null)
+                {
+                    if(!battleManager.players[i].playerReference.dead && battleManager.players[i].playerReference.currentState!=playerState.Rage)
+                    {
+                            battleManager.players[i].playerReference.Heal(0.01f * (0.5f * actualATK + skills.SkillStats(chosenSkill)[0]));
+                    }
+                }
+            }
             playerAnimator.SetBool("Heal", false);
         }
         else if(skillTarget == 8) //Buff single player
@@ -694,6 +749,23 @@ public class Player : MonoBehaviour
                 playerAnimator.SetBool("BuffDef", false);
             }
 
+        }
+        else if(skillTarget == 9)
+        {
+            if(chosenSkill==3) //Defense buff // Placeholder
+            {
+                for (int i = 0; i < battleManager.players.Length; i++)
+                {
+                    if (battleManager.players[i].playerReference != null)
+                    {
+                        if (!battleManager.players[i].playerReference.dead && battleManager.players[i].playerReference.currentState != playerState.Rage)
+                        {
+                            battleManager.players[i].playerReference.BuffStats("Defense", skills.SkillStats(chosenSkill)[0], skills.SkillStats(chosenSkill)[2]);
+                        }
+                    }
+                }
+                playerAnimator.SetBool("BuffDef", false);
+            }
         }
 
         currentMP -= mpCost;

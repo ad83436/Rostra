@@ -14,6 +14,7 @@ public class UIBTL : MonoBehaviour
     public GameObject playerTurnIndicator;
     public GameObject chooseEnemyArrow;
     public GameObject[] chooseEnemyArrowForSelectAll;
+    public GameObject[] choosePlayerArrowForSelectAll;
     public GameObject playerIndicatorPos0;
     public GameObject playerIndicatorPos1;
     public GameObject playerIndicatorPos2;
@@ -45,7 +46,6 @@ public class UIBTL : MonoBehaviour
     public Image mpBar;
 
     //Skills Control Panel
-
     public Image skillsPanel;
     public GameObject[] skillsHPos;
     public GameObject skillsHighlighter;
@@ -210,6 +210,11 @@ public class UIBTL : MonoBehaviour
         {
             chooseEnemyArrowForSelectAll[i].gameObject.SetActive(false);
         }
+
+        for(int i =0;i< choosePlayerArrowForSelectAll.Length;i++)
+        {
+            choosePlayerArrowForSelectAll[i].gameObject.SetActive(false);
+        }
     }
 
 
@@ -245,6 +250,7 @@ public class UIBTL : MonoBehaviour
                 ChoosingPlayer();
                 break;
             case btlUIState.choosingAllPlayers:
+                ChoosingAllPlayers();
                 break;
             case btlUIState.battleEnd:
                 EndBattleUI();
@@ -720,6 +726,18 @@ public class UIBTL : MonoBehaviour
                             currentState = btlUIState.choosingPlayer;
                             break;
                         case (float)SKILL_TYPE.ALL_PLAYER_HEAL:
+                            for (int i = 0; i < choosePlayerArrowForSelectAll.Length; i++)
+                            {
+                                if (btlManager.players[i].playerReference != null)
+                                {
+                                    if (!btlManager.players[i].playerReference.dead)
+                                    {
+                                        choosePlayerArrowForSelectAll[i].gameObject.SetActive(true);
+                                    }
+                                }
+                            }
+                            previousState = btlUIState.choosingSkillsCommand;
+                            currentState = btlUIState.choosingAllPlayers;
                             break;
                         case (float)SKILL_TYPE.SINGLE_PLAYER_BUFF:
                             choosePlayerArrow.gameObject.SetActive(true);
@@ -729,6 +747,18 @@ public class UIBTL : MonoBehaviour
                             currentState = btlUIState.choosingPlayer;
                             break;
                         case (float)SKILL_TYPE.ALL_PLAYER_BUFF:
+                            for (int i = 0; i < choosePlayerArrowForSelectAll.Length; i++)
+                            {
+                                if (btlManager.players[i].playerReference != null)
+                                {
+                                    if (!btlManager.players[i].playerReference.dead)
+                                    {
+                                        choosePlayerArrowForSelectAll[i].gameObject.SetActive(true);
+                                    }
+                                }
+                            }
+                            previousState = btlUIState.choosingSkillsCommand;
+                            currentState = btlUIState.choosingAllPlayers;
                             break;
                     }
                 }
@@ -970,11 +1000,12 @@ public class UIBTL : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            choosePlayerArrow.gameObject.SetActive(false);
+            
             if (previousState == btlUIState.choosingItemsCommand)
             {
                 if (btlManager.players[playerIndicatorIndex].playerReference.currentState != Player.playerState.Rage)
                 {
+                    choosePlayerArrow.gameObject.SetActive(false);
                     UpdateActivityText(inventory.ItemName(inventory.invItem[inventory.consumableInv[itemsPanelIndex], 0]));
                     inventory.ItemUseFunction(inventory.invItem[inventory.consumableInv[itemsPanelIndex], 0], inventory.consumableInv[itemsPanelIndex], playerIndicatorIndex);
                     btlManager.players[playerIndicatorIndex].playerReference.EnableEffect("Heal", inventory.itemAddAmount); //Update the heal text
@@ -989,12 +1020,47 @@ public class UIBTL : MonoBehaviour
             {
                 if (btlManager.players[playerIndicatorIndex].playerReference.currentState != Player.playerState.Rage)
                 {
+                    choosePlayerArrow.gameObject.SetActive(false);
                     UpdateActivityText((skills.SkillName(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])));
                     playerInControl.UseSkillOnOnePlayer(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator],
                                                         skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[5],
                                                         skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[2],
                                                         btlManager.players[playerIndicatorIndex].playerReference);
                 }
+            }
+        }
+    }
+
+    private void ChoosingAllPlayers()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            DisableActivtyText();
+            if (previousState == btlUIState.choosingBasicCommand)
+            {
+                currentState = btlUIState.choosingBasicCommand;
+            }
+            else if (previousState == btlUIState.choosingSkillsCommand)
+            {
+                skillsPanel.gameObject.SetActive(true);
+                currentState = btlUIState.choosingSkillsCommand;
+            }
+
+            for (int i = 0; i < choosePlayerArrowForSelectAll.Length; i++)
+            {
+                choosePlayerArrowForSelectAll[i].gameObject.SetActive(false);
+            }
+        }
+        else if(Input.GetKeyDown(KeyCode.Space))
+        {
+            UpdateActivityText(skills.SkillName(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator]));
+            playerInControl.UseSkillOnAllPlayers(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator],
+                                    skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[5],
+                                    skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[2]);
+
+            for (int i = 0; i < choosePlayerArrowForSelectAll.Length; i++)
+            {
+                choosePlayerArrowForSelectAll[i].gameObject.SetActive(false);
             }
         }
     }
