@@ -8,51 +8,29 @@ using UnityEngine.SceneManagement;
 
 public class Enemy : MonoBehaviour
 {
-    public enum EnemyClassType
-    {
-        DPS,    
-        Tank,   
-        Support 
-    };
-
-    public enum EnemyAttackType
-    {
-        Dumb,
-        Opportunistic,
-        Assassin,
-        Bruiser,
-        Healer,
-        Heal_Support,
-        Strategist,
-        Demo
-    };
-
-    enum PlayerStatReference
-    {
-        Health,
-        Agility,
-        Defence,
-        Attack
-
-    };
-
     public int enemyIndexInBattleManager;
     private BattleManager battleManager;
     private UIBTL uiBTL;
+    private  EnemySkills eSkills;
     public float eMana;
     public float eAttack;
     public float eAgility;
     public float eDefence;
     public float eStrength;
     public float eSpeed;
+    public int[] showMeWhatYouGot;
     public float eBaseLevel;
     public int eCurrentLevel;
     public string eName;
     public float eRange;
-    public List <float> playerStatNeeded;
+    public List<float> playerStatNeeded;
+    public List<float> enemyStatNeeded;
     public float eCritical;
     public Sprite qImage;
     Player attackThisPlayer;
+    int statMod;
+    Enemy enemyToHeal;
+    Player[] attackSomePlayers = new Player[4];
 
     private SpriteRenderer spriteRenderer;
     private Color spriteColor;
@@ -69,18 +47,24 @@ public class Enemy : MonoBehaviour
     public bool dead;
     private bool skillPointAdded;
     public bool hit;
+    public bool usedSkill;
+    public bool skillAttacksTwo;
 
     private GameObject demoEffect;
     private ObjectPooler objPooler;
 
     public EnemyClassType enemyClass;
     public EnemyAttackType enemyAttack;
+    public EnemyName enemyName;
+    [SerializeField] AllEnemySkills canUseSkill;
 
     private void Start()
     {
+        GiveNamesAndSkills();
         battleManager = BattleManager.instance;
         objPooler = ObjectPooler.instance;
         uiBTL = UIBTL.instance;
+        eSkills = EnemySkills.Instance;
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         spriteColor = spriteRenderer.color;
         animator = gameObject.GetComponent<Animator>();
@@ -91,7 +75,8 @@ public class Enemy : MonoBehaviour
         haveAddedMyself = false;
         hit = false;
         dead = false;
-
+        usedSkill = false;
+        skillAttacksTwo = false;
         IncreaseStatsBasedOnLevel(eCurrentLevel);
     }
 
@@ -106,7 +91,7 @@ public class Enemy : MonoBehaviour
 
         if (Input.GetKey(KeyCode.G))
         {
-            AttackLowHp();
+            HealEnemy();
         }
     }
 
@@ -140,13 +125,12 @@ public class Enemy : MonoBehaviour
                 Debug.Log(eName + " is a " + enemyClass + " Class of enemy");
                 break;
         }
-
         maxHP = currentHP;
     }
 
     public void AddEnemyToBattle()
     {
-        battleManager.AddEnemy(enemyIndexInBattleManager, Mathf.RoundToInt(eAgility), Mathf.RoundToInt(eStrength), Mathf.RoundToInt(eCritical), Mathf.RoundToInt(eSpeed), this, name);
+        battleManager.AddEnemy(enemyIndexInBattleManager, Mathf.RoundToInt(eAgility), Mathf.RoundToInt(eStrength), Mathf.RoundToInt(eCritical), Mathf.RoundToInt(eSpeed), Mathf.RoundToInt(currentHP),Mathf.RoundToInt(maxHP) ,this, name);
     }
 
     /// <summary>
@@ -158,7 +142,8 @@ public class Enemy : MonoBehaviour
         uiBTL.DisableActivtyText();
         float attackChance = Random.Range(0, 100); // determines if the ememy will use its type attack or a dumb attack 
         float skillChance = Random.Range(0, 60);// determines if the enemy will use a skill or not //TEMP VALUES//
-
+      
+       
         if (!dead)
         {
             switch (enemyAttack)
@@ -186,7 +171,7 @@ public class Enemy : MonoBehaviour
 
                     else
                     {
-                        if (skillChance > 40) 
+                        if (skillChance > 40)
                         {
                             DumbAttack();
                             print(eName + " Used their skill aswell as a Dumb attack");
@@ -217,7 +202,6 @@ public class Enemy : MonoBehaviour
                             print(eName + " Did not use their skill but used their types attack");
                         }
                     }
-            
 
                     else
                     {
@@ -252,7 +236,6 @@ public class Enemy : MonoBehaviour
                         }
                     }
 
-
                     else
                     {
                         if (skillChance > 40)
@@ -271,7 +254,15 @@ public class Enemy : MonoBehaviour
                     break;
 
                 case EnemyAttackType.Healer:
+                    if (skillChance > 40)
+                    {
+                        HealEnemy();
+                    }
 
+                    else
+                    {
+                        HealEnemy();
+                    }
                     break;
 
                 case EnemyAttackType.Heal_Support:
@@ -297,7 +288,17 @@ public class Enemy : MonoBehaviour
 
                     else
                     {
-                        DumbAttack();
+                        if (skillChance > 40)
+                        {
+                            DumbAttack();
+                            print(eName + " Used their skill aswell as a Dumb attack");
+                        }
+
+                        else
+                        {
+                            DumbAttack();
+                            print(eName + " Did not use their skill but used a Dumb attack");
+                        }
                     }
 
                     break;
@@ -312,6 +313,7 @@ public class Enemy : MonoBehaviour
 
         else
         {
+            EnemySkills.usedSkill = false;
             uiBTL.EndTurn();
         }
     }
@@ -319,15 +321,17 @@ public class Enemy : MonoBehaviour
     //Calculate whether the attack is a hit or a miss
     private void CalculateHit()
     {
-        //20 sided die + str <? enemy agility
-        if (Random.Range(0.0f, 20.0f) + eStrength < attackThisPlayer.agi)
-        {
-            hit = false;
-        }
-        else
-        {
-            hit = true;
-        }
+        //if (/*!skillAttacksTwo*/)
+      //  {
+            //20 sided die + str <? enemy agility
+            if (Random.Range(0.0f, 20.0f) + eStrength < attackThisPlayer.agi)
+            {
+                hit = false;
+            }
+            else
+            {
+                hit = true;
+            }
 
         Debug.Log("Enemy Hit is " + hit);
     }
@@ -337,9 +341,77 @@ public class Enemy : MonoBehaviour
         return Random.Range(0.0f, 100.0f);
     }
 
+    private void DemoAttackEffect()
+    {
+        demoEffect = objPooler.SpawnFromPool("DemoAttack", attackThisPlayer.gameObject.transform.position, gameObject.transform.rotation);
+    }
+
+    //Called from the animator once the attack anaimation ends
+    private void CompleteAttack()
+    {
+        float critMod = 1.2f;
+        if (hit)
+        {
+            if (skillAttacksTwo) 
+            {
+                for (int i = 0; i < attackSomePlayers.Length; ++i)
+                {
+                    objPooler.SpawnFromPool("EnemyNormalAttack", attackSomePlayers[i].gameObject.transform.position, gameObject.transform.rotation);
+                }
+            }
+
+            else
+            {
+                objPooler.SpawnFromPool("EnemyNormalAttack", attackThisPlayer.gameObject.transform.position, gameObject.transform.rotation);
+            }
+            
+            if (CalculateCrit() <= eCritical)
+            {
+                Debug.Log("Critical Hit from Enemy");
+                attackThisPlayer.TakeDamage(eAttack * critMod);
+            }
+
+            else
+            {
+                if (!usedSkill)
+                {
+                    if (!skillAttacksTwo)
+                    {
+                        Debug.Log("Critical Hit from Enemy");
+                        attackThisPlayer.TakeDamage(eAttack);
+                    }
+                }
+
+                else
+                {
+                    if (skillAttacksTwo)
+                    {
+                        for (int i = 0; i < attackSomePlayers.Length; ++i)
+                        {
+                            attackSomePlayers[i].TakeDamage(eAttack);
+                        }
+                    }
+
+                    else
+                    {
+                        attackThisPlayer.TakeDamage(eAttack);
+                    }
+                }
+            }
+        }
+
+        else
+        {
+            Debug.Log("Enemy has missed");
+        }
+
+        animator.SetBool("Attack", false);
+        uiBTL.EndTurn();
+    }
+
     void DumbAttack()
     {
-        attackThisPlayer = battleManager.players[Random.Range(0,4)].playerReference;
+        attackThisPlayer = battleManager.players[Random.Range(0, 4)].playerReference;
         //if the player is dead, try again
         if (attackThisPlayer.currentHP <= 0.0f)
         {
@@ -352,54 +424,23 @@ public class Enemy : MonoBehaviour
             CalculateHit();
             animator.SetBool("Attack", true);
         }
-        
-    }
 
-    private void DemoAttackEffect()
-    {
-        demoEffect = objPooler.SpawnFromPool("DemoAttack", attackThisPlayer.gameObject.transform.position, gameObject.transform.rotation);
-    }
-
-    //Called from the animator once the attack anaimation ends
-    private void CompleteAttack()
-    {
-        if (hit)
-        {
-            objPooler.SpawnFromPool("EnemyNormalAttack", attackThisPlayer.gameObject.transform.position, gameObject.transform.rotation);
-            if(CalculateCrit() <= eCritical)
-            {
-                Debug.Log("Critical Hit from Enemy");
-                attackThisPlayer.TakeDamage(eAttack * 1.2f);
-            }
-
-            else
-            {
-                attackThisPlayer.TakeDamage(eAttack);
-            }           
-        }
-
-        else
-        {
-            Debug.Log("Enemy has missed");
-        }
-        animator.SetBool("Attack", false);
-        uiBTL.EndTurn();
     }
 
     void AttackLowHp()
     {
         StatNeeded(PlayerStatReference.Health);
-         for (int i = 0; i < 4; i++)
-         {
+        for (int i = 0; i < battleManager.players.Length; i++)
+        {
             //checking if hp stat for BM is the same as the smallest value in the list is so do yo thang 
-             if (battleManager.players[i].currentHP == Mathf.Min(playerStatNeeded.ToArray()))
-             {
-                attackThisPlayer = battleManager.players[i].playerReference;                
-                 CalculateHit();
-                 animator.SetBool("Attack", true);
-             }
-         }
-         //clear the list for the next use 
+            if (battleManager.players[i].currentHP == Mathf.Min(playerStatNeeded.ToArray()))
+            {
+                attackThisPlayer = battleManager.players[i].playerReference;
+                CalculateHit();
+                animator.SetBool("Attack", true);
+            }
+        }
+        //clear the list for the next use 
         playerStatNeeded.Clear();
     }
 
@@ -455,12 +496,109 @@ public class Enemy : MonoBehaviour
         playerStatNeeded.Clear();
     }
 
-    // returns the stat needed for the enemies that attack based on player stats 
-    void StatNeeded(PlayerStatReference statNeeded)
+    public void SkillAttack(int[] whoToAttack)
     {
-        float statsRefForCheck; //  i know shitty name 
-        //returns the lowest HP of the party 
-        if (statNeeded == PlayerStatReference.Health)
+        usedSkill = true;
+        skillAttacksTwo = true;
+        for (int i = 0; i < battleManager.players.Length; i++) 
+        {
+            for (int j = 0; j < whoToAttack.Length; j++)
+            {
+                if (battleManager.players[i].playerReference.playerIndex == whoToAttack[j])
+                {
+                    attackSomePlayers[i] = battleManager.players[i].playerReference;
+                    CalculateHit();
+                    animator.SetBool("Attack", true);
+                }
+            }
+        }
+    }
+
+    void SkillAttack(int whoToAttack)
+    {
+
+    }
+
+    void HealEnemy()
+    {
+        int[] healthHolder = new int[battleManager.enemies.Length];// why i did this i will never know change it when not too lazy
+        float lowestHealth; //holds ref the lowest health in enemyStat List
+        int healthMod = Random.Range(5, 20);// how much health should be applied to the enemies currentHP
+        float chanceOfHealth = Random.value; //  how low should  the health be before it is healed //CHANGE THIS FUCKING VARIABLE NAME ANDRE!!
+
+        for (int i = 0; i < healthHolder.Length; ++i)
+        {
+            //add enemies currentHp to enemyStat List only if they arnt dead
+            if (battleManager.enemies[i].currentHP > 0 && !dead)
+            {
+                enemyStatNeeded.Add(battleManager.enemies[i].currentHP);
+            }
+        }
+
+        lowestHealth = Mathf.Min(enemyStatNeeded.ToArray()); 
+
+        for (int i = 0; i <enemyStatNeeded.Count; ++i)
+        {
+            //if enemyStat is not the lowestHealth Remove it 
+            if(enemyStatNeeded[i] != lowestHealth)
+            {
+                enemyStatNeeded.RemoveAt(i);
+            }
+        }
+
+        for (int i = 0; i < healthHolder.Length; ++i)
+        {
+            if (battleManager.enemies[i].currentHP == lowestHealth)
+            {
+                enemyToHeal = battleManager.enemies[i].enemyReference;
+            }
+        }
+
+        //if the enemy that needs to be healths current hp is less that a percentage of max hp plus 0.1 so that its never below 20%
+        if (enemyToHeal.currentHP <= (enemyToHeal.maxHP * chanceOfHealth + .1f))
+        { 
+            if (enemyToHeal.currentHP + healthMod >= enemyToHeal.maxHP)
+            {
+                enemyToHeal.currentHP = enemyToHeal.maxHP;
+                battleManager.enemies[enemyToHeal.enemyIndexInBattleManager].currentHP = enemyToHeal.currentHP;
+            }
+
+            else
+            {
+                enemyToHeal.currentHP += healthMod;
+                battleManager.enemies[enemyToHeal.enemyIndexInBattleManager].currentHP = enemyToHeal.currentHP;
+            }
+            uiBTL.EndTurn();
+        }
+
+        else
+        {
+            DumbAttack();
+        }
+
+        print(enemyToHeal.enemyIndexInBattleManager);
+        enemyStatNeeded.Clear(); 
+    }
+
+    void SupportHeal()
+    {
+        int statMod = Random.Range(5, 20); // temp values 
+        float statToMod = Random.value + .1f;
+        
+
+        for (int i = 0; i < battleManager.enemies.Length; ++i)
+        {
+
+        }
+
+    }
+
+    // returns the stat needed for the enemies that attack based on player stats 
+    void StatNeeded(PlayerStatReference pStatNeeded)
+    {
+        float pStatsRefForCheck = 0; //  i know shitty name 
+                                     //returns the lowest HP of the party 
+        if (pStatNeeded == PlayerStatReference.Health)
         {
             foreach (BattleManager.PlayerInformtion stat in battleManager.players)
             {
@@ -468,30 +606,31 @@ public class Enemy : MonoBehaviour
                 if (stat.playerReference != null && stat.currentHP > 0)
                 {
                     playerStatNeeded.Add(stat.currentHP);
+                    //return;
                 }
             }
             //sort the list DUH
             playerStatNeeded.Sort();
 
-            statsRefForCheck = Mathf.Min(playerStatNeeded.ToArray());
+            pStatsRefForCheck += Mathf.Min(playerStatNeeded.ToArray());
 
-            for (int i = 0; i <playerStatNeeded.Count; i++)
+            for (int i = 0; i < playerStatNeeded.Count; i++)
             {
-                if(playerStatNeeded[i] != statsRefForCheck)
+                if (playerStatNeeded[i] != pStatsRefForCheck)
                 {
                     playerStatNeeded.Remove(playerStatNeeded[i]);
                     print("Removed" + battleManager.players[i].name);
                 }
-                
-                else if (playerStatNeeded[i] == statsRefForCheck)
+
+                else if (playerStatNeeded[i] == pStatsRefForCheck)
                 {
                     playerStatNeeded.Remove(playerStatNeeded.Count - 1);
                 }
             }
         }
-        
 
-        else if(statNeeded == PlayerStatReference.Agility)
+
+        else if (pStatNeeded == PlayerStatReference.Agility)
         {
             foreach (BattleManager.PlayerInformtion stat in battleManager.players)
             {
@@ -501,27 +640,27 @@ public class Enemy : MonoBehaviour
                     playerStatNeeded.Add(stat.agi);
                 }
             }
-         
+
             playerStatNeeded.Sort();
 
-            statsRefForCheck = Mathf.Max(playerStatNeeded.ToArray());
+            pStatsRefForCheck = Mathf.Max(playerStatNeeded.ToArray());
 
             for (int i = 0; i < playerStatNeeded.Count; i++)
             {
-                if (playerStatNeeded[i] != statsRefForCheck)
+                if (playerStatNeeded[i] != pStatsRefForCheck)
                 {
                     playerStatNeeded.Remove(playerStatNeeded[i]);
                     print("Removed" + battleManager.players[i].name);
                 }
-                
-                else if (playerStatNeeded[i] == statsRefForCheck)
+
+                else if (playerStatNeeded[i] == pStatsRefForCheck)
                 {
                     playerStatNeeded.Remove(playerStatNeeded.Count - 1);
                 }
             }
         }
 
-        else if (statNeeded == PlayerStatReference.Attack)
+        else if (pStatNeeded == PlayerStatReference.Attack)
         {
             foreach (BattleManager.PlayerInformtion stat in battleManager.players)
             {
@@ -534,17 +673,17 @@ public class Enemy : MonoBehaviour
 
             playerStatNeeded.Sort();
 
-            statsRefForCheck = Mathf.Max(playerStatNeeded.ToArray());
+            pStatsRefForCheck += Mathf.Max(playerStatNeeded.ToArray());
 
             for (int i = 0; i < playerStatNeeded.Count; i++)
             {
-                if (playerStatNeeded[i] != statsRefForCheck)
+                if (playerStatNeeded[i] != pStatsRefForCheck)
                 {
                     playerStatNeeded.Remove(playerStatNeeded[i]);
                     print("Removed" + battleManager.players[i].name);
                 }
-               
-                else if (playerStatNeeded[i] == statsRefForCheck)
+
+                else if (playerStatNeeded[i] == pStatsRefForCheck)
                 {
                     playerStatNeeded.Remove(playerStatNeeded.Count - 1);
                 }
@@ -564,16 +703,16 @@ public class Enemy : MonoBehaviour
             }
             playerStatNeeded.Sort();
 
-            statsRefForCheck = Mathf.Min(playerStatNeeded.ToArray());
+            pStatsRefForCheck += Mathf.Min(playerStatNeeded.ToArray());
             for (int i = 0; i < playerStatNeeded.Count; i++)
             {
-                if (playerStatNeeded[i] != statsRefForCheck)
+                if (playerStatNeeded[i] != pStatsRefForCheck)
                 {
                     playerStatNeeded.Remove(playerStatNeeded[i]);
                     print("Removed" + battleManager.players[i].name);
                 }
-               
-                else if (playerStatNeeded[i] == statsRefForCheck)
+
+                else if (playerStatNeeded[i] == pStatsRefForCheck)
                 {
                     playerStatNeeded.Remove(playerStatNeeded.Count - 1);
                 }
@@ -581,6 +720,23 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    //function override used to get the stats a enemy same idea as with the player 
+  //  void StatNeeded(EnemyStatReference eStatNeeded)
+   // {
+      
+   // }
+
+    public void becomeLessVisbile() //Called from UIBTL when this enemy is NOT chosen for attack
+    {
+        spriteColor.a = 0.5f;
+        spriteRenderer.color = spriteColor;
+    }
+
+    public void resetVisibility() //Called from UIBTL when this enemy is NOT chosen for attack, and either the player doesn't attack or the attack finishes
+    {
+        spriteColor.a = 1.0f;
+        spriteRenderer.color = spriteColor;
+    }
 
     //Calcualte the damage
     public void TakeDamage(float playerAttack)
@@ -608,6 +764,96 @@ public class Enemy : MonoBehaviour
     {
         animator.SetBool("Hit", false);
     }
+
+    public void GiveNamesAndSkills()
+    {
+        int randomskill = Random.Range(0, 100);
+        switch (enemyName)
+        {
+            case EnemyName.Bat:
+                eName = "The Bat";
+                break;
+
+            case EnemyName.Boar:
+                eName = "The Boar";
+                break;
+
+            case EnemyName.Dino:
+                eName = "The Dino";
+                break;
+
+            case EnemyName.Dragon:
+                eName = "The Dragon";
+                break;
+
+            case EnemyName.Ghost:
+                eName = "The Ghost";
+                break;
+
+            case EnemyName.Giant:
+                eName = "The Giant";
+
+                if (randomskill <= 50)
+                {
+                    canUseSkill = AllEnemySkills.Ground_Smash;
+                }
+
+                else
+                {
+                    canUseSkill = AllEnemySkills.Ground_Smash;
+                }
+
+                break;
+
+            case EnemyName.Mimic:
+                eName = "The Mimic";
+                break;
+
+            case EnemyName.Mushroom:
+                eName = "The Most Dangerous Mushroom";
+                break;
+
+            case EnemyName.Octodad:
+                eName = "The Octodad";
+                break;
+
+            case EnemyName.Reptile:
+                eName = "King Krool";
+                break;
+
+            case EnemyName.Slime:
+                eName = "The Slime";
+                break;
+
+            case EnemyName.Snake:
+                eName = "The Ekans";
+                break;
+
+            case EnemyName.Yeti:
+                eName = "The Abominable Snowman";
+                break;
+
+            case EnemyName.Solider:
+                eName = "The Soilder";
+                break;
+
+            case EnemyName.Lieutenant:
+                eName = "The Lieutentant";
+                break;
+        }
+    }
+
+    //assigns skills functionalilty for skills that effect more than one in the current battle
+    //called in enemyTurn
+     void MakeSkillsWork(AllEnemySkills ChosenSkill)
+     {
+        switch (ChosenSkill)
+        {
+            case AllEnemySkills.Ground_Smash:
+                SkillAttack(eSkills.GroundSmashSkill());
+                break;
+        }
+     }
 
     private void Death()
     {

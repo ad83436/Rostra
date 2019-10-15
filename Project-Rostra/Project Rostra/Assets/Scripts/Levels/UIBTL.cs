@@ -325,12 +325,10 @@ public class UIBTL : MonoBehaviour
                 break;
 
         }
-
     }
 
     public void MoveQImages()
     {
-
         //Once the images start moving, turn off the indicator next to the "RAGE" word and return the text color to normal if the previous player was in rage
         if (playerInControl.currentState == Player.playerState.Rage)
         {
@@ -369,7 +367,6 @@ public class UIBTL : MonoBehaviour
 
         targetPos.x = images[8].transform.localPosition.x + imageMaxDistance;
         images[8].transform.localPosition = Vector2.MoveTowards(images[8].transform.localPosition, targetPos , imageMovementSpeed * Time.deltaTime);
-
     }
 
     //Called when the image at the far right of the Q collides with the recycle image collider
@@ -1215,7 +1212,6 @@ public class UIBTL : MonoBehaviour
         {
             rageText.color = Color.gray;
         }
-
     }
 
     public void UpdatePlayerHPControlPanel()

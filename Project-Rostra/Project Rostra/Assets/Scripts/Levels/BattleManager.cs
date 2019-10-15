@@ -165,11 +165,13 @@ public class BattleManager : MonoBehaviour
     }
 
     //Called at the beginning of the battle to store references to current enemies. Needed to be able to update the queue
-    public void AddEnemy(int enemyIndex, int agi, int str, int crit, int speed, Enemy enemyRef, string name)
+    public void AddEnemy(int enemyIndex, int agi, int str, int crit, int speed, int currentHp, int maxHp, Enemy enemyRef, string name)
     {
             enemies[enemyIndex].playerIndex = enemyIndex;
             enemies[enemyIndex].agi = agi;
             enemies[enemyIndex].speed = speed;
+            enemies[enemyIndex].currentHP = currentHp;
+            enemies[enemyIndex].maxHP = maxHp;
             enemies[enemyIndex].str = str;
             enemies[enemyIndex].crit = crit;
             enemies[enemyIndex].enemyReference = enemyRef;
