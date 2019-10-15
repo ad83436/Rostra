@@ -53,6 +53,7 @@ public class UIBTL : MonoBehaviour
     public Text[] mpCosts;
     public Text skillDescription;
     public Text skillAtkValueText;
+    public Text skillWaitValueText;
     private bool firstTimeOpenedSkillsPanel; //Used to make sure we get the skills information only once per player per turn
 
     //Items Control Panel
@@ -556,6 +557,7 @@ public class UIBTL : MonoBehaviour
                         skillsHighlighter.gameObject.transform.position = skillsHPos[0].transform.position;
                         skillDescription.text = skills.SkillDescription(PartySkills.skills[playerInControl.playerIndex].equippedSkills[0]).ToString();
                         skillAtkValueText.text = skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[0])[0].ToString();
+                        skillWaitValueText.text = "Wait: " + skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[0])[2].ToString();
                         controlsIndicator = 0;
                     }
                     break;
@@ -736,6 +738,7 @@ public class UIBTL : MonoBehaviour
         skillsHighlighter.gameObject.transform.position = skillsHPos[controlsIndicator].transform.position;
         skillDescription.text = skills.SkillDescription(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator]).ToString();
         skillAtkValueText.text = "ATK: " + skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[0].ToString();
+        skillWaitValueText.text = "Wait: " + skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[2].ToString();
 
     }
 

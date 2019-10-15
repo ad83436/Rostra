@@ -275,7 +275,7 @@ public class SkillsInventory : MonoBehaviour {
             case (int)SKILLS.TEST_Fargas:
                 skillStat[0] = 25;
                 skillStat[1] = 95;
-                skillStat[2] = 1;
+                skillStat[2] = 2;
                 skillStat[4] = (float)SKILL_TYPE.ALL_TARGETS_ATK;
                 skillStat[5] = 50;
                 break;
