@@ -298,11 +298,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1928816376}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87ac8d342faca114d90c4ea83dba64cd, type: 3}
+  m_Script: {fileID: 11500000, guid: 9ef020d1cc9ba6341b515baba7b7bb44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  merchantType: 0
-  itemsToSell: 
+  shopItems: 
+  isSelling: 0
+  GuiSmall: {fileID: 12800000, guid: 8cd005d600c706945b313ab1374fb2ea, type: 3}
 --- !u!4 &1928816378
 Transform:
   m_ObjectHideFlags: 0
