@@ -32,6 +32,10 @@ public class ItemShop : MonoBehaviour {
 
     // Handles input and functionality for the menu (For testing purposes)
     private void Update() {
+        if (MainInventory.invInstance.isVisible) {
+            return;
+        }
+
         // Getting Keyboard Input
         bool keyDown, keyUp, keySelect, keyReturn;
         keyDown = Input.GetKeyDown(KeyCode.DownArrow);
@@ -79,6 +83,10 @@ public class ItemShop : MonoBehaviour {
 
     // Drawing the Item Shop in code for testing
     private void OnGUI() {
+        if (MainInventory.invInstance.isVisible) {
+            return;
+        }
+
         // Creating the Font(s) for the Inventory
         GUIStyle style = new GUIStyle(GUI.skin.label) {
             font = GuiSmall,
@@ -93,6 +101,8 @@ public class ItemShop : MonoBehaviour {
             // Drawing a cursor that points to the item the player has highlighted
             GUI.Label(new Rect(1185.0f, 15.0f + (fontHeight * (curOption)), 50.0f, 50.0f), ">", style);
         }
+
+        GUI.Label(new Rect(1205.0f, 200.0f, 200.0f, 50.0f), "$" + MainInventory.totalMoney.ToString(), style);
     }
 
     // Buys the current item from the merchants inventory and attempts to place it into the player's inventory
