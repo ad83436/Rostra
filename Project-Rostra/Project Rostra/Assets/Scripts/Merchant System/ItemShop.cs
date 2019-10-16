@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 // Code Written By:     Christopher Brine
@@ -9,15 +8,7 @@ public class ItemShop : MonoBehaviour {
     public List<int> shopItems = new List<int>();   // The list of items that the shopkeeper has on them
     public bool isSelling = false;                  // If true, the user will be selling items from their inventory
 
-    // The variables that are used for drawing the GUI to the screen
-    public Font GuiSmall;
-
     private Merchant merchant;                      // The current merchant that owns this store
-
-    private int curOption = 0;                      // The current shop item that is being looked at by the player
-    private int selectedOption = -1;                // The option that the user selects to purchase
-    private int firstToDraw = 0;                    // The top-most element that is being draw in the list of visible items
-    private int numToDraw = 8;                      // The number of shop items that are visible to the player at any given time
 
     public ItemShop(Merchant merchant) {
         this.merchant = merchant;
@@ -112,8 +103,6 @@ public class ItemShop : MonoBehaviour {
         int itemPrice = MainInventory.invInstance.ItemPrice(itemID);
         bool canPurchase = false;
 
-        Debug.Log(itemPrice + ", " + MainInventory.totalMoney);
-
         // The player doesn't have enough money to purchase the items they want, return false
         if (MainInventory.totalMoney < itemPrice * itemNum) {
             return canPurchase;
@@ -123,38 +112,33 @@ public class ItemShop : MonoBehaviour {
         int curItemNum = itemNum;
         for (int i = 0; i < MainInventory.INVENTORY_SIZE; i++) {
             int stackLimit = MainInventory.invInstance.ItemStackLimit(itemID);
-            Debug.Log(curItemNum);
+            int slotItem = MainInventory.invInstance.invItem[i, 0];
             if (stackLimit > 1) { // Purchasing stackable items form a merchant
-                if (MainInventory.invInstance.invItem[i, 0] == itemID && MainInventory.invInstance.invItem[i, 1] < stackLimit) {
-                    while(MainInventory.invInstance.invItem[i, 1] < stackLimit && curItemNum >= 1) { // There is a slot with items that can still be added to it
+                if (slotItem == itemID && MainInventory.invInstance.invItem[i, 1] < stackLimit) {
+                    while(MainInventory.invInstance.invItem[i, 1] < stackLimit && curItemNum > 1) { // There is a slot with items that can still be added to it
                         MainInventory.invInstance.invItem[i, 1]++;
                         MainInventory.totalMoney -= itemPrice;
                         curItemNum--;
-                        Debug.Log("Item added to already existing stack");
+                        canPurchase = true;
                     }
-                    canPurchase = true;
-                } else if (MainInventory.invInstance.invItem[i, 0] == (int)ITEM_ID.NO_ITEM) { // The slot is empty
-                    while(MainInventory.invInstance.invItem[i, 1] < stackLimit && curItemNum >= 1) {
+                } else if (slotItem == 0) { // The slot is empty
+                    while(MainInventory.invInstance.invItem[i, 1] < stackLimit && curItemNum > 1) {
                         MainInventory.invInstance.invItem[i, 0] = itemID;
                         MainInventory.invInstance.invItem[i, 1]++;
                         MainInventory.totalMoney -= itemPrice;
-                        Debug.Log("Item added to new stack");
                         curItemNum--;
+                        canPurchase = true;
                     }
-                    canPurchase = true;
                 }
             } else { // Purchasing non-stackable items from a merchant
-                if (MainInventory.invInstance.invItem[i, 0] == (int)ITEM_ID.NO_ITEM) { // The slot is empty
+                if (slotItem == 0) { // The slot is empty
                     MainInventory.invInstance.invItem[i, 0] = itemID;
                     MainInventory.invInstance.invItem[i, 1] = 1;
                     MainInventory.totalMoney -= itemPrice;
                     curItemNum--;
                     canPurchase = true;
-                    Debug.Log("Item added");
                 }
             }
-            // Exit the loop
-            if (curItemNum == 0) { break; }
         }
 
         return canPurchase;

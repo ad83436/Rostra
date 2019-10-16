@@ -58,6 +58,7 @@ public class Player : MonoBehaviour
     private string skillNameForObjPooler;
     private int skillWaitingIndex = 0;
     private string skillAnimatorName = "";
+    private int enemyRowIndicator = 0; //Used to know the enemy row the player is attacking
 
     //Buffs
     //Booleans are used in case the player's stats were debuffed by an enemy and when buffed, the debuff effects will be negated. The Q counter will not be affected
@@ -232,6 +233,7 @@ public class Player : MonoBehaviour
                             UseSkillOnOneEnemy(chosenSkill, mpCost, 0, attackingThisEnemy);
                             break;
                         case 1:
+                            UseSkillOnEnemyRow(chosenSkill, mpCost, 0, enemyRowIndicator);
                             break;
                         case 2:
                             UseSkillOnAllEnemies(chosenSkill, mpCost, 0);
@@ -246,11 +248,13 @@ public class Player : MonoBehaviour
                             UseSkillOnOnePlayer(chosenSkill, mpCost, 0, healThisPlayer);
                             break;
                         case 7:
+                            UseSkillOnAllPlayers(chosenSkill, mpCost, 0);
                             break;
                         case 8:
                             UseSkillOnOnePlayer(chosenSkill, mpCost, 0, healThisPlayer);
                             break;
                         case 9:
+                            UseSkillOnAllPlayers(chosenSkill, mpCost, 0);
                             break;
                     }
                     
@@ -529,6 +533,45 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void UseSkillOnAllPlayers(int skillID, float manaCost, float waitTime)
+    {
+        skillWaitTime = waitTime;
+        chosenSkill = skillID;
+        mpCost = manaCost;
+
+        //Placeholders, these skills will be a single character heal/buff
+        //Check if the skill is immediate or if the player needs to wait a number of turns
+        if (skillID == 4) //Heal 
+        {
+            skillTarget = 7;//All player heal
+            skillAnimatorName = "Heal";
+            skillWaitingIndex = 1;
+        }
+        else if (skillID == 3) //Buff defense skill
+        {
+            skillTarget = 9; //All player buff
+            skillAnimatorName = "BuffDef";
+            skillWaitingIndex = 1;
+        }
+
+        if(waitTime<=0)
+        {
+            skillWaitingIndex = 0;
+            playerAnimator.SetInteger("WaitingIndex", -1); //-1 is all animation
+            playerAnimator.SetBool(skillAnimatorName, true);
+        }
+        else
+        {
+            Debug.Log("Now");
+            waitTimeText.gameObject.SetActive(true);
+            waitTimeText.text = skillWaitTime.ToString();
+            playerAnimator.SetInteger("WaitingIndex", skillWaitingIndex);
+            currentState = playerState.Waiting;
+            uiBTL.EndTurn();
+        }
+
+    }
+
     public void UseSkillOnOneEnemy(int skillID, float manaCost, float waitTime, Enemy enemyReference)
     {
 
@@ -600,6 +643,39 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void UseSkillOnEnemyRow(int skillID, float manaCost, float waitTime, int rowIndicator)
+    {
+        skillWaitTime = waitTime;
+        skillTarget = 1;
+        chosenSkill = skillID;
+        mpCost = manaCost;
+
+        //Check which skill to know which animation to run
+        if (skillID == 1) //Fargas  basic attack skill --> Placeholder will be changed once we have the actual skill
+        {
+            Debug.Log("HIT");
+            skillNameForObjPooler = "FFSkill1";
+            skillAnimatorName = "ASkill";
+            skillWaitingIndex = 1;
+        }
+
+        if (waitTime <= 0)
+        {
+            skillWaitingIndex = 0;
+            playerAnimator.SetInteger("WaitingIndex", -1);
+            playerAnimator.SetBool(skillAnimatorName, true);
+        }
+        else
+        {
+            //If there's waiting time, go to wait state and end the turn 
+            waitTimeText.gameObject.SetActive(true);
+            waitTimeText.text = skillWaitTime.ToString();
+            playerAnimator.SetInteger("WaitingIndex", skillWaitingIndex);
+            currentState = playerState.Waiting;
+            uiBTL.EndTurn();
+        }
+    }
+
     //Called from the animator
     public void SkillEffect()
     {
@@ -646,7 +722,79 @@ public class Player : MonoBehaviour
             playerAnimator.SetBool(skillAnimatorName, false);
 
         }
-        else if(skillTarget == 2)
+        else if(skillTarget == 1) //Full row attack
+        {
+            if (enemyRowIndicator == 0)
+            {
+                for (int i = 0; i < 3; i++) //Front row
+                {
+                    if (battleManager.enemies[i].enemyReference != null)
+                    {
+                        if (!battleManager.enemies[i].enemyReference.dead)
+                        {
+                            CalculateHitForSkill(battleManager.enemies[i].enemyReference);
+                            if (hit)
+                            {
+                                objPooler.SpawnFromPool(skillNameForObjPooler, battleManager.enemies[i].enemyReference.gameObject.transform.position, gameObject.transform.rotation);
+                                Debug.Log("Skill hit");
+                                //Summon effect here
+                                btlCam.CameraShake();
+                                if (CalculateCrit() <= crit)
+                                {
+                                    Debug.Log("Skill Crit");
+                                    battleManager.enemies[i].enemyReference.TakeDamage(0.7f * actualATK + skills.SkillStats(chosenSkill)[0]); //Damage is the half the player's attack stat and the skill's attack stat
+                                }
+                                else
+                                {
+                                    Debug.Log("No Skill Crit");
+                                    battleManager.enemies[i].enemyReference.TakeDamage(0.5f * actualATK + skills.SkillStats(chosenSkill)[0]); //Damage is the half the player's attack stat and the skill's attack stat
+                                }
+                            }
+                            else
+                            {
+                                Debug.Log("Skill miss");
+                            }
+                        }
+                    }
+                }
+            }
+            else if (enemyRowIndicator == 1) //Ranged row
+            {
+                for (int i = 3; i < 5; i++)
+                {
+                    if (battleManager.enemies[i].enemyReference != null)
+                    {
+                        if (!battleManager.enemies[i].enemyReference.dead)
+                        {
+                            CalculateHitForSkill(battleManager.enemies[i].enemyReference);
+                            if (hit)
+                            {
+                                objPooler.SpawnFromPool(skillNameForObjPooler, battleManager.enemies[i].enemyReference.gameObject.transform.position, gameObject.transform.rotation);
+                                Debug.Log("Skill hit");
+                                //Summon effect here
+                                btlCam.CameraShake();
+                                if (CalculateCrit() <= crit)
+                                {
+                                    Debug.Log("Skill Crit");
+                                    battleManager.enemies[i].enemyReference.TakeDamage(0.7f * actualATK + skills.SkillStats(chosenSkill)[0]); //Damage is the half the player's attack stat and the skill's attack stat
+                                }
+                                else
+                                {
+                                    Debug.Log("No Skill Crit");
+                                    battleManager.enemies[i].enemyReference.TakeDamage(0.5f * actualATK + skills.SkillStats(chosenSkill)[0]); //Damage is the half the player's attack stat and the skill's attack stat
+                                }
+                            }
+                            else
+                            {
+                                Debug.Log("Skill miss");
+                            }
+                        }
+                    }
+                }
+            }
+            playerAnimator.SetBool(skillAnimatorName, false);
+        }
+        else if(skillTarget == 2) //All enemies attack
         {
             for(int i = 0; i<battleManager.enemies.Length; i++)
             {
@@ -681,9 +829,23 @@ public class Player : MonoBehaviour
             }
             playerAnimator.SetBool(skillAnimatorName, false);
         }
-        else if(skillTarget == 6)
+        else if(skillTarget == 6) //Heal one player
         {
-            healThisPlayer.Heal(0.1f * (0.5f * actualATK + skills.SkillStats(chosenSkill)[0]));
+            healThisPlayer.Heal(0.01f * (0.5f * actualATK + skills.SkillStats(chosenSkill)[0])); //Passing in a percentage
+            playerAnimator.SetBool("Heal", false);
+        }
+        else if(skillTarget == 7) //Heal all players
+        {
+            for(int i =0;i<battleManager.players.Length; i++)
+            {
+                if(battleManager.players[i].playerReference!=null)
+                {
+                    if(!battleManager.players[i].playerReference.dead && battleManager.players[i].playerReference.currentState!=playerState.Rage)
+                    {
+                            battleManager.players[i].playerReference.Heal(0.01f * (0.5f * actualATK + skills.SkillStats(chosenSkill)[0]));
+                    }
+                }
+            }
             playerAnimator.SetBool("Heal", false);
         }
         else if(skillTarget == 8) //Buff single player
@@ -694,6 +856,23 @@ public class Player : MonoBehaviour
                 playerAnimator.SetBool("BuffDef", false);
             }
 
+        }
+        else if(skillTarget == 9) //Buff all players
+        {
+            if(chosenSkill==3) //Defense buff // Placeholder
+            {
+                for (int i = 0; i < battleManager.players.Length; i++)
+                {
+                    if (battleManager.players[i].playerReference != null)
+                    {
+                        if (!battleManager.players[i].playerReference.dead && battleManager.players[i].playerReference.currentState != playerState.Rage)
+                        {
+                            battleManager.players[i].playerReference.BuffStats("Defense", skills.SkillStats(chosenSkill)[0], skills.SkillStats(chosenSkill)[2]);
+                        }
+                    }
+                }
+                playerAnimator.SetBool("BuffDef", false);
+            }
         }
 
         currentMP -= mpCost;
