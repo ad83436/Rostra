@@ -47,5 +47,7 @@ public class Dialogue
 	public float maxWillCount;
 	//
 	public bool isBattle;
-
+	//
+	public bool willPlayOnce;
+	public bool narratorText;
 }

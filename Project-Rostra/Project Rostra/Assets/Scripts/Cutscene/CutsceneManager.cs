@@ -130,7 +130,7 @@ public class CutsceneManager : MonoBehaviour
 				Debug.Log("Next");
 				current++;
 				moveLenght--;
-				actorsCM[actorCount].transform.position = movesCM[current];
+				actorsCM[actorCount].transform.localPosition = new Vector3(movesCM[current].x, movesCM[current].y, actorsCM[actorCount].transform.localPosition.z);
 				anim.SetBool("FadeIn", false);
 			}
 			/// 
@@ -148,7 +148,7 @@ public class CutsceneManager : MonoBehaviour
 			
 		}
 	}
-	// set will reset everything to default
+	// this will reset everything to default
 
 	public void End()
 	{
@@ -161,6 +161,10 @@ public class CutsceneManager : MonoBehaviour
 		pl.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
 		pl.transform.position = returnPosition;
 		DialogueManager.instance.canWalk = true;
+		foreach (GameObject g in actorsCM)
+		{
+			Destroy(g);
+		}
 	}	
 
 	
