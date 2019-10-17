@@ -32,7 +32,7 @@ public class ExpManager : MonoBehaviour {
 		PartyStats.chara[0].maxHealth = 200.0f;
 		PartyStats.chara[0].magicpoints = 200.0f;
 		PartyStats.chara[0].maxMana = 200.0f;
-		PartyStats.chara[0].attack = 100.0f;
+		PartyStats.chara[0].attack = 40.0f;
 		PartyStats.chara[0].defence = 15.0f;
 		PartyStats.chara[0].agility = 14.0f;
 		PartyStats.chara[0].strength = 16.0f;
@@ -217,54 +217,30 @@ public class ExpManager : MonoBehaviour {
 	
 	public static int[] RequiredStats(SKILLS skill, int playerindex) {
 		switch (playerindex) {
-			case 0:
+			case 0: //Fargas
 				switch (skill) {
-					case SKILLS.TEST_Fargas:	return new int[] { 110, 15, 200, 200, 16, 14, 16 };
-					case SKILLS.TEST_Frea:		return new int[] { 120, 15, 210, 240, 22, 22, 22 };
-					case SKILLS.TEST_Oberon:	return new int[] { 100, 20, 200, 200, 16, 14, 16 };
-					case SKILLS.TEST_Arcelus:	return new int[] { 100, 15, 210, 200, 16, 14, 16 };
-					case SKILLS.TEST_Fargas2:	return new int[] { 110, 15, 200, 200, 16, 14, 16 };
-					case SKILLS.TEST_Frea2:		return new int[] { 110, 15, 200, 200, 16, 14, 16 };
-					case SKILLS.TEST_Oberon2:	return new int[] { 100, 20, 200, 200, 16, 14, 16 };
-					case SKILLS.TEST_Arcelus2:	return new int[] { 100, 15, 210, 200, 16, 14, 16 };
-					default: return null;
-				}
-			case 1:
+					case SKILLS.Fa_SwiftStrike:	return new int[] { 41, 15, 200, 200, 16, 14, 16 };
+                    case SKILLS.Fa_SwordOfFury: return new int[] { 41, 15, 200, 200, 16, 14, 16 };
+                    default: return null;
+                }
+			case 1: //Oberon
 				switch (skill) {
-					case SKILLS.TEST_Fargas:	return new int[] { 110, 15, 200, 200, 16, 14, 16 };
-					case SKILLS.TEST_Frea:		return new int[] { 110, 15, 200, 200, 16, 14, 16 };
-					case SKILLS.TEST_Oberon:	return new int[] { 100, 20, 200, 200, 16, 14, 16 };
-					case SKILLS.TEST_Arcelus:	return new int[] { 100, 15, 210, 200, 16, 14, 16 };
-					case SKILLS.TEST_Fargas2:	return new int[] { 110, 15, 200, 200, 16, 14, 16 };
-					case SKILLS.TEST_Frea2:		return new int[] { 110, 15, 200, 200, 16, 14, 16 };
-					case SKILLS.TEST_Oberon2:	return new int[] { 100, 20, 200, 200, 16, 14, 16 };
-					case SKILLS.TEST_Arcelus2:	return new int[] { 100, 15, 210, 200, 16, 14, 16 };
-					default: return null;
-				}
-			case 2:
+					case SKILLS.Ob_ShieldAlly:	return new int[] { 110, 15, 200, 200, 16, 14, 16 };
+                    case SKILLS.Ob_ShieldAllAllies: return new int[] { 110, 15, 200, 200, 16, 14, 16 };
+                    default: return null;
+                }
+			case 2: //Frea
 				switch (skill) {
-					case SKILLS.TEST_Fargas:	return new int[] { 110, 15, 200, 200, 16, 14, 16 };
-					case SKILLS.TEST_Frea:		return new int[] { 110, 15, 200, 200, 16, 14, 16 };
-					case SKILLS.TEST_Oberon:	return new int[] { 100, 20, 200, 200, 16, 14, 16 };
-					case SKILLS.TEST_Arcelus:	return new int[] { 100, 15, 210, 200, 16, 14, 16 };
-					case SKILLS.TEST_Fargas2:	return new int[] { 110, 15, 200, 200, 16, 14, 16 };
-					case SKILLS.TEST_Frea2:		return new int[] { 110, 15, 200, 200, 16, 14, 16 };
-					case SKILLS.TEST_Oberon2:	return new int[] { 100, 20, 200, 200, 16, 14, 16 };
-					case SKILLS.TEST_Arcelus2:	return new int[] { 100, 15, 210, 200, 16, 14, 16 };
-					default: return null;
-				}
-			case 3:
+					case SKILLS.Fr_PiercingShot:	return new int[] { 110, 15, 200, 200, 16, 14, 16 };
+                    case SKILLS.Fr_ArrowRain: return new int[] { 110, 15, 200, 200, 16, 14, 16 };
+                    default: return null;
+                }
+			case 3: //Arcelus
 				switch (skill) {
-					case SKILLS.TEST_Fargas:	return new int[] { 110, 15, 200, 200, 16, 14, 16 };
-					case SKILLS.TEST_Frea:		return new int[] { 110, 15, 200, 200, 16, 14, 16 };
-					case SKILLS.TEST_Oberon:	return new int[] { 100, 20, 200, 200, 16, 14, 16 };
-					case SKILLS.TEST_Arcelus:	return new int[] { 100, 15, 210, 200, 16, 14, 16 };
-					case SKILLS.TEST_Fargas2:	return new int[] { 110, 15, 200, 200, 16, 14, 16 };
-					case SKILLS.TEST_Frea2:		return new int[] { 110, 15, 200, 200, 16, 14, 16 };
-					case SKILLS.TEST_Oberon2:	return new int[] { 100, 20, 200, 200, 16, 14, 16 };
-					case SKILLS.TEST_Arcelus2:	return new int[] { 100, 15, 210, 200, 16, 14, 16 };
-					default: return null;
-				}
+					case SKILLS.Ar_HealingAura:	return new int[] { 110, 15, 200, 200, 16, 14, 16 };
+                    case SKILLS.Ar_DrainEye: return new int[] { 110, 15, 200, 200, 16, 14, 16 };
+                    default: return null;
+                }
 			default: return null;
 		}
 	}
