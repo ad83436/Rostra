@@ -117,8 +117,6 @@ public class ItemShop : MonoBehaviour {
                     int[] items = shopItems.ToArray();
                     if (!BuyItem(items[curOption])) {
                         Debug.Log("Cannot Purchase -- insufficent funds");
-                    } else {
-                        Debug.Log("Item Purchased -- " + items[curOption]);
                     }
                 }
             }
@@ -239,14 +237,14 @@ public class ItemShop : MonoBehaviour {
             int slotItem = MainInventory.invInstance.invItem[i, 0];
             if (stackLimit > 1) { // Purchasing stackable items form a merchant
                 if (slotItem == itemID && MainInventory.invInstance.invItem[i, 1] < stackLimit) {
-                    while(MainInventory.invInstance.invItem[i, 1] < stackLimit && curItemNum > 1) { // There is a slot with items that can still be added to it
+                    while(MainInventory.invInstance.invItem[i, 1] < stackLimit && curItemNum >= 1) { // There is a slot with items that can still be added to it
                         MainInventory.invInstance.invItem[i, 1]++;
                         MainInventory.totalMoney -= itemPrice;
                         curItemNum--;
                         canPurchase = true;
                     }
                 } else if (slotItem == 0) { // The slot is empty
-                    while(MainInventory.invInstance.invItem[i, 1] < stackLimit && curItemNum > 1) {
+                    while(MainInventory.invInstance.invItem[i, 1] < stackLimit && curItemNum >= 1) {
                         MainInventory.invInstance.invItem[i, 0] = itemID;
                         MainInventory.invInstance.invItem[i, 1]++;
                         MainInventory.totalMoney -= itemPrice;
