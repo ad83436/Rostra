@@ -1072,7 +1072,7 @@ public class UIBTL : MonoBehaviour
                 if (btlManager.players[playerIndicatorIndex].playerReference.currentState != Player.playerState.Rage)
                 {
                     choosePlayerArrow.gameObject.SetActive(false);
-                    UpdateActivityText((skills.SkillName(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])));
+                    UpdateActivityText(skills.SkillName(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator]));
                     playerInControl.UseSkillOnOnePlayer(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator],
                                                         skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[5],
                                                         skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[2],
@@ -1471,6 +1471,7 @@ public class UIBTL : MonoBehaviour
         firstTimeOpenedSkillsPanel = false; //Get ready for the next player in case they want to use thier skills
         controlsIndicator = 0;
         highlighter.gameObject.transform.position = highlighiterPos[0].transform.position;
+        DisableActivtyText();
         playerInControl.ForcePlayerTurnAnimationOff();
     }
 

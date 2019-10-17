@@ -29,7 +29,7 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
-		if (dm.canWalk == true)
+		if (dm.canWalk == true && !BattleManager.battleInProgress)
 		{
 			moveInput.x = Input.GetAxisRaw("Horizontal");
 			moveInput.y = Input.GetAxisRaw("Vertical");

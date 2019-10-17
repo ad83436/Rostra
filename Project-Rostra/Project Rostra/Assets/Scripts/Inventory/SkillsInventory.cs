@@ -29,6 +29,18 @@ public class SkillsInventory : MonoBehaviour {
         } else {
             Destroy(gameObject);
         }
+
+        AddToUnlockedSkills((int)SKILLS.Fa_SwiftStrike, 0);
+        EquipSkill((int)SKILLS.Fa_SwiftStrike, 0, 0);
+
+        AddToUnlockedSkills((int)SKILLS.Ob_ShieldAlly, 1);
+        EquipSkill((int)SKILLS.Ob_ShieldAlly, 0, 1);
+
+        AddToUnlockedSkills((int)SKILLS.Fr_PiercingShot, 2);
+        EquipSkill((int)SKILLS.Fr_PiercingShot, 0, 2);
+
+        AddToUnlockedSkills((int)SKILLS.Ar_HealingAura, 3);
+        EquipSkill((int)SKILLS.Ar_HealingAura, 0, 3);
     }
 
     // Handling keyboard functionality

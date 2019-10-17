@@ -59,6 +59,7 @@ public class Player : MonoBehaviour
     private int skillWaitingIndex = 0;
     private string skillAnimatorName = "";
     private int enemyRowIndicator = 0; //Used to know the enemy row the player is attacking
+    private bool showSkillNameAfterWait = false; //If the player waits before executing the attack, make sure to show the name when the skill is executed
 
     //Buffs
     //Booleans are used in case the player's stats were debuffed by an enemy and when buffed, the debuff effects will be negated. The Q counter will not be affected
@@ -257,6 +258,8 @@ public class Player : MonoBehaviour
                             UseSkillOnAllPlayers(chosenSkill, mpCost, 0);
                             break;
                     }
+
+                    uiBTL.UpdateActivityText(skills.SkillName(chosenSkill));
 
                 }
                 else
@@ -514,7 +517,7 @@ public class Player : MonoBehaviour
             skillAnimatorName = "Heal";
             skillWaitingIndex = 1;
         }
-        else if (skillID == 3) //Buff defense skill
+        else if (skillID == (int)SKILLS.Ob_ShieldAlly) //Buff defense skill
         {
             skillTarget = 8; //Single player buff
             skillAnimatorName = "BuffDef";
@@ -546,7 +549,7 @@ public class Player : MonoBehaviour
 
         //Placeholders, these skills will be a single character heal/buff
         //Check if the skill is immediate or if the player needs to wait a number of turns
-        if (skillID == 4) //Heal 
+        if (skillID == (int)SKILLS.Ar_HealingAura) //Heal 
         {
             skillTarget = 7;//All player heal
             skillAnimatorName = "Heal";
@@ -587,7 +590,7 @@ public class Player : MonoBehaviour
         attackingThisEnemy = enemyReference;
 
         //Check which skill to know which animation to run
-        if (skillID == 1 || skillID == 2) //Fargas and Freya basic attack skills
+        if (skillID==(int)SKILLS.Fr_PiercingShot) //Fargas and Freya basic attack skills
         {
             Debug.Log("HIT");
             skillNameForObjPooler = "FFSkill1";
@@ -656,7 +659,7 @@ public class Player : MonoBehaviour
         mpCost = manaCost;
 
         //Check which skill to know which animation to run
-        if (skillID == 1) //Fargas  basic attack skill --> Placeholder will be changed once we have the actual skill
+        if (skillID == (int)SKILLS.Fa_SwiftStrike) 
         {
             Debug.Log("HIT");
             skillNameForObjPooler = "FFSkill1";
@@ -860,7 +863,7 @@ public class Player : MonoBehaviour
         }
         else if (skillTarget == 8) //Buff single player
         {
-            if (chosenSkill == 3)//Defense Buff
+            if (chosenSkill == (int)SKILLS.Ob_ShieldAlly)//Defense Buff
             {
                 healThisPlayer.BuffStats("Defense", skills.SkillStats(chosenSkill)[0], skills.SkillStats(chosenSkill)[2]);
                 playerAnimator.SetBool("BuffDef", false);
@@ -884,7 +887,6 @@ public class Player : MonoBehaviour
                 playerAnimator.SetBool("BuffDef", false);
             }
         }
-
         currentMP -= mpCost;
         battleManager.players[playerIndex].currentMP = currentMP;
         uiBTL.UpdatePlayerMPControlPanel();

@@ -32,7 +32,7 @@ public class ExpManager : MonoBehaviour {
 		PartyStats.chara[0].maxHealth = 200.0f;
 		PartyStats.chara[0].magicpoints = 200.0f;
 		PartyStats.chara[0].maxMana = 200.0f;
-		PartyStats.chara[0].attack = 40.0f;
+		PartyStats.chara[0].attack = 30.0f;
 		PartyStats.chara[0].defence = 15.0f;
 		PartyStats.chara[0].agility = 14.0f;
 		PartyStats.chara[0].strength = 16.0f;
@@ -46,8 +46,8 @@ public class ExpManager : MonoBehaviour {
 		PartyStats.chara[1].maxHealth = 250.0f;
 		PartyStats.chara[1].magicpoints = 150.0f;
 		PartyStats.chara[1].maxMana = 150.0f;
-		PartyStats.chara[1].attack = 100.0f;
-		PartyStats.chara[1].defence = 20.0f;
+		PartyStats.chara[1].attack = 15.0f;
+		PartyStats.chara[1].defence = 30.0f;
 		PartyStats.chara[1].agility = 10.0f;
 		PartyStats.chara[1].strength = 14.0f;
 		PartyStats.chara[1].critical = 3.0f;
@@ -56,13 +56,13 @@ public class ExpManager : MonoBehaviour {
 		PartyStats.chara[1].neededExperience = 150;
 
 		//Frea
-		PartyStats.chara[2].hitpoints = 180.0f;
-		PartyStats.chara[2].maxHealth = 180.0f;
+		PartyStats.chara[2].hitpoints = 190.0f;
+		PartyStats.chara[2].maxHealth = 190.0f;
 		PartyStats.chara[2].magicpoints = 200.0f;
 		PartyStats.chara[2].maxMana = 200.0f;
-		PartyStats.chara[2].attack = 100.0f;
+		PartyStats.chara[2].attack = 35.0f;
 		PartyStats.chara[2].defence = 14.0f;
-		PartyStats.chara[2].agility = 13.0f;
+		PartyStats.chara[2].agility = 16.0f;
 		PartyStats.chara[2].strength = 15.0f;
 		PartyStats.chara[2].critical = 5.0f;
 		PartyStats.chara[2].speed = 14.0f;
@@ -70,13 +70,13 @@ public class ExpManager : MonoBehaviour {
 		PartyStats.chara[2].neededExperience = 150;
 
 		//Arcelus
-		PartyStats.chara[3].hitpoints = 160.0f;
-		PartyStats.chara[3].maxHealth = 160.0f;
+		PartyStats.chara[3].hitpoints = 180.0f;
+		PartyStats.chara[3].maxHealth = 180.0f;
 		PartyStats.chara[3].magicpoints = 250.0f;
 		PartyStats.chara[3].maxMana = 250.0f;
-		PartyStats.chara[3].attack = 100.0f;
-		PartyStats.chara[3].defence = 15.0f;
-		PartyStats.chara[3].agility = 17.0f;
+		PartyStats.chara[3].attack = 18.0f;
+		PartyStats.chara[3].defence = 13.0f;
+		PartyStats.chara[3].agility = 26.0f;
 		PartyStats.chara[3].strength = 13.0f;
 		PartyStats.chara[3].critical = 3.0f;
 		PartyStats.chara[3].speed = 12.0f;
@@ -219,26 +219,27 @@ public class ExpManager : MonoBehaviour {
 		switch (playerindex) {
 			case 0: //Fargas
 				switch (skill) {
-					case SKILLS.Fa_SwiftStrike:	return new int[] { 41, 15, 200, 200, 16, 14, 16 };
-                    case SKILLS.Fa_SwordOfFury: return new int[] { 41, 15, 200, 200, 16, 14, 16 };
+					case SKILLS.Fa_SwiftStrike:	return new int[] { 30, 15, 200, 200, 16, 14, 16 };
+                    case SKILLS.Fa_SwordOfFury: return new int[] { 31, 15, 200, 200, 16, 14, 16 };
                     default: return null;
                 }
 			case 1: //Oberon
 				switch (skill) {
-					case SKILLS.Ob_ShieldAlly:	return new int[] { 110, 15, 200, 200, 16, 14, 16 };
-                    case SKILLS.Ob_ShieldAllAllies: return new int[] { 110, 15, 200, 200, 16, 14, 16 };
+					case SKILLS.Ob_ShieldAlly:	return new int[] { 15, 30, 250, 150, 14, 10, 9 };
+                    case SKILLS.Ob_ShieldAllAllies: return new int[] { 15, 31, 250, 150, 14, 10, 9 };
                     default: return null;
                 }
 			case 2: //Frea
 				switch (skill) {
-					case SKILLS.Fr_PiercingShot:	return new int[] { 110, 15, 200, 200, 16, 14, 16 };
-                    case SKILLS.Fr_ArrowRain: return new int[] { 110, 15, 200, 200, 16, 14, 16 };
+					case SKILLS.Fr_PiercingShot:	return new int[] { 35, 14, 190, 200, 15, 16, 14 };
+                    case SKILLS.Fr_ArrowRain: return new int[] { 36, 14, 190, 200, 15, 16, 14 };
                     default: return null;
+                        
                 }
 			case 3: //Arcelus
 				switch (skill) {
-					case SKILLS.Ar_HealingAura:	return new int[] { 110, 15, 200, 200, 16, 14, 16 };
-                    case SKILLS.Ar_DrainEye: return new int[] { 110, 15, 200, 200, 16, 14, 16 };
+					case SKILLS.Ar_HealingAura:	return new int[] { 18, 13, 180, 250, 13, 26, 12 };
+                    case SKILLS.Ar_DrainEye: return new int[] { 18, 13, 180, 325, 13, 26, 12 };
                     default: return null;
                 }
 			default: return null;
