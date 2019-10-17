@@ -58,6 +58,7 @@ public class Player : MonoBehaviour
     private string skillNameForObjPooler;
     private int skillWaitingIndex = 0;
     private string skillAnimatorName = "";
+    public int enemyRowIndicator = 0;
 
     //Buffs
     //Booleans are used in case the player's stats were debuffed by an enemy and when buffed, the debuff effects will be negated. The Q counter will not be affected
