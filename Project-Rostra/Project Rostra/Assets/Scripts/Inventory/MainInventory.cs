@@ -344,11 +344,6 @@ public class MainInventory : MonoBehaviour {
 			if (invItem[slot, 2] != -1) {
 				UpdatePlayerStats(invItem[slot, 2], invItem[slot, 0], true);
 			}
-			// If the item is a consumable, make sure to update the list and remove the slot value
-			if (ItemType(invItem[slot, 0]) == (int)ITEM_TYPE.CONSUMABLE) {
-				int index = consumableInv.IndexOf(slot);
-				consumableInv.RemoveAt(index);
-			}
 		}
 	}
 

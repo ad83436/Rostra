@@ -304,11 +304,16 @@ public class Player : MonoBehaviour
             {
                 attackingThisEnemy.TakeDamage(actualATK);
             }
+
         }
-        //uiBTL.EndTurn();
+        else
+        {
+            Debug.Log("Player attack has missed");
+            uiBTL.EndTurn();
+        }
 
         //If the player is in rage state, they can only attack so it makes sense to check if we were in rage mode when attacking
-        if(currentState==playerState.Rage)
+        if (currentState==playerState.Rage)
         {
             QCounter++;
             if(QCounter>=3) //If it's been 3 or more turns since the player raged out, reset rage mode
@@ -716,6 +721,7 @@ public class Player : MonoBehaviour
             else
             {
                 Debug.Log("Skill miss");
+                uiBTL.EndTurn();
             }
 
 
@@ -753,6 +759,7 @@ public class Player : MonoBehaviour
                             else
                             {
                                 Debug.Log("Skill miss");
+                                uiBTL.EndTurn();
                             }
                         }
                     }
@@ -787,6 +794,8 @@ public class Player : MonoBehaviour
                             else
                             {
                                 Debug.Log("Skill miss");
+                                uiBTL.EndTurn();
+
                             }
                         }
                     }
@@ -823,6 +832,7 @@ public class Player : MonoBehaviour
                         else
                         {
                             Debug.Log("Skill miss");
+                            uiBTL.EndTurn();
                         }
                     }
                 }

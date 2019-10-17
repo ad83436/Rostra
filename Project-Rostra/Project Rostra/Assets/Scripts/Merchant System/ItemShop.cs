@@ -117,41 +117,41 @@ public class ItemShop : MonoBehaviour {
                     int[] items = shopItems.ToArray();
                     if (!BuyItem(items[curOption])) {
                         Debug.Log("Cannot Purchase -- insufficent funds");
-                    } else {
-                        Debug.Log("Item Purchased -- " + items[curOption]);
                     }
                 }
             }
         } else if (isSelling) {
-            if (keyUp) {
-                curOption--;
-                // Shifting the inventory's view up
-                if (curOption < firstToDraw + (numToDraw / 2) - 1 && firstToDraw > 0) {
-                    firstToDraw--;
+            if (selectedOption == -1) {
+                if (keyUp) {
+                    curOption--;
+                    // Shifting the inventory's view up
+                    if (curOption < firstToDraw + (numToDraw / 2) - 1 && firstToDraw > 0) {
+                        firstToDraw--;
+                    }
+                    // Looping to the end of the inventory if the player presses up while on the first item
+                    if (curOption < 0) {
+                        curOption = MainInventory.INVENTORY_SIZE - 1;
+                        firstToDraw = curOption - numToDraw;
+                    }
+                } else if (keyDown) {
+                    curOption++;
+                    // Shifting the inventory's view down
+                    if (curOption > firstToDraw + (numToDraw / 2) + 1 && firstToDraw < MainInventory.INVENTORY_SIZE - 1 - numToDraw) {
+                        firstToDraw++;
+                    }
+                    // Looping to the start of the inventory if the player presses down while on the last item
+                    if (curOption > MainInventory.INVENTORY_SIZE - 1) {
+                        curOption = 0;
+                        firstToDraw = 0;
+                    }
                 }
-                // Looping to the end of the inventory if the player presses up while on the first item
-                if (curOption < 0) {
-                    curOption = MainInventory.INVENTORY_SIZE - 1;
-                    firstToDraw = curOption - numToDraw;
-                }
-            } else if (keyDown) {
-                curOption++;
-                // Shifting the inventory's view down
-                if (curOption > firstToDraw + (numToDraw / 2) + 1 && firstToDraw < MainInventory.INVENTORY_SIZE - 1 - numToDraw) {
-                    firstToDraw++;
-                }
-                // Looping to the start of the inventory if the player presses down while on the last item
-                if (curOption > MainInventory.INVENTORY_SIZE - 1) {
-                    curOption = 0;
-                    firstToDraw = 0;
-                }
-            }
 
-            // Selecting an item to sell to the merchant
-            if (keySelect) {
-                if (MainInventory.invInstance.invItem[curOption, 0] != 0) {
-                    if (!SellItem(MainInventory.invInstance.invItem[curOption, 0], curOption)) {
-                        Debug.Log("Cannot Purchase -- Merchant doesn't sell this item");
+                // Selecting an item to sell to the merchant
+                if (keySelect) {
+                    if (MainInventory.invInstance.invItem[curOption, 0] != 0) {
+                        if (!SellItem(MainInventory.invInstance.invItem[curOption, 0], curOption)) {
+                            Debug.Log("Cannot Purchase -- Merchant doesn't sell this item");
+                        }
                     }
                 }
             }
@@ -199,8 +199,6 @@ public class ItemShop : MonoBehaviour {
                 // Drawing a cursor that points to the item the player has highlighted
                 if (i == curOption) { GUI.Label(new Rect(1185.0f, 15.0f + (fontHeight * curOption), 50.0f, 50.0f), ">", style); }
             }
-
-            GUI.Label(new Rect(1205.0f, 200.0f, 200.0f, 50.0f), "$" + MainInventory.totalMoney.ToString(), style);
         }
 
         // Drawing the inventory for selling items
@@ -216,6 +214,8 @@ public class ItemShop : MonoBehaviour {
                 if (MainInventory.invInstance.invItem[i, 2] != -1) { GUI.Label(new Rect(510.0f, 15.0f + (fontHeight * (i - firstToDraw)), 50.0f, 50.0f), "(E)", style); }
             }
         }
+
+        GUI.Label(new Rect(1205.0f, 200.0f, 200.0f, 50.0f), "$" + MainInventory.totalMoney.ToString(), style);
     }
 
     // Buys the current item from the merchants inventory and attempts to place it into the player's inventory
@@ -232,19 +232,19 @@ public class ItemShop : MonoBehaviour {
 
         // Add to the last open list in the inventory/the nearest stack of the item from the start
         int curItemNum = itemNum;
-        for (int i = 0; i < MainInventory.INVENTORY_SIZE; i++) {
+        for (int i = 0; i < MainInventory.INVENTORY_SIZE && curItemNum > 0; i++) {
             int stackLimit = MainInventory.invInstance.ItemStackLimit(itemID);
             int slotItem = MainInventory.invInstance.invItem[i, 0];
             if (stackLimit > 1) { // Purchasing stackable items form a merchant
                 if (slotItem == itemID && MainInventory.invInstance.invItem[i, 1] < stackLimit) {
-                    while(MainInventory.invInstance.invItem[i, 1] < stackLimit && curItemNum > 1) { // There is a slot with items that can still be added to it
+                    while(MainInventory.invInstance.invItem[i, 1] < stackLimit && curItemNum >= 1) { // There is a slot with items that can still be added to it
                         MainInventory.invInstance.invItem[i, 1]++;
                         MainInventory.totalMoney -= itemPrice;
                         curItemNum--;
                         canPurchase = true;
                     }
                 } else if (slotItem == 0) { // The slot is empty
-                    while(MainInventory.invInstance.invItem[i, 1] < stackLimit && curItemNum > 1) {
+                    while(MainInventory.invInstance.invItem[i, 1] < stackLimit && curItemNum >= 1) {
                         MainInventory.invInstance.invItem[i, 0] = itemID;
                         MainInventory.invInstance.invItem[i, 1]++;
                         MainInventory.totalMoney -= itemPrice;
