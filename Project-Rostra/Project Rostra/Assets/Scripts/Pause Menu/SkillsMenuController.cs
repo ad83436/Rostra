@@ -11,6 +11,8 @@ struct USkillItem {
 
 public class SkillsMenuController : SubMenu {
 
+	public static bool hasEquipped = false;
+
 	//property to skillinventory
 	private ref SkillsInventory skinv => ref SkillsInventory.invInstance;
 
@@ -273,6 +275,7 @@ public class SkillsMenuController : SubMenu {
 					UpdateSkillUI();
 					SkillGroup.alpha = 1f;
 					SetDescription(0, true);
+					hasEquipped = true;
 					break;
 				}
 				break;
