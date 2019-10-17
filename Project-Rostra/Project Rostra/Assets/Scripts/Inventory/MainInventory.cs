@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class MainInventory : MonoBehaviour {
 	public static MainInventory invInstance;    // Holds the current inventory instance in a single variable
-	public static int totalMoney = 0;           // The amount of money the player has
+	public static int totalMoney = 500000;           // The amount of money the player has
 	public static int INVENTORY_SIZE = 60;      // The maximum size of the inventory
 	public int[,] invItem = new int[INVENTORY_SIZE, 3];
 	// NOTE -- Element 0 is the item's ID value that will point to its name, description, icon, etc.
@@ -26,8 +26,8 @@ public class MainInventory : MonoBehaviour {
 	private bool swappingItems = false;         // If true, the inventory will be in an "Item Swap" state. Meaning, no items can be selected until the swap is declined or completed
 
 	// Variables for selecting options and inventory items
-	public int curOption = 0;                  // The current inventory item the player has their cursor over
-	private int selectedOption = -1;            // The item that the player has selected in the inventory
+	public int curOption = 0;                   // The current inventory item the player has their cursor over
+	public int selectedOption = -1;             // The item that the player has selected in the inventory
 	private int subCurOption = 0;               // The current option the player has their cursor over after selecting an item
 
 	// Variables for selecting the player to use a consumable item
@@ -70,7 +70,6 @@ public class MainInventory : MonoBehaviour {
 		invItem[3, 0] = (int)ITEM_ID.TEST_ARMOR1;
 		invItem[3, 1] = 1;
 
-		Debug.Log(consumableInv[0].ToString() + ", " + consumableInv[1].ToString());
 	}
 
 	// Handling keyboard functionality
@@ -279,12 +278,6 @@ public class MainInventory : MonoBehaviour {
 	public void SwapItems(int slot1, int slot2) {
 		if (slot1 != slot2) {
 			int[] tempItem = { invItem[slot1, 0], invItem[slot1, 1], invItem[slot1, 2] };
-			// If the item is a consumable, make sure to update the list for its new slot
-			if (ItemType(invItem[slot1, 0]) == (int)ITEM_TYPE.CONSUMABLE) {
-				int index = consumableInv.IndexOf(slot1);
-				consumableInv.RemoveAt(index);
-				consumableInv.Insert(index, slot2);
-			}
 			// Move the second item into the first item's slot
 			invItem[slot1, 0] = invItem[slot2, 0];
 			invItem[slot1, 1] = invItem[slot2, 1];
@@ -307,14 +300,10 @@ public class MainInventory : MonoBehaviour {
 					invItem[i, 0] = itemID;
 					invItem[i, 1] += numToAdd;
 					numToAdd = 0;
-					// Add it to the list of consumables
-					if (ItemType(itemID) == (int)ITEM_TYPE.CONSUMABLE) { consumableInv.Add(i); }
 				} else { // No more space in a stack, try to find an empty spot
 					int remainder = stackSize - invItem[i, 1];
 					invItem[i, 1] = stackSize;
 					numToAdd -= remainder;
-					// Add it to the list of consumables
-					if (ItemType(itemID) == (int)ITEM_TYPE.CONSUMABLE) { consumableInv.Add(i); }
 					// NOTE -- If the inventory cannot find a spot for the remaining items it will just discard them.
 					// When this happens a message should be displayed for the player to let them know those items couldn't be picked up.
 				}
@@ -354,11 +343,6 @@ public class MainInventory : MonoBehaviour {
 			// Remove the item from a player object if one had the dropped item equipped
 			if (invItem[slot, 2] != -1) {
 				UpdatePlayerStats(invItem[slot, 2], invItem[slot, 0], true);
-			}
-			// If the item is a consumable, make sure to update the list and remove the slot value
-			if (ItemType(invItem[slot, 0]) == (int)ITEM_TYPE.CONSUMABLE) {
-				int index = consumableInv.IndexOf(slot);
-				consumableInv.RemoveAt(index);
 			}
 		}
 	}

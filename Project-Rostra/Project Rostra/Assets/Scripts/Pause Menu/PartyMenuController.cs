@@ -90,6 +90,7 @@ public class PartyMenuController : SubMenu {
 
 	[SerializeField] private CanvasGroup partyGroup;
 	[SerializeField] private CanvasGroup statsGroup;
+	[SerializeField] private CanvasGroup popup;
 
 	public override void MenuUpdate() {
 		if (!IsInStatsMenu) {
@@ -159,6 +160,7 @@ public class PartyMenuController : SubMenu {
 	}
 
 	public void CloseStatsMenu() {
+		popup.alpha = 0f;
 		statsMenu.ResetSelected();
 		IsInStatsMenu = false;
 	}
@@ -170,6 +172,7 @@ public class PartyMenuController : SubMenu {
 	}
 
 	public override void OnActive() {
+		popup.alpha = 0f;
 		if (IsInStatsMenu) {
 			UpdateStats();
 			playerIndex = 0;
@@ -182,17 +185,19 @@ public class PartyMenuController : SubMenu {
 	public override void OnInvisible() { }
 
 	public void IncreaseStat(ButtonController button) {
+		bool hasUnlockedSkill = false;
 		switch (button.buttonName) {
-			case "Attack": ExpManager.instance.UsePointOnAttack(playerIndex); break;
-			case "Defence": ExpManager.instance.UsePointOnDefence(playerIndex); break;
-			case "Health": ExpManager.instance.UsePointOnHealth(playerIndex); break;
-			case "Mana": ExpManager.instance.UsePointOnMana(playerIndex); break;
-			case "Strength": ExpManager.instance.UsePointOnStrength(playerIndex); break;
-			case "Agility": ExpManager.instance.UsePointOnAgility(playerIndex); break;
-			case "Speed": ExpManager.instance.UsePointOnSpeed(playerIndex); break;
+			case "Attack": hasUnlockedSkill = ExpManager.instance.UsePointOnAttack(playerIndex); break;
+			case "Defence": hasUnlockedSkill = ExpManager.instance.UsePointOnDefence(playerIndex); break;
+			case "Health": hasUnlockedSkill = ExpManager.instance.UsePointOnHealth(playerIndex); break;
+			case "Mana": hasUnlockedSkill = ExpManager.instance.UsePointOnMana(playerIndex); break;
+			case "Strength": hasUnlockedSkill = ExpManager.instance.UsePointOnStrength(playerIndex); break;
+			case "Agility": hasUnlockedSkill = ExpManager.instance.UsePointOnAgility(playerIndex); break;
+			case "Speed": hasUnlockedSkill = ExpManager.instance.UsePointOnSpeed(playerIndex); break;
 			case "Critical": break;
 			default: Debug.LogError("Stat button name did not match"); break;
 		}
 		UpdateStats();
+		if (hasUnlockedSkill) popup.alpha = 1f;
 	}
 }

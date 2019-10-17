@@ -302,11 +302,16 @@ public class Player : MonoBehaviour
             {
                 attackingThisEnemy.TakeDamage(actualATK);
             }
+
         }
-        //uiBTL.EndTurn();
+        else
+        {
+            Debug.Log("Player attack has missed");
+            uiBTL.EndTurn();
+        }
 
         //If the player is in rage state, they can only attack so it makes sense to check if we were in rage mode when attacking
-        if(currentState==playerState.Rage)
+        if (currentState==playerState.Rage)
         {
             QCounter++;
             if(QCounter>=3) //If it's been 3 or more turns since the player raged out, reset rage mode
@@ -681,13 +686,89 @@ public class Player : MonoBehaviour
             else
             {
                 Debug.Log("Skill miss");
+                uiBTL.EndTurn();
             }
 
 
             playerAnimator.SetBool(skillAnimatorName, false);
 
         }
-        else if(skillTarget == 2)
+        else if(skillTarget == 1) //Full row attack
+        {
+            if (enemyRowIndicator == 0)
+            {
+                for (int i = 0; i < 3; i++) //Front row
+                {
+                    if (battleManager.enemies[i].enemyReference != null)
+                    {
+                        if (!battleManager.enemies[i].enemyReference.dead)
+                        {
+                            CalculateHitForSkill(battleManager.enemies[i].enemyReference);
+                            if (hit)
+                            {
+                                objPooler.SpawnFromPool(skillNameForObjPooler, battleManager.enemies[i].enemyReference.gameObject.transform.position, gameObject.transform.rotation);
+                                Debug.Log("Skill hit");
+                                //Summon effect here
+                                btlCam.CameraShake();
+                                if (CalculateCrit() <= crit)
+                                {
+                                    Debug.Log("Skill Crit");
+                                    battleManager.enemies[i].enemyReference.TakeDamage(0.7f * actualATK + skills.SkillStats(chosenSkill)[0]); //Damage is the half the player's attack stat and the skill's attack stat
+                                }
+                                else
+                                {
+                                    Debug.Log("No Skill Crit");
+                                    battleManager.enemies[i].enemyReference.TakeDamage(0.5f * actualATK + skills.SkillStats(chosenSkill)[0]); //Damage is the half the player's attack stat and the skill's attack stat
+                                }
+                            }
+                            else
+                            {
+                                Debug.Log("Skill miss");
+                                uiBTL.EndTurn();
+                            }
+                        }
+                    }
+                }
+            }
+            else if (enemyRowIndicator == 1) //Ranged row
+            {
+                for (int i = 3; i < 5; i++)
+                {
+                    if (battleManager.enemies[i].enemyReference != null)
+                    {
+                        if (!battleManager.enemies[i].enemyReference.dead)
+                        {
+                            CalculateHitForSkill(battleManager.enemies[i].enemyReference);
+                            if (hit)
+                            {
+                                objPooler.SpawnFromPool(skillNameForObjPooler, battleManager.enemies[i].enemyReference.gameObject.transform.position, gameObject.transform.rotation);
+                                Debug.Log("Skill hit");
+                                //Summon effect here
+                                btlCam.CameraShake();
+                                if (CalculateCrit() <= crit)
+                                {
+                                    Debug.Log("Skill Crit");
+                                    battleManager.enemies[i].enemyReference.TakeDamage(0.7f * actualATK + skills.SkillStats(chosenSkill)[0]); //Damage is the half the player's attack stat and the skill's attack stat
+                                }
+                                else
+                                {
+                                    Debug.Log("No Skill Crit");
+                                    battleManager.enemies[i].enemyReference.TakeDamage(0.5f * actualATK + skills.SkillStats(chosenSkill)[0]); //Damage is the half the player's attack stat and the skill's attack stat
+                                }
+                            }
+                            else
+                            {
+                                Debug.Log("Skill miss");
+                                uiBTL.EndTurn();
+
+                            }
+                        }
+                    }
+                }
+            }
+            playerAnimator.SetBool(skillAnimatorName, false);
+        }
+        else if(skillTarget == 2) //All enemies attack
         {
             for(int i = 0; i<battleManager.enemies.Length; i++)
             {
@@ -716,6 +797,7 @@ public class Player : MonoBehaviour
                         else
                         {
                             Debug.Log("Skill miss");
+                            uiBTL.EndTurn();
                         }
                     }
                 }
