@@ -78,14 +78,14 @@ public class SkillsMenuController : SubMenu {
 		UnlockedSkillsList = new List<USkillItem>();
 		for (int i = 0; i < PartySkills.skills[playerindex].learnedSkills.Length; i++) {
 			if (PartySkills.skills[playerindex].learnedSkills[i] != (int)SKILLS.NO_SKILL)
-				UnlockedSkillsList.Add(Generate(PartySkills.skills[playerindex].learnedSkills[i]));
+				UnlockedSkillsList.Add(Generate(PartySkills.skills[playerindex].learnedSkills[i], false));
 		}
 
 		//fill locked skills
 		LockedSkillsList = new List<USkillItem>();
 		for (int i = 0; i < PartySkills.skills[playerindex].unlockableSkills.Length; i++) {
 			if (PartySkills.skills[playerindex].unlockableSkills[i] != (int)SKILLS.NO_SKILL)
-				LockedSkillsList.Add(Generate(PartySkills.skills[playerindex].unlockableSkills[i]));
+				LockedSkillsList.Add(Generate(PartySkills.skills[playerindex].unlockableSkills[i], true));
 		}
 	}
 
@@ -94,12 +94,28 @@ public class SkillsMenuController : SubMenu {
 		LockedSkillsList.Clear();
 	}
 
-	private USkillItem Generate(int skillID) {
+	private USkillItem Generate(int skillID, bool isLocked) {
 		USkillItem skill = new USkillItem();
 
 		skill.SkillID = skillID;
 		skill.name = skinv.SkillName(skillID);
-		skill.description = skinv.SkillDescription(skillID);
+		if (!isLocked) skill.description = skinv.SkillDescription(skillID);
+		else {
+			string desc = skinv.SkillDescription(skillID);
+			desc += "\n\n";
+
+			int[] minimum = ExpManager.RequiredStats((SKILLS)skillID, playerIndex);
+
+			if (minimum[0] > PartyStats.chara[playerIndex].attack) desc += "ATK: " + minimum[0] + "\n";
+			if (minimum[1] > PartyStats.chara[playerIndex].defence) desc += "DEF: " + minimum[1] + "\n";
+			if (minimum[2] > PartyStats.chara[playerIndex].maxHealth) desc += "HP:  " + minimum[2] + "\n";
+			if (minimum[3] > PartyStats.chara[playerIndex].maxMana) desc += "MP:  " + minimum[3] + "\n";
+			if (minimum[4] > PartyStats.chara[playerIndex].strength) desc += "STR: " + minimum[4] + "\n";
+			if (minimum[5] > PartyStats.chara[playerIndex].agility) desc += "AGI: " + minimum[5] + "\n";
+			if (minimum[6] > PartyStats.chara[playerIndex].speed) desc += "SPD: " + minimum[6] + "\n";
+
+			skill.description = desc;
+		}
 
 		return skill;
 	}
@@ -158,8 +174,17 @@ public class SkillsMenuController : SubMenu {
 		}
 	}
 
-	private void SetDescription(string desc) {
-		descriptionText.text = desc;
+	private void SetDescription(int relIndex, bool isunlockedlist) {
+		if (isunlockedlist && UnlockedSkillsList.Count > 0)
+			descriptionText.text = UnlockedSkillsList[relIndex].description;
+		else if (LockedSkillsList.Count > 0)
+			descriptionText.text = LockedSkillsList[relIndex].description;
+		else
+			ClearDescription();
+	}
+
+	private void ClearDescription() {
+		descriptionText.text = "---";
 	}
 
 	#endregion
@@ -203,7 +228,7 @@ public class SkillsMenuController : SubMenu {
 	}
 
 	private void MoveDownUnlocked() {
-		if (skillIndexA == UnlockedSkillsList.Count - 1) return;
+		if (skillIndexA == UnlockedSkillsList.Count - 1 || skillIndexA >= UnlockedSkillsList.Count) return;
 		if (RelIndexA == SKILLS_PER_PAGE - 1) ++topOfListA;
 		++skillIndexA;
 	}
@@ -215,7 +240,7 @@ public class SkillsMenuController : SubMenu {
 	}
 
 	private void MoveDownLocked() {
-		if (skillIndexB == LockedSkillsList.Count - 1) return;
+		if (skillIndexB == LockedSkillsList.Count - 1 || skillIndexB >= LockedSkillsList.Count) return;
 		if (RelIndexB == SKILLS_PER_PAGE - 1) ++topOfListB;
 		++skillIndexB;
 	}
@@ -247,7 +272,7 @@ public class SkillsMenuController : SubMenu {
 					FillLists(playerIndex);
 					UpdateSkillUI();
 					SkillGroup.alpha = 1f;
-					print("List size: " + UnlockedSkillsList.Count);
+					SetDescription(0, true);
 					break;
 				}
 				break;
@@ -269,7 +294,7 @@ public class SkillsMenuController : SubMenu {
 					else RelIndexB = LockedSkillsList.Count - topOfListB - 1;
 					if (RelIndexB < 0) RelIndexB = 0;
 					state = 2;
-					SetDescription(LockedSkillsList[skillIndexB].description);
+					SetDescription(skillIndexB, false);
 					break;
 				}
 
@@ -280,8 +305,9 @@ public class SkillsMenuController : SubMenu {
 
 				if (Up || Down) {
 					UpdateUnlockedUI();
-					SetDescription(UnlockedSkillsList[skillIndexA].description);
+					SetDescription(skillIndexA, true);
 				}
+				if (UnlockedSkillsList.Count == 0) ClearDescription();
 
 				if (Confirm && UnlockedSkillsList.Count > skillIndexA) {
 					SetUnlColor(RelIndexA, UnhighlightColor);
@@ -316,7 +342,7 @@ public class SkillsMenuController : SubMenu {
 					else RelIndexA = UnlockedSkillsList.Count - topOfListA - 1;
 					if (RelIndexA < 0) RelIndexA = 0;
 					state = 1;
-					SetDescription(UnlockedSkillsList[skillIndexA].description);
+					SetDescription(skillIndexA, true);
 					break;
 				}
 
@@ -327,8 +353,9 @@ public class SkillsMenuController : SubMenu {
 
 				if (Up || Down) {
 					UpdateLockedUI();
-					SetDescription(LockedSkillsList[skillIndexB].description);
+					SetDescription(skillIndexB, false);
 				}
+				if (LockedSkillsList.Count == 0) ClearDescription();
 				break;
 			} /// Locked skill list
 			default: break;
@@ -348,7 +375,7 @@ public class SkillsMenuController : SubMenu {
 	}
 
 	public override void OnActive() {
-
+		ClearDescription();
 	}
 
 	public override void OnInactive() {
