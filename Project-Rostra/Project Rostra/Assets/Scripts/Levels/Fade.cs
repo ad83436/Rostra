@@ -13,12 +13,9 @@ public class Fade : MonoBehaviour
     private bool transitionToVictory;
     private bool transitionToDefeat;
     private bool transitionToWorldMap;
-    private bool transitionToEndTest;
-    private bool canGoToSurvey;
 
     public VictoryScreen victoryPanel;
     public GameObject defeatPanel;
-    public GameObject endTestPanel;
     private UIBTL uiBtl;
 
     
@@ -30,22 +27,11 @@ public class Fade : MonoBehaviour
         transitionToVictory = false;
         transitionToDefeat = false;
         transitionToWorldMap = false;
-        transitionToEndTest = false;
-        canGoToSurvey = false;
         uiBtl = UIBTL.instance;
-
-        if (endTestPanel)
-        {
-            endTestPanel.gameObject.SetActive(false);
-        }
     }
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space) && canGoToSurvey)
-        {
-            Application.OpenURL("http://google.com");
-        }
         if(Input.GetKeyDown(KeyCode.P))
         {
             FlipFadeToBattle();
@@ -85,12 +71,6 @@ public class Fade : MonoBehaviour
                     transitionToWorldMap = false;
 					SceneManager.UnloadSceneAsync(SceneManager.GetSceneByName("Queue Scene"));
 				}
-                else if(transitionToEndTest)
-                {
-                    transitionToEndTest = false;
-                    endTestPanel.gameObject.SetActive(true);
-                    canGoToSurvey = true;
-                }
             }
         }
     }
@@ -139,11 +119,5 @@ public class Fade : MonoBehaviour
     {
         fadeOut = !fadeOut;
         transitionToWorldMap = true;
-    }
-
-    public void FlipToEndTest()
-    {
-        fadeOut = !fadeOut;
-        transitionToEndTest = true;
     }
 }
