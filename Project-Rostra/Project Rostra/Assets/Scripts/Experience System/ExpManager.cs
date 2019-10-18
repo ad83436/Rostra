@@ -250,8 +250,8 @@ public class ExpManager : MonoBehaviour {
 
 	private bool UpdatePlayerSkills(int index) {
 		bool hasGotSkill = false;
-		int[] arr = new int[] { (int)PartyStats.chara[index].attack,        (int)PartyStats.chara[index].defence,   (int)PartyStats.chara[index].hitpoints,
-								(int)PartyStats.chara[index].magicpoints,   (int)PartyStats.chara[index].strength,  (int)PartyStats.chara[index].agility,
+		int[] arr = new int[] { (int)PartyStats.chara[index].attack,        (int)PartyStats.chara[index].defence,   (int)PartyStats.chara[index].maxHealth,
+								(int)PartyStats.chara[index].maxMana,   (int)PartyStats.chara[index].strength,  (int)PartyStats.chara[index].agility,
 								(int)PartyStats.chara[index].speed };
 		for (int i = 0; i < PartySkills.skills[index].unlockableSkills.Length; i++) {
 			
