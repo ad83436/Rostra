@@ -347,7 +347,7 @@ public class SkillsInventory : MonoBehaviour {
             case (int)SKILLS.Fa_SwiftStrike:
                 skillStat[0] = 35;
                 skillStat[1] = 100;
-                skillStat[2] = 0;
+                skillStat[2] = 1;
                 skillStat[4] = (float)SKILL_TYPE.FULL_ROW_ATK;
                 skillStat[5] = 40;
                 break;
@@ -391,6 +391,13 @@ public class SkillsInventory : MonoBehaviour {
                 skillStat[1] = 100;
                 skillStat[2] = 2;
                 skillStat[4] = (float)SKILL_TYPE.ALL_PLAYER_HEAL;
+                skillStat[5] = 60;
+                break;
+            case (int)SKILLS.Ar_DrainEye:
+                skillStat[0] = 40;
+                skillStat[1] = 100;
+                skillStat[2] = 1;
+                skillStat[4] = (float)SKILL_TYPE.SINGLE_PLAYER_HEAL;
                 skillStat[5] = 60;
                 break;
             default:

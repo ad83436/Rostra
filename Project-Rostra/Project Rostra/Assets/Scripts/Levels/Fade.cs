@@ -17,6 +17,7 @@ public class Fade : MonoBehaviour
     public VictoryScreen victoryPanel;
     public GameObject defeatPanel;
     private UIBTL uiBtl;
+
     
     void Start()
     {
@@ -29,13 +30,13 @@ public class Fade : MonoBehaviour
         uiBtl = UIBTL.instance;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.P))
         {
             FlipFadeToBattle();
         }
+
         //Fadeout or Fadein?
         if (!fadeOut)
         {
@@ -67,7 +68,7 @@ public class Fade : MonoBehaviour
 				}
 				else if (transitionToWorldMap)
 				{
-					transitionToWorldMap = false;
+                    transitionToWorldMap = false;
 					SceneManager.UnloadSceneAsync(SceneManager.GetSceneByName("Queue Scene"));
 				}
             }
