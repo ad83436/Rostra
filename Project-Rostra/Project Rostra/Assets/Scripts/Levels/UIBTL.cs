@@ -109,6 +109,7 @@ public class UIBTL : MonoBehaviour
     //Players
     private Player playerInControl;
     private int playerIndicatorIndex; //Used to keep track where the playerindicator is when using items or skills
+    public int numberOfEndTurnCalls = 0; //Make sure this number is equal to the number of alive enemies at the time of the "row" or "all" attack before ending the turn
 
     //Activity Text
     public GameObject activtyTextBack;
@@ -1457,22 +1458,31 @@ public class UIBTL : MonoBehaviour
 
     public void EndTurn()
     {
-        if (playerInControl.currentState == Player.playerState.Rage)
+        if (numberOfEndTurnCalls > 0)
         {
-            //Make sure to turn off the indicators at the end of the turn, this is to make sure the end screen does not show the indicators
-            rageModeIndicator1.gameObject.SetActive(false);
-            rageModeIndicator2.gameObject.SetActive(false);
+            numberOfEndTurnCalls--;
+            Debug.Log("From End Turn" + numberOfEndTurnCalls);
         }
-        playerTurnIndicator.SetActive(false);
-        chooseEnemyArrow.SetActive(false);
-        controlsPanel.gameObject.SetActive(false);
-        itemsPanel.gameObject.SetActive(false);
-        moveImagesNow = true;
-        firstTimeOpenedSkillsPanel = false; //Get ready for the next player in case they want to use thier skills
-        controlsIndicator = 0;
-        highlighter.gameObject.transform.position = highlighiterPos[0].transform.position;
-        DisableActivtyText();
-        playerInControl.ForcePlayerTurnAnimationOff();
+        else
+        {
+            if (playerInControl.currentState == Player.playerState.Rage)
+            {
+                //Make sure to turn off the indicators at the end of the turn, this is to make sure the end screen does not show the indicators
+                rageModeIndicator1.gameObject.SetActive(false);
+                rageModeIndicator2.gameObject.SetActive(false);
+            }
+            playerTurnIndicator.SetActive(false);
+            chooseEnemyArrow.SetActive(false);
+            controlsPanel.gameObject.SetActive(false);
+            itemsPanel.gameObject.SetActive(false);
+            moveImagesNow = true;
+            firstTimeOpenedSkillsPanel = false; //Get ready for the next player in case they want to use thier skills
+            controlsIndicator = 0;
+            highlighter.gameObject.transform.position = highlighiterPos[0].transform.position;
+            DisableActivtyText();
+            numberOfEndTurnCalls = 0;
+            playerInControl.ForcePlayerTurnAnimationOff();
+        }
     }
 
     public void EnemyIsDead(int enemyIndex)
@@ -1570,6 +1580,43 @@ public class UIBTL : MonoBehaviour
         activtyTextBack.gameObject.SetActive(false);
         choosePlayerArrow.gameObject.SetActive(false);
         chooseEnemyArrow.gameObject.SetActive(false);
+    }
+
+    //Enemies call end turn upon getting hit. Make sure only one End turn is called when damaging multiple enemies.
+    public void UpdateNumberOfEndTurnsNeededToEndTurn(int rowCount)
+    {
+        if(rowCount == 0) //Front
+        {
+            for(int i =0;i<3;i++)
+            {
+                if (!enemiesDead[i])
+                {
+                    numberOfEndTurnCalls++;
+                }
+            }
+        }
+        else if(rowCount == 1) //Ranged
+        {
+            for (int i = 3; i < 5; i++)
+            {
+                if (!enemiesDead[i])
+                {
+                    numberOfEndTurnCalls++;
+                }
+            }
+        }
+        else //All
+        {
+            for (int i = 0; i < enemiesDead.Length; i++)
+            {
+                if (!enemiesDead[i])
+                {
+                    numberOfEndTurnCalls++;
+                }
+            }
+        }
+        numberOfEndTurnCalls--; //Number of end turn calls should be less by one since the last enemy to call it should actually end the turn
+        Debug.Log("Number of End Turn Calls = " + numberOfEndTurnCalls);
     }
 
 }

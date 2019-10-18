@@ -657,6 +657,7 @@ public class Player : MonoBehaviour
         skillTarget = 1;
         chosenSkill = skillID;
         mpCost = manaCost;
+        enemyRowIndicator = rowIndicator;
 
         //Check which skill to know which animation to run
         if (skillID == (int)SKILLS.Fa_SwiftStrike) 
@@ -733,6 +734,7 @@ public class Player : MonoBehaviour
         }
         else if (skillTarget == 1) //Full row attack
         {
+            uiBTL.UpdateNumberOfEndTurnsNeededToEndTurn(enemyRowIndicator); //Tell the UIBTL which row you're attacking
             if (enemyRowIndicator == 0)
             {
                 for (int i = 0; i < 3; i++) //Front row
@@ -767,6 +769,8 @@ public class Player : MonoBehaviour
                         }
                     }
                 }
+                playerAnimator.SetBool(skillAnimatorName, false);
+                playerAnimator.SetInteger("WaitingIndex", 0);
             }
             else if (enemyRowIndicator == 1) //Ranged row
             {
@@ -805,9 +809,11 @@ public class Player : MonoBehaviour
                 }
             }
             playerAnimator.SetBool(skillAnimatorName, false);
+            playerAnimator.SetInteger("WaitingIndex", 0);
         }
         else if (skillTarget == 2) //All enemies attack
         {
+            uiBTL.UpdateNumberOfEndTurnsNeededToEndTurn(2);
             for (int i = 0; i < battleManager.enemies.Length; i++)
             {
                 if (battleManager.enemies[i].enemyReference != null)
@@ -841,6 +847,7 @@ public class Player : MonoBehaviour
                 }
             }
             playerAnimator.SetBool(skillAnimatorName, false);
+            playerAnimator.SetInteger("WaitingIndex", 0);
         }
         else if (skillTarget == 6) //Heal one player
         {
