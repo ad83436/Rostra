@@ -2331,7 +2331,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 43.6, y: 35.3}
+  m_AnchoredPosition: {x: 43.600006, y: 35.299988}
   m_SizeDelta: {x: 459, y: 363.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &416931333
@@ -7025,7 +7025,7 @@ MonoBehaviour:
   - {fileID: 2487905135032201599, guid: 3c7d329df66cd7349923408792b8e755, type: 3}
   - {fileID: 2487905135032201599, guid: 3c7d329df66cd7349923408792b8e755, type: 3}
   - {fileID: 2487905135032201599, guid: 3c7d329df66cd7349923408792b8e755, type: 3}
-  enemyLevels: 0100000001000000010000000100000001000000
+  enemyLevels: 0300000004000000030000000300000004000000
   fadePanel: {fileID: 0}
   endTestPanel: {fileID: 126959872}
   enemySpwn: {fileID: 1950009557}

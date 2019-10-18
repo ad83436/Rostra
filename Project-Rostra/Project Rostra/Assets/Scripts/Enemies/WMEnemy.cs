@@ -55,6 +55,6 @@ public class WMEnemy : MonoBehaviour
             endTestPanel.gameObject.SetActive(true);
         }
 
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
     }
 }

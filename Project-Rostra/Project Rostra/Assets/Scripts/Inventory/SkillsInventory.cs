@@ -391,7 +391,7 @@ public class SkillsInventory : MonoBehaviour {
                 skillStat[1] = 100;
                 skillStat[2] = 2;
                 skillStat[4] = (float)SKILL_TYPE.ALL_PLAYER_HEAL;
-                skillStat[5] = 60;
+                skillStat[5] = 90;
                 break;
             case (int)SKILLS.Ar_DrainEye:
                 skillStat[0] = 40;
