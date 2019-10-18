@@ -50,4 +50,5 @@ public class Dialogue
 	//// will fix later
 	//public bool willPlayOnce;
 	//public bool narratorText;
+	public int triggerBool;
 }

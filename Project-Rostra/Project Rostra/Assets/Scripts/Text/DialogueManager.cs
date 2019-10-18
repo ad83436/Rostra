@@ -204,6 +204,17 @@ public class DialogueManager : MonoBehaviour
 			canWalk = false;
 			startUpdating = true;
 			isActive = true;
+			if (d.triggerBool > 0)
+			{
+				switch (d.triggerBool)
+				{
+					case 6:
+						DialogueManager.instance.demo = true;
+						Debug.Log("We can leave the tavern");
+						break;
+
+				}
+			}
 		}
 		
 	}
@@ -418,19 +429,19 @@ public class DialogueManager : MonoBehaviour
 		}
 		if (dia.isChoice == true && boxCount == choiceCount && Input.GetKeyDown(KeyCode.LeftArrow))
 		{
-			choiceNum = 2;
+			choiceNum = 1;
 		}
 		else if (dia.isChoice == true && boxCount == choiceCount && Input.GetKeyDown(KeyCode.RightArrow))
 		{
-			choiceNum = 1;
+			choiceNum = 2;
 		}
 		if (Input.GetKeyDown(KeyCode.Return) && choiceNum == 1 && boxCount == choiceCount && dia.isChoice == true)
 		{
-			SelectSecondChoice();
+			SelectFirstChoice();
 		}
 		else if (Input.GetKeyDown(KeyCode.Return) && choiceNum == 2 && boxCount == choiceCount && dia.isChoice == true)
 		{
-			SelectFirstChoice();
+			SelectSecondChoice();
 		}
 		if (choiceNum == 1)
 		{

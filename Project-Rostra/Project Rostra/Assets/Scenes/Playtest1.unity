@@ -261,7 +261,7 @@ PrefabInstance:
     - target: {fileID: 4278881741189929439, guid: 341bf5431cccd28448af40ef3945b85a,
         type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 4278881741189929439, guid: 341bf5431cccd28448af40ef3945b85a,
         type: 3}
@@ -319,7 +319,7 @@ Transform:
   m_Children:
   - {fileID: 1481352462}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &552226068
 Animator:
@@ -491,7 +491,7 @@ PrefabInstance:
     - target: {fileID: 8160286294077849607, guid: e71c31535867d2b449dbe64aba4b4f4d,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8160286294077849607, guid: e71c31535867d2b449dbe64aba4b4f4d,
         type: 3}
@@ -554,6 +554,119 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &752323671
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6336824498945899260, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_Name
+      value: NPC (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -10.53
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.28
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.302734
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.names.Array.data[0]
+      value: Gildra
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[0]
+      value: 'Many years ago, Turst and our Kingdom of Ocrest went to war. The deadlands
+        to the south serve as a painful reminder of the cost of war. '
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[1]
+      value: 'It houses the corpses of fallen soliders their spirits never being able
+        to find rest. Anyone who used to live there has since left. The monsters became
+        too much for them. '
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[2]
+      value: Often the monsters come up from the Deadlands to the Outskirts of town.
+        I wouldn't worry though, they never come into town.
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[3]
+      value: 
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a78d6f729d7fe0c46819b9311c776815, type: 3}
 --- !u!1 &767575369
 GameObject:
   m_ObjectHideFlags: 0
@@ -596,7 +709,7 @@ Transform:
   m_Children:
   - {fileID: 1637821908}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &798387080
 GameObject:
@@ -640,7 +753,7 @@ Transform:
   m_Children:
   - {fileID: 2109284774}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &800206358
 GameObject:
@@ -1658,6 +1771,438 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1001 &806638929
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6336824498945899260, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_Name
+      value: NPC (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -10.537
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -5.585
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.302734
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.names.Array.data[0]
+      value: Wilhelm
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[0]
+      value: Hadria is in troubling times. The Alchemy Guild and the Dwarven workers
+        are disputing. Both sides are becoming more and more discontent by the day.
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[1]
+      value: A conflict is brewing, and I don't plan to be here when it happens.
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a78d6f729d7fe0c46819b9311c776815, type: 3}
+--- !u!1001 &931425285
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6336824498945899260, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_Name
+      value: Torven
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.77
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.73
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.302734
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.names.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.portrait.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.names.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[1]
+      value: 'It houses the corpses of fallen soliders their spirits never being able
+        to find rest. Anyone who used to live there has since left. The monstrs became
+        too much for them. '
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[2]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[3]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.normal
+      value: 
+      objectReference: {fileID: 931425288}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: choiceCare
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.choiceCare1
+      value: 
+      objectReference: {fileID: 931425287}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.choiceCare2
+      value: 
+      objectReference: {fileID: 931425289}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: isChoiceDepend
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a78d6f729d7fe0c46819b9311c776815, type: 3}
+--- !u!1 &931425286 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6336824498945899260, guid: a78d6f729d7fe0c46819b9311c776815,
+    type: 3}
+  m_PrefabInstance: {fileID: 931425285}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &931425287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 931425286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43509005be49f1c4f973fd54f9269559, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogue:
+    names:
+    - Fargas
+    - Torven
+    - Fargas
+    - Frea
+    - Oberon
+    - Arcelus
+    - Torven
+    - Fargas
+    - Torven
+    - Fargas
+    - Torven
+    - Fargas
+    - 
+    sentences:
+    - I was told you knew Domel. Is that right?
+    - Aye. And you fine folks are?
+    - I'm Jorin. Pleasure to meet you
+    - Alarise
+    - My name is Terrel, at your service!
+    - My name is Arc.... I mean Ariane.
+    - Now then, why do you seek Domel? Are you in league with that tretcherous Guild?
+    - No we come here on our own will. Domel is a good friend of ours. We want to
+      try and find him. We were told you could lead us to him.
+    - Strange, he didn't mention you in the mines.
+    - We aren't from around here. We come from Udrasil.
+    - 'The capital? Heh. Outsiders. Alright I''m willing to help you but I can''t
+      give much info. '
+    - All we know is the last place he was seen was near his home in the Outskirts
+      of town. We tried to go ourselves to see him but there are too many monsters.
+      I don't want another of my kin to go missing.
+    - Besides, It's clear the Alchemy Guild assissinated him so they could sow discord
+      and wipe us out.
+    - We've all accepted the risks of going. Do you have any more information?
+    - 'This is where we will end it off to avoid spoilers. Go to the door of the tavern
+      to continue the story. '
+    portrait:
+    - {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825, type: 3}
+    - {fileID: 21300000, guid: 26feff2f0d4e92349a70bba8a0c18d31, type: 3}
+    - {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825, type: 3}
+    - {fileID: 21300000, guid: 1f1660c1b92d23a4fb0b75fcca80183d, type: 3}
+    - {fileID: 21300000, guid: e24a4049526ca704eb781c65db5c188d, type: 3}
+    - {fileID: 21300000, guid: f40486206916ccc4a9bf37f57f448dee, type: 3}
+    - {fileID: 21300000, guid: 26feff2f0d4e92349a70bba8a0c18d31, type: 3}
+    - {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825, type: 3}
+    - {fileID: 21300000, guid: 26feff2f0d4e92349a70bba8a0c18d31, type: 3}
+    - {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825, type: 3}
+    - {fileID: 21300000, guid: 26feff2f0d4e92349a70bba8a0c18d31, type: 3}
+    - {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825, type: 3}
+    - {fileID: 21300000, guid: dd3d4b940a009d14dbfe8b78c3b4f6ca, type: 3}
+    povChange:
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    - 7
+    - 8
+    - 9
+    - 10
+    - 13
+    - 14
+    - 0
+    typingSpeed: 0
+    isChoice: 0
+    choiceLine: 0
+    choice1: {fileID: 0}
+    choice2: {fileID: 0}
+    willRemember: 0
+    choiceSet: 0
+    choiceCare1: {fileID: 0}
+    choiceCare2: {fileID: 0}
+    choiceText1: 
+    choiceText2: 
+    normal: {fileID: 0}
+    hasPlayed: 0
+    willCount: 0
+    maxWillCount: 0
+    isBattle: 0
+    triggerBool: 6
+  choiceCare: 0
+  isChoiceDepend: 0
+  isOneShot: 0
+--- !u!114 &931425288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 931425286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43509005be49f1c4f973fd54f9269559, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogue:
+    names:
+    - Torven
+    sentences:
+    - Name's Torven. I'm the leader of the Dwarven Rebellion. Can't talk now. The
+      head of those guild pigs is here in the tavern. Gotta keep my eyes out so he
+      don't hurt the good people here.
+    portrait:
+    - {fileID: 21300000, guid: 26feff2f0d4e92349a70bba8a0c18d31, type: 3}
+    povChange: []
+    typingSpeed: 0
+    isChoice: 0
+    choiceLine: 0
+    choice1: {fileID: 0}
+    choice2: {fileID: 0}
+    willRemember: 0
+    choiceSet: 0
+    choiceCare1: {fileID: 0}
+    choiceCare2: {fileID: 0}
+    choiceText1: 
+    choiceText2: 
+    normal: {fileID: 0}
+    hasPlayed: 0
+    willCount: 0
+    maxWillCount: 0
+    isBattle: 0
+    triggerBool: 0
+  choiceCare: 0
+  isChoiceDepend: 0
+  isOneShot: 0
+--- !u!114 &931425289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 931425286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43509005be49f1c4f973fd54f9269559, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogue:
+    names:
+    - Torven
+    sentences:
+    - 'I''ve heard that you''ve been talking to the Alchemy Guild. Get out of my sight
+      you traiterous rat. '
+    portrait:
+    - {fileID: 21300000, guid: 26feff2f0d4e92349a70bba8a0c18d31, type: 3}
+    povChange: []
+    typingSpeed: 0
+    isChoice: 0
+    choiceLine: 0
+    choice1: {fileID: 0}
+    choice2: {fileID: 0}
+    willRemember: 0
+    choiceSet: 0
+    choiceCare1: {fileID: 0}
+    choiceCare2: {fileID: 0}
+    choiceText1: 
+    choiceText2: 
+    normal: {fileID: 0}
+    hasPlayed: 0
+    willCount: 0
+    maxWillCount: 0
+    isBattle: 0
+    triggerBool: 0
+  choiceCare: 0
+  isChoiceDepend: 0
+  isOneShot: 0
 --- !u!1001 &1196286667
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1708,7 +2253,7 @@ PrefabInstance:
     - target: {fileID: 5788237177932269124, guid: e0f070d922659fa4cb38c55bcd394b5b,
         type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 5788237177932269124, guid: e0f070d922659fa4cb38c55bcd394b5b,
         type: 3}
@@ -1727,6 +2272,80 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e0f070d922659fa4cb38c55bcd394b5b, type: 3}
+--- !u!1001 &1231247479
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2205216448283696309, guid: 9b09bcf73104b9f4caa616632450e362,
+        type: 3}
+      propertyPath: m_Name
+      value: DialogueToCombat
+      objectReference: {fileID: 0}
+    - target: {fileID: 2205216448283696331, guid: 9b09bcf73104b9f4caa616632450e362,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.7649195
+      objectReference: {fileID: 0}
+    - target: {fileID: 2205216448283696331, guid: 9b09bcf73104b9f4caa616632450e362,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -10.283287
+      objectReference: {fileID: 0}
+    - target: {fileID: 2205216448283696331, guid: 9b09bcf73104b9f4caa616632450e362,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -601.58435
+      objectReference: {fileID: 0}
+    - target: {fileID: 2205216448283696331, guid: 9b09bcf73104b9f4caa616632450e362,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2205216448283696331, guid: 9b09bcf73104b9f4caa616632450e362,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2205216448283696331, guid: 9b09bcf73104b9f4caa616632450e362,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2205216448283696331, guid: 9b09bcf73104b9f4caa616632450e362,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2205216448283696331, guid: 9b09bcf73104b9f4caa616632450e362,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2205216448283696331, guid: 9b09bcf73104b9f4caa616632450e362,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2205216448283696331, guid: 9b09bcf73104b9f4caa616632450e362,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2205216448283696331, guid: 9b09bcf73104b9f4caa616632450e362,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2205216448283696329, guid: 9b09bcf73104b9f4caa616632450e362,
+        type: 3}
+      propertyPath: fade
+      value: 
+      objectReference: {fileID: 343581018}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9b09bcf73104b9f4caa616632450e362, type: 3}
 --- !u!1 &1372131763
 GameObject:
   m_ObjectHideFlags: 0
@@ -1819,13 +2438,339 @@ RectTransform:
   m_Children:
   - {fileID: 343581017}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1001 &1399573228
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6336824498945899260, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_Name
+      value: Grendol
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -12.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.86
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.302734
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.names.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.portrait.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.names.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[1]
+      value: 'It houses the corpses of fallen soliders their spirits never being able
+        to find rest. Anyone who used to live there has since left. The monstrs became
+        too much for them. '
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[2]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[3]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.normal
+      value: 
+      objectReference: {fileID: 1399573232}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: choiceCare
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.choiceCare1
+      value: 
+      objectReference: {fileID: 1399573231}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.choiceCare2
+      value: 
+      objectReference: {fileID: 1399573230}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: isChoiceDepend
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a78d6f729d7fe0c46819b9311c776815, type: 3}
+--- !u!1 &1399573229 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6336824498945899260, guid: a78d6f729d7fe0c46819b9311c776815,
+    type: 3}
+  m_PrefabInstance: {fileID: 1399573228}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1399573230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1399573229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43509005be49f1c4f973fd54f9269559, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogue:
+    names:
+    - Grendol
+    sentences:
+    - 'I''ve heard that you''ve been talking those slippery Dwarves. I cannot associate
+      myself with someone who talks to those savages. '
+    portrait:
+    - {fileID: 21300000, guid: 26feff2f0d4e92349a70bba8a0c18d31, type: 3}
+    povChange: []
+    typingSpeed: 0
+    isChoice: 0
+    choiceLine: 0
+    choice1: {fileID: 0}
+    choice2: {fileID: 0}
+    willRemember: 0
+    choiceSet: 0
+    choiceCare1: {fileID: 0}
+    choiceCare2: {fileID: 0}
+    choiceText1: 
+    choiceText2: 
+    normal: {fileID: 0}
+    hasPlayed: 0
+    willCount: 0
+    maxWillCount: 0
+    isBattle: 0
+    triggerBool: 0
+  choiceCare: 0
+  isChoiceDepend: 0
+  isOneShot: 0
+--- !u!114 &1399573231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1399573229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43509005be49f1c4f973fd54f9269559, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogue:
+    names:
+    - Fargas
+    - Grendol
+    - Fargas
+    - Frea
+    - Oberon
+    - Arcelus
+    - Grendol
+    - Fargas
+    - Grendol
+    - Fargas
+    - 
+    - 
+    sentences:
+    - I've heard you know something about Domel is this correct?
+    - That highly depends on who is asking. Can I get names from this fine party?
+    - I'm Jorin. Pleasure to meet you
+    - Alarise
+    - My name is Terrel, at your service!
+    - My name is Arc.... I mean Ariane.
+    - Good. Now if I might ask why do you seek Domel?
+    - He was a good friend of ours. We are from Udrasil. We wanted to stop by and
+      say hello but he is no where to be found.
+    - He has been missing a few days now. He lives on the outskirts of town. We sent
+      out a search party but the monsters were too many. We could not reach his home.
+    - I'm sure he was murdered by one of the other Dwarves looking to remove our only
+      way of communicating with them. I do not want you to go looking for him and
+      fall victim to those monsters.
+    - We all want to do every thing we can to help him. Do you know where we can look?
+    - 'This is where we will end it off to avoid spoilers. Go to the door of the tavern
+      to continue the story. '
+    portrait:
+    - {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825, type: 3}
+    - {fileID: 21300000, guid: 26feff2f0d4e92349a70bba8a0c18d31, type: 3}
+    - {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825, type: 3}
+    - {fileID: 21300000, guid: 1f1660c1b92d23a4fb0b75fcca80183d, type: 3}
+    - {fileID: 21300000, guid: e24a4049526ca704eb781c65db5c188d, type: 3}
+    - {fileID: 21300000, guid: f40486206916ccc4a9bf37f57f448dee, type: 3}
+    - {fileID: 21300000, guid: 26feff2f0d4e92349a70bba8a0c18d31, type: 3}
+    - {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825, type: 3}
+    - {fileID: 21300000, guid: 26feff2f0d4e92349a70bba8a0c18d31, type: 3}
+    - {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825, type: 3}
+    - {fileID: 21300000, guid: dd3d4b940a009d14dbfe8b78c3b4f6ca, type: 3}
+    - {fileID: 21300000, guid: dd3d4b940a009d14dbfe8b78c3b4f6ca, type: 3}
+    povChange:
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    - 7
+    - 8
+    - 10
+    - 11
+    - 12
+    - 12
+    typingSpeed: 0
+    isChoice: 0
+    choiceLine: 0
+    choice1: {fileID: 0}
+    choice2: {fileID: 0}
+    willRemember: 0
+    choiceSet: 0
+    choiceCare1: {fileID: 0}
+    choiceCare2: {fileID: 0}
+    choiceText1: 
+    choiceText2: 
+    normal: {fileID: 0}
+    hasPlayed: 0
+    willCount: 0
+    maxWillCount: 0
+    isBattle: 0
+    triggerBool: 6
+  choiceCare: 0
+  isChoiceDepend: 0
+  isOneShot: 0
+--- !u!114 &1399573232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1399573229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43509005be49f1c4f973fd54f9269559, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogue:
+    names:
+    - Grendol
+    sentences:
+    - Greetings, my name is Grendol the Overseer of Operations for the Alchemy Guild.
+      You will have to excuse me I'm terribly busy at the moment.
+    - A rabble rouser is in the tavern at the moment. I would like to ensure this
+      individual does not start something and injure innocent people. As you were.
+    portrait:
+    - {fileID: 21300000, guid: 26feff2f0d4e92349a70bba8a0c18d31, type: 3}
+    povChange: []
+    typingSpeed: 0
+    isChoice: 0
+    choiceLine: 0
+    choice1: {fileID: 0}
+    choice2: {fileID: 0}
+    willRemember: 0
+    choiceSet: 0
+    choiceCare1: {fileID: 0}
+    choiceCare2: {fileID: 0}
+    choiceText1: 
+    choiceText2: 
+    normal: {fileID: 0}
+    hasPlayed: 0
+    willCount: 0
+    maxWillCount: 0
+    isBattle: 0
+    triggerBool: 0
+  choiceCare: 0
+  isChoiceDepend: 0
+  isOneShot: 0
 --- !u!1 &1481352459
 GameObject:
   m_ObjectHideFlags: 0
@@ -1909,6 +2854,819 @@ Transform:
   m_Father: {fileID: 552226067}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1517019924
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6336824498945899260, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_Name
+      value: Barkeep
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -7.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.302734
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899257, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: -0.28353173
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899257, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 1.0703952
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.size
+      value: 29
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.names.Array.size
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.portrait.Array.size
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.povChange.Array.size
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.names.Array.data[0]
+      value: Barkeep
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[0]
+      value: What'll be folks? Ocrestian Ale?
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[1]
+      value: We....
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[2]
+      value: No no no, of course not! You search something finer! Lysian Red, produced
+        in the Silver Sands region. A personal favourite a mine and several of me
+        customers.
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[3]
+      value: No we just need...
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.normal
+      value: 
+      objectReference: {fileID: 1517019928}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: choiceCare
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.choiceCare1
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.choiceCare2
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.names.Array.data[1]
+      value: Fargas
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.names.Array.data[2]
+      value: Barkeep
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.names.Array.data[3]
+      value: Fargas
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.names.Array.data[4]
+      value: Barkeep
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.names.Array.data[5]
+      value: Fargas
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.names.Array.data[6]
+      value: Barkeep
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.names.Array.data[7]
+      value: Oberon
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.names.Array.data[8]
+      value: Barkeep
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.names.Array.data[9]
+      value: Fargas
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.names.Array.data[10]
+      value: Barkeep
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.names.Array.data[11]
+      value: Frea
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.names.Array.data[12]
+      value: Arcelus
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.names.Array.data[13]
+      value: Barkeep
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.names.Array.data[14]
+      value: Fargas
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.names.Array.data[15]
+      value: Barkeep
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.names.Array.data[16]
+      value: Fargas
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.names.Array.data[17]
+      value: Barkeep
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[4]
+      value: Something better! Gotrun's famous Bootkicker pint! One sip and you'll
+        be gone for hours!
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[5]
+      value: I need to know where Domel is. Do you know where he might be?
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[6]
+      value: The dwarf? Haven't seen him in days. Though don't go mentioning his name
+        so loudly.
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[7]
+      value: Why not?
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[8]
+      value: 'Our village finds itself in a right bit of trouble. The Alchemy Guild
+        and it''s dwarven workers are in a dispute right now. Domel rests at the center
+        of this. '
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[9]
+      value: What does he have to do with it?
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[10]
+      value: I... I've got other patrons to serve.
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[11]
+      value: I can assure you we all tip well.
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[12]
+      value: Tell us more about Domel.
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[13]
+      value: 'Well the dispute arose because the dwarven workers feel their labour
+        is being exploited. The Alchemy Guild feels they treat their workers better
+        than most guilds do. '
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[14]
+      value: A little bit of work is needed to ensure they can continue to make the
+        elixirs we need and are hellbent creating the elixir of immortality.
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[15]
+      value: 'Or so they say. Domels the only one who was willing to talk to both
+        sides and worked tirelessly to ensure that conflict would never become a war. '
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[16]
+      value: Bless him, he always puts the good of the people before his own. However
+        both sides have been blaming Domels disappearance on each other.
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[17]
+      value: ' It''s become a pretty sore subject. People are starting to worry for
+        his safety. '
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[18]
+      value: I am too.
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[19]
+      value: Where was he last seen?
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[20]
+      value: I don't know. But I do know who might. Both the alchemy guild and the
+        Dwarves knew him very well it's possible they would know or would atleast
+        point you in the right direction.
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[21]
+      value: Alright, we can go talk to them and find out where Domel went.
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[22]
+      value: If the Alchemy Guild members or The Dwarves see you talking to the other
+        side they'll get suspicious and won't give you the info you're looking for.
+        If I was you I'd only pick one.
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[23]
+      value: Which do you consider to be the most trustworthy?
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[24]
+      value: 'Don''t reckon I know. Been keeping outta troubles in the hopes that
+        this whole thing will blow over. I will say this. '
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[25]
+      value: The Alchemy Guild always has some idea what's happening in this village.
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[26]
+      value: 'The Dwarves have a lot of personal connections and knew Domel personally. '
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[27]
+      value: 'One more piece of advice. Don''t completly trust either. '
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[28]
+      value: I get the sense that they are both trying to gain the upper hand in this
+        situation.
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.isChoice
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.choiceLine
+      value: 29
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.choiceSet
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.choiceText1
+      value: Dwarves
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.choiceText2
+      value: Alchemy Guild
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.portrait.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: 26feff2f0d4e92349a70bba8a0c18d31,
+        type: 3}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.portrait.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825,
+        type: 3}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.portrait.Array.data[2]
+      value: 
+      objectReference: {fileID: 21300000, guid: 26feff2f0d4e92349a70bba8a0c18d31,
+        type: 3}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.portrait.Array.data[3]
+      value: 
+      objectReference: {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825,
+        type: 3}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.portrait.Array.data[7]
+      value: 
+      objectReference: {fileID: 21300000, guid: e24a4049526ca704eb781c65db5c188d,
+        type: 3}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.portrait.Array.data[11]
+      value: 
+      objectReference: {fileID: 21300000, guid: 1f1660c1b92d23a4fb0b75fcca80183d,
+        type: 3}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.portrait.Array.data[12]
+      value: 
+      objectReference: {fileID: 21300000, guid: f40486206916ccc4a9bf37f57f448dee,
+        type: 3}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.portrait.Array.data[4]
+      value: 
+      objectReference: {fileID: 21300000, guid: 26feff2f0d4e92349a70bba8a0c18d31,
+        type: 3}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.portrait.Array.data[5]
+      value: 
+      objectReference: {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825,
+        type: 3}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.portrait.Array.data[6]
+      value: 
+      objectReference: {fileID: 21300000, guid: 26feff2f0d4e92349a70bba8a0c18d31,
+        type: 3}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.portrait.Array.data[8]
+      value: 
+      objectReference: {fileID: 21300000, guid: 26feff2f0d4e92349a70bba8a0c18d31,
+        type: 3}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.portrait.Array.data[9]
+      value: 
+      objectReference: {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825,
+        type: 3}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.portrait.Array.data[10]
+      value: 
+      objectReference: {fileID: 21300000, guid: 26feff2f0d4e92349a70bba8a0c18d31,
+        type: 3}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.portrait.Array.data[13]
+      value: 
+      objectReference: {fileID: 21300000, guid: 26feff2f0d4e92349a70bba8a0c18d31,
+        type: 3}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.portrait.Array.data[14]
+      value: 
+      objectReference: {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825,
+        type: 3}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.portrait.Array.data[15]
+      value: 
+      objectReference: {fileID: 21300000, guid: 26feff2f0d4e92349a70bba8a0c18d31,
+        type: 3}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.portrait.Array.data[16]
+      value: 
+      objectReference: {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825,
+        type: 3}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.portrait.Array.data[17]
+      value: 
+      objectReference: {fileID: 21300000, guid: 26feff2f0d4e92349a70bba8a0c18d31,
+        type: 3}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.povChange.Array.data[0]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.povChange.Array.data[1]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.povChange.Array.data[2]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.povChange.Array.data[3]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.povChange.Array.data[4]
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.povChange.Array.data[5]
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.povChange.Array.data[6]
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.povChange.Array.data[7]
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.povChange.Array.data[8]
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.povChange.Array.data[9]
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.povChange.Array.data[10]
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.povChange.Array.data[11]
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.povChange.Array.data[12]
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.povChange.Array.data[13]
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.povChange.Array.data[14]
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.povChange.Array.data[15]
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.povChange.Array.data[16]
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.povChange.Array.data[17]
+      value: 23
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.choice1
+      value: 
+      objectReference: {fileID: 1517019926}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.choice2
+      value: 
+      objectReference: {fileID: 1517019927}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.willRemember
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.povChange.Array.data[18]
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.names.Array.data[18]
+      value: Fargas
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.names.Array.data[19]
+      value: Barkeep
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.portrait.Array.data[18]
+      value: 
+      objectReference: {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825,
+        type: 3}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.portrait.Array.data[19]
+      value: 
+      objectReference: {fileID: 21300000, guid: 26feff2f0d4e92349a70bba8a0c18d31,
+        type: 3}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.povChange.Array.data[19]
+      value: 24
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a78d6f729d7fe0c46819b9311c776815, type: 3}
+--- !u!1 &1517019925 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6336824498945899260, guid: a78d6f729d7fe0c46819b9311c776815,
+    type: 3}
+  m_PrefabInstance: {fileID: 1517019924}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1517019926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1517019925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43509005be49f1c4f973fd54f9269559, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogue:
+    names:
+    - Fargas
+    - Barkeep
+    - Fargas
+    - 
+    - Barkeep
+    sentences:
+    - The Dwarves knew Domel. They have an insight the Guild couldn't.
+    - I can see a dwarf standing over to the right.
+    - Thank you very much. If anyone asks we weren't here. Right?
+    - Fargas puts some gold on the table and slides it across to the Barkeep.
+    - It's my pleasure! The smith's have always been wonderful patrons!
+    portrait:
+    - {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825, type: 3}
+    - {fileID: 21300000, guid: 26feff2f0d4e92349a70bba8a0c18d31, type: 3}
+    - {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825, type: 3}
+    - {fileID: 21300000, guid: dd3d4b940a009d14dbfe8b78c3b4f6ca, type: 3}
+    - {fileID: 21300000, guid: 26feff2f0d4e92349a70bba8a0c18d31, type: 3}
+    povChange:
+    - 1
+    - 2
+    - 3
+    - 4
+    - 4
+    typingSpeed: 0
+    isChoice: 0
+    choiceLine: 0
+    choice1: {fileID: 0}
+    choice2: {fileID: 0}
+    willRemember: 0
+    choiceSet: 0
+    choiceCare1: {fileID: 0}
+    choiceCare2: {fileID: 0}
+    choiceText1: 
+    choiceText2: 
+    normal: {fileID: 0}
+    hasPlayed: 0
+    willCount: 0
+    maxWillCount: 0
+    isBattle: 0
+    triggerBool: 0
+  choiceCare: 0
+  isChoiceDepend: 0
+  isOneShot: 0
+--- !u!114 &1517019927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1517019925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43509005be49f1c4f973fd54f9269559, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogue:
+    names:
+    - Fargas
+    - Barkeep
+    - Fargas
+    - 
+    - Barkeep
+    sentences:
+    - If the Alchemy Guild knows what's going on in the town, they have to have some
+      idea what's going on here.
+    - I think I see one of it's members. He's standing over to the left.
+    - Thank you very much. If anyone asks we weren't here. Right?
+    - Fargas puts some gold on the table and slides it across to the Barkeep.
+    - It's my pleasure! The smith's have always been wonderful patrons!
+    portrait:
+    - {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825, type: 3}
+    - {fileID: 21300000, guid: 26feff2f0d4e92349a70bba8a0c18d31, type: 3}
+    - {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825, type: 3}
+    - {fileID: 21300000, guid: dd3d4b940a009d14dbfe8b78c3b4f6ca, type: 3}
+    - {fileID: 21300000, guid: 26feff2f0d4e92349a70bba8a0c18d31, type: 3}
+    povChange:
+    - 1
+    - 2
+    - 3
+    - 4
+    - 4
+    typingSpeed: 0
+    isChoice: 0
+    choiceLine: 0
+    choice1: {fileID: 0}
+    choice2: {fileID: 0}
+    willRemember: 0
+    choiceSet: 0
+    choiceCare1: {fileID: 0}
+    choiceCare2: {fileID: 0}
+    choiceText1: 
+    choiceText2: 
+    normal: {fileID: 0}
+    hasPlayed: 0
+    willCount: 0
+    maxWillCount: 0
+    isBattle: 0
+    triggerBool: 0
+  choiceCare: 0
+  isChoiceDepend: 0
+  isOneShot: 0
+--- !u!114 &1517019928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1517019925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43509005be49f1c4f973fd54f9269559, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogue:
+    names:
+    - Barkeep
+    sentences:
+    - I'm sorry I've done all I can
+    portrait:
+    - {fileID: 21300000, guid: 26feff2f0d4e92349a70bba8a0c18d31, type: 3}
+    povChange: []
+    typingSpeed: 0
+    isChoice: 0
+    choiceLine: 0
+    choice1: {fileID: 0}
+    choice2: {fileID: 0}
+    willRemember: 0
+    choiceSet: 0
+    choiceCare1: {fileID: 0}
+    choiceCare2: {fileID: 0}
+    choiceText1: 
+    choiceText2: 
+    normal: {fileID: 0}
+    hasPlayed: 0
+    willCount: 0
+    maxWillCount: 0
+    isBattle: 0
+    triggerBool: 0
+  choiceCare: 0
+  isChoiceDepend: 0
+  isOneShot: 0
 --- !u!1001 &1550286325
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1959,7 +3717,7 @@ PrefabInstance:
     - target: {fileID: 3426706061826418558, guid: 50ca083330861ea4db056423f4b1ade9,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3426706061826418558, guid: 50ca083330861ea4db056423f4b1ade9,
         type: 3}
@@ -1978,6 +3736,197 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 50ca083330861ea4db056423f4b1ade9, type: 3}
+--- !u!1001 &1558913114
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6336824498945899260, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_Name
+      value: NPC
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.504
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -7.167
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.302734
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.names.Array.data[0]
+      value: Faradia
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[0]
+      value: I'm just a simple farmer. Me and my kids are worried about the dispute
+        going on not to mention the monsters that wonder in from the deadlands.
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a78d6f729d7fe0c46819b9311c776815, type: 3}
+--- !u!1001 &1632894276
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6336824498945899260, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_Name
+      value: NPC (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -9.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.64
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.302734
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.names.Array.data[0]
+      value: Wilhelm
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[0]
+      value: 'Have you ever heard of Barysia? It''s said to be the home of the vampires.
+        I''ve been searching for it many years, but I''ve always come up empty handed.
+        My peers say it doesn''t exist. '
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[1]
+      value: I'll show them.
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a78d6f729d7fe0c46819b9311c776815, type: 3}
 --- !u!1 &1637821907
 GameObject:
   m_ObjectHideFlags: 0
@@ -2529,7 +4478,7 @@ PrefabInstance:
     - target: {fileID: 6595024453704713438, guid: 553abd6f34f56904592869472cdfc65b,
         type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 6595024453704713438, guid: 553abd6f34f56904592869472cdfc65b,
         type: 3}
@@ -2581,11 +4530,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: DialogueManager
       objectReference: {fileID: 0}
-    - target: {fileID: 7743127176600541143, guid: 2662fb6040661474eb9a5c87ff125a0c,
-        type: 3}
-      propertyPath: fade
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 7743127176600541136, guid: 2662fb6040661474eb9a5c87ff125a0c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2624,7 +4568,7 @@ PrefabInstance:
     - target: {fileID: 7743127176600541136, guid: 2662fb6040661474eb9a5c87ff125a0c,
         type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 7743127176600541136, guid: 2662fb6040661474eb9a5c87ff125a0c,
         type: 3}
@@ -2648,7 +4592,7 @@ PrefabInstance:
     - target: {fileID: 5887905131166168395, guid: 2662fb6040661474eb9a5c87ff125a0c,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.48199463
+      value: -0.48242188
       objectReference: {fileID: 0}
     - target: {fileID: 5887905131166168395, guid: 2662fb6040661474eb9a5c87ff125a0c,
         type: 3}
@@ -2665,6 +4609,11 @@ PrefabInstance:
       propertyPath: m_AnchorMin.y
       value: 0.06226781
       objectReference: {fileID: 0}
+    - target: {fileID: 7743127176600541143, guid: 2662fb6040661474eb9a5c87ff125a0c,
+        type: 3}
+      propertyPath: fade
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5887905131166168394, guid: 2662fb6040661474eb9a5c87ff125a0c,
         type: 3}
       propertyPath: m_Text
@@ -2674,11 +4623,11 @@ PrefabInstance:
     - target: {fileID: 5887905131246827224, guid: 2662fb6040661474eb9a5c87ff125a0c,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -7.500122
+      value: -7.5
       objectReference: {fileID: 0}
     - target: {fileID: 38988943, guid: 2662fb6040661474eb9a5c87ff125a0c, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -14.704834
+      value: -14.70459
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2662fb6040661474eb9a5c87ff125a0c, type: 3}
@@ -2732,7 +4681,7 @@ PrefabInstance:
     - target: {fileID: 5063818996988190474, guid: e39707a10eec55043a689f4f4f23dd65,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 5063818996988190474, guid: e39707a10eec55043a689f4f4f23dd65,
         type: 3}
@@ -2793,7 +4742,7 @@ Transform:
   m_Children:
   - {fileID: 800206359}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2009236087
 GameObject:
@@ -6667,3 +8616,117 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1001 &2119979698
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6336824498945899260, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_Name
+      value: NPC (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.54
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.302734
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899262, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.names.Array.data[0]
+      value: Havard
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[0]
+      value: Some day I wanna see our capital. Udrasil seems like it has so many more
+        opportunities than I can find here. In Udrasil I can join the Alchmy Guild
+        at their headquarters.
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[1]
+      value: 'It houses the corpses of fallen soliders their spirits never being able
+        to find rest. Anyone who used to live there has since left. The monsters became
+        too much for them. '
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[2]
+      value: Often the monsters come up from the Deadlands to the Outskirts of town.
+        I wouldn't worry though, they never come into town.
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[3]
+      value: 
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a78d6f729d7fe0c46819b9311c776815, type: 3}
