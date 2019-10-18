@@ -13,12 +13,15 @@ public class Fade : MonoBehaviour
     private bool transitionToVictory;
     private bool transitionToDefeat;
     private bool transitionToWorldMap;
+    private bool transitionToEndTest;
+    private bool canGoToSurvey;
 
     public VictoryScreen victoryPanel;
     public GameObject defeatPanel;
+    public GameObject endTestPanel;
     private UIBTL uiBtl;
 
-    
+
     void Start()
     {
         thisImage = gameObject.GetComponent<Image>();
@@ -27,12 +30,23 @@ public class Fade : MonoBehaviour
         transitionToVictory = false;
         transitionToDefeat = false;
         transitionToWorldMap = false;
+        transitionToEndTest = false;
+        canGoToSurvey = false;
         uiBtl = UIBTL.instance;
+
+        if (endTestPanel)
+        {
+            endTestPanel.gameObject.SetActive(false);
+        }
     }
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.Space) && canGoToSurvey)
+        {
+            Application.OpenURL("http://google.com");
+        }
+        if (Input.GetKeyDown(KeyCode.P))
         {
             FlipFadeToBattle();
         }
@@ -45,37 +59,43 @@ public class Fade : MonoBehaviour
         else
         {
             thisImage.fillAmount += 0.02f;
-            
+
             if (thisImage.fillAmount >= 1.0f)
             {
-				if (transitionToBattle)
-				{
-					transitionToBattle = false;
-					TransitionIntoBattle();
-					fadeOut = false;
-				}
-				else if (transitionToVictory)
-				{
-					transitionToVictory = false;
-					TransitionIntoVictory();
-					uiBtl.StartShowingEndScreen(true); //Show the victory screen stats now
-				}
-				else if (transitionToDefeat)
-				{
-					transitionToDefeat = false;
-					TransitionIntoDefeat();
-					uiBtl.StartShowingEndScreen(false); //Show the defeat screen
-				}
-				else if (transitionToWorldMap)
-				{
+                if (transitionToBattle)
+                {
+                    transitionToBattle = false;
+                    TransitionIntoBattle();
+                    fadeOut = false;
+                }
+                else if (transitionToVictory)
+                {
+                    transitionToVictory = false;
+                    TransitionIntoVictory();
+                    uiBtl.StartShowingEndScreen(true); //Show the victory screen stats now
+                }
+                else if (transitionToDefeat)
+                {
+                    transitionToDefeat = false;
+                    TransitionIntoDefeat();
+                    uiBtl.StartShowingEndScreen(false); //Show the defeat screen
+                }
+                else if (transitionToWorldMap)
+                {
                     transitionToWorldMap = false;
-					SceneManager.UnloadSceneAsync(SceneManager.GetSceneByName("Queue Scene"));
-				}
+                    SceneManager.UnloadSceneAsync(SceneManager.GetSceneByName("Queue Scene"));
+                }
+                else if (transitionToEndTest)
+                {
+                    transitionToEndTest = false;
+                    endTestPanel.gameObject.SetActive(true);
+                    canGoToSurvey = true;
+                }
             }
         }
     }
 
-    public void FlipFadeToBattle( WMEnemy enemyCollidingWithPlayer)
+    public void FlipFadeToBattle(WMEnemy enemyCollidingWithPlayer)
     {
         enemyHolder = enemyCollidingWithPlayer;
         fadeOut = true;
@@ -91,7 +111,7 @@ public class Fade : MonoBehaviour
     public void FlipFadeToVictory()
     {
         fadeOut = !fadeOut;
-        transitionToVictory = true;        
+        transitionToVictory = true;
     }
 
     public void FlipFadeToDefeat()
@@ -104,12 +124,12 @@ public class Fade : MonoBehaviour
     {
         enemyHolder.TransitionIntoBattle();
     }
-    
+
     public void TransitionIntoVictory()
     {
         victoryPanel.VictoryFadeIn();
     }
-    
+
     public void TransitionIntoDefeat()
     {
         defeatPanel.gameObject.SetActive(true);
@@ -119,5 +139,11 @@ public class Fade : MonoBehaviour
     {
         fadeOut = !fadeOut;
         transitionToWorldMap = true;
+    }
+
+    public void FlipToEndTest()
+    {
+        fadeOut = !fadeOut;
+        transitionToEndTest = true;
     }
 }
