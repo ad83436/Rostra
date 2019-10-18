@@ -9,6 +9,7 @@ public class DialogueToBattle : MonoBehaviour
 	DialogueManager dm;
 	ConversationTrigger ct;
 	public ChoiceEnum ce;
+	public Fade fade;
     // Start is called before the first frame update
     void Awake()
     {
@@ -18,9 +19,10 @@ public class DialogueToBattle : MonoBehaviour
 	
 	private void OnTriggerEnter2D(Collider2D col)
 	{
-		if (col.CompareTag("Player") && dm.GetChoice(ce) == true)
+		if (col.CompareTag("Player") && dm.demo == true)
 		{
-			TriggerEvent();
+			Debug.Log("Transition To Battle");
+			fade.FlipFadeToBattle();
 		}
 	}
 
