@@ -11,8 +11,10 @@ struct USkillItem {
 
 public class SkillsMenuController : SubMenu {
 
+	public static bool hasEquipped = false;
+
 	//property to skillinventory
-	private ref SkillsInventory skinv => ref SkillsInventory.invInstance;
+	private ref SkillsInventory Skinv => ref SkillsInventory.invInstance;
 
 	// UI Components
 	public CanvasGroup EquipGroup;
@@ -98,14 +100,63 @@ public class SkillsMenuController : SubMenu {
 		USkillItem skill = new USkillItem();
 
 		skill.SkillID = skillID;
-		skill.name = skinv.SkillName(skillID);
-		if (!isLocked) skill.description = skinv.SkillDescription(skillID);
-		else {
-			string desc = skinv.SkillDescription(skillID);
-			desc += "\n\n";
+		skill.name = Skinv.SkillName(skillID);
+		//name and description
+		string desc = "<b>" + Skinv.SkillName(skillID) + "</b>\n";
+		desc += "<i>" + Skinv.SkillDescription(skillID) + "</i>";
+
+		//stats title
+		desc += "\n\n<b>Stats:</b> \n";
+
+		//get the skill stats
+		float[] arr = Skinv.SkillStats(skillID);
+
+		desc += "<i>";
+		//fill skill stats to desc
+		switch ((SKILL_TYPE)arr[4]) {
+			case SKILL_TYPE.SINGLE_TARGET_ATK:
+				desc += "Attack: " + arr[0] + "\n";
+				break;
+			case SKILL_TYPE.FULL_ROW_ATK:
+				desc += "Attack: " + arr[0] + "\n";
+				break;
+			case SKILL_TYPE.ALL_TARGETS_ATK:
+				desc += "Attack: " + arr[0] + "\n";
+				break;
+			case SKILL_TYPE.SINGLE_PLAYER_HEAL:
+				desc += "Heal: " + arr[0] + "\n";
+				break;
+			case SKILL_TYPE.ALL_PLAYER_HEAL:
+				desc += "Heal: " + arr[0] + "\n";
+				break;
+			case SKILL_TYPE.SINGLE_PLAYER_BUFF:
+				desc += "Buff: " + arr[0] + "\n";
+				break;
+			case SKILL_TYPE.ALL_PLAYER_BUFF:
+				desc += "Buff: " + arr[0] + "\n";
+				break;
+			case SKILL_TYPE.SINGLE_TARGET_DEBUFF:
+				desc += "Debuff: " + arr[0] + "\n";
+				break;
+			case SKILL_TYPE.FULL_ROW_DEBUFF:
+				desc += "Debuff: " + arr[0] + "\n";
+				break;
+			case SKILL_TYPE.ALL_TARGETS_DEBUFF:
+				desc += "Debuff: " + arr[0] + "\n";
+				break;
+			default:
+				break;
+		}
+
+		desc += "Turns: " + arr[2] + "\n";
+		desc += "MP Usage: " + arr[5] + "\n";
+		desc += "</i>";
+
+		if (isLocked) {
+			desc += "\n<b>Required to unlock:</b>\n";
 
 			int[] minimum = ExpManager.RequiredStats((SKILLS)skillID, playerIndex);
-
+			desc += "<i>";
 			if (minimum[0] > PartyStats.chara[playerIndex].attack) desc += "ATK: " + minimum[0] + "\n";
 			if (minimum[1] > PartyStats.chara[playerIndex].defence) desc += "DEF: " + minimum[1] + "\n";
 			if (minimum[2] > PartyStats.chara[playerIndex].maxHealth) desc += "HP:  " + minimum[2] + "\n";
@@ -113,9 +164,10 @@ public class SkillsMenuController : SubMenu {
 			if (minimum[4] > PartyStats.chara[playerIndex].strength) desc += "STR: " + minimum[4] + "\n";
 			if (minimum[5] > PartyStats.chara[playerIndex].agility) desc += "AGI: " + minimum[5] + "\n";
 			if (minimum[6] > PartyStats.chara[playerIndex].speed) desc += "SPD: " + minimum[6] + "\n";
-
-			skill.description = desc;
+			desc += "</i>";
 		}
+
+		skill.description = desc;
 
 		return skill;
 	}
@@ -126,7 +178,7 @@ public class SkillsMenuController : SubMenu {
 
 	private void UpdateSelectedCharaUI(int character) {
 		for (int i = 0; i < 4; i++) {
-			equippedSkillsText[character * 4 + i].text = skinv.SkillName(PartySkills.skills[character].equippedSkills[i]);
+			equippedSkillsText[character * 4 + i].text = Skinv.SkillName(PartySkills.skills[character].equippedSkills[i]);
 		}
 	}
 
@@ -138,7 +190,7 @@ public class SkillsMenuController : SubMenu {
 		for (int player = 0; player < 4; player++) {
 			for (int i = 0; i < 4; i++) {
 				equippedSkillsText[player * 4 + i].text =
-					skinv.SkillName(PartySkills.skills[player].equippedSkills[i]);
+					Skinv.SkillName(PartySkills.skills[player].equippedSkills[i]);
 			}
 		}
 	}
@@ -273,6 +325,7 @@ public class SkillsMenuController : SubMenu {
 					UpdateSkillUI();
 					SkillGroup.alpha = 1f;
 					SetDescription(0, true);
+					hasEquipped = true;
 					break;
 				}
 				break;
@@ -314,7 +367,7 @@ public class SkillsMenuController : SubMenu {
 					state = 0;
 					SkillGroup.alpha = 0f;
 					print(skillIndexA);
-					skinv.EquipSkill(UnlockedSkillsList[skillIndexA].SkillID, equipIndex, playerIndex);
+					Skinv.EquipSkill(UnlockedSkillsList[skillIndexA].SkillID, equipIndex, playerIndex);
 					UpdateSelectedCharaUI(playerIndex);
 					ClearLists();
 					topOfListA = 0;

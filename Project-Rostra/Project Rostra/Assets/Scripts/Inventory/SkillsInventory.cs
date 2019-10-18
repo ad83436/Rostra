@@ -29,6 +29,18 @@ public class SkillsInventory : MonoBehaviour {
         } else {
             Destroy(gameObject);
         }
+
+        AddToUnlockedSkills((int)SKILLS.Fa_SwiftStrike, 0);
+        EquipSkill((int)SKILLS.Fa_SwiftStrike, 0, 0);
+
+        AddToUnlockedSkills((int)SKILLS.Ob_ShieldAlly, 1);
+        EquipSkill((int)SKILLS.Ob_ShieldAlly, 0, 1);
+
+        AddToUnlockedSkills((int)SKILLS.Fr_PiercingShot, 2);
+        EquipSkill((int)SKILLS.Fr_PiercingShot, 0, 2);
+
+        AddToUnlockedSkills((int)SKILLS.Ar_HealingAura, 3);
+        EquipSkill((int)SKILLS.Ar_HealingAura, 0, 3);
     }
 
     // Handling keyboard functionality
@@ -228,6 +240,22 @@ public class SkillsInventory : MonoBehaviour {
                 return "Buff Skill 1";
             case (int)SKILLS.TEST_Arcelus:
                 return "Heal Skill 1";
+            case (int)SKILLS.Fa_SwiftStrike:
+                return "Swift Strike";
+            case (int)SKILLS.Fa_SwordOfFury:
+                return "Sword of Fury";
+            case (int)SKILLS.Fr_PiercingShot:
+                return "Piercing Shot";
+            case (int)SKILLS.Fr_ArrowRain:
+                return "Arrow Rain";
+            case (int)SKILLS.Ob_ShieldAlly:
+                return "Shield Ally";
+            case (int)SKILLS.Ob_ShieldAllAllies:
+                return "Shield All Allies";
+            case (int)SKILLS.Ar_HealingAura:
+                return "Healing Aura";
+            case (int)SKILLS.Ar_DrainEye:
+                return "Drain Eye";
             default: //In case no skill is equipped at that slot
                 return "---";
         }
@@ -250,7 +278,23 @@ public class SkillsInventory : MonoBehaviour {
                 return "Buff skill 1 \n\ntargets players";
             case (int)SKILLS.TEST_Arcelus:
                 return "Heal skill 1 \n\ntargets players";
-			default: return "";
+            case (int)SKILLS.Fa_SwiftStrike:
+                return "Inflict a flurry of strikes on a row of enemies";
+            case (int)SKILLS.Fa_SwordOfFury:
+                return "Inflict a great deal of damage to one enemy";
+            case (int)SKILLS.Fr_PiercingShot:
+                return "As single strong shot aimed at one enemy";
+            case (int)SKILLS.Fr_ArrowRain:
+                return "Frea shoots a rain of arrows that damages all enemies";
+            case (int)SKILLS.Ob_ShieldAlly:
+                return "Increase the defense of one ally for three turns";
+            case (int)SKILLS.Ob_ShieldAllAllies:
+                return "Increase the defense of all allies for three turns";
+            case (int)SKILLS.Ar_HealingAura:
+                return "Restore the health points of all the players";
+            case (int)SKILLS.Ar_DrainEye:
+                return "Ally affected by Drain Eye gains health every time they deal damage. Lasts for 3 turns";
+            default: return "";
         }
     }
 
@@ -299,6 +343,55 @@ public class SkillsInventory : MonoBehaviour {
                 skillStat[2] = 2;
                 skillStat[4] = (float)SKILL_TYPE.ALL_PLAYER_HEAL;
                 skillStat[5] = 40;
+                break;
+            case (int)SKILLS.Fa_SwiftStrike:
+                skillStat[0] = 35;
+                skillStat[1] = 100;
+                skillStat[2] = 1;
+                skillStat[4] = (float)SKILL_TYPE.FULL_ROW_ATK;
+                skillStat[5] = 40;
+                break;
+            case (int)SKILLS.Fa_SwordOfFury:
+                skillStat[0] = 35;
+                skillStat[1] = 100;
+                skillStat[2] = 1;
+                skillStat[4] = (float)SKILL_TYPE.SINGLE_TARGET_ATK;
+                skillStat[5] = 40;
+                break;
+            case (int)SKILLS.Fr_PiercingShot:
+                skillStat[0] = 40;
+                skillStat[1] = 100;
+                skillStat[2] = 0;
+                skillStat[4] = (float)SKILL_TYPE.SINGLE_TARGET_ATK;
+                skillStat[5] = 35;
+                break;
+            case (int)SKILLS.Fr_ArrowRain:
+                skillStat[0] = 40;
+                skillStat[1] = 100;
+                skillStat[2] = 0;
+                skillStat[4] = (float)SKILL_TYPE.ALL_TARGETS_ATK;
+                skillStat[5] = 35;
+                break;
+            case (int)SKILLS.Ob_ShieldAlly:
+                skillStat[0] = 20;
+                skillStat[1] = 100;
+                skillStat[2] = 0;
+                skillStat[4] = (float)SKILL_TYPE.SINGLE_PLAYER_BUFF;
+                skillStat[5] = 40;
+                break;
+            case (int)SKILLS.Ob_ShieldAllAllies:
+                skillStat[0] = 20;
+                skillStat[1] = 100;
+                skillStat[2] = 0;
+                skillStat[4] = (float)SKILL_TYPE.ALL_PLAYER_BUFF;
+                skillStat[5] = 40;
+                break;
+            case (int)SKILLS.Ar_HealingAura:
+                skillStat[0] = 40;
+                skillStat[1] = 100;
+                skillStat[2] = 2;
+                skillStat[4] = (float)SKILL_TYPE.ALL_PLAYER_HEAL;
+                skillStat[5] = 60;
                 break;
             default:
                 skillStat[0] = 0;

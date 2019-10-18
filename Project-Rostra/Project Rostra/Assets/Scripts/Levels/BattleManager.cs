@@ -195,8 +195,9 @@ public class BattleManager : MonoBehaviour
 
     public void StartBattle()
     {
+        battleInProgress = true;
         //Store and sort the agilities of the players and enemies in ascending order
-       
+
         foreach (PlayerInformtion p in players)
         {
             if (p.playerReference != null)//Make sure all the entries have players (i.e. what if we have less than 4 players)
@@ -230,6 +231,8 @@ public class BattleManager : MonoBehaviour
         {
             NextOnQueue();
         }
+
+        
     }
 
     public void NextOnQueue()

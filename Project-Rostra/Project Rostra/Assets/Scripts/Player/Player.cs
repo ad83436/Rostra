@@ -51,21 +51,22 @@ public class Player : MonoBehaviour
     //9: All players buff
 
     private int chosenSkill;
-    private int skillTarget; 
+    private int skillTarget;
     private float mpCost;
     private float skillWaitTime;
     private Player healThisPlayer;
     private string skillNameForObjPooler;
     private int skillWaitingIndex = 0;
     private string skillAnimatorName = "";
-    public int enemyRowIndicator = 0;
+    private int enemyRowIndicator = 0; //Used to know the enemy row the player is attacking
+    private bool showSkillNameAfterWait = false; //If the player waits before executing the attack, make sure to show the name when the skill is executed
 
     //Buffs
     //Booleans are used in case the player's stats were debuffed by an enemy and when buffed, the debuff effects will be negated. The Q counter will not be affected
     private bool defenseBuffed = false;
     private bool attackBuffed = false;
     private bool agilityBuffed = false;
-    private float defenseBuffSkillQCounter = 0 ; //How many turns until the defense buff is reversed. Need three counters as multiple stats could be buffed/debuffed at the same time
+    private float defenseBuffSkillQCounter = 0; //How many turns until the defense buff is reversed. Need three counters as multiple stats could be buffed/debuffed at the same time
     private float attackBuffSkillQCounter = 0;
     private float agilityBuffSkillQCounter = 0;
 
@@ -183,13 +184,13 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.L))
+        if (Input.GetKeyDown(KeyCode.L))
         {
             //Testing the damage formula and rage calculations
             TakeDamage(30.0f);
         }
 
-        if(Input.GetKeyDown(KeyCode.H))
+        if (Input.GetKeyDown(KeyCode.H))
         {
             Heal(0.2f);
         }
@@ -220,11 +221,11 @@ public class Player : MonoBehaviour
             {
                 EndGuard();
             }
-            else if(currentState == playerState.Waiting)
+            else if (currentState == playerState.Waiting)
             {
                 skillWaitTime--;
 
-                if(skillWaitTime<=0)
+                if (skillWaitTime <= 0)
                 {
                     waitTimeText.gameObject.SetActive(false);
                     switch (skillTarget) //use the skill target to know which function to call
@@ -233,6 +234,7 @@ public class Player : MonoBehaviour
                             UseSkillOnOneEnemy(chosenSkill, mpCost, 0, attackingThisEnemy);
                             break;
                         case 1:
+                            UseSkillOnEnemyRow(chosenSkill, mpCost, 0, enemyRowIndicator);
                             break;
                         case 2:
                             UseSkillOnAllEnemies(chosenSkill, mpCost, 0);
@@ -256,7 +258,9 @@ public class Player : MonoBehaviour
                             UseSkillOnAllPlayers(chosenSkill, mpCost, 0);
                             break;
                     }
-                    
+
+                    uiBTL.UpdateActivityText(skills.SkillName(chosenSkill));
+
                 }
                 else
                 {
@@ -267,7 +271,7 @@ public class Player : MonoBehaviour
 
             //Check for buffs
             CheckForBuffs();
-           
+
         }
         else
         {
@@ -312,10 +316,10 @@ public class Player : MonoBehaviour
         }
 
         //If the player is in rage state, they can only attack so it makes sense to check if we were in rage mode when attacking
-        if (currentState==playerState.Rage)
+        if (currentState == playerState.Rage)
         {
             QCounter++;
-            if(QCounter>=3) //If it's been 3 or more turns since the player raged out, reset rage mode
+            if (QCounter >= 3) //If it's been 3 or more turns since the player raged out, reset rage mode
             {
                 ResetPlayerRage();
             }
@@ -327,7 +331,7 @@ public class Player : MonoBehaviour
     private void CalculateHit()
     {
         //20 sided die + str <? enemy agility
-        if(Random.Range(0.0f,20.0f) + str < attackingThisEnemy.eAgility)
+        if (Random.Range(0.0f, 20.0f) + str < attackingThisEnemy.eAgility)
         {
             hit = false;
         }
@@ -411,12 +415,12 @@ public class Player : MonoBehaviour
         {
             hpImage.fillAmount = currentHP / maxHP;
         }
-        if (currentRage < maxRage && currentState!=playerState.Rage) //If there's still capacity for rage while we're not actually in rage, increase the rage meter
+        if (currentRage < maxRage && currentState != playerState.Rage) //If there's still capacity for rage while we're not actually in rage, increase the rage meter
         {
             currentRage += damage * 1.05f; //Rage amount is always 5% more than the health lost
             rageImage.fillAmount = currentRage / maxRage;
-            
-            if(currentRage>=maxRage)
+
+            if (currentRage >= maxRage)
             {
                 currentRage = maxRage;
                 canRage = true; //Can now go into rage mode
@@ -480,7 +484,7 @@ public class Player : MonoBehaviour
         hpImage.fillAmount = currentHP / maxHP;
         rageImage.fillAmount = currentRage / maxRage;
 
-        if(currentRage>=maxRage)
+        if (currentRage >= maxRage)
         {
             currentRage = maxRage;
             canRage = true;
@@ -497,7 +501,7 @@ public class Player : MonoBehaviour
     }
 
     //---------------------------------------------------Skills---------------------------------------------------//
-    public void UseSkillOnOnePlayer(int skillID, float manaCost , float waitTime, Player playerReference)
+    public void UseSkillOnOnePlayer(int skillID, float manaCost, float waitTime, Player playerReference)
     {
         Debug.Log("Skill Target" + skillID);
 
@@ -513,7 +517,7 @@ public class Player : MonoBehaviour
             skillAnimatorName = "Heal";
             skillWaitingIndex = 1;
         }
-        else if (skillID == 3) //Buff defense skill
+        else if (skillID == (int)SKILLS.Ob_ShieldAlly) //Buff defense skill
         {
             skillTarget = 8; //Single player buff
             skillAnimatorName = "BuffDef";
@@ -545,7 +549,7 @@ public class Player : MonoBehaviour
 
         //Placeholders, these skills will be a single character heal/buff
         //Check if the skill is immediate or if the player needs to wait a number of turns
-        if (skillID == 4) //Heal 
+        if (skillID == (int)SKILLS.Ar_HealingAura) //Heal 
         {
             skillTarget = 7;//All player heal
             skillAnimatorName = "Heal";
@@ -558,7 +562,7 @@ public class Player : MonoBehaviour
             skillWaitingIndex = 1;
         }
 
-        if(waitTime<=0)
+        if (waitTime <= 0)
         {
             skillWaitingIndex = 0;
             playerAnimator.SetInteger("WaitingIndex", -1); //-1 is all animation
@@ -586,7 +590,7 @@ public class Player : MonoBehaviour
         attackingThisEnemy = enemyReference;
 
         //Check which skill to know which animation to run
-        if (skillID == 1 || skillID == 2) //Fargas and Freya basic attack skills
+        if (skillID==(int)SKILLS.Fr_PiercingShot) //Fargas and Freya basic attack skills
         {
             Debug.Log("HIT");
             skillNameForObjPooler = "FFSkill1";
@@ -630,7 +634,40 @@ public class Player : MonoBehaviour
             skillWaitingIndex = 1;
         }
 
-        if(waitTime<=0)
+        if (waitTime <= 0)
+        {
+            skillWaitingIndex = 0;
+            playerAnimator.SetInteger("WaitingIndex", -1);
+            playerAnimator.SetBool(skillAnimatorName, true);
+        }
+        else
+        {
+            //If there's waiting time, go to wait state and end the turn 
+            waitTimeText.gameObject.SetActive(true);
+            waitTimeText.text = skillWaitTime.ToString();
+            playerAnimator.SetInteger("WaitingIndex", skillWaitingIndex);
+            currentState = playerState.Waiting;
+            uiBTL.EndTurn();
+        }
+    }
+
+    public void UseSkillOnEnemyRow(int skillID, float manaCost, float waitTime, int rowIndicator)
+    {
+        skillWaitTime = waitTime;
+        skillTarget = 1;
+        chosenSkill = skillID;
+        mpCost = manaCost;
+
+        //Check which skill to know which animation to run
+        if (skillID == (int)SKILLS.Fa_SwiftStrike) 
+        {
+            Debug.Log("HIT");
+            skillNameForObjPooler = "FFSkill1";
+            skillAnimatorName = "ASkill";
+            skillWaitingIndex = 1;
+        }
+
+        if (waitTime <= 0)
         {
             skillWaitingIndex = 0;
             playerAnimator.SetInteger("WaitingIndex", -1);
@@ -666,13 +703,13 @@ public class Player : MonoBehaviour
         {
             Debug.Log("Damage enemy");
             CalculateHitForSkill();
-            if(hit)
+            if (hit)
             {
                 objPooler.SpawnFromPool(skillNameForObjPooler, attackingThisEnemy.gameObject.transform.position, gameObject.transform.rotation);
                 Debug.Log("Skill hit");
                 //Summon effect here
                 btlCam.CameraShake();
-                if(CalculateCrit()<=crit)
+                if (CalculateCrit() <= crit)
                 {
                     Debug.Log("Skill Crit");
                     attackingThisEnemy.TakeDamage(0.7f * actualATK + skills.SkillStats(chosenSkill)[0]); //Damage is the half the player's attack stat and the skill's attack stat
@@ -694,7 +731,7 @@ public class Player : MonoBehaviour
             playerAnimator.SetBool(skillAnimatorName, false);
 
         }
-        else if(skillTarget == 1) //Full row attack
+        else if (skillTarget == 1) //Full row attack
         {
             if (enemyRowIndicator == 0)
             {
@@ -769,16 +806,16 @@ public class Player : MonoBehaviour
             }
             playerAnimator.SetBool(skillAnimatorName, false);
         }
-        else if(skillTarget == 2) //All enemies attack
+        else if (skillTarget == 2) //All enemies attack
         {
-            for(int i = 0; i<battleManager.enemies.Length; i++)
+            for (int i = 0; i < battleManager.enemies.Length; i++)
             {
-                if(battleManager.enemies[i].enemyReference!=null)
+                if (battleManager.enemies[i].enemyReference != null)
                 {
-                    if(!battleManager.enemies[i].enemyReference.dead)
+                    if (!battleManager.enemies[i].enemyReference.dead)
                     {
                         CalculateHitForSkill(battleManager.enemies[i].enemyReference);
-                        if(hit)
+                        if (hit)
                         {
                             objPooler.SpawnFromPool(skillNameForObjPooler, battleManager.enemies[i].enemyReference.gameObject.transform.position, gameObject.transform.rotation);
                             Debug.Log("Skill hit");
@@ -805,37 +842,37 @@ public class Player : MonoBehaviour
             }
             playerAnimator.SetBool(skillAnimatorName, false);
         }
-        else if(skillTarget == 6) //Heal one player
+        else if (skillTarget == 6) //Heal one player
         {
             healThisPlayer.Heal(0.01f * (0.5f * actualATK + skills.SkillStats(chosenSkill)[0])); //Passing in a percentage
             playerAnimator.SetBool("Heal", false);
         }
-        else if(skillTarget == 7) //Heal all players
+        else if (skillTarget == 7) //Heal all players
         {
-            for(int i =0;i<battleManager.players.Length; i++)
+            for (int i = 0; i < battleManager.players.Length; i++)
             {
-                if(battleManager.players[i].playerReference!=null)
+                if (battleManager.players[i].playerReference != null)
                 {
-                    if(!battleManager.players[i].playerReference.dead && battleManager.players[i].playerReference.currentState!=playerState.Rage)
+                    if (!battleManager.players[i].playerReference.dead && battleManager.players[i].playerReference.currentState != playerState.Rage)
                     {
-                            battleManager.players[i].playerReference.Heal(0.01f * (0.5f * actualATK + skills.SkillStats(chosenSkill)[0]));
+                        battleManager.players[i].playerReference.Heal(0.01f * (0.5f * actualATK + skills.SkillStats(chosenSkill)[0]));
                     }
                 }
             }
             playerAnimator.SetBool("Heal", false);
         }
-        else if(skillTarget == 8) //Buff single player
+        else if (skillTarget == 8) //Buff single player
         {
-            if(chosenSkill == 3)//Defense Buff
+            if (chosenSkill == (int)SKILLS.Ob_ShieldAlly)//Defense Buff
             {
                 healThisPlayer.BuffStats("Defense", skills.SkillStats(chosenSkill)[0], skills.SkillStats(chosenSkill)[2]);
                 playerAnimator.SetBool("BuffDef", false);
             }
 
         }
-        else if(skillTarget == 9)
+        else if (skillTarget == 9) //Buff all players
         {
-            if(chosenSkill==3) //Defense buff // Placeholder
+            if (chosenSkill == 3) //Defense buff // Placeholder
             {
                 for (int i = 0; i < battleManager.players.Length; i++)
                 {
@@ -850,7 +887,6 @@ public class Player : MonoBehaviour
                 playerAnimator.SetBool("BuffDef", false);
             }
         }
-
         currentMP -= mpCost;
         battleManager.players[playerIndex].currentMP = currentMP;
         uiBTL.UpdatePlayerMPControlPanel();
@@ -896,21 +932,21 @@ public class Player : MonoBehaviour
     public void BuffStats(string statToBuff, float amount, float lastsNumberOfTurns)
     {
         lastsNumberOfTurns++; //Add one more turn since the system should count the number of turns based on the caster not the receiver. This way ensures that the queue goes around equal to the number of turns it the buff/debuff is supposed to last
-        switch(statToBuff)
+        switch (statToBuff)
         {
             case "Defense":
-                if(defenseBuffed && actualDEF<def) //Check for debuffs first
+                if (defenseBuffed && actualDEF < def) //Check for debuffs first
                 {
                     actualDEF = def;
                     defenseBuffSkillQCounter = 0; //Negate the debuff completely
                 }
-                else if(defenseBuffed && actualDEF > def) //If defense has already been buffed, update the Q counter
+                else if (defenseBuffed && actualDEF > def) //If defense has already been buffed, update the Q counter
                 {
                     defenseBuffSkillQCounter = lastsNumberOfTurns;
                 }
-                else if(!defenseBuffed) //No buffs or debuffs have occurred so far
+                else if (!defenseBuffed) //No buffs or debuffs have occurred so far
                 {
-                    EnableEffect("DefBuff",0);
+                    EnableEffect("DefBuff", 0);
                     defenseBuffed = true;
                     actualDEF = def + amount;
                     defenseBuffSkillQCounter = lastsNumberOfTurns;
@@ -998,11 +1034,11 @@ public class Player : MonoBehaviour
 
     public void EnableEffect(string effectName, int value)
     {
-        switch(effectName)
+        switch (effectName)
         {
             case "Heal":
                 healEffect.gameObject.SetActive(true);
-                if(value > 0)
+                if (value > 0)
                 {
                     healText.gameObject.SetActive(true);
                     healText.text = value.ToString();
