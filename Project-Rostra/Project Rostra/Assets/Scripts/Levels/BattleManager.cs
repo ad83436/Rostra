@@ -402,18 +402,6 @@ public class BattleManager : MonoBehaviour
         }
     }
 
-    //Called by the inventory manager to update the player's stats when the player changes gear and on awake
-    public void UpdateFromInv(int playerIndex,int hp, int mp, int atk, int def, int agi, int str, int crit)
-    {
-        players[playerIndex].currentHP = hp;
-        players[playerIndex].currentMP = mp;
-        players[playerIndex].atk = atk;
-        players[playerIndex].def = def;
-        players[playerIndex].agi = agi;
-        players[playerIndex].crit = crit;
-        players[playerIndex].str = str;
-    }
-
     //Called by the exp manager on awake and when the player's level changes
     public void UpdateFromExp(int playerIndex, int currentExp, int maxExp)
     {
