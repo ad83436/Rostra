@@ -30,7 +30,7 @@ public class DialogueToBattle : MonoBehaviour
 		}
 		else if (col.CompareTag("Player") && dm.demo == true && endDemo.enabled == true)
 		{
-			fade.FlipToEndTest();
+			//fade.FlipToEndTest();
 		}
 	}
 }
