@@ -225,7 +225,7 @@ public class ExpManager : MonoBehaviour {
                 }
 			case 1: //Oberon
 				switch (skill) {
-					case SKILLS.Ob_ShieldAlly:	return new int[] { 15, 30, 250, 150, 14, 10, 9 };
+					case SKILLS.Ob_ShieldAlly:	    return new int[] { 15, 30, 250, 150, 14, 10, 9 };
                     case SKILLS.Ob_ShieldAllAllies: return new int[] { 15, 31, 250, 150, 14, 10, 9 };
                     default: return null;
                 }

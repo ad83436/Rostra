@@ -417,6 +417,7 @@ public class VictoryScreen : MonoBehaviour
         {
             //Update the party stats with the new exp. The battle manager will get them next time a battle starts
             //Normally the victory screen should not directly communicate with the PartyStats but as this is a simple write, going through the btlmanager seems and over complication
+            
             PartyStats.chara[playerIndex].currentExperience = Mathf.RoundToInt(currentExp);
             switch (playerIndex)
             {
