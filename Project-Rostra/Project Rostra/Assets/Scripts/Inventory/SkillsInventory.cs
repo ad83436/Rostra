@@ -347,7 +347,7 @@ public class SkillsInventory : MonoBehaviour {
             case (int)SKILLS.Fa_SwiftStrike:
                 skillStat[0] = 35;
                 skillStat[1] = 100;
-                skillStat[2] = 1;
+                skillStat[2] = 0;
                 skillStat[4] = (float)SKILL_TYPE.FULL_ROW_ATK;
                 skillStat[5] = 40;
                 break;
