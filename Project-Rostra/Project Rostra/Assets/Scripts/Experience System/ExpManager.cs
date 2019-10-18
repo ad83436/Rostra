@@ -250,23 +250,30 @@ public class ExpManager : MonoBehaviour {
 
 	private bool UpdatePlayerSkills(int index) {
 		bool hasGotSkill = false;
-		int[] arr = new int[] { (int)PartyStats.chara[index].attack,        (int)PartyStats.chara[index].defence,   (int)PartyStats.chara[index].hitpoints,
-								(int)PartyStats.chara[index].magicpoints,   (int)PartyStats.chara[index].strength,  (int)PartyStats.chara[index].agility,
+		int[] arr = new int[] { (int)PartyStats.chara[index].attack,        (int)PartyStats.chara[index].defence,   (int)PartyStats.chara[index].maxHealth,
+								(int)PartyStats.chara[index].maxMana,   (int)PartyStats.chara[index].strength,  (int)PartyStats.chara[index].agility,
 								(int)PartyStats.chara[index].speed };
 		for (int i = 0; i < PartySkills.skills[index].unlockableSkills.Length; i++) {
-			
-			if (CheckForMinimumVals(arr, RequiredStats((SKILLS)PartySkills.skills[index].unlockableSkills[i], index))) {
-				SkillsInventory.invInstance.AddToUnlockedSkills((int)PartySkills.skills[index].unlockableSkills[i], index);
+			if (PartySkills.skills[index].unlockableSkills[i] != 0 &&
+				CheckForMinimumVals(arr, RequiredStats((SKILLS)PartySkills.skills[index].unlockableSkills[i], index))) {
 				hasGotSkill = true;
+				SkillsInventory.invInstance.AddToUnlockedSkills((int)PartySkills.skills[index].unlockableSkills[i], index);
 			}
 		}
 		return hasGotSkill;
 	}
 
 	private bool CheckForMinimumVals(int[] cur, int[] min) {
-		if (min == null) return false;
-		if (cur.Length != min.Length) return false;
+		if (min == null) {
+			print("what?");
+			return false;
+		}
+		if (cur.Length != min.Length) {
+			print("who?");
+			return false;
+		}
 		for (int i = 0; i < cur.Length; i++) {
+			print(cur[i] + " < " + min[i]);
 			if (cur[i] < min[i]) {
 				return false;
 			}

@@ -131,10 +131,11 @@ public class PartyMenuController : SubMenu {
 			}
 		} else {
 			if (Cancel) { CloseStatsMenu(); return; }
-			statsMenu.UpdateItemSelected(Down, Up, Left, Right, Confirm, Cancel);
+			statsMenu.UpdateItemSelected(Down, Up, Left, Right, Confirm && PartyStats.chara[playerIndex].statPoints > 0, Cancel);
 			statPointCounter.text = PartyStats.chara[playerIndex].statPoints + " StatPoints";
 			if (Input.GetKeyDown(KeyCode.V) && !(statsMenu.xIndex == 1 && statsMenu.yIndex == 3)) {
-				PartyStats.chara[playerIndex].statPoints++; statsMenu.UpdateItemSelected(false, false, false, false, true, false);
+				PartyStats.chara[playerIndex].statPoints++; 
+				statsMenu.UpdateItemSelected(false, false, false, false, true, false);
 			}
 		}
 	}
