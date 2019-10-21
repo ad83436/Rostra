@@ -59,11 +59,11 @@ public class MainInventory : MonoBehaviour {
 		invItem[0, 0] = (int)ITEM_ID.TEST_WEAPON1;
 		invItem[0, 1] = 1;
 
-		invItem[1, 0] = (int)ITEM_ID.TEST_POTION_HP;
+		invItem[1, 0] = (int)ITEM_ID.HP_POTION;
 		invItem[1, 1] = ItemStackLimit((int)ITEM_ID.TEST_POTION_HP);
 		consumableInv.Add(1);
 
-		invItem[2, 0] = (int)ITEM_ID.TEST_POTION_MP;
+		invItem[2, 0] = (int)ITEM_ID.MP_ELIXER;
 		invItem[2, 1] = ItemStackLimit((int)ITEM_ID.TEST_POTION_MP);
 		consumableInv.Add(2);
 
@@ -76,7 +76,7 @@ public class MainInventory : MonoBehaviour {
 	private void Update() {
 		// Getting Keyboard Input
 		bool keyOpen, keySelect, keyReturn, keyUp, keyDown;
-		keyOpen = Input.GetKeyDown(KeyCode.I);
+		keyOpen = Input.GetKeyDown(KeyCode.O);
 		keySelect = Input.GetKeyDown(KeyCode.Z);
 		keyReturn = Input.GetKeyDown(KeyCode.X);
 		keyUp = Input.GetKeyDown(KeyCode.UpArrow);
@@ -372,7 +372,14 @@ public class MainInventory : MonoBehaviour {
 			case (int)ITEM_ID.TEST_WEAPON1:
 				name = "Test Iron Sword";
 				break;
-		}
+            case (int)ITEM_ID.HP_POTION:
+                name = "Potion";
+                break;
+            case (int)ITEM_ID.MP_ELIXER:
+                name = "Elixer";
+                break;
+
+        }
 		return name;
 	}
 
@@ -401,7 +408,13 @@ public class MainInventory : MonoBehaviour {
 			case (int)ITEM_ID.TEST_WEAPON1:
 				description = "An Iron Sword used for testing the game's inventory.";
 				break;
-		}
+            case (int)ITEM_ID.HP_POTION:
+                description = "A potion that restores 50 hit points for one ally.";
+                break;
+            case (int)ITEM_ID.MP_ELIXER:
+                description = "An elixer that restores 50 mana points for one ally.";
+                break;
+        }
 
 		return description;
 	}
@@ -573,12 +586,12 @@ public class MainInventory : MonoBehaviour {
 
 		// Check which functionality to use based on the itemID provided
 		switch (itemID) {
-			case (int)ITEM_ID.TEST_POTION_HP:
-				itemAddAmount = 10;
+			case (int)ITEM_ID.HP_POTION:
+				itemAddAmount = 50;
 				UpdatePlayerHitpoints(itemAddAmount, playerID);
 				break;
-			case (int)ITEM_ID.TEST_POTION_MP:
-				itemAddAmount = 20;
+			case (int)ITEM_ID.MP_ELIXER:
+				itemAddAmount = 50;
 				UpdatePlayerMagicpoints(itemAddAmount, playerID);
 				break;
 			case (int)ITEM_ID.TEST_ARMOR1:
@@ -605,7 +618,9 @@ public class MainInventory : MonoBehaviour {
 		switch (itemID) {
 			case (int)ITEM_ID.TEST_POTION_HP:
 			case (int)ITEM_ID.TEST_POTION_MP:
-				itemType = (int)ITEM_TYPE.CONSUMABLE;
+            case (int)ITEM_ID.HP_POTION:
+            case (int)ITEM_ID.MP_ELIXER:
+                itemType = (int)ITEM_TYPE.CONSUMABLE;
 				break;
 			case (int)ITEM_ID.TEST_QUEST_ITEM:
 				itemType = (int)ITEM_TYPE.KEY_ITEM;
@@ -630,10 +645,12 @@ public class MainInventory : MonoBehaviour {
 		// Find out an item's max stack size based on its ID
 		switch (itemID) {
 			case (int)ITEM_ID.TEST_POTION_HP:
+            case (int)ITEM_ID.HP_POTION:
 				stackSize = 20;
 				break;
 			case (int)ITEM_ID.TEST_POTION_MP:
-				stackSize = 10;
+            case (int)ITEM_ID.MP_ELIXER:
+                stackSize = 10;
 				break;
 		}
 

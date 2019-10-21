@@ -252,7 +252,7 @@ public class VictoryScreen : MonoBehaviour
             {
                 IncreaseExp(ref arcelusExp, ref arcelusCurrentExp, ref arcelusMaxExp, ref arcelusExpGain, ref arcelusExpStep, ref arcelusCurrentExpText, ref arcelusMaxExpText, 3);
             }
-            else if (Input.GetKeyDown(KeyCode.Space) && !fargasAddinExp && !freaAddinExp && !oberonAddinExp && !arcelusAddinExp && !initiatedFadeOut)
+            else if (Input.GetButtonDown("Confirm") && !fargasAddinExp && !freaAddinExp && !oberonAddinExp && !arcelusAddinExp && !initiatedFadeOut)
             {
                 initiatedFadeOut = true;
                 fadePanelToWorldMap.TransitionBackToWorldMapFromBattle();

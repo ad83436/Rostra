@@ -376,7 +376,7 @@ public class DialogueManager : MonoBehaviour
 					choices[6] = true;
 					break;
 				default:
-					Debug.LogError("You wanted a story choice but passed no choice set, fix it you idiot");
+					Debug.LogError("You wanted a story choice but passed no choice set");
 					break;
 			}
 			End();
@@ -423,7 +423,7 @@ public class DialogueManager : MonoBehaviour
 	// check our keyboard pressed and do things accordingly
 	public void CheckInput()
 	{
-		if (Input.GetKeyDown(KeyCode.Return) && canEnter == true)
+		if (Input.GetButtonDown("Confirm") && canEnter == true)
 		{
 			NextSentence();
 		}
@@ -435,11 +435,11 @@ public class DialogueManager : MonoBehaviour
 		{
 			choiceNum = 2;
 		}
-		if (Input.GetKeyDown(KeyCode.Return) && choiceNum == 1 && boxCount == choiceCount && dia.isChoice == true)
+		if (Input.GetButtonDown("Confirm") && choiceNum == 1 && boxCount == choiceCount && dia.isChoice == true)
 		{
 			SelectFirstChoice();
 		}
-		else if (Input.GetKeyDown(KeyCode.Return) && choiceNum == 2 && boxCount == choiceCount && dia.isChoice == true)
+		else if (Input.GetButtonDown("Confirm") && choiceNum == 2 && boxCount == choiceCount && dia.isChoice == true)
 		{
 			SelectSecondChoice();
 		}

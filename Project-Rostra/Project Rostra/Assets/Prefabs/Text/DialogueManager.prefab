@@ -34,7 +34,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.010254, y: 0.20177263}
   m_AnchorMax: {x: 0.97670966, y: 0.95960677}
-  m_AnchoredPosition: {x: 0.5500183, y: -14.704803}
+  m_AnchoredPosition: {x: 0.5500183, y: -14.705078}
   m_SizeDelta: {x: 0.6399994, y: 27.510002}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &38988945
@@ -260,6 +260,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: TextUI
       objectReference: {fileID: 0}
+    - target: {fileID: 5887905129865670037, guid: 245f068009b070f40a585947167a718b,
+        type: 3}
+      propertyPath: m_Text
+      value: 'This is just sample text I will remove later. This is just a test there
+        is no need to panic or to be alarmed blah blah blah blah blah blah blah blah '
+      objectReference: {fileID: 0}
     - target: {fileID: 5887905130606681585, guid: 245f068009b070f40a585947167a718b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -390,6 +396,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -7.5
       objectReference: {fileID: 0}
+    - target: {fileID: 5887905129812110852, guid: 245f068009b070f40a585947167a718b,
+        type: 3}
+      propertyPath: m_Text
+      value: Press Z
+      objectReference: {fileID: 0}
     - target: {fileID: 5887905131246891765, guid: 245f068009b070f40a585947167a718b,
         type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -422,8 +433,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5887905129865670036, guid: 245f068009b070f40a585947167a718b,
         type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.06226781
+      objectReference: {fileID: 0}
+    - target: {fileID: 5887905129865670036, guid: 245f068009b070f40a585947167a718b,
+        type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 1.1503906
+      value: -0.4814453
+      objectReference: {fileID: 0}
+    - target: {fileID: 5887905129865670036, guid: 245f068009b070f40a585947167a718b,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 2.51
+      objectReference: {fileID: 0}
+    - target: {fileID: 5887905129865670036, guid: 245f068009b070f40a585947167a718b,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 1.9549999
       objectReference: {fileID: 0}
     - target: {fileID: 5887905131246891764, guid: 245f068009b070f40a585947167a718b,
         type: 3}
