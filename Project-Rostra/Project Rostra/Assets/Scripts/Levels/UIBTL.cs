@@ -498,7 +498,7 @@ public class UIBTL : MonoBehaviour
                         controlsIndicator = 4;
                         highlighter.transform.position = highlighiterPos[4].transform.position;
                     }
-                    else if (Input.GetKeyDown(KeyCode.Space)) //Player has chosen attack
+                    else if (Input.GetButtonDown("Confirm")) //Player has chosen attack
                     {
                         previousState = btlUIState.choosingBasicCommand;
                         currentState = btlUIState.choosingEnemy;
@@ -521,7 +521,7 @@ public class UIBTL : MonoBehaviour
                         controlsIndicator = 3;
                         highlighter.transform.position = highlighiterPos[3].transform.position;
                     }
-                    else if (Input.GetKeyDown(KeyCode.Space)) //Player has chosen Guard
+                    else if (Input.GetButtonDown("Confirm")) //Player has chosen Guard
                     {
                         UpdateActivityText("Guard");
                         playerInControl.Guard();
@@ -545,7 +545,7 @@ public class UIBTL : MonoBehaviour
                         controlsIndicator = 4;
                         highlighter.transform.position = highlighiterPos[4].transform.position;
                     }
-                    else if (Input.GetKeyDown(KeyCode.Space)) //Player has chosen Skills
+                    else if (Input.GetButtonDown("Confirm")) //Player has chosen Skills
                     {
                         previousState = btlUIState.choosingBasicCommand;
                         if (!firstTimeOpenedSkillsPanel)
@@ -585,7 +585,7 @@ public class UIBTL : MonoBehaviour
                         controlsIndicator = 4;
                         highlighter.transform.position = highlighiterPos[4].transform.position;
                     }
-                    else if (Input.GetKeyDown(KeyCode.Space)) //Player has chosen Items
+                    else if (Input.GetButtonDown("Confirm")) //Player has chosen Items
                     {
                         previousState = btlUIState.choosingBasicCommand;
                         //Reset the items panel
@@ -624,7 +624,7 @@ public class UIBTL : MonoBehaviour
                         controlsIndicator = 0;
                         highlighter.transform.position = highlighiterPos[0].transform.position;
                     }
-                    else if (Input.GetKeyDown(KeyCode.Space)) //Player has chosen Rage
+                    else if (Input.GetButtonDown("Confirm")) //Player has chosen Rage
                     {
                         rageText.color = Color.yellow;
                         skillsText.color = Color.gray;
@@ -643,7 +643,7 @@ public class UIBTL : MonoBehaviour
 
     private void ChoosingSkillsCommand()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetButtonDown("Cancel"))
         {
             DisableActivtyText();
             skillsPanel.gameObject.SetActive(false);
@@ -679,7 +679,7 @@ public class UIBTL : MonoBehaviour
                 }
             }
         }
-        else if (Input.GetKeyDown(KeyCode.Space))
+        else if (Input.GetButtonDown("Confirm"))
         {
             if (PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator] != (int)SKILLS.NO_SKILL)
             {
@@ -826,7 +826,7 @@ public class UIBTL : MonoBehaviour
 
     private void ChoosingItemsCommand()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetButtonDown("Cancel"))
         {
             DisableActivtyText();
             itemsPanel.gameObject.SetActive(false);
@@ -834,7 +834,7 @@ public class UIBTL : MonoBehaviour
             itemsPanelIndex = 0;
             currentState = btlUIState.choosingBasicCommand;
         }
-        else if (Input.GetKeyDown(KeyCode.Space))//Player has chosen an item
+        else if (Input.GetButtonDown("Confirm"))//Player has chosen an item
         {
             //Make sure you choose an item that is usable and not equipable
             previousState = btlUIState.choosingItemsCommand; //Needed to know what to reference when choosing the player
@@ -963,7 +963,7 @@ public class UIBTL : MonoBehaviour
 
     private void ChoosingPlayer()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetButtonDown("Cancel"))
         {
             DisableActivtyText();
             switch (playerInControl.playerIndex)
@@ -1050,7 +1050,7 @@ public class UIBTL : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetButtonDown("Confirm"))
         {
 
             if (previousState == btlUIState.choosingItemsCommand)
@@ -1085,7 +1085,7 @@ public class UIBTL : MonoBehaviour
 
     private void ChoosingAllPlayers()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetButtonDown("Cancel"))
         {
             DisableActivtyText();
             if (previousState == btlUIState.choosingBasicCommand)
@@ -1103,7 +1103,7 @@ public class UIBTL : MonoBehaviour
                 choosePlayerArrowForSelectAll[i].gameObject.SetActive(false);
             }
         }
-        else if (Input.GetKeyDown(KeyCode.Space))
+        else if (Input.GetButtonDown("Confirm"))
         {
             UpdateActivityText(skills.SkillName(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator]));
             playerInControl.UseSkillOnAllPlayers(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator],
@@ -1120,7 +1120,7 @@ public class UIBTL : MonoBehaviour
     private void ChoosingEnemy()
     {
         //Leave choosing enemy
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetButtonDown("Cancel"))
         {
             DisableActivtyText();
             if (previousState == btlUIState.choosingBasicCommand)
@@ -1294,7 +1294,7 @@ public class UIBTL : MonoBehaviour
                 break;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetButtonDown("Confirm"))
         {
             chooseEnemyArrow.gameObject.SetActive(false);
             if (previousState == btlUIState.choosingBasicCommand)
@@ -1316,7 +1316,7 @@ public class UIBTL : MonoBehaviour
 
     private void ChoosingAllEnemies()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetButtonDown("Cancel"))
         {
             DisableActivtyText();
             if (previousState == btlUIState.choosingBasicCommand)
@@ -1334,7 +1334,7 @@ public class UIBTL : MonoBehaviour
                 chooseEnemyArrowForSelectAll[i].gameObject.SetActive(false);
             }
         }
-        else if (Input.GetKeyDown(KeyCode.Space))
+        else if (Input.GetButtonDown("Confirm"))
         {
             UpdateActivityText(skills.SkillName(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator]));
             playerInControl.UseSkillOnAllEnemies(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator],
@@ -1350,7 +1350,7 @@ public class UIBTL : MonoBehaviour
 
     private void ChoosingRowOfEnemies()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetButtonDown("Cancel"))
         {
             DisableActivtyText();
             if (previousState == btlUIState.choosingBasicCommand)
@@ -1413,7 +1413,7 @@ public class UIBTL : MonoBehaviour
                 break;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetButtonDown("Confirm"))
         {
             //Call the row function
             playerInControl.UseSkillOnEnemyRow(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator],

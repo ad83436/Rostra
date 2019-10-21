@@ -47,7 +47,7 @@ public class SkillsInventory : MonoBehaviour {
     private void Update() {
         // Getting Keyboard Input
         bool keyOpen, keySelect, keyReturn, keyUp, keyDown, keyLeft, keyRight;
-        keyOpen = Input.GetKeyDown(KeyCode.K);
+        keyOpen = Input.GetKeyDown(KeyCode.M);
         keySelect = Input.GetKeyDown(KeyCode.Z);
         keyReturn = Input.GetKeyDown(KeyCode.X);
         keyUp = Input.GetKeyDown(KeyCode.UpArrow);

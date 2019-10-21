@@ -25,6 +25,7 @@ public class DialogueToBattle : MonoBehaviour
 		if (col.CompareTag("Player") && dm.demo == true && battle.enabled == true)
 		{
 			Debug.Log("Transition To Battle");
+            BattleManager.battleInProgress = true;
 			fade.FlipFadeToBattle();
 			battle.enabled = false;
 			endDemo.enabled = true;
