@@ -5,7 +5,8 @@ using UnityEngine;
 // Last Updated:        October 16th, 2019
 
 public class ItemShop : MonoBehaviour {
-	public static ItemShop singleton { get; private set; }
+
+    public static ItemShop singleton { get; private set; }
     // The list of items that the shopkeeper has on them
     public List<int> shopItems = new List<int>();
 
@@ -28,13 +29,15 @@ public class ItemShop : MonoBehaviour {
     }
 
     private void Awake() {
-		if (singleton == null) singleton = this;
-		else Debug.Log("The fookin itemshop already exists");
+
+        if (singleton == null) singleton = this;
+        else Debug.Log("The fookin itemshop already exists");
 
         shopItems.Add((int)ITEM_ID.TEST_POTION_HP);
         shopItems.Add((int)ITEM_ID.TEST_POTION_MP);
         shopItems.Add((int)ITEM_ID.TEST_ARMOR1);
         shopItems.Add((int)ITEM_ID.TEST_WEAPON1);
+
     }
 
     // Handles input and functionality for the menu (For testing purposes)

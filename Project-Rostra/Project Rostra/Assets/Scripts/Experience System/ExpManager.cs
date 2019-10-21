@@ -254,26 +254,19 @@ public class ExpManager : MonoBehaviour {
 								(int)PartyStats.chara[index].maxMana,   (int)PartyStats.chara[index].strength,  (int)PartyStats.chara[index].agility,
 								(int)PartyStats.chara[index].speed };
 		for (int i = 0; i < PartySkills.skills[index].unlockableSkills.Length; i++) {
-			if (PartySkills.skills[index].unlockableSkills[i] != 0 &&
-				CheckForMinimumVals(arr, RequiredStats((SKILLS)PartySkills.skills[index].unlockableSkills[i], index))) {
-				hasGotSkill = true;
+			
+			if (CheckForMinimumVals(arr, RequiredStats((SKILLS)PartySkills.skills[index].unlockableSkills[i], index))) {
 				SkillsInventory.invInstance.AddToUnlockedSkills((int)PartySkills.skills[index].unlockableSkills[i], index);
+				hasGotSkill = true;
 			}
 		}
 		return hasGotSkill;
 	}
 
 	private bool CheckForMinimumVals(int[] cur, int[] min) {
-		if (min == null) {
-			print("what?");
-			return false;
-		}
-		if (cur.Length != min.Length) {
-			print("who?");
-			return false;
-		}
+		if (min == null) return false;
+		if (cur.Length != min.Length) return false;
 		for (int i = 0; i < cur.Length; i++) {
-			print(cur[i] + " < " + min[i]);
 			if (cur[i] < min[i]) {
 				return false;
 			}
