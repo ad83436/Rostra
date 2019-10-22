@@ -15,21 +15,16 @@ public class PlayerMove : MonoBehaviour
 	DialogueToBattle dtm;
     private Vector2 moveInput;
 
-    private void Awake()
-	{
-		//dm = FindObjectOfType<DialogueManager>();
-		dm = DialogueManager.instance;
-		
-	}
 	void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         moveInput = new Vector2(0.0f, 0.0f);
+        dm = DialogueManager.instance;
     }
 
     void Update()
     {
-		if (dm.canWalk == true && !BattleManager.battleInProgress)
+		if (dm.canWalk && !BattleManager.battleInProgress && !PauseMenuController.isPaused)
 		{
 			moveInput.x = Input.GetAxisRaw("Horizontal");
 			moveInput.y = Input.GetAxisRaw("Vertical");
@@ -77,17 +72,17 @@ public class PlayerMove : MonoBehaviour
 	// this is will handle talking to the NPC 
 	public void TalkToNPC()
 	{
-		if ((dm.nextDialogue == true && dm.isActive == false) && Input.GetKeyDown(KeyCode.Return) && ct != null && ct.isChoiceDepend == false && ct.dialogue.hasPlayed == false)
+		if ((dm.nextDialogue == true && dm.isActive == false) && Input.GetButtonDown("Confirm") && ct != null && ct.isChoiceDepend == false && ct.dialogue.hasPlayed == false)
 		{
 			ct.TriggerConvo();
 			Debug.Log("Talking");
 		}
-		else if ((dm.nextDialogue == true && dm.isActive == false) && Input.GetKeyDown(KeyCode.Return) && ct != null && ct.dialogue.isChoice == true && ct.dialogue.hasPlayed == true)
+		else if ((dm.nextDialogue == true && dm.isActive == false) && Input.GetButtonDown("Confirm") && ct != null && ct.dialogue.isChoice == true && ct.dialogue.hasPlayed == true)
 		{
 			ct.TriggerNormalDialogue();
 			Debug.Log("Talking");
 		}
-		else if ((dm.nextDialogue == true && dm.isActive == false) && Input.GetKeyDown(KeyCode.Return) && ct != null && ct.isChoiceDepend == true)
+		else if ((dm.nextDialogue == true && dm.isActive == false) && Input.GetButtonDown("Confirm") && ct != null && ct.isChoiceDepend == true)
 		{
 			ct.TriggerChoiceDependantConvo();
 			Debug.Log("Talking");

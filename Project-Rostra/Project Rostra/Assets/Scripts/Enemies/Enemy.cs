@@ -155,164 +155,167 @@ public class Enemy : MonoBehaviour
 
     public void EnemyTurn()
     {
-        uiBTL.DisableActivtyText();
-        float attackChance = Random.Range(0, 100); // determines if the ememy will use its type attack or a dumb attack 
-        float skillChance = Random.Range(0, 60);// determines if the enemy will use a skill or not //TEMP VALUES//
-
-        if (!dead)
+        if (BattleManager.battleInProgress)
         {
-            switch (enemyAttack)
+            uiBTL.DisableActivtyText();
+            float attackChance = Random.Range(0, 100); // determines if the ememy will use its type attack or a dumb attack 
+            float skillChance = Random.Range(0, 60);// determines if the enemy will use a skill or not //TEMP VALUES//
+
+            if (!dead)
             {
-                case EnemyAttackType.Dumb:
-                    DumbAttack();
-                    break;
-
-                case EnemyAttackType.Opportunistic:
-
-                    if (attackChance > 30)
-                    {
-                        if (skillChance > 40)
-                        {
-                            AttackLowDef();
-                            print(eName + " Used their skill aswell as their types attack");
-                        }
-
-                        else
-                        {
-                            AttackLowDef();
-                            print(eName + " Did not use their skill but used their types attack");
-                        }
-                    }
-
-                    else
-                    {
-                        if (skillChance > 40) 
-                        {
-                            DumbAttack();
-                            print(eName + " Used their skill aswell as a Dumb attack");
-                        }
-
-                        else
-                        {
-                            DumbAttack();
-                            print(eName + " Did not use their skill but used a Dumb attack");
-                        }
-                    }
-
-                    break;
-
-                case EnemyAttackType.Assassin:
-
-                    if (attackChance > 30)
-                    {
-                        if (skillChance > 40)
-                        {
-                            AttackLowHp();
-                            print(eName + " Used their skill aswell as their types attack");
-                        }
-
-                        else
-                        {
-                            AttackLowHp();
-                            print(eName + " Did not use their skill but used their types attack");
-                        }
-                    }
-            
-
-                    else
-                    {
-                        if (skillChance > 40)
-                        {
-                            DumbAttack();
-                            print(eName + " Used their skill aswell as a Dumb attack");
-                        }
-
-                        else
-                        {
-                            DumbAttack();
-                            print(eName + " Did not use their skill but used a Dumb attack");
-                        }
-                    }
-
-                    break;
-
-                case EnemyAttackType.Bruiser:
-                    if (attackChance > 30)
-                    {
-                        if (skillChance > 40)
-                        {
-                            AttackHighAtk();
-                            print(eName + " Used their skill aswell as their types attack");
-                        }
-
-                        else
-                        {
-                            AttackHighAtk();
-                            print(eName + " Did not use their skill but used their types attack");
-                        }
-                    }
-
-
-                    else
-                    {
-                        if (skillChance > 40)
-                        {
-                            DumbAttack();
-                            print(eName + " Used their skill aswell as a Dumb attack");
-                        }
-
-                        else
-                        {
-                            DumbAttack();
-                            print(eName + " Did not use their skill but used a Dumb attack");
-                        }
-                    }
-
-                    break;
-
-                case EnemyAttackType.Healer:
-
-                    break;
-
-                case EnemyAttackType.Heal_Support:
-
-                    break;
-
-                case EnemyAttackType.Strategist:
-
-                    if (attackChance > 30)
-                    {
-                        if (skillChance > 40)
-                        {
-                            AttackHighAgi();
-                            print(eName + " Used their skill aswell as their types attack");
-                        }
-
-                        else
-                        {
-                            AttackHighAgi();
-                            print(eName + " Did not use their skill but used their types attack");
-                        }
-                    }
-
-                    else
-                    {
+                switch (enemyAttack)
+                {
+                    case EnemyAttackType.Dumb:
                         DumbAttack();
-                    }
+                        break;
 
-                    break;
+                    case EnemyAttackType.Opportunistic:
 
-                case EnemyAttackType.Demo:
+                        if (attackChance > 30)
+                        {
+                            if (skillChance > 40)
+                            {
+                                AttackLowDef();
+                                print(eName + " Used their skill aswell as their types attack");
+                            }
 
-                    DumbAttack();
+                            else
+                            {
+                                AttackLowDef();
+                                print(eName + " Did not use their skill but used their types attack");
+                            }
+                        }
 
-                    break;
+                        else
+                        {
+                            if (skillChance > 40)
+                            {
+                                DumbAttack();
+                                print(eName + " Used their skill aswell as a Dumb attack");
+                            }
+
+                            else
+                            {
+                                DumbAttack();
+                                print(eName + " Did not use their skill but used a Dumb attack");
+                            }
+                        }
+
+                        break;
+
+                    case EnemyAttackType.Assassin:
+
+                        if (attackChance > 30)
+                        {
+                            if (skillChance > 40)
+                            {
+                                AttackLowHp();
+                                print(eName + " Used their skill aswell as their types attack");
+                            }
+
+                            else
+                            {
+                                AttackLowHp();
+                                print(eName + " Did not use their skill but used their types attack");
+                            }
+                        }
+
+
+                        else
+                        {
+                            if (skillChance > 40)
+                            {
+                                DumbAttack();
+                                print(eName + " Used their skill aswell as a Dumb attack");
+                            }
+
+                            else
+                            {
+                                DumbAttack();
+                                print(eName + " Did not use their skill but used a Dumb attack");
+                            }
+                        }
+
+                        break;
+
+                    case EnemyAttackType.Bruiser:
+                        if (attackChance > 30)
+                        {
+                            if (skillChance > 40)
+                            {
+                                AttackHighAtk();
+                                print(eName + " Used their skill aswell as their types attack");
+                            }
+
+                            else
+                            {
+                                AttackHighAtk();
+                                print(eName + " Did not use their skill but used their types attack");
+                            }
+                        }
+
+
+                        else
+                        {
+                            if (skillChance > 40)
+                            {
+                                DumbAttack();
+                                print(eName + " Used their skill aswell as a Dumb attack");
+                            }
+
+                            else
+                            {
+                                DumbAttack();
+                                print(eName + " Did not use their skill but used a Dumb attack");
+                            }
+                        }
+
+                        break;
+
+                    case EnemyAttackType.Healer:
+
+                        break;
+
+                    case EnemyAttackType.Heal_Support:
+
+                        break;
+
+                    case EnemyAttackType.Strategist:
+
+                        if (attackChance > 30)
+                        {
+                            if (skillChance > 40)
+                            {
+                                AttackHighAgi();
+                                print(eName + " Used their skill aswell as their types attack");
+                            }
+
+                            else
+                            {
+                                AttackHighAgi();
+                                print(eName + " Did not use their skill but used their types attack");
+                            }
+                        }
+
+                        else
+                        {
+                            DumbAttack();
+                        }
+
+                        break;
+
+                    case EnemyAttackType.Demo:
+
+                        DumbAttack();
+
+                        break;
+                }
             }
-        }
 
-        else
-        {
-            uiBTL.EndTurn();
+            else
+            {
+                uiBTL.EndTurn();
+            }
         }
     }
 

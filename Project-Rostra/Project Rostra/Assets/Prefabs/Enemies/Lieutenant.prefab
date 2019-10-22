@@ -498,12 +498,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c49573c71ef3f541813f91b7a35cd10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyIndexInBattleManager: 2
+  enemyIndexInBattleManager: 4
   eMana: 0
   eAttack: 40
   eAgility: 12
   eDefence: 24
-  eStrength: 12
+  eStrength: 16
   eSpeed: 13
   eBaseLevel: 5
   eCurrentLevel: 12
