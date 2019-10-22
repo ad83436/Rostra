@@ -93,7 +93,8 @@ public class UIBTL : MonoBehaviour
         choosingRowOfEnemies,
         choosingPlayer, //Player has chosen a supporting command
         choosingAllPlayers,
-        battleEnd
+        battleEnd,
+        idle //Used after the player ends their turn. This is to prevent input from the player during enemy turns
     }
 
     private btlUIState currentState;
@@ -255,6 +256,8 @@ public class UIBTL : MonoBehaviour
                 break;
             case btlUIState.battleEnd:
                 EndBattleUI();
+                break;
+            case btlUIState.idle:
                 break;
         }
     }
@@ -1493,6 +1496,7 @@ public class UIBTL : MonoBehaviour
                 DisableActivtyText();
                 numberOfEndTurnCalls = 0;
                 playerInControl.ForcePlayerTurnAnimationOff();
+                currentState = btlUIState.idle;
             }
             moveImagesNow = true;
         }
@@ -1514,26 +1518,6 @@ public class UIBTL : MonoBehaviour
             btlManager.EndOfBattle();
         }
 
-        /* for(int i = 0, j=0; j<enemies.Length;j++)
-         {
-             if(enemies[j]!=null && enemiesDead[j]==true)
-             {
-                 i++;
-                 if(i>=numberOfEnemies)
-                 {
-                     Debug.Log("End it ");
-                     //Start fading in the end battle screen
-                     fadePanel.FlipFadeToVictory();
-
-                     //Make sure to turn off the indicators at the end of the turn, this is to make sure the end screen does not show the indicators
-                     rageModeIndicator1.gameObject.SetActive(false);
-                     rageModeIndicator2.gameObject.SetActive(false);
-                     battleHasEnded = true;
-                     btlManager.EndOfBattle();
-                 }
-             }
-         }
-        */
     }
 
     private void EndBattleUI()

@@ -204,7 +204,6 @@ public class Player : MonoBehaviour
 
     private void StartBattle()
     {
-
         //Get the information from the party stats file
         UpdatePlayerStats();
         battleManager.players[playerIndex].playerIndex = playerIndex;
