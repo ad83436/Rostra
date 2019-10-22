@@ -1060,7 +1060,14 @@ public class UIBTL : MonoBehaviour
                     choosePlayerArrow.gameObject.SetActive(false);
                     UpdateActivityText(inventory.ItemName(inventory.invItem[inventory.consumableInv[itemsPanelIndex], 0]));
                     inventory.ItemUseFunction(inventory.invItem[inventory.consumableInv[itemsPanelIndex], 0], inventory.consumableInv[itemsPanelIndex], playerIndicatorIndex);
-                    btlManager.players[playerIndicatorIndex].playerReference.EnableEffect("Heal", inventory.itemAddAmount); //Update the heal text
+                    if (inventory.invItem[inventory.consumableInv[itemsPanelIndex],0] == (int)ITEM_ID.HP_POTION)
+                    {
+                        btlManager.players[playerIndicatorIndex].playerReference.EnableEffect("Heal", inventory.itemAddAmount); //Update the heal text
+                    }
+                    else if(inventory.invItem[inventory.consumableInv[itemsPanelIndex], 0] == (int)ITEM_ID.MP_ELIXER)
+                    {
+                        btlManager.players[playerIndicatorIndex].playerReference.EnableEffect("MP", inventory.itemAddAmount); //Update the heal text
+                    }
                     itemCount[itemHPosIndex].text = inventory.invItem[inventory.consumableInv[0], 1].ToString();
                     itemsPanelIndex = 0; //Reset the itemsPanelIndex
                     btlManager.players[playerIndicatorIndex].playerReference.UpdatePlayerStats();

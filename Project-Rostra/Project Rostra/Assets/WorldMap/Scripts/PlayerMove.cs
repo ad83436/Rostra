@@ -15,16 +15,11 @@ public class PlayerMove : MonoBehaviour
 	DialogueToBattle dtm;
     private Vector2 moveInput;
 
-    private void Awake()
-	{
-		//dm = FindObjectOfType<DialogueManager>();
-		dm = DialogueManager.instance;
-		
-	}
 	void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         moveInput = new Vector2(0.0f, 0.0f);
+        dm = DialogueManager.instance;
     }
 
     void Update()
