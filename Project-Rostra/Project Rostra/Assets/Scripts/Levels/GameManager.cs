@@ -9,7 +9,6 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
-        QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = targetFPS;
     }
 
