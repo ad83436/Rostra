@@ -1491,6 +1491,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI - Battle Manager
       objectReference: {fileID: 0}
+    - target: {fileID: 230563281705353907, guid: 9f72b6d54aeb3c844871b64d15a60701,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 230563281705353905, guid: 9f72b6d54aeb3c844871b64d15a60701,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1551,23 +1556,6 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 242658911}
-    - target: {fileID: 230563281705353906, guid: 9f72b6d54aeb3c844871b64d15a60701,
-        type: 3}
-      propertyPath: itemIcons.Array.size
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 230563281705353906, guid: 9f72b6d54aeb3c844871b64d15a60701,
-        type: 3}
-      propertyPath: itemIcons.Array.data[6]
-      value: 
-      objectReference: {fileID: 21300000, guid: c31c5c244ea421a48a4beb4e1d294163,
-        type: 3}
-    - target: {fileID: 230563281705353906, guid: 9f72b6d54aeb3c844871b64d15a60701,
-        type: 3}
-      propertyPath: itemIcons.Array.data[7]
-      value: 
-      objectReference: {fileID: 21300000, guid: 60b7049005b42dc43b19c0136624c44a,
-        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f72b6d54aeb3c844871b64d15a60701, type: 3}
 --- !u!1001 &2794915159868658330
@@ -1581,6 +1569,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BattleManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 2794915159861226941, guid: 8ee36087513184f4ba2c93e1136be8ef,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2794915159861226931, guid: 8ee36087513184f4ba2c93e1136be8ef,
         type: 3}
@@ -1635,6 +1628,10 @@ PrefabInstance:
     - target: {fileID: 2794915159861226931, guid: 8ee36087513184f4ba2c93e1136be8ef,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 242658910, guid: 8ee36087513184f4ba2c93e1136be8ef, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

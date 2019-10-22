@@ -44,7 +44,8 @@ public class Fade : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) && canGoToSurvey)
         {
-            Application.OpenURL("http://google.com");
+            Application.OpenURL("https://drive.google.com/open?id=1HRdDsVZKcSQmuYScziiHemY-gXOa5k7R1_4w4gTy1oc");
+            Application.Quit();
         }
         if (Input.GetKeyDown(KeyCode.P))
         {

@@ -93,7 +93,8 @@ public class UIBTL : MonoBehaviour
         choosingRowOfEnemies,
         choosingPlayer, //Player has chosen a supporting command
         choosingAllPlayers,
-        battleEnd
+        battleEnd,
+        idle //Used after the player ends their turn. This is to prevent input from the player during enemy turns
     }
 
     private btlUIState currentState;
@@ -256,6 +257,8 @@ public class UIBTL : MonoBehaviour
             case btlUIState.battleEnd:
                 EndBattleUI();
                 break;
+            case btlUIState.idle:
+                break;
         }
     }
 
@@ -339,13 +342,16 @@ public class UIBTL : MonoBehaviour
     {
 
         //Once the images start moving, turn off the indicator next to the "RAGE" word and return the text color to normal if the previous player was in rage
-        if (playerInControl.currentState == Player.playerState.Rage)
+        if (playerInControl != null)
         {
-            rageModeIndicator1.gameObject.SetActive(false);
-            rageModeIndicator2.gameObject.SetActive(false);
-            skillsText.color = Color.white;
-            itemsText.color = Color.white;
-            guardText.color = Color.white;
+            if (playerInControl.currentState == Player.playerState.Rage)
+            {
+                rageModeIndicator1.gameObject.SetActive(false);
+                rageModeIndicator2.gameObject.SetActive(false);
+                skillsText.color = Color.white;
+                itemsText.color = Color.white;
+                guardText.color = Color.white;
+            }
         }
 
         //Move all the images an amount of imageMaxDistance to the right
@@ -1060,7 +1066,14 @@ public class UIBTL : MonoBehaviour
                     choosePlayerArrow.gameObject.SetActive(false);
                     UpdateActivityText(inventory.ItemName(inventory.invItem[inventory.consumableInv[itemsPanelIndex], 0]));
                     inventory.ItemUseFunction(inventory.invItem[inventory.consumableInv[itemsPanelIndex], 0], inventory.consumableInv[itemsPanelIndex], playerIndicatorIndex);
-                    btlManager.players[playerIndicatorIndex].playerReference.EnableEffect("Heal", inventory.itemAddAmount); //Update the heal text
+                    if (inventory.invItem[inventory.consumableInv[itemsPanelIndex],0] == (int)ITEM_ID.HP_POTION)
+                    {
+                        btlManager.players[playerIndicatorIndex].playerReference.EnableEffect("Heal", inventory.itemAddAmount); //Update the heal text
+                    }
+                    else if(inventory.invItem[inventory.consumableInv[itemsPanelIndex], 0] == (int)ITEM_ID.MP_ELIXER)
+                    {
+                        btlManager.players[playerIndicatorIndex].playerReference.EnableEffect("MP", inventory.itemAddAmount); //Update the heal text
+                    }
                     itemCount[itemHPosIndex].text = inventory.invItem[inventory.consumableInv[0], 1].ToString();
                     itemsPanelIndex = 0; //Reset the itemsPanelIndex
                     btlManager.players[playerIndicatorIndex].playerReference.UpdatePlayerStats();
@@ -1465,23 +1478,27 @@ public class UIBTL : MonoBehaviour
         }
         else
         {
-            if (playerInControl.currentState == Player.playerState.Rage)
+            if (playerInControl != null)
             {
-                //Make sure to turn off the indicators at the end of the turn, this is to make sure the end screen does not show the indicators
-                rageModeIndicator1.gameObject.SetActive(false);
-                rageModeIndicator2.gameObject.SetActive(false);
+                if (playerInControl.currentState == Player.playerState.Rage)
+                {
+                    //Make sure to turn off the indicators at the end of the turn, this is to make sure the end screen does not show the indicators
+                    rageModeIndicator1.gameObject.SetActive(false);
+                    rageModeIndicator2.gameObject.SetActive(false);
+                }
+                playerTurnIndicator.SetActive(false);
+                chooseEnemyArrow.SetActive(false);
+                controlsPanel.gameObject.SetActive(false);
+                itemsPanel.gameObject.SetActive(false);
+                firstTimeOpenedSkillsPanel = false; //Get ready for the next player in case they want to use thier skills
+                controlsIndicator = 0;
+                highlighter.gameObject.transform.position = highlighiterPos[0].transform.position;
+                DisableActivtyText();
+                numberOfEndTurnCalls = 0;
+                playerInControl.ForcePlayerTurnAnimationOff();
+                currentState = btlUIState.idle;
             }
-            playerTurnIndicator.SetActive(false);
-            chooseEnemyArrow.SetActive(false);
-            controlsPanel.gameObject.SetActive(false);
-            itemsPanel.gameObject.SetActive(false);
             moveImagesNow = true;
-            firstTimeOpenedSkillsPanel = false; //Get ready for the next player in case they want to use thier skills
-            controlsIndicator = 0;
-            highlighter.gameObject.transform.position = highlighiterPos[0].transform.position;
-            DisableActivtyText();
-            numberOfEndTurnCalls = 0;
-            playerInControl.ForcePlayerTurnAnimationOff();
         }
     }
 
@@ -1501,26 +1518,6 @@ public class UIBTL : MonoBehaviour
             btlManager.EndOfBattle();
         }
 
-        /* for(int i = 0, j=0; j<enemies.Length;j++)
-         {
-             if(enemies[j]!=null && enemiesDead[j]==true)
-             {
-                 i++;
-                 if(i>=numberOfEnemies)
-                 {
-                     Debug.Log("End it ");
-                     //Start fading in the end battle screen
-                     fadePanel.FlipFadeToVictory();
-
-                     //Make sure to turn off the indicators at the end of the turn, this is to make sure the end screen does not show the indicators
-                     rageModeIndicator1.gameObject.SetActive(false);
-                     rageModeIndicator2.gameObject.SetActive(false);
-                     battleHasEnded = true;
-                     btlManager.EndOfBattle();
-                 }
-             }
-         }
-        */
     }
 
     private void EndBattleUI()

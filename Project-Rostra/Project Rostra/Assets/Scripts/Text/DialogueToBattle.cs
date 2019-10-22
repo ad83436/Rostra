@@ -13,9 +13,9 @@ public class DialogueToBattle : MonoBehaviour
 	public Collider2D battle;
 	public Collider2D endDemo;
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
-		dm = FindObjectOfType<DialogueManager>();
+        dm = DialogueManager.instance;
 		ct = GetComponent<ConversationTrigger>();
 		endDemo.enabled = false;
     }

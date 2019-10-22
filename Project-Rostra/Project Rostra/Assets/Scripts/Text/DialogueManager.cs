@@ -101,7 +101,7 @@ public class DialogueManager : MonoBehaviour
 		choices[(int)choice] = b;
 	}
 
-	void Awake()
+	void Start()
     {
 		// singleton notation
 		if (instance == null)
@@ -215,8 +215,9 @@ public class DialogueManager : MonoBehaviour
 
 				}
 			}
+			d.hasPlayed = true;
 		}
-		
+
 	}
 
 	public void NextSentence()
@@ -288,6 +289,7 @@ public class DialogueManager : MonoBehaviour
 			fade = GameObject.Find("Fade").GetComponent<Fade>();
 			battle = true;
 		}
+		
 	}
 	// this is a coroutine that will take our chars from the string and print one at a time 
 	IEnumerator TypeLetters(string s)
@@ -392,27 +394,40 @@ public class DialogueManager : MonoBehaviour
 	public void ChoiceDependantConvo(float choice, Dialogue d)
 	{
 		dia = d;
+		Debug.Log(d.hasPlayed);
+		Debug.Log(d.isOneShot);
 		// if the choice is more than half of the array take away half the array to get it's counterpart
-		if (choice > choices.Length / 2 && (choices[(int)choice] == false && choices[(int)choice - choices.Length / 2] == false))
+		if (d.choiceCare1.dialogue.hasPlayed == true && d.choiceCare1.dialogue.isOneShot == true)
 		{
-			StartConversation(dia.normal.dialogue);
-			Debug.Log((int)choice - choices.Length / 2);
+			Debug.Log("Playing Normal Text");
+			StartConversation(dia.choiceCare1.dialogue.normal.dialogue);
 		}
-		// if it's less than half add half
-		else if (choice <= choices.Length / 2 && (choices[(int)choice] == false && choices[(int)choice + choices.Length / 2] == false))
+		else
 		{
-			StartConversation(dia.normal.dialogue);
-			Debug.Log((int)choice + choices.Length / 2);
-		}
-		// init dialogue 1
-		else if (choices[(int)choice] == true)
-		{
-			StartConversation(dia.choiceCare1.dialogue);
-		}
-		// init dialogue 2
-		else if (choices[(int)choice] == false)
-		{
-			StartConversation(dia.choiceCare2.dialogue);
+			if (choice > choices.Length / 2 && (choices[(int)choice] == false && choices[(int)choice - choices.Length / 2] == false))
+			{
+				StartConversation(dia.normal.dialogue);
+				Debug.Log((int)choice - choices.Length / 2);
+			}
+			// if it's less than half add half
+			else if (choice <= choices.Length / 2 && (choices[(int)choice] == false && choices[(int)choice + choices.Length / 2] == false))
+			{
+				StartConversation(dia.normal.dialogue);
+				Debug.Log((int)choice + choices.Length / 2);
+			}
+			// init dialogue 1
+			else if (choices[(int)choice] == true)
+			{
+				dia.choiceCare1.dialogue.hasPlayed = true;
+				StartConversation(dia.choiceCare1.dialogue);
+				
+			}
+			// init dialogue 2
+			else if (choices[(int)choice] == false)
+			{
+				StartConversation(dia.choiceCare2.dialogue);
+			}
+
 		}
 	}
 

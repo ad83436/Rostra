@@ -82,6 +82,8 @@ public class Player : MonoBehaviour
     public GameObject rageModeIndicator;
     //Heal
     public GameObject healEffect;
+    //MPHeal
+    public GameObject mpEffect;
     //Buffs
     public GameObject defBuffEffect;
     public GameObject atkBuffEffect;
@@ -92,6 +94,7 @@ public class Player : MonoBehaviour
     public Image rageImage;
     public Text damageText;
     public Text healText;
+    public Text mpText;
     public Text waitTimeText;
 
     //Camera
@@ -153,9 +156,11 @@ public class Player : MonoBehaviour
         rageModeIndicator.gameObject.SetActive(false);
         //Heal
         healEffect.gameObject.SetActive(false);
+        mpEffect.gameObject.SetActive(false);
         defBuffEffect.gameObject.SetActive(false);
         atkBuffEffect.gameObject.SetActive(false);
         agiBuffEffect.gameObject.SetActive(false);
+        //MP Heal
 
         //Targeted enemy info
         attackingThisEnemy = null;
@@ -179,6 +184,7 @@ public class Player : MonoBehaviour
         rageImage.fillAmount = currentRage / maxRage;
         damageText.gameObject.SetActive(false);
         healText.gameObject.SetActive(false);
+        mpText.gameObject.SetActive(false);
         waitTimeText.gameObject.SetActive(false);
     }
 
@@ -198,7 +204,6 @@ public class Player : MonoBehaviour
 
     private void StartBattle()
     {
-
         //Get the information from the party stats file
         UpdatePlayerStats();
         battleManager.players[playerIndex].playerIndex = playerIndex;
@@ -404,6 +409,7 @@ public class Player : MonoBehaviour
         damageText.gameObject.SetActive(true);
         damageText.text = Mathf.RoundToInt(damage).ToString();
         battleManager.players[playerIndex].currentHP = currentHP; //Update the BTL manager with the new health
+        PartyStats.chara[playerIndex].hitpoints = currentHP; //Update the party stats
 
         if (currentHP <= 0.0f)
         {
@@ -896,6 +902,7 @@ public class Player : MonoBehaviour
         }
         currentMP -= mpCost;
         battleManager.players[playerIndex].currentMP = currentMP;
+        PartyStats.chara[playerIndex].magicpoints = currentMP;
         uiBTL.UpdatePlayerMPControlPanel();
         currentState = playerState.Idle;
     }
@@ -1049,6 +1056,14 @@ public class Player : MonoBehaviour
                 {
                     healText.gameObject.SetActive(true);
                     healText.text = value.ToString();
+                }
+                break;
+            case "MP":
+                mpEffect.gameObject.SetActive(true);
+                if (value > 0)
+                {
+                    mpText.gameObject.SetActive(true);
+                    mpText.text = value.ToString();
                 }
                 break;
             case "DefBuff":
