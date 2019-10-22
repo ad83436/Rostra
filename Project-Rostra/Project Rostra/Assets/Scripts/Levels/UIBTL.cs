@@ -339,13 +339,16 @@ public class UIBTL : MonoBehaviour
     {
 
         //Once the images start moving, turn off the indicator next to the "RAGE" word and return the text color to normal if the previous player was in rage
-        if (playerInControl.currentState == Player.playerState.Rage)
+        if (playerInControl != null)
         {
-            rageModeIndicator1.gameObject.SetActive(false);
-            rageModeIndicator2.gameObject.SetActive(false);
-            skillsText.color = Color.white;
-            itemsText.color = Color.white;
-            guardText.color = Color.white;
+            if (playerInControl.currentState == Player.playerState.Rage)
+            {
+                rageModeIndicator1.gameObject.SetActive(false);
+                rageModeIndicator2.gameObject.SetActive(false);
+                skillsText.color = Color.white;
+                itemsText.color = Color.white;
+                guardText.color = Color.white;
+            }
         }
 
         //Move all the images an amount of imageMaxDistance to the right
@@ -1472,23 +1475,26 @@ public class UIBTL : MonoBehaviour
         }
         else
         {
-            if (playerInControl.currentState == Player.playerState.Rage)
+            if (playerInControl != null)
             {
-                //Make sure to turn off the indicators at the end of the turn, this is to make sure the end screen does not show the indicators
-                rageModeIndicator1.gameObject.SetActive(false);
-                rageModeIndicator2.gameObject.SetActive(false);
+                if (playerInControl.currentState == Player.playerState.Rage)
+                {
+                    //Make sure to turn off the indicators at the end of the turn, this is to make sure the end screen does not show the indicators
+                    rageModeIndicator1.gameObject.SetActive(false);
+                    rageModeIndicator2.gameObject.SetActive(false);
+                }
+                playerTurnIndicator.SetActive(false);
+                chooseEnemyArrow.SetActive(false);
+                controlsPanel.gameObject.SetActive(false);
+                itemsPanel.gameObject.SetActive(false);
+                firstTimeOpenedSkillsPanel = false; //Get ready for the next player in case they want to use thier skills
+                controlsIndicator = 0;
+                highlighter.gameObject.transform.position = highlighiterPos[0].transform.position;
+                DisableActivtyText();
+                numberOfEndTurnCalls = 0;
+                playerInControl.ForcePlayerTurnAnimationOff();
             }
-            playerTurnIndicator.SetActive(false);
-            chooseEnemyArrow.SetActive(false);
-            controlsPanel.gameObject.SetActive(false);
-            itemsPanel.gameObject.SetActive(false);
             moveImagesNow = true;
-            firstTimeOpenedSkillsPanel = false; //Get ready for the next player in case they want to use thier skills
-            controlsIndicator = 0;
-            highlighter.gameObject.transform.position = highlighiterPos[0].transform.position;
-            DisableActivtyText();
-            numberOfEndTurnCalls = 0;
-            playerInControl.ForcePlayerTurnAnimationOff();
         }
     }
 

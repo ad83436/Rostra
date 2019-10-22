@@ -62,6 +62,7 @@ public class BattleManager : MonoBehaviour
     public bool battleHasEnded;
     public static bool battleInProgress = false;
 
+    private float dummyTimer = 5.0f;
 
     //At the beginning of each battle, each player and enemy will use the singleton to update their stats
     #region singleton
@@ -185,7 +186,7 @@ public class BattleManager : MonoBehaviour
         {
             allEnemiesAdded = true;
             //Temp code
-            expGain = 40 * totalLevels;
+            expGain = 20 * totalLevels;
             Debug.Log("EXP GAINNN " + expGain);
         }
 
@@ -195,21 +196,8 @@ public class BattleManager : MonoBehaviour
 
     public void StartBattle()
     {
-        battleInProgress = true;
+
         //Store and sort the agilities of the players and enemies in ascending order
-
-        foreach (PlayerInformtion p in players)
-        {
-            if (p.playerReference != null)//Make sure all the entries have players (i.e. what if we have less than 4 players)
-            {
-                //Debug.Log(p.playerReference.name + " Has been added to sort");
-                pSpeeds.Add(p.speed);
-            }
-        }
-            
-
-        pSpeeds.Sort();
-
 
         foreach (PlayerInformtion e in enemies)
         {
@@ -221,18 +209,32 @@ public class BattleManager : MonoBehaviour
 
         eSpeeds.Sort();
 
+        foreach (PlayerInformtion p in players)
+        {
+            if (p.playerReference != null)//Make sure all the entries have players (i.e. what if we have less than 4 players)
+            {
+                pSpeeds.Add(p.speed);
+            }
+        }
+
+        pSpeeds.Sort();
+
 
         BuildQueue();
 
         //Update the consumable inventory
         TellInventoryToUpdateConsumables();
 
+        battleInProgress = true;
+
         if (!battleHasEnded)
         {
             NextOnQueue();
         }
 
-        
+
+
+
     }
 
     public void NextOnQueue()
@@ -442,7 +444,6 @@ public class BattleManager : MonoBehaviour
         players[playerIndex].speed = PartyStats.chara[playerIndex].TotalSpeed;
         players[playerIndex].exp = PartyStats.chara[playerIndex].currentExperience;
         players[playerIndex].expNeededForNextLevel = PartyStats.chara[playerIndex].neededExperience;
-        players[playerIndex].playerReference.UpdatePlayerStats();
     }
 
     private void TellInventoryToUpdateConsumables()

@@ -1491,6 +1491,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI - Battle Manager
       objectReference: {fileID: 0}
+    - target: {fileID: 230563281705353907, guid: 9f72b6d54aeb3c844871b64d15a60701,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 230563281705353905, guid: 9f72b6d54aeb3c844871b64d15a60701,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1564,6 +1569,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BattleManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 2794915159861226941, guid: 8ee36087513184f4ba2c93e1136be8ef,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2794915159861226931, guid: 8ee36087513184f4ba2c93e1136be8ef,
         type: 3}

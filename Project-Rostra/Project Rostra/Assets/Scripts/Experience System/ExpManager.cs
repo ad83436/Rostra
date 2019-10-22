@@ -34,7 +34,7 @@ public class ExpManager : MonoBehaviour {
 		PartyStats.chara[0].maxMana = 200.0f;
 		PartyStats.chara[0].attack = 30.0f;
 		PartyStats.chara[0].defence = 15.0f;
-		PartyStats.chara[0].agility = 14.0f;
+		PartyStats.chara[0].agility = 17.0f;
 		PartyStats.chara[0].strength = 16.0f;
 		PartyStats.chara[0].critical = 5.0f;
 		PartyStats.chara[0].speed = 16.0f;
@@ -62,7 +62,7 @@ public class ExpManager : MonoBehaviour {
 		PartyStats.chara[2].maxMana = 200.0f;
 		PartyStats.chara[2].attack = 35.0f;
 		PartyStats.chara[2].defence = 14.0f;
-		PartyStats.chara[2].agility = 16.0f;
+		PartyStats.chara[2].agility = 17.0f;
 		PartyStats.chara[2].strength = 15.0f;
 		PartyStats.chara[2].critical = 5.0f;
 		PartyStats.chara[2].speed = 14.0f;
