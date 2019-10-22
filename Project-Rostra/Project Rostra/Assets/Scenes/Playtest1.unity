@@ -2091,6 +2091,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 126959872}
   m_CullTransparentMesh: 0
+--- !u!1 &189502063 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4009531185347760040, guid: f9677c88e84e2fa4d8216d74ad64d140,
+    type: 3}
+  m_PrefabInstance: {fileID: 1546852095}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &189502064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 189502063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43509005be49f1c4f973fd54f9269559, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogue:
+    names:
+    - 
+    sentences:
+    - 'This is where we will end it off to avoid spoilers. Go to the door of the tavern
+      to continue the demo. '
+    portrait:
+    - {fileID: 21300000, guid: dd3d4b940a009d14dbfe8b78c3b4f6ca, type: 3}
+    povChange: []
+    typingSpeed: 0
+    isChoice: 0
+    choiceLine: 0
+    choice1: {fileID: 0}
+    choice2: {fileID: 0}
+    willRemember: 0
+    choiceSet: 0
+    choiceCare1: {fileID: 0}
+    choiceCare2: {fileID: 0}
+    choiceText1: 
+    choiceText2: 
+    normal: {fileID: 0}
+    hasPlayed: 0
+    willCount: 0
+    maxWillCount: 0
+    isBattle: 0
+    triggerBool: 0
+    isOneShot: 0
+  choiceCare: 0
+  isChoiceDepend: 0
 --- !u!1 &343581016
 GameObject:
   m_ObjectHideFlags: 0
@@ -2331,7 +2378,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 43.600006, y: 35.299988}
+  m_AnchoredPosition: {x: 43.59961, y: 35.299805}
   m_SizeDelta: {x: 459, y: 363.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &416931333
@@ -2622,8 +2669,82 @@ PrefabInstance:
       value: 'This is where we will end it off to avoid spoilers. Go to the door of
         the tavern to continue the demo. '
       objectReference: {fileID: 0}
+    - target: {fileID: 1257990562384444598, guid: d88e632621d169b4f96f296898977892,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[11]
+      value: 'All we know is the last place he was seen was near his home in the Outskirts
+        of town. We tried to go ourselves to see him but there are too many monsters. '
+      objectReference: {fileID: 0}
+    - target: {fileID: 1257990562384444598, guid: d88e632621d169b4f96f296898977892,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[12]
+      value: I don't want another of my kin to go missing. Besides, It's clear the
+        Alchemy Guild assissinated him so they could sow discord and wipe us out.
+      objectReference: {fileID: 0}
+    - target: {fileID: 1257990562384444598, guid: d88e632621d169b4f96f296898977892,
+        type: 3}
+      propertyPath: dialogue.normal
+      value: 
+      objectReference: {fileID: 600204649}
+    - target: {fileID: 1257990562384444598, guid: d88e632621d169b4f96f296898977892,
+        type: 3}
+      propertyPath: isOneShot
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1257990562384444598, guid: d88e632621d169b4f96f296898977892,
+        type: 3}
+      propertyPath: dialogue.isOneShot
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d88e632621d169b4f96f296898977892, type: 3}
+--- !u!1 &600204648 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5081656383449744968, guid: d88e632621d169b4f96f296898977892,
+    type: 3}
+  m_PrefabInstance: {fileID: 600204647}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &600204649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 600204648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43509005be49f1c4f973fd54f9269559, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogue:
+    names:
+    - 
+    sentences:
+    - 'This is where we will end it off to avoid spoilers. Go to the door of the tavern
+      to continue the demo. '
+    portrait:
+    - {fileID: 21300000, guid: dd3d4b940a009d14dbfe8b78c3b4f6ca, type: 3}
+    povChange: []
+    typingSpeed: 0
+    isChoice: 0
+    choiceLine: 0
+    choice1: {fileID: 0}
+    choice2: {fileID: 0}
+    willRemember: 0
+    choiceSet: 0
+    choiceCare1: {fileID: 0}
+    choiceCare2: {fileID: 0}
+    choiceText1: 
+    choiceText2: 
+    normal: {fileID: 0}
+    hasPlayed: 0
+    willCount: 0
+    maxWillCount: 0
+    isBattle: 0
+    triggerBool: 0
+    isOneShot: 0
+  choiceCare: 0
+  isChoiceDepend: 0
 --- !u!1001 &632895430
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2815,6 +2936,42 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 2.7
       objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899263, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 6190975520820174421, guid: 93c7b86ab6408964bb33535a87662b09,
+        type: 3}
+    - target: {fileID: 6336824498945899256, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 0.17
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899256, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 0.28
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899257, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 0.17
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899257, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 0.28
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899257, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: -0.030979857
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899257, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.5652914
+      objectReference: {fileID: 0}
     - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
         type: 3}
       propertyPath: dialogue.sentences.Array.size
@@ -2909,42 +3066,6 @@ PrefabInstance:
         type: 3}
       propertyPath: isChoiceDepend
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6336824498945899257, guid: a78d6f729d7fe0c46819b9311c776815,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 0.17
-      objectReference: {fileID: 0}
-    - target: {fileID: 6336824498945899257, guid: a78d6f729d7fe0c46819b9311c776815,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 0.28
-      objectReference: {fileID: 0}
-    - target: {fileID: 6336824498945899257, guid: a78d6f729d7fe0c46819b9311c776815,
-        type: 3}
-      propertyPath: m_Offset.y
-      value: -0.030979857
-      objectReference: {fileID: 0}
-    - target: {fileID: 6336824498945899257, guid: a78d6f729d7fe0c46819b9311c776815,
-        type: 3}
-      propertyPath: m_Size.y
-      value: 0.5652914
-      objectReference: {fileID: 0}
-    - target: {fileID: 6336824498945899263, guid: a78d6f729d7fe0c46819b9311c776815,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 6190975520820174421, guid: 93c7b86ab6408964bb33535a87662b09,
-        type: 3}
-    - target: {fileID: 6336824498945899256, guid: a78d6f729d7fe0c46819b9311c776815,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 0.17
-      objectReference: {fileID: 0}
-    - target: {fileID: 6336824498945899256, guid: a78d6f729d7fe0c46819b9311c776815,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 0.28
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 931425287, guid: a78d6f729d7fe0c46819b9311c776815, type: 3}
@@ -4138,6 +4259,32 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 2.7
       objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899263, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -2693724678846489391, guid: 11e32376ec40f1342a213cb044cebe46,
+        type: 3}
+    - target: {fileID: 6336824498945899256, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899256, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 0.18888889
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899257, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899257, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 0.18888889
+      objectReference: {fileID: 0}
     - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
         type: 3}
       propertyPath: dialogue.sentences.Array.size
@@ -4223,32 +4370,6 @@ PrefabInstance:
         type: 3}
       propertyPath: isChoiceDepend
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6336824498945899257, guid: a78d6f729d7fe0c46819b9311c776815,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 0.33333334
-      objectReference: {fileID: 0}
-    - target: {fileID: 6336824498945899257, guid: a78d6f729d7fe0c46819b9311c776815,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 0.18888889
-      objectReference: {fileID: 0}
-    - target: {fileID: 6336824498945899263, guid: a78d6f729d7fe0c46819b9311c776815,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: -2693724678846489391, guid: 11e32376ec40f1342a213cb044cebe46,
-        type: 3}
-    - target: {fileID: 6336824498945899256, guid: a78d6f729d7fe0c46819b9311c776815,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 0.33333334
-      objectReference: {fileID: 0}
-    - target: {fileID: 6336824498945899256, guid: a78d6f729d7fe0c46819b9311c776815,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 0.18888889
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 931425287, guid: a78d6f729d7fe0c46819b9311c776815, type: 3}
@@ -5953,6 +6074,21 @@ PrefabInstance:
       value: 'This is where we will end it off to avoid spoilers. Go to the door of
         the tavern to continue the demo. '
       objectReference: {fileID: 0}
+    - target: {fileID: 6941273051793765719, guid: f9677c88e84e2fa4d8216d74ad64d140,
+        type: 3}
+      propertyPath: dialogue.isOneShot
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6941273051793765719, guid: f9677c88e84e2fa4d8216d74ad64d140,
+        type: 3}
+      propertyPath: dialogue.normal
+      value: 
+      objectReference: {fileID: 189502064}
+    - target: {fileID: 6941273051793765719, guid: f9677c88e84e2fa4d8216d74ad64d140,
+        type: 3}
+      propertyPath: isOneShot
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f9677c88e84e2fa4d8216d74ad64d140, type: 3}
 --- !u!1001 &1550286325
@@ -6190,6 +6326,42 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 2.7
       objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899263, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 6358557475250261967, guid: 11e32376ec40f1342a213cb044cebe46,
+        type: 3}
+    - target: {fileID: 6336824498945899256, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899256, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 0.18888889
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899257, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899257, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 0.18888889
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899257, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: -0.057564348
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899257, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.6184605
+      objectReference: {fileID: 0}
     - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
         type: 3}
       propertyPath: dialogue.sentences.Array.size
@@ -6280,42 +6452,6 @@ PrefabInstance:
         type: 3}
       propertyPath: isChoiceDepend
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6336824498945899257, guid: a78d6f729d7fe0c46819b9311c776815,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 0.33333334
-      objectReference: {fileID: 0}
-    - target: {fileID: 6336824498945899257, guid: a78d6f729d7fe0c46819b9311c776815,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 0.18888889
-      objectReference: {fileID: 0}
-    - target: {fileID: 6336824498945899257, guid: a78d6f729d7fe0c46819b9311c776815,
-        type: 3}
-      propertyPath: m_Offset.y
-      value: -0.057564348
-      objectReference: {fileID: 0}
-    - target: {fileID: 6336824498945899257, guid: a78d6f729d7fe0c46819b9311c776815,
-        type: 3}
-      propertyPath: m_Size.y
-      value: 0.6184605
-      objectReference: {fileID: 0}
-    - target: {fileID: 6336824498945899263, guid: a78d6f729d7fe0c46819b9311c776815,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 6358557475250261967, guid: 11e32376ec40f1342a213cb044cebe46,
-        type: 3}
-    - target: {fileID: 6336824498945899256, guid: a78d6f729d7fe0c46819b9311c776815,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 0.33333334
-      objectReference: {fileID: 0}
-    - target: {fileID: 6336824498945899256, guid: a78d6f729d7fe0c46819b9311c776815,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 0.18888889
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 931425287, guid: a78d6f729d7fe0c46819b9311c776815, type: 3}
@@ -11190,6 +11326,42 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 2.7
       objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899263, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -394548977048536461, guid: 11e32376ec40f1342a213cb044cebe46,
+        type: 3}
+    - target: {fileID: 6336824498945899256, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899256, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 0.18888889
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899257, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899257, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 0.18888889
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899257, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: -0.017187744
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336824498945899257, guid: a78d6f729d7fe0c46819b9311c776815,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.5377076
+      objectReference: {fileID: 0}
     - target: {fileID: 6336824498945899259, guid: a78d6f729d7fe0c46819b9311c776815,
         type: 3}
       propertyPath: dialogue.sentences.Array.size
@@ -11289,42 +11461,6 @@ PrefabInstance:
         type: 3}
       propertyPath: isChoiceDepend
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6336824498945899257, guid: a78d6f729d7fe0c46819b9311c776815,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 0.33333334
-      objectReference: {fileID: 0}
-    - target: {fileID: 6336824498945899257, guid: a78d6f729d7fe0c46819b9311c776815,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 0.18888889
-      objectReference: {fileID: 0}
-    - target: {fileID: 6336824498945899257, guid: a78d6f729d7fe0c46819b9311c776815,
-        type: 3}
-      propertyPath: m_Offset.y
-      value: -0.017187744
-      objectReference: {fileID: 0}
-    - target: {fileID: 6336824498945899257, guid: a78d6f729d7fe0c46819b9311c776815,
-        type: 3}
-      propertyPath: m_Size.y
-      value: 0.5377076
-      objectReference: {fileID: 0}
-    - target: {fileID: 6336824498945899263, guid: a78d6f729d7fe0c46819b9311c776815,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: -394548977048536461, guid: 11e32376ec40f1342a213cb044cebe46,
-        type: 3}
-    - target: {fileID: 6336824498945899256, guid: a78d6f729d7fe0c46819b9311c776815,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 0.33333334
-      objectReference: {fileID: 0}
-    - target: {fileID: 6336824498945899256, guid: a78d6f729d7fe0c46819b9311c776815,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 0.18888889
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 931425287, guid: a78d6f729d7fe0c46819b9311c776815, type: 3}

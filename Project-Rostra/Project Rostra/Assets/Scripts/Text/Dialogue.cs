@@ -51,4 +51,6 @@ public class Dialogue
 	//public bool willPlayOnce;
 	//public bool narratorText;
 	public int triggerBool;
+	//
+	public bool isOneShot;
 }
