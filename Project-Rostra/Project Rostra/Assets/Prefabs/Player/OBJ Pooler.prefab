@@ -59,3 +59,19 @@ MonoBehaviour:
     prefab: {fileID: 8086483546740591391, guid: 602587776ca962f4e8ca233979ca04de,
       type: 3}
     poolSize: 5
+  - tag: ArrowRain
+    prefab: {fileID: 5638568755526142779, guid: 3bf39ebc1de69a748a1cabf8416b1f24,
+      type: 3}
+    poolSize: 1
+  - tag: ArrowImpact
+    prefab: {fileID: 1115780185244945743, guid: 0164096a5a1d8a64e8a5026dcf4f6e0e,
+      type: 3}
+    poolSize: 5
+  - tag: NeverAgain
+    prefab: {fileID: 5912572688224476285, guid: ec04ab5e41213234a91102eee741421d,
+      type: 3}
+    poolSize: 1
+  - tag: ArrowImpactNG
+    prefab: {fileID: 7807593752040339245, guid: 97b1f2a4571bccc458b1b5464f180bf8,
+      type: 3}
+    poolSize: 5

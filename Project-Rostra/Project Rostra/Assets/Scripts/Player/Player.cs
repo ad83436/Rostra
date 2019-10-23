@@ -1,4 +1,12 @@
-﻿using System.Collections;
+﻿///Note: This player script contains information that is used by all 4 player characters. The reason for this is
+///that the UIBTL needs to talk to the players. Making it a unified script seemed easier when we started rather than attempting to know
+///which of the 4 player scripts should be made active.
+///This is not the corect way to do it alas it's too late to change it now as it works. 
+///Will need to build a hierarchy and rely on virtual functions instead of cramming everything onto one huge script
+///My bad - Ayyad
+
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -55,20 +63,24 @@ public class Player : MonoBehaviour
     private float mpCost;
     private float skillWaitTime;
     private Player healThisPlayer;
-    private string skillNameForObjPooler;
+    private string skillObjectForObjPooler; //In case you're summong objects alongside the effects
+    private string skillNameForObjPooler; // Skill effect
     private int skillWaitingIndex = 0;
     private string skillAnimatorName = "";
     private int enemyRowIndicator = 0; //Used to know the enemy row the player is attacking
     private bool showSkillNameAfterWait = false; //If the player waits before executing the attack, make sure to show the name when the skill is executed
+    private int numberOfAttacks = 0; //Some skills have the character attack twice
 
     //Buffs
     //Booleans are used in case the player's stats were debuffed by an enemy and when buffed, the debuff effects will be negated. The Q counter will not be affected
     private bool defenseBuffed = false;
     private bool attackBuffed = false;
     private bool agilityBuffed = false;
+    private bool strBuffed = false;
     private float defenseBuffSkillQCounter = 0; //How many turns until the defense buff is reversed. Need three counters as multiple stats could be buffed/debuffed at the same time
     private float attackBuffSkillQCounter = 0;
     private float agilityBuffSkillQCounter = 0;
+    private float strBuffSkillQCounter = 0;
 
     //Rage
     public float currentRage;
@@ -88,6 +100,7 @@ public class Player : MonoBehaviour
     public GameObject defBuffEffect;
     public GameObject atkBuffEffect;
     public GameObject agiBuffEffect;
+    public GameObject strBuffEffect;
 
     //UI
     public Image hpImage;
@@ -160,6 +173,7 @@ public class Player : MonoBehaviour
         defBuffEffect.gameObject.SetActive(false);
         atkBuffEffect.gameObject.SetActive(false);
         agiBuffEffect.gameObject.SetActive(false);
+        strBuffEffect.gameObject.SetActive(false);
         //MP Heal
 
         //Targeted enemy info
@@ -287,6 +301,8 @@ public class Player : MonoBehaviour
     //Called from the UI
     public void Attack(Enemy enemyRef)
     {
+        numberOfAttacks = 0; //Just a precaution
+        chosenSkill = (int)SKILLS.NO_SKILL; //It's a normal attack, make sure CompleteAttack works correctly
         playerAnimator.SetBool("Turn", false);
         playerAnimator.SetBool("Attack", true);
         attackingThisEnemy = enemyRef;
@@ -294,7 +310,7 @@ public class Player : MonoBehaviour
     //Called from the animator
     private void CompleteAttack()
     {
-        playerAnimator.SetBool("Attack", false);
+        numberOfAttacks--;
         //Check hit or miss
         CalculateHit();
         if (hit)
@@ -306,18 +322,35 @@ public class Player : MonoBehaviour
             //Check for critical hits
             if (CalculateCrit() <= crit)
             {
-                attackingThisEnemy.TakeDamage(actualATK * 1.2f);
+                if (chosenSkill == (int)SKILLS.NO_SKILL) //In case the player's skill uses the same animation as the normal attack animation
+                {
+                    attackingThisEnemy.TakeDamage(actualATK * 1.2f, numberOfAttacks);
+                }
+                else
+                {
+                    attackingThisEnemy.TakeDamage(0.7f * actualATK + skills.SkillStats(chosenSkill)[0], numberOfAttacks);
+                }
             }
             else
             {
-                attackingThisEnemy.TakeDamage(actualATK);
+                if (chosenSkill == (int)SKILLS.NO_SKILL)
+                {
+                    attackingThisEnemy.TakeDamage(actualATK, numberOfAttacks);
+                }
+                else
+                {
+                    attackingThisEnemy.TakeDamage(0.5f * actualATK + skills.SkillStats(chosenSkill)[0], numberOfAttacks);
+                }
             }
 
         }
         else
         {
             Debug.Log("Player attack has missed");
-            uiBTL.EndTurn();
+            if (numberOfAttacks <= 0)
+            {
+                uiBTL.EndTurn();
+            }
         }
 
         //If the player is in rage state, they can only attack so it makes sense to check if we were in rage mode when attacking
@@ -328,6 +361,11 @@ public class Player : MonoBehaviour
             {
                 ResetPlayerRage();
             }
+        }
+
+        if (numberOfAttacks <= 0) //Check that all attacks have been done
+        {
+            playerAnimator.SetBool("Attack", false);
         }
 
     }
@@ -509,7 +547,6 @@ public class Player : MonoBehaviour
     //---------------------------------------------------Skills---------------------------------------------------//
     public void UseSkillOnOnePlayer(int skillID, float manaCost, float waitTime, Player playerReference)
     {
-        Debug.Log("Skill Target" + skillID);
 
         skillWaitTime = waitTime;
         chosenSkill = skillID;
@@ -529,13 +566,21 @@ public class Player : MonoBehaviour
             skillAnimatorName = "BuffDef";
             skillWaitingIndex = 1;
         }
+        else if (skillID == (int)SKILLS.Fr_IDontMiss) //I Don't Miss special skill
+        {
+            skillTarget = 8; //Single player buff
+            BuffStats("Strength", skills.SkillStats(chosenSkill)[0], 1);
+        }
 
         //If there's waiting time, go to wait state and end the turn 
         if (waitTime <= 0)
         {
             skillWaitingIndex = 0;
             playerAnimator.SetInteger("WaitingIndex", 0);
-            playerAnimator.SetBool(skillAnimatorName, true);
+            if (skillAnimatorName != "")
+            {
+                playerAnimator.SetBool(skillAnimatorName, true);
+            }
         }
         else
         {
@@ -561,7 +606,7 @@ public class Player : MonoBehaviour
             skillAnimatorName = "Heal";
             skillWaitingIndex = 1;
         }
-        else if (skillID == 3) //Buff defense skill
+        else if (skillID == (int)SKILLS.Ob_ShieldAllAllies) //Buff defense skill
         {
             skillTarget = 9; //All player buff
             skillAnimatorName = "BuffDef";
@@ -588,26 +633,35 @@ public class Player : MonoBehaviour
 
     public void UseSkillOnOneEnemy(int skillID, float manaCost, float waitTime, Enemy enemyReference)
     {
-
+        Debug.Log("Skill ID is: " + skillID);
         skillWaitTime = waitTime;
         skillTarget = 0;
         chosenSkill = skillID;
         mpCost = manaCost;
         attackingThisEnemy = enemyReference;
 
-        //Check which skill to know which animation to run
-        if (skillID==(int)SKILLS.Fr_PiercingShot) //Fargas and Freya basic attack skills
+        switch(skillID)
         {
-            Debug.Log("HIT");
-            skillNameForObjPooler = "FFSkill1";
-            skillAnimatorName = "ASkill";
-            skillWaitingIndex = 1; //Should there be waiting time, this index is used to know which waiting animation to go to
+            case (int)SKILLS.Fr_DoubleShot: //Double shot is a normal attack done twice
+                Debug.Log("Inside HITTT ");
+                numberOfAttacks = 2;
+                playerAnimator.SetBool("Turn", false);
+                skillAnimatorName = "Attack";
+                currentMP -= mpCost;
+                battleManager.players[playerIndex].currentMP = currentMP;
+                PartyStats.chara[playerIndex].magicpoints = currentMP;
+                break;
+            case (int)SKILLS.Fr_PiercingShot:
+                skillNameForObjPooler = "FFSkill1";
+                skillAnimatorName = "ASkill";
+                skillWaitingIndex = 1; //Should there be waiting time, this index is used to know which waiting animation to go to
+                break;
         }
 
         //Do we have to wait?
         if (waitTime <= 0)
         {
-
+            Debug.Log("Further Inside HITTT ");
             skillWaitingIndex = 0;
             playerAnimator.SetInteger("WaitingIndex", 0);
             playerAnimator.SetBool(skillAnimatorName, true);
@@ -631,19 +685,28 @@ public class Player : MonoBehaviour
         chosenSkill = skillID;
         mpCost = manaCost;
 
+
         //Check which skill to know which animation to run
-        if (skillID == 1) //Fargas  basic attack skill --> Placeholder will be changed once we have the actual skill
+        switch (skillID)
         {
-            Debug.Log("HIT");
-            skillNameForObjPooler = "FFSkill1";
-            skillAnimatorName = "ASkill";
-            skillWaitingIndex = 1;
+            case (int)SKILLS.Fr_ArrowRain:
+                skillObjectForObjPooler = "ArrowRain";
+                skillNameForObjPooler = "ArrowImpact";
+                skillAnimatorName = "ASkill";
+                skillWaitingIndex = 1;
+                break;
+            case (int)SKILLS.Fr_NeverAgain:
+                skillObjectForObjPooler = "NeverAgain";
+                skillNameForObjPooler = "ArrowImpactNG";
+                skillAnimatorName = "ASkill";
+                skillWaitingIndex = -2;
+                break;
         }
 
         if (waitTime <= 0)
         {
             skillWaitingIndex = 0;
-            playerAnimator.SetInteger("WaitingIndex", -1);
+            playerAnimator.SetInteger("WaitingIndex", -1); // (All attacks) run when the index is -1
             playerAnimator.SetBool(skillAnimatorName, true);
         }
         else
@@ -719,12 +782,12 @@ public class Player : MonoBehaviour
                 if (CalculateCrit() <= crit)
                 {
                     Debug.Log("Skill Crit");
-                    attackingThisEnemy.TakeDamage(0.7f * actualATK + skills.SkillStats(chosenSkill)[0]); //Damage is the half the player's attack stat and the skill's attack stat
+                    attackingThisEnemy.TakeDamage(0.7f * actualATK + skills.SkillStats(chosenSkill)[0], numberOfAttacks); //Damage is the half the player's attack stat and the skill's attack stat
                 }
                 else
                 {
                     Debug.Log("No Skill Crit");
-                    attackingThisEnemy.TakeDamage(0.5f * actualATK + skills.SkillStats(chosenSkill)[0]); //Damage is the half the player's attack stat and the skill's attack stat
+                    attackingThisEnemy.TakeDamage(0.5f * actualATK + skills.SkillStats(chosenSkill)[0], numberOfAttacks); //Damage is the half the player's attack stat and the skill's attack stat
                 }
 
             }
@@ -759,12 +822,12 @@ public class Player : MonoBehaviour
                                 if (CalculateCrit() <= crit)
                                 {
                                     Debug.Log("Skill Crit");
-                                    battleManager.enemies[i].enemyReference.TakeDamage(0.7f * actualATK + skills.SkillStats(chosenSkill)[0]); //Damage is the half the player's attack stat and the skill's attack stat
+                                    battleManager.enemies[i].enemyReference.TakeDamage(0.7f * actualATK + skills.SkillStats(chosenSkill)[0], numberOfAttacks); //Damage is the half the player's attack stat and the skill's attack stat
                                 }
                                 else
                                 {
                                     Debug.Log("No Skill Crit");
-                                    battleManager.enemies[i].enemyReference.TakeDamage(0.5f * actualATK + skills.SkillStats(chosenSkill)[0]); //Damage is the half the player's attack stat and the skill's attack stat
+                                    battleManager.enemies[i].enemyReference.TakeDamage(0.5f * actualATK + skills.SkillStats(chosenSkill)[0], numberOfAttacks); //Damage is the half the player's attack stat and the skill's attack stat
                                 }
                             }
                             else
@@ -796,12 +859,12 @@ public class Player : MonoBehaviour
                                 if (CalculateCrit() <= crit)
                                 {
                                     Debug.Log("Skill Crit");
-                                    battleManager.enemies[i].enemyReference.TakeDamage(0.7f * actualATK + skills.SkillStats(chosenSkill)[0]); //Damage is the half the player's attack stat and the skill's attack stat
+                                    battleManager.enemies[i].enemyReference.TakeDamage(0.7f * actualATK + skills.SkillStats(chosenSkill)[0], numberOfAttacks); //Damage is the half the player's attack stat and the skill's attack stat
                                 }
                                 else
                                 {
                                     Debug.Log("No Skill Crit");
-                                    battleManager.enemies[i].enemyReference.TakeDamage(0.5f * actualATK + skills.SkillStats(chosenSkill)[0]); //Damage is the half the player's attack stat and the skill's attack stat
+                                    battleManager.enemies[i].enemyReference.TakeDamage(0.5f * actualATK + skills.SkillStats(chosenSkill)[0], numberOfAttacks); //Damage is the half the player's attack stat and the skill's attack stat
                                 }
                             }
                             else
@@ -829,6 +892,10 @@ public class Player : MonoBehaviour
                         CalculateHitForSkill(battleManager.enemies[i].enemyReference);
                         if (hit)
                         {
+                            if (skillObjectForObjPooler != "")
+                            {
+                                objPooler.SpawnFromPool(skillObjectForObjPooler, battleManager.enemies[i].enemyReference.gameObject.transform.position, gameObject.transform.rotation);
+                            }
                             objPooler.SpawnFromPool(skillNameForObjPooler, battleManager.enemies[i].enemyReference.gameObject.transform.position, gameObject.transform.rotation);
                             Debug.Log("Skill hit");
                             //Summon effect here
@@ -836,12 +903,12 @@ public class Player : MonoBehaviour
                             if (CalculateCrit() <= crit)
                             {
                                 Debug.Log("Skill Crit");
-                                battleManager.enemies[i].enemyReference.TakeDamage(0.7f * actualATK + skills.SkillStats(chosenSkill)[0]); //Damage is the half the player's attack stat and the skill's attack stat
+                                battleManager.enemies[i].enemyReference.TakeDamage(0.7f * actualATK + skills.SkillStats(chosenSkill)[0], numberOfAttacks); //Damage is the half the player's attack stat and the skill's attack stat
                             }
                             else
                             {
                                 Debug.Log("No Skill Crit");
-                                battleManager.enemies[i].enemyReference.TakeDamage(0.5f * actualATK + skills.SkillStats(chosenSkill)[0]); //Damage is the half the player's attack stat and the skill's attack stat
+                                battleManager.enemies[i].enemyReference.TakeDamage(0.5f * actualATK + skills.SkillStats(chosenSkill)[0], numberOfAttacks); //Damage is the half the player's attack stat and the skill's attack stat
                             }
                         }
                         else
@@ -878,14 +945,14 @@ public class Player : MonoBehaviour
         {
             if (chosenSkill == (int)SKILLS.Ob_ShieldAlly)//Defense Buff
             {
-                healThisPlayer.BuffStats("Defense", skills.SkillStats(chosenSkill)[0], skills.SkillStats(chosenSkill)[2]);
+                healThisPlayer.BuffStats("Defense", skills.SkillStats(chosenSkill)[0], 3);
                 playerAnimator.SetBool("BuffDef", false);
             }
 
         }
         else if (skillTarget == 9) //Buff all players
         {
-            if (chosenSkill == 3) //Defense buff // Placeholder
+            if (chosenSkill == (int)SKILLS.Ob_ShieldAllAllies) //Defense buff // Placeholder
             {
                 for (int i = 0; i < battleManager.players.Length; i++)
                 {
@@ -893,13 +960,14 @@ public class Player : MonoBehaviour
                     {
                         if (!battleManager.players[i].playerReference.dead && battleManager.players[i].playerReference.currentState != playerState.Rage)
                         {
-                            battleManager.players[i].playerReference.BuffStats("Defense", skills.SkillStats(chosenSkill)[0], skills.SkillStats(chosenSkill)[2]);
+                            battleManager.players[i].playerReference.BuffStats("Defense", skills.SkillStats(chosenSkill)[0], 3);
                         }
                     }
                 }
                 playerAnimator.SetBool("BuffDef", false);
             }
         }
+        chosenSkill = (int)SKILLS.NO_SKILL;
         currentMP -= mpCost;
         battleManager.players[playerIndex].currentMP = currentMP;
         PartyStats.chara[playerIndex].magicpoints = currentMP;
@@ -949,6 +1017,7 @@ public class Player : MonoBehaviour
         switch (statToBuff)
         {
             case "Defense":
+                EnableEffect("DefBuff", 0);
                 if (defenseBuffed && actualDEF < def) //Check for debuffs first
                 {
                     actualDEF = def;
@@ -960,7 +1029,7 @@ public class Player : MonoBehaviour
                 }
                 else if (!defenseBuffed) //No buffs or debuffs have occurred so far
                 {
-                    EnableEffect("DefBuff", 0);
+                    
                     defenseBuffed = true;
                     actualDEF = def + amount;
                     defenseBuffSkillQCounter = lastsNumberOfTurns;
@@ -970,42 +1039,66 @@ public class Player : MonoBehaviour
                 }
                 break;
             case "Attack":
-                if (attackBuffed && actualATK < def) //Check for debuffs first
+                EnableEffect("AtkBuff", 0);
+                if (attackBuffed && actualATK < atk) //Check for debuffs first
                 {
                     actualATK = atk;
                     attackBuffSkillQCounter = 0; //Negate the debuff completely
                 }
-                else if (attackBuffed && actualATK > def) //If attack has already been buffed, update the Q counter
+                else if (attackBuffed && actualATK > atk) //If attack has already been buffed, update the Q counter
                 {
                     attackBuffSkillQCounter = lastsNumberOfTurns;
                 }
                 else if (!attackBuffed) //No buffs or debuffs have occurred so far
                 {
+                    
                     attackBuffed = true;
                     actualATK = atk + amount;
                     attackBuffSkillQCounter = lastsNumberOfTurns;
                 }
                 break;
             case "Agility":
-                if (agilityBuffed && actualAgi < def) //Check for debuffs first
+                EnableEffect("AgiBuff", 0);
+                if (agilityBuffed && actualAgi < agi) //Check for debuffs first
                 {
                     actualAgi = agi;
                     agilityBuffSkillQCounter = 0; //Negate the debuff completely
                 }
-                else if (agilityBuffed && actualAgi > def) //If agility has already been buffed, update the Q counter
+                else if (agilityBuffed && actualAgi > agi) //If agility has already been buffed, update the Q counter
                 {
                     agilityBuffSkillQCounter = lastsNumberOfTurns;
                 }
                 else if (!agilityBuffed) //No buffs or debuffs have occurred so far
                 {
+                   
                     agilityBuffed = true;
                     actualAgi = agi + amount;
                     agilityBuffSkillQCounter = lastsNumberOfTurns;
                 }
                 break;
+            case "Strength":
+                EnableEffect("StrBuff", 0);
+                if (strBuffed && actualSTR < str) //Check for debuffs first
+                {
+                    actualSTR = str;
+                    strBuffSkillQCounter = 0; //Negate the debuff completely
+                }
+                else if (strBuffed && actualSTR > str) //If str has already been buffed, update the Q counter
+                {
+                    strBuffSkillQCounter = lastsNumberOfTurns;
+                }
+                else if (!strBuffed) //No buffs or debuffs have occurred so far
+                {
+                   
+                    strBuffed = true;
+                    actualSTR = str + amount;
+                    Debug.Log(name + " Strength is: " + actualSTR);
+                    strBuffSkillQCounter = lastsNumberOfTurns;
+                }
+                break;
         }
 
-        uiBTL.EndTurn(); //End the turn of the current player (i.e. the buffer) when the buffing is done
+       
     }
 
     private void CheckForBuffs()
@@ -1020,6 +1113,7 @@ public class Player : MonoBehaviour
                 defenseBuffed = false;
                 actualDEF = def;
                 Debug.Log("Buff has ended");
+                uiBTL.UpdateActivityText("DEF is back to normal");
             }
         }
 
@@ -1031,6 +1125,7 @@ public class Player : MonoBehaviour
                 attackBuffSkillQCounter = 0;
                 attackBuffed = false;
                 actualATK = atk;
+                uiBTL.UpdateActivityText("ATK is back to normal");
             }
         }
 
@@ -1042,6 +1137,19 @@ public class Player : MonoBehaviour
                 agilityBuffSkillQCounter = 0;
                 agilityBuffed = false;
                 actualAgi = agi;
+                uiBTL.UpdateActivityText("AGI is back to normal");
+            }
+        }
+
+        if (strBuffed && strBuffSkillQCounter > 0)
+        {
+            strBuffSkillQCounter--;
+            if (strBuffSkillQCounter <= 0)
+            {
+                strBuffSkillQCounter = 0;
+                strBuffed = false;
+                actualSTR = str;
+                uiBTL.UpdateActivityText("STR is back to normal");
             }
         }
     }
@@ -1075,6 +1183,11 @@ public class Player : MonoBehaviour
             case "AgiBuff":
                 agiBuffEffect.gameObject.SetActive(true);
                 break;
+            case "StrBuff":
+                strBuffEffect.gameObject.SetActive(true);
+                break;
         }
+
+        uiBTL.EndTurn(); //End the turn of the current player (i.e. the buffer) when the buffing is done
     }
 }

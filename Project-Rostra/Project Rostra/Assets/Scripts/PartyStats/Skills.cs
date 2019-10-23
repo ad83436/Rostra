@@ -18,10 +18,14 @@ public enum SKILLS { // Minimum Value -- 0x0000, Maximum Value -- 0xFFEF (65519 
     Fa_SwordOfFury =        0x000A,
     Fr_PiercingShot =       0x000B,
     Fr_ArrowRain =          0x000C,
-    Ar_HealingAura =        0x000D,
-    Ar_DrainEye =           0x000E,
-    Ob_ShieldAlly =         0x000F,
-    Ob_ShieldAllAllies =    0x0010,
+    Fr_DoubleShot =         0x000D,
+    Fr_PhantomShot =        0x000E,
+    Fr_IDontMiss =          0x000F,
+    Fr_NeverAgain =         0x0010,
+    Ar_HealingAura =        0x0011,
+    Ar_DrainEye =           0x0012,
+    Ob_ShieldAlly =         0x0013,
+    Ob_ShieldAllAllies =    0x0014,
 };
 
 public enum SKILL_TYPE{ // Minimum Value -- 0xFFF0, Maximum Value -- 0xFFFF (16 possible skill types)
