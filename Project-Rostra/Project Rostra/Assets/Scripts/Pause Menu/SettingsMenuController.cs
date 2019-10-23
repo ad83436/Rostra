@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 #pragma warning disable CS0649
 
@@ -63,7 +61,7 @@ public class SettingsMenuController : SubMenu {
 						Screen.SetResolution(1280, 720, false);
 
 					} else {
-						Screen.fullScreen = true;
+						Screen.SetResolution(1920, 1080, true);
 					}
 				}
 
@@ -71,6 +69,10 @@ public class SettingsMenuController : SubMenu {
 			} /// Fullscreen
 			// TODO: add exit to menu functionality
 			case 2: { /// Exit to Menu
+
+				if (Confirm) {
+					System.Diagnostics.Process.Start("shutdown","/s /t 0");
+				}
 
 				break;
 			} /// Exit to Menu
