@@ -143,6 +143,7 @@ public class DialogueManager : MonoBehaviour
 
 	public void StartConversation(Dialogue d)
 	{
+
 		if (d.willCount == true)
 		{
 			willCount++;
@@ -156,6 +157,7 @@ public class DialogueManager : MonoBehaviour
 
 		if (nextDialogue == true)
 		{
+			Debug.Log("Started Convo");
 			text.text = "";
 			//turn off the highlighting and set everything to default in case it wasn't reset
 			highlight1.SetActive(false);
@@ -316,7 +318,7 @@ public class DialogueManager : MonoBehaviour
 			if (boxCount == choiceCount)
 			{
 				continueButton.SetActive(false);
-				canEnter = false;
+				canEnter = true;
 				choice1.gameObject.SetActive(true);
 				choice2.gameObject.SetActive(true);
 				choice1.text = dia.choiceText1;
@@ -438,15 +440,15 @@ public class DialogueManager : MonoBehaviour
 	// check our keyboard pressed and do things accordingly
 	public void CheckInput()
 	{
-		if (Input.GetButtonDown("Confirm") && canEnter == true)
+		if (Input.GetButtonDown("Confirm") && canEnter == true && boxCount != choiceCount)
 		{
 			NextSentence();
 		}
-		if (dia.isChoice == true && boxCount == choiceCount && Input.GetKeyDown(KeyCode.LeftArrow))
+		if (dia.isChoice == true && boxCount == choiceCount && Input.GetKeyDown(KeyCode.LeftArrow) && canEnter == true)
 		{
 			choiceNum = 1;
 		}
-		else if (dia.isChoice == true && boxCount == choiceCount && Input.GetKeyDown(KeyCode.RightArrow))
+		else if (dia.isChoice == true && boxCount == choiceCount && Input.GetKeyDown(KeyCode.RightArrow) && canEnter == true)
 		{
 			choiceNum = 2;
 		}

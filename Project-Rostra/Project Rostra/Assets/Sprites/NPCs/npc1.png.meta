@@ -17,6 +17,12 @@ TextureImporter:
   - first:
       213: -394548977048536461
     second: Ambitious_Man
+  - first:
+      213: 3315085677226881915
+    second: Torven_Left
+  - first:
+      213: 5943741281028038998
+    second: Domel
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -193,7 +199,7 @@ TextureImporter:
         width: 17
         height: 30
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -201,6 +207,48 @@ TextureImporter:
       bones: []
       spriteID: 6a20f0aaf4be5c247a9590ef0a5473ca
       internalID: -394548977048536461
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Torven_Left
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 180
+        width: 15
+        height: 29
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6494e1384fdb17540a49a852fcc83593
+      internalID: 3315085677226881915
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Domel
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 108
+        width: 17
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 353f4e1207c55c94f8195ef6868333e8
+      internalID: 5943741281028038998
       vertices: []
       indices: 
       edges: []
