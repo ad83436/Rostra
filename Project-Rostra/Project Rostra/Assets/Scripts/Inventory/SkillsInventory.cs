@@ -35,9 +35,17 @@ public class SkillsInventory : MonoBehaviour {
 
         AddToUnlockedSkills((int)SKILLS.Ob_ShieldAlly, 1);
         EquipSkill((int)SKILLS.Ob_ShieldAlly, 0, 1);
+        AddToUnlockedSkills((int)SKILLS.Ob_ShieldAllAllies, 1);
+        EquipSkill((int)SKILLS.Ob_ShieldAllAllies, 1, 1);
 
-        AddToUnlockedSkills((int)SKILLS.Fr_PiercingShot, 2);
-        EquipSkill((int)SKILLS.Fr_PiercingShot, 0, 2);
+        AddToUnlockedSkills((int)SKILLS.Fr_DoubleShot, 2);
+        EquipSkill((int)SKILLS.Fr_DoubleShot, 0, 2);
+        AddToUnlockedSkills((int)SKILLS.Fr_ArrowRain, 2);
+        EquipSkill((int)SKILLS.Fr_ArrowRain, 1, 2);
+        AddToUnlockedSkills((int)SKILLS.Fr_IDontMiss, 2);
+        EquipSkill((int)SKILLS.Fr_IDontMiss, 2, 2);
+        AddToUnlockedSkills((int)SKILLS.Fr_NeverAgain, 2);
+        EquipSkill((int)SKILLS.Fr_NeverAgain, 3, 2);
 
         AddToUnlockedSkills((int)SKILLS.Ar_HealingAura, 3);
         EquipSkill((int)SKILLS.Ar_HealingAura, 0, 3);
@@ -244,10 +252,18 @@ public class SkillsInventory : MonoBehaviour {
                 return "Swift Strike";
             case (int)SKILLS.Fa_SwordOfFury:
                 return "Sword of Fury";
+            case (int)SKILLS.Fr_DoubleShot:
+                return "Double Shot";
             case (int)SKILLS.Fr_PiercingShot:
                 return "Piercing Shot";
             case (int)SKILLS.Fr_ArrowRain:
                 return "Arrow Rain";
+            case (int)SKILLS.Fr_IDontMiss:
+                return "I Don't Miss.";
+            case (int)SKILLS.Fr_PhantomShot:
+                return "Phantom Shot";
+            case (int)SKILLS.Fr_NeverAgain:
+                return "Never Again!";
             case (int)SKILLS.Ob_ShieldAlly:
                 return "Shield Ally";
             case (int)SKILLS.Ob_ShieldAllAllies:
@@ -282,16 +298,24 @@ public class SkillsInventory : MonoBehaviour {
                 return "Inflict a flurry of strikes on a row of enemies";
             case (int)SKILLS.Fa_SwordOfFury:
                 return "Inflict a great deal of damage to one enemy";
+            case (int)SKILLS.Fr_DoubleShot:
+                return "Frea shoots two arrows in succession at one enemy";
             case (int)SKILLS.Fr_PiercingShot:
-                return "As single strong shot aimed at one enemy";
+                return "A single strong shot aimed at one enemy";
             case (int)SKILLS.Fr_ArrowRain:
                 return "Frea shoots a rain of arrows that damages all enemies";
+            case (int)SKILLS.Fr_IDontMiss:
+                return "Frea takes a deep breath and concentrates. Increases base Strength by 10 for three turns. ";
+            case (int)SKILLS.Fr_PhantomShot:
+                return "No one can see it coming. Damages a row of enemies and decreases their attack for three turns";
+            case (int)SKILLS.Fr_NeverAgain:
+                return "Frea channels all her anger into a single devastating shot that pierces through all enemies";
             case (int)SKILLS.Ob_ShieldAlly:
                 return "Increase the defense of one ally for three turns";
             case (int)SKILLS.Ob_ShieldAllAllies:
                 return "Increase the defense of all allies for three turns";
             case (int)SKILLS.Ar_HealingAura:
-                return "Restore the health points of all the players";
+                return "Restore a portion of all alive allies' HP";
             case (int)SKILLS.Ar_DrainEye:
                 return "Ally affected by Drain Eye gains health every time they deal damage. Lasts for 3 turns";
             default: return "";
@@ -358,26 +382,54 @@ public class SkillsInventory : MonoBehaviour {
                 skillStat[4] = (float)SKILL_TYPE.SINGLE_TARGET_ATK;
                 skillStat[5] = 40;
                 break;
-            case (int)SKILLS.Fr_PiercingShot:
-                skillStat[0] = 40;
-                skillStat[1] = 100;
+            case (int)SKILLS.Fr_DoubleShot:
+                skillStat[0] = 20;
+                skillStat[1] = 16;
                 skillStat[2] = 0;
                 skillStat[4] = (float)SKILL_TYPE.SINGLE_TARGET_ATK;
-                skillStat[5] = 35;
+                skillStat[5] = 25;
+                break;
+            case (int)SKILLS.Fr_PiercingShot:
+                skillStat[0] = 50;
+                skillStat[1] = 18;
+                skillStat[2] = 1;
+                skillStat[4] = (float)SKILL_TYPE.SINGLE_TARGET_ATK;
+                skillStat[5] = 40;
                 break;
             case (int)SKILLS.Fr_ArrowRain:
-                skillStat[0] = 40;
+                skillStat[0] = 35;
+                skillStat[1] = 15;
+                skillStat[2] = 1;
+                skillStat[4] = (float)SKILL_TYPE.ALL_TARGETS_ATK;
+                skillStat[5] = 45;
+                break;
+            case (int)SKILLS.Fr_IDontMiss:
+                skillStat[0] = 10;
                 skillStat[1] = 100;
                 skillStat[2] = 0;
-                skillStat[4] = (float)SKILL_TYPE.ALL_TARGETS_ATK;
+                skillStat[4] = (float)SKILL_TYPE.SINGLE_PLAYER_BUFF;
                 skillStat[5] = 35;
+                break;
+            case (int)SKILLS.Fr_PhantomShot:
+                skillStat[0] = 50;
+                skillStat[1] = 16;
+                skillStat[2] = 2;
+                skillStat[4] = (float)SKILL_TYPE.FULL_ROW_ATK;
+                skillStat[5] = 55;
+                break;
+            case (int)SKILLS.Fr_NeverAgain:
+                skillStat[0] = 100;
+                skillStat[1] = 18;
+                skillStat[2] = 4;
+                skillStat[4] = (float)SKILL_TYPE.ALL_TARGETS_ATK;
+                skillStat[5] = 100;
                 break;
             case (int)SKILLS.Ob_ShieldAlly:
                 skillStat[0] = 20;
                 skillStat[1] = 100;
                 skillStat[2] = 0;
                 skillStat[4] = (float)SKILL_TYPE.SINGLE_PLAYER_BUFF;
-                skillStat[5] = 40;
+                skillStat[5] = 20;
                 break;
             case (int)SKILLS.Ob_ShieldAllAllies:
                 skillStat[0] = 20;

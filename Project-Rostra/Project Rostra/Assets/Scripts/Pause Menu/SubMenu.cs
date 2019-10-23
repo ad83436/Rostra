@@ -6,7 +6,7 @@ using UnityEngine;
 
 public abstract class SubMenu : MonoBehaviour {
 
-	private CanvasGroup group;
+	[SerializeField] private CanvasGroup group;
 
 	private bool active = false;
 	public bool IsActive {
@@ -37,10 +37,6 @@ public abstract class SubMenu : MonoBehaviour {
 	protected bool Right => PauseMenuController.instance.Right;
 	protected bool Confirm => PauseMenuController.instance.Confirm;
 	protected bool Cancel => PauseMenuController.instance.Cancel;
-
-	protected virtual void Awake() {
-		group = GetComponent<CanvasGroup>();
-	}
 
 	public abstract void MenuUpdate();
 	public abstract void OnVisible();

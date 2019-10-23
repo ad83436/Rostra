@@ -586,7 +586,7 @@ public class Enemy : MonoBehaviour
 
 
     //Calcualte the damage
-    public void TakeDamage(float playerAttack)
+    public void TakeDamage(float playerAttack, int numberOfAttacks)
     {
         Debug.Log("Received player attack: " + playerAttack);
         float damage = playerAttack - ((eDefence / (20.0f + eDefence)) * playerAttack);
@@ -603,7 +603,10 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-            uiBTL.EndTurn(); //Only end the turn after the damage has been taken
+            if (numberOfAttacks <= 0)
+            {
+                uiBTL.EndTurn(); //Only end the turn after the damage has been taken
+            }
         }
     }
 

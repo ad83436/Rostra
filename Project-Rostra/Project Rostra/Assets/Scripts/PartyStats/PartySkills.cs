@@ -33,12 +33,12 @@ public static class PartySkills {
         new CharacterSkills(
             new int[] {
                 // Unlockable Skills for Frea
+                (int)SKILLS.Fr_DoubleShot,
                 (int)SKILLS.Fr_PiercingShot,
                 (int)SKILLS.Fr_ArrowRain,
-                (int)SKILLS.NO_SKILL,
-                (int)SKILLS.NO_SKILL,
-                (int)SKILLS.NO_SKILL,
-                (int)SKILLS.NO_SKILL,
+                (int)SKILLS.Fr_IDontMiss,
+                (int)SKILLS.Fr_PhantomShot,
+                (int)SKILLS.Fr_NeverAgain,
                 (int)SKILLS.NO_SKILL,
                 (int)SKILLS.NO_SKILL,
             }),

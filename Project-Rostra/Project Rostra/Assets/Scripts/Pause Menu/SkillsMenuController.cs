@@ -65,8 +65,7 @@ public class SkillsMenuController : SubMenu {
 
 	#region Initialization
 
-	protected override void Awake() {
-		base.Awake();
+	private void Awake() {
 		EquipGroup.alpha = 1f;
 		SkillGroup.alpha = 0f;
 	}

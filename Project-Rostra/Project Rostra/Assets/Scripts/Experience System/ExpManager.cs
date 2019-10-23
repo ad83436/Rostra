@@ -231,8 +231,12 @@ public class ExpManager : MonoBehaviour {
                 }
 			case 2: //Frea
 				switch (skill) {
-					case SKILLS.Fr_PiercingShot:	return new int[] { 35, 14, 190, 200, 15, 16, 14 };
-                    case SKILLS.Fr_ArrowRain:       return new int[] { 36, 14, 190, 200, 15, 16, 14 };
+                    case SKILLS.Fr_DoubleShot:      return new int[] { 35, 14, 190, 200, 15, 16, 14 };
+                    case SKILLS.Fr_PiercingShot:	return new int[] { 40, 14, 265, 200, 17, 16, 14 };
+                    case SKILLS.Fr_ArrowRain:       return new int[] { 37, 14, 190, 325, 16, 16, 14 };
+                    case SKILLS.Fr_IDontMiss:       return new int[] { 35, 16, 265, 325, 16, 16, 16 };
+                    case SKILLS.Fr_PhantomShot:     return new int[] { 42, 18, 265, 400, 18, 16, 16 };
+                    case SKILLS.Fr_NeverAgain:      return new int[] { 44, 20, 340, 400, 20, 18, 17 };
                     default: return null;
                         
                 }
