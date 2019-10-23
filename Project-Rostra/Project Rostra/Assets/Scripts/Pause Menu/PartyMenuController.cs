@@ -74,8 +74,7 @@ public class PartyMenuController : SubMenu {
 	
 	public override void OnVisible() { }
 
-	protected override void Awake() {
-		base.Awake();
+	private void Awake() { 
 		statsMenu.pressedDelegate = IncreaseStat;
 		statsMenu.exitDelegate = CloseStatsMenu;
 	}

@@ -95,8 +95,7 @@ public class ItemsMenuController : SubMenu {
 
 	#region Initialization
 
-	protected override void Awake() {
-		base.Awake();
+	private void Awake() {
 		availOptions = new bool[5];
 		for (int i = 0; i < availOptions.Length; i++) {
 			availOptions[i] = false;
