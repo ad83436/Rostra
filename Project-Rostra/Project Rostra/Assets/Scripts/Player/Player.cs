@@ -441,6 +441,7 @@ public class Player : MonoBehaviour
 
     public void TakeDamage(float enemyATK)
     {
+        Debug.Log(name + currentState);
         btlCam.CameraShake();
         float damage = enemyATK - ((def / (20.0f + def)) * enemyATK);
         currentHP -= damage;
@@ -454,9 +455,10 @@ public class Player : MonoBehaviour
             hpImage.fillAmount = 0.0f;
             dead = true;
             playerAnimator.SetBool("Dead", true);
-            ResetPlayerRage(); //If you die, you lose your RAGE
+            //If you die, you lose your RAGE
             if (currentState == playerState.Waiting) //If the player is waiting on a skill, reset everything and die
             {
+                Debug.Log("Huh?");
                 chosenSkill = (int)SKILLS.NO_SKILL;
                 skillWaitTime = 0;
                 skillWaitingIndex = 0;
@@ -464,6 +466,7 @@ public class Player : MonoBehaviour
                 playerAnimator.SetInteger("WaitingIndex", 0);
 
             }
+            ResetPlayerRage();
         }
         else
         {
