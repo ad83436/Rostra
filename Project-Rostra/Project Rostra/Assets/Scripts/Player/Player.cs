@@ -78,7 +78,7 @@ public class Player : MonoBehaviour
     private bool agilityBuffed = false;
     private bool strBuffed = false;
     private bool drainEye = false;
-    private float drainEyeModifier = 0.5f; //Used to calculate the heal percentage
+    private float drainEyeModifier = 0.2f; //Used to calculate the heal percentage
     private float defenseBuffSkillQCounter = 0; //How many turns until the defense buff is reversed. Need three counters as multiple stats could be buffed/debuffed at the same time
     private float attackBuffSkillQCounter = 0;
     private float agilityBuffSkillQCounter = 0;
