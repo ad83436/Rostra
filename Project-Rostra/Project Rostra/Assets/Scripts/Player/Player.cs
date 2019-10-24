@@ -77,10 +77,13 @@ public class Player : MonoBehaviour
     private bool attackBuffed = false;
     private bool agilityBuffed = false;
     private bool strBuffed = false;
+    private bool drainEye = false;
+    private float drainEyeModifier = 0.5f; //Used to calculate the heal percentage
     private float defenseBuffSkillQCounter = 0; //How many turns until the defense buff is reversed. Need three counters as multiple stats could be buffed/debuffed at the same time
     private float attackBuffSkillQCounter = 0;
     private float agilityBuffSkillQCounter = 0;
     private float strBuffSkillQCounter = 0;
+    private float drainEyeSkillQCounter = 0;
 
     //Rage
     public float currentRage;
@@ -103,6 +106,7 @@ public class Player : MonoBehaviour
     public GameObject atkBuffEffect;
     public GameObject agiBuffEffect;
     public GameObject strBuffEffect;
+    public GameObject drainEyeBuffEffect;
 
     //UI
     public Image hpImage;
@@ -179,6 +183,7 @@ public class Player : MonoBehaviour
         atkBuffEffect.gameObject.SetActive(false);
         agiBuffEffect.gameObject.SetActive(false);
         strBuffEffect.gameObject.SetActive(false);
+        drainEyeBuffEffect.gameObject.SetActive(false);
         //MP Heal
 
         //Targeted enemy info
@@ -331,10 +336,18 @@ public class Player : MonoBehaviour
                 if (chosenSkill == (int)SKILLS.NO_SKILL) //In case the player's skill uses the same animation as the normal attack animation
                 {
                     attackingThisEnemy.TakeDamage(actualATK * 1.2f, numberOfAttacks);
+                    if (drainEye) //Check if Drain Eye is active
+                    {
+                        Heal(0.01f * (drainEyeModifier * (1.2f * actualATK)));
+                    }
                 }
                 else
                 {
                     attackingThisEnemy.TakeDamage(0.7f * actualATK + skills.SkillStats(chosenSkill)[0], numberOfAttacks);
+                    if (drainEye) //Check if Drain Eye is active
+                    {
+                        Heal(0.01f * (drainEyeModifier * (0.7f * actualATK + skills.SkillStats(chosenSkill)[0])));
+                    }
                 }
             }
             else
@@ -342,10 +355,18 @@ public class Player : MonoBehaviour
                 if (chosenSkill == (int)SKILLS.NO_SKILL)
                 {
                     attackingThisEnemy.TakeDamage(actualATK, numberOfAttacks);
+                    if (drainEye) //Check if Drain Eye is active
+                    {
+                        Heal(0.01f * 0.1f * actualATK);
+                    }
                 }
                 else
                 {
                     attackingThisEnemy.TakeDamage(0.5f * actualATK + skills.SkillStats(chosenSkill)[0], numberOfAttacks);
+                    if (drainEye) //Check if Drain Eye is active
+                    {
+                        Heal(0.01f * (drainEyeModifier * (0.5f * actualATK + skills.SkillStats(chosenSkill)[0])));
+                    }
                 }
             }
 
@@ -460,6 +481,7 @@ public class Player : MonoBehaviour
         {
             hpImage.fillAmount = 0.0f;
             dead = true;
+            DisableAllBuffs(); //BUffs should not continue beyond death
             playerAnimator.SetBool("Dead", true);
             //If you die, you lose your RAGE
             if (currentState == playerState.Waiting) //If the player is waiting on a skill, reset everything and die
@@ -590,6 +612,12 @@ public class Player : MonoBehaviour
             skillTarget = 6;//Single player heal
             skillAnimatorName = "Heal";
             skillWaitingIndex = 3; //Lullaby of Hope wait is 3 per the animator
+        }
+        else if(skillID == (int)SKILLS.Ar_DrainEye)
+        {
+            skillTarget = 8; //Single player buff
+            skillAnimatorName = "DrainEye";
+            skillWaitingIndex = 1; //No wait for draineye
         }
         else if (skillID == (int)SKILLS.Ob_ShieldAlly) //Buff defense skill
         {
@@ -837,11 +865,19 @@ public class Player : MonoBehaviour
                 {
                     Debug.Log("Skill Crit");
                     attackingThisEnemy.TakeDamage(0.7f * actualATK + skills.SkillStats(chosenSkill)[0], numberOfAttacks); //Damage is the half the player's attack stat and the skill's attack stat
+                    if(drainEye) //Check if Drain Eye is active
+                    {
+                        Heal(0.01f * (drainEyeModifier * (0.7f * actualATK + skills.SkillStats(chosenSkill)[0])));
+                    }
                 }
                 else
                 {
                     Debug.Log("No Skill Crit");
                     attackingThisEnemy.TakeDamage(0.5f * actualATK + skills.SkillStats(chosenSkill)[0], numberOfAttacks); //Damage is the half the player's attack stat and the skill's attack stat
+                    if (drainEye) //Check if Drain Eye is active
+                    {
+                        Heal(0.01f * (drainEyeModifier * (0.5f * actualATK + skills.SkillStats(chosenSkill)[0])));
+                    }
                 }
 
             }
@@ -877,11 +913,19 @@ public class Player : MonoBehaviour
                                 {
                                     Debug.Log("Skill Crit");
                                     battleManager.enemies[i].enemyReference.TakeDamage(0.7f * actualATK + skills.SkillStats(chosenSkill)[0], numberOfAttacks); //Damage is the half the player's attack stat and the skill's attack stat
+                                    if (drainEye) //Check if Drain Eye is active
+                                    {
+                                        Heal(0.01f * (drainEyeModifier * (0.7f * actualATK + skills.SkillStats(chosenSkill)[0])));
+                                    }
                                 }
                                 else
                                 {
                                     Debug.Log("No Skill Crit");
                                     battleManager.enemies[i].enemyReference.TakeDamage(0.5f * actualATK + skills.SkillStats(chosenSkill)[0], numberOfAttacks); //Damage is the half the player's attack stat and the skill's attack stat
+                                    if (drainEye) //Check if Drain Eye is active
+                                    {
+                                        Heal(0.01f * (drainEyeModifier * (0.5f * actualATK + skills.SkillStats(chosenSkill)[0])));
+                                    }
                                 }
                             }
                             else
@@ -914,11 +958,19 @@ public class Player : MonoBehaviour
                                 {
                                     Debug.Log("Skill Crit");
                                     battleManager.enemies[i].enemyReference.TakeDamage(0.7f * actualATK + skills.SkillStats(chosenSkill)[0], numberOfAttacks); //Damage is the half the player's attack stat and the skill's attack stat
+                                    if (drainEye) //Check if Drain Eye is active
+                                    {
+                                        Heal(0.01f * (drainEyeModifier * (0.7f * actualATK + skills.SkillStats(chosenSkill)[0])));
+                                    }
                                 }
                                 else
                                 {
                                     Debug.Log("No Skill Crit");
                                     battleManager.enemies[i].enemyReference.TakeDamage(0.5f * actualATK + skills.SkillStats(chosenSkill)[0], numberOfAttacks); //Damage is the half the player's attack stat and the skill's attack stat
+                                    if (drainEye) //Check if Drain Eye is active
+                                    {
+                                        Heal(0.01f * (drainEyeModifier * (0.5f * actualATK + skills.SkillStats(chosenSkill)[0])));
+                                    }
                                 }
                             }
                             else
@@ -958,11 +1010,19 @@ public class Player : MonoBehaviour
                             {
                                 Debug.Log("Skill Crit");
                                 battleManager.enemies[i].enemyReference.TakeDamage(0.7f * actualATK + skills.SkillStats(chosenSkill)[0], numberOfAttacks); //Damage is the half the player's attack stat and the skill's attack stat
+                                if (drainEye) //Check if Drain Eye is active
+                                {
+                                    Heal(0.01f * (drainEyeModifier * (0.7f * actualATK + skills.SkillStats(chosenSkill)[0])));
+                                }
                             }
                             else
                             {
                                 Debug.Log("No Skill Crit");
                                 battleManager.enemies[i].enemyReference.TakeDamage(0.5f * actualATK + skills.SkillStats(chosenSkill)[0], numberOfAttacks); //Damage is the half the player's attack stat and the skill's attack stat
+                                if (drainEye) //Check if Drain Eye is active
+                                {
+                                    Heal(0.01f * (drainEyeModifier * (0.7f * actualATK + skills.SkillStats(chosenSkill)[0])));
+                                }
                             }
                         }
                         else
@@ -1018,6 +1078,11 @@ public class Player : MonoBehaviour
                 healThisPlayer.BuffStats("Defense", skills.SkillStats(chosenSkill)[0], 3);
                 playerAnimator.SetBool("BuffDef", false);
             }
+            else if(chosenSkill == (int)SKILLS.Ar_DrainEye)
+            {
+                healThisPlayer.BuffStats("DrainEye", skills.SkillStats(chosenSkill)[0], 3);
+                playerAnimator.SetBool("DrainEye", false);
+            }
 
         }
         else if (skillTarget == 9) //Buff all players
@@ -1051,7 +1116,9 @@ public class Player : MonoBehaviour
     public void Heal(float percentage)
     {
         EnableEffect("Heal", 0);
+        Debug.Log("Percentageeeee " + percentage);
         float healAmount = percentage * maxHP;
+        Debug.Log("Heal amountttt +++ " + healAmount);
         currentHP += healAmount;
         healText.gameObject.SetActive(true);
         healText.text = Mathf.RoundToInt(healAmount).ToString();
@@ -1200,6 +1267,19 @@ public class Player : MonoBehaviour
                     strBuffSkillQCounter = lastsNumberOfTurns;
                 }
                 break;
+            case "DrainEye":
+                EnableEffect("DrainEye", 0);
+                if (drainEye) //Check to see if Drain Eye is active, if yes, just extend it
+                {
+                    drainEyeSkillQCounter = lastsNumberOfTurns;
+                }
+                else if (!drainEye) //No buffs or debuffs have occurred so far
+                {
+
+                    drainEye = true;
+                    drainEyeSkillQCounter = lastsNumberOfTurns;
+                }
+                break;
         }
 
        
@@ -1256,6 +1336,18 @@ public class Player : MonoBehaviour
                 uiBTL.UpdateActivityText("STR is back to normal");
             }
         }
+
+        if(drainEye && drainEyeSkillQCounter > 0)
+        {
+            drainEyeSkillQCounter--;
+            if (drainEyeSkillQCounter <= 0)
+            {
+                drainEyeSkillQCounter = 0;
+                drainEye = false;
+                uiBTL.UpdateActivityText("Drain Eye has shut");
+                drainEyeBuffEffect.gameObject.SetActive(false);
+            }
+        }
     }
 
     public void EnableEffect(string effectName, int value) //Value is used by items as they add static amounts rather than percentages. Skills will pass value as zero.
@@ -1304,8 +1396,45 @@ public class Player : MonoBehaviour
                     chosenSkill = (int)SKILLS.NO_SKILL;
                 }
                 break;
+            case "DrainEye":
+                drainEyeBuffEffect.gameObject.SetActive(true);
+                break;
         }
 
         uiBTL.EndTurn(); //End the turn of the current player (i.e. the buffer) when the buffing is done
+    }
+    
+    private void DisableAllBuffs() //Called when the player dies. Disables all buffs.
+    {
+        if(attackBuffed)
+        {
+            actualATK = atk;
+            attackBuffed = false;
+            attackBuffSkillQCounter = 0;
+        }
+        if (defenseBuffed)
+        {
+            actualDEF = def;
+            defenseBuffed = false;
+            defenseBuffSkillQCounter = 0;
+        }
+        if (agilityBuffed)
+        {
+            actualAgi = agi;
+            agilityBuffed = false;
+            agilityBuffSkillQCounter = 0;
+        }
+        if(strBuffed)
+        {
+            actualSTR = str;
+            strBuffed = false;
+            strBuffSkillQCounter = 0;
+        }
+        if(drainEye)
+        {
+            drainEye = false;
+            drainEyeBuffEffect.gameObject.SetActive(false);
+            drainEyeSkillQCounter = 0;
+        }
     }
 }
