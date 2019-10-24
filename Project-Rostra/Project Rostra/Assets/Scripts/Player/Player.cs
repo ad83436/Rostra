@@ -88,7 +88,7 @@ public class Player : MonoBehaviour
 
 
     //Effects
-    //Gurad
+    //Guard
     public GameObject guardIcon;
     //Rage
     public GameObject rageModeIndicator;
@@ -96,6 +96,8 @@ public class Player : MonoBehaviour
     public GameObject healEffect;
     //MPHeal
     public GameObject mpEffect;
+    //Revive
+    public GameObject hopeEffect;
     //Buffs
     public GameObject defBuffEffect;
     public GameObject atkBuffEffect;
@@ -170,6 +172,7 @@ public class Player : MonoBehaviour
         //Heal
         healEffect.gameObject.SetActive(false);
         mpEffect.gameObject.SetActive(false);
+        hopeEffect.gameObject.SetActive(false);
         defBuffEffect.gameObject.SetActive(false);
         atkBuffEffect.gameObject.SetActive(false);
         agiBuffEffect.gameObject.SetActive(false);
@@ -1085,7 +1088,7 @@ public class Player : MonoBehaviour
 
     public void RevivePlayer(float percentage) //Heal percentage after revival. Used for skills
     {
-        EnableEffect("Revive", 0); //Enable the effect
+        EnableEffect("Revival", 0); //Enable the effect
         Heal(percentage);
         dead = false;
         playerAnimator.SetBool("Dead", false);
@@ -1270,6 +1273,7 @@ public class Player : MonoBehaviour
                 strBuffEffect.gameObject.SetActive(true);
                 break;
             case "Revival":
+                hopeEffect.gameObject.SetActive(true);
                 if(value>0) //Used for Items
                 {
                     healEffect.gameObject.SetActive(true);
