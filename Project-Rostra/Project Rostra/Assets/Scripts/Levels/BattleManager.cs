@@ -457,6 +457,6 @@ public class BattleManager : MonoBehaviour
                 MainInventory.invInstance.consumableInv.Add(i);
             }
         }
-        //Debug.Log("Consumables Count is: " + MainInventory.invInstance.consumableInv.Count);
+        Debug.Log("Consumables Count is: " + MainInventory.invInstance.consumableInv.Count);
     }
 }

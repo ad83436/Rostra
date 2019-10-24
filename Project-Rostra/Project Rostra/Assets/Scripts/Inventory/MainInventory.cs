@@ -644,6 +644,9 @@ public class MainInventory : MonoBehaviour {
 			case (int)ITEM_ID.TEST_ARMOR1:
 				itemType = (int)ITEM_TYPE.EQUIPABLE;
 				break;
+            default:
+                itemType = (int)ITEM_TYPE.EQUIPABLE;
+                break;
 		}
 
 		return itemType;
