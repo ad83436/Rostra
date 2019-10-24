@@ -110,6 +110,8 @@ public class Player : MonoBehaviour
     public Text damageText;
     public Text healText;
     public Text mpText;
+    public Text skillText;
+    private string skillTextValue = "";
     public Text waitTimeText;
 
     //Camera
@@ -201,6 +203,7 @@ public class Player : MonoBehaviour
         rageImage.fillAmount = currentRage / maxRage;
         damageText.gameObject.SetActive(false);
         healText.gameObject.SetActive(false);
+        skillText.gameObject.SetActive(false);
         mpText.gameObject.SetActive(false);
         waitTimeText.gameObject.SetActive(false);
     }
@@ -735,7 +738,15 @@ public class Player : MonoBehaviour
                 skillObjectForObjPooler = "NeverAgain";
                 skillNameForObjPooler = "ArrowImpactNG";
                 skillAnimatorName = "ASkill";
+                skillTextValue = "Die!";
                 skillWaitingIndex = -2;
+                break;
+            case (int)SKILLS.Ar_Armageddon:
+                skillObjectForObjPooler = "ArmFire";
+                skillNameForObjPooler = "ArmImpact";
+                skillAnimatorName = "Heal";
+                skillTextValue = "Burn!";
+                skillWaitingIndex = 4; //Armageddon is 4
                 break;
         }
 
@@ -805,6 +816,13 @@ public class Player : MonoBehaviour
         //8: Single player buff
         //9: All players buff
 
+        //Check if there's a skill text
+        if(skillTextValue != "")
+        {
+            skillText.gameObject.SetActive(true);
+            skillText.text = skillTextValue;
+            skillTextValue = "";
+        }
         if (skillTarget == 0) // Damaging one enemy
         {
             Debug.Log("Damage enemy");
