@@ -612,6 +612,7 @@ public class Player : MonoBehaviour
             skillTarget = 6;//Single player heal
             skillAnimatorName = "Heal";
             skillWaitingIndex = 3; //Lullaby of Hope wait is 3 per the animator
+            skillTextValue = "Don't give up!";
         }
         else if(skillID == (int)SKILLS.Ar_DrainEye)
         {
