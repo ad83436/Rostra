@@ -444,11 +444,11 @@ public class DialogueManager : MonoBehaviour
 		{
 			NextSentence();
 		}
-		if (dia.isChoice == true && boxCount == choiceCount && Input.GetKeyDown(KeyCode.LeftArrow) && canEnter == true)
+		if (dia.isChoice == true && boxCount == choiceCount && Input.GetKeyDown(KeyCode.LeftArrow))
 		{
 			choiceNum = 1;
 		}
-		else if (dia.isChoice == true && boxCount == choiceCount && Input.GetKeyDown(KeyCode.RightArrow) && canEnter == true)
+		else if (dia.isChoice == true && boxCount == choiceCount && Input.GetKeyDown(KeyCode.RightArrow))
 		{
 			choiceNum = 2;
 		}
