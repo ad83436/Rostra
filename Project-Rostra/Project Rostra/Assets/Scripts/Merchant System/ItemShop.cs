@@ -39,7 +39,7 @@ public class ItemShop : MonoBehaviour {
         shopItems.Add((int)ITEM_ID.TEST_WEAPON1);
 
     }
-
+	/*
     // Handles input and functionality for the menu (For testing purposes)
     private void Update() {
         if (MainInventory.invInstance.isVisible) {
@@ -223,7 +223,7 @@ public class ItemShop : MonoBehaviour {
         }
 
         GUI.Label(new Rect(1205.0f, 200.0f, 200.0f, 50.0f), "$" + MainInventory.totalMoney.ToString(), style);
-    }
+    }*/
 
     // Buys the current item from the merchants inventory and attempts to place it into the player's inventory
     // If the player has insufficient funds or not enough space in their inventory, the function will return false,
