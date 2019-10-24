@@ -75,3 +75,11 @@ MonoBehaviour:
     prefab: {fileID: 7807593752040339245, guid: 97b1f2a4571bccc458b1b5464f180bf8,
       type: 3}
     poolSize: 5
+  - tag: ArmFire
+    prefab: {fileID: 4140260960897782188, guid: 64e1be2fca1f2c74080f19ec7ebba579,
+      type: 3}
+    poolSize: 1
+  - tag: ArmImpact
+    prefab: {fileID: 6465157179934058720, guid: c82f81da3cb61ce43a99d83fe2b3399a,
+      type: 3}
+    poolSize: 5

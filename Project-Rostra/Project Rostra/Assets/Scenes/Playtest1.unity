@@ -7307,6 +7307,43 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6595024453704713425, guid: 553abd6f34f56904592869472cdfc65b,
+        type: 3}
+      propertyPath: listOfPools.Array.size
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6595024453704713425, guid: 553abd6f34f56904592869472cdfc65b,
+        type: 3}
+      propertyPath: listOfPools.Array.data[8].tag
+      value: ArmFire
+      objectReference: {fileID: 0}
+    - target: {fileID: 6595024453704713425, guid: 553abd6f34f56904592869472cdfc65b,
+        type: 3}
+      propertyPath: listOfPools.Array.data[8].prefab
+      value: 
+      objectReference: {fileID: 4140260960897782188, guid: 64e1be2fca1f2c74080f19ec7ebba579,
+        type: 3}
+    - target: {fileID: 6595024453704713425, guid: 553abd6f34f56904592869472cdfc65b,
+        type: 3}
+      propertyPath: listOfPools.Array.data[8].poolSize
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6595024453704713425, guid: 553abd6f34f56904592869472cdfc65b,
+        type: 3}
+      propertyPath: listOfPools.Array.data[9].tag
+      value: ArmImpact
+      objectReference: {fileID: 0}
+    - target: {fileID: 6595024453704713425, guid: 553abd6f34f56904592869472cdfc65b,
+        type: 3}
+      propertyPath: listOfPools.Array.data[9].prefab
+      value: 
+      objectReference: {fileID: 6465157179934058720, guid: c82f81da3cb61ce43a99d83fe2b3399a,
+        type: 3}
+    - target: {fileID: 6595024453704713425, guid: 553abd6f34f56904592869472cdfc65b,
+        type: 3}
+      propertyPath: listOfPools.Array.data[9].poolSize
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 553abd6f34f56904592869472cdfc65b, type: 3}
 --- !u!1 &1830220260
