@@ -1,0 +1,967 @@
+fileFormatVersion: 2
+guid: a931bd589976aaa4a91a1b0c4ada4fab
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -7092617478220077448
+    second: FreaManaCharge_0
+  - first:
+      213: -4006485869190707224
+    second: FreaManaCharge_1
+  - first:
+      213: 3136488716260484717
+    second: FreaManaCharge_2
+  - first:
+      213: -6336850404471835654
+    second: FreaManaCharge_3
+  - first:
+      213: 5311484202186352527
+    second: FreaManaCharge_4
+  - first:
+      213: 8908375415616839077
+    second: FreaManaCharge_5
+  - first:
+      213: -568601919146594939
+    second: FreaManaCharge_6
+  - first:
+      213: -7027403797979890271
+    second: FreaManaCharge_7
+  - first:
+      213: -3601619877163770580
+    second: FreaManaCharge_8
+  - first:
+      213: 6088540199942652768
+    second: FreaManaCharge_9
+  - first:
+      213: -371142375182467114
+    second: FreaManaCharge_10
+  - first:
+      213: 6239970660477423549
+    second: FreaManaCharge_11
+  - first:
+      213: -4137345969518464402
+    second: FreaManaCharge_12
+  - first:
+      213: -5768023984347446000
+    second: FreaManaCharge_13
+  - first:
+      213: -5643446969954774051
+    second: FreaManaCharge_14
+  - first:
+      213: -8481851234013718633
+    second: FreaManaCharge_15
+  - first:
+      213: -7721386478186473337
+    second: FreaManaCharge_16
+  - first:
+      213: 662479576535598697
+    second: FreaManaCharge_17
+  - first:
+      213: -3962305989541556456
+    second: FreaManaCharge_18
+  - first:
+      213: 1157215955569195118
+    second: FreaManaCharge_19
+  - first:
+      213: 7474517929526706717
+    second: FreaManaCharge_20
+  - first:
+      213: -222245612547873527
+    second: FreaManaCharge_21
+  - first:
+      213: 5172691145877141773
+    second: FreaManaCharge_22
+  - first:
+      213: 1880643273351803467
+    second: FreaManaCharge_23
+  - first:
+      213: -1956551864396662516
+    second: FreaManaCharge_24
+  - first:
+      213: -6216055041757760591
+    second: FreaManaCharge_25
+  - first:
+      213: -7942489088740251283
+    second: FreaManaCharge_26
+  - first:
+      213: -8471847981801603885
+    second: FreaManaCharge_27
+  - first:
+      213: -4047468843483665631
+    second: FreaManaCharge_28
+  - first:
+      213: -7224600542794669149
+    second: FreaManaCharge_29
+  - first:
+      213: -3335090863844436356
+    second: FreaManaCharge_30
+  - first:
+      213: 5883921251451222306
+    second: FreaManaCharge_31
+  - first:
+      213: -7258255217477004204
+    second: FreaManaCharge_32
+  - first:
+      213: -4015140345965692995
+    second: FreaManaCharge_33
+  - first:
+      213: -7198927405934663844
+    second: FreaManaCharge_34
+  - first:
+      213: -1849374199679005668
+    second: FreaManaCharge_35
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 35
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: FreaManaCharge_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 530
+        width: 161
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 48e155d1eab4bce4a9e1080f2ea0d021
+      internalID: -7092617478220077448
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreaManaCharge_1
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 530
+        width: 161
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 426f39283c4d13c419b8a8862c094d03
+      internalID: -4006485869190707224
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreaManaCharge_2
+      rect:
+        serializedVersion: 2
+        x: 322
+        y: 530
+        width: 161
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d38c6f0a9316a304f9d62f4ff3e5e606
+      internalID: 3136488716260484717
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreaManaCharge_3
+      rect:
+        serializedVersion: 2
+        x: 483
+        y: 530
+        width: 161
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a7bc499b6d6ab143b565bf6314f474b
+      internalID: -6336850404471835654
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreaManaCharge_4
+      rect:
+        serializedVersion: 2
+        x: 644
+        y: 530
+        width: 161
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8aa8213d004c34749b4bbca8aa9951a2
+      internalID: 5311484202186352527
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreaManaCharge_5
+      rect:
+        serializedVersion: 2
+        x: 805
+        y: 530
+        width: 161
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f11785e671ec404cb11f2c4dbbe6d33
+      internalID: 8908375415616839077
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreaManaCharge_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 424
+        width: 161
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ba9cfa250b930f45914f4f77bd28913
+      internalID: -568601919146594939
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreaManaCharge_7
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 424
+        width: 161
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 002b62d44a62ccf469316831f8377c1c
+      internalID: -7027403797979890271
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreaManaCharge_8
+      rect:
+        serializedVersion: 2
+        x: 322
+        y: 424
+        width: 161
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c65266c49b1ce6348a82e5013bc8ff0d
+      internalID: -3601619877163770580
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreaManaCharge_9
+      rect:
+        serializedVersion: 2
+        x: 483
+        y: 424
+        width: 161
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 08a8221af49c233499affe1d2c57796a
+      internalID: 6088540199942652768
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreaManaCharge_10
+      rect:
+        serializedVersion: 2
+        x: 644
+        y: 424
+        width: 161
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 87b05ee34bd63e84a91b364117f5d666
+      internalID: -371142375182467114
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreaManaCharge_11
+      rect:
+        serializedVersion: 2
+        x: 805
+        y: 424
+        width: 161
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 845d9287a7e0473419a567b0c6b6eb6c
+      internalID: 6239970660477423549
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreaManaCharge_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 318
+        width: 161
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6955336a75b191642bf475d4155d2780
+      internalID: -4137345969518464402
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreaManaCharge_13
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 318
+        width: 161
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b8d8b95b4f0059c489cf9025b7162e68
+      internalID: -5768023984347446000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreaManaCharge_14
+      rect:
+        serializedVersion: 2
+        x: 322
+        y: 318
+        width: 161
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b1fff36b907c88442bf5eb8cbc5cd1a4
+      internalID: -5643446969954774051
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreaManaCharge_15
+      rect:
+        serializedVersion: 2
+        x: 483
+        y: 318
+        width: 161
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e424443d0049fdb4eb8018d5de3f3fde
+      internalID: -8481851234013718633
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreaManaCharge_16
+      rect:
+        serializedVersion: 2
+        x: 644
+        y: 318
+        width: 161
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c62c9028bb335b4ebe111a94764c20c
+      internalID: -7721386478186473337
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreaManaCharge_17
+      rect:
+        serializedVersion: 2
+        x: 805
+        y: 318
+        width: 161
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 26b8af467f98b00439c617e1bee6c068
+      internalID: 662479576535598697
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreaManaCharge_18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 212
+        width: 161
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 82d663d40fefd3245b066ba8100d3241
+      internalID: -3962305989541556456
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreaManaCharge_19
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 212
+        width: 161
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd04710039d04e545a711ab356fc46cb
+      internalID: 1157215955569195118
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreaManaCharge_20
+      rect:
+        serializedVersion: 2
+        x: 322
+        y: 212
+        width: 161
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf60c270bf4864c458cdcaff6a4dfacd
+      internalID: 7474517929526706717
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreaManaCharge_21
+      rect:
+        serializedVersion: 2
+        x: 483
+        y: 212
+        width: 161
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ea94fd27b926e647a783c007044115a
+      internalID: -222245612547873527
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreaManaCharge_22
+      rect:
+        serializedVersion: 2
+        x: 644
+        y: 212
+        width: 161
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 70fd6c03025f6944293eff6567bcf74b
+      internalID: 5172691145877141773
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreaManaCharge_23
+      rect:
+        serializedVersion: 2
+        x: 805
+        y: 212
+        width: 161
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d59c4968435ea19478ee3466a69275e8
+      internalID: 1880643273351803467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreaManaCharge_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 106
+        width: 161
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f5947d24a01f685479bd2df1950b4cd1
+      internalID: -1956551864396662516
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreaManaCharge_25
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 106
+        width: 161
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c58ee78314ea864c8e42402aba3ac3a
+      internalID: -6216055041757760591
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreaManaCharge_26
+      rect:
+        serializedVersion: 2
+        x: 322
+        y: 106
+        width: 161
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b2165b2952e7f0147ac0160cfd3c0cd1
+      internalID: -7942489088740251283
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreaManaCharge_27
+      rect:
+        serializedVersion: 2
+        x: 483
+        y: 106
+        width: 161
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 50e9762cd8e71734a949d455debd6b2e
+      internalID: -8471847981801603885
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreaManaCharge_28
+      rect:
+        serializedVersion: 2
+        x: 644
+        y: 106
+        width: 161
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bda5d156e26f1ed418699dd250cb6a1d
+      internalID: -4047468843483665631
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreaManaCharge_29
+      rect:
+        serializedVersion: 2
+        x: 805
+        y: 106
+        width: 161
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 78cbf9b2e0140af41a5bcaa0ebc01e14
+      internalID: -7224600542794669149
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreaManaCharge_30
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 161
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d09b4db7d99524429af96d71e11ab1b
+      internalID: -3335090863844436356
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreaManaCharge_31
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 0
+        width: 161
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6bdaf51c170b3ed44ada0fd3911feb63
+      internalID: 5883921251451222306
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreaManaCharge_32
+      rect:
+        serializedVersion: 2
+        x: 322
+        y: 0
+        width: 161
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: baeaa58b87f00c0458a3c30bd4cc84e0
+      internalID: -7258255217477004204
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreaManaCharge_33
+      rect:
+        serializedVersion: 2
+        x: 483
+        y: 0
+        width: 161
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 34492bc15255b8c4ead81c996b27d0dc
+      internalID: -4015140345965692995
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreaManaCharge_34
+      rect:
+        serializedVersion: 2
+        x: 644
+        y: 0
+        width: 161
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 89da5c2371e6c284fbd85071b8c5e6ad
+      internalID: -7198927405934663844
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreaManaCharge_35
+      rect:
+        serializedVersion: 2
+        x: 805
+        y: 0
+        width: 161
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 76ccca4cd979ab34b95dd241b527c2e7
+      internalID: -1849374199679005668
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

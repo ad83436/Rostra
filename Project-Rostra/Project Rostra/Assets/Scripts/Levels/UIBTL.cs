@@ -885,6 +885,7 @@ public class UIBTL : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.DownArrow) && itemsPanelIndex < inventory.consumableInv.Count)
         {
+            Debug.Log("Counttt " + inventory.consumableInv.Count);
             //Keep track of where the highlighter is
             if (itemsPanelIndex + 1 < inventory.consumableInv.Count)
             {
@@ -1093,37 +1094,83 @@ public class UIBTL : MonoBehaviour
 
             if (previousState == btlUIState.choosingItemsCommand)
             {
-                if (btlManager.players[playerIndicatorIndex].playerReference.currentState != Player.playerState.Rage)
+                //Make sure you're not using the hope potion, the player you're targeting is not dead and is not in RAGE
+                if (inventory.invItem[inventory.consumableInv[itemsPanelIndex], 0] != (int)ITEM_ID.HOPE_POTION) 
                 {
-                    choosePlayerArrow.gameObject.SetActive(false);
-                    UpdateActivityText(inventory.ItemName(inventory.invItem[inventory.consumableInv[itemsPanelIndex], 0]));
-                    inventory.ItemUseFunction(inventory.invItem[inventory.consumableInv[itemsPanelIndex], 0], inventory.consumableInv[itemsPanelIndex], playerIndicatorIndex);
-                    if (inventory.invItem[inventory.consumableInv[itemsPanelIndex],0] == (int)ITEM_ID.HP_POTION)
+                    if (!btlManager.players[playerIndicatorIndex].playerReference.dead)
                     {
-                        btlManager.players[playerIndicatorIndex].playerReference.EnableEffect("Heal", inventory.itemAddAmount); //Update the heal text
+                        if (btlManager.players[playerIndicatorIndex].playerReference.currentState != Player.playerState.Rage)
+                        {
+                            choosePlayerArrow.gameObject.SetActive(false);
+                            UpdateActivityText(inventory.ItemName(inventory.invItem[inventory.consumableInv[itemsPanelIndex], 0]));
+                            inventory.ItemUseFunction(inventory.invItem[inventory.consumableInv[itemsPanelIndex], 0], inventory.consumableInv[itemsPanelIndex], playerIndicatorIndex);
+                            if (inventory.invItem[inventory.consumableInv[itemsPanelIndex], 0] == (int)ITEM_ID.HP_POTION)
+                            {
+                                btlManager.players[playerIndicatorIndex].playerReference.EnableEffect("Heal", inventory.itemAddAmount); //Update the heal text
+                            }
+                            else if (inventory.invItem[inventory.consumableInv[itemsPanelIndex], 0] == (int)ITEM_ID.MP_ELIXER)
+                            {
+                                btlManager.players[playerIndicatorIndex].playerReference.EnableEffect("MP", inventory.itemAddAmount); //Update the heal text
+                            }
+                            itemCount[itemHPosIndex].text = inventory.invItem[inventory.consumableInv[0], 1].ToString();
+                            itemsPanelIndex = 0; //Reset the itemsPanelIndex
+                            btlManager.players[playerIndicatorIndex].playerReference.UpdatePlayerStats();
+                            playerInControl.ForcePlayerTurnAnimationOff();
+                            EndTurn();
+                        }
                     }
-                    else if(inventory.invItem[inventory.consumableInv[itemsPanelIndex], 0] == (int)ITEM_ID.MP_ELIXER)
+                }
+                else //If it is indeed the Hope potion, then the player targeted needs to be dead
+                {
+                    if (btlManager.players[playerIndicatorIndex].playerReference.dead)
                     {
-                        btlManager.players[playerIndicatorIndex].playerReference.EnableEffect("MP", inventory.itemAddAmount); //Update the heal text
+                            choosePlayerArrow.gameObject.SetActive(false);
+                            UpdateActivityText(inventory.ItemName(inventory.invItem[inventory.consumableInv[itemsPanelIndex], 0]));
+                            inventory.ItemUseFunction(inventory.invItem[inventory.consumableInv[itemsPanelIndex], 0], inventory.consumableInv[itemsPanelIndex], playerIndicatorIndex);
+                            btlManager.players[playerIndicatorIndex].playerReference.EnableEffect("Revival", inventory.itemAddAmount); //Enabled the Revive effect
+                            itemCount[itemHPosIndex].text = inventory.invItem[inventory.consumableInv[0], 1].ToString();
+                            itemsPanelIndex = 0; //Reset the itemsPanelIndex
+                            btlManager.players[playerIndicatorIndex].playerReference.UpdatePlayerStats();
+                            playerInControl.ForcePlayerTurnAnimationOff();
+                            EndTurn();
                     }
-                    itemCount[itemHPosIndex].text = inventory.invItem[inventory.consumableInv[0], 1].ToString();
-                    itemsPanelIndex = 0; //Reset the itemsPanelIndex
-                    btlManager.players[playerIndicatorIndex].playerReference.UpdatePlayerStats();
-                    playerInControl.ForcePlayerTurnAnimationOff();
-                    EndTurn();
                 }
             }
             else if (previousState == btlUIState.choosingSkillsCommand)
             {
-                if (btlManager.players[playerIndicatorIndex].playerReference.currentState != Player.playerState.Rage)
-                {
-                    choosePlayerArrow.gameObject.SetActive(false);
-                    UpdateActivityText(skills.SkillName(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator]));
-                    playerInControl.UseSkillOnOnePlayer(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator],
-                                                        skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[5],
-                                                        skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[2],
-                                                        btlManager.players[playerIndicatorIndex].playerReference);
-                }
+
+                    if (PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator] != (int)SKILLS.NO_SKILL)
+                    {
+                        if (PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator] != (int)SKILLS.Ar_LullabyOfHope)
+                        {
+                            //If you're using a regular skill, make sure you're choosing an alive ally.
+                            if (!btlManager.players[playerIndicatorIndex].playerReference.dead)
+                            {
+                                 if (btlManager.players[playerIndicatorIndex].playerReference.currentState != Player.playerState.Rage)
+                                 {
+                                choosePlayerArrow.gameObject.SetActive(false);
+                                UpdateActivityText(skills.SkillName(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator]));
+                                playerInControl.UseSkillOnOnePlayer(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator],
+                                                                    skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[5],
+                                                                    skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[2],
+                                                                    btlManager.players[playerIndicatorIndex].playerReference);
+                                 }
+                            }
+                        }
+                        else //If the skill is indeed Lullaby Of Hope, then make sure you target a dead ally
+                        {
+                            if (btlManager.players[playerIndicatorIndex].playerReference.dead)
+                            {
+                                choosePlayerArrow.gameObject.SetActive(false);
+                                UpdateActivityText(skills.SkillName(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator]));
+                                playerInControl.UseSkillOnOnePlayer(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator],
+                                                                    skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[5],
+                                                                    skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[2],
+                                                                    btlManager.players[playerIndicatorIndex].playerReference);
+                            }
+                        }
+                    }
+
             }
         }
     }

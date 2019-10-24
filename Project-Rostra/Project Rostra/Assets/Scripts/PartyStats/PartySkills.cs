@@ -45,12 +45,12 @@ public static class PartySkills {
         new CharacterSkills(
             new int[] {
                 // Unlockable Skills for Arcelus
+                (int)SKILLS.Ar_Heal,
                 (int)SKILLS.Ar_HealingAura,
                 (int)SKILLS.Ar_DrainEye,
-                (int)SKILLS.NO_SKILL,
-                (int)SKILLS.NO_SKILL,
-                (int)SKILLS.NO_SKILL,
-                (int)SKILLS.NO_SKILL,
+                (int)SKILLS.Ar_LullabyOfHope,
+                (int)SKILLS.Ar_ManaCharge,
+                (int)SKILLS.Ar_Armageddon,
                 (int)SKILLS.NO_SKILL,
                 (int)SKILLS.NO_SKILL,
             }),

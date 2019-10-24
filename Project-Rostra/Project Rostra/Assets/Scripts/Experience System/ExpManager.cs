@@ -28,7 +28,7 @@ public class ExpManager : MonoBehaviour {
 		//Will be changed to use a load file instead
 
 		//Fargas
-		PartyStats.chara[0].hitpoints = 200.0f;
+		PartyStats.chara[0].hitpoints = 10.0f;
 		PartyStats.chara[0].maxHealth = 200.0f;
 		PartyStats.chara[0].magicpoints = 200.0f;
 		PartyStats.chara[0].maxMana = 200.0f;
@@ -242,8 +242,12 @@ public class ExpManager : MonoBehaviour {
                 }
 			case 3: //Arcelus
 				switch (skill) {
-					case SKILLS.Ar_HealingAura:	return new int[] { 18, 13, 180, 250, 13, 26, 12 };
-                    case SKILLS.Ar_DrainEye:    return new int[] { 18, 13, 180, 325, 13, 26, 12 };
+                    case SKILLS.Ar_Heal:        return new int[] { 18, 13, 180, 250, 13, 26, 12 };
+                    case SKILLS.Ar_HealingAura:	return new int[] { 20, 13, 180, 325, 13, 26, 12 };
+                    case SKILLS.Ar_DrainEye:    return new int[] { 18, 13, 255, 325, 13, 26, 12 };
+                    case SKILLS.Ar_LullabyOfHope: return new int[] { 18, 15, 180, 400, 13, 26, 14 };
+                    case SKILLS.Ar_ManaCharge: return new int[] { 19, 13, 255, 325, 14, 26, 12 };
+                    case SKILLS.Ar_Armageddon: return new int[] { 22, 15, 330, 475, 15, 26, 14 };
                     default: return null;
                 }
 			default: return null;

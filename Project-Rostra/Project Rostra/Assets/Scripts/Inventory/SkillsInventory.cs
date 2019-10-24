@@ -47,8 +47,14 @@ public class SkillsInventory : MonoBehaviour {
         AddToUnlockedSkills((int)SKILLS.Fr_NeverAgain, 2);
         EquipSkill((int)SKILLS.Fr_NeverAgain, 3, 2);
 
+        AddToUnlockedSkills((int)SKILLS.Ar_Heal, 3);
+        EquipSkill((int)SKILLS.Ar_Heal, 0, 3);
         AddToUnlockedSkills((int)SKILLS.Ar_HealingAura, 3);
-        EquipSkill((int)SKILLS.Ar_HealingAura, 0, 3);
+        EquipSkill((int)SKILLS.Ar_HealingAura, 1, 3);
+        AddToUnlockedSkills((int)SKILLS.Ar_ManaCharge, 3);
+        EquipSkill((int)SKILLS.Ar_ManaCharge, 2, 3);
+        AddToUnlockedSkills((int)SKILLS.Ar_LullabyOfHope, 3);
+        EquipSkill((int)SKILLS.Ar_LullabyOfHope, 3, 3);
     }
 
     // Handling keyboard functionality
@@ -268,10 +274,18 @@ public class SkillsInventory : MonoBehaviour {
                 return "Shield Ally";
             case (int)SKILLS.Ob_ShieldAllAllies:
                 return "Shield All Allies";
+            case (int)SKILLS.Ar_Heal:
+                return "Heal";
             case (int)SKILLS.Ar_HealingAura:
                 return "Healing Aura";
             case (int)SKILLS.Ar_DrainEye:
                 return "Drain Eye";
+            case (int)SKILLS.Ar_LullabyOfHope:
+                return "Lullaby Of Hope";
+            case (int)SKILLS.Ar_ManaCharge:
+                return "Mana Charge";
+            case (int)SKILLS.Ar_Armageddon:
+                return "Armageddon";
             default: //In case no skill is equipped at that slot
                 return "---";
         }
@@ -314,10 +328,18 @@ public class SkillsInventory : MonoBehaviour {
                 return "Increase the defense of one ally for three turns";
             case (int)SKILLS.Ob_ShieldAllAllies:
                 return "Increase the defense of all allies for three turns";
+            case (int)SKILLS.Ar_Heal:
+                return "Restores a portion of a single alive ally’s HP";
             case (int)SKILLS.Ar_HealingAura:
                 return "Restore a portion of all alive allies' HP";
             case (int)SKILLS.Ar_DrainEye:
                 return "Ally affected by Drain Eye gains health every time they deal damage. Lasts for 3 turns";
+            case (int)SKILLS.Ar_LullabyOfHope:
+                return "Arcelus never gives up on a patient. Revives one ally with half of their HP";
+            case (int)SKILLS.Ar_ManaCharge:
+                return "Restores a portion of one ally’s MP.";
+            case (int)SKILLS.Ar_Armageddon:
+                return " Sometimes to save someone, another must perish. Arcelus summons pillars of fire damaging all enemies.";
             default: return "";
         }
     }
@@ -434,23 +456,51 @@ public class SkillsInventory : MonoBehaviour {
             case (int)SKILLS.Ob_ShieldAllAllies:
                 skillStat[0] = 20;
                 skillStat[1] = 100;
-                skillStat[2] = 0;
+                skillStat[2] = 1;
                 skillStat[4] = (float)SKILL_TYPE.ALL_PLAYER_BUFF;
                 skillStat[5] = 40;
                 break;
+            case (int)SKILLS.Ar_Heal:
+                skillStat[0] = 20;
+                skillStat[1] = 100;
+                skillStat[2] = 0;
+                skillStat[4] = (float)SKILL_TYPE.SINGLE_PLAYER_HEAL;
+                skillStat[5] = 40;
+                break;
             case (int)SKILLS.Ar_HealingAura:
-                skillStat[0] = 40;
+                skillStat[0] = 30;
                 skillStat[1] = 100;
                 skillStat[2] = 2;
                 skillStat[4] = (float)SKILL_TYPE.ALL_PLAYER_HEAL;
-                skillStat[5] = 90;
+                skillStat[5] = 60;
                 break;
             case (int)SKILLS.Ar_DrainEye:
                 skillStat[0] = 40;
                 skillStat[1] = 100;
-                skillStat[2] = 1;
+                skillStat[2] = 0;
                 skillStat[4] = (float)SKILL_TYPE.SINGLE_PLAYER_HEAL;
                 skillStat[5] = 60;
+                break;
+            case (int)SKILLS.Ar_LullabyOfHope:
+                skillStat[0] = 50;
+                skillStat[1] = 100;
+                skillStat[2] = 2;
+                skillStat[4] = (float)SKILL_TYPE.SINGLE_PLAYER_HEAL;
+                skillStat[5] = 60;
+                break;
+            case (int)SKILLS.Ar_ManaCharge:
+                skillStat[0] = 20;
+                skillStat[1] = 100;
+                skillStat[2] = 1;
+                skillStat[4] = (float)SKILL_TYPE.SINGLE_PLAYER_HEAL;
+                skillStat[5] = 30;
+                break;
+            case (int)SKILLS.Ar_Armageddon:
+                skillStat[0] = 100;
+                skillStat[1] = 18;
+                skillStat[2] = 4;
+                skillStat[4] = (float)SKILL_TYPE.ALL_TARGETS_ATK;
+                skillStat[5] = 100;
                 break;
             default:
                 skillStat[0] = 0;

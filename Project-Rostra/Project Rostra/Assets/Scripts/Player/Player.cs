@@ -454,6 +454,16 @@ public class Player : MonoBehaviour
             hpImage.fillAmount = 0.0f;
             dead = true;
             playerAnimator.SetBool("Dead", true);
+            ResetPlayerRage(); //If you die, you lose your RAGE
+            if (currentState == playerState.Waiting) //If the player is waiting on a skill, reset everything and die
+            {
+                chosenSkill = (int)SKILLS.NO_SKILL;
+                skillWaitTime = 0;
+                skillWaitingIndex = 0;
+                waitTimeText.gameObject.SetActive(false);
+                playerAnimator.SetInteger("WaitingIndex", 0);
+
+            }
         }
         else
         {
@@ -554,11 +564,23 @@ public class Player : MonoBehaviour
         healThisPlayer = playerReference;
 
         //Check if the skill is immediate or if the player needs to wait a number of turns
-        if (skillID == 4) //Heal
+        if (skillID == (int)SKILLS.Ar_Heal) //Heal
         {
             skillTarget = 6;//Single player heal
             skillAnimatorName = "Heal";
             skillWaitingIndex = 1;
+        }
+        else if(skillID == (int)SKILLS.Ar_ManaCharge)
+        {
+            skillTarget = 6;//Single player heal
+            skillAnimatorName = "Heal";
+            skillWaitingIndex = 2; //Mana heal wait is 2 per the animator
+        }
+        else if(skillID == (int)SKILLS.Ar_LullabyOfHope)
+        {
+            skillTarget = 6;//Single player heal
+            skillAnimatorName = "Heal";
+            skillWaitingIndex = 3; //Lullaby of Hope wait is 3 per the animator
         }
         else if (skillID == (int)SKILLS.Ob_ShieldAlly) //Buff defense skill
         {
@@ -570,6 +592,14 @@ public class Player : MonoBehaviour
         {
             skillTarget = 8; //Single player buff
             BuffStats("Strength", skills.SkillStats(chosenSkill)[0], 1);
+            chosenSkill = (int)SKILLS.NO_SKILL;
+            currentMP -= mpCost;
+            battleManager.players[playerIndex].currentMP = currentMP;
+            PartyStats.chara[playerIndex].magicpoints = currentMP;
+            uiBTL.UpdatePlayerMPControlPanel();
+            currentState = playerState.Idle;
+
+
         }
 
         //If there's waiting time, go to wait state and end the turn 
@@ -616,7 +646,7 @@ public class Player : MonoBehaviour
         if (waitTime <= 0)
         {
             skillWaitingIndex = 0;
-            playerAnimator.SetInteger("WaitingIndex", -1); //-1 is all animation
+            playerAnimator.SetInteger("WaitingIndex", -1); //-1 is (All) animation
             playerAnimator.SetBool(skillAnimatorName, true);
         }
         else
@@ -924,22 +954,38 @@ public class Player : MonoBehaviour
         }
         else if (skillTarget == 6) //Heal one player
         {
-            healThisPlayer.Heal(0.01f * (0.5f * actualATK + skills.SkillStats(chosenSkill)[0])); //Passing in a percentage
-            playerAnimator.SetBool("Heal", false);
+            if (chosenSkill == (int)SKILLS.Ar_Heal)
+            {
+                healThisPlayer.Heal(0.01f * (0.5f * actualATK + skills.SkillStats(chosenSkill)[0])); //Passing in a percentage
+                playerAnimator.SetBool("Heal", false);
+            }
+            else if(chosenSkill == (int)SKILLS.Ar_ManaCharge)
+            {
+                healThisPlayer.ManaCharge(0.01f * (0.5f * actualATK + skills.SkillStats(chosenSkill)[0]));
+                playerAnimator.SetBool("Heal", false);
+            }
+            else if(chosenSkill == (int)SKILLS.Ar_LullabyOfHope)
+            {
+                healThisPlayer.RevivePlayer(0.5f); //Revive a player with half their HP
+                playerAnimator.SetBool("Heal", false);
+            }
         }
         else if (skillTarget == 7) //Heal all players
         {
-            for (int i = 0; i < battleManager.players.Length; i++)
+            if (chosenSkill == (int)SKILLS.Ar_HealingAura)
             {
-                if (battleManager.players[i].playerReference != null)
+                for (int i = 0; i < battleManager.players.Length; i++)
                 {
-                    if (!battleManager.players[i].playerReference.dead && battleManager.players[i].playerReference.currentState != playerState.Rage)
+                    if (battleManager.players[i].playerReference != null)
                     {
-                        battleManager.players[i].playerReference.Heal(0.01f * (0.5f * actualATK + skills.SkillStats(chosenSkill)[0]));
+                        if (!battleManager.players[i].playerReference.dead && battleManager.players[i].playerReference.currentState != playerState.Rage)
+                        {
+                            battleManager.players[i].playerReference.Heal(0.01f * (0.5f * actualATK + skills.SkillStats(chosenSkill)[0]));
+                        }
                     }
                 }
+                playerAnimator.SetBool("Heal", false);
             }
-            playerAnimator.SetBool("Heal", false);
         }
         else if (skillTarget == 8) //Buff single player
         {
@@ -958,6 +1004,7 @@ public class Player : MonoBehaviour
                 {
                     if (battleManager.players[i].playerReference != null)
                     {
+                        //Make sure the character being buffed is alive and not in RAGE mode
                         if (!battleManager.players[i].playerReference.dead && battleManager.players[i].playerReference.currentState != playerState.Rage)
                         {
                             battleManager.players[i].playerReference.BuffStats("Defense", skills.SkillStats(chosenSkill)[0], 3);
@@ -967,6 +1014,7 @@ public class Player : MonoBehaviour
                 playerAnimator.SetBool("BuffDef", false);
             }
         }
+        //Claculate the new MP and reset the player's state
         chosenSkill = (int)SKILLS.NO_SKILL;
         currentMP -= mpCost;
         battleManager.players[playerIndex].currentMP = currentMP;
@@ -1008,7 +1056,39 @@ public class Player : MonoBehaviour
         rageImage.fillAmount = currentRage / maxRage;
         uiBTL.UpdatePlayerHPControlPanel();
         PartyStats.chara[playerIndex].rage = currentRage; //Update the party stats
+        PartyStats.chara[playerIndex].hitpoints = currentHP;
         uiBTL.EndTurn(); //End the turn of the current player (i.e. the healer) after the healing is done
+    }
+
+    //Increase the player's MP by a percentage.
+    public void ManaCharge(float percentage)
+    {
+        EnableEffect("MP", 0);
+        float mpAmount = percentage * maxMP;
+        currentMP += mpAmount;
+        mpText.gameObject.SetActive(true);
+        mpText.text = Mathf.RoundToInt(mpAmount).ToString();
+        battleManager.players[playerIndex].currentMP = currentMP;
+
+        if (currentMP > maxMP)
+        {
+            currentMP = maxMP;
+        }
+
+        uiBTL.UpdatePlayerMPControlPanel();
+        PartyStats.chara[playerIndex].magicpoints = currentMP;
+        uiBTL.EndTurn(); //End the turn of the current player (i.e. the healer) after the healing is done
+    }
+
+    public void RevivePlayer(float percentage) //Heal percentage after revival. Used for skills
+    {
+        EnableEffect("Revive", 0); //Enable the effect
+        Heal(percentage);
+        dead = false;
+        playerAnimator.SetBool("Dead", false);
+        playerAnimator.SetBool("Hit", false);
+        currentState = playerState.Idle; //Reset the player
+        chosenSkill = (int)SKILLS.NO_SKILL;
     }
 
     public void BuffStats(string statToBuff, float amount, float lastsNumberOfTurns)
@@ -1154,13 +1234,13 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void EnableEffect(string effectName, int value)
+    public void EnableEffect(string effectName, int value) //Value is used by items as they add static amounts rather than percentages. Skills will pass value as zero.
     {
         switch (effectName)
         {
             case "Heal":
                 healEffect.gameObject.SetActive(true);
-                if (value > 0)
+                if (value > 0) //Check if the function call coming from an item.
                 {
                     healText.gameObject.SetActive(true);
                     healText.text = value.ToString();
@@ -1185,6 +1265,19 @@ public class Player : MonoBehaviour
                 break;
             case "StrBuff":
                 strBuffEffect.gameObject.SetActive(true);
+                break;
+            case "Revival":
+                if(value>0) //Used for Items
+                {
+                    healEffect.gameObject.SetActive(true);
+                    healText.gameObject.SetActive(true);
+                    healText.text = value.ToString();
+                    dead = false;
+                    playerAnimator.SetBool("Dead", false);
+                    playerAnimator.SetBool("Hit", false);
+                    currentState = playerState.Idle; //Reset the player
+                    chosenSkill = (int)SKILLS.NO_SKILL;
+                }
                 break;
         }
 

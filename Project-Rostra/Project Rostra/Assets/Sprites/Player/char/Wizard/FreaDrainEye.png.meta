@@ -1,0 +1,967 @@
+fileFormatVersion: 2
+guid: ff1ac9c6c0f22b6498d2a9d453aeb3c6
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 8175355379539075052
+    second: FreaDrainEye_0
+  - first:
+      213: 4943743003818319007
+    second: FreaDrainEye_1
+  - first:
+      213: -5975010361784037845
+    second: FreaDrainEye_2
+  - first:
+      213: 4346051856040042701
+    second: FreaDrainEye_3
+  - first:
+      213: 5389875701100976947
+    second: FreaDrainEye_4
+  - first:
+      213: 6641367537415404987
+    second: FreaDrainEye_5
+  - first:
+      213: -7974148969300956943
+    second: FreaDrainEye_6
+  - first:
+      213: -3319697324518332128
+    second: FreaDrainEye_7
+  - first:
+      213: 3223436549884570344
+    second: FreaDrainEye_8
+  - first:
+      213: -3357065071086357690
+    second: FreaDrainEye_9
+  - first:
+      213: 3049215213712068244
+    second: FreaDrainEye_10
+  - first:
+      213: -4829685787420796493
+    second: FreaDrainEye_11
+  - first:
+      213: -6673215772118708299
+    second: FreaDrainEye_12
+  - first:
+      213: -6500904117864698838
+    second: FreaDrainEye_13
+  - first:
+      213: -5587419733943341724
+    second: FreaDrainEye_14
+  - first:
+      213: -3678419978487568139
+    second: FreaDrainEye_15
+  - first:
+      213: 4370380759803582610
+    second: FreaDrainEye_16
+  - first:
+      213: -5372678769690418918
+    second: FreaDrainEye_17
+  - first:
+      213: -776729332367555728
+    second: FreaDrainEye_18
+  - first:
+      213: -8680190287174872323
+    second: FreaDrainEye_19
+  - first:
+      213: -6564437150527046598
+    second: FreaDrainEye_20
+  - first:
+      213: -4384805158971191440
+    second: FreaDrainEye_21
+  - first:
+      213: 8713665992206293683
+    second: FreaDrainEye_22
+  - first:
+      213: -7647550076571043435
+    second: FreaDrainEye_23
+  - first:
+      213: -7558432689606209529
+    second: FreaDrainEye_24
+  - first:
+      213: 1476176195663610513
+    second: FreaDrainEye_25
+  - first:
+      213: 2453596717835532241
+    second: FreaDrainEye_26
+  - first:
+      213: 4651680467481356141
+    second: FreaDrainEye_27
+  - first:
+      213: 257551287608613726
+    second: FreaDrainEye_28
+  - first:
+      213: -7652203473654465497
+    second: FreaDrainEye_29
+  - first:
+      213: -76435953777988130
+    second: FreaDrainEye_30
+  - first:
+      213: -6845407063358673172
+    second: FreaDrainEye_31
+  - first:
+      213: -6927442730027132903
+    second: FreaDrainEye_32
+  - first:
+      213: 3347239337994575595
+    second: FreaDrainEye_33
+  - first:
+      213: 3757283056042577871
+    second: FreaDrainEye_34
+  - first:
+      213: 5084407346340969843
+    second: FreaDrainEye_35
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 35
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: FreaDrainEye_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 530
+        width: 161
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 024c158e20c2186418f07725461ef06e
+      internalID: 8175355379539075052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreaDrainEye_1
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 530
+        width: 161
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c27e766a433b3ff489349cd5b5667c8f
+      internalID: 4943743003818319007
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreaDrainEye_2
+      rect:
+        serializedVersion: 2
+        x: 322
+        y: 530
+        width: 161
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 114124e31d8c377408b4b6e4145f6622
+      internalID: -5975010361784037845
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreaDrainEye_3
+      rect:
+        serializedVersion: 2
+        x: 483
+        y: 530
+        width: 161
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2310653c52df0a54cb30d1bc2bd8c961
+      internalID: 4346051856040042701
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreaDrainEye_4
+      rect:
+        serializedVersion: 2
+        x: 644
+        y: 530
+        width: 161
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b95b7f1172e30a048a82abc14b1624ec
+      internalID: 5389875701100976947
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreaDrainEye_5
+      rect:
+        serializedVersion: 2
+        x: 805
+        y: 530
+        width: 161
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3a553eece7afc264aa994f195a3918bc
+      internalID: 6641367537415404987
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreaDrainEye_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 424
+        width: 161
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d005f548cd0e8d46ba300aa9a252b44
+      internalID: -7974148969300956943
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreaDrainEye_7
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 424
+        width: 161
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f9188b3619d63442a80d8e667c62521
+      internalID: -3319697324518332128
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreaDrainEye_8
+      rect:
+        serializedVersion: 2
+        x: 322
+        y: 424
+        width: 161
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3cafd48d135e29346806ea916680f177
+      internalID: 3223436549884570344
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreaDrainEye_9
+      rect:
+        serializedVersion: 2
+        x: 483
+        y: 424
+        width: 161
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7f23717a5650e6c419d378acfd4a279e
+      internalID: -3357065071086357690
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreaDrainEye_10
+      rect:
+        serializedVersion: 2
+        x: 644
+        y: 424
+        width: 161
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d5207b0e44a6cf4f8371e9112357283
+      internalID: 3049215213712068244
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreaDrainEye_11
+      rect:
+        serializedVersion: 2
+        x: 805
+        y: 424
+        width: 161
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 58bdef17f6212f14789590325d52f517
+      internalID: -4829685787420796493
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreaDrainEye_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 318
+        width: 161
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a4e565d44bb400a41a6f63b33dcbb075
+      internalID: -6673215772118708299
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreaDrainEye_13
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 318
+        width: 161
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d2f827c19c8c3df47aa7e90ccbe19065
+      internalID: -6500904117864698838
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreaDrainEye_14
+      rect:
+        serializedVersion: 2
+        x: 322
+        y: 318
+        width: 161
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6aff7dc58dda5624d9b23dbe5fe15e85
+      internalID: -5587419733943341724
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreaDrainEye_15
+      rect:
+        serializedVersion: 2
+        x: 483
+        y: 318
+        width: 161
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c2fa107b41f595447aa3dbbd85c82b96
+      internalID: -3678419978487568139
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreaDrainEye_16
+      rect:
+        serializedVersion: 2
+        x: 644
+        y: 318
+        width: 161
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cb63ccbadd35db1439964003fbaa34c9
+      internalID: 4370380759803582610
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreaDrainEye_17
+      rect:
+        serializedVersion: 2
+        x: 805
+        y: 318
+        width: 161
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3637857673b81d742856e99fd6ad0743
+      internalID: -5372678769690418918
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreaDrainEye_18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 212
+        width: 161
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 543bce6d8e1dd7c4ab2bc573b1717640
+      internalID: -776729332367555728
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreaDrainEye_19
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 212
+        width: 161
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 17b97e498609a09468425a1d0eb7308c
+      internalID: -8680190287174872323
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreaDrainEye_20
+      rect:
+        serializedVersion: 2
+        x: 322
+        y: 212
+        width: 161
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8c4922f17ee891f43a97b0ab75c75cdf
+      internalID: -6564437150527046598
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreaDrainEye_21
+      rect:
+        serializedVersion: 2
+        x: 483
+        y: 212
+        width: 161
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f88bb0235769d0746bbc1544f5732d96
+      internalID: -4384805158971191440
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreaDrainEye_22
+      rect:
+        serializedVersion: 2
+        x: 644
+        y: 212
+        width: 161
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 674da7d53f9c79d48985fd6788f176ea
+      internalID: 8713665992206293683
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreaDrainEye_23
+      rect:
+        serializedVersion: 2
+        x: 805
+        y: 212
+        width: 161
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2167c336a8f6e7343b0193cae0370514
+      internalID: -7647550076571043435
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreaDrainEye_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 106
+        width: 161
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce4aa2079c0ca8248a7b9c81be16628d
+      internalID: -7558432689606209529
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreaDrainEye_25
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 106
+        width: 161
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5fb0717939a81f54b8bf12dd2747e48f
+      internalID: 1476176195663610513
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreaDrainEye_26
+      rect:
+        serializedVersion: 2
+        x: 322
+        y: 106
+        width: 161
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ff0a1719358792499091d71293a91ba
+      internalID: 2453596717835532241
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreaDrainEye_27
+      rect:
+        serializedVersion: 2
+        x: 483
+        y: 106
+        width: 161
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e921c82cd6ccd5f4e878c09a4ac6fd22
+      internalID: 4651680467481356141
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreaDrainEye_28
+      rect:
+        serializedVersion: 2
+        x: 644
+        y: 106
+        width: 161
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ebcb7e6593550924492594858459b522
+      internalID: 257551287608613726
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreaDrainEye_29
+      rect:
+        serializedVersion: 2
+        x: 805
+        y: 106
+        width: 161
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 49d7821f6bfd070498b953d1c6b0c502
+      internalID: -7652203473654465497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreaDrainEye_30
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 161
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 905b98579df6dd5438f6918489545597
+      internalID: -76435953777988130
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreaDrainEye_31
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 0
+        width: 161
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fba49fa140cee844393f083825f4a41b
+      internalID: -6845407063358673172
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreaDrainEye_32
+      rect:
+        serializedVersion: 2
+        x: 322
+        y: 0
+        width: 161
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d9d2730f9f81a8f46a9221afdb3c6b49
+      internalID: -6927442730027132903
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreaDrainEye_33
+      rect:
+        serializedVersion: 2
+        x: 483
+        y: 0
+        width: 161
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d9accf581a96bb4895d625cf8fe2014
+      internalID: 3347239337994575595
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreaDrainEye_34
+      rect:
+        serializedVersion: 2
+        x: 644
+        y: 0
+        width: 161
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f2812b0d8723f240915904d467a5cc0
+      internalID: 3757283056042577871
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreaDrainEye_35
+      rect:
+        serializedVersion: 2
+        x: 805
+        y: 0
+        width: 161
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6a45b013115e8024a9fb9926a2fb457e
+      internalID: 5084407346340969843
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
