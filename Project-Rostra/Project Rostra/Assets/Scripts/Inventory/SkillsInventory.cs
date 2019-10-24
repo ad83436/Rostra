@@ -47,14 +47,14 @@ public class SkillsInventory : MonoBehaviour {
         AddToUnlockedSkills((int)SKILLS.Fr_NeverAgain, 2);
         EquipSkill((int)SKILLS.Fr_NeverAgain, 3, 2);
 
-        AddToUnlockedSkills((int)SKILLS.Ar_Armageddon, 3);
-        EquipSkill((int)SKILLS.Ar_Armageddon, 0, 3);
-        AddToUnlockedSkills((int)SKILLS.Ar_HealingAura, 3);
-        EquipSkill((int)SKILLS.Ar_HealingAura, 1, 3);
+        AddToUnlockedSkills((int)SKILLS.Ar_LullabyOfHope, 3);
+        EquipSkill((int)SKILLS.Ar_LullabyOfHope, 0, 3);
+        AddToUnlockedSkills((int)SKILLS.Ar_DrainEye, 3);
+        EquipSkill((int)SKILLS.Ar_DrainEye, 1, 3);
         AddToUnlockedSkills((int)SKILLS.Ar_ManaCharge, 3);
         EquipSkill((int)SKILLS.Ar_ManaCharge, 2, 3);
-        AddToUnlockedSkills((int)SKILLS.Ar_LullabyOfHope, 3);
-        EquipSkill((int)SKILLS.Ar_LullabyOfHope, 3, 3);
+        AddToUnlockedSkills((int)SKILLS.Ar_Armageddon, 3);
+        EquipSkill((int)SKILLS.Ar_Armageddon, 3, 3);
     }
 
     // Handling keyboard functionality
