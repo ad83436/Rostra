@@ -88,7 +88,7 @@ public class Player : MonoBehaviour
 
 
     //Effects
-    //Gurad
+    //Guard
     public GameObject guardIcon;
     //Rage
     public GameObject rageModeIndicator;
@@ -96,6 +96,8 @@ public class Player : MonoBehaviour
     public GameObject healEffect;
     //MPHeal
     public GameObject mpEffect;
+    //Revive
+    public GameObject hopeEffect;
     //Buffs
     public GameObject defBuffEffect;
     public GameObject atkBuffEffect;
@@ -108,6 +110,8 @@ public class Player : MonoBehaviour
     public Text damageText;
     public Text healText;
     public Text mpText;
+    public Text skillText;
+    private string skillTextValue = "";
     public Text waitTimeText;
 
     //Camera
@@ -170,6 +174,7 @@ public class Player : MonoBehaviour
         //Heal
         healEffect.gameObject.SetActive(false);
         mpEffect.gameObject.SetActive(false);
+        hopeEffect.gameObject.SetActive(false);
         defBuffEffect.gameObject.SetActive(false);
         atkBuffEffect.gameObject.SetActive(false);
         agiBuffEffect.gameObject.SetActive(false);
@@ -198,6 +203,7 @@ public class Player : MonoBehaviour
         rageImage.fillAmount = currentRage / maxRage;
         damageText.gameObject.SetActive(false);
         healText.gameObject.SetActive(false);
+        skillText.gameObject.SetActive(false);
         mpText.gameObject.SetActive(false);
         waitTimeText.gameObject.SetActive(false);
     }
@@ -732,7 +738,15 @@ public class Player : MonoBehaviour
                 skillObjectForObjPooler = "NeverAgain";
                 skillNameForObjPooler = "ArrowImpactNG";
                 skillAnimatorName = "ASkill";
+                skillTextValue = "Die!";
                 skillWaitingIndex = -2;
+                break;
+            case (int)SKILLS.Ar_Armageddon:
+                skillObjectForObjPooler = "ArmFire";
+                skillNameForObjPooler = "ArmImpact";
+                skillAnimatorName = "Heal";
+                skillTextValue = "Burn!";
+                skillWaitingIndex = 4; //Armageddon is 4
                 break;
         }
 
@@ -802,6 +816,13 @@ public class Player : MonoBehaviour
         //8: Single player buff
         //9: All players buff
 
+        //Check if there's a skill text
+        if(skillTextValue != "")
+        {
+            skillText.gameObject.SetActive(true);
+            skillText.text = skillTextValue;
+            skillTextValue = "";
+        }
         if (skillTarget == 0) // Damaging one enemy
         {
             Debug.Log("Damage enemy");
@@ -1085,7 +1106,7 @@ public class Player : MonoBehaviour
 
     public void RevivePlayer(float percentage) //Heal percentage after revival. Used for skills
     {
-        EnableEffect("Revive", 0); //Enable the effect
+        EnableEffect("Revival", 0); //Enable the effect
         Heal(percentage);
         dead = false;
         playerAnimator.SetBool("Dead", false);
@@ -1270,6 +1291,7 @@ public class Player : MonoBehaviour
                 strBuffEffect.gameObject.SetActive(true);
                 break;
             case "Revival":
+                hopeEffect.gameObject.SetActive(true);
                 if(value>0) //Used for Items
                 {
                     healEffect.gameObject.SetActive(true);
