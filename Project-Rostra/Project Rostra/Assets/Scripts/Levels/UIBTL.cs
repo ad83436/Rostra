@@ -62,7 +62,7 @@ public class UIBTL : MonoBehaviour
     public GameObject choosePlayerArrow;
     public GameObject itemsPanel;
     public Text itemDescription;
-    public Sprite[] itemIcons; //Stores the icon of each item --> Temporary until the itemIcons array is ready in the MainInventory
+    //public Sprite[] itemIcons; //Stores the icon of each item --> Temporary until the itemIcons array is ready in the MainInventory
     public Image[] itemIconsInPanel; //Stores references to the icons inside the panel --> They change if we scroll down
     public Text[] itemNames; //Displayes item name
     public Text[] itemCount; //Displays item count
@@ -629,7 +629,7 @@ public class UIBTL : MonoBehaviour
                         //Show three the first three items in the inventory
                         for (int i = 0; i < 3 && i < inventory.consumableInv.Count; i++)
                         {
-                            itemIconsInPanel[i].sprite = itemIcons[inventory.invItem[inventory.consumableInv[itemsPanelIndex + i], 0]];
+                            itemIconsInPanel[i].sprite = inventory.ItemIcon(inventory.invItem[inventory.consumableInv[itemsPanelIndex + i], 0]);// itemIcons[inventory.invItem[inventory.consumableInv[itemsPanelIndex + i], 0]];
                             itemNames[i].text = inventory.ItemName(inventory.invItem[inventory.consumableInv[itemsPanelIndex + i], 0]);
                             itemCount[i].text = inventory.invItem[inventory.consumableInv[itemsPanelIndex + i], 1].ToString();
                         }
@@ -919,13 +919,13 @@ public class UIBTL : MonoBehaviour
                     //Make sure we don't go out of bounds
                     if (itemsPanelIndex + i < inventory.consumableInv.Count)
                     {
-                        itemIconsInPanel[i].sprite = itemIcons[inventory.invItem[inventory.consumableInv[itemsPanelIndex + i], 0]];
+                        itemIconsInPanel[i].sprite = inventory.ItemIcon(inventory.invItem[inventory.consumableInv[itemsPanelIndex + i], 0]); //itemIcons[inventory.invItem[inventory.consumableInv[itemsPanelIndex + i], 0]];
                         itemNames[i].text = inventory.ItemName(inventory.invItem[inventory.consumableInv[itemsPanelIndex + i], 0]);
                         itemCount[i].text = inventory.invItem[inventory.consumableInv[itemsPanelIndex + i], 1].ToString();
                     }
                     else
                     {
-                        itemIconsInPanel[i].sprite = itemIcons[0];
+                        itemIconsInPanel[i].sprite = inventory.ItemIcon(-1);//Default
                         itemNames[i].text = "---";
                         itemCount[i].text = "---";
 
@@ -962,15 +962,15 @@ public class UIBTL : MonoBehaviour
             //Will turn it into a for loop when I'm smart enough
             if (itemsPanelIndex % 3 != 0 && itemHPosIndex < 0)
             {
-                itemIconsInPanel[0].sprite = itemIcons[inventory.invItem[inventory.consumableInv[itemsPanelIndex - 2], 0]];
+                itemIconsInPanel[0].sprite = inventory.ItemIcon(inventory.invItem[inventory.consumableInv[itemsPanelIndex -2], 0]); //itemIcons[inventory.invItem[inventory.consumableInv[itemsPanelIndex - 2], 0]];
                 itemNames[0].text = inventory.ItemName(inventory.invItem[inventory.consumableInv[itemsPanelIndex - 2], 0]);
                 itemCount[0].text = inventory.invItem[inventory.consumableInv[itemsPanelIndex - 2], 1].ToString();
 
-                itemIconsInPanel[1].sprite = itemIcons[inventory.invItem[inventory.consumableInv[itemsPanelIndex - 1], 0]];
+                itemIconsInPanel[1].sprite = inventory.ItemIcon(inventory.invItem[inventory.consumableInv[itemsPanelIndex -1], 0]); //itemIcons[inventory.invItem[inventory.consumableInv[itemsPanelIndex - 1], 0]];
                 itemNames[1].text = inventory.ItemName(inventory.invItem[inventory.consumableInv[itemsPanelIndex - 1], 0]);
                 itemCount[1].text = inventory.invItem[inventory.consumableInv[itemsPanelIndex - 1], 1].ToString();
 
-                itemIconsInPanel[2].sprite = itemIcons[inventory.invItem[inventory.consumableInv[itemsPanelIndex], 0]];
+                itemIconsInPanel[2].sprite = inventory.ItemIcon(inventory.invItem[inventory.consumableInv[itemsPanelIndex], 0]);//itemIcons[inventory.invItem[inventory.consumableInv[itemsPanelIndex], 0]];
                 itemNames[2].text = inventory.ItemName(inventory.invItem[inventory.consumableInv[itemsPanelIndex], 0]);
                 itemCount[2].text = inventory.invItem[inventory.consumableInv[itemsPanelIndex], 1].ToString();
 

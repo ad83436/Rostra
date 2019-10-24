@@ -42,6 +42,8 @@ public class MainInventory : MonoBehaviour {
 	//Amounts
 	public int itemAddAmount = 0;
 
+    public Sprite[] itemIcons;
+
 	// Set the main inventory instance to this one if no inventory is active, delete otherwise
 	public void Awake() {
 		if (invInstance == null) {
@@ -652,12 +654,46 @@ public class MainInventory : MonoBehaviour {
 		return itemType;
 	}
 
-	#endregion
+    #endregion
 
-	#region Stack Limit of Items in a Single Inventory Space
+    #region An item's "Icon"
+    public Sprite ItemIcon(int itemID)
+    {
+        Sprite icon = itemIcons[0]; //No Item is at 0
 
-	// Returns the maximum stack limit for an item given the itemID
-	public int ItemStackLimit(int itemID) {
+        // Search for the item's type based on its ID
+        switch (itemID)
+        {
+            case (int)ITEM_ID.TEST_POTION_HP:
+            case (int)ITEM_ID.HP_POTION:
+                icon = itemIcons[1];//Potion is 1
+                break;
+            case (int)ITEM_ID.TEST_POTION_MP:
+            case (int)ITEM_ID.MP_ELIXER:
+                icon = itemIcons[2]; //Elixer is 2
+                break;
+            case (int)ITEM_ID.HOPE_POTION:
+                icon = itemIcons[3]; //Hope is 3
+                break;
+            case (int)ITEM_ID.TEST_ARMOR1:
+                icon = itemIcons[4];
+                break;
+            case (int)ITEM_ID.TEST_WEAPON1:
+                icon = itemIcons[5];
+                break;
+            default:
+                icon = itemIcons[0];
+                break;
+        }
+
+        return icon;
+    }
+
+    #endregion
+    #region Stack Limit of Items in a Single Inventory Space
+
+    // Returns the maximum stack limit for an item given the itemID
+    public int ItemStackLimit(int itemID) {
 		int stackSize = 1; // Default stack limit is 1
 
 		// Find out an item's max stack size based on its ID

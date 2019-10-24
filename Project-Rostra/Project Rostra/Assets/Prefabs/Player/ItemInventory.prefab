@@ -47,3 +47,12 @@ MonoBehaviour:
   GuiSmall: {fileID: 12800000, guid: 8cd005d600c706945b313ab1374fb2ea, type: 3}
   isVisible: 0
   curOption: 0
+  selectedOption: -1
+  itemAddAmount: 0
+  itemIcons:
+  - {fileID: 21300000, guid: 5659c2efffd66c6478d67bc19c138116, type: 3}
+  - {fileID: 21300000, guid: c31c5c244ea421a48a4beb4e1d294163, type: 3}
+  - {fileID: 21300000, guid: 60b7049005b42dc43b19c0136624c44a, type: 3}
+  - {fileID: 21300000, guid: 292119b1d6b9ae043985d5443cf0524c, type: 3}
+  - {fileID: 21300000, guid: a7692c10f03e75140bdc7c9d29804ac3, type: 3}
+  - {fileID: 21300000, guid: c1534a61e937a294db394c7970252754, type: 3}
