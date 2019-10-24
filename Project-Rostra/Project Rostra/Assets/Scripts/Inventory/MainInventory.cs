@@ -659,34 +659,25 @@ public class MainInventory : MonoBehaviour {
     #region An item's "Icon"
     public Sprite ItemIcon(int itemID)
     {
-        Sprite icon = itemIcons[0]; //No Item is at 0
-
         // Search for the item's type based on its ID
         switch (itemID)
         {
             case (int)ITEM_ID.TEST_POTION_HP:
             case (int)ITEM_ID.HP_POTION:
-                icon = itemIcons[1];//Potion is 1
-                break;
+                return itemIcons[1];//Potion is 1
             case (int)ITEM_ID.TEST_POTION_MP:
             case (int)ITEM_ID.MP_ELIXER:
-                icon = itemIcons[2]; //Elixer is 2
-                break;
+                return itemIcons[2]; //Elixer is 2
             case (int)ITEM_ID.HOPE_POTION:
-                icon = itemIcons[3]; //Hope is 3
-                break;
+                return itemIcons[3]; //Hope is 3
             case (int)ITEM_ID.TEST_ARMOR1:
-                icon = itemIcons[4];
-                break;
+                return itemIcons[4];
             case (int)ITEM_ID.TEST_WEAPON1:
-                icon = itemIcons[5];
-                break;
+                return itemIcons[5];
             default:
-                icon = itemIcons[0];
-                break;
+                return itemIcons[0];
         }
 
-        return icon;
     }
 
     #endregion
