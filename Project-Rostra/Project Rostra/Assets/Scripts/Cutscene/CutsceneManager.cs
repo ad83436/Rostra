@@ -60,6 +60,7 @@ public class CutsceneManager : MonoBehaviour
 		if (isActive == true)
 		{
 			NextAction();
+			Debug.Log(current);
 		}
     }
 
@@ -128,7 +129,14 @@ public class CutsceneManager : MonoBehaviour
 			if (isActive == true && timingsCM[current] <= 0 && moveLenght >= 0)
 			{
 				Debug.Log("Next");
-				current++;
+				if (current + 1 < movesCM.Length)
+				{
+					current++;
+				}
+				else
+				{
+					End();
+				}
 				moveLenght--;
 				actorsCM[actorCount].transform.localPosition = new Vector3(movesCM[current].x, movesCM[current].y, actorsCM[actorCount].transform.localPosition.z);
 				anim.SetBool("FadeIn", false);
@@ -136,9 +144,12 @@ public class CutsceneManager : MonoBehaviour
 			/// 
 			if (povCount <= povChangesCM.Length - 1 && current == povChangesCM[povCount] && actorsCM.Length > 0 && povChangesCM.Length > 0)
 			{
-				actorCount++;
-				povCount++;
-				anim = actorsCM[actorCount].GetComponent<Animator>();
+				if (actorCount + 1 < actorsCM.Length)
+				{
+					actorCount++;
+					povCount++;
+					anim = actorsCM[actorCount].GetComponent<Animator>();
+				}
 			}
 		}
 		else
