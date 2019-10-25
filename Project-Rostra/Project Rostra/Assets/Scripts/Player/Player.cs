@@ -468,7 +468,6 @@ public class Player : MonoBehaviour
 
     public void TakeDamage(float enemyATK)
     {
-        Debug.Log(name + currentState);
         btlCam.CameraShake();
         float damage = enemyATK - ((def / (20.0f + def)) * enemyATK);
         currentHP -= damage;
@@ -612,6 +611,7 @@ public class Player : MonoBehaviour
             skillTarget = 6;//Single player heal
             skillAnimatorName = "Heal";
             skillWaitingIndex = 3; //Lullaby of Hope wait is 3 per the animator
+            skillTextValue = "Don't give up!";
         }
         else if(skillID == (int)SKILLS.Ar_DrainEye)
         {
@@ -1184,6 +1184,7 @@ public class Player : MonoBehaviour
 
     public void BuffStats(string statToBuff, float amount, float lastsNumberOfTurns)
     {
+        Debug.Log("Stat to buff: " + statToBuff);
         lastsNumberOfTurns++; //Add one more turn since the system should count the number of turns based on the caster not the receiver. This way ensures that the queue goes around equal to the number of turns it the buff/debuff is supposed to last
         switch (statToBuff)
         {
@@ -1290,7 +1291,6 @@ public class Player : MonoBehaviour
         if (defenseBuffed && defenseBuffSkillQCounter > 0)
         {
             defenseBuffSkillQCounter--;
-            Debug.Log("Buff counter: " + defenseBuffSkillQCounter);
             if (defenseBuffSkillQCounter <= 0)
             {
                 defenseBuffSkillQCounter = 0;
