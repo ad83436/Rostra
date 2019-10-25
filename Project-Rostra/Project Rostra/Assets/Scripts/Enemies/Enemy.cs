@@ -8,34 +8,6 @@ using UnityEngine.SceneManagement;
 
 public class Enemy : MonoBehaviour
 {
-    public enum EnemyClassType
-    {
-        DPS,    
-        Tank,   
-        Support 
-    };
-
-    public enum EnemyAttackType
-    {
-        Dumb,
-        Opportunistic,
-        Assassin,
-        Bruiser,
-        Healer,
-        Heal_Support,
-        Strategist,
-        Demo
-    };
-
-    enum PlayerStatReference
-    {
-        Health,
-        Agility,
-        Defence,
-        Attack
-
-    };
-
     public int enemyIndexInBattleManager;
     private BattleManager battleManager;
     private UIBTL uiBTL;
@@ -89,7 +61,9 @@ public class Enemy : MonoBehaviour
 
     public EnemyClassType enemyClass;
     public EnemyAttackType enemyAttack;
-
+    public AllEnemySkills canUseSkill;
+    public EnemyName enemyName;
+    PlayerStatReference statNeeded;
     private void Awake()
     {
         print("Very First  " + currentHP);
@@ -97,6 +71,7 @@ public class Enemy : MonoBehaviour
         AssingClassSkills(this);
         GiveNamesAndSkills();
     }
+
     private void Start()
     {
         print("First" + currentHP);
@@ -145,6 +120,8 @@ public class Enemy : MonoBehaviour
     /// <summary>
     /// HEY LISTEN !!!!!!!! Feel Free Change the values in EnemyTurn if you must do so, as these are all test values sho like a good tweaking now and then.
     /// </summary>
+    /// 
+
     public void EnemyTurn()
     {
         uiBTL.DisableActivtyText();
@@ -165,6 +142,7 @@ public class Enemy : MonoBehaviour
                     {
                         DumbAttack();
                     }
+
                     break;
 
                 case EnemyAttackType.Opportunistic:
@@ -176,11 +154,16 @@ public class Enemy : MonoBehaviour
                             MakeSkillsWork(canUseSkill);
                             print(eName + " Used their skill aswell as their types attack");
                         }
+                        else
+                        {
+
+                        }
 
                     }
 
                     else
                     {
+
                         if (skillChance >= 50)
                         {
                             MakeSkillsWork(canUseSkill);
@@ -189,28 +172,24 @@ public class Enemy : MonoBehaviour
 
                         else
                         {
-                            if (skillChance > 40)
-                            {
-                                DumbAttack();
-                                print(eName + " Used their skill aswell as a Dumb attack");
-                            }
-
-                            else
-                            {
-                                DumbAttack();
-                                print(eName + " Did not use their skill but used a Dumb attack");
-                            }
+                            DumbAttack();
+                            print(eName + " Did not use their skill but used a Dumb attack");
                         }
+
                     }
                     break;
 
-                    case EnemyAttackType.Assassin:
+                case EnemyAttackType.Assassin:
 
-                        if (attackChance > 30)
+                    if (attackChance > 30)
+                    {
+                        if (skillChance > 40)
                         {
                             MakeSkillsWork(canUseSkill);
                             print(eName + " Used their skill aswell as their types attack");
                         }
+
+
 
                         else
                         {
@@ -219,9 +198,13 @@ public class Enemy : MonoBehaviour
                         }
                     }
 
+
                     else
                     {
-                        if (skillChance >= 50)
+
+
+
+                        if (skillChance > 40)
                         {
                             MakeSkillsWork(canUseSkill);
                             print(eName + " Used their skill aswell as a Dumb attack");
@@ -229,18 +212,10 @@ public class Enemy : MonoBehaviour
 
                         else
                         {
-                            if (skillChance > 40)
-                            {
-                                DumbAttack();
-                                print(eName + " Used their skill aswell as a Dumb attack");
-                            }
-
-                            else
-                            {
-                                DumbAttack();
-                                print(eName + " Did not use their skill but used a Dumb attack");
-                            }
+                            DumbAttack();
+                            print(eName + " Did not use their skill but used a Dumb attack");
                         }
+
                     }
                     break;
 
@@ -261,7 +236,7 @@ public class Enemy : MonoBehaviour
 
                     else
                     {
-                        if(skill >= 50)
+                        if (skillChance >= 50)
                         {
                             MakeSkillsWork(canUseSkill);
                         }
@@ -271,7 +246,7 @@ public class Enemy : MonoBehaviour
                             DumbAttack();
                         }
                     }
-                    
+
                     break;
 
                 case EnemyAttackType.Healer:
@@ -297,11 +272,12 @@ public class Enemy : MonoBehaviour
                     {
                         SupportHeal(theHealer);
                     }
-                    
+
                     break;
 
-                    case EnemyAttackType.Strategist:
-
+                case EnemyAttackType.Strategist:
+                    if (attackChance > 30)
+                    {
                         if (attackChance > 30)
                         {
                             MakeSkillsWork(canUseSkill);
@@ -314,6 +290,7 @@ public class Enemy : MonoBehaviour
                             print(eName + " Did not use their skill but used their types attack");
                         }
                     }
+
 
                     else
                     {
@@ -328,32 +305,40 @@ public class Enemy : MonoBehaviour
                     }
                     break;
 
-                    case EnemyAttackType.Demo:
+                case EnemyAttackType.Demo:
 
                     DumbAttack();
                     break;
 
                 case EnemyAttackType.Relentless:
 
-                    if(attackChance > 30)
+                    if (attackChance > 30)
                     {
-                        if(skillChance >= 50)
+                        if (skillChance >= 50)
                         {
                             MakeSkillsWork(canUseSkill);
                         }
 
                         else
                         {
-                            RelentlessAttack(playerIndexHolder,timeAttacking);
+                            RelentlessAttack(playerIndexHolder, timeAttacking);
                         }
                     }
 
                     else
                     {
-                        DumbAttack();
+                        if (skillChance >= 50)
+                        {
+                            RelentlessAttack(playerIndexHolder, timeAttacking);
+                        }
+
+                        else
+                        {
+                            DumbAttack();
+                        }
                     }
                     break;
-                   
+
                 case EnemyAttackType.Enemy_Blows_Self:
 
                     if (skillChance >= 50)
@@ -365,9 +350,11 @@ public class Enemy : MonoBehaviour
                     {
                         BlowSelf();
                     }
-                    
+
                     break;
+
             }
+        }
 
         else
         {
@@ -375,7 +362,7 @@ public class Enemy : MonoBehaviour
             uiBTL.EndTurn();
         }
     }
-    //Calculate whether the attack is a hit or a miss
+        //Calculate whether the attack is a hit or a miss
     private void CalculateHit()
     {
         //20 sided die + str <? enemy agility
@@ -1077,6 +1064,7 @@ public class Enemy : MonoBehaviour
             }
         }
     }
+
     public void EndHitAnimation()
     {
         animator.SetBool("Hit", false);
@@ -1176,6 +1164,7 @@ public class Enemy : MonoBehaviour
                 break;
         }
     }
+
     public void IncreaseStatsBasedOnLevel(int enemyCurrentLevel)
     {
         enemyCurrentLevel = eCurrentLevel;
@@ -1773,7 +1762,7 @@ public class Enemy : MonoBehaviour
         {
             if(battleManager.enemies[i].enemyReference != null && !battleManager.enemies[i].enemyReference.dead)
             {
-                battleManager.enemies[i].enemyReference.TakeDamage(attack);
+                battleManager.enemies[i].enemyReference.TakeDamage(attack,1);
             }
         }
     }
