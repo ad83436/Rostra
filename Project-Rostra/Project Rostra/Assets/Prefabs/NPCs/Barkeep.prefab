@@ -1,0 +1,432 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2695883018746198838
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2695883018746198836}
+  - component: {fileID: 2695883018746198837}
+  - component: {fileID: 2695883018746198834}
+  - component: {fileID: 2695883018746198835}
+  - component: {fileID: 2695883018746198833}
+  - component: {fileID: 8257735968710607304}
+  - component: {fileID: 8257735968710607305}
+  - component: {fileID: 8257735968710607302}
+  m_Layer: 0
+  m_Name: Barkeep
+  m_TagString: NPC
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2695883018746198836
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2695883018746198838}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -7.03, y: 4, z: -1.302734}
+  m_LocalScale: {x: 2.7, y: 2.7, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &2695883018746198837
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2695883018746198838}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 2047630865
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 4610488278177085407, guid: 50f4b7377c128454583453c8d25bc774,
+    type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 0.19, y: 0.29}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!61 &2695883018746198834
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2695883018746198838}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.19, y: 0.29}
+    newSize: {x: 0.19, y: 0.29}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.19, y: 0.29}
+  m_EdgeRadius: 0
+--- !u!61 &2695883018746198835
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2695883018746198838}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.008602083, y: -0.28353173}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.19, y: 0.29}
+    newSize: {x: 0.19, y: 0.29}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.5237614, y: 1.0703952}
+  m_EdgeRadius: 0
+--- !u!114 &2695883018746198833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2695883018746198838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43509005be49f1c4f973fd54f9269559, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogue:
+    names:
+    - Barkeep
+    - Fargas
+    - Barkeep
+    - Fargas
+    - Barkeep
+    - Fargas
+    - Barkeep
+    - Oberon
+    - Barkeep
+    - Fargas
+    - Barkeep
+    - Frea
+    - Arcelus
+    - Barkeep
+    - Fargas
+    - Barkeep
+    - Fargas
+    - Barkeep
+    - Fargas
+    - Barkeep
+    sentences:
+    - What'll be folks? Ocrestian Ale?
+    - We....
+    - No no no, of course not! You search something finer! Lysian Red, produced in
+      the Silver Sands region. A personal favourite a mine and several of me customers.
+    - No we just need...
+    - Something better! Gotrun's famous Bootkicker pint! One sip and you'll be gone
+      for hours!
+    - I need to know where Domel is. Do you know where he might be?
+    - The dwarf? Haven't seen him in days. Though don't go mentioning his name so
+      loudly.
+    - Why not?
+    - 'Our village finds itself in a right bit of trouble. The Alchemy Guild and it''s
+      dwarven workers are in a dispute right now. Domel rests at the center of this. '
+    - What does he have to do with it?
+    - I... I've got other patrons to serve.
+    - I can assure you we all tip well.
+    - Tell us more about Domel.
+    - 'Well the dispute arose because the dwarven workers feel their labour is being
+      exploited. The Alchemy Guild feels they treat their workers better than most
+      guilds do. '
+    - A little bit of work is needed to ensure they can continue to make the elixirs
+      we need and are hellbent creating the elixir of immortality.
+    - 'Or so they say. Domels the only one who was willing to talk to both sides and
+      worked tirelessly to ensure that conflict would never become a war. '
+    - Bless him, he always puts the good of the people before his own. However both
+      sides have been blaming Domels disappearance on each other.
+    - ' It''s become a pretty sore subject. People are starting to worry for his safety. '
+    - I am too.
+    - Where was he last seen?
+    - I don't know. But I do know who might. Both the alchemy guild and the Dwarves
+      knew him very well it's possible they would know or would atleast point you
+      in the right direction.
+    - Alright, we can go talk to them and find out where Domel went.
+    - If the Alchemy Guild members or The Dwarves see you talking to the other side
+      they'll get suspicious and won't give you the info you're looking for. If I
+      was you I'd only pick one.
+    - Which do you consider to be the most trustworthy?
+    - 'Don''t reckon I know. Been keeping outta troubles in the hopes that this whole
+      thing will blow over. I will say this. '
+    - The Alchemy Guild always has some idea what's happening in this village.
+    - 'The Dwarves have a lot of personal connections and knew Domel personally. '
+    - 'One more piece of advice. Don''t completly trust either. '
+    - I get the sense that they are both trying to gain the upper hand in this situation.
+    portrait:
+    - {fileID: 21300000, guid: 26feff2f0d4e92349a70bba8a0c18d31, type: 3}
+    - {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825, type: 3}
+    - {fileID: 21300000, guid: 26feff2f0d4e92349a70bba8a0c18d31, type: 3}
+    - {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825, type: 3}
+    - {fileID: 21300000, guid: 26feff2f0d4e92349a70bba8a0c18d31, type: 3}
+    - {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825, type: 3}
+    - {fileID: 21300000, guid: 26feff2f0d4e92349a70bba8a0c18d31, type: 3}
+    - {fileID: 21300000, guid: e24a4049526ca704eb781c65db5c188d, type: 3}
+    - {fileID: 21300000, guid: 26feff2f0d4e92349a70bba8a0c18d31, type: 3}
+    - {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825, type: 3}
+    - {fileID: 21300000, guid: 26feff2f0d4e92349a70bba8a0c18d31, type: 3}
+    - {fileID: 21300000, guid: 1f1660c1b92d23a4fb0b75fcca80183d, type: 3}
+    - {fileID: 21300000, guid: f40486206916ccc4a9bf37f57f448dee, type: 3}
+    - {fileID: 21300000, guid: 26feff2f0d4e92349a70bba8a0c18d31, type: 3}
+    - {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825, type: 3}
+    - {fileID: 21300000, guid: 26feff2f0d4e92349a70bba8a0c18d31, type: 3}
+    - {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825, type: 3}
+    - {fileID: 21300000, guid: 26feff2f0d4e92349a70bba8a0c18d31, type: 3}
+    - {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825, type: 3}
+    - {fileID: 21300000, guid: 26feff2f0d4e92349a70bba8a0c18d31, type: 3}
+    povChange:
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    - 7
+    - 8
+    - 9
+    - 10
+    - 11
+    - 12
+    - 13
+    - 19
+    - 20
+    - 21
+    - 22
+    - 23
+    - 24
+    - 24
+    typingSpeed: 0.001
+    isChoice: 1
+    choiceLine: 29
+    choice1: {fileID: 8257735968710607304}
+    choice2: {fileID: 8257735968710607305}
+    willRemember: 1
+    choiceSet: 1
+    choiceCare1: {fileID: 0}
+    choiceCare2: {fileID: 0}
+    choiceText1: Dwarves
+    choiceText2: Alchemy Guild
+    normal: {fileID: 8257735968710607302}
+    hasPlayed: 0
+    willCount: 0
+    maxWillCount: 0
+    isBattle: 0
+  choiceCare: 0
+  isChoiceDepend: 0
+  isOneShot: 0
+--- !u!114 &8257735968710607304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2695883018746198838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43509005be49f1c4f973fd54f9269559, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogue:
+    names:
+    - Fargas
+    - Barkeep
+    - Fargas
+    - 
+    - Barkeep
+    sentences:
+    - The Dwarves knew Domel. They have an insight the Guild couldn't.
+    - I can see a dwarf standing over to the right.
+    - Thank you very much. If anyone asks we weren't here. Right?
+    - Fargas puts some gold on the table and slides it across to the Barkeep.
+    - It's my pleasure! The smith's have always been wonderful patrons!
+    portrait:
+    - {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825, type: 3}
+    - {fileID: 21300000, guid: 26feff2f0d4e92349a70bba8a0c18d31, type: 3}
+    - {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825, type: 3}
+    - {fileID: 21300000, guid: dd3d4b940a009d14dbfe8b78c3b4f6ca, type: 3}
+    - {fileID: 21300000, guid: 26feff2f0d4e92349a70bba8a0c18d31, type: 3}
+    povChange:
+    - 1
+    - 2
+    - 3
+    - 4
+    - 4
+    typingSpeed: 0
+    isChoice: 0
+    choiceLine: 0
+    choice1: {fileID: 0}
+    choice2: {fileID: 0}
+    willRemember: 0
+    choiceSet: 0
+    choiceCare1: {fileID: 0}
+    choiceCare2: {fileID: 0}
+    choiceText1: 
+    choiceText2: 
+    normal: {fileID: 0}
+    hasPlayed: 0
+    willCount: 0
+    maxWillCount: 0
+    isBattle: 0
+  choiceCare: 0
+  isChoiceDepend: 0
+  isOneShot: 0
+--- !u!114 &8257735968710607305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2695883018746198838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43509005be49f1c4f973fd54f9269559, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogue:
+    names:
+    - Fargas
+    - Barkeep
+    - Fargas
+    - 
+    - Barkeep
+    sentences:
+    - If the Alchemy Guild knows what's going on in the town, they have to have some
+      idea what's going on here.
+    - I think I see one of it's members. He's standing over to the left.
+    - Thank you very much. If anyone asks we weren't here. Right?
+    - Fargas puts some gold on the table and slides it across to the Barkeep.
+    - It's my pleasure! The smith's have always been wonderful patrons!
+    portrait:
+    - {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825, type: 3}
+    - {fileID: 21300000, guid: 26feff2f0d4e92349a70bba8a0c18d31, type: 3}
+    - {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825, type: 3}
+    - {fileID: 21300000, guid: dd3d4b940a009d14dbfe8b78c3b4f6ca, type: 3}
+    - {fileID: 21300000, guid: 26feff2f0d4e92349a70bba8a0c18d31, type: 3}
+    povChange:
+    - 1
+    - 2
+    - 3
+    - 4
+    - 4
+    typingSpeed: 0
+    isChoice: 0
+    choiceLine: 0
+    choice1: {fileID: 0}
+    choice2: {fileID: 0}
+    willRemember: 0
+    choiceSet: 0
+    choiceCare1: {fileID: 0}
+    choiceCare2: {fileID: 0}
+    choiceText1: 
+    choiceText2: 
+    normal: {fileID: 0}
+    hasPlayed: 0
+    willCount: 0
+    maxWillCount: 0
+    isBattle: 0
+  choiceCare: 0
+  isChoiceDepend: 0
+  isOneShot: 0
+--- !u!114 &8257735968710607302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2695883018746198838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43509005be49f1c4f973fd54f9269559, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogue:
+    names:
+    - Barkeep
+    sentences:
+    - I'm sorry I've done all I can
+    portrait:
+    - {fileID: 21300000, guid: 26feff2f0d4e92349a70bba8a0c18d31, type: 3}
+    povChange: []
+    typingSpeed: 0
+    isChoice: 0
+    choiceLine: 0
+    choice1: {fileID: 0}
+    choice2: {fileID: 0}
+    willRemember: 0
+    choiceSet: 0
+    choiceCare1: {fileID: 0}
+    choiceCare2: {fileID: 0}
+    choiceText1: 
+    choiceText2: 
+    normal: {fileID: 0}
+    hasPlayed: 0
+    willCount: 0
+    maxWillCount: 0
+    isBattle: 0
+  choiceCare: 0
+  isChoiceDepend: 0
+  isOneShot: 0

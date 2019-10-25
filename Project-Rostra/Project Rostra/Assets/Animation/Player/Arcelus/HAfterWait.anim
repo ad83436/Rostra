@@ -26,27 +26,33 @@ AnimationClip:
       value: {fileID: 1395589222383337161, guid: 39c7e107513efe146bfbf18815729654,
         type: 3}
     - time: 0.16666667
-      value: {fileID: -8208084331011379842, guid: 39c7e107513efe146bfbf18815729654,
+      value: {fileID: 6870179341143805858, guid: 39c7e107513efe146bfbf18815729654,
         type: 3}
     - time: 0.25
-      value: {fileID: -1832085433291416358, guid: 39c7e107513efe146bfbf18815729654,
+      value: {fileID: -8208084331011379842, guid: 39c7e107513efe146bfbf18815729654,
         type: 3}
     - time: 0.33333334
-      value: {fileID: 5905033057540599743, guid: 39c7e107513efe146bfbf18815729654,
+      value: {fileID: -7330937870044783591, guid: 39c7e107513efe146bfbf18815729654,
         type: 3}
     - time: 0.41666666
-      value: {fileID: -4332951564270353457, guid: 39c7e107513efe146bfbf18815729654,
+      value: {fileID: -1832085433291416358, guid: 39c7e107513efe146bfbf18815729654,
         type: 3}
     - time: 0.5
-      value: {fileID: -6113668204260172276, guid: 39c7e107513efe146bfbf18815729654,
+      value: {fileID: 5905033057540599743, guid: 39c7e107513efe146bfbf18815729654,
         type: 3}
     - time: 0.5833333
-      value: {fileID: -3907942565725012584, guid: 39c7e107513efe146bfbf18815729654,
+      value: {fileID: -4332951564270353457, guid: 39c7e107513efe146bfbf18815729654,
         type: 3}
     - time: 0.6666667
-      value: {fileID: -655409248462060926, guid: 39c7e107513efe146bfbf18815729654,
+      value: {fileID: -6113668204260172276, guid: 39c7e107513efe146bfbf18815729654,
         type: 3}
     - time: 0.75
+      value: {fileID: -3907942565725012584, guid: 39c7e107513efe146bfbf18815729654,
+        type: 3}
+    - time: 0.8333333
+      value: {fileID: -655409248462060926, guid: 39c7e107513efe146bfbf18815729654,
+        type: 3}
+    - time: 0.9166667
       value: {fileID: 1611801974594354092, guid: 39c7e107513efe146bfbf18815729654,
         type: 3}
     attribute: m_Sprite
@@ -70,7 +76,9 @@ AnimationClip:
     pptrCurveMapping:
     - {fileID: -1584135826477099757, guid: 39c7e107513efe146bfbf18815729654, type: 3}
     - {fileID: 1395589222383337161, guid: 39c7e107513efe146bfbf18815729654, type: 3}
+    - {fileID: 6870179341143805858, guid: 39c7e107513efe146bfbf18815729654, type: 3}
     - {fileID: -8208084331011379842, guid: 39c7e107513efe146bfbf18815729654, type: 3}
+    - {fileID: -7330937870044783591, guid: 39c7e107513efe146bfbf18815729654, type: 3}
     - {fileID: -1832085433291416358, guid: 39c7e107513efe146bfbf18815729654, type: 3}
     - {fileID: 5905033057540599743, guid: 39c7e107513efe146bfbf18815729654, type: 3}
     - {fileID: -4332951564270353457, guid: 39c7e107513efe146bfbf18815729654, type: 3}
@@ -83,7 +91,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.76666665
+    m_StopTime: 0.93333334
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -103,7 +111,7 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0.75
+  - time: 0.9166667
     functionName: SkillEffect
     data: 
     objectReferenceParameter: {fileID: 0}

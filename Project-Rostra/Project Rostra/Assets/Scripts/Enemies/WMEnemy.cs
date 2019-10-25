@@ -8,14 +8,31 @@ public class WMEnemy : MonoBehaviour
     public Enemy[] enemies;
     public int[] enemyLevels;
     public Fade fadePanel;
+    public GameObject endTestPanel;
 
     public EnemySpawner enemySpwn;
 
     private void Start()
     {
         enemySpwn = EnemySpawner.instance;
+
+        if(endTestPanel)
+        {
+            endTestPanel.gameObject.SetActive(false);
+        }
     }
-    
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            if (endTestPanel)
+            {
+                endTestPanel.gameObject.SetActive(false);
+            }
+        }
+    }
+
 
     private void OnTriggerEnter2D(Collider2D col)
     {
@@ -33,7 +50,11 @@ public class WMEnemy : MonoBehaviour
             enemySpwn.AddEnemyToSpawn(enemies[i], i, enemyLevels[i]);
         }
         SceneManager.LoadScene("Queue Scene", LoadSceneMode.Additive);
+        if (endTestPanel)
+        {
+            endTestPanel.gameObject.SetActive(true);
+        }
 
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
     }
 }

@@ -60,12 +60,14 @@ public class CutsceneManager : MonoBehaviour
 		if (isActive == true)
 		{
 			NextAction();
+			Debug.Log(current);
 		}
-
     }
 
 	public void StartCutscene(Cutscene cs, Vector2 returnPos)
 	{
+		// call the copy constructor and save a local copy of what cutscene we passed in
+		// set up the current cutscene info
 		copy = new Cutscene(cs);
 		pl.transform.position = cs.camLocation;
 		returnPosition = returnPos;
@@ -94,25 +96,29 @@ public class CutsceneManager : MonoBehaviour
 
 	public void NextAction()
 	{
+		// if our current step is less than the amount of moves that means we can go ahead with the cutscene
 		if (current <= moveLenghtInitial)
 		{
+			// if we aren't already in a cutscene
 			if (DialogueManager.instance.isActive == false && moveLenght >= 0)
 			{
 				//fade in
 				if (timingsCM[current] <= anim.GetCurrentAnimatorStateInfo(0).length)
 				{
 					anim.SetBool("FadeIn", true);
+					//anim.SetBool("FadeIn", false);
 				}
 				timingsCM[current] -= Time.deltaTime;
 			}
+			// if our current move has dialogue attached to it
 			if (dialogueCount <= dialogueLenght && current == dialogueEntranceCM[entranceCount])
 			{
 				DialogueManager.instance.StartConversation(dialoguesCM[dialogueCount]);
 				anim.SetBool("FadeIn", false);
+				//anim.SetBool("FadeOut", false);
 				if (DialogueManager.instance.nextDialogue == true)
 				{
 					dialogueCount++;
-					current++;
 					entranceCount++;
 				}
 			}
@@ -121,18 +127,37 @@ public class CutsceneManager : MonoBehaviour
 				audios.clip = copy.song;
 				audios.Play();
 			}
+			// if our timings is less than zero move onto next move and count up the timers
 			if (isActive == true && timingsCM[current] <= 0 && moveLenght >= 0)
 			{
-				current++;
+				Debug.Log("Next");
+				if (current + 1 < movesCM.Length)
+				{
+					current++;
+				}
+				else
+				{
+					End();
+				}
 				moveLenght--;
-				actorsCM[actorCount].transform.position = movesCM[current];
+				actorsCM[actorCount].transform.localPosition = new Vector3(movesCM[current].x, movesCM[current].y, actorsCM[actorCount].transform.localPosition.z);
 				anim.SetBool("FadeIn", false);
+				//if (timingsCM[current] <= anim.GetCurrentAnimatorStateInfo(0).length)
+				//{
+				//	anim.SetBool("FadeIn", true);
+				//	anim.SetBool("FadeOut", false);
+				//}
+
 			}
+			/// 
 			if (povCount <= povChangesCM.Length - 1 && current == povChangesCM[povCount] && actorsCM.Length > 0 && povChangesCM.Length > 0)
 			{
-				actorCount++;
-				povCount++;
-				anim = actorsCM[actorCount].GetComponent<Animator>();
+				if (actorCount + 1 < actorsCM.Length)
+				{
+					actorCount++;
+					povCount++;
+					anim = actorsCM[actorCount].GetComponent<Animator>();
+				}
 			}
 		}
 		else
@@ -142,6 +167,7 @@ public class CutsceneManager : MonoBehaviour
 			
 		}
 	}
+	// this will reset everything to default
 
 	public void End()
 	{
@@ -154,6 +180,10 @@ public class CutsceneManager : MonoBehaviour
 		pl.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
 		pl.transform.position = returnPosition;
 		DialogueManager.instance.canWalk = true;
+		foreach (GameObject g in actorsCM)
+		{
+			Destroy(g);
+		}
 	}	
 
 	

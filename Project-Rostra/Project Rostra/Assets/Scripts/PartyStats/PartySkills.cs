@@ -9,20 +9,20 @@ public static class PartySkills {
         new CharacterSkills(
             new int[] {
                 // Unlockable Skills for Fargas
-                (int)SKILLS.TEST_Fargas,
-                (int)SKILLS.TEST_Frea,
-                (int)SKILLS.TEST_Oberon,
-                (int)SKILLS.TEST_Arcelus,
-                (int)SKILLS.TEST_Fargas,
-                (int)SKILLS.TEST_Frea,
-                (int)SKILLS.TEST_Oberon,
-                (int)SKILLS.TEST_Arcelus,
+                (int)SKILLS.Fa_SwiftStrike,
+                (int)SKILLS.Fa_SwordOfFury,
+                (int)SKILLS.NO_SKILL,
+                (int)SKILLS.NO_SKILL,
+                (int)SKILLS.NO_SKILL,
+                (int)SKILLS.NO_SKILL,
+                (int)SKILLS.NO_SKILL,
+                (int)SKILLS.NO_SKILL,
             }),
         new CharacterSkills(
             new int[] {
                 // Unlockable Skills for Oberon
-                (int)SKILLS.TEST_Oberon,
-                (int)SKILLS.NO_SKILL,
+                (int)SKILLS.Ob_ShieldAlly,
+                (int)SKILLS.Ob_ShieldAllAllies,
                 (int)SKILLS.NO_SKILL,
                 (int)SKILLS.NO_SKILL,
                 (int)SKILLS.NO_SKILL,
@@ -33,24 +33,24 @@ public static class PartySkills {
         new CharacterSkills(
             new int[] {
                 // Unlockable Skills for Frea
-                (int)SKILLS.TEST_Frea,
-                (int)SKILLS.NO_SKILL,
-                (int)SKILLS.NO_SKILL,
-                (int)SKILLS.NO_SKILL,
-                (int)SKILLS.NO_SKILL,
-                (int)SKILLS.NO_SKILL,
+                (int)SKILLS.Fr_DoubleShot,
+                (int)SKILLS.Fr_PiercingShot,
+                (int)SKILLS.Fr_ArrowRain,
+                (int)SKILLS.Fr_IDontMiss,
+                (int)SKILLS.Fr_PhantomShot,
+                (int)SKILLS.Fr_NeverAgain,
                 (int)SKILLS.NO_SKILL,
                 (int)SKILLS.NO_SKILL,
             }),
         new CharacterSkills(
             new int[] {
                 // Unlockable Skills for Arcelus
-                (int)SKILLS.TEST_Arcelus,
-                (int)SKILLS.NO_SKILL,
-                (int)SKILLS.NO_SKILL,
-                (int)SKILLS.NO_SKILL,
-                (int)SKILLS.NO_SKILL,
-                (int)SKILLS.NO_SKILL,
+                (int)SKILLS.Ar_Heal,
+                (int)SKILLS.Ar_HealingAura,
+                (int)SKILLS.Ar_DrainEye,
+                (int)SKILLS.Ar_LullabyOfHope,
+                (int)SKILLS.Ar_ManaCharge,
+                (int)SKILLS.Ar_Armageddon,
                 (int)SKILLS.NO_SKILL,
                 (int)SKILLS.NO_SKILL,
             }),

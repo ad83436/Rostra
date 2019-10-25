@@ -8,6 +8,34 @@ using UnityEngine.SceneManagement;
 
 public class Enemy : MonoBehaviour
 {
+    public enum EnemyClassType
+    {
+        DPS,    
+        Tank,   
+        Support 
+    };
+
+    public enum EnemyAttackType
+    {
+        Dumb,
+        Opportunistic,
+        Assassin,
+        Bruiser,
+        Healer,
+        Heal_Support,
+        Strategist,
+        Demo
+    };
+
+    enum PlayerStatReference
+    {
+        Health,
+        Agility,
+        Defence,
+        Attack
+
+    };
+
     public int enemyIndexInBattleManager;
     private BattleManager battleManager;
     private UIBTL uiBTL;
@@ -61,8 +89,6 @@ public class Enemy : MonoBehaviour
 
     public EnemyClassType enemyClass;
     public EnemyAttackType enemyAttack;
-    public EnemyName enemyName;
-    [SerializeField] AllEnemySkills canUseSkill;
 
     private void Awake()
     {
@@ -151,11 +177,6 @@ public class Enemy : MonoBehaviour
                             print(eName + " Used their skill aswell as their types attack");
                         }
 
-                        else
-                        {
-                            AttackLowDef();
-                            print(eName + " Did not use their skill but used their types attack");
-                        }
                     }
 
                     else
@@ -168,17 +189,24 @@ public class Enemy : MonoBehaviour
 
                         else
                         {
-                            DumbAttack();
-                            print(eName + " Did not use their skill but used a Dumb attack");
+                            if (skillChance > 40)
+                            {
+                                DumbAttack();
+                                print(eName + " Used their skill aswell as a Dumb attack");
+                            }
+
+                            else
+                            {
+                                DumbAttack();
+                                print(eName + " Did not use their skill but used a Dumb attack");
+                            }
                         }
                     }
                     break;
 
-                case EnemyAttackType.Assassin:
+                    case EnemyAttackType.Assassin:
 
-                    if (attackChance > 30)
-                    {
-                        if (skillChance > 40)
+                        if (attackChance > 30)
                         {
                             MakeSkillsWork(canUseSkill);
                             print(eName + " Used their skill aswell as their types attack");
@@ -201,8 +229,17 @@ public class Enemy : MonoBehaviour
 
                         else
                         {
-                            DumbAttack();
-                            print(eName + " Did not use their skill but used a Dumb attack");
+                            if (skillChance > 40)
+                            {
+                                DumbAttack();
+                                print(eName + " Used their skill aswell as a Dumb attack");
+                            }
+
+                            else
+                            {
+                                DumbAttack();
+                                print(eName + " Did not use their skill but used a Dumb attack");
+                            }
                         }
                     }
                     break;
@@ -224,18 +261,17 @@ public class Enemy : MonoBehaviour
 
                     else
                     {
-                        if (skillChance >= 50)
+                        if(skill >= 50)
                         {
                             MakeSkillsWork(canUseSkill);
-                            print(eName + " Used their skill aswell as a Dumb attack");
                         }
 
                         else
                         {
                             DumbAttack();
-                            print(eName + " Did not use their skill but used a Dumb attack");
                         }
                     }
+                    
                     break;
 
                 case EnemyAttackType.Healer:
@@ -264,11 +300,9 @@ public class Enemy : MonoBehaviour
                     
                     break;
 
-                case EnemyAttackType.Strategist:
+                    case EnemyAttackType.Strategist:
 
-                    if (attackChance > 30)
-                    {
-                        if (skillChance > 40)
+                        if (attackChance > 30)
                         {
                             MakeSkillsWork(canUseSkill);
                             print(eName + " Used their skill aswell as their types attack");
@@ -294,7 +328,7 @@ public class Enemy : MonoBehaviour
                     }
                     break;
 
-                case EnemyAttackType.Demo:
+                    case EnemyAttackType.Demo:
 
                     DumbAttack();
                     break;
@@ -334,7 +368,6 @@ public class Enemy : MonoBehaviour
                     
                     break;
             }
-        }
 
         else
         {
@@ -379,7 +412,7 @@ public class Enemy : MonoBehaviour
             if (CalculateCrit() <= eCritical)
             {
                 Debug.Log("Critical Hit from Enemy");
-                attackThisPlayer.TakeDamage(eAttack * critMod);
+                attackThisPlayer.TakeDamage(eAttack * 1.2f);
             }
 
             else
@@ -392,7 +425,6 @@ public class Enemy : MonoBehaviour
         {
             Debug.Log("Enemy has missed");
         }
-
         animator.SetBool("Attack", false);
         uiBTL.EndTurn();
     }
@@ -416,17 +448,17 @@ public class Enemy : MonoBehaviour
     void AttackLowHp()
     {
         StatNeeded(PlayerStatReference.Health);
-        for (int i = 0; i < battleManager.players.Length; i++)
-        {
+         for (int i = 0; i < 4; i++)
+         {
             //checking if hp stat for BM is the same as the smallest value in the list is so do yo thang 
-            if (battleManager.players[i].currentHP == Mathf.Min(playerStatNeeded.ToArray()))
-            {
-                attackThisPlayer = battleManager.players[i].playerReference;
-                CalculateHit();
-                animator.SetBool("Attack", true);
-            }
-        }
-        //clear the list for the next use 
+             if (battleManager.players[i].currentHP == Mathf.Min(playerStatNeeded.ToArray()))
+             {
+                attackThisPlayer = battleManager.players[i].playerReference;                
+                 CalculateHit();
+                 animator.SetBool("Attack", true);
+             }
+         }
+         //clear the list for the next use 
         playerStatNeeded.Clear();
     }
     void AttackLowDef()
@@ -883,9 +915,9 @@ public class Enemy : MonoBehaviour
     }
     void StatNeeded(PlayerStatReference pStatNeeded)
     {
-        float pStatsRefForCheck = 0; //  i know shitty name 
-                                     //returns the lowest HP of the party 
-        if (pStatNeeded == PlayerStatReference.Health)
+        float statsRefForCheck; //  i know shitty name 
+        //returns the lowest HP of the party 
+        if (statNeeded == PlayerStatReference.Health)
         {
             foreach (BattleManager.PlayerInformtion stat in battleManager.players)
             {
@@ -893,31 +925,30 @@ public class Enemy : MonoBehaviour
                 if (stat.playerReference != null && stat.currentHP > 0)
                 {
                     playerStatNeeded.Add(stat.currentHP);
-                    //return;
                 }
             }
             //sort the list DUH
             playerStatNeeded.Sort();
 
-            pStatsRefForCheck += Mathf.Min(playerStatNeeded.ToArray());
+            statsRefForCheck = Mathf.Min(playerStatNeeded.ToArray());
 
-            for (int i = 0; i < playerStatNeeded.Count; i++)
+            for (int i = 0; i <playerStatNeeded.Count; i++)
             {
-                if (playerStatNeeded[i] != pStatsRefForCheck)
+                if(playerStatNeeded[i] != statsRefForCheck)
                 {
                     playerStatNeeded.Remove(playerStatNeeded[i]);
                     print("Removed" + battleManager.players[i].name);
                 }
-
-                else if (playerStatNeeded[i] == pStatsRefForCheck)
+                
+                else if (playerStatNeeded[i] == statsRefForCheck)
                 {
                     playerStatNeeded.Remove(playerStatNeeded.Count - 1);
                 }
             }
         }
+        
 
-
-        else if (pStatNeeded == PlayerStatReference.Agility)
+        else if(statNeeded == PlayerStatReference.Agility)
         {
             foreach (BattleManager.PlayerInformtion stat in battleManager.players)
             {
@@ -927,27 +958,27 @@ public class Enemy : MonoBehaviour
                     playerStatNeeded.Add(stat.agi);
                 }
             }
-
+         
             playerStatNeeded.Sort();
 
-            pStatsRefForCheck = Mathf.Max(playerStatNeeded.ToArray());
+            statsRefForCheck = Mathf.Max(playerStatNeeded.ToArray());
 
             for (int i = 0; i < playerStatNeeded.Count; i++)
             {
-                if (playerStatNeeded[i] != pStatsRefForCheck)
+                if (playerStatNeeded[i] != statsRefForCheck)
                 {
                     playerStatNeeded.Remove(playerStatNeeded[i]);
                     print("Removed" + battleManager.players[i].name);
                 }
-
-                else if (playerStatNeeded[i] == pStatsRefForCheck)
+                
+                else if (playerStatNeeded[i] == statsRefForCheck)
                 {
                     playerStatNeeded.Remove(playerStatNeeded.Count - 1);
                 }
             }
         }
 
-        else if (pStatNeeded == PlayerStatReference.Attack)
+        else if (statNeeded == PlayerStatReference.Attack)
         {
             foreach (BattleManager.PlayerInformtion stat in battleManager.players)
             {
@@ -960,17 +991,17 @@ public class Enemy : MonoBehaviour
 
             playerStatNeeded.Sort();
 
-            pStatsRefForCheck += Mathf.Max(playerStatNeeded.ToArray());
+            statsRefForCheck = Mathf.Max(playerStatNeeded.ToArray());
 
             for (int i = 0; i < playerStatNeeded.Count; i++)
             {
-                if (playerStatNeeded[i] != pStatsRefForCheck)
+                if (playerStatNeeded[i] != statsRefForCheck)
                 {
                     playerStatNeeded.Remove(playerStatNeeded[i]);
                     print("Removed" + battleManager.players[i].name);
                 }
-
-                else if (playerStatNeeded[i] == pStatsRefForCheck)
+               
+                else if (playerStatNeeded[i] == statsRefForCheck)
                 {
                     playerStatNeeded.Remove(playerStatNeeded.Count - 1);
                 }
@@ -990,16 +1021,16 @@ public class Enemy : MonoBehaviour
             }
             playerStatNeeded.Sort();
 
-            pStatsRefForCheck += Mathf.Min(playerStatNeeded.ToArray());
+            statsRefForCheck = Mathf.Min(playerStatNeeded.ToArray());
             for (int i = 0; i < playerStatNeeded.Count; i++)
             {
-                if (playerStatNeeded[i] != pStatsRefForCheck)
+                if (playerStatNeeded[i] != statsRefForCheck)
                 {
                     playerStatNeeded.Remove(playerStatNeeded[i]);
                     print("Removed" + battleManager.players[i].name);
                 }
-
-                else if (playerStatNeeded[i] == pStatsRefForCheck)
+               
+                else if (playerStatNeeded[i] == statsRefForCheck)
                 {
                     playerStatNeeded.Remove(playerStatNeeded.Count - 1);
                 }
@@ -1022,7 +1053,7 @@ public class Enemy : MonoBehaviour
         spriteRenderer.color = spriteColor;
     }
     //Calcualte the damage
-    public void TakeDamage(float playerAttack)
+    public void TakeDamage(float playerAttack, int numberOfAttacks)
     {
         Debug.Log("Received player attack: " + playerAttack);
         float damage = playerAttack - ((eDefence / (20.0f + eDefence)) * playerAttack);
@@ -1040,7 +1071,10 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-            uiBTL.EndTurn(); //Only end the turn after the damage has been taken
+            if (numberOfAttacks <= 0)
+            {
+                uiBTL.EndTurn(); //Only end the turn after the damage has been taken
+            }
         }
     }
     public void EndHitAnimation()

@@ -12,28 +12,21 @@ public class ConversationTrigger : MonoBehaviour
 	// call this method in order to trigger the conversation
 	public bool isChoiceDepend;
 	// does the conversation only trigger once
-	public bool isOneShot;
+	//public bool isOneShot;
+	//private bool hasPlayed;
 	public void TriggerConvo()
 	{
-		if (isOneShot == true && dialogue.hasPlayed == false)
-		{
-			FindObjectOfType<DialogueManager>().StartConversation(dialogue);
-			isOneShot = false;
-		}
-		else
-		{
-			DialogueManager.instance.StartConversation(dialogue);
-		}
+		DialogueManager.instance.StartConversation(dialogue);
 	}
 	// 1 = dwarf, 2 = guild, 3 = kill, 4 = spare, 5 = tell, 6 = lie
 	public void TriggerChoiceDependantConvo()
 	{
-		FindObjectOfType<DialogueManager>().ChoiceDependantConvo(choiceCare, dialogue);
+		DialogueManager.instance.ChoiceDependantConvo(choiceCare, dialogue);
 	}
 
 	public void TriggerNormalDialogue()
 	{
-		FindObjectOfType<DialogueManager>().PlayNormalDialogue(dialogue);
+		DialogueManager.instance.PlayNormalDialogue(dialogue);
 	}
 
 	public void TriggerCutsceneDialogue()

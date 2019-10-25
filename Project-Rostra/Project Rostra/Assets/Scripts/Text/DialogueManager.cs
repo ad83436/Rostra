@@ -101,7 +101,7 @@ public class DialogueManager : MonoBehaviour
 		choices[(int)choice] = b;
 	}
 
-	void Awake()
+	void Start()
     {
 		// singleton notation
 		if (instance == null)
@@ -143,6 +143,7 @@ public class DialogueManager : MonoBehaviour
 
 	public void StartConversation(Dialogue d)
 	{
+
 		if (d.willCount == true)
 		{
 			willCount++;
@@ -156,6 +157,7 @@ public class DialogueManager : MonoBehaviour
 
 		if (nextDialogue == true)
 		{
+			Debug.Log("Started Convo");
 			text.text = "";
 			//turn off the highlighting and set everything to default in case it wasn't reset
 			highlight1.SetActive(false);
@@ -204,8 +206,20 @@ public class DialogueManager : MonoBehaviour
 			canWalk = false;
 			startUpdating = true;
 			isActive = true;
+			if (d.triggerBool > 0)
+			{
+				switch (d.triggerBool)
+				{
+					case 6:
+						DialogueManager.instance.demo = true;
+						Debug.Log("We can leave the tavern");
+						break;
+
+				}
+			}
+			d.hasPlayed = true;
 		}
-		
+
 	}
 
 	public void NextSentence()
@@ -277,6 +291,7 @@ public class DialogueManager : MonoBehaviour
 			fade = GameObject.Find("Fade").GetComponent<Fade>();
 			battle = true;
 		}
+		
 	}
 	// this is a coroutine that will take our chars from the string and print one at a time 
 	IEnumerator TypeLetters(string s)
@@ -303,7 +318,7 @@ public class DialogueManager : MonoBehaviour
 			if (boxCount == choiceCount)
 			{
 				continueButton.SetActive(false);
-				canEnter = false;
+				canEnter = true;
 				choice1.gameObject.SetActive(true);
 				choice2.gameObject.SetActive(true);
 				choice1.text = dia.choiceText1;
@@ -365,7 +380,7 @@ public class DialogueManager : MonoBehaviour
 					choices[6] = true;
 					break;
 				default:
-					Debug.LogError("You wanted a story choice but passed no choice set, fix it you idiot");
+					Debug.LogError("You wanted a story choice but passed no choice set");
 					break;
 			}
 			End();
@@ -381,27 +396,40 @@ public class DialogueManager : MonoBehaviour
 	public void ChoiceDependantConvo(float choice, Dialogue d)
 	{
 		dia = d;
+		Debug.Log(d.hasPlayed);
+		Debug.Log(d.isOneShot);
 		// if the choice is more than half of the array take away half the array to get it's counterpart
-		if (choice > choices.Length / 2 && (choices[(int)choice] == false && choices[(int)choice - choices.Length / 2] == false))
+		if (d.choiceCare1.dialogue.hasPlayed == true && d.choiceCare1.dialogue.isOneShot == true)
 		{
-			StartConversation(dia.normal.dialogue);
-			Debug.Log((int)choice - choices.Length / 2);
+			Debug.Log("Playing Normal Text");
+			StartConversation(dia.choiceCare1.dialogue.normal.dialogue);
 		}
-		// if it's less than half add half
-		else if (choice <= choices.Length / 2 && (choices[(int)choice] == false && choices[(int)choice + choices.Length / 2] == false))
+		else
 		{
-			StartConversation(dia.normal.dialogue);
-			Debug.Log((int)choice + choices.Length / 2);
-		}
-		// init dialogue 1
-		else if (choices[(int)choice] == true)
-		{
-			StartConversation(dia.choiceCare1.dialogue);
-		}
-		// init dialogue 2
-		else if (choices[(int)choice] == false)
-		{
-			StartConversation(dia.choiceCare2.dialogue);
+			if (choice > choices.Length / 2 && (choices[(int)choice] == false && choices[(int)choice - choices.Length / 2] == false))
+			{
+				StartConversation(dia.normal.dialogue);
+				Debug.Log((int)choice - choices.Length / 2);
+			}
+			// if it's less than half add half
+			else if (choice <= choices.Length / 2 && (choices[(int)choice] == false && choices[(int)choice + choices.Length / 2] == false))
+			{
+				StartConversation(dia.normal.dialogue);
+				Debug.Log((int)choice + choices.Length / 2);
+			}
+			// init dialogue 1
+			else if (choices[(int)choice] == true)
+			{
+				dia.choiceCare1.dialogue.hasPlayed = true;
+				StartConversation(dia.choiceCare1.dialogue);
+				
+			}
+			// init dialogue 2
+			else if (choices[(int)choice] == false)
+			{
+				StartConversation(dia.choiceCare2.dialogue);
+			}
+
 		}
 	}
 
@@ -412,25 +440,25 @@ public class DialogueManager : MonoBehaviour
 	// check our keyboard pressed and do things accordingly
 	public void CheckInput()
 	{
-		if (Input.GetKeyDown(KeyCode.Return) && canEnter == true)
+		if (Input.GetButtonDown("Confirm") && canEnter == true && boxCount != choiceCount)
 		{
 			NextSentence();
 		}
 		if (dia.isChoice == true && boxCount == choiceCount && Input.GetKeyDown(KeyCode.LeftArrow))
 		{
-			choiceNum = 2;
+			choiceNum = 1;
 		}
 		else if (dia.isChoice == true && boxCount == choiceCount && Input.GetKeyDown(KeyCode.RightArrow))
 		{
-			choiceNum = 1;
+			choiceNum = 2;
 		}
-		if (Input.GetKeyDown(KeyCode.Return) && choiceNum == 1 && boxCount == choiceCount && dia.isChoice == true)
-		{
-			SelectSecondChoice();
-		}
-		else if (Input.GetKeyDown(KeyCode.Return) && choiceNum == 2 && boxCount == choiceCount && dia.isChoice == true)
+		if (Input.GetButtonDown("Confirm") && choiceNum == 1 && boxCount == choiceCount && dia.isChoice == true)
 		{
 			SelectFirstChoice();
+		}
+		else if (Input.GetButtonDown("Confirm") && choiceNum == 2 && boxCount == choiceCount && dia.isChoice == true)
+		{
+			SelectSecondChoice();
 		}
 		if (choiceNum == 1)
 		{

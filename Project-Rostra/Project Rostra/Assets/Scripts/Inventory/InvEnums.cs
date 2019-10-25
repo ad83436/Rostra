@@ -13,6 +13,9 @@ enum ITEM_ID { // Minimum Value -- 0x0000, Maximum Value -- 0xFEFF (65280 possib
 	TEST_QUEST_ITEM =   0x0003, // Test Item
 	TEST_ARMOR1 =       0x0004, // Test Item        (Leather Armor)
 	TEST_WEAPON1 =      0x0005, // Test Item        (Iron Sword)
+    HP_POTION =         0x0006,
+    MP_ELIXER =         0x0007,
+    HOPE_POTION =       0x0008,
 };
 
 enum ITEM_TYPE { // Minimum Value -- 0xFF00, Maximum Value -- 0xFF4F (64 possible item types)

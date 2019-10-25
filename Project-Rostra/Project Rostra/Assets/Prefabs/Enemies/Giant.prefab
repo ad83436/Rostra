@@ -206,10 +206,9 @@ MonoBehaviour:
   eSpeed: 0
   eBaseLevel: 5
   eCurrentLevel: 15
-  eName: 
+  eName: Giant
   eRange: 0
   playerStatNeeded: []
-  enemyStatNeeded: []
   eCritical: 3
   qImage: {fileID: 21300000, guid: a1c83ac44df87ae4bb4206c178de4c5a, type: 3}
   HP: {fileID: 3829569746409785133}
@@ -220,12 +219,8 @@ MonoBehaviour:
   enemyCanvas: {fileID: 3829569744485860892}
   dead: 0
   hit: 0
-  usedSkill: 0
-  isStatModed: 0
   enemyClass: 1
-  enemyAttack: 3
-  enemyName: 5
-  canUseSkill: 1
+  enemyAttack: 2
 --- !u!95 &8834717703439480084
 Animator:
   serializedVersion: 3

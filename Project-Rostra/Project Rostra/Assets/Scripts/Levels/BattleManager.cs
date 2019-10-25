@@ -62,6 +62,7 @@ public class BattleManager : MonoBehaviour
     public bool battleHasEnded;
     public static bool battleInProgress = false;
 
+    private float dummyTimer = 5.0f;
 
     //At the beginning of each battle, each player and enemy will use the singleton to update their stats
     #region singleton
@@ -165,13 +166,11 @@ public class BattleManager : MonoBehaviour
     }
 
     //Called at the beginning of the battle to store references to current enemies. Needed to be able to update the queue
-    public void AddEnemy(int enemyIndex, int agi, int str, int crit, int speed, int currentHp, int maxHp, Enemy enemyRef, string name)
+    public void AddEnemy(int enemyIndex, int agi, int str, int crit, int speed, Enemy enemyRef, string name)
     {
             enemies[enemyIndex].playerIndex = enemyIndex;
             enemies[enemyIndex].agi = agi;
             enemies[enemyIndex].speed = speed;
-            enemies[enemyIndex].currentHP = currentHp;
-            enemies[enemyIndex].maxHP = maxHp;
             enemies[enemyIndex].str = str;
             enemies[enemyIndex].crit = crit;
             enemies[enemyIndex].enemyReference = enemyRef;
@@ -187,7 +186,7 @@ public class BattleManager : MonoBehaviour
         {
             allEnemiesAdded = true;
             //Temp code
-            expGain = 6 * totalLevels;
+            expGain = 20 * totalLevels;
             Debug.Log("EXP GAINNN " + expGain);
         }
 
@@ -197,20 +196,8 @@ public class BattleManager : MonoBehaviour
 
     public void StartBattle()
     {
+
         //Store and sort the agilities of the players and enemies in ascending order
-       
-        foreach (PlayerInformtion p in players)
-        {
-            if (p.playerReference != null)//Make sure all the entries have players (i.e. what if we have less than 4 players)
-            {
-                //Debug.Log(p.playerReference.name + " Has been added to sort");
-                pSpeeds.Add(p.speed);
-            }
-        }
-            
-
-        pSpeeds.Sort();
-
 
         foreach (PlayerInformtion e in enemies)
         {
@@ -222,16 +209,32 @@ public class BattleManager : MonoBehaviour
 
         eSpeeds.Sort();
 
+        foreach (PlayerInformtion p in players)
+        {
+            if (p.playerReference != null)//Make sure all the entries have players (i.e. what if we have less than 4 players)
+            {
+                pSpeeds.Add(p.speed);
+            }
+        }
+
+        pSpeeds.Sort();
+
 
         BuildQueue();
 
         //Update the consumable inventory
         TellInventoryToUpdateConsumables();
 
+        battleInProgress = true;
+
         if (!battleHasEnded)
         {
             NextOnQueue();
         }
+
+
+
+
     }
 
     public void NextOnQueue()
@@ -401,18 +404,6 @@ public class BattleManager : MonoBehaviour
         }
     }
 
-    //Called by the inventory manager to update the player's stats when the player changes gear and on awake
-    public void UpdateFromInv(int playerIndex,int hp, int mp, int atk, int def, int agi, int str, int crit)
-    {
-        players[playerIndex].currentHP = hp;
-        players[playerIndex].currentMP = mp;
-        players[playerIndex].atk = atk;
-        players[playerIndex].def = def;
-        players[playerIndex].agi = agi;
-        players[playerIndex].crit = crit;
-        players[playerIndex].str = str;
-    }
-
     //Called by the exp manager on awake and when the player's level changes
     public void UpdateFromExp(int playerIndex, int currentExp, int maxExp)
     {
@@ -453,7 +444,6 @@ public class BattleManager : MonoBehaviour
         players[playerIndex].speed = PartyStats.chara[playerIndex].TotalSpeed;
         players[playerIndex].exp = PartyStats.chara[playerIndex].currentExperience;
         players[playerIndex].expNeededForNextLevel = PartyStats.chara[playerIndex].neededExperience;
-        players[playerIndex].playerReference.UpdatePlayerStats();
     }
 
     private void TellInventoryToUpdateConsumables()
@@ -467,6 +457,6 @@ public class BattleManager : MonoBehaviour
                 MainInventory.invInstance.consumableInv.Add(i);
             }
         }
-        //Debug.Log("Consumables Count is: " + MainInventory.invInstance.consumableInv.Count);
+        Debug.Log("Consumables Count is: " + MainInventory.invInstance.consumableInv.Count);
     }
 }
