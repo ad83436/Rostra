@@ -197,14 +197,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c49573c71ef3f541813f91b7a35cd10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyIndexInBattleManager: 2
+  enemyIndexInBattleManager: 1
   eMana: 0
   eAttack: 20
   eAgility: 6
   eDefence: 15
   eStrength: 18
   eSpeed: 0
-  showMeWhatYouGot: 
   eBaseLevel: 5
   eCurrentLevel: 15
   eName: 
@@ -222,11 +221,11 @@ MonoBehaviour:
   dead: 0
   hit: 0
   usedSkill: 0
-  skillAttacksTwo: 0
+  isStatModed: 0
   enemyClass: 1
-  enemyAttack: 4
+  enemyAttack: 3
   enemyName: 5
-  canUseSkill: 0
+  canUseSkill: 1
 --- !u!95 &8834717703439480084
 Animator:
   serializedVersion: 3

@@ -498,7 +498,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c49573c71ef3f541813f91b7a35cd10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyIndexInBattleManager: 2
+  enemyIndexInBattleManager: 3
   eMana: 0
   eAttack: 40
   eAgility: 12
@@ -509,19 +509,28 @@ MonoBehaviour:
   eCurrentLevel: 12
   eName: Lieutenant
   eRange: 0
+  waitTime: 0
+  playerIndexHolder: 0
+  timeAttacking: 0
+  blowStrength: 0
   playerStatNeeded: []
+  enemyStatNeeded: []
   eCritical: 3
   qImage: {fileID: 21300000, guid: 9a9ff385ca5254c439f175b45144d64a, type: 3}
   HP: {fileID: 4686583913837300073}
-  maxHP: 150
+  maxHP: 0
   currentHP: 150
   damageText: {fileID: 3667068463516064826}
   healText: {fileID: 3524970256035659064}
   enemyCanvas: {fileID: 2477978935004593292}
   dead: 0
   hit: 0
+  blow: 0
+  isStatModed: 0
   enemyClass: 0
-  enemyAttack: 0
+  enemyAttack: 9
+  enemyName: 14
+  canUseSkill: 1
 --- !u!95 &4635448690410328169
 Animator:
   serializedVersion: 3

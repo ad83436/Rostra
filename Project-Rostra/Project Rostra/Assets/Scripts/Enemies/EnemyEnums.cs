@@ -17,6 +17,9 @@ public enum EnemyAttackType
     Healer,
     Heal_Support,
     Strategist,
+    Relentless,
+    The_Saint,
+    Enemy_Blows_Self,
     Demo
 };
 
@@ -35,8 +38,21 @@ public enum EnemyStatReference
 
 public enum AllEnemySkills
 {
+    //Tank
     Ground_Smash,
-    Place_Holder  
+    Blow_Self,
+    Earth_Smash,
+
+    //Dps
+    Slice_And_Dice,
+    Bite,
+    Ball_Roll,
+    Attack_Multiple,
+
+    //support
+    Increase_Multiple_Stats,
+    All_Enemy_Heal,
+    Switch_Stats,   
 };
 
 public enum EnemyName

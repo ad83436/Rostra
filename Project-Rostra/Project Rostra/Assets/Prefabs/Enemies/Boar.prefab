@@ -263,12 +263,16 @@ MonoBehaviour:
   HP: {fileID: 3588559100116211246}
   maxHP: 0
   currentHP: 0
+  damageText: {fileID: 0}
+  healText: {fileID: 0}
   enemyCanvas: {fileID: 0}
   dead: 0
   hit: 0
-  enemyClass: 0
+  usedSkill: 0
+  isStatModed: 0
   enemyAttack: 0
-  theEnemyName: 1
+  enemyName: 1
+  canUseSkill: 0
 --- !u!1 &3588559101050574602
 GameObject:
   m_ObjectHideFlags: 0

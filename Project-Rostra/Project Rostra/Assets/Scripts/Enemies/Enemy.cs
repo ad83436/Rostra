@@ -11,26 +11,32 @@ public class Enemy : MonoBehaviour
     public int enemyIndexInBattleManager;
     private BattleManager battleManager;
     private UIBTL uiBTL;
-    private  EnemySkills eSkills;
     public float eMana;
     public float eAttack;
     public float eAgility;
     public float eDefence;
     public float eStrength;
     public float eSpeed;
-    public int[] showMeWhatYouGot;
     public float eBaseLevel;
     public int eCurrentLevel;
     public string eName;
     public float eRange;
+    int amountModed;
+    public float waitTime;
+    public int playerIndexHolder;
+    public int timeAttacking;
+    int countDownToBlow;
+    public int blowStrength;
+    int enemyStartingAtk; 
+    int[] skills;
     public List<float> playerStatNeeded;
     public List<float> enemyStatNeeded;
     public float eCritical;
     public Sprite qImage;
     Player attackThisPlayer;
-    int statMod;
+    Enemy theHealer;
     Enemy enemyToHeal;
-    Player[] attackSomePlayers = new Player[4];
+
 
     private SpriteRenderer spriteRenderer;
     private Color spriteColor;
@@ -47,8 +53,8 @@ public class Enemy : MonoBehaviour
     public bool dead;
     private bool skillPointAdded;
     public bool hit;
-    public bool usedSkill;
-    public bool skillAttacksTwo;
+    public bool blow;
+    public bool isStatModed;
 
     private GameObject demoEffect;
     private ObjectPooler objPooler;
@@ -58,13 +64,24 @@ public class Enemy : MonoBehaviour
     public EnemyName enemyName;
     [SerializeField] AllEnemySkills canUseSkill;
 
+    private void Awake()
+    {
+        print("Very First  " + currentHP);
+        IncreaseStatsBasedOnLevel(eCurrentLevel); 
+        AssingClassSkills(this);
+        GiveNamesAndSkills();
+    }
     private void Start()
     {
-        GiveNamesAndSkills();
+        print("First" + currentHP);
+        
+        amountModed = 0;
+        timeAttacking = 1;
+        countDownToBlow = Random.Range(5, 10);
+
         battleManager = BattleManager.instance;
         objPooler = ObjectPooler.instance;
         uiBTL = UIBTL.instance;
-        eSkills = EnemySkills.Instance;
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         spriteColor = spriteRenderer.color;
         animator = gameObject.GetComponent<Animator>();
@@ -75,11 +92,14 @@ public class Enemy : MonoBehaviour
         haveAddedMyself = false;
         hit = false;
         dead = false;
-        usedSkill = false;
-        skillAttacksTwo = false;
-        IncreaseStatsBasedOnLevel(eCurrentLevel);
-    }
+        isStatModed = false;
+        blow = false;
+       
 
+        ChoosePlayer();
+        enemyStartingAtk = Mathf.CeilToInt(eAttack);
+        print(currentHP);
+    }
     private void Update()
     {
         //If the enemy is yet to add itself to the Q and the btl manager is currently adding enemies, then add this enemy to the Q
@@ -88,68 +108,37 @@ public class Enemy : MonoBehaviour
             AddEnemyToBattle();
             haveAddedMyself = true;
         }
-
-        if (Input.GetKey(KeyCode.G))
-        {
-            HealEnemy();
-        }
+       
     }
-
     //Every enemy scales differently based on its warrior class (DPS,Tanks, Support)
-    public void IncreaseStatsBasedOnLevel(int enemyCurrentLevel)
-    {
-        eCurrentLevel = enemyCurrentLevel;
-        //eHP increase is still temporary until we agree how much each class'es HP increases with leveling up
-        float skillPoints = enemyCurrentLevel - eBaseLevel;
-
-        switch (enemyClass)
-        {
-            case EnemyClassType.DPS:
-                eAttack = Mathf.CeilToInt(eAttack + (skillPoints * 0.6f));
-                eAgility = Mathf.CeilToInt(eAgility + (skillPoints * 0.4f));
-                currentHP = Mathf.CeilToInt(currentHP + (skillPoints * 35.0f * 0.5f));
-                Debug.Log(eName + " is a " + enemyClass + " Class of enemy");
-                break;
-
-            case EnemyClassType.Tank:
-                eAttack = Mathf.CeilToInt(eAttack + (skillPoints * 0.3f));
-                eAgility = Mathf.CeilToInt(eDefence + (skillPoints * 0.7f));
-                currentHP = Mathf.CeilToInt(currentHP + (skillPoints * 60.0f * 0.5f));
-                Debug.Log(eName + " is a " + enemyClass + " Class of enemy");
-                break;
-
-            case EnemyClassType.Support:
-                eAttack = Mathf.CeilToInt(eAttack + (skillPoints * 0.4f));
-                eAgility = Mathf.CeilToInt(eAttack + (skillPoints * 0.6f));
-                currentHP = Mathf.CeilToInt(currentHP + (skillPoints * 85.0f * 0.5f));
-                Debug.Log(eName + " is a " + enemyClass + " Class of enemy");
-                break;
-        }
-        maxHP = currentHP;
-    }
-
+    // also assigns skills that only certain types can use 
     public void AddEnemyToBattle()
     {
-        battleManager.AddEnemy(enemyIndexInBattleManager, Mathf.RoundToInt(eAgility), Mathf.RoundToInt(eStrength), Mathf.RoundToInt(eCritical), Mathf.RoundToInt(eSpeed), Mathf.RoundToInt(currentHP),Mathf.RoundToInt(maxHP) ,this, name);
+        battleManager.AddEnemy(enemyIndexInBattleManager, Mathf.RoundToInt(eAgility), Mathf.RoundToInt(eStrength), Mathf.RoundToInt(eCritical), Mathf.RoundToInt(eSpeed), Mathf.RoundToInt(currentHP), Mathf.RoundToInt(maxHP), this, name);
     }
-
     /// <summary>
     /// HEY LISTEN !!!!!!!! Feel Free Change the values in EnemyTurn if you must do so, as these are all test values sho like a good tweaking now and then.
     /// </summary>
-
     public void EnemyTurn()
     {
         uiBTL.DisableActivtyText();
         float attackChance = Random.Range(0, 100); // determines if the ememy will use its type attack or a dumb attack 
-        float skillChance = Random.Range(0, 60);// determines if the enemy will use a skill or not //TEMP VALUES//
-      
-       
+        float skillChance = Random.Range(0, 50);// determines if the enemy will use a skill or not //TEMP VALUES//
+
         if (!dead)
         {
             switch (enemyAttack)
             {
                 case EnemyAttackType.Dumb:
-                    DumbAttack();
+                    if (skillChance > 40)
+                    {
+                        MakeSkillsWork(canUseSkill);
+                    }
+
+                    else
+                    {
+                        DumbAttack();
+                    }
                     break;
 
                 case EnemyAttackType.Opportunistic:
@@ -158,7 +147,7 @@ public class Enemy : MonoBehaviour
                     {
                         if (skillChance > 40)
                         {
-                            AttackLowDef();
+                            MakeSkillsWork(canUseSkill);
                             print(eName + " Used their skill aswell as their types attack");
                         }
 
@@ -171,9 +160,9 @@ public class Enemy : MonoBehaviour
 
                     else
                     {
-                        if (skillChance > 40)
+                        if (skillChance >= 50)
                         {
-                            DumbAttack();
+                            MakeSkillsWork(canUseSkill);
                             print(eName + " Used their skill aswell as a Dumb attack");
                         }
 
@@ -183,7 +172,6 @@ public class Enemy : MonoBehaviour
                             print(eName + " Did not use their skill but used a Dumb attack");
                         }
                     }
-
                     break;
 
                 case EnemyAttackType.Assassin:
@@ -192,7 +180,7 @@ public class Enemy : MonoBehaviour
                     {
                         if (skillChance > 40)
                         {
-                            AttackLowHp();
+                            MakeSkillsWork(canUseSkill);
                             print(eName + " Used their skill aswell as their types attack");
                         }
 
@@ -205,9 +193,9 @@ public class Enemy : MonoBehaviour
 
                     else
                     {
-                        if (skillChance > 40)
+                        if (skillChance >= 50)
                         {
-                            DumbAttack();
+                            MakeSkillsWork(canUseSkill);
                             print(eName + " Used their skill aswell as a Dumb attack");
                         }
 
@@ -217,7 +205,6 @@ public class Enemy : MonoBehaviour
                             print(eName + " Did not use their skill but used a Dumb attack");
                         }
                     }
-
                     break;
 
                 case EnemyAttackType.Bruiser:
@@ -225,22 +212,21 @@ public class Enemy : MonoBehaviour
                     {
                         if (skillChance > 40)
                         {
-                            AttackHighAtk();
+                            MakeSkillsWork(canUseSkill);
                             print(eName + " Used their skill aswell as their types attack");
                         }
 
                         else
                         {
                             AttackHighAtk();
-                            print(eName + " Did not use their skill but used their types attack");
                         }
                     }
 
                     else
                     {
-                        if (skillChance > 40)
+                        if (skillChance >= 50)
                         {
-                            DumbAttack();
+                            MakeSkillsWork(canUseSkill);
                             print(eName + " Used their skill aswell as a Dumb attack");
                         }
 
@@ -250,23 +236,32 @@ public class Enemy : MonoBehaviour
                             print(eName + " Did not use their skill but used a Dumb attack");
                         }
                     }
-
                     break;
 
                 case EnemyAttackType.Healer:
-                    if (skillChance > 40)
+                    if (skillChance >= 50)
                     {
-                        HealEnemy();
+                        MakeSkillsWork(canUseSkill);
                     }
 
                     else
                     {
                         HealEnemy();
                     }
+
                     break;
 
                 case EnemyAttackType.Heal_Support:
+                    if (skillChance >= 50)
+                    {
+                        MakeSkillsWork(canUseSkill);
+                    }
 
+                    else
+                    {
+                        SupportHeal(theHealer);
+                    }
+                    
                     break;
 
                 case EnemyAttackType.Strategist:
@@ -275,7 +270,7 @@ public class Enemy : MonoBehaviour
                     {
                         if (skillChance > 40)
                         {
-                            AttackHighAgi();
+                            MakeSkillsWork(canUseSkill);
                             print(eName + " Used their skill aswell as their types attack");
                         }
 
@@ -288,83 +283,99 @@ public class Enemy : MonoBehaviour
 
                     else
                     {
-                        if (skillChance > 40)
+                        if (skillChance >= 50)
                         {
-                            DumbAttack();
-                            print(eName + " Used their skill aswell as a Dumb attack");
+                            MakeSkillsWork(canUseSkill);
                         }
-
                         else
                         {
                             DumbAttack();
-                            print(eName + " Did not use their skill but used a Dumb attack");
                         }
                     }
-
                     break;
 
                 case EnemyAttackType.Demo:
 
                     DumbAttack();
+                    break;
 
+                case EnemyAttackType.Relentless:
+
+                    if(attackChance > 30)
+                    {
+                        if(skillChance >= 50)
+                        {
+                            MakeSkillsWork(canUseSkill);
+                        }
+
+                        else
+                        {
+                            RelentlessAttack(playerIndexHolder,timeAttacking);
+                        }
+                    }
+
+                    else
+                    {
+                        DumbAttack();
+                    }
+                    break;
+                   
+                case EnemyAttackType.Enemy_Blows_Self:
+
+                    if (skillChance >= 50)
+                    {
+                        MakeSkillsWork(canUseSkill);
+                    }
+
+                    else
+                    {
+                        BlowSelf();
+                    }
+                    
                     break;
             }
         }
 
         else
         {
-            EnemySkills.usedSkill = false;
+
             uiBTL.EndTurn();
         }
     }
-
     //Calculate whether the attack is a hit or a miss
     private void CalculateHit()
     {
-        //if (/*!skillAttacksTwo*/)
-      //  {
-            //20 sided die + str <? enemy agility
-            if (Random.Range(0.0f, 20.0f) + eStrength < attackThisPlayer.agi)
-            {
-                hit = false;
-            }
-            else
-            {
-                hit = true;
-            }
+        //20 sided die + str <? enemy agility
+        if (Random.Range(0.0f, 20.0f) + eStrength < attackThisPlayer.agi)
+        {
+            hit = false;
+        }
+
+        else
+        {
+            hit = true;
+            timeAttacking += 1;
+        }
 
         Debug.Log("Enemy Hit is " + hit);
     }
-
     private float CalculateCrit()
     {
         return Random.Range(0.0f, 100.0f);
     }
-
     private void DemoAttackEffect()
     {
         demoEffect = objPooler.SpawnFromPool("DemoAttack", attackThisPlayer.gameObject.transform.position, gameObject.transform.rotation);
     }
-
     //Called from the animator once the attack anaimation ends
     private void CompleteAttack()
     {
         float critMod = 1.2f;
+
         if (hit)
         {
-            if (skillAttacksTwo) 
-            {
-                for (int i = 0; i < attackSomePlayers.Length; ++i)
-                {
-                    objPooler.SpawnFromPool("EnemyNormalAttack", attackSomePlayers[i].gameObject.transform.position, gameObject.transform.rotation);
-                }
-            }
+            objPooler.SpawnFromPool("EnemyNormalAttack", attackThisPlayer.gameObject.transform.position, gameObject.transform.rotation);
 
-            else
-            {
-                objPooler.SpawnFromPool("EnemyNormalAttack", attackThisPlayer.gameObject.transform.position, gameObject.transform.rotation);
-            }
-            
             if (CalculateCrit() <= eCritical)
             {
                 Debug.Log("Critical Hit from Enemy");
@@ -373,30 +384,7 @@ public class Enemy : MonoBehaviour
 
             else
             {
-                if (!usedSkill)
-                {
-                    if (!skillAttacksTwo)
-                    {
-                        Debug.Log("Critical Hit from Enemy");
-                        attackThisPlayer.TakeDamage(eAttack);
-                    }
-                }
-
-                else
-                {
-                    if (skillAttacksTwo)
-                    {
-                        for (int i = 0; i < attackSomePlayers.Length; ++i)
-                        {
-                            attackSomePlayers[i].TakeDamage(eAttack);
-                        }
-                    }
-
-                    else
-                    {
-                        attackThisPlayer.TakeDamage(eAttack);
-                    }
-                }
+                attackThisPlayer.TakeDamage(eAttack);
             }
         }
 
@@ -408,7 +396,6 @@ public class Enemy : MonoBehaviour
         animator.SetBool("Attack", false);
         uiBTL.EndTurn();
     }
-
     void DumbAttack()
     {
         attackThisPlayer = battleManager.players[Random.Range(0, 4)].playerReference;
@@ -426,7 +413,6 @@ public class Enemy : MonoBehaviour
         }
 
     }
-
     void AttackLowHp()
     {
         StatNeeded(PlayerStatReference.Health);
@@ -443,7 +429,6 @@ public class Enemy : MonoBehaviour
         //clear the list for the next use 
         playerStatNeeded.Clear();
     }
-
     void AttackLowDef()
     {
         StatNeeded(PlayerStatReference.Defence);
@@ -461,7 +446,6 @@ public class Enemy : MonoBehaviour
         //clear the list for the next use 
         playerStatNeeded.Clear();
     }
-
     void AttackHighAgi()
     {
         StatNeeded(PlayerStatReference.Agility);
@@ -478,7 +462,6 @@ public class Enemy : MonoBehaviour
         //clear the list for the next use 
         playerStatNeeded.Clear();
     }
-
     void AttackHighAtk()
     {
         StatNeeded(PlayerStatReference.Attack);
@@ -495,36 +478,201 @@ public class Enemy : MonoBehaviour
         //clear the list for the next use 
         playerStatNeeded.Clear();
     }
-
-    public void SkillAttack(int[] whoToAttack)
+    void RelentlessAttack(int playerIndex, int timeAttacking)
     {
-        usedSkill = true;
-        skillAttacksTwo = true;
-        for (int i = 0; i < battleManager.players.Length; i++) 
+        float attackMod;
+        attackThisPlayer = battleManager.players[playerIndex].playerReference;
+
+        if (attackThisPlayer.currentHP <= 0)
         {
-            for (int j = 0; j < whoToAttack.Length; j++)
+            ChoosePlayer();
+            RelentlessAttack(playerIndexHolder, timeAttacking);
+            timeAttacking = 1;
+        }
+
+        if (timeAttacking == 1)
+        {
+            print("enemy has attacked " +  timeAttacking + " time(s) since the start of the battle");
+            CalculateHit();
+            animator.SetBool("Attack", true);
+            ++timeAttacking;
+        }
+
+        else if (timeAttacking == 2)
+        {
+            Mathf.CeilToInt(attackMod = eAttack * 0.1f);
+            eAttack += attackMod;
+            print("enemy has attacked " + timeAttacking + " time(s) since the start of the battle with a attack of " + eAttack);
+            ++timeAttacking;
+            CalculateHit();
+            animator.SetBool("Attack", true);
+            
+        }
+
+        else if (timeAttacking == 3)
+        {
+            Mathf.CeilToInt(attackMod = eAttack * 0.2f);
+            eAttack += attackMod;  
+            print("enemy has attacked " + timeAttacking + " time(s) since the start of the battle with a attack of " + eAttack);
+            ++timeAttacking;
+            CalculateHit();
+            animator.SetBool("Attack", true);
+            
+
+        }
+
+        else if (timeAttacking == 4)
+        {
+            Mathf.CeilToInt(attackMod = eAttack * 0.3f);
+            eAttack += attackMod;
+            print("enemy has attacked " + timeAttacking + " time(s) since the start of the battle with a attack of " + eAttack);
+            ++timeAttacking;
+            CalculateHit();
+            animator.SetBool("Attack", true);
+        }
+
+        else if (timeAttacking == 5)
+        {
+            Mathf.CeilToInt(attackMod = eAttack * 0.4f);
+            eAttack += attackMod;
+            print("enemy has attacked " + timeAttacking + " time(s) since the start of the battle with a attack of " + eAttack);
+            ++timeAttacking;
+            CalculateHit();
+            animator.SetBool("Attack", true);
+            
+        }
+
+        else
+        {
+            Mathf.CeilToInt(attackMod = eAttack * 0.5f);
+            eAttack += attackMod;
+            print("enemy has attacked " + timeAttacking + " time(s) since the start of the battle with a attack of " + eAttack);
+            CalculateHit();
+            animator.SetBool("Attack", true);
+        }
+
+        eAttack = enemyStartingAtk;
+    } 
+    void BlowSelf()
+    {
+        countDownToBlow--;
+        blowStrength += Random.Range(10, 15);
+      
+        if (countDownToBlow <= 0)
+        {
+            blow = true;
+            currentHP = 0;
+        }
+
+        if (blow)
+        {
+            print("Enemy blew self with a blow strength of " + blowStrength);
+            AttackWholeField(blowStrength);
+            blow = false;
+        }
+
+        uiBTL.EndTurn();
+    }
+   /* void ReviveEnemy(Enemy theHealer)
+    {
+        List<Enemy> enemyRef = new List<Enemy>();
+       
+        print("The healer is at index " + enemyIndexInBattleManager);
+
+        for (int i =0; i < battleManager.enemies.Length; i++)
+        {
+            if (battleManager.enemies[i].enemyReference != null)
             {
-                if (battleManager.players[i].playerReference.playerIndex == whoToAttack[j])
-                {
-                    attackSomePlayers[i] = battleManager.players[i].playerReference;
-                    CalculateHit();
-                    animator.SetBool("Attack", true);
-                }
+                enemyRef.Add(battleManager.enemies[i].enemyReference);
+            }
+            print(i);
+        }
+        print("First" + enemyRef.Count);
+
+        for (int i = 0; i < enemyRef.Count; i++)
+        {
+            if (!enemyRef[i].dead)
+            {
+                
+                enemyRef.RemoveAt(i);
+                print("Index " + enemyRef[i].enemyIndexInBattleManager);
+            }
+            print(i);
+        }
+
+        print("Second " + enemyRef.Count);
+
+        for (int i = 0; i < enemyRef.Count; ++i)
+        {
+            if (enemyRef[i] == this)
+            {
+                print("Index " + enemyRef[i].enemyIndexInBattleManager);
+                enemyRef.Remove(enemyRef[i]);
+                break;
             }
         }
-    }
 
-    void SkillAttack(int whoToAttack)
-    {
+        
+       
 
-    }
+        
 
+        print("Third" + enemyRef.Count);
+
+        print("There are " + enemyRef[0].enemyIndexInBattleManager + " Dead Monsters");
+
+        if ((enemyRef.Count-1) >= 1)
+        {
+            if((enemyRef.Count - 1) == 1)
+            {
+                enemyToHeal = enemyRef[0];
+                print("dead enemy at index " + enemyToHeal.enemyIndexInBattleManager);
+                print("There are " + (enemyRef.Count - 1) + " Dead Monster(s)");
+                
+            } 
+
+            else if ((enemyRef.Count - 1) == 2)
+            {
+                enemyToHeal = enemyRef[PickRandomNumber(enemyRef[0].enemyIndexInBattleManager, enemyRef[1].enemyIndexInBattleManager)];
+                print("dead enemy at index " + enemyToHeal.enemyIndexInBattleManager);
+                print("There are " + (enemyRef.Count - 1) + " Dead Monster(s)");
+                
+            }
+
+            else if ((enemyRef.Count - 1) == 3)
+            {
+                enemyToHeal = enemyRef[PickRandomNumber(enemyRef[0].enemyIndexInBattleManager, enemyRef[1].enemyIndexInBattleManager, enemyRef[2].enemyIndexInBattleManager)];
+                print("dead enemy at index " + enemyToHeal.enemyIndexInBattleManager);
+                print("There are " + (enemyRef.Count - 1) + " Dead Monster(s)");
+                
+            }
+
+            else if ((enemyRef.Count - 1) == 4)
+            {
+                enemyToHeal = enemyRef[PickRandomNumber(enemyRef[0].enemyIndexInBattleManager, enemyRef[1].enemyIndexInBattleManager, enemyRef[2].enemyIndexInBattleManager, enemyRef[3].enemyIndexInBattleManager)];
+                print("dead enemy at index " + enemyToHeal.enemyIndexInBattleManager);
+                print("There are " + (enemyRef.Count - 1) + " Dead Monster(s)");
+               
+            }
+
+        }
+
+        else if(enemyRef.Count-1 < 1 || enemyRef == null)
+        {
+            print("No Enemies Dead");
+                
+        }
+        enemyRef.Clear();
+        
+        uiBTL.EndTurn();
+        
+    } */
     void HealEnemy()
     {
         int[] healthHolder = new int[battleManager.enemies.Length];// why i did this i will never know change it when not too lazy
         float lowestHealth; //holds ref the lowest health in enemyStat List
         int healthMod = Random.Range(5, 20);// how much health should be applied to the enemies currentHP
-        float chanceOfHealth = Random.value; //  how low should  the health be before it is healed //CHANGE THIS FUCKING VARIABLE NAME ANDRE!!
+        float chanceOfHealth = Random.Range(0.2f, 0.9f); //  how low should  the health be before it is healed //CHANGE THIS FUCKING VARIABLE NAME ANDRE!!
 
         for (int i = 0; i < healthHolder.Length; ++i)
         {
@@ -535,12 +683,12 @@ public class Enemy : MonoBehaviour
             }
         }
 
-        lowestHealth = Mathf.Min(enemyStatNeeded.ToArray()); 
+        lowestHealth = Mathf.Min(enemyStatNeeded.ToArray());
 
-        for (int i = 0; i <enemyStatNeeded.Count; ++i)
+        for (int i = 0; i < enemyStatNeeded.Count; ++i)
         {
             //if enemyStat is not the lowestHealth Remove it 
-            if(enemyStatNeeded[i] != lowestHealth)
+            if (enemyStatNeeded[i] != lowestHealth)
             {
                 enemyStatNeeded.RemoveAt(i);
             }
@@ -555,8 +703,8 @@ public class Enemy : MonoBehaviour
         }
 
         //if the enemy that needs to be healths current hp is less that a percentage of max hp plus 0.1 so that its never below 20%
-        if (enemyToHeal.currentHP <= (enemyToHeal.maxHP * chanceOfHealth + .1f))
-        { 
+        if (enemyToHeal.currentHP <= (enemyToHeal.maxHP * chanceOfHealth))
+        {
             if (enemyToHeal.currentHP + healthMod >= enemyToHeal.maxHP)
             {
                 enemyToHeal.currentHP = enemyToHeal.maxHP;
@@ -575,25 +723,164 @@ public class Enemy : MonoBehaviour
         {
             DumbAttack();
         }
-
-        print(enemyToHeal.enemyIndexInBattleManager);
-        enemyStatNeeded.Clear(); 
+        enemyStatNeeded.Clear();
     }
-
-    void SupportHeal()
+    void SupportHeal(Enemy theHealer)
     {
-        int statMod = Random.Range(5, 20); // temp values 
-        float statToMod = Random.value + .1f;
-        
+        int statMod; // temp values 
+        List<Enemy> enemyToHealRef = new List<Enemy>(); //list of all the enemies other then the instance calling this function
+        int randomStat = Random.Range(0, 2); //pick a random stat to add to 
+        int randomStatAtk = Random.Range(0, 3);//pick a random stat based Attack
+        int healAtIndex;
 
+        //add enemies to the list
         for (int i = 0; i < battleManager.enemies.Length; ++i)
         {
+            if (battleManager.enemies[i].enemyReference == this)
+            {
+                theHealer = battleManager.enemies[i].enemyReference; // which enemy instance is calling this function he is  the healer 
+            }
 
+            if (battleManager.enemies[i].enemyReference != this)
+            {
+                if (battleManager.enemies[i].enemyReference != null && battleManager.enemies[i].currentHP > 0)
+                {
+                    enemyToHealRef.Add(battleManager.enemies[i].enemyReference); // all the other enemies in the battle go into here 
+                }
+            }
         }
 
-    }
+        if(enemyToHealRef.Count == 5)
+        {
+            healAtIndex = PickRandomNumber(enemyToHealRef[0].enemyIndexInBattleManager, enemyToHealRef[1].enemyIndexInBattleManager, enemyToHealRef[2].enemyIndexInBattleManager, enemyToHealRef[3].enemyIndexInBattleManager, enemyToHealRef[4].enemyIndexInBattleManager);
+            print("Heal at Index " + healAtIndex);
+            print(enemyToHealRef[healAtIndex].enemyIndexInBattleManager);
+            enemyToHeal = battleManager.enemies[healAtIndex].enemyReference;
+        }
 
-    // returns the stat needed for the enemies that attack based on player stats 
+        else if(enemyToHealRef.Count == 4)
+        {
+            healAtIndex = PickRandomNumber(enemyToHealRef[0].enemyIndexInBattleManager, enemyToHealRef[1].enemyIndexInBattleManager, enemyToHealRef[2].enemyIndexInBattleManager, enemyToHealRef[3].enemyIndexInBattleManager);
+            print("Heal at Index " + healAtIndex);
+
+            enemyToHeal = battleManager.enemies[healAtIndex].enemyReference;
+        }
+
+        else if(enemyToHealRef.Count == 3)
+        {
+            healAtIndex = PickRandomNumber(enemyToHealRef[0].enemyIndexInBattleManager, enemyToHealRef[1].enemyIndexInBattleManager, enemyToHealRef[2].enemyIndexInBattleManager);
+            print("Heal at Index " + healAtIndex);
+            print(enemyToHealRef[healAtIndex].enemyIndexInBattleManager);
+            enemyToHeal = battleManager.enemies[healAtIndex].enemyReference; ;
+        }
+
+        else if(enemyToHealRef.Count == 2)
+        {
+            healAtIndex = PickRandomNumber(enemyToHealRef[0].enemyIndexInBattleManager, enemyToHealRef[1].enemyIndexInBattleManager);
+            print("Heal at Index " + healAtIndex);
+            enemyToHeal = battleManager.enemies[healAtIndex].enemyReference;
+        }
+
+        else
+        {
+            healAtIndex = enemyToHealRef[0].enemyIndexInBattleManager;
+            print("Heal at Index " + healAtIndex);
+            print(enemyToHealRef[healAtIndex].enemyIndexInBattleManager);
+            enemyToHeal = enemyToHealRef[healAtIndex];
+        }
+
+        if (enemyToHeal.isStatModed)
+        {
+            if (theHealer.eAttack > enemyToHeal.eAttack && randomStat == 0)
+            {
+                enemyToHeal.amountModed++;
+                statMod = Random.Range(5, 20);
+                enemyToHeal.eAttack += statMod;
+                print(enemyToHeal.eName + " At index " + enemyToHeal.enemyIndexInBattleManager + " had " + statMod + " Added to it's Attack");
+                print("enemy at index " + enemyToHeal.enemyIndexInBattleManager + " Had stats moded " + enemyToHeal.amountModed + " time(s) ");
+                uiBTL.EndTurn();
+            }
+
+            else if (theHealer.eDefence > enemyToHeal.eDefence && randomStat == 1)
+            {
+                enemyToHeal.amountModed++;
+                statMod = Random.Range(5, 20);
+                enemyToHeal.eDefence += statMod;
+                print(enemyToHeal.eName + " At index " + enemyToHeal.enemyIndexInBattleManager + "had " + statMod + " Added to it's Defence");
+                print("enemy at index " + enemyToHeal.enemyIndexInBattleManager + " Had stats moded " + enemyToHeal.amountModed + " time(s) ");
+                uiBTL.EndTurn();
+            }
+
+            else if (theHealer.eAgility > enemyToHeal.eAgility && randomStat == 2)
+            {
+                enemyToHeal.amountModed++;
+                statMod = Random.Range(5, 20);
+                enemyToHeal.eAgility += statMod;
+                print(enemyToHeal.eName + " At index " + enemyToHeal.enemyIndexInBattleManager + " had " + statMod + " Added to it's Agailty");
+                print("enemy at index " + enemyToHeal.enemyIndexInBattleManager + " Had stats moded " + enemyToHeal.amountModed + " time(s) ");
+                uiBTL.EndTurn();
+            }
+
+            else
+            {
+                if (randomStatAtk == 0)
+                {
+                    AttackLowDef();
+                    print("used AttackLowDef()");
+                }
+
+                else if (randomStatAtk == 1)
+                {
+                    AttackHighAtk();
+                    print("used AttackHighAtk()");
+                }
+
+                else if (randomStat == 2)
+                {
+                    HealEnemy();
+                }
+
+                else
+                {
+                    AttackHighAgi();
+                    print("used AttackHighAgi()");
+                }
+            }
+        }
+
+        else
+        {
+            if (randomStatAtk == 0)
+            {
+                AttackLowDef();
+                print("used AttackLowDef()");
+            }
+
+            else if (randomStatAtk == 1)
+            {
+                AttackHighAtk();
+                print("used AttackHighAtk()");
+            }
+
+            else if (randomStat == 2)
+            {
+                HealEnemy();
+            }
+
+            else
+            {
+                AttackHighAgi();
+                print("used AttackHighAgi()");
+            }
+        }
+
+        if (enemyToHeal.amountModed >= 2)
+        {
+            enemyToHeal.isStatModed = true;
+        }
+
+        enemyToHealRef.Clear();
+    }
     void StatNeeded(PlayerStatReference pStatNeeded)
     {
         float pStatsRefForCheck = 0; //  i know shitty name 
@@ -719,25 +1006,21 @@ public class Enemy : MonoBehaviour
             }
         }
     }
-
     //function override used to get the stats a enemy same idea as with the player 
   //  void StatNeeded(EnemyStatReference eStatNeeded)
    // {
       
    // }
-
     public void becomeLessVisbile() //Called from UIBTL when this enemy is NOT chosen for attack
     {
         spriteColor.a = 0.5f;
         spriteRenderer.color = spriteColor;
     }
-
     public void resetVisibility() //Called from UIBTL when this enemy is NOT chosen for attack, and either the player doesn't attack or the attack finishes
     {
         spriteColor.a = 1.0f;
         spriteRenderer.color = spriteColor;
     }
-
     //Calcualte the damage
     public void TakeDamage(float playerAttack)
     {
@@ -753,108 +1036,750 @@ public class Enemy : MonoBehaviour
         if (currentHP <= 0.0f)
         {
             animator.SetBool("Death", true);
+            Death();
         }
         else
         {
             uiBTL.EndTurn(); //Only end the turn after the damage has been taken
         }
     }
-
     public void EndHitAnimation()
     {
         animator.SetBool("Hit", false);
     }
-
     public void GiveNamesAndSkills()
     {
-        int randomskill = Random.Range(0, 100);
         switch (enemyName)
         {
             case EnemyName.Bat:
                 eName = "The Bat";
+               //Dps
+               // canUseSkill = (AllEnemySkills)skills[1];
                 break;
 
             case EnemyName.Boar:
+                //Dps
+               // canUseSkill = (AllEnemySkills)skills[1];
                 eName = "The Boar";
                 break;
 
             case EnemyName.Dino:
+                //Tank
+                //canUseSkill = (AllEnemySkills)skills[0];
                 eName = "The Dino";
                 break;
 
             case EnemyName.Dragon:
+              //Tank
+               // canUseSkill = (AllEnemySkills)skills[0];
                 eName = "The Dragon";
                 break;
 
             case EnemyName.Ghost:
+                //Support
+                //canUseSkill = (AllEnemySkills)skills[0];
                 eName = "The Ghost";
                 break;
 
             case EnemyName.Giant:
+                //Tank
+               // canUseSkill = (AllEnemySkills)skills[0];
                 eName = "The Giant";
-
-                if (randomskill <= 50)
-                {
-                    canUseSkill = AllEnemySkills.Ground_Smash;
-                }
-
-                else
-                {
-                    canUseSkill = AllEnemySkills.Ground_Smash;
-                }
-
                 break;
 
             case EnemyName.Mimic:
+                //Tank
+              //  canUseSkill = (AllEnemySkills)skills[1];
                 eName = "The Mimic";
                 break;
 
             case EnemyName.Mushroom:
+               //support
+               // canUseSkill = (AllEnemySkills)skills[0];
                 eName = "The Most Dangerous Mushroom";
                 break;
 
             case EnemyName.Octodad:
+                //Tank
+               // canUseSkill = (AllEnemySkills)skills[0];
                 eName = "The Octodad";
                 break;
 
             case EnemyName.Reptile:
-                eName = "King Krool";
+                //Dps
+               // canUseSkill = (AllEnemySkills)skills[0];
+                eName = "King K rool";
                 break;
 
             case EnemyName.Slime:
+                //Support
+                //canUseSkill = (AllEnemySkills)skills[0];
                 eName = "The Slime";
                 break;
 
             case EnemyName.Snake:
+               //Dps
+               // canUseSkill = (AllEnemySkills)skills[1];
                 eName = "The Ekans";
                 break;
 
             case EnemyName.Yeti:
+                //Tank
+               // canUseSkill = (AllEnemySkills)skills[0];
                 eName = "The Abominable Snowman";
                 break;
 
             case EnemyName.Solider:
+              //Dps
+                //canUseSkill = (AllEnemySkills)skills[0];
                 eName = "The Soilder";
                 break;
 
             case EnemyName.Lieutenant:
+               //Dps
+                //canUseSkill = (AllEnemySkills)skills[0];
                 eName = "The Lieutentant";
                 break;
         }
     }
+    public void IncreaseStatsBasedOnLevel(int enemyCurrentLevel)
+    {
+        enemyCurrentLevel = eCurrentLevel;
+        //eHP increase is still temporary until we agree how much each class'es HP increases with leveling up
+        float skillPoints = enemyCurrentLevel - eBaseLevel;
 
-    //assigns skills functionalilty for skills that effect more than one in the current battle
-    //called in enemyTurn
-     void MakeSkillsWork(AllEnemySkills ChosenSkill)
-     {
-        switch (ChosenSkill)
+        switch (enemyClass)
         {
-            case AllEnemySkills.Ground_Smash:
-                SkillAttack(eSkills.GroundSmashSkill());
+            case EnemyClassType.DPS:
+                eAttack = Mathf.CeilToInt(eAttack + (skillPoints * 0.6f));
+                eAgility = Mathf.CeilToInt(eAgility + (skillPoints * 0.4f));
+                currentHP = Mathf.CeilToInt(currentHP + (skillPoints * 35.0f * 0.5f));
+                Debug.Log(eName + " is a " + enemyClass + " Class of enemy");
+                break;
+
+            case EnemyClassType.Tank:
+                eAttack = Mathf.CeilToInt(eAttack + (skillPoints * 0.3f));
+                eDefence = Mathf.CeilToInt(eDefence + (skillPoints * 0.7f));
+                currentHP = Mathf.CeilToInt(currentHP + (skillPoints * 60.0f * 0.5f));
+                Debug.Log(eName + " is a " + enemyClass + " Class of enemy");
+                break;
+
+            case EnemyClassType.Support:
+                eAttack = Mathf.CeilToInt(eAttack + (skillPoints * 0.4f));
+                eAgility = Mathf.CeilToInt(eAgility + (skillPoints * 0.6f));
+                currentHP = Mathf.CeilToInt(currentHP + (skillPoints * 85.0f * 0.5f));
+                Debug.Log(eName + " is a " + enemyClass + " Class of enemy");
                 break;
         }
-     }
 
+        maxHP = currentHP;
+    }
+    void AssingClassSkills(Enemy enemy)
+    {
+        switch (enemyClass)
+        {
+            case EnemyClassType.DPS:
+
+                enemy.skills = new int[]
+                {
+                    (int) AllEnemySkills.Slice_And_Dice,
+                    (int)AllEnemySkills.Bite,
+                    (int)AllEnemySkills.Ball_Roll,
+                    (int)AllEnemySkills.Attack_Multiple
+                };
+
+                break;
+
+            case EnemyClassType.Tank:
+
+                enemy.skills = new int[]
+                {
+                    (int) AllEnemySkills.Ground_Smash,
+                    (int)AllEnemySkills.Blow_Self,
+                    (int)AllEnemySkills.Earth_Smash
+                };
+
+                break;
+
+            case EnemyClassType.Support:
+
+                enemy.skills = new int[]
+                {
+                    (int) AllEnemySkills.Increase_Multiple_Stats,
+                    (int) AllEnemySkills.All_Enemy_Heal,
+                    (int) AllEnemySkills.Switch_Stats
+                };
+
+                break;
+        }
+    }
+    //assigns skills functionalilty for skills that effect more than one in the current battle
+    //called in enemyTurn
+    void MakeSkillsWork(AllEnemySkills ChosenSkill)
+    {
+        float attackMod;
+        int healthMod;
+        int playerIndexRef;
+        int randomRow = Random.Range(0, 1);
+        
+        switch (ChosenSkill)
+        {
+            #region ground smash skill
+            case AllEnemySkills.Ground_Smash:
+
+                if(randomRow == 0)
+                {
+                    print("Picked Back Row");
+                    attackThisPlayer = battleManager.players[1].playerReference;
+                    print("Attacked" + attackThisPlayer.name);
+                    attackThisPlayer.TakeDamage(eAttack);
+
+                    attackThisPlayer = battleManager.players[2].playerReference;
+                    print("Then Attacked " + attackThisPlayer.name);
+                    attackThisPlayer.TakeDamage(eAttack);
+                }
+
+                else if(randomRow == 1)
+                {
+                    print("Picked Back Row");
+                    attackThisPlayer = battleManager.players[0].playerReference;
+                    print("Attacked" + attackThisPlayer.name);
+                    attackThisPlayer.TakeDamage(eAttack);
+                    
+                    attackThisPlayer = battleManager.players[3].playerReference;
+                    print("Then Attacked " + attackThisPlayer.name);
+                    attackThisPlayer.TakeDamage(eAttack);
+                }
+                uiBTL.EndTurn();
+                break;
+            #endregion
+
+            //Skill that hits a player random amount of time 
+            #region slice and dice skill
+            case AllEnemySkills.Slice_And_Dice:
+
+                int hitAmount = Random.Range(0, 5);
+                
+                playerIndexRef = Random.Range(0, battleManager.players.Length - 1);
+                
+                attackThisPlayer = battleManager.players[playerIndexRef].playerReference;
+
+                if(attackThisPlayer.currentHP <= 0)
+                {
+                    MakeSkillsWork((AllEnemySkills)skills[0]);
+                }
+
+                else
+                {
+                    if(hitAmount == 0)
+                    {
+                        print("Attack Missed");
+                        uiBTL.EndTurn();
+                    }
+
+                    else if(hitAmount == 1)
+                    {
+ 
+                        attackThisPlayer.TakeDamage(eAttack);
+                        
+                        uiBTL.EndTurn();
+                    }
+
+                    else if(hitAmount == 2)
+                    {
+                        print("I sliced and diced " + hitAmount + " time(s)");
+                        for(int i =0; i < 2; ++i)
+                        {
+                            if (i == 0)
+                            {
+                                attackThisPlayer.TakeDamage(eAttack);
+                                print("First Attack does " + eAttack + " Damage");
+                            }
+
+                            else if (i == 1)
+                            {
+                                Mathf.CeilToInt(attackMod = (eAttack * .1f));
+                                attackThisPlayer.TakeDamage(eAttack + attackMod);
+                                print("Second Attack does " + attackMod + " Damage extra");
+                            }
+                        }
+
+                        uiBTL.EndTurn();
+                    }
+
+                    else if(hitAmount == 3)
+                    {
+                        print("I sliced and diced " + hitAmount + " time(s)");
+                        for (int i = 0; i < 3; ++i)
+                        {
+                            if (i == 0)
+                            {
+                                attackThisPlayer.TakeDamage(eAttack);
+                                print("First Attack does " + eAttack + " Damage");
+                            }
+
+                            else if (i == 1)
+                            {
+                                Mathf.CeilToInt(attackMod = (eAttack * .1f));
+                                attackThisPlayer.TakeDamage(eAttack + attackMod);
+                                print("Second Attack does " + attackMod + " Damage extra");
+                            }
+
+                            else if (i == 2)
+                            {
+                                Mathf.CeilToInt(attackMod = (eAttack * .2f));
+                                attackThisPlayer.TakeDamage(eAttack + attackMod);
+                                print("Third Attack does " + attackMod + " Damage extra");
+                            }
+                        }
+
+                        uiBTL.EndTurn();
+                    }
+
+                    else if(hitAmount == 4)
+                    {
+                        print("I sliced and diced " + hitAmount + " time(s)");
+
+                        for (int i = 0; i < 4; ++i)
+                        {
+                            if (i == 0)
+                            {
+                                attackThisPlayer.TakeDamage(eAttack);
+                                print("First Attack does " + eAttack + " Damage");
+                            }
+
+                            else if (i == 1)
+                            {
+                                Mathf.CeilToInt(attackMod = (eAttack * .1f));
+                                attackThisPlayer.TakeDamage(eAttack + attackMod);
+                                print("Second Attack does " + attackMod + " Damage extra");
+                            }
+
+                            else if (i == 2)
+                            {
+                                Mathf.CeilToInt(attackMod = (eAttack * .2f));
+                                attackThisPlayer.TakeDamage(eAttack + attackMod);
+                                print("Third Attack does " + attackMod + " Damage extra");
+                            }
+
+                            else if (i == 3)
+                            {
+                                Mathf.CeilToInt(attackMod = (eAttack * .3f));
+                                attackThisPlayer.TakeDamage(eAttack + attackMod);
+                                print("Fourth Attack does " + attackMod + " Damage extra");
+                            }
+
+                        }
+
+                        uiBTL.EndTurn();
+                    }
+
+                    else
+                    {
+                        print("I sliced and diced " + hitAmount + " time(s)");
+                        for (int i = 0; i < 5; ++i)
+                        {
+                            if (i == 0)
+                            {
+                                attackThisPlayer.TakeDamage(eAttack);
+                                print("First Attack does " + eAttack + "Damage");
+                            }
+
+                            else if (i == 1)
+                            {
+                                Mathf.CeilToInt(attackMod = (eAttack * .1f));
+                                attackThisPlayer.TakeDamage(eAttack + attackMod);
+                                print("Second Attack does " +attackMod + " Damage extra");
+                            }
+
+                            else if (i == 2)
+                            {
+                                Mathf.CeilToInt(attackMod = (eAttack * .2f));
+                                attackThisPlayer.TakeDamage(eAttack + attackMod);
+                                print("Third Attack does " + attackMod + " Damage extra");
+                            }
+
+                            else if (i == 3)
+                            {
+                                Mathf.CeilToInt(attackMod = (eAttack * .3f));
+                                attackThisPlayer.TakeDamage(eAttack + attackMod);
+                                print("Fourth Attack does " + attackMod + " Damage extra");
+                            }
+
+                            else if(i == 4)
+                            {
+                                Mathf.CeilToInt(attackMod = (eAttack * .4f));
+                                attackThisPlayer.TakeDamage(eAttack + attackMod);
+                                print("Fifth Attack does " + attackMod + " Damage extra");
+                            }
+                        }
+
+                        uiBTL.EndTurn();
+                    }
+                }
+
+                break;
+            #endregion
+
+            #region increase multiple stats
+            //increase a stat based off class
+            case AllEnemySkills.Increase_Multiple_Stats:
+                int statIncrease = PickRandomNumber(10, 20);
+                for (int i = 0; i < battleManager.enemies.Length; ++i)
+               {
+                    if(this == battleManager.enemies[i].enemyReference)
+                    {
+                        theHealer = battleManager.enemies[i].enemyReference;
+                    }
+
+                    if(this != battleManager.enemies[i].enemyReference && battleManager.enemies[i].enemyReference != null)
+                    {
+                        enemyToHeal = battleManager.enemies[i].enemyReference;
+                    }
+               }
+
+                if (enemyToHeal.dead)
+                {
+                    MakeSkillsWork(AllEnemySkills.Increase_Multiple_Stats);
+                }
+
+                if (!enemyToHeal.isStatModed)
+                {
+                    if (enemyToHeal.enemyClass == EnemyClassType.DPS)
+                    {
+                        enemyToHeal.eAttack += statIncrease * 0.6f;
+                        enemyToHeal.eAgility += statIncrease * 0.4f;
+                        print("Enemy At Index " + enemyToHeal.enemyIndexInBattleManager + " Has had Attack modified by " + (statIncrease * 0.6f) + " Also has had Agility modfied by " + (statIncrease * 0.4f));
+                        enemyToHeal.isStatModed = true;
+                    }
+
+                    else if (enemyToHeal.enemyClass == EnemyClassType.Tank)
+                    {
+                        enemyToHeal.eAttack += statIncrease * 0.3f;
+                        enemyToHeal.eDefence += statIncrease * 0.7f;
+                        print("Enemy At Index " + enemyToHeal.enemyIndexInBattleManager + " Has had Attack modified by " + (statIncrease * 0.3f) + " Also has had Defence modfied by " + (statIncrease * 0.7f));
+                        enemyToHeal.isStatModed = true;
+                    }
+
+                    else if (enemyToHeal.enemyClass == EnemyClassType.Support)
+                    {
+                        enemyToHeal.eAttack += statIncrease * 0.4f;
+                        enemyToHeal.eAgility += statIncrease * 0.6f;
+                        print("Enemy At Index " + enemyToHeal.enemyIndexInBattleManager + " Has had Attack modified by " + (statIncrease * 0.4f) + " Also has had Agility modfied by " + (statIncrease * 0.6f));
+                        enemyToHeal.isStatModed = true;
+                    }
+                }
+
+                else
+                {
+                    HealEnemy();
+                }
+
+                uiBTL.EndTurn();
+
+                break;
+            #endregion
+
+            #region heal all enemies
+            case AllEnemySkills.All_Enemy_Heal:
+                healthMod = 100;
+                print("Used The Heal All Skill");
+
+                for (int i = 0; i < battleManager.enemies.Length; ++i)
+                {
+                    if(battleManager.enemies[i].enemyReference != null && this != battleManager.enemies[i].enemyReference)
+                    {
+                        if (!battleManager.enemies[i].enemyReference.dead)
+                        {
+                            enemyToHeal = battleManager.enemies[i].enemyReference;
+                            print("Enemy was healed at index " + enemyToHeal.enemyIndexInBattleManager);
+                            enemyToHeal.currentHP += healthMod;
+                            print("Enemies new Hp is " + enemyToHeal.currentHP);
+
+                            if(enemyToHeal.currentHP > enemyToHeal.maxHP)
+                            {
+                                enemyToHeal.currentHP = enemyToHeal.maxHP;
+                                print("Enemies new Hp is " + enemyToHeal.currentHP);
+                            }
+                        }
+                    }
+                }
+
+                uiBTL.EndTurn();
+
+                break;
+            #endregion
+
+            #region bite
+            case AllEnemySkills.Bite:
+                
+                attackThisPlayer = battleManager.players[PickRandomNumber(battleManager.players[0].playerReference.playerIndex, battleManager.players[1].playerReference.playerIndex,battleManager.players[2].playerReference.playerIndex, battleManager.players[3].playerReference.playerIndex)].playerReference;
+                if(attackThisPlayer.currentHP <= 0)
+                {
+                    MakeSkillsWork(AllEnemySkills.Bite);
+                }
+
+                print("Enemy Attack is " + eAttack);
+                print(attackThisPlayer.name + " Was Attacked With the Bite Skill");
+                Mathf.CeilToInt(attackMod = (eAttack * .5f));
+                eAttack += attackMod;
+                print("Enemy New Attack is " + eAttack);
+                CalculateHit();
+                animator.SetBool("Attack", true);
+                eAttack = enemyStartingAtk;  
+
+                break;
+            #endregion
+
+            #region earth smash
+            case AllEnemySkills.Earth_Smash:
+
+                for(int i = 0; i < battleManager.players.Length; ++i)
+                {
+                    attackThisPlayer = battleManager.players[i].playerReference;
+                    attackThisPlayer.TakeDamage(eAttack);
+                }
+
+                uiBTL.EndTurn();
+
+                break;
+            #endregion
+
+            #region blow self
+            case AllEnemySkills.Blow_Self:
+                print("Enemy Blew slef skillfully ");
+                currentHP = 0;
+                blowStrength = 200;
+                AttackWholeField(blowStrength);
+                blowStrength = 0;
+                break;
+            #endregion
+
+            #region ball roll
+            case AllEnemySkills.Ball_Roll:
+               
+                if (randomRow == 0)
+                {
+                    AttackOberon();
+                    Invoke("AttackFrea", 1);
+                    Invoke("AttackArcelus", 3);
+                    Invoke("AttackFargas", 4);
+                    
+                }
+
+                else if(randomRow == 1)
+                {
+                    AttackFargas();
+                    Invoke("AttackFargas", 1);
+                    Invoke("AttackFrea", 3);
+                    Invoke("AttackArcelus", 4);
+                    
+                }
+
+                Invoke("EndTurn", 5.5f);
+                break;
+            #endregion
+
+            #region attack multiple
+            case AllEnemySkills.Attack_Multiple:
+
+                int firstSelected;
+
+                PickPlayer(PickRandomNumber(battleManager.players[0].playerReference.playerIndex, battleManager.players[1].playerReference.playerIndex, battleManager.players[2].playerReference.playerIndex, battleManager.players[3].playerReference.playerIndex));
+
+                if (attackThisPlayer.currentHP <= 0)
+                {
+                    MakeSkillsWork(AllEnemySkills.Attack_Multiple);
+                }
+
+                firstSelected = attackThisPlayer.playerIndex;
+
+                AttackPlayer(attackThisPlayer.playerIndex,(int)eAttack);
+
+                PickPlayer(PickRandomNumber(battleManager.players[0].playerReference.playerIndex, battleManager.players[1].playerReference.playerIndex, battleManager.players[2].playerReference.playerIndex, battleManager.players[3].playerReference.playerIndex));
+
+                if (attackThisPlayer.playerIndex == firstSelected)
+                {
+                    PickPlayer(PickRandomNumber(battleManager.players[0].playerReference.playerIndex, battleManager.players[1].playerReference.playerIndex, battleManager.players[2].playerReference.playerIndex, battleManager.players[3].playerReference.playerIndex));
+                }
+
+
+                Invoke("AttackPlayer", 1);
+
+                Invoke("EndTurn", 1.2f);
+
+                break;
+            #endregion
+           
+        }
+    }
+    void ChoosePlayer()
+    {
+        if (enemyAttack == EnemyAttackType.Relentless)
+        {
+            playerIndexHolder = battleManager.players[PickRandomNumber(battleManager.players[0].playerReference.playerIndex, battleManager.players[1].playerReference.playerIndex, battleManager.players[2].playerReference.playerIndex, battleManager.players[3].playerReference.playerIndex)].playerReference.playerIndex;
+            print(playerIndexHolder);
+        }
+    } //choose a player for Relentless Enemy 
+    // pick a random index.. if there is a better way please let me know 
+    int PickRandomNumber(int value_0,int value_1)
+    {
+        int pickedValue;
+        int randomizeValues = Random.Range(0, 1);
+        if(randomizeValues == 0)
+        {
+            pickedValue = value_0;
+            return pickedValue;
+        }
+        else
+        {
+            pickedValue = value_1;
+            return pickedValue;
+        }
+       
+                
+    }
+    int PickRandomNumber(int value_0, int value_1,int value_2)
+    {
+        int pickedValue;
+        int randomizeValues = Random.Range(0, 2);
+        if (randomizeValues == 0)
+        {
+            pickedValue = value_0;
+            return pickedValue;
+        }
+
+        else if(randomizeValues == 1)
+        {
+            pickedValue = value_1;
+            return pickedValue;
+        }
+
+        else
+        {
+            pickedValue = value_2;
+            return pickedValue;
+        }
+    }
+    int PickRandomNumber(int value_0, int value_1,int value_2,int value_3)
+    {
+        int pickedValue;
+        int randomizeValues = Random.Range(0, 3);
+
+        if (randomizeValues == 0)
+        {
+            pickedValue = value_0;
+            return pickedValue;
+        }
+
+        else if (randomizeValues == 1)
+        {
+            pickedValue = value_1;
+            return pickedValue;
+        }
+
+        else if(randomizeValues == 2)
+        {
+            pickedValue = value_2;
+            return pickedValue;
+        }
+
+        else
+        {
+            pickedValue = value_3;
+            return pickedValue;
+        }
+    }
+    int PickRandomNumber(int value_0, int value_1, int value_2, int value_3,int value_4)
+    {
+        int pickedValue;
+        int randomizeValues = Random.Range(0, 3);
+
+        if (randomizeValues == 0)
+        {
+            pickedValue = value_0;
+            return pickedValue;
+        }
+
+        else if (randomizeValues == 1)
+        {
+            pickedValue = value_1;
+            return pickedValue;
+        }
+
+        else if (randomizeValues == 2)
+        {
+            pickedValue = value_2;
+            return pickedValue;
+        }
+
+        else if(randomizeValues == 3)
+        {
+            pickedValue = value_3;
+            return pickedValue;
+        }
+
+        else
+        {
+            pickedValue = value_4;
+            return pickedValue;
+        }
+    }
+    void AttackWholeField(int attack)
+    {
+        for(int i =0; i < battleManager.players.Length; ++i)
+        {
+            if(battleManager.players[i].playerReference != null && !battleManager.players[i].playerReference.dead)
+            {
+                battleManager.players[i].playerReference.TakeDamage(attack);
+            }
+        }
+
+        for(int i = 0; i < battleManager.enemies.Length;++i)
+        {
+            if(battleManager.enemies[i].enemyReference != null && !battleManager.enemies[i].enemyReference.dead)
+            {
+                battleManager.enemies[i].enemyReference.TakeDamage(attack);
+            }
+        }
+    }
+    void AttackFargas()
+    {
+        attackThisPlayer = battleManager.players[0].playerReference;
+        attackThisPlayer.TakeDamage(eAttack);
+    }
+    void AttackOberon()
+    {
+        attackThisPlayer = battleManager.players[1].playerReference;
+        attackThisPlayer.TakeDamage(eAttack);
+    }
+    void AttackFrea()
+    {
+        attackThisPlayer = battleManager.players[2].playerReference;
+        attackThisPlayer.TakeDamage(eAttack);
+    }
+    void AttackArcelus()
+    {
+        attackThisPlayer = battleManager.players[3].playerReference;
+        attackThisPlayer.TakeDamage(eAttack);
+    }
+    void PickPlayer(int playerindex)
+    {
+        attackThisPlayer = battleManager.players[playerindex].playerReference;
+    }
+    void AttackPlayer(int playerindex,int damage)
+    {
+        attackThisPlayer = battleManager.players[playerindex].playerReference;
+        attackThisPlayer.TakeDamage(damage);
+    }
+    void PickEnemy(int enemyIndex)
+    {
+        enemyToHeal = battleManager.enemies[enemyIndex].enemyReference;
+    }
+    void EndTurn()
+    {
+        uiBTL.EndTurn();
+    }
     private void Death()
     {
         if (!dead)
@@ -867,3 +1792,4 @@ public class Enemy : MonoBehaviour
         }
     }
 }
+ 
