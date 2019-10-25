@@ -142,11 +142,6 @@ public class CutsceneManager : MonoBehaviour
 				moveLenght--;
 				actorsCM[actorCount].transform.localPosition = new Vector3(movesCM[current].x, movesCM[current].y, actorsCM[actorCount].transform.localPosition.z);
 				anim.SetBool("FadeIn", false);
-				//if (timingsCM[current] <= anim.GetCurrentAnimatorStateInfo(0).length)
-				//{
-				//	anim.SetBool("FadeIn", true);
-				//	anim.SetBool("FadeOut", false);
-				//}
 
 			}
 			/// 
