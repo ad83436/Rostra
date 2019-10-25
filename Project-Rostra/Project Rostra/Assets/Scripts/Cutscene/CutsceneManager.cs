@@ -105,7 +105,7 @@ public class CutsceneManager : MonoBehaviour
 				//fade in
 				if (timingsCM[current] <= anim.GetCurrentAnimatorStateInfo(0).length)
 				{
-					anim.SetBool("FadeIn", true);
+					anim.SetBool("FadeOut", true);
 				}
 				timingsCM[current] -= Time.deltaTime;
 			}
@@ -114,6 +114,7 @@ public class CutsceneManager : MonoBehaviour
 			{
 				DialogueManager.instance.StartConversation(dialoguesCM[dialogueCount]);
 				anim.SetBool("FadeIn", false);
+				anim.SetBool("FadeOut", false);
 				if (DialogueManager.instance.nextDialogue == true)
 				{
 					dialogueCount++;
@@ -139,7 +140,8 @@ public class CutsceneManager : MonoBehaviour
 				}
 				moveLenght--;
 				actorsCM[actorCount].transform.localPosition = new Vector3(movesCM[current].x, movesCM[current].y, actorsCM[actorCount].transform.localPosition.z);
-				anim.SetBool("FadeIn", false);
+				anim.SetBool("FadeOut", false);
+				
 			}
 			/// 
 			if (povCount <= povChangesCM.Length - 1 && current == povChangesCM[povCount] && actorsCM.Length > 0 && povChangesCM.Length > 0)
