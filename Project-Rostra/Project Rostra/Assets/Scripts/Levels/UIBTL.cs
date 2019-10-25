@@ -76,11 +76,15 @@ public class UIBTL : MonoBehaviour
     //Q UI Images
     private List<Sprite> imagesQ; //Filled by the BTL manager
     public Image[] images = new Image[9];
+    public Image backdropHighlighter;
     private Vector2 imageRecyclePos; //To which position do images go when recycled?
     private Vector2 targetPos; //Used to calculate the distance each image travels in the Q
     private float imageMovementSpeed;
     private float imageMaxDistance; //Distance to be moved by each image
     private bool moveImagesNow; //Toggled on end turn and when the first image hits the recycler
+    private Vector2 imagesOriginalSize; //Used to restore images to their original sizes after being hilighted
+    private Vector2 imagesHilightedSize; //Makes the selected image a bit bigger to make it highlighted
+    private Image highlightedImage; //Used to know which image was hilighted so we can shrink it before moving forward
 
     //States
     private enum btlUIState
@@ -167,6 +171,8 @@ public class UIBTL : MonoBehaviour
         imagesQ = new List<Sprite>();
         imageRecyclePos = images[8].gameObject.transform.localPosition;
         targetPos = images[0].transform.localPosition;
+        imagesOriginalSize = images[0].rectTransform.sizeDelta;
+        imagesHilightedSize = new Vector2(144.32f, 64.97f);
 
         imageMovementSpeed = 250.0f;
         imageMaxDistance = 149.0f;
@@ -270,6 +276,9 @@ public class UIBTL : MonoBehaviour
 
     public void QueueIsReady()
     {
+        highlightedImage = images[0];
+        images[0].rectTransform.sizeDelta = imagesHilightedSize;
+        backdropHighlighter.gameObject.SetActive(true);
         //Called from the BTL manager when the Q has been built
         Debug.Log("Images count " + imagesQ.Count);
         //Fill up the Q until its of size 9. Only 6 will be on screen at a time however.
@@ -340,7 +349,8 @@ public class UIBTL : MonoBehaviour
 
     public void MoveQImages()
     {
-
+        highlightedImage.rectTransform.sizeDelta = imagesOriginalSize;
+        backdropHighlighter.gameObject.SetActive(false);
         //Once the images start moving, turn off the indicator next to the "RAGE" word and return the text color to normal if the previous player was in rage
         if (playerInControl != null)
         {
@@ -390,35 +400,53 @@ public class UIBTL : MonoBehaviour
     {
         //We've hit the recycler, stop moving!
         moveImagesNow = false;
-
+        backdropHighlighter.gameObject.SetActive(true);
         switch (imageIndex) //Which image hit the recycler?
         {
             case 0:
                 images[0].gameObject.transform.localPosition = imageRecyclePos;
+                images[1].rectTransform.sizeDelta = imagesHilightedSize;
+                highlightedImage = images[1];
                 break;
             case 1:
                 images[1].gameObject.transform.localPosition = imageRecyclePos;
+                images[2].rectTransform.sizeDelta = imagesHilightedSize;
+                highlightedImage = images[2];
                 break;
             case 2:
                 images[2].gameObject.transform.localPosition = imageRecyclePos;
+                images[3].rectTransform.sizeDelta = imagesHilightedSize;
+                highlightedImage = images[3];
                 break;
             case 3:
                 images[3].gameObject.transform.localPosition = imageRecyclePos;
+                images[4].rectTransform.sizeDelta = imagesHilightedSize;
+                highlightedImage = images[4];
                 break;
             case 4:
                 images[4].gameObject.transform.localPosition = imageRecyclePos;
+                images[5].rectTransform.sizeDelta = imagesHilightedSize;
+                highlightedImage = images[5];
                 break;
             case 5:
                 images[5].gameObject.transform.localPosition = imageRecyclePos;
+                images[6].rectTransform.sizeDelta = imagesHilightedSize;
+                highlightedImage = images[6];
                 break;
             case 6:
                 images[6].gameObject.transform.localPosition = imageRecyclePos;
+                images[7].rectTransform.sizeDelta = imagesHilightedSize;
+                highlightedImage = images[7];
                 break;
             case 7:
                 images[7].gameObject.transform.localPosition = imageRecyclePos;
+                images[8].rectTransform.sizeDelta = imagesHilightedSize;
+                highlightedImage = images[8];
                 break;
             case 8:
                 images[8].gameObject.transform.localPosition = imageRecyclePos;
+                images[0].rectTransform.sizeDelta = imagesHilightedSize;
+                highlightedImage = images[0];
                 break;
 
         }
