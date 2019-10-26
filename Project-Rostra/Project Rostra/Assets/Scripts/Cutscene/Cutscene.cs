@@ -17,7 +17,7 @@ public class Cutscene
 	public float[] timings;
 	// during what amount of moves will the dialogue be shown.
 	public float[] dialogueEntrance;
-	public GameObject[] actors;
+	public Actor[] actors;
 	public float[] povChanges;
 	public float songEntrance;
 	public AudioClip song;
@@ -48,7 +48,7 @@ public class Cutscene
 			dialogueEntrance[i] = other.dialogueEntrance[i];
 		}
 
-		actors = new GameObject[other.actors.Length];
+		actors = new Actor[other.actors.Length];
 		for (int i = 0; i < other.actors.Length; i++)
 		{
 			actors[i] = other.actors[i];
