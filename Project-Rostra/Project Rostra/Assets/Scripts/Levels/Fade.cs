@@ -14,6 +14,9 @@ public class Fade : MonoBehaviour
     private bool transitionToDefeat;
     private bool transitionToWorldMap;
     private bool transitionToEndTest;
+    private bool transitionIntoACutscene;
+    private CutsceneTrigger cutsceneTriggerRef;
+    private bool transitionOutOfACutscene;
     private bool canGoToSurvey;
 
     public VictoryScreen victoryPanel;
@@ -56,6 +59,14 @@ public class Fade : MonoBehaviour
         if (!fadeOut)
         {
             thisImage.fillAmount -= 0.02f;
+
+            if(thisImage.fillAmount <= 0.0f)
+            {
+                if(transitionIntoACutscene) //When it's a cutscene, fade in call cutscene, fade out
+                {
+                    transitionIntoACutscene = false;
+                }
+            }
         }
         else
         {
@@ -92,6 +103,18 @@ public class Fade : MonoBehaviour
                     endTestPanel.gameObject.SetActive(true);
                     canGoToSurvey = true;
                 }
+                else if(transitionIntoACutscene)
+                {
+                    fadeOut = !fadeOut; //Fade out again
+                    cutsceneTriggerRef.TriggerCutscene(); //Load the cutscene while fading out
+                    cutsceneTriggerRef = null;
+                }
+                else if(transitionOutOfACutscene)
+                {
+                    fadeOut = !fadeOut;
+                    CutsceneManager.instance.End();
+                    transitionOutOfACutscene = false;
+                }
             }
         }
     }
@@ -121,6 +144,17 @@ public class Fade : MonoBehaviour
         transitionToDefeat = true;
     }
 
+    public void TransitionIntoACutscene(CutsceneTrigger cutTrigger)
+    {
+        cutsceneTriggerRef = cutTrigger;
+        fadeOut = !fadeOut;
+        transitionIntoACutscene = true;
+    }
+    public void TransitionOutOfACutscene()
+    {
+        transitionOutOfACutscene = true;
+        fadeOut = !fadeOut;
+    }
     public void TransitionIntoBattle()
     {
         enemyHolder.TransitionIntoBattle();

@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class CutsceneTrigger : MonoBehaviour
 {
+    public Fade fade;
 	public Cutscene cs;
 	private bool hasActivated = false;
 	private Vector2 returnPositon;
@@ -23,8 +24,11 @@ public class CutsceneTrigger : MonoBehaviour
 	{
 		if (col.CompareTag("Player") && hasActivated == false && isInteractable == false && isChoiceDependant == false)
 		{
-			TriggerCutscene();
-			hasActivated = true;
+            //TriggerCutscene();
+            fade.TransitionIntoACutscene(this);
+            DialogueManager.instance.canWalk = false;
+            col.gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);
+            hasActivated = true;
 		}
 		
 	}

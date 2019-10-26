@@ -581,6 +581,7 @@ public class Enemy : MonoBehaviour
         {
             blow = true;
             currentHP = 0;
+
         }
 
         if (blow)
@@ -588,6 +589,7 @@ public class Enemy : MonoBehaviour
             print("Enemy blew self with a blow strength of " + blowStrength);
             AttackWholeField(blowStrength);
             blow = false;
+            animator.SetBool("Death", true);
         }
 
         uiBTL.EndTurn();
@@ -1054,7 +1056,6 @@ public class Enemy : MonoBehaviour
         if (currentHP <= 0.0f)
         {
             animator.SetBool("Death", true);
-            Death();
         }
         else
         {
@@ -1276,7 +1277,6 @@ public class Enemy : MonoBehaviour
                 uiBTL.EndTurn();
                 break;
             #endregion
-
             //Skill that hits a player random amount of time 
             #region slice and dice skill
             case AllEnemySkills.Slice_And_Dice:
