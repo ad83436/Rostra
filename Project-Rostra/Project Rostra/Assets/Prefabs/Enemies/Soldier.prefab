@@ -179,23 +179,32 @@ MonoBehaviour:
   eDefence: 14
   eStrength: 15
   eSpeed: 10
-  eBaseLevel: 3
+  eBaseLevel: 1
   eCurrentLevel: 10
   eName: Soldier
   eRange: 0
+  waitTime: 0
+  playerIndexHolder: 0
+  timeAttacking: 0
+  blowStrength: 0
   playerStatNeeded: []
+  enemyStatNeeded: []
   eCritical: 5
   qImage: {fileID: 21300000, guid: a08c25fce83805c4fa7b68967e929629, type: 3}
   HP: {fileID: 1405176034582042746}
   maxHP: 120
-  currentHP: 120
+  currentHP: 10
   damageText: {fileID: 2836062761733822273}
   healText: {fileID: 2893322329922529736}
   enemyCanvas: {fileID: 9096833780443251242}
   dead: 0
   hit: 0
+  blow: 0
+  isStatModed: 0
   enemyClass: 0
   enemyAttack: 0
+  canUseSkill: 8
+  enemyName: 13
 --- !u!95 &6612120055157309320
 Animator:
   serializedVersion: 3

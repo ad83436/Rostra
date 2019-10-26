@@ -478,6 +478,9 @@ public class Player : MonoBehaviour
 
         if (currentHP <= 0.0f)
         {
+            currentHP = 0.0f;
+            battleManager.players[playerIndex].currentHP = currentHP; //Update the BTL manager with the new health
+            PartyStats.chara[playerIndex].hitpoints = currentHP; //Update the party stats
             hpImage.fillAmount = 0.0f;
             dead = true;
             DisableAllBuffs(); //BUffs should not continue beyond death

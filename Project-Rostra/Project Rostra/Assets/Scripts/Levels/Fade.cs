@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class Fade : MonoBehaviour
 {
+
     private Image thisImage;
     public WMEnemy enemyHolder;
     private bool fadeOut;

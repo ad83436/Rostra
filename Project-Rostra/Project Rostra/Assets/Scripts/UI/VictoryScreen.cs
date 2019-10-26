@@ -252,7 +252,7 @@ public class VictoryScreen : MonoBehaviour
             {
                 IncreaseExp(ref arcelusExp, ref arcelusCurrentExp, ref arcelusMaxExp, ref arcelusExpGain, ref arcelusExpStep, ref arcelusCurrentExpText, ref arcelusMaxExpText, 3);
             }
-            else if (Input.GetButtonDown("Confirm") && !fargasAddinExp && !freaAddinExp && !oberonAddinExp && !arcelusAddinExp && !initiatedFadeOut)
+            else if (Input.GetButtonDown("Confirm") && !fargasAddinExp && !startFadingFargasIn && !freaAddinExp && !startFadingFreaIn && !oberonAddinExp && !startFadingOberonIn && !arcelusAddinExp && !startFadingArcelusIn && !initiatedFadeOut)
             {
                 initiatedFadeOut = true;
                 fadePanelToWorldMap.TransitionBackToWorldMapFromBattle();
@@ -370,72 +370,95 @@ public class VictoryScreen : MonoBehaviour
 
     private void IncreaseExp(ref Image expBar, ref float currentExp, ref float maxExp, ref int expGain, ref float expStep, ref Text expText, ref Text maxExpText , int playerIndex)
     {
-        //Keep increasing the current exp by 1 and decreasing the exp gain by 1
-        if (expBar.fillAmount < 1.0f && currentExp < maxExp && expGain > 0)
+        if (Input.GetButtonDown("Confirm"))
         {
-            currentExp++;
-            btlManager.players[playerIndex].exp = Mathf.RoundToInt(currentExp); //Update the battle manager
-            expText.text = currentExp.ToString() + " / ";
-            expGain--;
-            expBar.fillAmount += expStep;
-        }
-        //If you surpass the max exp, level up
-        //also get the new max exp
-        else if (currentExp >= maxExp || expBar.fillAmount >= 1.0f)
-        {
-            btlManager.LevelUp(playerIndex);
-            currentExp = btlManager.players[playerIndex].exp;
-            maxExp = btlManager.players[playerIndex].expNeededForNextLevel;
-            expText.text = currentExp.ToString() + " / ";
-            maxExpText.text = maxExp.ToString();
-            expStep = 1.0f / maxExp;
-            expBar.fillAmount = 0.0f;
-
-            switch (playerIndex)
+            if (expGain + currentExp >= maxExp)
             {
-                case 0:
-                    fargasLevelUpBack.gameObject.SetActive(true);
-                    fargasLevelUpFore.gameObject.SetActive(true);
-                    break;
-                case 1:
-                    oberonLevelUpBack.gameObject.SetActive(true);
-                    oberonLevelUpFore.gameObject.SetActive(true);
-                    break;
-                case 2:
-                    freaLevelUpBack.gameObject.SetActive(true);
-                    freaLevelUpFore.gameObject.SetActive(true);
-                    break;
-                case 3:
-                    arcelusLevelUpBack.gameObject.SetActive(true);
-                    arcelusLevelUpFore.gameObject.SetActive(true);
-                    break;
+                expGain = expGain - Mathf.RoundToInt(maxExp - currentExp);
+                currentExp = maxExp;
+                expBar.fillAmount = 1.0f;
+                btlManager.players[playerIndex].exp = Mathf.RoundToInt(currentExp);
             }
-
-        }
-        //If we have reached the exp gain, stop
-        else if (expGain <= 0)
-        {
-            //Update the party stats with the new exp. The battle manager will get them next time a battle starts
-            //Normally the victory screen should not directly communicate with the PartyStats but as this is a simple write, going through the btlmanager seems and over complication
-            
-            PartyStats.chara[playerIndex].currentExperience = Mathf.RoundToInt(currentExp);
-            switch (playerIndex)
+            else if (expGain + currentExp < maxExp)
             {
-                case 0:
-                    fargasAddinExp = false;
-                    startFadingOberonIn = true;
-                    break;
-                case 1:
-                    oberonAddinExp = false;
-                    startFadingFreaIn = true;
-                    break;
-                case 2:
-                    freaAddinExp = false;
-                    startFadingArcelusIn = true;
-                    break;
-                case 3:
-                    arcelusAddinExp = false;
-                    break;
+                currentExp += expGain;
+                expGain = 0;
+                expBar.fillAmount = currentExp / maxExp;
+                expText.text = currentExp.ToString() + " / ";
+            }
+        }
+        else
+        {
+            //Keep increasing the current exp by 1 and decreasing the exp gain by 1
+            if (expBar.fillAmount < 1.0f && currentExp < maxExp && expGain > 0)
+            {
+                currentExp++;
+                expText.text = currentExp.ToString() + " / ";
+                expGain--;
+                expBar.fillAmount += expStep;
+
+                Debug.Log("HITT current expt: " + currentExp);
+            }
+            //If you surpass the max exp, level up
+            //also get the new max exp
+            else if (currentExp >= maxExp || expBar.fillAmount >= 1.0f)
+            {
+                btlManager.players[playerIndex].exp = Mathf.RoundToInt(currentExp); //Update the battle manager
+                btlManager.LevelUp(playerIndex);
+                currentExp = btlManager.players[playerIndex].exp;
+                Debug.Log("Miss current expt: " + currentExp);
+                maxExp = btlManager.players[playerIndex].expNeededForNextLevel;
+                expText.text = currentExp.ToString() + " / ";
+                maxExpText.text = maxExp.ToString();
+                expStep = 1.0f / maxExp;
+                expBar.fillAmount = 0.0f;
+
+                switch (playerIndex)
+                {
+                    case 0:
+                        fargasLevelUpBack.gameObject.SetActive(true);
+                        fargasLevelUpFore.gameObject.SetActive(true);
+                        break;
+                    case 1:
+                        oberonLevelUpBack.gameObject.SetActive(true);
+                        oberonLevelUpFore.gameObject.SetActive(true);
+                        break;
+                    case 2:
+                        freaLevelUpBack.gameObject.SetActive(true);
+                        freaLevelUpFore.gameObject.SetActive(true);
+                        break;
+                    case 3:
+                        arcelusLevelUpBack.gameObject.SetActive(true);
+                        arcelusLevelUpFore.gameObject.SetActive(true);
+                        break;
+                }
+
+            }
+            //If we have reached the exp gain, stop
+            else if (expGain <= 0)
+            {
+                //Update the party stats with the new exp. The battle manager will get them next time a battle starts
+                //Normally the victory screen should not directly communicate with the PartyStats but as this is a simple write, going through the btlmanager seems and over complication
+                btlManager.players[playerIndex].exp = Mathf.RoundToInt(currentExp);
+                PartyStats.chara[playerIndex].currentExperience = Mathf.RoundToInt(currentExp);
+                switch (playerIndex)
+                {
+                    case 0:
+                        startFadingOberonIn = true;
+                        fargasAddinExp = false;
+                        break;
+                    case 1:
+                        startFadingFreaIn = true;
+                        oberonAddinExp = false;
+                        break;
+                    case 2:
+                        startFadingArcelusIn = true;
+                        freaAddinExp = false;
+                        break;
+                    case 3:
+                        arcelusAddinExp = false;
+                        break;
+                }
             }
         }
     }
