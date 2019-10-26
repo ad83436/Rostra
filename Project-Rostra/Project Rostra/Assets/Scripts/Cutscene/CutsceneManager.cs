@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 public class CutsceneManager : MonoBehaviour
 {
 	public static CutsceneManager instance;
+    public Fade fade;
 	private Cutscene copy;
 	private Dialogue[] dialoguesCM;
 	private Vector2[] movesCM;
@@ -146,7 +147,8 @@ public class CutsceneManager : MonoBehaviour
                     }
                     else
                     {
-                        End();
+                        //End();
+                        fade.TransitionOutOfACutscene();
                     }
                     moveLenght--;
                     actorsCM[actorCount].MoveActor(new Vector3(movesCM[current].x, movesCM[current].y, actorsCM[actorCount].transform.localPosition.z));
@@ -170,8 +172,8 @@ public class CutsceneManager : MonoBehaviour
             else
             {
                 isActive = false;
-                End();
-
+                //End();
+                fade.TransitionOutOfACutscene();
             }
         }
 	}
