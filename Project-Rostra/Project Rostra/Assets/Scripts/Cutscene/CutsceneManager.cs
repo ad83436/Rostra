@@ -108,7 +108,6 @@ public class CutsceneManager : MonoBehaviour
 				{
 					anim.ResetTrigger("FadeOut");
 					anim.SetTrigger("FadeIn");
-					//anim.SetBool("FadeIn", false);
 				}
 				// this is gonna check if our next point is visible by the camera if not then fade out
 				if (canSeen.x <= 0 && canSeen.x >= 1 && canSeen.y <= 0 && canSeen.y >= 1)
@@ -116,7 +115,6 @@ public class CutsceneManager : MonoBehaviour
 					anim.ResetTrigger("FadeIn");
 					anim.SetTrigger("FadeOut");
 				}
-				//anim.SetTrigger("FadeOut");
 				timingsCM[current] -= Time.deltaTime;
 			}
 			// if our current move has dialogue attached to it
@@ -126,7 +124,6 @@ public class CutsceneManager : MonoBehaviour
 				// nothing should be happening here
 				anim.ResetTrigger("FadeIn");
 				anim.ResetTrigger("FadeOut");
-				//anim.SetBool("FadeOut", false);
 				if (DialogueManager.instance.nextDialogue == true)
 				{
 					dialogueCount++;
