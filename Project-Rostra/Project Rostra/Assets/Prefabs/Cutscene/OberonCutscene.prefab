@@ -201,72 +201,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
-      propertyPath: cs.moves.Array.size
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.actors.Array.size
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.timings.Array.size
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
       propertyPath: cs.dialogues.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[2].names.Array.size
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[2].sentences.Array.size
-      value: 16
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[2].portrait.Array.size
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[2].povChange.Array.size
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[3].names.Array.size
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[3].sentences.Array.size
-      value: 16
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[3].portrait.Array.size
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[3].povChange.Array.size
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.povChanges.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogueEntrance.Array.size
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
@@ -291,48 +226,48 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
-      propertyPath: cs.actors.Array.data[0]
-      value: 
-      objectReference: {fileID: 4354633853029854786}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.actors.Array.data[1]
-      value: 
-      objectReference: {fileID: 4354633851603043138}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.moves.Array.data[2].x
-      value: 1
+      propertyPath: cs.dialogues.Array.data[2].names.Array.size
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
-      propertyPath: cs.moves.Array.data[0].x
-      value: 0
+      propertyPath: cs.dialogues.Array.data[2].sentences.Array.size
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
-      propertyPath: cs.moves.Array.data[0].y
-      value: -0.1834869
+      propertyPath: cs.dialogues.Array.data[2].portrait.Array.size
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
-      propertyPath: cs.moves.Array.data[1].x
-      value: 1
+      propertyPath: cs.dialogues.Array.data[2].povChange.Array.size
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
-      propertyPath: cs.moves.Array.data[1].y
-      value: -0.1834869
+      propertyPath: cs.moves.Array.size
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
-      propertyPath: cs.dialogueEntrance.Array.data[0]
+      propertyPath: cs.timings.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
+        type: 3}
+      propertyPath: cs.dialogueEntrance.Array.size
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
-      propertyPath: cs.dialogueEntrance.Array.data[1]
-      value: 4
+      propertyPath: cs.actors.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
+        type: 3}
+      propertyPath: cs.povChanges.Array.size
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
@@ -346,13 +281,57 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
-      propertyPath: cs.song
-      value: 
+      propertyPath: cs.dialogues.Array.data[0].names.Array.data[0]
+      value: Oberon
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
-      propertyPath: cs.moves.Array.data[2].y
-      value: -1
+      propertyPath: cs.dialogues.Array.data[0].sentences.Array.data[0]
+      value: 'When you strike make sure that you leave no room for counter attack.
+        That''s all for today soldier you are dismissed. '
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
+        type: 3}
+      propertyPath: cs.dialogues.Array.data[0].portrait.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: e24a4049526ca704eb781c65db5c188d,
+        type: 3}
+    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
+        type: 3}
+      propertyPath: cs.dialogues.Array.data[1].names.Array.data[0]
+      value: Fargas
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
+        type: 3}
+      propertyPath: cs.dialogues.Array.data[1].names.Array.data[1]
+      value: Oberon
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
+        type: 3}
+      propertyPath: cs.dialogues.Array.data[1].sentences.Array.data[0]
+      value: Oberon... can I talk for a moment
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
+        type: 3}
+      propertyPath: cs.dialogues.Array.data[1].sentences.Array.data[1]
+      value: Sure
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
+        type: 3}
+      propertyPath: cs.dialogues.Array.data[1].portrait.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825,
+        type: 3}
+    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
+        type: 3}
+      propertyPath: cs.dialogues.Array.data[1].portrait.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: e24a4049526ca704eb781c65db5c188d,
+        type: 3}
+    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
+        type: 3}
+      propertyPath: cs.dialogues.Array.data[1].povChange.Array.data[1]
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
@@ -417,7 +396,7 @@ PrefabInstance:
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
       propertyPath: cs.dialogues.Array.data[2].sentences.Array.data[1]
-      value: 'Oberon. A high born Aszartian lute player turned spearman for the Ocrestian
+      value: 'Oberon. A high born Ocrestian lute player turned spearman for the Ocrestian
         Army. '
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
@@ -630,282 +609,33 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
-      propertyPath: cs.dialogues.Array.data[3].names.Array.data[0]
-      value: Oberon
+      propertyPath: cs.moves.Array.data[0].x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
-      propertyPath: cs.dialogues.Array.data[3].names.Array.data[2]
-      value: Fargas
+      propertyPath: cs.moves.Array.data[0].y
+      value: -0.1834869
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
-      propertyPath: cs.dialogues.Array.data[3].names.Array.data[3]
-      value: Oberon
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[3].names.Array.data[4]
-      value: Fargas
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[3].names.Array.data[5]
-      value: Oberon
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[3].names.Array.data[6]
-      value: Fargas
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[3].names.Array.data[7]
-      value: Oberon
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[3].names.Array.data[8]
-      value: Fargas
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[3].names.Array.data[9]
-      value: Oberon
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[3].names.Array.data[10]
-      value: Fargas
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[3].names.Array.data[11]
-      value: Oberon
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[3].sentences.Array.data[0]
-      value: Hey hey, how's my old stick in the mud doing? How can I be of service?
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[3].sentences.Array.data[1]
-      value: 'Oberon. A high born Aszartian lute player turned spearman for the Ocrestian
-        Army. '
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[3].sentences.Array.data[2]
-      value: It's about Brenna I haven't been receiving letters from her recently.
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[3].sentences.Array.data[3]
-      value: I wouldn't worry too much. Maybe she just hasn't had the time to write
-        back?
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[3].sentences.Array.data[4]
-      value: Her husband died recently and she wanted to see me. Does that sound like
-        a reason for her to stop writing.
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[3].sentences.Array.data[5]
-      value: Hmmmmm that does sound strange.
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[3].sentences.Array.data[6]
-      value: Look... I want to go see her. I've talked to the commanders but they've
-        all forbidden me to go.
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[3].sentences.Array.data[7]
-      value: Can I trust your silence if I were to go?
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[3].sentences.Array.data[8]
-      value: I'll do you one better. I'll come with you.
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[3].sentences.Array.data[9]
-      value: I could never put your life in danger like that.
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[3].sentences.Array.data[10]
-      value: Listen, when you found me in Udrasil I was a spoiled brat who got whatever
-        he wanted at the drop of a hat.
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[3].sentences.Array.data[11]
-      value: I wasted my life in the taverns. Until you came and talked some sense
-        to me.
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[3].sentences.Array.data[12]
-      value: I've made something of myself and I'd be honored to fight at your side.
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[3].sentences.Array.data[13]
-      value: Besides how could you turn down having the greatest spearman in all Ocrest?
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[3].sentences.Array.data[14]
-      value: Oberon... I... thank you.
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[3].sentences.Array.data[15]
-      value: What kind of friend would I be if I were to leave you when you needed
-        me most? Now come on stop being so dramatic.
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[3].portrait.Array.data[0]
-      value: 
-      objectReference: {fileID: 21300000, guid: e24a4049526ca704eb781c65db5c188d,
-        type: 3}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[3].portrait.Array.data[1]
-      value: 
-      objectReference: {fileID: 21300000, guid: dd3d4b940a009d14dbfe8b78c3b4f6ca,
-        type: 3}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[3].portrait.Array.data[2]
-      value: 
-      objectReference: {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825,
-        type: 3}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[3].portrait.Array.data[3]
-      value: 
-      objectReference: {fileID: 21300000, guid: e24a4049526ca704eb781c65db5c188d,
-        type: 3}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[3].portrait.Array.data[4]
-      value: 
-      objectReference: {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825,
-        type: 3}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[3].portrait.Array.data[5]
-      value: 
-      objectReference: {fileID: 21300000, guid: e24a4049526ca704eb781c65db5c188d,
-        type: 3}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[3].portrait.Array.data[6]
-      value: 
-      objectReference: {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825,
-        type: 3}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[3].portrait.Array.data[7]
-      value: 
-      objectReference: {fileID: 21300000, guid: e24a4049526ca704eb781c65db5c188d,
-        type: 3}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[3].portrait.Array.data[8]
-      value: 
-      objectReference: {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825,
-        type: 3}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[3].portrait.Array.data[9]
-      value: 
-      objectReference: {fileID: 21300000, guid: e24a4049526ca704eb781c65db5c188d,
-        type: 3}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[3].portrait.Array.data[10]
-      value: 
-      objectReference: {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825,
-        type: 3}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[3].portrait.Array.data[11]
-      value: 
-      objectReference: {fileID: 21300000, guid: e24a4049526ca704eb781c65db5c188d,
-        type: 3}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[3].povChange.Array.data[0]
+      propertyPath: cs.moves.Array.data[1].x
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
-      propertyPath: cs.dialogues.Array.data[3].povChange.Array.data[1]
-      value: 2
+      propertyPath: cs.moves.Array.data[1].y
+      value: -0.1834869
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
-      propertyPath: cs.dialogues.Array.data[3].povChange.Array.data[2]
-      value: 3
+      propertyPath: cs.moves.Array.data[2].x
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
-      propertyPath: cs.dialogues.Array.data[3].povChange.Array.data[3]
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[3].povChange.Array.data[4]
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[3].povChange.Array.data[5]
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[3].povChange.Array.data[6]
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[3].povChange.Array.data[7]
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[3].povChange.Array.data[8]
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[3].povChange.Array.data[9]
-      value: 14
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[3].povChange.Array.data[10]
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[3].povChange.Array.data[11]
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[0].names.Array.data[0]
-      value: Oberon
+      propertyPath: cs.moves.Array.data[2].y
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
@@ -939,6 +669,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
+      propertyPath: cs.timings.Array.data[5]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
+        type: 3}
+      propertyPath: cs.dialogueEntrance.Array.data[0]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
+        type: 3}
+      propertyPath: cs.dialogueEntrance.Array.data[2]
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
+        type: 3}
+      propertyPath: cs.actors.Array.data[0]
+      value: 
+      objectReference: {fileID: 4354633853029854786}
+    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
+        type: 3}
+      propertyPath: cs.actors.Array.data[1]
+      value: 
+      objectReference: {fileID: 4354633851603043138}
+    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
+        type: 3}
       propertyPath: cs.actors.Array.data[2]
       value: 
       objectReference: {fileID: 4354633853119957422}
@@ -946,7 +701,17 @@ PrefabInstance:
         type: 3}
       propertyPath: cs.actors.Array.data[3]
       value: 
-      objectReference: {fileID: 4354633853119957422}
+      objectReference: {fileID: 4354633851603043138}
+    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
+        type: 3}
+      propertyPath: cs.actors.Array.data[4]
+      value: 
+      objectReference: {fileID: 4354633851603043138}
+    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
+        type: 3}
+      propertyPath: cs.actors.Array.data[5]
+      value: 
+      objectReference: {fileID: 4354633852330560665}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
       propertyPath: cs.povChanges.Array.data[0]
@@ -964,78 +729,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
-      propertyPath: cs.songEntrance
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.timings.Array.data[5]
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogueEntrance.Array.data[2]
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[0].sentences.Array.data[0]
-      value: When you strike make sure that you leave no room for counter attack.
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[1].sentences.Array.data[0]
-      value: Oberon... can I talk for a moment
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[1].portrait.Array.data[0]
-      value: 
-      objectReference: {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825,
-        type: 3}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[1].names.Array.data[0]
-      value: Fargas
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[1].names.Array.data[1]
-      value: Oberon
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[1].sentences.Array.data[1]
-      value: Sure, you are dismissed soldiers
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[1].portrait.Array.data[1]
-      value: 
-      objectReference: {fileID: 21300000, guid: e24a4049526ca704eb781c65db5c188d,
-        type: 3}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[1].povChange.Array.data[0]
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[1].povChange.Array.data[1]
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.actors.Array.data[4]
-      value: 
-      objectReference: {fileID: 4354633851603043138}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.actors.Array.data[5]
-      value: 
-      objectReference: {fileID: 4354633852330560665}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
       propertyPath: cs.povChanges.Array.data[3]
       value: 4
       objectReference: {fileID: 0}
@@ -1046,21 +739,25 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
-      propertyPath: cs.dialogues.Array.data[0].portrait.Array.data[0]
-      value: 
-      objectReference: {fileID: 21300000, guid: e24a4049526ca704eb781c65db5c188d,
+      propertyPath: cs.songEntrance
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
+      propertyPath: cs.song
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1430299444, guid: fc807c7c7bed02e44a3cdae90dddf003, type: 3}
       propertyPath: m_Offset.x
       value: -0.9391327
       objectReference: {fileID: 0}
     - target: {fileID: 1430299444, guid: fc807c7c7bed02e44a3cdae90dddf003, type: 3}
-      propertyPath: m_Size.x
-      value: 8.771942
-      objectReference: {fileID: 0}
-    - target: {fileID: 1430299444, guid: fc807c7c7bed02e44a3cdae90dddf003, type: 3}
       propertyPath: m_Offset.y
       value: -1.9351501
+      objectReference: {fileID: 0}
+    - target: {fileID: 1430299444, guid: fc807c7c7bed02e44a3cdae90dddf003, type: 3}
+      propertyPath: m_Size.x
+      value: 8.771942
       objectReference: {fileID: 0}
     - target: {fileID: 1430299444, guid: fc807c7c7bed02e44a3cdae90dddf003, type: 3}
       propertyPath: m_Size.y
@@ -1238,16 +935,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2626243625421622227, guid: 335a038814e3ddd47a79a28e6ddf7ff0,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2626243625421622227, guid: 335a038814e3ddd47a79a28e6ddf7ff0,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2626243625421622226, guid: 335a038814e3ddd47a79a28e6ddf7ff0,
         type: 3}
       propertyPath: m_Sprite
@@ -1339,16 +1026,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2626243625421622227, guid: 335a038814e3ddd47a79a28e6ddf7ff0,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2626243625421622227, guid: 335a038814e3ddd47a79a28e6ddf7ff0,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 335a038814e3ddd47a79a28e6ddf7ff0, type: 3}
