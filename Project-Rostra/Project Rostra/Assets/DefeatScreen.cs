@@ -62,6 +62,7 @@ public class DefeatScreen : MonoBehaviour
         {
             if(thisImage.fillAmount < 1.0f && fadingIn)
             {
+                //Fade in the Defeat text
                 thisImage.fillAmount += 0.05f;
                 panelItemsColor.a += 0.08f;
                 defeatTextBack.color = panelItemsColor;
@@ -73,6 +74,7 @@ public class DefeatScreen : MonoBehaviour
             }
             else if(fadingIn)
             { 
+                //Once the fade in is done, start writing the quote
                 StartCoroutine(WriteQuote());
                 fadingIn = false;
             }
@@ -131,11 +133,13 @@ public class DefeatScreen : MonoBehaviour
         {
             textCounter++;
             StartCoroutine(WriteQuote());
+            //Recursive call until the string is finished
         }
         else
         {
             textCounter = 0;
             StartCoroutine(WriteAuthor());
+            //Once the string is finished, start writing the author
         }
         
     }
@@ -153,6 +157,8 @@ public class DefeatScreen : MonoBehaviour
         {
             if (!menuActive)
             {
+                //If the menu is inactive, that means we're still at the death quote
+                //Activate the menu and reset the text counter
                 highlighter.gameObject.SetActive(true);
                 menuOptions.gameObject.SetActive(true);
                 menuActive = true;
