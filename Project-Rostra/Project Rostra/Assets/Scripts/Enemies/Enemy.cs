@@ -1277,7 +1277,6 @@ public class Enemy : MonoBehaviour
                 uiBTL.EndTurn();
                 break;
             #endregion
-
             //Skill that hits a player random amount of time 
             #region slice and dice skill
             case AllEnemySkills.Slice_And_Dice:
