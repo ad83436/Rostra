@@ -15,12 +15,13 @@ public class Fade : MonoBehaviour
     private bool transitionToWorldMap;
     private bool transitionToEndTest;
     private bool transitionIntoACutscene;
+    private bool transitionToMainMenu;
     private CutsceneTrigger cutsceneTriggerRef;
     private bool transitionOutOfACutscene;
     private bool canGoToSurvey;
 
     public VictoryScreen victoryPanel;
-    public GameObject defeatPanel;
+    public DefeatScreen defeatPanel;
     public GameObject endTestPanel;
     private UIBTL uiBtl;
 
@@ -34,6 +35,7 @@ public class Fade : MonoBehaviour
         transitionToDefeat = false;
         transitionToWorldMap = false;
         transitionToEndTest = false;
+        transitionToMainMenu = false;
         canGoToSurvey = false;
         uiBtl = UIBTL.instance;
 
@@ -84,16 +86,17 @@ public class Fade : MonoBehaviour
                 {
                     transitionToVictory = false;
                     TransitionIntoVictory();
-                    uiBtl.StartShowingEndScreen(true); //Show the victory screen stats now
+                   // uiBtl.StartShowingEndScreen(true); //Show the victory screen stats now
                 }
                 else if (transitionToDefeat)
                 {
                     transitionToDefeat = false;
                     TransitionIntoDefeat();
-                    uiBtl.StartShowingEndScreen(false); //Show the defeat screen
+                    //uiBtl.StartShowingEndScreen(false); //Show the defeat screen
                 }
                 else if (transitionToWorldMap)
                 {
+                    Debug.Log("Transition is now falseee");
                     transitionToWorldMap = false;
                     SceneManager.UnloadSceneAsync(SceneManager.GetSceneByName("Queue Scene"));
                 }
@@ -114,6 +117,11 @@ public class Fade : MonoBehaviour
                     fadeOut = !fadeOut;
                     CutsceneManager.instance.End();
                     transitionOutOfACutscene = false;
+                }
+                else if(transitionToMainMenu)
+                {
+                    transitionToMainMenu = false;
+                    SceneManager.LoadScene("Main Menu");
                 }
             }
         }
@@ -167,13 +175,18 @@ public class Fade : MonoBehaviour
 
     public void TransitionIntoDefeat()
     {
-        defeatPanel.gameObject.SetActive(true);
+        defeatPanel.DefeatFadeIn();
     }
 
     public void TransitionBackToWorldMapFromBattle()
     {
         fadeOut = !fadeOut;
         transitionToWorldMap = true;
+    }
+    public void TransitionBackToMainMenu()
+    {
+        fadeOut = !fadeOut;
+        transitionToMainMenu = true;
     }
 
     public void FlipToEndTest()

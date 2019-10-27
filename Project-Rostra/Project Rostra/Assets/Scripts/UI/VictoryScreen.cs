@@ -166,7 +166,7 @@ public class VictoryScreen : MonoBehaviour
         victoryTextBack.color = victoryTextFore.color = panelItemsColor;
 
         // Clear out the consumables list
-        MainInventory.invInstance.consumableInv.Clear();
+        //MainInventory.invInstance.consumableInv.Clear();
     }
 
     void Update()
@@ -178,11 +178,12 @@ public class VictoryScreen : MonoBehaviour
             if(thisImage.fillAmount<1.0f && fadingIn)
             {
                 thisImage.fillAmount += 0.05f;
+                //Fade in the Victory text
                 panelItemsColor.a += 0.08f;
                 victoryTextBack.color = panelItemsColor;
-                panelItemsColor.r =  0.7058824f;
-                panelItemsColor.b =  0.08294977f;
-                panelItemsColor.g =  0.07843137f;
+                panelItemsColor.r = 0.479175f;
+                panelItemsColor.g = 0.1119616f;
+                panelItemsColor.b = 0.6415094f;
                 victoryTextFore.color = panelItemsColor;
                 panelItemsColor.r = panelItemsColor.g = panelItemsColor.b = 1.0f;
             }
@@ -262,7 +263,6 @@ public class VictoryScreen : MonoBehaviour
     
     public void GetNewStats()
     {
-        Debug.Log("CALLED GET NEW STATS");
         //Must check if all the players are still alive but for now they are
         //Update the players' stats
 
@@ -396,8 +396,6 @@ public class VictoryScreen : MonoBehaviour
                 expText.text = currentExp.ToString() + " / ";
                 expGain--;
                 expBar.fillAmount += expStep;
-
-                Debug.Log("HITT current expt: " + currentExp);
             }
             //If you surpass the max exp, level up
             //also get the new max exp
@@ -406,7 +404,6 @@ public class VictoryScreen : MonoBehaviour
                 btlManager.players[playerIndex].exp = Mathf.RoundToInt(currentExp); //Update the battle manager
                 btlManager.LevelUp(playerIndex);
                 currentExp = btlManager.players[playerIndex].exp;
-                Debug.Log("Miss current expt: " + currentExp);
                 maxExp = btlManager.players[playerIndex].expNeededForNextLevel;
                 expText.text = currentExp.ToString() + " / ";
                 maxExpText.text = maxExp.ToString();

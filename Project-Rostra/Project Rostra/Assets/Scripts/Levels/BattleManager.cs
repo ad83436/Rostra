@@ -381,23 +381,27 @@ public class BattleManager : MonoBehaviour
 
 
     //Called by each player at the end of each battle
-    public void EndOfBattle()
+    public void EndOfBattle(bool victory)
     {
         battleHasEnded = true;
         battleInProgress = false;
-        for (int i =0; i<4;i++)
-        {
-            //Update the remaining HP of players in the btl manager and the partystats
-            players[i].currentHP = PartyStats.chara[i].hitpoints = players[i].playerReference.currentHP;
-            players[i].currentMP = PartyStats.chara[i].magicpoints = players[i].playerReference.currentMP;
-            //If the player ended the battle in rage mode, reset the rage to 0
-            if (players[i].playerReference.currentState == Player.playerState.Rage)
+        if (victory)
+        { //Only if it's a victory, update the party stats
+            for (int i = 0; i < 4; i++)
             {
-                PartyStats.chara[i].rage = 0.0f;
-                players[i].playerReference.canRage = false;
+                //Update the remaining HP of players in the btl manager and the partystats
+                players[i].currentHP = PartyStats.chara[i].hitpoints = players[i].playerReference.currentHP;
+                players[i].currentMP = PartyStats.chara[i].magicpoints = players[i].playerReference.currentMP;
+                //If the player ended the battle in rage mode, reset the rage to 0
+                if (players[i].playerReference.currentState == Player.playerState.Rage)
+                {
+                    PartyStats.chara[i].rage = 0.0f;
+                    players[i].playerReference.canRage = false;
+                }
+                
             }
-            enemySpawner.numberOfEnemies = 0; //Reset the enemy spawner to get ready for the next battle
         }
+        enemySpawner.numberOfEnemies = 0; //Reset the enemy spawner to get ready for the next battle
 
         //Clear out the enemies array
         for (int i =0;i<5;i++)
