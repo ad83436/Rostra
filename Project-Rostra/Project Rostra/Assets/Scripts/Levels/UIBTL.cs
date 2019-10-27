@@ -115,6 +115,9 @@ public class UIBTL : MonoBehaviour
     private Player playerInControl;
     private int playerIndicatorIndex; //Used to keep track where the playerindicator is when using items or skills
     public int numberOfEndTurnCalls = 0; //Make sure this number is equal to the number of alive enemies at the time of the "row" or "all" attack before ending the turn
+    public bool[] playersDead;
+    public int numberOfPlayers = 4;
+    private int numberOfDeadPlayers = 0;
 
     //Activity Text
     public GameObject activtyTextBack;
@@ -208,6 +211,12 @@ public class UIBTL : MonoBehaviour
         chooseEnemyArrow.gameObject.SetActive(false);
 
         playerIndicatorIndex = 0;
+        playersDead = new bool[4];
+
+        for(int i = 0;i<playersDead.Length;i++)
+        {
+            playersDead[i] = false;
+        }
 
         //Dialogue after battle
         dialogueManager = DialogueManager.instance;
@@ -1619,9 +1628,26 @@ public class UIBTL : MonoBehaviour
             rageModeIndicator1.gameObject.SetActive(false);
             rageModeIndicator2.gameObject.SetActive(false);
             battleHasEnded = true;
-            btlManager.EndOfBattle();
+            btlManager.EndOfBattle(true);
         }
+        currentState = btlUIState.battleEnd;
+    }
 
+    public void PlayerIsDead(int playerIndex)
+    {
+        playersDead[playerIndex] = true;
+        numberOfDeadPlayers++;
+
+        if(numberOfDeadPlayers>=numberOfPlayers)
+        {
+            fadePanel.FlipFadeToDefeat();
+
+            rageModeIndicator1.gameObject.SetActive(false);
+            rageModeIndicator2.gameObject.SetActive(false);
+            battleHasEnded = true;
+            btlManager.EndOfBattle(false);
+        }
+        currentState = btlUIState.battleEnd;
     }
 
     private void EndBattleUI()

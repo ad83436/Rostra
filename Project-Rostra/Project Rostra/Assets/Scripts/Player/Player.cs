@@ -497,6 +497,7 @@ public class Player : MonoBehaviour
 
             }
             ResetPlayerRage();
+            uiBTL.PlayerIsDead(playerIndex);
         }
         else
         {

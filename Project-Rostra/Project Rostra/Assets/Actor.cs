@@ -6,7 +6,7 @@ public class Actor : MonoBehaviour
 {
     private Vector3 newLocation;
     private Animator actorAnimator;
-    private bool fadeIn = false;
+    public bool fadeIn = false;
 
     private void Start()
     {

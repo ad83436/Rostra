@@ -92,6 +92,7 @@ public class CutsceneManager : MonoBehaviour
 		songEntrance = copy.songEntrance;
 		//anim = actorsCM[0].GetComponent<Animator>();
 		DialogueManager.instance.canWalk = false;
+
 	}
 
 	public void NextAction()
