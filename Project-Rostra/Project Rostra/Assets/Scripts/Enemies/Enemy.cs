@@ -33,7 +33,7 @@ public class Enemy : MonoBehaviour
     public List<float> enemyStatNeeded;
     public float eCritical;
     public Sprite qImage;
-    Player attackThisPlayer;
+    protected Player attackThisPlayer;
     Enemy theHealer;
     Enemy enemyToHeal;
 
@@ -83,7 +83,7 @@ public class Enemy : MonoBehaviour
         GiveNamesAndSkills();
     }
 
-    protected void Start()
+    protected virtual void Start()
     {
         print("First" + currentHP);
         
@@ -113,9 +113,9 @@ public class Enemy : MonoBehaviour
         print(currentHP);
 
         currentState = EnemyState.idle;
-        waitTurnsText.gameObject.SetActive(false);
+        //waitTurnsText.gameObject.SetActive(false);
     }
-    protected void Update()
+    protected virtual void Update()
     {
         //If the enemy is yet to add itself to the Q and the btl manager is currently adding enemies, then add this enemy to the Q
         if (!haveAddedMyself && battleManager.addEnemies)
@@ -424,7 +424,7 @@ public class Enemy : MonoBehaviour
     //Called from the animator once the attack anaimation ends
     protected virtual void CompleteAttack()
     {
-        float critMod = 1.2f;
+      //  float critMod = 1.2f;
 
         if (hit)
         {
@@ -449,7 +449,7 @@ public class Enemy : MonoBehaviour
         animator.SetBool("Attack", false);
         uiBTL.EndTurn();
     }
-    void DumbAttack()
+    protected void DumbAttack()
     {
         attackThisPlayer = battleManager.players[Random.Range(0, 4)].playerReference;
         //if the player is dead, try again
