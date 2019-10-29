@@ -447,14 +447,14 @@ public class SkillsInventory : MonoBehaviour {
                 skillStat[5] = 100;
                 break;
             case (int)SKILLS.Ob_ShieldAlly:
-                skillStat[0] = 20;
+                skillStat[0] = 0.3f;
                 skillStat[1] = 100;
                 skillStat[2] = 0;
                 skillStat[4] = (float)SKILL_TYPE.SINGLE_PLAYER_BUFF;
                 skillStat[5] = 20;
                 break;
             case (int)SKILLS.Ob_ShieldAllAllies:
-                skillStat[0] = 20;
+                skillStat[0] = 0.3f;
                 skillStat[1] = 100;
                 skillStat[2] = 1;
                 skillStat[4] = (float)SKILL_TYPE.ALL_PLAYER_BUFF;

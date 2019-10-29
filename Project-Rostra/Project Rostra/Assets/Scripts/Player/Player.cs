@@ -37,6 +37,18 @@ public class Player : MonoBehaviour
     public int initialPos; //Position of the player 0 being Frontline and -1 being Ranged
     public bool dead;
 
+    //Status ailments
+    public enum playerAilments
+    {
+        none,
+        fear,
+        tied,
+    }
+    private playerAilments currentAilment = playerAilments.none;
+    private int fearTimer = 0; //Used to disable the ailment after a certain number of turns
+    private int tiedTimer = 0;
+    private Enemy tiedToThisEnemy = null; //Should the player be tied to an enemy, the enemy should be healed by half the heal amount the player recieves when healed
+
     //Queue
     public Sprite qImage;
     private int QCounter; //Used to count turns since the player went in rage or decided to go in waiting state.
@@ -107,6 +119,10 @@ public class Player : MonoBehaviour
     public GameObject agiBuffEffect;
     public GameObject strBuffEffect;
     public GameObject drainEyeBuffEffect;
+    //Debuffs
+    public SpriteRenderer debuffArrow;
+    private Color debuffColor;
+
 
     //UI
     public Image hpImage;
@@ -165,7 +181,6 @@ public class Player : MonoBehaviour
 
         //Skills
         chosenSkill = 0;
-
         //Rage
         maxRage = maxHP * 0.65f; //Max rage is 65% of max health
         canRage = false;
@@ -211,6 +226,8 @@ public class Player : MonoBehaviour
         skillText.gameObject.SetActive(false);
         mpText.gameObject.SetActive(false);
         waitTimeText.gameObject.SetActive(false);
+        debuffArrow.gameObject.SetActive(false);
+        debuffColor = new Color(1.0f, 1.0f, 1.0f, 1.0f);
     }
 
     private void Update()
@@ -519,6 +536,45 @@ public class Player : MonoBehaviour
         if (currentState != playerState.Waiting)
         {
             playerAnimator.SetBool("Hit", true);
+        }
+    }
+
+    //Take Damage override to include debuffs
+    public void TakeDamage(float enemyAtk,int debuffIndex, string debuffSubIndex, playerAilments ailment, Enemy enemyReference, float debuffValuePercent, int debuffTimer, bool affectNonGuardOnly)
+    {
+        if (enemyAtk > 0)
+        {
+            TakeDamage(enemyAtk); //Call the original one since the player needs to lose health first should the attack passed on be higher than zero
+        }
+
+        switch(debuffIndex) //Is it a regular debuff or an ailment?
+        {
+            case 0: //Ailment
+                switch(ailment)
+                {
+                    case playerAilments.fear:
+                        fearTimer = debuffTimer;
+                        break;
+                    case playerAilments.tied:
+                        tiedTimer = debuffTimer;
+                        tiedToThisEnemy = enemyReference;
+                        break;
+                }
+                break;
+            case 1: //Regular
+                        if(affectNonGuardOnly) //If this boolean is true, make sure to only affect characters in a non-guard state
+                        {
+                            if (currentState != playerState.Guard)
+                            {
+                                BuffStats(debuffSubIndex, -debuffValuePercent, debuffTimer);
+                            }
+                        }
+                        else
+                        {
+
+                            BuffStats(debuffSubIndex, -debuffValuePercent, debuffTimer);
+                        }
+                break;
         }
     }
 
@@ -1186,28 +1242,35 @@ public class Player : MonoBehaviour
         chosenSkill = (int)SKILLS.NO_SKILL;
     }
 
-    public void BuffStats(string statToBuff, float amount, float lastsNumberOfTurns)
+    public void BuffStats(string statToBuff, float precentage, float lastsNumberOfTurns)
     {
         Debug.Log("Stat to buff: " + statToBuff);
         lastsNumberOfTurns++; //Add one more turn since the system should count the number of turns based on the caster not the receiver. This way ensures that the queue goes around equal to the number of turns it the buff/debuff is supposed to last
         switch (statToBuff)
         {
             case "Defense":
-                EnableEffect("DefBuff", 0);
-                if (defenseBuffed && actualDEF < def) //Check for debuffs first
+                if (precentage > 0)
+                {
+                    EnableEffect("DefBuff", 0);
+                }
+                else
+                {
+                    EnableEffect("DefDebuff", 0);
+                }
+                if (defenseBuffed && ((actualDEF < def && precentage > 0) || (actualDEF > def && precentage < 0))) //Check for debuffs first
                 {
                     actualDEF = def;
                     defenseBuffSkillQCounter = 0; //Negate the debuff completely
                 }
-                else if (defenseBuffed && actualDEF > def) //If defense has already been buffed, update the Q counter
+                else if (defenseBuffed && ((actualDEF > def && precentage > 0) || (actualDEF < def && precentage < 0))) //If defense has already been buffed, update the Q counter
                 {
                     defenseBuffSkillQCounter = lastsNumberOfTurns;
                 }
                 else if (!defenseBuffed) //No buffs or debuffs have occurred so far
                 {
-                    
+                    Debug.Log("Actual defense before for " + name + " is: " + actualDEF);
                     defenseBuffed = true;
-                    actualDEF = def + amount;
+                    actualDEF = def + def * precentage;
                     defenseBuffSkillQCounter = lastsNumberOfTurns;
 
                     Debug.Log("Actual defense now for " + name + " is: " + actualDEF);
@@ -1215,13 +1278,20 @@ public class Player : MonoBehaviour
                 }
                 break;
             case "Attack":
-                EnableEffect("AtkBuff", 0);
-                if (attackBuffed && actualATK < atk) //Check for debuffs first
+                if (precentage > 0)
+                {
+                    EnableEffect("AtkBuff", 0);
+                }
+                else
+                {
+                    EnableEffect("AtkDebuff", 0);
+                }
+                if (attackBuffed && ((actualATK < atk && precentage > 0) || (actualATK > atk && precentage < 0))) //Check if we'er being debuffed after being buffed or vice versa, if so, reset the attack
                 {
                     actualATK = atk;
                     attackBuffSkillQCounter = 0; //Negate the debuff completely
                 }
-                else if (attackBuffed && actualATK > atk) //If attack has already been buffed, update the Q counter
+                else if (attackBuffed && ((actualATK > atk && precentage > 0) || (actualATK < atk && precentage < 0))) //Check if the buff or debuff is being extended
                 {
                     attackBuffSkillQCounter = lastsNumberOfTurns;
                 }
@@ -1229,18 +1299,25 @@ public class Player : MonoBehaviour
                 {
                     
                     attackBuffed = true;
-                    actualATK = atk + amount;
+                    actualATK = atk + atk * precentage;
                     attackBuffSkillQCounter = lastsNumberOfTurns;
                 }
                 break;
             case "Agility":
-                EnableEffect("AgiBuff", 0);
-                if (agilityBuffed && actualAgi < agi) //Check for debuffs first
+                if (precentage > 0)
+                {
+                    EnableEffect("AgiBuff", 0);
+                }
+                else
+                {
+                    EnableEffect("AgiDebuff", 0);
+                }
+                if (agilityBuffed && ((actualAgi < agi && precentage > 0) || (actualAgi > agi && precentage < 0))) //Check for debuffs first
                 {
                     actualAgi = agi;
                     agilityBuffSkillQCounter = 0; //Negate the debuff completely
                 }
-                else if (agilityBuffed && actualAgi > agi) //If agility has already been buffed, update the Q counter
+                else if (agilityBuffed && ((actualAgi > agi && precentage > 0) || (actualAgi < agi && precentage < 0))) //If agility has already been buffed, update the Q counter
                 {
                     agilityBuffSkillQCounter = lastsNumberOfTurns;
                 }
@@ -1248,18 +1325,25 @@ public class Player : MonoBehaviour
                 {
                    
                     agilityBuffed = true;
-                    actualAgi = agi + amount;
+                    actualAgi = agi + agi * precentage;
                     agilityBuffSkillQCounter = lastsNumberOfTurns;
                 }
                 break;
             case "Strength":
-                EnableEffect("StrBuff", 0);
-                if (strBuffed && actualSTR < str) //Check for debuffs first
+                if (precentage > 0)
+                {
+                    EnableEffect("StrBuff", 0);
+                }
+                else
+                {
+                    EnableEffect("StrDebuff", 0);
+                }
+                if (strBuffed && ((actualSTR < str && precentage > 0) || (actualSTR > str && precentage < 0))) //Check for debuffs first
                 {
                     actualSTR = str;
                     strBuffSkillQCounter = 0; //Negate the debuff completely
                 }
-                else if (strBuffed && actualSTR > str) //If str has already been buffed, update the Q counter
+                else if (strBuffed && ((actualSTR > str && precentage > 0) || (actualSTR < str && precentage < 0))) //If str has already been buffed, update the Q counter
                 {
                     strBuffSkillQCounter = lastsNumberOfTurns;
                 }
@@ -1267,7 +1351,7 @@ public class Player : MonoBehaviour
                 {
                    
                     strBuffed = true;
-                    actualSTR = str + amount;
+                    actualSTR = str + str * precentage;
                     Debug.Log(name + " Strength is: " + actualSTR);
                     strBuffSkillQCounter = lastsNumberOfTurns;
                 }
@@ -1377,14 +1461,42 @@ public class Player : MonoBehaviour
             case "DefBuff":
                 defBuffEffect.gameObject.SetActive(true);
                 break;
+            case "DefDebuff":
+                debuffColor.r = 0.4958386f;
+                debuffColor.g = 0.1921569f;
+                debuffColor.b = 0.8588235f;
+                debuffArrow.gameObject.SetActive(true);
+                debuffArrow.color = debuffColor;
+                break;
             case "AtkBuff":
                 atkBuffEffect.gameObject.SetActive(true);
+                break;
+            case "AtkDebuff":
+                debuffColor.r = 0.8584906f;
+                debuffColor.g = 0.1903257f;
+                debuffColor.b = 0.1903257f;
+                debuffArrow.gameObject.SetActive(true);
+                debuffArrow.color = debuffColor;
                 break;
             case "AgiBuff":
                 agiBuffEffect.gameObject.SetActive(true);
                 break;
+            case "AgiDebuff":
+                debuffColor.r = 0.03582038f;
+                debuffColor.g = 0.3113208f;
+                debuffColor.b = 0.01909043f;
+                debuffArrow.gameObject.SetActive(true);
+                debuffArrow.color = debuffColor;
+                break;
             case "StrBuff":
                 strBuffEffect.gameObject.SetActive(true);
+                break;
+            case "StrDebuff":
+                debuffColor.r = 0.896f;
+                debuffColor.g = 0.4148713f;
+                debuffColor.b = 0.1940637f;
+                debuffArrow.gameObject.SetActive(true);
+                debuffArrow.color = debuffColor;
                 break;
             case "Revival":
                 hopeEffect.gameObject.SetActive(true);
