@@ -28,6 +28,8 @@ public class Farea : Enemy
 
     //Wail
     public GameObject wailWait;
+    private string[] statToDebuff; //Used to store all possible stats that WoF can debuff
+    private string chosenStat; //Used to store the choice of the stat to debuff
 
 
     protected override void Start()
@@ -51,6 +53,10 @@ public class Farea : Enemy
         jObj.gameObject.SetActive(false);
         wObj.gameObject.SetActive(false);
         wailWait.gameObject.SetActive(false);
+
+        statToDebuff = new string[2];
+        statToDebuff[0] = "Defense";
+        statToDebuff[1] = "Attack";
     }
 
 
@@ -174,11 +180,12 @@ public class Farea : Enemy
         switch (chosenSkill)
         {
             case fareaSkills.wails:
+                chosenStat = statToDebuff[Random.Range(0, statToDebuff.Length)];
                 for (int i = 0; i < battleManager.players.Length; i++)
                 {
                     if(!battleManager.players[i].playerReference.dead)
                     {
-                        battleManager.players[i].playerReference.TakeDamage(eAttack, 1, "Defense", Player.playerAilments.none, null, 0.3f, 3, true);
+                        battleManager.players[i].playerReference.TakeDamage(eAttack, 1, chosenStat, Player.playerAilments.none, null, 0.3f, 3, true);
                         //Summon debuff object
                         objPooler.SpawnFromPool("WailAttack", battleManager.players[i].playerReference.transform.position, gameObject.transform.rotation);
                     }
