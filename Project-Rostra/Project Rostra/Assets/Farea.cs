@@ -11,9 +11,23 @@ public class Farea : Enemy
     private float totalDamageSustained = 0.0f; //Used for Mother's Pain Skill. Becomes zero after the skill is used
     private float totalDamageThreshold = 300.0f; //When the Farea has sustained 300 or more damage and is in phase 2, it will do Mother's Pain Next
 
+
+    private enum fareaSkills //Only the skills that will require waiting for a number of turns before executing
+    {
+        none,
+        wails,
+        mothersPain,
+        youAreNotMine
+
+    }
+    private fareaSkills chosenSkill = fareaSkills.none;
+
     //J&W --> (The official competitor of A&W)
     public GameObject jObj;
     public GameObject wObj;
+
+    //Wail
+    public GameObject wailWait;
 
 
     protected override void Start()
@@ -36,6 +50,7 @@ public class Farea : Enemy
         waitTurnsText.gameObject.SetActive(false);
         jObj.gameObject.SetActive(false);
         wObj.gameObject.SetActive(false);
+        wailWait.gameObject.SetActive(false);
     }
 
 
@@ -51,11 +66,12 @@ public class Farea : Enemy
         {
             waitQTurns--;
             waitTurnsText.text = waitQTurns.ToString(); //Update the UI
-            if (waitQTurns < 0)
+            if (waitQTurns <= 0)
             {
                 waitTurnsText.gameObject.SetActive(false); //Turn off the text. Don't forget to enable it when the enemy goes to waiting state
-                //Execute skill here 
-            }
+                currentState = EnemyState.idle; //Change the state
+                animator.SetInteger("WaitingIndex", 1); //After waiting, the index is always going to be 1
+       }
             else
             {
                 //End the turn
@@ -65,8 +81,9 @@ public class Farea : Enemy
         }
         else
         {
-            //attackChance = Random.Range(0, 100);
-            attackChance = 60; //Testing
+                //Only update the attackChance when no skill is on the waiting list
+                //attackChance = Random.Range(0, 100);
+                attackChance = 30; //Testing
 
             if (bossPhase == 1)
             {
@@ -76,12 +93,16 @@ public class Farea : Enemy
                 }
                 else if (attackChance >= 10 && attackChance < 40) //Wails of Frailty
                 {
-
+                    GoToWaitState(fareaSkills.wails, 1, 2);
+                    //Summon skill effect
+                    wailWait.gameObject.SetActive(true);
+                    uiBTL.UpdateActivityText("Wails of Frailty");
                 }
                 else if(attackChance >= 40 && attackChance < 70) //Judgment and Wrath
                 {
                     attackThisPlayer = battleManager.players[Random.Range(0, 4)].playerReference;
                     animator.SetBool("JudgementAndWrath", true);
+                    uiBTL.UpdateActivityText("Judgement & Wrath");
                 }
                 else if (attackChance >= 70 && attackChance <= 100) // Lullaby Of Despair
                 {
@@ -91,7 +112,7 @@ public class Farea : Enemy
             }
             else if(bossPhase == 2)
             {
-                //Check if one of the players is dead
+                //Check if one of the players is dead --> if yes, there's a chance to use You Are Not Mine
                 for (int i = 0; i < uiBTL.playersDead.Length; i++)
                 {
                     if (uiBTL.playersDead[i] == true)
@@ -105,6 +126,20 @@ public class Farea : Enemy
     }
 
 
+    //-----------------------------Skills------------------------------//
+    private void GoToWaitState(fareaSkills skill, int turnsToWait, int waitingIndex)
+    {
+        chosenSkill = skill;
+        waitQTurns = turnsToWait;
+        waitTurnsText.gameObject.SetActive(true);
+        waitTurnsText.text = waitQTurns.ToString();
+        animator.SetInteger("WaitingIndex", waitingIndex);
+        currentState = EnemyState.waiting;
+        uiBTL.EndTurn();
+    }
+
+
+    //Judgement & Wrath
     private void Judgement()
     {
         //Disable J and apply the damage.
@@ -120,6 +155,7 @@ public class Farea : Enemy
         wObj.gameObject.SetActive(false);
         attackThisPlayer.TakeDamage(eAttack * 1.2f); //Wrath does a little more damage
         animator.SetBool("JudgementAndWrath", false);
+        uiBTL.DisableActivtyText();
         uiBTL.EndTurn();
     }
 
@@ -127,5 +163,34 @@ public class Farea : Enemy
     {
         jObj.gameObject.SetActive(true);
         wObj.gameObject.SetActive(true);
+    }
+
+    //Called from the animator to check which skill to execute after waiting
+
+    private void SkillEffect()
+    {
+        switch (chosenSkill)
+        {
+            case fareaSkills.wails:
+                for (int i = 0; i < battleManager.players.Length; i++)
+                {
+                    if(!battleManager.players[i].playerReference.dead)
+                    {
+                        battleManager.players[i].playerReference.TakeDamage(eAttack, 1, "Attack", Player.playerAilments.none, null, 0.3f, 3, true);
+                        //Summon debuff object
+                        objPooler.SpawnFromPool("WailAttack", battleManager.players[i].playerReference.transform.position, gameObject.transform.rotation);
+                    }
+                }
+                chosenSkill = fareaSkills.none;
+                animator.SetInteger("WaitingIndex", 0);
+                wailWait.gameObject.SetActive(false);
+                uiBTL.EndTurn();
+                break;
+            case fareaSkills.mothersPain:
+                break;
+            case fareaSkills.youAreNotMine:
+                break;
+        }
+
     }
 }
