@@ -9,8 +9,8 @@ using UnityEngine.SceneManagement;
 public class Enemy : MonoBehaviour
 {
     public int enemyIndexInBattleManager;
-    private BattleManager battleManager;
-    private UIBTL uiBTL;
+    protected BattleManager battleManager;
+    protected UIBTL uiBTL;
     public float eMana;
     public float eAttack;
     public float eAgility;
@@ -33,14 +33,14 @@ public class Enemy : MonoBehaviour
     public List<float> enemyStatNeeded;
     public float eCritical;
     public Sprite qImage;
-    Player attackThisPlayer;
+    protected Player attackThisPlayer;
     Enemy theHealer;
     Enemy enemyToHeal;
 
 
-    private SpriteRenderer spriteRenderer;
-    private Color spriteColor;
-    private Animator animator;
+    protected SpriteRenderer spriteRenderer;
+    protected Color spriteColor;
+    protected Animator animator;
 
     public Image HP;
     public float maxHP;
@@ -49,22 +49,33 @@ public class Enemy : MonoBehaviour
     public Text healText;
     public GameObject enemyCanvas;
 
-    private bool haveAddedMyself;
+    protected bool haveAddedMyself;
     public bool dead;
-    private bool skillPointAdded;
+    protected bool skillPointAdded;
     public bool hit;
     public bool blow;
     public bool isStatModed;
 
-    private GameObject demoEffect;
-    private ObjectPooler objPooler;
+    protected GameObject demoEffect;
+    protected ObjectPooler objPooler;
 
     public EnemyClassType enemyClass;
     public EnemyAttackType enemyAttack;
     public AllEnemySkills canUseSkill;
     public EnemyName enemyName;
     PlayerStatReference statNeeded;
-    private void Awake()
+
+    protected enum EnemyState
+    {
+        idle,
+        waiting
+    };
+
+    protected EnemyState currentState;
+    protected int waitQTurns = 0; //Update this when you want a skill to have wait time
+    public Text waitTurnsText;
+
+    protected void Awake()
     {
         print("Very First  " + currentHP);
         IncreaseStatsBasedOnLevel(eCurrentLevel); 
@@ -72,7 +83,7 @@ public class Enemy : MonoBehaviour
         GiveNamesAndSkills();
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         print("First" + currentHP);
         
@@ -100,8 +111,11 @@ public class Enemy : MonoBehaviour
         ChoosePlayer();
         enemyStartingAtk = Mathf.CeilToInt(eAttack);
         print(currentHP);
+
+        currentState = EnemyState.idle;
+        //waitTurnsText.gameObject.SetActive(false);
     }
-    private void Update()
+    protected virtual void Update()
     {
         //If the enemy is yet to add itself to the Q and the btl manager is currently adding enemies, then add this enemy to the Q
         if (!haveAddedMyself && battleManager.addEnemies)
@@ -113,7 +127,7 @@ public class Enemy : MonoBehaviour
     }
     //Every enemy scales differently based on its warrior class (DPS,Tanks, Support)
     // also assigns skills that only certain types can use 
-    public void AddEnemyToBattle()
+    public virtual void AddEnemyToBattle()
     {
         battleManager.AddEnemy(enemyIndexInBattleManager, Mathf.RoundToInt(eAgility), Mathf.RoundToInt(eStrength), Mathf.RoundToInt(eCritical), Mathf.RoundToInt(eSpeed), Mathf.RoundToInt(currentHP), Mathf.RoundToInt(maxHP), this, name);
     }
@@ -122,248 +136,268 @@ public class Enemy : MonoBehaviour
     /// </summary>
     /// 
 
-    public void EnemyTurn()
+    public virtual void EnemyTurn()
     {
         uiBTL.DisableActivtyText();
-        float attackChance = Random.Range(0, 100); // determines if the ememy will use its type attack or a dumb attack 
-        float skillChance = Random.Range(0, 50);// determines if the enemy will use a skill or not //TEMP VALUES//
 
-        if (!dead)
+        if (currentState == EnemyState.waiting)
         {
-            switch (enemyAttack)
+            waitQTurns--;
+            waitTurnsText.text = waitQTurns.ToString(); //Update the UI
+            if (waitQTurns<0)
             {
-                case EnemyAttackType.Dumb:
-                    if (skillChance > 40)
-                    {
-                        MakeSkillsWork(canUseSkill);
-                    }
-
-                    else
-                    {
-                        DumbAttack();
-                    }
-
-                    break;
-
-                case EnemyAttackType.Opportunistic:
-
-                    if (attackChance > 30)
-                    {
-                        if (skillChance > 40)
-                        {
-                            MakeSkillsWork(canUseSkill);
-                            print(eName + " Used their skill aswell as their types attack");
-                        }
-                        else
-                        {
-
-                        }
-
-                    }
-
-                    else
-                    {
-
-                        if (skillChance >= 50)
-                        {
-                            MakeSkillsWork(canUseSkill);
-                            print(eName + " Used their skill aswell as a Dumb attack");
-                        }
-
-                        else
-                        {
-                            DumbAttack();
-                            print(eName + " Did not use their skill but used a Dumb attack");
-                        }
-
-                    }
-                    break;
-
-                case EnemyAttackType.Assassin:
-
-                    if (attackChance > 30)
-                    {
-                        if (skillChance > 40)
-                        {
-                            MakeSkillsWork(canUseSkill);
-                            print(eName + " Used their skill aswell as their types attack");
-                        }
-
-
-
-                        else
-                        {
-                            AttackLowHp();
-                            print(eName + " Did not use their skill but used their types attack");
-                        }
-                    }
-
-
-                    else
-                    {
-
-
-
-                        if (skillChance > 40)
-                        {
-                            MakeSkillsWork(canUseSkill);
-                            print(eName + " Used their skill aswell as a Dumb attack");
-                        }
-
-                        else
-                        {
-                            DumbAttack();
-                            print(eName + " Did not use their skill but used a Dumb attack");
-                        }
-
-                    }
-                    break;
-
-                case EnemyAttackType.Bruiser:
-                    if (attackChance > 30)
-                    {
-                        if (skillChance > 40)
-                        {
-                            MakeSkillsWork(canUseSkill);
-                            print(eName + " Used their skill aswell as their types attack");
-                        }
-
-                        else
-                        {
-                            AttackHighAtk();
-                        }
-                    }
-
-                    else
-                    {
-                        if (skillChance >= 50)
-                        {
-                            MakeSkillsWork(canUseSkill);
-                        }
-
-                        else
-                        {
-                            DumbAttack();
-                        }
-                    }
-
-                    break;
-
-                case EnemyAttackType.Healer:
-                    if (skillChance >= 50)
-                    {
-                        MakeSkillsWork(canUseSkill);
-                    }
-
-                    else
-                    {
-                        HealEnemy();
-                    }
-
-                    break;
-
-                case EnemyAttackType.Heal_Support:
-                    if (skillChance >= 50)
-                    {
-                        MakeSkillsWork(canUseSkill);
-                    }
-
-                    else
-                    {
-                        SupportHeal(theHealer);
-                    }
-
-                    break;
-
-                case EnemyAttackType.Strategist:
-                    if (attackChance > 30)
-                    {
-                        if (attackChance > 30)
-                        {
-                            MakeSkillsWork(canUseSkill);
-                            print(eName + " Used their skill aswell as their types attack");
-                        }
-
-                        else
-                        {
-                            AttackHighAgi();
-                            print(eName + " Did not use their skill but used their types attack");
-                        }
-                    }
-
-
-                    else
-                    {
-                        if (skillChance >= 50)
-                        {
-                            MakeSkillsWork(canUseSkill);
-                        }
-                        else
-                        {
-                            DumbAttack();
-                        }
-                    }
-                    break;
-
-                case EnemyAttackType.Demo:
-
-                    DumbAttack();
-                    break;
-
-                case EnemyAttackType.Relentless:
-
-                    if (attackChance > 30)
-                    {
-                        if (skillChance >= 50)
-                        {
-                            MakeSkillsWork(canUseSkill);
-                        }
-
-                        else
-                        {
-                            RelentlessAttack(playerIndexHolder, timeAttacking);
-                        }
-                    }
-
-                    else
-                    {
-                        if (skillChance >= 50)
-                        {
-                            RelentlessAttack(playerIndexHolder, timeAttacking);
-                        }
-
-                        else
-                        {
-                            DumbAttack();
-                        }
-                    }
-                    break;
-
-                case EnemyAttackType.Enemy_Blows_Self:
-
-                    if (skillChance >= 50)
-                    {
-                        MakeSkillsWork(canUseSkill);
-                    }
-
-                    else
-                    {
-                        BlowSelf();
-                    }
-
-                    break;
-
+                waitTurnsText.gameObject.SetActive(false); //Turn off the text. Don't forget to enable it when the enemy goes to waiting state
+                //Execute skill here 
             }
-        }
+            else
+            {
+                //End the turn
+                uiBTL.EndTurn();
+            }
 
+        }
         else
         {
+            float attackChance = Random.Range(0, 100); // determines if the ememy will use its type attack or a dumb attack 
+            float skillChance = Random.Range(0, 50);// determines if the enemy will use a skill or not //TEMP VALUES//
 
-            uiBTL.EndTurn();
+            if (!dead)
+            {
+                switch (enemyAttack)
+                {
+                    case EnemyAttackType.Dumb:
+                        if (skillChance > 40)
+                        {
+                            MakeSkillsWork(canUseSkill);
+                        }
+
+                        else
+                        {
+                            DumbAttack();
+                        }
+
+                        break;
+
+                    case EnemyAttackType.Opportunistic:
+
+                        if (attackChance > 30)
+                        {
+                            if (skillChance > 40)
+                            {
+                                MakeSkillsWork(canUseSkill);
+                                print(eName + " Used their skill aswell as their types attack");
+                            }
+                            else
+                            {
+
+                            }
+
+                        }
+
+                        else
+                        {
+
+                            if (skillChance >= 50)
+                            {
+                                MakeSkillsWork(canUseSkill);
+                                print(eName + " Used their skill aswell as a Dumb attack");
+                            }
+
+                            else
+                            {
+                                DumbAttack();
+                                print(eName + " Did not use their skill but used a Dumb attack");
+                            }
+
+                        }
+                        break;
+
+                    case EnemyAttackType.Assassin:
+
+                        if (attackChance > 30)
+                        {
+                            if (skillChance > 40)
+                            {
+                                MakeSkillsWork(canUseSkill);
+                                print(eName + " Used their skill aswell as their types attack");
+                            }
+
+
+
+                            else
+                            {
+                                AttackLowHp();
+                                print(eName + " Did not use their skill but used their types attack");
+                            }
+                        }
+
+
+                        else
+                        {
+
+
+
+                            if (skillChance > 40)
+                            {
+                                MakeSkillsWork(canUseSkill);
+                                print(eName + " Used their skill aswell as a Dumb attack");
+                            }
+
+                            else
+                            {
+                                DumbAttack();
+                                print(eName + " Did not use their skill but used a Dumb attack");
+                            }
+
+                        }
+                        break;
+
+                    case EnemyAttackType.Bruiser:
+                        if (attackChance > 30)
+                        {
+                            if (skillChance > 40)
+                            {
+                                MakeSkillsWork(canUseSkill);
+                                print(eName + " Used their skill aswell as their types attack");
+                            }
+
+                            else
+                            {
+                                AttackHighAtk();
+                            }
+                        }
+
+                        else
+                        {
+                            if (skillChance >= 50)
+                            {
+                                MakeSkillsWork(canUseSkill);
+                            }
+
+                            else
+                            {
+                                DumbAttack();
+                            }
+                        }
+
+                        break;
+
+                    case EnemyAttackType.Healer:
+                        if (skillChance >= 50)
+                        {
+                            MakeSkillsWork(canUseSkill);
+                        }
+
+                        else
+                        {
+                            HealEnemy();
+                        }
+
+                        break;
+
+                    case EnemyAttackType.Heal_Support:
+                        if (skillChance >= 50)
+                        {
+                            MakeSkillsWork(canUseSkill);
+                        }
+
+                        else
+                        {
+                            SupportHeal(theHealer);
+                        }
+
+                        break;
+
+                    case EnemyAttackType.Strategist:
+                        if (attackChance > 30)
+                        {
+                            if (attackChance > 30)
+                            {
+                                MakeSkillsWork(canUseSkill);
+                                print(eName + " Used their skill aswell as their types attack");
+                            }
+
+                            else
+                            {
+                                AttackHighAgi();
+                                print(eName + " Did not use their skill but used their types attack");
+                            }
+                        }
+
+
+                        else
+                        {
+                            if (skillChance >= 50)
+                            {
+                                MakeSkillsWork(canUseSkill);
+                            }
+                            else
+                            {
+                                DumbAttack();
+                            }
+                        }
+                        break;
+
+                    case EnemyAttackType.Demo:
+
+                        DumbAttack();
+                        break;
+
+                    case EnemyAttackType.Relentless:
+
+                        if (attackChance > 30)
+                        {
+                            if (skillChance >= 50)
+                            {
+                                MakeSkillsWork(canUseSkill);
+                            }
+
+                            else
+                            {
+                                RelentlessAttack(playerIndexHolder, timeAttacking);
+                            }
+                        }
+
+                        else
+                        {
+                            if (skillChance >= 50)
+                            {
+                                RelentlessAttack(playerIndexHolder, timeAttacking);
+                            }
+
+                            else
+                            {
+                                DumbAttack();
+                            }
+                        }
+                        break;
+
+                    case EnemyAttackType.Enemy_Blows_Self:
+
+                        if (skillChance >= 50)
+                        {
+                            MakeSkillsWork(canUseSkill);
+                        }
+
+                        else
+                        {
+                            BlowSelf();
+                        }
+
+                        break;
+
+                }
+            }
+
+            else
+            {
+
+                uiBTL.EndTurn();
+            }
         }
     }
         //Calculate whether the attack is a hit or a miss
-    private void CalculateHit()
+    protected virtual void CalculateHit()
     {
         //20 sided die + str <? enemy agility
         if (Random.Range(0.0f, 20.0f) + eStrength < attackThisPlayer.agi)
@@ -379,18 +413,18 @@ public class Enemy : MonoBehaviour
 
         Debug.Log("Enemy Hit is " + hit);
     }
-    private float CalculateCrit()
+    protected virtual float CalculateCrit()
     {
         return Random.Range(0.0f, 100.0f);
     }
-    private void DemoAttackEffect()
+    protected void DemoAttackEffect()
     {
         demoEffect = objPooler.SpawnFromPool("DemoAttack", attackThisPlayer.gameObject.transform.position, gameObject.transform.rotation);
     }
     //Called from the animator once the attack anaimation ends
-    private void CompleteAttack()
+    protected virtual void CompleteAttack()
     {
-        float critMod = 1.2f;
+      //  float critMod = 1.2f;
 
         if (hit)
         {
@@ -415,7 +449,7 @@ public class Enemy : MonoBehaviour
         animator.SetBool("Attack", false);
         uiBTL.EndTurn();
     }
-    void DumbAttack()
+    protected void DumbAttack()
     {
         attackThisPlayer = battleManager.players[Random.Range(0, 4)].playerReference;
         //if the player is dead, try again
@@ -1031,18 +1065,8 @@ public class Enemy : MonoBehaviour
    // {
       
    // }
-    public void becomeLessVisbile() //Called from UIBTL when this enemy is NOT chosen for attack
-    {
-        spriteColor.a = 0.5f;
-        spriteRenderer.color = spriteColor;
-    }
-    public void resetVisibility() //Called from UIBTL when this enemy is NOT chosen for attack, and either the player doesn't attack or the attack finishes
-    {
-        spriteColor.a = 1.0f;
-        spriteRenderer.color = spriteColor;
-    }
     //Calcualte the damage
-    public void TakeDamage(float playerAttack, int numberOfAttacks)
+    public virtual void TakeDamage(float playerAttack, int numberOfAttacks)
     {
         Debug.Log("Received player attack: " + playerAttack);
         float damage = playerAttack - ((eDefence / (20.0f + eDefence)) * playerAttack);
@@ -1803,7 +1827,7 @@ public class Enemy : MonoBehaviour
     {
         uiBTL.EndTurn();
     }
-    private void Death()
+    protected void Death()
     {
         if (!dead)
         {

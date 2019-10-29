@@ -173,8 +173,8 @@ public class BattleManager : MonoBehaviour
             enemies[enemyIndex].speed = speed;
             enemies[enemyIndex].str = str;
             enemies[enemyIndex].crit = crit;
-        enemies[enemyIndex].currentHP = currentHp;
-        enemies[enemyIndex].maxHP = maxHp;
+            enemies[enemyIndex].currentHP = currentHp;
+            enemies[enemyIndex].maxHP = maxHp;
             enemies[enemyIndex].enemyReference = enemyRef;
             enemies[enemyIndex].name = name;
 
