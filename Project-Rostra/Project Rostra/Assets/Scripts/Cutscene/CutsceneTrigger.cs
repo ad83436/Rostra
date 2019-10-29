@@ -24,7 +24,7 @@ public class CutsceneTrigger : MonoBehaviour
 	{
 		if (col.CompareTag("Player") && hasActivated == false && isInteractable == false && isChoiceDependant == false)
 		{
-            //TriggerCutscene();
+			Debug.Log("Triggered Cutscene");
             fade.TransitionIntoACutscene(this);
             DialogueManager.instance.canWalk = false;
             col.gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);

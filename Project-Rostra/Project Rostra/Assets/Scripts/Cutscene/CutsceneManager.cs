@@ -37,7 +37,7 @@ public class CutsceneManager : MonoBehaviour
 	private bool fadeOut = false;
 	// Start is called before the first frame update
 	void Awake()
-    {
+	{
 		if (instance == null)
 		{
 			instance = this;
@@ -55,14 +55,14 @@ public class CutsceneManager : MonoBehaviour
 		audios = GetComponent<AudioSource>();
 	}
 
-    // Update is called once per frame
-    void Update()
-    {
+	// Update is called once per frame
+	void Update()
+	{
 		if (isActive == true)
 		{
 			NextAction();
 		}
-    }
+	}
 
 	public void StartCutscene(Cutscene cs, Vector2 returnPos)
 	{
@@ -193,12 +193,12 @@ public class CutsceneManager : MonoBehaviour
 		DialogueManager.instance.canWalk = true;
 		foreach (Actor g in actorsCM)
 		{
-            if (g != null)
-            {
-                Destroy(g.gameObject);
-            }
+			if (g != null)
+			{
+				Destroy(g.gameObject);
+			}
 		}
-	}	
+	}
 
-	
+
 }

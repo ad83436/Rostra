@@ -110,7 +110,8 @@ public class Fade : MonoBehaviour
                 {
                     fadeOut = !fadeOut; //Fade out again
                     cutsceneTriggerRef.TriggerCutscene(); //Load the cutscene while fading out
-                    cutsceneTriggerRef = null;
+					Debug.Log(cutsceneTriggerRef);
+					cutsceneTriggerRef = null;
                 }
                 else if(transitionOutOfACutscene)
                 {
@@ -155,9 +156,10 @@ public class Fade : MonoBehaviour
     public void TransitionIntoACutscene(CutsceneTrigger cutTrigger)
     {
         cutsceneTriggerRef = cutTrigger;
-        fadeOut = !fadeOut;
-        transitionIntoACutscene = true;
-    }
+		fadeOut = !fadeOut;
+		transitionIntoACutscene = true;
+
+	}
     public void TransitionOutOfACutscene()
     {
         transitionOutOfACutscene = true;
