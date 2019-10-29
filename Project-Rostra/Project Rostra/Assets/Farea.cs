@@ -83,7 +83,7 @@ public class Farea : Enemy
         {
                 //Only update the attackChance when no skill is on the waiting list
                 //attackChance = Random.Range(0, 100);
-                attackChance = 30; //Testing
+                attackChance = 60; //Testing
 
             if (bossPhase == 1)
             {
@@ -144,6 +144,7 @@ public class Farea : Enemy
     {
         //Disable J and apply the damage.
         //Should change this to use animations
+        objPooler.SpawnFromPool("JudgeAttack", attackThisPlayer.gameObject.transform.position, gameObject.transform.rotation);
         jObj.gameObject.SetActive(false);
         attackThisPlayer.TakeDamage(eAttack);
     }
@@ -152,6 +153,7 @@ public class Farea : Enemy
     {
         //Disable W and apply the damage.
         //Should change this to use animations
+        objPooler.SpawnFromPool("WrathAttack", attackThisPlayer.gameObject.transform.position, gameObject.transform.rotation);
         wObj.gameObject.SetActive(false);
         attackThisPlayer.TakeDamage(eAttack * 1.2f); //Wrath does a little more damage
         animator.SetBool("JudgementAndWrath", false);
