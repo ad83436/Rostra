@@ -83,7 +83,7 @@ public class Farea : Enemy
         {
                 //Only update the attackChance when no skill is on the waiting list
                 //attackChance = Random.Range(0, 100);
-                attackChance = 60; //Testing
+                attackChance = 30; //Testing
 
             if (bossPhase == 1)
             {
@@ -178,7 +178,7 @@ public class Farea : Enemy
                 {
                     if(!battleManager.players[i].playerReference.dead)
                     {
-                        battleManager.players[i].playerReference.TakeDamage(eAttack, 1, "Attack", Player.playerAilments.none, null, 0.3f, 3, true);
+                        battleManager.players[i].playerReference.TakeDamage(eAttack, 1, "Defense", Player.playerAilments.none, null, 0.3f, 3, true);
                         //Summon debuff object
                         objPooler.SpawnFromPool("WailAttack", battleManager.players[i].playerReference.transform.position, gameObject.transform.rotation);
                     }

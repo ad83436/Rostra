@@ -121,6 +121,11 @@ public class Player : MonoBehaviour
     public GameObject drainEyeBuffEffect;
     //Debuffs
     public SpriteRenderer debuffArrow;
+    public GameObject atkBuffArrowIndicator;
+    public GameObject defBuffArrowIndicator;
+    public GameObject agiBuffArrowIndicator;
+    public GameObject strBuffArrowIndicator;
+    private Quaternion arrowRotator;
     private Color debuffColor;
 
 
@@ -228,6 +233,12 @@ public class Player : MonoBehaviour
         waitTimeText.gameObject.SetActive(false);
         debuffArrow.gameObject.SetActive(false);
         debuffColor = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+
+        arrowRotator = Quaternion.Euler(0.0f, 0.0f, 0.0f);
+        atkBuffArrowIndicator.gameObject.SetActive(false);
+        defBuffArrowIndicator.gameObject.SetActive(false);
+        agiBuffArrowIndicator.gameObject.SetActive(false);
+        strBuffArrowIndicator.gameObject.SetActive(false);
     }
 
     private void Update()
@@ -688,7 +699,7 @@ public class Player : MonoBehaviour
         else if (skillID == (int)SKILLS.Fr_IDontMiss) //I Don't Miss special skill
         {
             skillTarget = 8; //Single player buff
-            BuffStats("Strength", skills.SkillStats(chosenSkill)[0], 1);
+            BuffStats("Strength", skills.SkillStats(chosenSkill)[0], 3);
             chosenSkill = (int)SKILLS.NO_SKILL;
             currentMP -= mpCost;
             battleManager.players[playerIndex].currentMP = currentMP;
@@ -1261,10 +1272,11 @@ public class Player : MonoBehaviour
                 {
                     actualDEF = def;
                     defenseBuffSkillQCounter = 0; //Negate the debuff completely
+                    defBuffArrowIndicator.gameObject.SetActive(false);
                 }
                 else if (defenseBuffed && ((actualDEF > def && precentage > 0) || (actualDEF < def && precentage < 0))) //If defense has already been buffed, update the Q counter
                 {
-                    defenseBuffSkillQCounter = lastsNumberOfTurns;
+                    defenseBuffSkillQCounter = lastsNumberOfTurns;                   
                 }
                 else if (!defenseBuffed) //No buffs or debuffs have occurred so far
                 {
@@ -1290,10 +1302,12 @@ public class Player : MonoBehaviour
                 {
                     actualATK = atk;
                     attackBuffSkillQCounter = 0; //Negate the debuff completely
+                    atkBuffArrowIndicator.gameObject.SetActive(false);
                 }
                 else if (attackBuffed && ((actualATK > atk && precentage > 0) || (actualATK < atk && precentage < 0))) //Check if the buff or debuff is being extended
                 {
                     attackBuffSkillQCounter = lastsNumberOfTurns;
+                   
                 }
                 else if (!attackBuffed) //No buffs or debuffs have occurred so far
                 {
@@ -1316,10 +1330,12 @@ public class Player : MonoBehaviour
                 {
                     actualAgi = agi;
                     agilityBuffSkillQCounter = 0; //Negate the debuff completely
+                    agiBuffArrowIndicator.gameObject.SetActive(false);
                 }
                 else if (agilityBuffed && ((actualAgi > agi && precentage > 0) || (actualAgi < agi && precentage < 0))) //If agility has already been buffed, update the Q counter
                 {
                     agilityBuffSkillQCounter = lastsNumberOfTurns;
+                   
                 }
                 else if (!agilityBuffed) //No buffs or debuffs have occurred so far
                 {
@@ -1342,10 +1358,12 @@ public class Player : MonoBehaviour
                 {
                     actualSTR = str;
                     strBuffSkillQCounter = 0; //Negate the debuff completely
+                    strBuffArrowIndicator.gameObject.SetActive(false);
                 }
                 else if (strBuffed && ((actualSTR > str && precentage > 0) || (actualSTR < str && precentage < 0))) //If str has already been buffed, update the Q counter
                 {
                     strBuffSkillQCounter = lastsNumberOfTurns;
+                    
                 }
                 else if (!strBuffed) //No buffs or debuffs have occurred so far
                 {
@@ -1386,6 +1404,7 @@ public class Player : MonoBehaviour
                 actualDEF = def;
                 Debug.Log("Buff has ended");
                 uiBTL.UpdateActivityText("DEF is back to normal");
+                defBuffArrowIndicator.gameObject.SetActive(false);
             }
         }
 
@@ -1398,6 +1417,7 @@ public class Player : MonoBehaviour
                 attackBuffed = false;
                 actualATK = atk;
                 uiBTL.UpdateActivityText("ATK is back to normal");
+                atkBuffArrowIndicator.gameObject.SetActive(false);
             }
         }
 
@@ -1410,6 +1430,7 @@ public class Player : MonoBehaviour
                 agilityBuffed = false;
                 actualAgi = agi;
                 uiBTL.UpdateActivityText("AGI is back to normal");
+                agiBuffArrowIndicator.gameObject.SetActive(false);
             }
         }
 
@@ -1422,6 +1443,7 @@ public class Player : MonoBehaviour
                 strBuffed = false;
                 actualSTR = str;
                 uiBTL.UpdateActivityText("STR is back to normal");
+                strBuffArrowIndicator.gameObject.SetActive(false);
             }
         }
 
@@ -1460,6 +1482,9 @@ public class Player : MonoBehaviour
                 break;
             case "DefBuff":
                 defBuffEffect.gameObject.SetActive(true);
+                defBuffArrowIndicator.gameObject.SetActive(true);
+                arrowRotator= Quaternion.Euler(0.0f, 0.0f, 180.0f);
+                defBuffArrowIndicator.transform.rotation = arrowRotator;
                 break;
             case "DefDebuff":
                 debuffColor.r = 0.4958386f;
@@ -1467,9 +1492,15 @@ public class Player : MonoBehaviour
                 debuffColor.b = 0.8588235f;
                 debuffArrow.gameObject.SetActive(true);
                 debuffArrow.color = debuffColor;
+                defBuffArrowIndicator.gameObject.SetActive(true);
+                arrowRotator = Quaternion.Euler(0.0f, 0.0f, 0.0f);
+                defBuffArrowIndicator.transform.rotation = arrowRotator;
                 break;
             case "AtkBuff":
                 atkBuffEffect.gameObject.SetActive(true);
+                atkBuffArrowIndicator.gameObject.SetActive(true);
+                arrowRotator = Quaternion.Euler(0.0f, 0.0f, 180.0f);
+                atkBuffArrowIndicator.transform.rotation = arrowRotator;
                 break;
             case "AtkDebuff":
                 debuffColor.r = 0.8584906f;
@@ -1477,9 +1508,15 @@ public class Player : MonoBehaviour
                 debuffColor.b = 0.1903257f;
                 debuffArrow.gameObject.SetActive(true);
                 debuffArrow.color = debuffColor;
+                atkBuffArrowIndicator.gameObject.SetActive(true);
+                arrowRotator = Quaternion.Euler(0.0f, 0.0f, 0.0f);
+                atkBuffArrowIndicator.transform.rotation = arrowRotator;
                 break;
             case "AgiBuff":
                 agiBuffEffect.gameObject.SetActive(true);
+                agiBuffArrowIndicator.gameObject.SetActive(true);
+                arrowRotator = Quaternion.Euler(0.0f, 0.0f, 180.0f);
+                agiBuffArrowIndicator.transform.rotation = arrowRotator;
                 break;
             case "AgiDebuff":
                 debuffColor.r = 0.03582038f;
@@ -1487,9 +1524,15 @@ public class Player : MonoBehaviour
                 debuffColor.b = 0.01909043f;
                 debuffArrow.gameObject.SetActive(true);
                 debuffArrow.color = debuffColor;
+                agiBuffArrowIndicator.gameObject.SetActive(true);
+                arrowRotator= Quaternion.Euler(0.0f, 0.0f, 0.0f);
+                agiBuffArrowIndicator.transform.rotation = arrowRotator;
                 break;
             case "StrBuff":
                 strBuffEffect.gameObject.SetActive(true);
+                strBuffArrowIndicator.gameObject.SetActive(true);
+                arrowRotator = Quaternion.Euler(0.0f, 0.0f, 180.0f);
+                strBuffArrowIndicator.transform.rotation = arrowRotator;
                 break;
             case "StrDebuff":
                 debuffColor.r = 0.896f;
@@ -1497,6 +1540,9 @@ public class Player : MonoBehaviour
                 debuffColor.b = 0.1940637f;
                 debuffArrow.gameObject.SetActive(true);
                 debuffArrow.color = debuffColor;
+                strBuffArrowIndicator.gameObject.SetActive(true);
+                arrowRotator = Quaternion.Euler(0.0f, 0.0f, 0.0f);
+                strBuffArrowIndicator.transform.rotation = arrowRotator;
                 break;
             case "Revival":
                 hopeEffect.gameObject.SetActive(true);
