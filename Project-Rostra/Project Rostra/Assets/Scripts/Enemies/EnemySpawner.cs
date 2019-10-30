@@ -10,6 +10,7 @@ public class EnemySpawner : MonoBehaviour
     public GameObject[] enemyPos = new GameObject[5]; //Provided by the BTL Manager before the battle starts
     private Enemy enemySpawned;
     public int numberOfEnemies = 0;
+    public bool isBoss;
 
     #region singleton
     private void Awake()
@@ -45,15 +46,26 @@ public class EnemySpawner : MonoBehaviour
     //Called from BTL Manager
     public void SpawnEnemies()
     {
-
-        for(int i=0;i<enemiesToSpawn.Length;i++)
+        if (isBoss) //If it is a boss, summon it in the middle spot. Turned true by a trigger
         {
-            if (enemiesToSpawn[i] != null)
+            enemySpawned = Instantiate(enemiesToSpawn[0], enemyPos[1].transform.position, gameObject.transform.rotation);
+            enemySpawned.enemyIndexInBattleManager = 1;
+            enemySpawned.IncreaseStatsBasedOnLevel(enemyLevels[0]);
+            isBoss = false; //After you leave the trigger, go false
+        }
+        else
+        {
+
+            for (int i = 0; i < enemiesToSpawn.Length; i++)
             {
-                enemySpawned = Instantiate(enemiesToSpawn[i], enemyPos[i].transform.position, gameObject.transform.rotation);
-                enemySpawned.enemyIndexInBattleManager = i;
-                enemySpawned.IncreaseStatsBasedOnLevel(enemyLevels[i]);
+                if (enemiesToSpawn[i] != null)
+                {
+                    enemySpawned = Instantiate(enemiesToSpawn[i], enemyPos[i].transform.position, gameObject.transform.rotation);
+                    enemySpawned.enemyIndexInBattleManager = i;
+                    enemySpawned.IncreaseStatsBasedOnLevel(enemyLevels[i]);
+                }
             }
         }
+        
     }
 }
