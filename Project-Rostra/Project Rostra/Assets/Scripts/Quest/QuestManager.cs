@@ -10,6 +10,8 @@ public static class QuestManager
 	public static int milestone { get; private set; }
 	public static string description { get; private set; }
 	public static int location { get; private set; }
+	public static string milestoneName { get; private set; }
+	public static Dictionary<string, bool> visitedLocals;
 	/// <summary>
 	/// Okay so let's run through all the locations
 	/// 1 = Military camp
@@ -30,11 +32,39 @@ public static class QuestManager
 			case 1:
 				questName = "Test Quest";
 				location = 1;
-				description = "This is a test case in order to test to see if Sean is a good programmer or not. Hint Hint he's not";
+				description = "This is a test case in order to test to see if Sean is a good programmer or not.";
 				milestone = m;
+				milestoneName = "Have you ever heard the Tragedy of Darth Plagueis?";
 				break;
-				
+
 		}
 
 	}
+
+	public static void AddVisitedLocation(string i)
+	{
+		if (visitedLocals.ContainsKey(i))
+		{
+			visitedLocals[i] = true;
+		}
+		else
+		{
+			Debug.LogError("Dictionary does not contain the locale you input, fix you peasant!");
+		}
+	}
+
+	static QuestManager()
+	{
+		visitedLocals.Add("Military Camp", false);
+		visitedLocals.Add("Brenna's House", false);
+		visitedLocals.Add("Town", false);
+		visitedLocals.Add("Inn", false);
+		visitedLocals.Add("Domel's house", false);
+		questName = "";
+		location = 0;
+		description = "";
+		milestone = 0;
+		milestoneName = "";
+	}
+
 }

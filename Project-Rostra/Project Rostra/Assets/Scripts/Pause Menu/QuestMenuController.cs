@@ -4,7 +4,29 @@ using UnityEngine;
 
 public class QuestMenuController : SubMenu {
 
-	#region Submenu Functions
+	// array of map locations
+
+	// text components
+	public UnityEngine.UI.Text Test_QuestName;
+	public UnityEngine.UI.Text Test_QuestMile;
+	public UnityEngine.UI.Text Test_QuestDesc;
+
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	private void Awake() {
+		canOpen = false; // prevent the menu from opening
+		QuestManager.AddMilestone(1);
+	}
+
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	private void UpdateCurrentQuest() {
+		Test_QuestDesc.text = QuestManager.questName;
+		Test_QuestMile.text = QuestManager.milestoneName;
+		Test_QuestDesc.text = QuestManager.description;
+	}
+
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	public override void MenuUpdate() {
 		if (Cancel) {
@@ -12,14 +34,14 @@ public class QuestMenuController : SubMenu {
 		}
 	}
 
-	#region Menu Events
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	public override void OnActive() { }
 	public override void OnInactive() { }
 	public override void OnInvisible() { }
-	public override void OnVisible() { }
+	public override void OnVisible() {
+		UpdateCurrentQuest();
+	}
 
-	#endregion
-
-	#endregion
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 }
