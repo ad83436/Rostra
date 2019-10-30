@@ -24,7 +24,6 @@ public class CutsceneTrigger : MonoBehaviour
 	{
 		if (col.CompareTag("Player") && hasActivated == false && isInteractable == false && isChoiceDependant == false)
 		{
-			Debug.Log("Triggered Cutscene");
             fade.TransitionIntoACutscene(this);
             DialogueManager.instance.canWalk = false;
             col.gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);
@@ -37,12 +36,16 @@ public class CutsceneTrigger : MonoBehaviour
 	{
 		if (col.CompareTag("Player") && hasActivated == false && isInteractable == true && Input.GetKeyDown(KeyCode.Z))
 		{
-			TriggerCutscene();
+			fade.TransitionIntoACutscene(this);
+			col.gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);
+			DialogueManager.instance.canWalk = false;
 			hasActivated = true;
 		}
 		if (col.CompareTag("Player") && hasActivated == false && DialogueManager.instance.GetChoice(ce) == true && isChoiceDependant == true)
 		{
-			TriggerCutscene();
+			fade.TransitionIntoACutscene(this);
+			DialogueManager.instance.canWalk = false;
+			col.gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);
 			hasActivated = true;
 		}
 	}

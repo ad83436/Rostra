@@ -101,8 +101,8 @@ public class DialogueManager : MonoBehaviour
 		choices[(int)choice] = b;
 	}
 
-	void Start()
-    {
+	private void Awake()
+	{
 		// singleton notation
 		if (instance == null)
 		{
@@ -112,6 +112,11 @@ public class DialogueManager : MonoBehaviour
 		{
 			Destroy(gameObject);
 		}
+	}
+
+	void Start()
+    {
+		
 		DontDestroyOnLoad(this.gameObject);
         // set everything to its default 
         textElements = new Queue<string>();

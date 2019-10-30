@@ -83,3 +83,15 @@ MonoBehaviour:
     prefab: {fileID: 6465157179934058720, guid: c82f81da3cb61ce43a99d83fe2b3399a,
       type: 3}
     poolSize: 5
+  - tag: WailAttack
+    prefab: {fileID: 3652259003597476709, guid: 714308a09749439469bd89a9771175eb,
+      type: 3}
+    poolSize: 4
+  - tag: JudgeAttack
+    prefab: {fileID: 3598165973622607037, guid: 49024782ff49a3d4f92c6b7c67048296,
+      type: 3}
+    poolSize: 1
+  - tag: WrathAttack
+    prefab: {fileID: 4208859462664037881, guid: 6339aad92e780164f9e73af71e3d58c0,
+      type: 3}
+    poolSize: 1

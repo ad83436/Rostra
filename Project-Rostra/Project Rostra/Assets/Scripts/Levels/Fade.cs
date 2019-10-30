@@ -109,9 +109,11 @@ public class Fade : MonoBehaviour
                 else if(transitionIntoACutscene)
                 {
                     fadeOut = !fadeOut; //Fade out again
-                    cutsceneTriggerRef.TriggerCutscene(); //Load the cutscene while fading out
-					Debug.Log(cutsceneTriggerRef);
-					cutsceneTriggerRef = null;
+                    if (cutsceneTriggerRef != null)
+                    {
+                        cutsceneTriggerRef.TriggerCutscene(); //Load the cutscene while fading out
+                        cutsceneTriggerRef = null;
+                    }
                 }
                 else if(transitionOutOfACutscene)
                 {
