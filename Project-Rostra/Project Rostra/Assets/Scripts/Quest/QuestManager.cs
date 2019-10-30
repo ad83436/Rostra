@@ -11,6 +11,7 @@ public static class QuestManager
 	public static string description { get; private set; }
 	public static int location { get; private set; }
 	public static string milestoneName { get; private set; }
+	public static Dictionary<string, bool> visitedLocals;
 	/// <summary>
 	/// Okay so let's run through all the locations
 	/// 1 = Military camp
@@ -35,8 +36,28 @@ public static class QuestManager
 				milestone = m;
 				milestoneName = "Have you ever heard the Tragedy of Darth Plagueis?";
 				break;
-				
+
 		}
 
 	}
+
+	public static void AddVisitedLocation(string i)
+	{
+		visitedLocals[i] = true;
+	}
+
+	static QuestManager()
+	{
+		visitedLocals.Add("Military Camp", false);
+		visitedLocals.Add("Brenna's House", false);
+		visitedLocals.Add("Town", false);
+		visitedLocals.Add("Inn", false);
+		visitedLocals.Add("Domel's house", false);
+		questName = "";
+		location = 0;
+		description = "";
+		milestone = 0;
+		milestoneName = "";
+	}
+
 }
