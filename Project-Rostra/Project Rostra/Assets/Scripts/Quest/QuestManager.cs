@@ -55,6 +55,7 @@ public static class QuestManager
 
 	static QuestManager()
 	{
+		visitedLocals = new Dictionary<string, bool>();
 		visitedLocals.Add("Military Camp", false);
 		visitedLocals.Add("Brenna's House", false);
 		visitedLocals.Add("Town", false);
