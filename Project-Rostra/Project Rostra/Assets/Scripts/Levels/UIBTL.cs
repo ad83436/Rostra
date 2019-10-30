@@ -1684,7 +1684,7 @@ public class UIBTL : MonoBehaviour
         //Make sure the indicator starts at an alive enemy
         for (int i = 0; i < enemiesDead.Length; i++)
         {
-            if (enemiesDead[i] == false)
+            if (enemiesDead[i] == false && enemies[i] != null)
             {
                 chooseEnemyArrow.transform.position = enemyIndicatorPosArray[i].transform.position;
                 enemyIndicatorIndex = i;

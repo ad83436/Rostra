@@ -145,8 +145,8 @@ public class Farea : Enemy
         else
         {
                 //Only update the attackChance when no skill is on the waiting list
-                //attackChance = Random.Range(0, 100);
-                attackChance = 80; //Testing
+                attackChance = Random.Range(0, 100);
+               // attackChance = 80; //Testing
 
             if (bossPhase == 1)
             {
