@@ -43,7 +43,14 @@ public static class QuestManager
 
 	public static void AddVisitedLocation(string i)
 	{
-		visitedLocals[i] = true;
+		if (visitedLocals.ContainsKey(i))
+		{
+			visitedLocals[i] = true;
+		}
+		else
+		{
+			Debug.LogError("Dictionary does not contain the locale you input, fix you peasant!");
+		}
 	}
 
 	static QuestManager()
