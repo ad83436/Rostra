@@ -70,6 +70,58 @@ public class Farea : Enemy
         base.Update();
     }
 
+    public override void TakeDamage(float playerAttack, int numberOfAttacks)
+    {
+       
+        Debug.Log("Received player attack: " + playerAttack);
+        float damage = playerAttack - ((eDefence / (20.0f + eDefence)) * playerAttack);
+        currentHP -= damage;
+        damageText.gameObject.SetActive(true);
+        damageText.text = Mathf.RoundToInt(damage).ToString();
+        battleManager.enemies[enemyIndexInBattleManager].currentHP = currentHP; //Update the BTL manager with the new health
+        HP.fillAmount = currentHP / maxHP;
+        animator.SetBool("Hit", true);
+
+        if (currentHP <= 0.0f)
+        {
+            if(bossPhase == 1)
+            {
+                //Reset and get ready for phase 2
+                currentState = EnemyState.idle;
+                waitTime = 0;
+                waitTurnsText.text = "0";
+                chosenSkill = fareaSkills.none;
+                lullWait.gameObject.SetActive(false);
+                wailWait.gameObject.SetActive(false);
+                animator.SetBool("Phase2", true);
+            }
+            animator.SetBool("Death", true);
+        }
+        else
+        {
+            if (numberOfAttacks <= 0)
+            {
+                uiBTL.EndTurn(); //Only end the turn after the damage has been taken
+            }
+        }
+    }
+
+    private void StartPhase2()
+    {
+        uiBTL.EndTurn(); //End the player's turn
+        bossPhase = 2;
+        maxHP *= 2;
+        currentHP = maxHP;
+        eAttack *= 1.2f;
+        eDefence *= 1.2f;
+        eAgility *= 1.2f;
+        eStrength *= 1.2f;
+        
+        HP.fillAmount = 1.0f;
+        animator.SetBool("Hit", false);
+        animator.SetBool("Death", false);
+    }
+
     public override void EnemyTurn()
     {
         //Check if we're waiting on a skill first

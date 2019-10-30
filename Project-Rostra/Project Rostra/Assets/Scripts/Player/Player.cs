@@ -1646,7 +1646,7 @@ public class Player : MonoBehaviour
                     fearChance = Random.Range(0, 10);
                     Debug.Log("Fear chance is: " + fearChance);
 
-                    if(fearChance>=0 && fearChance <=4)
+                    if(fearChance>=0 && fearChance <=3)
                     {
                         affectedByFear = false;
                     }
