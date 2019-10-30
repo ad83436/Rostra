@@ -115,7 +115,7 @@ public class PauseMenuController : MonoBehaviour {
 				}
 			}
 
-			if (Confirm) {
+			if (Confirm && allSubMenus[currentListItem].canOpen) {
 				allSubMenus[currentListItem].IsActive = true;
 				activeMenu = false;
 				listItems[currentListItem].color = Color.white;

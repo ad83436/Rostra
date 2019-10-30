@@ -8,6 +8,7 @@ public abstract class SubMenu : MonoBehaviour {
 
 	[SerializeField] private CanvasGroup group;
 
+	public bool canOpen = true;
 	private bool active = false;
 	public bool IsActive {
 		get => active;
