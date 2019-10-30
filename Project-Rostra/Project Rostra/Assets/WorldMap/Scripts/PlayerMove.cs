@@ -39,8 +39,10 @@ public class PlayerMove : MonoBehaviour
 		else if(dm.canWalk == false)
 		{
 			moveVelocity = Vector2.zero;
+			animator.SetFloat("Horizontal", 0);
+			animator.SetFloat("Vertical", 0);
+			animator.SetFloat("Speed", 0);
 		}
-		TalkToNPC();
 	}
     
     void FixedUpdate()

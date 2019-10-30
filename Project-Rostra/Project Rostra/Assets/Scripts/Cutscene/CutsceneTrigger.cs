@@ -37,7 +37,9 @@ public class CutsceneTrigger : MonoBehaviour
 	{
 		if (col.CompareTag("Player") && hasActivated == false && isInteractable == true && Input.GetKeyDown(KeyCode.Z))
 		{
-			TriggerCutscene();
+			fade.TransitionIntoACutscene(this);
+			col.gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);
+			DialogueManager.instance.canWalk = false;
 			hasActivated = true;
 		}
 		if (col.CompareTag("Player") && hasActivated == false && DialogueManager.instance.GetChoice(ce) == true && isChoiceDependant == true)

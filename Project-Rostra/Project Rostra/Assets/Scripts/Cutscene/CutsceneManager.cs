@@ -46,6 +46,10 @@ public class CutsceneManager : MonoBehaviour
 		{
 			Destroy(gameObject);
 		}
+	}
+
+	private void Start()
+	{
 		DontDestroyOnLoad(this.gameObject);
 		current = 0;
 		entranceCount = 0;
@@ -54,7 +58,6 @@ public class CutsceneManager : MonoBehaviour
 		povCount = 0;
 		audios = GetComponent<AudioSource>();
 	}
-
 	// Update is called once per frame
 	void Update()
 	{
