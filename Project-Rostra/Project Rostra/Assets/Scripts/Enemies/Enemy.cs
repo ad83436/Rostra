@@ -1279,11 +1279,11 @@ public class Enemy : MonoBehaviour
                 {
                     print("Picked Back Row");
                     attackThisPlayer = battleManager.players[1].playerReference;
-                    print("Attacked" + attackThisPlayer.name);
+                    print("Attacked" + attackThisPlayer.nameOfCharacter);
                     attackThisPlayer.TakeDamage(eAttack);
 
                     attackThisPlayer = battleManager.players[2].playerReference;
-                    print("Then Attacked " + attackThisPlayer.name);
+                    print("Then Attacked " + attackThisPlayer.nameOfCharacter);
                     attackThisPlayer.TakeDamage(eAttack);
                 }
 
@@ -1291,11 +1291,11 @@ public class Enemy : MonoBehaviour
                 {
                     print("Picked Back Row");
                     attackThisPlayer = battleManager.players[0].playerReference;
-                    print("Attacked" + attackThisPlayer.name);
+                    print("Attacked" + attackThisPlayer.nameOfCharacter);
                     attackThisPlayer.TakeDamage(eAttack);
                     
                     attackThisPlayer = battleManager.players[3].playerReference;
-                    print("Then Attacked " + attackThisPlayer.name);
+                    print("Then Attacked " + attackThisPlayer.nameOfCharacter);
                     attackThisPlayer.TakeDamage(eAttack);
                 }
                 uiBTL.EndTurn();
@@ -1567,7 +1567,7 @@ public class Enemy : MonoBehaviour
                 }
 
                 print("Enemy Attack is " + eAttack);
-                print(attackThisPlayer.name + " Was Attacked With the Bite Skill");
+                print(attackThisPlayer.nameOfCharacter + " Was Attacked With the Bite Skill");
                 Mathf.CeilToInt(attackMod = (eAttack * .5f));
                 eAttack += attackMod;
                 print("Enemy New Attack is " + eAttack);

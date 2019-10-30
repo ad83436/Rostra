@@ -32,7 +32,7 @@ public class Player : MonoBehaviour
     public float crit;
     public float speed;
     public int playerIndex;
-    public string name;
+    public string nameOfCharacter;
     public int range; //Range of player standard attack
     public int initialPos; //Position of the player 0 being Frontline and -1 being Ranged
     public bool dead;
@@ -44,10 +44,18 @@ public class Player : MonoBehaviour
         fear,
         tied,
     }
-    private playerAilments currentAilment = playerAilments.none;
-    private int fearTimer = 0; //Used to disable the ailment after a certain number of turns
-    private int tiedTimer = 0;
+    public playerAilments currentAilment = playerAilments.none; //You an only be affected by one ailment at a time
+
+    //Fear
+    private int fearTimer = 0; //Used to disable the ailment after a certain number of turns have been skipped due to fear
+    public GameObject fearSymbol;
+    private int fearChance = 0; //If a player is inflicted with Fear, see if they should skip their turn
+    private bool affectedByFear = false;
+
+    //Tied
+    private int tiedTimer = 0; //Used to disable tied after it being used three times (damage or heal)
     private Enemy tiedToThisEnemy = null; //Should the player be tied to an enemy, the enemy should be healed by half the heal amount the player recieves when healed
+
 
     //Queue
     public Sprite qImage;
@@ -121,6 +129,11 @@ public class Player : MonoBehaviour
     public GameObject drainEyeBuffEffect;
     //Debuffs
     public SpriteRenderer debuffArrow;
+    public GameObject atkBuffArrowIndicator;
+    public GameObject defBuffArrowIndicator;
+    public GameObject agiBuffArrowIndicator;
+    public GameObject strBuffArrowIndicator;
+    private Quaternion arrowRotator;
     private Color debuffColor;
 
 
@@ -152,7 +165,6 @@ public class Player : MonoBehaviour
     //Guarding
     private float actualDefBeforeGuard; //What if the player uses a def-increasing skill before making this character go to guard?
                                         //Should be updated correctly if a player is guarding and while doing so gets his/her def increased
-
 
     public enum playerState
     {
@@ -228,6 +240,14 @@ public class Player : MonoBehaviour
         waitTimeText.gameObject.SetActive(false);
         debuffArrow.gameObject.SetActive(false);
         debuffColor = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+        arrowRotator = Quaternion.Euler(0.0f, 0.0f, 0.0f);
+        atkBuffArrowIndicator.gameObject.SetActive(false);
+        defBuffArrowIndicator.gameObject.SetActive(false);
+        agiBuffArrowIndicator.gameObject.SetActive(false);
+        strBuffArrowIndicator.gameObject.SetActive(false);
+
+        //Ailments
+        fearSymbol.gameObject.SetActive(false);
     }
 
     private void Update()
@@ -250,7 +270,7 @@ public class Player : MonoBehaviour
         UpdatePlayerStats();
         battleManager.players[playerIndex].playerIndex = playerIndex;
         battleManager.players[playerIndex].playerReference = this;
-        battleManager.players[playerIndex].name = name;
+        battleManager.players[playerIndex].name = nameOfCharacter;
         battleManager.numberOfPlayers--;
 
         //Update skills
@@ -263,12 +283,14 @@ public class Player : MonoBehaviour
         {
             playerAnimator.SetBool("Turn", true);
 
+            CheckForAilments();
+
             //If the it's my turn again, and I have been guarding, end the guard since guarding only lasts for 1 turn
             if (currentState == playerState.Guard)
             {
                 EndGuard();
             }
-            else if (currentState == playerState.Waiting)
+            else if (currentState == playerState.Waiting && !affectedByFear)
             {
                 skillWaitTime--;
 
@@ -326,6 +348,7 @@ public class Player : MonoBehaviour
         }
     }
 
+    #region attack
     //Called from the UI
     public void Attack(Enemy enemyRef)
     {
@@ -413,7 +436,9 @@ public class Player : MonoBehaviour
         }
 
     }
+    #endregion
 
+    #region hit and crit
     //Calculate whether the attack is a hit or a miss
     private void CalculateHit()
     {
@@ -466,13 +491,21 @@ public class Player : MonoBehaviour
         return Random.Range(0.0f, 100.0f);
     }
 
+    private void EndHit()
+    {
+        playerAnimator.SetBool("Hit", false);
+    }
+
+    #endregion
+
+    #region Guard
     //Guard and End Guard are called from the UI. End Guard is called when the player's turn returns
     public void Guard()
     {
+        actualDefBeforeGuard = actualDEF; //Store the current defense before multiplying it
         actualDEF = actualDefBeforeGuard * 1.5f;
         currentState = playerState.Guard;
         playerAnimator.SetBool("Turn", false);
-        Debug.Log(name + " is Guarding and current def is " + actualDEF);
         guardIcon.gameObject.SetActive(true);
         uiBTL.EndTurn();
     }
@@ -483,6 +516,9 @@ public class Player : MonoBehaviour
         guardIcon.gameObject.SetActive(false);
     }
 
+    #endregion
+
+    #region take damage
     public void TakeDamage(float enemyATK)
     {
         btlCam.CameraShake();
@@ -553,9 +589,14 @@ public class Player : MonoBehaviour
                 switch(ailment)
                 {
                     case playerAilments.fear:
+                        //Get the fear timer and activate the object
+                        currentAilment = playerAilments.fear;
                         fearTimer = debuffTimer;
+                        Debug.Log(nameOfCharacter + "IS SPOOKED");
+                        fearSymbol.gameObject.SetActive(true);
                         break;
                     case playerAilments.tied:
+                        currentAilment = playerAilments.tied;
                         tiedTimer = debuffTimer;
                         tiedToThisEnemy = enemyReference;
                         break;
@@ -578,12 +619,9 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void EndHit()
-    {
-        playerAnimator.SetBool("Hit", false);
-    }
+    #endregion
 
-
+    #region RAGE
     //Called by the UIBTl when the player chooses to go into rage mode
     public void Rage()
     {
@@ -609,7 +647,7 @@ public class Player : MonoBehaviour
         rageImage.fillAmount = 0.0f;  //Update the UI
         currentState = playerState.Idle;
     }
-
+    #endregion
     //Called whenever a player is healed, or stats their stats changed
     public void UpdatePlayerStats()
     {
@@ -688,7 +726,7 @@ public class Player : MonoBehaviour
         else if (skillID == (int)SKILLS.Fr_IDontMiss) //I Don't Miss special skill
         {
             skillTarget = 8; //Single player buff
-            BuffStats("Strength", skills.SkillStats(chosenSkill)[0], 1);
+            BuffStats("Strength", skills.SkillStats(chosenSkill)[0], 3);
             chosenSkill = (int)SKILLS.NO_SKILL;
             currentMP -= mpCost;
             battleManager.players[playerIndex].currentMP = currentMP;
@@ -1240,7 +1278,11 @@ public class Player : MonoBehaviour
         playerAnimator.SetBool("Hit", false);
         currentState = playerState.Idle; //Reset the player
         chosenSkill = (int)SKILLS.NO_SKILL;
+        currentAilment = playerAilments.none;
+        DisableAllBuffs();
     }
+
+    #region buffs and debuffs
 
     public void BuffStats(string statToBuff, float precentage, float lastsNumberOfTurns)
     {
@@ -1261,19 +1303,20 @@ public class Player : MonoBehaviour
                 {
                     actualDEF = def;
                     defenseBuffSkillQCounter = 0; //Negate the debuff completely
+                    defBuffArrowIndicator.gameObject.SetActive(false);
                 }
                 else if (defenseBuffed && ((actualDEF > def && precentage > 0) || (actualDEF < def && precentage < 0))) //If defense has already been buffed, update the Q counter
                 {
-                    defenseBuffSkillQCounter = lastsNumberOfTurns;
+                    defenseBuffSkillQCounter = lastsNumberOfTurns;                   
                 }
                 else if (!defenseBuffed) //No buffs or debuffs have occurred so far
                 {
-                    Debug.Log("Actual defense before for " + name + " is: " + actualDEF);
+                    Debug.Log("Actual defense before for " + nameOfCharacter + " is: " + actualDEF);
                     defenseBuffed = true;
                     actualDEF = def + def * precentage;
                     defenseBuffSkillQCounter = lastsNumberOfTurns;
 
-                    Debug.Log("Actual defense now for " + name + " is: " + actualDEF);
+                    Debug.Log("Actual defense now for " + nameOfCharacter + " is: " + actualDEF);
                     Debug.Log("Counter: " + defenseBuffSkillQCounter);
                 }
                 break;
@@ -1290,10 +1333,12 @@ public class Player : MonoBehaviour
                 {
                     actualATK = atk;
                     attackBuffSkillQCounter = 0; //Negate the debuff completely
+                    atkBuffArrowIndicator.gameObject.SetActive(false);
                 }
                 else if (attackBuffed && ((actualATK > atk && precentage > 0) || (actualATK < atk && precentage < 0))) //Check if the buff or debuff is being extended
                 {
                     attackBuffSkillQCounter = lastsNumberOfTurns;
+                   
                 }
                 else if (!attackBuffed) //No buffs or debuffs have occurred so far
                 {
@@ -1316,10 +1361,12 @@ public class Player : MonoBehaviour
                 {
                     actualAgi = agi;
                     agilityBuffSkillQCounter = 0; //Negate the debuff completely
+                    agiBuffArrowIndicator.gameObject.SetActive(false);
                 }
                 else if (agilityBuffed && ((actualAgi > agi && precentage > 0) || (actualAgi < agi && precentage < 0))) //If agility has already been buffed, update the Q counter
                 {
                     agilityBuffSkillQCounter = lastsNumberOfTurns;
+                   
                 }
                 else if (!agilityBuffed) //No buffs or debuffs have occurred so far
                 {
@@ -1342,17 +1389,19 @@ public class Player : MonoBehaviour
                 {
                     actualSTR = str;
                     strBuffSkillQCounter = 0; //Negate the debuff completely
+                    strBuffArrowIndicator.gameObject.SetActive(false);
                 }
                 else if (strBuffed && ((actualSTR > str && precentage > 0) || (actualSTR < str && precentage < 0))) //If str has already been buffed, update the Q counter
                 {
                     strBuffSkillQCounter = lastsNumberOfTurns;
+                    
                 }
                 else if (!strBuffed) //No buffs or debuffs have occurred so far
                 {
                    
                     strBuffed = true;
                     actualSTR = str + str * precentage;
-                    Debug.Log(name + " Strength is: " + actualSTR);
+                    Debug.Log(nameOfCharacter + " Strength is: " + actualSTR);
                     strBuffSkillQCounter = lastsNumberOfTurns;
                 }
                 break;
@@ -1386,6 +1435,7 @@ public class Player : MonoBehaviour
                 actualDEF = def;
                 Debug.Log("Buff has ended");
                 uiBTL.UpdateActivityText("DEF is back to normal");
+                defBuffArrowIndicator.gameObject.SetActive(false);
             }
         }
 
@@ -1398,6 +1448,7 @@ public class Player : MonoBehaviour
                 attackBuffed = false;
                 actualATK = atk;
                 uiBTL.UpdateActivityText("ATK is back to normal");
+                atkBuffArrowIndicator.gameObject.SetActive(false);
             }
         }
 
@@ -1410,6 +1461,7 @@ public class Player : MonoBehaviour
                 agilityBuffed = false;
                 actualAgi = agi;
                 uiBTL.UpdateActivityText("AGI is back to normal");
+                agiBuffArrowIndicator.gameObject.SetActive(false);
             }
         }
 
@@ -1422,6 +1474,7 @@ public class Player : MonoBehaviour
                 strBuffed = false;
                 actualSTR = str;
                 uiBTL.UpdateActivityText("STR is back to normal");
+                strBuffArrowIndicator.gameObject.SetActive(false);
             }
         }
 
@@ -1460,6 +1513,9 @@ public class Player : MonoBehaviour
                 break;
             case "DefBuff":
                 defBuffEffect.gameObject.SetActive(true);
+                defBuffArrowIndicator.gameObject.SetActive(true);
+                arrowRotator= Quaternion.Euler(0.0f, 0.0f, 180.0f);
+                defBuffArrowIndicator.transform.rotation = arrowRotator;
                 break;
             case "DefDebuff":
                 debuffColor.r = 0.4958386f;
@@ -1467,9 +1523,15 @@ public class Player : MonoBehaviour
                 debuffColor.b = 0.8588235f;
                 debuffArrow.gameObject.SetActive(true);
                 debuffArrow.color = debuffColor;
+                defBuffArrowIndicator.gameObject.SetActive(true);
+                arrowRotator = Quaternion.Euler(0.0f, 0.0f, 0.0f);
+                defBuffArrowIndicator.transform.rotation = arrowRotator;
                 break;
             case "AtkBuff":
                 atkBuffEffect.gameObject.SetActive(true);
+                atkBuffArrowIndicator.gameObject.SetActive(true);
+                arrowRotator = Quaternion.Euler(0.0f, 0.0f, 180.0f);
+                atkBuffArrowIndicator.transform.rotation = arrowRotator;
                 break;
             case "AtkDebuff":
                 debuffColor.r = 0.8584906f;
@@ -1477,9 +1539,15 @@ public class Player : MonoBehaviour
                 debuffColor.b = 0.1903257f;
                 debuffArrow.gameObject.SetActive(true);
                 debuffArrow.color = debuffColor;
+                atkBuffArrowIndicator.gameObject.SetActive(true);
+                arrowRotator = Quaternion.Euler(0.0f, 0.0f, 0.0f);
+                atkBuffArrowIndicator.transform.rotation = arrowRotator;
                 break;
             case "AgiBuff":
                 agiBuffEffect.gameObject.SetActive(true);
+                agiBuffArrowIndicator.gameObject.SetActive(true);
+                arrowRotator = Quaternion.Euler(0.0f, 0.0f, 180.0f);
+                agiBuffArrowIndicator.transform.rotation = arrowRotator;
                 break;
             case "AgiDebuff":
                 debuffColor.r = 0.03582038f;
@@ -1487,9 +1555,15 @@ public class Player : MonoBehaviour
                 debuffColor.b = 0.01909043f;
                 debuffArrow.gameObject.SetActive(true);
                 debuffArrow.color = debuffColor;
+                agiBuffArrowIndicator.gameObject.SetActive(true);
+                arrowRotator= Quaternion.Euler(0.0f, 0.0f, 0.0f);
+                agiBuffArrowIndicator.transform.rotation = arrowRotator;
                 break;
             case "StrBuff":
                 strBuffEffect.gameObject.SetActive(true);
+                strBuffArrowIndicator.gameObject.SetActive(true);
+                arrowRotator = Quaternion.Euler(0.0f, 0.0f, 180.0f);
+                strBuffArrowIndicator.transform.rotation = arrowRotator;
                 break;
             case "StrDebuff":
                 debuffColor.r = 0.896f;
@@ -1497,6 +1571,9 @@ public class Player : MonoBehaviour
                 debuffColor.b = 0.1940637f;
                 debuffArrow.gameObject.SetActive(true);
                 debuffArrow.color = debuffColor;
+                strBuffArrowIndicator.gameObject.SetActive(true);
+                arrowRotator = Quaternion.Euler(0.0f, 0.0f, 0.0f);
+                strBuffArrowIndicator.transform.rotation = arrowRotator;
                 break;
             case "Revival":
                 hopeEffect.gameObject.SetActive(true);
@@ -1553,4 +1630,48 @@ public class Player : MonoBehaviour
             drainEyeSkillQCounter = 0;
         }
     }
+
+    #endregion
+
+    #region ailments
+
+    private void CheckForAilments()
+    {
+        switch(currentAilment)
+        {
+            case playerAilments.fear:
+                if(fearTimer > 0)
+                {
+                    Debug.Log("Fear timer is larger than zero");
+                    fearChance = Random.Range(0, 10);
+                    Debug.Log("Fear chance is: " + fearChance);
+
+                    if(fearChance>=0 && fearChance <=4)
+                    {
+                        affectedByFear = false;
+                    }
+                    else
+                    {
+                        Debug.Log(nameOfCharacter + " is scared and ended the turn");
+                        affectedByFear = true;
+                        fearTimer--; //Only decrease the timer if affected by fear ends up being true
+                        uiBTL.UpdateActivityText(nameOfCharacter + " is too afraid...");
+                        uiBTL.EndTurn(); //Skip the turn if affected by fear
+                    }
+                }
+                else
+                {
+                    currentAilment = playerAilments.none;
+                    fearSymbol.gameObject.SetActive(false);
+                    uiBTL.UpdateActivityText(nameOfCharacter + " is no longer afraid");
+                }
+                break;
+            case playerAilments.tied:
+                break;
+            default:
+                break;
+        }
+    }
+
+    #endregion
 }
