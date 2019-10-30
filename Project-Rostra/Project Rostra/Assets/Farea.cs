@@ -16,6 +16,7 @@ public class Farea : Enemy
     {
         none,
         wails,
+        lullabyOfDepsair,
         mothersPain,
         youAreNotMine
 
@@ -30,6 +31,9 @@ public class Farea : Enemy
     public GameObject wailWait;
     private string[] statToDebuff; //Used to store all possible stats that WoF can debuff
     private string chosenStat; //Used to store the choice of the stat to debuff
+
+    //Lullaby
+    public GameObject lullWait;
 
 
     protected override void Start()
@@ -53,6 +57,7 @@ public class Farea : Enemy
         jObj.gameObject.SetActive(false);
         wObj.gameObject.SetActive(false);
         wailWait.gameObject.SetActive(false);
+        lullWait.gameObject.SetActive(false);
 
         statToDebuff = new string[2];
         statToDebuff[0] = "Defense";
@@ -89,7 +94,7 @@ public class Farea : Enemy
         {
                 //Only update the attackChance when no skill is on the waiting list
                 //attackChance = Random.Range(0, 100);
-                attackChance = 30; //Testing
+                attackChance = 80; //Testing
 
             if (bossPhase == 1)
             {
@@ -99,7 +104,7 @@ public class Farea : Enemy
                 }
                 else if (attackChance >= 10 && attackChance < 40) //Wails of Frailty
                 {
-                    GoToWaitState(fareaSkills.wails, 1, 2);
+                    GoToWaitState(fareaSkills.wails, 2, 2);
                     //Summon skill effect
                     wailWait.gameObject.SetActive(true);
                     uiBTL.UpdateActivityText("Wails of Frailty");
@@ -112,7 +117,10 @@ public class Farea : Enemy
                 }
                 else if (attackChance >= 70 && attackChance <= 100) // Lullaby Of Despair
                 {
-
+                    GoToWaitState(fareaSkills.lullabyOfDepsair, 1, 2);
+                    //Summon skill effect
+                    lullWait.gameObject.SetActive(true);
+                    uiBTL.UpdateActivityText("Lullaby Of Despair");
                 }
                     
             }
@@ -180,7 +188,11 @@ public class Farea : Enemy
         switch (chosenSkill)
         {
             case fareaSkills.wails:
+                //Choose at random whether you want to damage attack or defense
                 chosenStat = statToDebuff[Random.Range(0, statToDebuff.Length)];
+                //Update the UI
+                uiBTL.UpdateActivityText("Wails of Frailty");
+                //Damage all players
                 for (int i = 0; i < battleManager.players.Length; i++)
                 {
                     if(!battleManager.players[i].playerReference.dead)
@@ -190,9 +202,32 @@ public class Farea : Enemy
                         objPooler.SpawnFromPool("WailAttack", battleManager.players[i].playerReference.transform.position, gameObject.transform.rotation);
                     }
                 }
+                //Reset animator
                 chosenSkill = fareaSkills.none;
                 animator.SetInteger("WaitingIndex", 0);
                 wailWait.gameObject.SetActive(false);
+                uiBTL.EndTurn();
+                break;
+            case fareaSkills.lullabyOfDepsair:
+                //Update the UI
+                uiBTL.UpdateActivityText("Lullaby Of Despair");
+                //Choose a player at random
+                attackThisPlayer = battleManager.players[Random.Range(0, battleManager.players.Length)].playerReference;
+
+                //If the player has no ailments, then affect thme with fear
+                if(attackThisPlayer.currentAilment == Player.playerAilments.none) //Make sure you target 
+                {
+                    attackThisPlayer.TakeDamage(0.0f, 0, "", Player.playerAilments.fear, null, 0, 3, false);
+                }
+                else
+                {
+                    //Otherwise just damage the player
+                    attackThisPlayer.TakeDamage(eAttack * 1.5f);
+                }
+                //Reset the animator
+                chosenSkill = fareaSkills.none;
+                animator.SetInteger("WaitingIndex", 0);
+                lullWait.gameObject.SetActive(false);
                 uiBTL.EndTurn();
                 break;
             case fareaSkills.mothersPain:
