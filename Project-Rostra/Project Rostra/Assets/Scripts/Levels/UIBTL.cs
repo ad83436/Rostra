@@ -153,7 +153,7 @@ public class UIBTL : MonoBehaviour
     }
     #endregion
 
-    void Start()
+    protected virtual void Start()
     {
         btlManager = BattleManager.instance;
         inventory = MainInventory.invInstance;
@@ -234,7 +234,7 @@ public class UIBTL : MonoBehaviour
     }
 
 
-    void Update()
+    protected virtual void Update()
     {
         if (moveImagesNow)
         {
@@ -277,13 +277,13 @@ public class UIBTL : MonoBehaviour
         }
     }
 
-    public void AddImageToQ(Sprite nextOnQImage)
+    public virtual void AddImageToQ(Sprite nextOnQImage)
     {
         //Called from the BTL manager when adding characters to the Q
         imagesQ.Add(nextOnQImage);
     }
 
-    public void QueueIsReady()
+    public virtual void QueueIsReady()
     {
         highlightedImage = images[0];
         images[0].rectTransform.sizeDelta = imagesHilightedSize;
@@ -356,7 +356,7 @@ public class UIBTL : MonoBehaviour
 
     }
 
-    public void MoveQImages()
+    public virtual void MoveQImages()
     {
         highlightedImage.rectTransform.sizeDelta = imagesOriginalSize;
         backdropHighlighter.gameObject.SetActive(false);
@@ -405,7 +405,7 @@ public class UIBTL : MonoBehaviour
     }
 
     //Called when the image at the far right of the Q collides with the recycle image collider
-    public void ImageRecycle(int imageIndex)
+    public virtual void ImageRecycle(int imageIndex)
     {
         //We've hit the recycler, stop moving!
         moveImagesNow = false;
@@ -464,7 +464,7 @@ public class UIBTL : MonoBehaviour
     }
 
     //Called from the BTL Manager to update the UI based on which player's turn it is
-    public void ShowThisPlayerUI(int playerIndex, string name, Player playerReference)
+    public virtual void ShowThisPlayerUI(int playerIndex, string name, Player playerReference)
     {
         DisableActivtyText();
         playerInControl = playerReference;
@@ -520,7 +520,7 @@ public class UIBTL : MonoBehaviour
         }
     }
 
-    private void ChoosingBasicCommand()
+    protected virtual void ChoosingBasicCommand()
     {
         if (!moveImagesNow) //Don't allow the player to choose a command until the Q has settled down
         {
@@ -706,7 +706,7 @@ public class UIBTL : MonoBehaviour
         }
     }
 
-    private void ChoosingSkillsCommand()
+    protected virtual void ChoosingSkillsCommand()
     {
         if (Input.GetButtonDown("Cancel"))
         {
@@ -901,7 +901,7 @@ public class UIBTL : MonoBehaviour
 
     }
 
-    private void ChoosingItemsCommand()
+    protected virtual void ChoosingItemsCommand()
     {
         if (Input.GetButtonDown("Cancel"))
         {
@@ -1038,7 +1038,7 @@ public class UIBTL : MonoBehaviour
         }
     }
 
-    private void ChoosingPlayer()
+    protected virtual void ChoosingPlayer()
     {
         if (Input.GetButtonDown("Cancel"))
         {
@@ -1213,7 +1213,7 @@ public class UIBTL : MonoBehaviour
         }
     }
 
-    private void ChoosingAllPlayers()
+    protected virtual void ChoosingAllPlayers()
     {
         if (Input.GetButtonDown("Cancel"))
         {
@@ -1246,7 +1246,7 @@ public class UIBTL : MonoBehaviour
         }
     }
 
-    private void ChoosingEnemy()
+    protected virtual void ChoosingEnemy()
     {
         //Leave choosing enemy
         if (Input.GetButtonDown("Cancel"))
@@ -1443,7 +1443,7 @@ public class UIBTL : MonoBehaviour
         }
     }
 
-    private void ChoosingAllEnemies()
+    protected virtual void ChoosingAllEnemies()
     {
         if (Input.GetButtonDown("Cancel"))
         {
@@ -1477,7 +1477,7 @@ public class UIBTL : MonoBehaviour
         }
     }
 
-    private void ChoosingRowOfEnemies()
+    protected virtual void ChoosingRowOfEnemies()
     {
         if (Input.GetButtonDown("Cancel"))
         {
@@ -1558,7 +1558,7 @@ public class UIBTL : MonoBehaviour
         }
     }
 
-    public void RageOptionTextColor()
+    public virtual void RageOptionTextColor()
     {
         if (playerInControl.canRage)
         {
@@ -1571,21 +1571,21 @@ public class UIBTL : MonoBehaviour
 
     }
 
-    public void UpdatePlayerHPControlPanel()
+    public virtual void UpdatePlayerHPControlPanel()
     {
         currentHP.text = Mathf.RoundToInt(playerInControl.currentHP).ToString();
         maxHP.text = " / " + Mathf.RoundToInt(playerInControl.maxHP).ToString();
         hpBar.fillAmount = playerInControl.hpImage.fillAmount;
     }
 
-    public void UpdatePlayerMPControlPanel()
+    public virtual void UpdatePlayerMPControlPanel()
     {
         currentMP.text = Mathf.RoundToInt(playerInControl.currentMP).ToString();
         maxMP.text = " / " + Mathf.RoundToInt(playerInControl.maxMP).ToString();
         mpBar.fillAmount = playerInControl.currentMP / playerInControl.maxMP;
     }
 
-    public void EndTurn()
+    public virtual void EndTurn()
     {
         if (numberOfEndTurnCalls > 0)
         {
@@ -1617,7 +1617,7 @@ public class UIBTL : MonoBehaviour
         }
     }
 
-    public void EnemyIsDead(int enemyIndex)
+    public virtual void EnemyIsDead(int enemyIndex)
     {
         enemiesDead[enemyIndex] = true;
         numberOfDeadEnemies++;
@@ -1635,7 +1635,7 @@ public class UIBTL : MonoBehaviour
         currentState = btlUIState.battleEnd;
     }
 
-    public void PlayerIsDead(int playerIndex)
+    public virtual void PlayerIsDead(int playerIndex)
     {
         playersDead[playerIndex] = true;
         numberOfDeadPlayers++;
@@ -1652,7 +1652,7 @@ public class UIBTL : MonoBehaviour
         currentState = btlUIState.battleEnd;
     }
 
-    private void EndBattleUI()
+    protected virtual void EndBattleUI()
     {
         //If there's a conversation right after the battle, invoke the function in the dialogue manager
         // if(conversationAfterBattle)
@@ -1662,7 +1662,7 @@ public class UIBTL : MonoBehaviour
 
     }
 
-    public void StartShowingEndScreen(bool isVictory)
+    public virtual void StartShowingEndScreen(bool isVictory)
     {
         if (isVictory)
         {
@@ -1674,14 +1674,14 @@ public class UIBTL : MonoBehaviour
         }
     }
 
-    private void UpdatePlayerStats(int playerIndex)
+    protected virtual void UpdatePlayerStats(int playerIndex)
     {
         btlManager.UpdatePlayerStats(playerIndex);
         playerInControl.ForcePlayerTurnAnimationOff();
     }
 
 
-    private void MoveEnemyIndicatorToFirstAliveEnemy()
+    protected virtual void MoveEnemyIndicatorToFirstAliveEnemy()
     {
         //Make sure the indicator starts at an alive enemy
         for (int i = 0; i < enemiesDead.Length; i++)
@@ -1696,14 +1696,14 @@ public class UIBTL : MonoBehaviour
     }
 
     //Update the activity text
-    public void UpdateActivityText(string activity)
+    public virtual void UpdateActivityText(string activity)
     {
         Debug.Log("Update Text : " + activity);
         activtyTextBack.gameObject.SetActive(true);
         activityText.text = activity;
     }
 
-    public void DisableActivtyText()
+    public virtual void DisableActivtyText()
     {
         activityText.text = "";
         activtyTextBack.gameObject.SetActive(false);
@@ -1712,7 +1712,7 @@ public class UIBTL : MonoBehaviour
     }
 
     //Enemies call end turn upon getting hit. Make sure only one End turn is called when damaging multiple enemies.
-    public void UpdateNumberOfEndTurnsNeededToEndTurn(int rowCount)
+    public virtual void UpdateNumberOfEndTurnsNeededToEndTurn(int rowCount)
     {
         if(rowCount == 0) //Front
         {
