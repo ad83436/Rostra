@@ -1714,27 +1714,59 @@ public class UIBTL : MonoBehaviour
     {
         if(rowCount == 0) //Front
         {
-            for(int i =0;i<3;i++)
+            if (numberOfEnemies >= 3) //We start with a full front row
             {
-                if (!enemiesDead[i])
+                for (int i = 0; i < 3; i++)
                 {
-                    numberOfEndTurnCalls++;
+                    if (!enemiesDead[i])
+                    {
+                        numberOfEndTurnCalls++;
+                    }
                 }
+            }
+            else if (numberOfEnemies == 2) //We only have two enemies so they must be on the front line
+            {
+                for (int i = 0; i < 2; i++)
+                {
+                    if (!enemiesDead[i])
+                    {
+                        numberOfEndTurnCalls++;
+                    }
+                }
+            }
+            else if (numberOfEnemies == 1) //We only have one enemy so it must be on the front line
+            {
+                    if (!enemiesDead[0])
+                    {
+                        numberOfEndTurnCalls++;
+                    }
             }
         }
         else if(rowCount == 1) //Ranged
         {
-            for (int i = 3; i < 5; i++)
+            if(numberOfEnemies == 5) //We start with a full ranged row
             {
-                if (!enemiesDead[i])
+                for (int i = 3; i < 5; i++)
                 {
-                    numberOfEndTurnCalls++;
+                    if (!enemiesDead[i])
+                    {
+                        numberOfEndTurnCalls++;
+                    }
                 }
+
             }
+            if (numberOfEnemies == 4) //We start with a one enemy in the ranged row
+            {
+                    if (!enemiesDead[3])
+                    {
+                        numberOfEndTurnCalls++;
+                    }
+            }
+
         }
         else //All
         {
-            for (int i = 0; i < enemiesDead.Length; i++)
+            for (int i = 0; i < numberOfEnemies; i++)
             {
                 if (!enemiesDead[i])
                 {

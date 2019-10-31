@@ -79,7 +79,7 @@ public class Farea : Enemy
 
     public override void TakeDamage(float playerAttack, int numberOfAttacks)
     {
-       
+        Debug.Log("Number of attacks " + numberOfAttacks);
         Debug.Log("Received player attack: " + playerAttack);
         float damage = playerAttack - ((eDefence / (20.0f + eDefence)) * playerAttack);
         currentHP -= damage;
@@ -89,10 +89,7 @@ public class Farea : Enemy
         battleManager.enemies[enemyIndexInBattleManager].currentHP = currentHP; //Update the BTL manager with the new health
         HP.fillAmount = currentHP / maxHP;
 
-        if (currentState != EnemyState.waiting)
-        {
-            animator.SetBool("Hit", true);
-        }
+
 
         if (currentHP <= 0.0f)
         {
@@ -115,6 +112,15 @@ public class Farea : Enemy
             {
                 uiBTL.EndTurn(); //Only end the turn after the damage has been taken
             }
+        }
+
+        if (currentState != EnemyState.waiting)
+        {
+            animator.SetBool("Hit", true);
+        }
+        else
+        {
+            uiBTL.EndTurn(); //End the turn if you're waiting since the hit animation won't run and won't end the turn
         }
     }
 

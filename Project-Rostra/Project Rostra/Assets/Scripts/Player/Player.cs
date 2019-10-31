@@ -1107,7 +1107,7 @@ public class Player : MonoBehaviour
                             if (CalculateCrit() <= crit)
                             {
                                 Debug.Log("Skill Crit");
-                                battleManager.enemies[i].enemyReference.TakeDamage(0.7f * actualATK + skills.SkillStats(chosenSkill)[0], numberOfAttacks); //Damage is the half the player's attack stat and the skill's attack stat
+                                battleManager.enemies[i].enemyReference.TakeDamage(0.7f * actualATK + skills.SkillStats(chosenSkill)[0], numberOfAttacks); //Damage is half the player's attack stat and the skill's attack stat
                                 if (drainEye) //Check if Drain Eye is active
                                 {
                                     Heal(0.01f * (drainEyeModifier * (0.7f * actualATK + skills.SkillStats(chosenSkill)[0])));
