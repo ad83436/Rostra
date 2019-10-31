@@ -1042,6 +1042,7 @@ public class UIBTL : MonoBehaviour
     {
         if (Input.GetButtonDown("Cancel"))
         {
+            choosePlayerArrow.gameObject.SetActive(false);
             switch (playerInControl.playerIndex)
             {
                 case 0:
@@ -1250,6 +1251,7 @@ public class UIBTL : MonoBehaviour
         //Leave choosing enemy
         if (Input.GetButtonDown("Cancel"))
         {
+            chooseEnemyArrow.gameObject.SetActive(false);
             if (previousState == btlUIState.choosingBasicCommand)
             {
                 currentState = btlUIState.choosingBasicCommand;

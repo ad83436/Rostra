@@ -89,8 +89,6 @@ public class Farea : Enemy
         battleManager.enemies[enemyIndexInBattleManager].currentHP = currentHP; //Update the BTL manager with the new health
         HP.fillAmount = currentHP / maxHP;
 
-
-
         if (currentHP <= 0.0f)
         {
             if(bossPhase == 1)
@@ -118,10 +116,7 @@ public class Farea : Enemy
         {
             animator.SetBool("Hit", true);
         }
-        else
-        {
-            uiBTL.EndTurn(); //End the turn if you're waiting since the hit animation won't run and won't end the turn
-        }
+
     }
 
     private void StartPhase2()
