@@ -19,7 +19,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5545472874334993941
 RectTransform:
   m_ObjectHideFlags: 0
@@ -245,6 +245,7 @@ MonoBehaviour:
   enemyAttack: 0
   canUseSkill: 0
   enemyName: 0
+  currentState: 0
   waitTurnsText: {fileID: 3651094524988528848}
   jObj: {fileID: 395192377346664081}
   wObj: {fileID: 2868400638937215508}
@@ -287,7 +288,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4489987587665308731
 RectTransform:
   m_ObjectHideFlags: 0
@@ -365,7 +366,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6036526191240142009
 RectTransform:
   m_ObjectHideFlags: 0
@@ -654,7 +655,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7819222843790313458
 RectTransform:
   m_ObjectHideFlags: 0
@@ -783,7 +784,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2421577544985108826
 RectTransform:
   m_ObjectHideFlags: 0
@@ -852,6 +853,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Judgement
+      objectReference: {fileID: 0}
+    - target: {fileID: 1081760623716653506, guid: 6a5d45c826c7cf4408d46fe7b2fa5b62,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4032819682426105383, guid: 6a5d45c826c7cf4408d46fe7b2fa5b62,
         type: 3}
@@ -944,6 +950,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wrath
       objectReference: {fileID: 0}
+    - target: {fileID: 7322866209666608019, guid: 15662f6348e46d94cba23f1cfca6b81c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6840952368139592850, guid: 15662f6348e46d94cba23f1cfca6b81c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1024,6 +1035,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FearSymbol
+      objectReference: {fileID: 0}
+    - target: {fileID: 3189490996429706677, guid: 29ffb62263b9f3541b60a8d639cf0014,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2763351637091251739, guid: 29ffb62263b9f3541b60a8d639cf0014,
         type: 3}
@@ -1121,6 +1137,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: MothersPainIndicator
       objectReference: {fileID: 0}
+    - target: {fileID: 9165071415216830549, guid: 80f6b1ce2dda5844fbd0cbe8ffb49521,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7524259404518469788, guid: 80f6b1ce2dda5844fbd0cbe8ffb49521,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1211,6 +1232,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: WailWait
+      objectReference: {fileID: 0}
+    - target: {fileID: 5678943745060061631, guid: 92196a67c0c9cc643a2f098765d15a4f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6919235626470450892, guid: 92196a67c0c9cc643a2f098765d15a4f,
         type: 3}
