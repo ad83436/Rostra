@@ -35,6 +35,7 @@ public class PlayerMove : MonoBehaviour
 			animator.SetFloat("Horizontal", horizontalMove);
 			animator.SetFloat("Vertical", verticalMove);
 			animator.SetFloat("Speed", moveVelocity.sqrMagnitude);
+			TalkToNPC();
 		}
 		else if(dm.canWalk == false)
 		{
@@ -75,7 +76,7 @@ public class PlayerMove : MonoBehaviour
 	// this is will handle talking to the NPC 
 	public void TalkToNPC()
 	{
-		if ((dm.nextDialogue == true && dm.isActive == false) && Input.GetButtonDown("Confirm") && ct != null && ct.isChoiceDepend == false && ct.dialogue.hasPlayed == false)
+		if ((dm.nextDialogue == true && dm.isActive == false) && Input.GetButtonDown("Confirm") && ct != null && ct.isChoiceDepend == false)
 		{
 			ct.TriggerConvo();
 			Debug.Log("Talking");
