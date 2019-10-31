@@ -53,7 +53,7 @@ public class Player : MonoBehaviour
     private bool affectedByFear = false;
 
     //Tied
-    private int tiedTimer = 0; //Used to disable tied after it being used three times (damage or heal)
+    public int tiedTimer = 0; //Used to disable tied after it being used three times (damage or heal)
     private Enemy tiedToThisEnemy = null; //Should the player be tied to an enemy, the enemy should be healed by half the heal amount the player recieves when healed
 
 
@@ -233,6 +233,7 @@ public class Player : MonoBehaviour
 
         //UI
         hpImage.fillAmount = currentHP / maxHP;
+        mpImage.fillAmount = currentMP / maxMP;
         rageImage.fillAmount = currentRage / maxRage;
         damageText.gameObject.SetActive(false);
         healText.gameObject.SetActive(false);
@@ -1242,6 +1243,12 @@ public class Player : MonoBehaviour
         if (currentRage < 0.0f)
         {
             currentRage = 0.0f;
+        }
+
+        if(currentAilment == playerAilments.tied)
+        {
+            tiedToThisEnemy.HealDueToTied(healAmount);
+            tiedTimer--;
         }
 
         //Update the UI

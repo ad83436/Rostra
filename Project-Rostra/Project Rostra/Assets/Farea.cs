@@ -14,6 +14,9 @@ public class Farea : Enemy
     private Player thisPlayerIsDead; //Used as a reference for You Are Not Mine
     private Vector2 mothersPainInitialLoc = new Vector2(24.24f, -2.35f);
 
+    public GameObject deadlyTiesObject;
+
+
 
     private enum fareaSkills //Only the skills that will require waiting for a number of turns before executing
     {
@@ -81,6 +84,17 @@ public class Farea : Enemy
     {
         Debug.Log("Number of attacks " + numberOfAttacks);
         Debug.Log("Received player attack: " + playerAttack);
+        if(tieThisPlayer!=null)
+        {
+            tieThisPlayer.TakeDamage(playerAttack); //Damage the tied player should you get damaged
+            tiedTimer--;
+            tieThisPlayer.tiedTimer--;
+            if (tiedTimer <= 0)
+            {
+                tiedTimer = 0;
+                tieThisPlayer = null;
+            }
+        }
         float damage = playerAttack - ((eDefence / (20.0f + eDefence)) * playerAttack);
         currentHP -= damage;
         totalDamageSustained += damage;
@@ -229,7 +243,18 @@ public class Farea : Enemy
                     }
                     else if(attackChance >= 40.0f && attackChance < 60.0f * skillChanceModifier)
                     {
-                        //Deadly Ties
+                        if (tieThisPlayer == null)
+                        {
+                            //Deadly Ties
+                            deadlyTiesObject.gameObject.SetActive(true);
+                            tieThisPlayer = battleManager.players[Random.Range(0, 4)].playerReference;
+                            animator.SetBool("DeadlyTies", true);
+                            uiBTL.UpdateActivityText("DeadlyTies");
+                        }
+                        else
+                        {
+                            EnemyTurn(); //If you're already tied to a player, try again
+                        }
                     }
                     else if (attackChance >= 60.0f && attackChance < 70.0f) //Wails of Frailty
                     {
@@ -300,6 +325,14 @@ public class Farea : Enemy
     {
         jObj.gameObject.SetActive(true);
         wObj.gameObject.SetActive(true);
+    }
+
+    private void DeadlyTies()
+    {
+        //Affect the player and tie them
+        tieThisPlayer.TakeDamage(0.0f, 0, "", Player.playerAilments.tied, this, 0.0f, tiedTimer, false);
+        animator.SetBool("DeadlyTies", false);
+        deadlyTiesObject.gameObject.SetActive(false);
     }
 
     //Called from the animator to check which skill to execute after waiting
