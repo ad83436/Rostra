@@ -1,5 +1,183 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1354388580
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1354388583}
+  - component: {fileID: 1354388582}
+  - component: {fileID: 1354388581}
+  m_Layer: 5
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1354388583
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1354388580}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 10.505183, y: 6.2252936, z: 6.2252936}
+  m_Children: []
+  m_Father: {fileID: 2083125546}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.28344017, y: 0.6392219}
+  m_AnchorMax: {x: 0.82939655, y: 0.71358854}
+  m_AnchoredPosition: {x: 320.2279, y: -61.20353}
+  m_SizeDelta: {x: -887.4807, y: -49.032223}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &1354388582
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1354388580}
+  m_CullTransparentMesh: 0
+--- !u!114 &1354388581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1354388580}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: eada3c905db7a974895ff520ebfa27a9, type: 3}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: Press Z To Talk
+--- !u!1 &2083125545
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2083125546}
+  - component: {fileID: 2083125549}
+  - component: {fileID: 2083125548}
+  - component: {fileID: 2083125547}
+  m_Layer: 5
+  m_Name: NPCCanvas (5)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2083125546
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2083125545}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.0005074075, y: 0.0010962965, z: 0.00296}
+  m_Children:
+  - {fileID: 1354388583}
+  m_Father: {fileID: 4009531185347760042}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 1920, y: 1080}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!223 &2083125549
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2083125545}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
+--- !u!114 &2083125548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2083125545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_UiScaleMode: 0
+  m_ReferencePixelsPerUnit: 100
+  m_ScaleFactor: 1
+  m_ReferenceResolution: {x: 800, y: 600}
+  m_ScreenMatchMode: 0
+  m_MatchWidthOrHeight: 0
+  m_PhysicalUnit: 3
+  m_FallbackScreenDPI: 96
+  m_DefaultSpriteDPI: 96
+  m_DynamicPixelsPerUnit: 1
+--- !u!114 &2083125547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2083125545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1 &4009531185347760040
 GameObject:
   m_ObjectHideFlags: 0
@@ -16,6 +194,7 @@ GameObject:
   - component: {fileID: 6941273051793765718}
   - component: {fileID: 6941273051793765719}
   - component: {fileID: 6941273051793765704}
+  - component: {fileID: 189502064}
   m_Layer: 0
   m_Name: Grendol
   m_TagString: NPC
@@ -33,7 +212,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -12.35, y: 2.86, z: -1.302734}
   m_LocalScale: {x: 2.7, y: 2.7, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 2083125546}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -75,8 +255,7 @@ SpriteRenderer:
   m_SortingLayerID: 2047630865
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 4610488278177085407, guid: 50f4b7377c128454583453c8d25bc774,
-    type: 3}
+  m_Sprite: {fileID: 479869884243140772, guid: 45834460d99aa374ab7910e41f9c556d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -104,7 +283,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.19, y: 0.29}
+    oldSize: {x: 0.17, y: 0.3}
     newSize: {x: 0.19, y: 0.29}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -130,7 +309,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.19, y: 0.29}
+    oldSize: {x: 0.17, y: 0.3}
     newSize: {x: 0.19, y: 0.29}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -172,9 +351,11 @@ MonoBehaviour:
     willCount: 0
     maxWillCount: 0
     isBattle: 0
+    triggerBool: 0
+    isOneShot: 0
   choiceCare: 4
   isChoiceDepend: 1
-  isOneShot: 0
+  pressZ: {fileID: 1354388581}
 --- !u!114 &6941273051793765718
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,9 +393,11 @@ MonoBehaviour:
     willCount: 0
     maxWillCount: 0
     isBattle: 0
+    triggerBool: 0
+    isOneShot: 0
   choiceCare: 0
   isChoiceDepend: 0
-  isOneShot: 0
+  pressZ: {fileID: 0}
 --- !u!114 &6941273051793765719
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -258,7 +441,7 @@ MonoBehaviour:
       fall victim to those monsters.
     - We all want to do every thing we can to help him. Do you know where we can look?
     - 'This is where we will end it off to avoid spoilers. Go to the door of the tavern
-      to continue the story. '
+      to continue the demo. '
     portrait:
     - {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825, type: 3}
     - {fileID: 21300000, guid: 26feff2f0d4e92349a70bba8a0c18d31, type: 3}
@@ -296,14 +479,16 @@ MonoBehaviour:
     choiceCare2: {fileID: 0}
     choiceText1: 
     choiceText2: 
-    normal: {fileID: 0}
+    normal: {fileID: 189502064}
     hasPlayed: 0
     willCount: 0
     maxWillCount: 0
     isBattle: 0
+    triggerBool: 6
+    isOneShot: 1
   choiceCare: 0
   isChoiceDepend: 0
-  isOneShot: 0
+  pressZ: {fileID: 0}
 --- !u!114 &6941273051793765704
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -343,6 +528,50 @@ MonoBehaviour:
     willCount: 0
     maxWillCount: 0
     isBattle: 0
+    triggerBool: 0
+    isOneShot: 0
   choiceCare: 0
   isChoiceDepend: 0
-  isOneShot: 0
+  pressZ: {fileID: 0}
+--- !u!114 &189502064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4009531185347760040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43509005be49f1c4f973fd54f9269559, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogue:
+    names:
+    - 
+    sentences:
+    - 'This is where we will end it off to avoid spoilers. Go to the door of the tavern
+      to continue the demo. '
+    portrait:
+    - {fileID: 21300000, guid: dd3d4b940a009d14dbfe8b78c3b4f6ca, type: 3}
+    povChange: []
+    typingSpeed: 0
+    isChoice: 0
+    choiceLine: 0
+    choice1: {fileID: 0}
+    choice2: {fileID: 0}
+    willRemember: 0
+    choiceSet: 0
+    choiceCare1: {fileID: 0}
+    choiceCare2: {fileID: 0}
+    choiceText1: 
+    choiceText2: 
+    normal: {fileID: 0}
+    hasPlayed: 0
+    willCount: 0
+    maxWillCount: 0
+    isBattle: 0
+    triggerBool: 0
+    isOneShot: 0
+  choiceCare: 0
+  isChoiceDepend: 0
+  pressZ: {fileID: 0}
