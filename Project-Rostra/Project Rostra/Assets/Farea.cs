@@ -68,6 +68,7 @@ public class Farea : Enemy
         wailWait.gameObject.SetActive(false);
         lullWait.gameObject.SetActive(false);
         mothersPainWait.gameObject.SetActive(false);
+        deadlyTiesObject.gameObject.SetActive(false);
 
         statToDebuff = new string[2];
         statToDebuff[0] = "Defense";
@@ -88,10 +89,10 @@ public class Farea : Enemy
         {
             tieThisPlayer.TakeDamage(playerAttack); //Damage the tied player should you get damaged
             tiedTimer--;
-            tieThisPlayer.tiedTimer--;
             if (tiedTimer <= 0)
             {
                 tiedTimer = 0;
+                tieThisPlayer.Untie();
                 tieThisPlayer = null;
             }
         }
@@ -229,7 +230,7 @@ public class Farea : Enemy
                         }
                     }
                     //attackChance = Random.Range(0.0f, 100.0f);
-                    attackChance = 30; //Testing
+                    attackChance = 50; //Testing
                     if(attackChance>= 0.0f && attackChance < 20.0f * skillChanceModifier && isThereADeadPlayer)
                     {
                         //You are not mine
@@ -248,6 +249,7 @@ public class Farea : Enemy
                             //Deadly Ties
                             deadlyTiesObject.gameObject.SetActive(true);
                             tieThisPlayer = battleManager.players[Random.Range(0, 4)].playerReference;
+                            tiedTimer = 4;
                             animator.SetBool("DeadlyTies", true);
                             uiBTL.UpdateActivityText("DeadlyTies");
                         }
@@ -333,6 +335,7 @@ public class Farea : Enemy
         tieThisPlayer.TakeDamage(0.0f, 0, "", Player.playerAilments.tied, this, 0.0f, tiedTimer, false);
         animator.SetBool("DeadlyTies", false);
         deadlyTiesObject.gameObject.SetActive(false);
+        uiBTL.EndTurn();
     }
 
     //Called from the animator to check which skill to execute after waiting

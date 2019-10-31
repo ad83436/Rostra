@@ -53,8 +53,8 @@ public class Player : MonoBehaviour
     private bool affectedByFear = false;
 
     //Tied
-    public int tiedTimer = 0; //Used to disable tied after it being used three times (damage or heal)
     private Enemy tiedToThisEnemy = null; //Should the player be tied to an enemy, the enemy should be healed by half the heal amount the player recieves when healed
+    public GameObject tiedSymbol;
 
 
     //Queue
@@ -157,7 +157,7 @@ public class Player : MonoBehaviour
     private float actualAgi;
     private float actualCRIT;
     private float actualSTR;
-    public bool healable; //False when dead and in rage mode
+    public bool healable; //False when dead or in rage mode
 
     //Targeted enemy info
     private Enemy attackingThisEnemy;
@@ -250,6 +250,7 @@ public class Player : MonoBehaviour
 
         //Ailments
         fearSymbol.gameObject.SetActive(false);
+        tiedSymbol.gameObject.SetActive(false);
     }
 
     private void Update()
@@ -599,8 +600,8 @@ public class Player : MonoBehaviour
                         break;
                     case playerAilments.tied:
                         currentAilment = playerAilments.tied;
-                        tiedTimer = debuffTimer;
                         tiedToThisEnemy = enemyReference;
+                        tiedSymbol.gameObject.SetActive(true);
                         break;
                 }
                 break;
@@ -1248,7 +1249,6 @@ public class Player : MonoBehaviour
         if(currentAilment == playerAilments.tied)
         {
             tiedToThisEnemy.HealDueToTied(healAmount);
-            tiedTimer--;
         }
 
         //Update the UI
@@ -1512,6 +1512,11 @@ public class Player : MonoBehaviour
                 {
                     healText.gameObject.SetActive(true);
                     healText.text = value.ToString();
+
+                    if(currentAilment == playerAilments.tied) //If the player is tied to an enemy, that enemy should be healed as well
+                    {
+                        tiedToThisEnemy.HealDueToTied(value);
+                    }
                 }
                 break;
             case "MP":
@@ -1682,6 +1687,12 @@ public class Player : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    public void Untie()
+    {
+        tiedSymbol.gameObject.SetActive(false);
+        currentAilment = playerAilments.none;
     }
 
     #endregion
