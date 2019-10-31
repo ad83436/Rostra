@@ -7,6 +7,11 @@ public enum EnemyClassType
     Tank,
     Support
 };
+public enum EnemyState
+{
+    idle,
+    waiting
+};
 
 public enum EnemyAttackType
 {
