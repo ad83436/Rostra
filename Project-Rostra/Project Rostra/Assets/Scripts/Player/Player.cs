@@ -140,6 +140,7 @@ public class Player : MonoBehaviour
     //UI
     public Image hpImage;
     public Image rageImage;
+    public Image mpImage;
     public Text damageText;
     public Text healText;
     public Text mpText;
@@ -729,6 +730,7 @@ public class Player : MonoBehaviour
             BuffStats("Strength", skills.SkillStats(chosenSkill)[0], 3);
             chosenSkill = (int)SKILLS.NO_SKILL;
             currentMP -= mpCost;
+            mpImage.fillAmount = currentMP / maxMP;
             battleManager.players[playerIndex].currentMP = currentMP;
             PartyStats.chara[playerIndex].magicpoints = currentMP;
             uiBTL.UpdatePlayerMPControlPanel();
@@ -813,6 +815,7 @@ public class Player : MonoBehaviour
                 playerAnimator.SetBool("Turn", false);
                 skillAnimatorName = "Attack";
                 currentMP -= mpCost;
+                mpImage.fillAmount = currentMP / maxMP;
                 battleManager.players[playerIndex].currentMP = currentMP;
                 PartyStats.chara[playerIndex].magicpoints = currentMP;
                 break;
@@ -1204,6 +1207,7 @@ public class Player : MonoBehaviour
         //Claculate the new MP and reset the player's state
         chosenSkill = (int)SKILLS.NO_SKILL;
         currentMP -= mpCost;
+        mpImage.fillAmount = currentMP / maxMP;
         battleManager.players[playerIndex].currentMP = currentMP;
         PartyStats.chara[playerIndex].magicpoints = currentMP;
         uiBTL.UpdatePlayerMPControlPanel();
