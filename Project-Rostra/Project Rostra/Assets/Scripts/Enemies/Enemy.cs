@@ -1912,6 +1912,7 @@ public class Enemy : MonoBehaviour
         if (tiedTimer <= 0)
         {
             tiedTimer = 0;
+            tieThisPlayer.Untie();
             tieThisPlayer = null;
         }
     }

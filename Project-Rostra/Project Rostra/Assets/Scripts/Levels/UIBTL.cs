@@ -969,7 +969,7 @@ public class UIBTL : MonoBehaviour
                     }
                 }
 
-                //Check if we're at the last three items -->This should be changed to work with the inventory count. Will change once we decide on the inventory count
+                //Check if we're at the last three items
                 if (itemsPanelIndex >= inventory.consumableInv.Count - 3)
                 {
                     downArrow.gameObject.SetActive(false);
