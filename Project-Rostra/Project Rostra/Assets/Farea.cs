@@ -12,6 +12,7 @@ public class Farea : Enemy
     private float totalDamageThreshold = 400.0f; //When the Farea has sustained 300 or more damage and is in phase 2, it will do Mother's Pain Next
     private float skillChanceModifier = 1.0f; //Used in phase 2 to prioritize certain skills depending on the situation
     private Player thisPlayerIsDead; //Used as a reference for You Are Not Mine
+    private Vector2 mothersPainInitialLoc = new Vector2(24.24f, -2.35f);
 
 
     private enum fareaSkills //Only the skills that will require waiting for a number of turns before executing
@@ -350,7 +351,7 @@ public class Farea : Enemy
                     {
                         battleManager.players[i].playerReference.TakeDamage(0.5f* totalDamageSustained); //Damage the players with half the totalDamageSustained
 
-                        objPooler.SpawnFromPool("MothersPain", gameObject.transform.position, gameObject.transform.rotation);
+                        objPooler.SpawnFromPool("MothersPain", mothersPainInitialLoc, gameObject.transform.rotation);
                     }
                 }
                 totalDamageSustained = 0.0f; //Reset the variable
