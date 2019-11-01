@@ -69,6 +69,7 @@ public class Farea : Enemy
         lullWait.gameObject.SetActive(false);
         mothersPainWait.gameObject.SetActive(false);
         deadlyTiesObject.gameObject.SetActive(false);
+        chain.gameObject.SetActive(false);
 
         statToDebuff = new string[2];
         statToDebuff[0] = "Defense";
@@ -93,6 +94,7 @@ public class Farea : Enemy
             {
                 tiedTimer = 0;
                 tieThisPlayer.Untie();
+                chain.gameObject.SetActive(false);
                 tieThisPlayer = null;
             }
         }
@@ -248,6 +250,7 @@ public class Farea : Enemy
                         {
                             //Deadly Ties
                             deadlyTiesObject.gameObject.SetActive(true);
+                            chain.gameObject.SetActive(true);
                             tieThisPlayer = battleManager.players[Random.Range(0, 4)].playerReference;
                             tiedTimer = 4;
                             animator.SetBool("DeadlyTies", true);

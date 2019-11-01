@@ -74,6 +74,7 @@ public class Enemy : MonoBehaviour
     protected Player tieThisPlayer;
     protected int tiedTimer = 4; //Used to nullify the tied player reference whenever the Farea takes damage or gets healed
     public GameObject healthObject;
+    public GameObject chain;
 
     protected void Awake()
     {
@@ -1913,6 +1914,7 @@ public class Enemy : MonoBehaviour
         {
             tiedTimer = 0;
             tieThisPlayer.Untie();
+            chain.gameObject.SetActive(false);
             tieThisPlayer = null;
         }
     }
