@@ -61,7 +61,10 @@ public class PlayerMove : MonoBehaviour
 		{
             Debug.Log("CONVERSING CAN DO");
 			ct = col.GetComponent<ConversationTrigger>();
-			
+			if (ct.pressZ != null)
+			{
+				ct.SetPressZ(true);
+			}
 		}
 	}
 	// set your CT to null once you exit the range of the NPC
@@ -69,8 +72,13 @@ public class PlayerMove : MonoBehaviour
 	{
 		if (col.CompareTag("NPC") && col.GetComponent<ConversationTrigger>() == ct)
 		{
+			if (ct.pressZ != null)
+			{
+				ct.SetPressZ(false);
+			}
 			ct = null;
 			Debug.Log(col.GetComponent<ConversationTrigger>());
+			
 		}
 	}
 	// this is will handle talking to the NPC 
