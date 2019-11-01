@@ -251,7 +251,7 @@ public class Farea : Enemy
                             //Deadly Ties
                             deadlyTiesObject.gameObject.SetActive(true);
                             chain.gameObject.SetActive(true);
-                            tieThisPlayer = battleManager.players[Random.Range(0, 4)].playerReference;
+                            TieAPlayer();
                             tiedTimer = 4;
                             animator.SetBool("DeadlyTies", true);
                             uiBTL.UpdateActivityText("DeadlyTies");
@@ -339,6 +339,15 @@ public class Farea : Enemy
         animator.SetBool("DeadlyTies", false);
         deadlyTiesObject.gameObject.SetActive(false);
         uiBTL.EndTurn();
+    }
+
+    private void TieAPlayer()
+    {
+        tieThisPlayer = battleManager.players[Random.Range(0, 4)].playerReference;
+        if(tieThisPlayer.dead)
+        {
+            TieAPlayer(); //Make sure whatever player you choose is alive
+        }
     }
 
     //Called from the animator to check which skill to execute after waiting
