@@ -1266,6 +1266,7 @@ public class Player : MonoBehaviour
         EnableEffect("MP", 0);
         float mpAmount = percentage * maxMP;
         currentMP += mpAmount;
+        mpImage.fillAmount = currentMP / maxMP;
         mpText.gameObject.SetActive(true);
         mpText.text = Mathf.RoundToInt(mpAmount).ToString();
         battleManager.players[playerIndex].currentMP = currentMP;
