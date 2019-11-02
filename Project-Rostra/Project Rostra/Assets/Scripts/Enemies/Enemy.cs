@@ -1919,5 +1919,12 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    public virtual void Heal(float healAmount)
+    {
+        currentHP += healAmount;
+        HP.fillAmount = currentHP / maxHP;
+        healthObject.gameObject.SetActive(true);
+    }
+
 }
 

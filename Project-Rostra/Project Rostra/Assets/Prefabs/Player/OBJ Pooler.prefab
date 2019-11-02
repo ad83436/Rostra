@@ -99,3 +99,7 @@ MonoBehaviour:
     prefab: {fileID: 1388415331812066116, guid: 617d55a520be2554fa236753192cd359,
       type: 3}
     poolSize: 1
+  - tag: YouAreNotMine
+    prefab: {fileID: 4187284173816479600, guid: dff8bfe313004a541a606d41c686d042,
+      type: 3}
+    poolSize: 1
