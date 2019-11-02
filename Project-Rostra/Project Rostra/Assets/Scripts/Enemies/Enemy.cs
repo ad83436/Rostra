@@ -68,7 +68,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected EnemyState currentState;
     protected int waitQTurns = 0; //Update this when you want a skill to have wait time
     public Text waitTurnsText;
-
+   
     protected void Awake()
     {
         print("Very First  " + currentHP);
@@ -76,7 +76,6 @@ public class Enemy : MonoBehaviour
         AssingClassSkills(this);
         GiveNamesAndSkills();
     }
-
     protected virtual void Start()
     {
         print("First" + currentHP);
@@ -130,7 +129,6 @@ public class Enemy : MonoBehaviour
     /// HEY LISTEN !!!!!!!! Feel Free Change the values in EnemyTurn if you must do so, as these are all test values sho like a good tweaking now and then.
     /// </summary>
     /// 
-
     public virtual void EnemyTurn()
     {
         uiBTL.DisableActivtyText();
@@ -144,9 +142,7 @@ public class Enemy : MonoBehaviour
             {
                 //waitTurnsText.gameObject.SetActive(false); //Turn off the text. Don't forget to enable it when the enemy goes to waiting state
                 MakeSkillsWork(canUseSkill);
-                waitQTurns = waitTimeAtStart;
-                waitTime = waitTimeAtStart;
-                currentState = EnemyState.idle;
+             
                 //Execute skill here 
             }
 
@@ -174,7 +170,7 @@ public class Enemy : MonoBehaviour
                             print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
                             currentState = EnemyState.waiting;
                             waitQTurns = waitTime;
-                            Wait(true);
+                            animator.SetBool("isWaiting", true);
                             EndTurn();
                         }
 
@@ -193,7 +189,7 @@ public class Enemy : MonoBehaviour
                                 print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
                                 currentState = EnemyState.waiting;
                                 waitQTurns = waitTime;
-                                Wait(true);
+                                animator.SetBool("isWaiting", true);
                                 EndTurn();
                             }
 
@@ -210,7 +206,7 @@ public class Enemy : MonoBehaviour
                                 print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
                                 currentState = EnemyState.waiting;
                                 waitQTurns = waitTime;
-                                Wait(true);
+                                animator.SetBool("isWaiting", true);
                                 EndTurn();
                             }
 
@@ -231,7 +227,7 @@ public class Enemy : MonoBehaviour
                                 print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
                                 currentState = EnemyState.waiting;
                                 waitQTurns = waitTime;
-                                Wait(true);
+                                animator.SetBool("isWaiting", true);
                                 EndTurn();
                             }
 
@@ -250,7 +246,7 @@ public class Enemy : MonoBehaviour
                                 print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
                                 currentState = EnemyState.waiting;
                                 waitQTurns = waitTime;
-                                Wait(true);
+                                animator.SetBool("isWaiting", true);
                                 EndTurn();
                             }
 
@@ -271,7 +267,7 @@ public class Enemy : MonoBehaviour
                                 print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
                                 currentState = EnemyState.waiting;
                                 waitQTurns = waitTime;
-                                Wait(true);
+                                animator.SetBool("isWaiting", true);
                                 EndTurn();
                             }
 
@@ -288,7 +284,7 @@ public class Enemy : MonoBehaviour
                                 print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
                                 currentState = EnemyState.waiting;
                                 waitQTurns = waitTime;
-                                Wait(true);
+                                animator.SetBool("isWaiting", true);
                                 EndTurn();
                             }
 
@@ -306,7 +302,7 @@ public class Enemy : MonoBehaviour
                             print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
                             currentState = EnemyState.waiting;
                             waitQTurns = waitTime;
-                            Wait(true);
+                            animator.SetBool("isWaiting", true);
                             EndTurn();
                         }
 
@@ -323,7 +319,7 @@ public class Enemy : MonoBehaviour
                             print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
                             currentState = EnemyState.waiting;
                             waitQTurns = waitTime;
-                            Wait(true);
+                            animator.SetBool("isWaiting", true);
                             EndTurn();
                         }
 
@@ -342,7 +338,7 @@ public class Enemy : MonoBehaviour
                                 print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
                                 currentState = EnemyState.waiting;
                                 waitQTurns = waitTime;
-                                Wait(true);
+                                animator.SetBool("isWaiting", true);
                                 EndTurn();
                             }
 
@@ -360,7 +356,7 @@ public class Enemy : MonoBehaviour
                                 print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
                                 currentState = EnemyState.waiting;
                                 waitQTurns = waitTime;
-                                Wait(true);
+                                animator.SetBool("isWaiting", true);
                                 EndTurn();
                             }
 
@@ -385,7 +381,7 @@ public class Enemy : MonoBehaviour
                                 print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
                                 currentState = EnemyState.waiting;
                                 waitQTurns = waitTime;
-                                Wait(true);
+                                animator.SetBool("isWaiting", true);
                                 EndTurn();
                             }
 
@@ -430,7 +426,6 @@ public class Enemy : MonoBehaviour
             }
         }
     }
-
     //Calculate whether the attack is a hit or a miss
     protected virtual void CalculateHit()
     {
@@ -1270,53 +1265,8 @@ public class Enemy : MonoBehaviour
             #region ground smash skill
             case AllEnemySkills.Ground_Smash:
 
-                Wait(false);
+                animator.SetBool("isWaiting", false);
                 animator.SetBool("SkillInUse", true);
-
-                if (randomRow == 0)
-                {
-                    print("Picked Back Row");
-
-                    AttackOberon(eAttack * 1.5f);
-                    print("Attacked" + attackThisPlayer.name);
-
-
-                    AttackFrea(eAttack * 1.5f);
-                    print("Then Attacked " + attackThisPlayer.name);
-                    attackThisPlayer.TakeDamage(eAttack * 1.5f);
-
-                    attackThisPlayer = battleManager.players[1].playerReference;
-                    print("Attacked" + attackThisPlayer.nameOfCharacter);
-                    attackThisPlayer.TakeDamage(eAttack);
-
-                    attackThisPlayer = battleManager.players[2].playerReference;
-                    print("Then Attacked " + attackThisPlayer.nameOfCharacter);
-                    attackThisPlayer.TakeDamage(eAttack);
-
-                }
-
-                else if (randomRow == 1)
-                {
-                    print("Picked Back Row");
-
-                    AttackFargas(eAttack * 1.5f);
-                    print("Attacked" + attackThisPlayer.name);
-
-                    AttackArcelus(eAttack * 1.5f);
-                    print("Then Attacked " + attackThisPlayer.name);
-                    attackThisPlayer.TakeDamage(eAttack * 1.5f);
-
-                    attackThisPlayer = battleManager.players[0].playerReference;
-                    print("Attacked" + attackThisPlayer.nameOfCharacter);
-                    attackThisPlayer.TakeDamage(eAttack);
-
-                    attackThisPlayer = battleManager.players[3].playerReference;
-                    print("Then Attacked " + attackThisPlayer.nameOfCharacter);
-                    attackThisPlayer.TakeDamage(eAttack);
-
-                }
-
-                //uiBTL.EndTurn();
                 break;
             #endregion
             //Skill that hits a player random amount of time 
@@ -1685,7 +1635,7 @@ public class Enemy : MonoBehaviour
             print(playerIndexHolder);
         }
     } //choose a player for Relentless Enemy 
-    // pick a random index.. if there is a better way please let me know 
+    // pick a random index
     int PickRandomNumber(int value_0, int value_1)
     {
         int pickedValue;
@@ -1852,10 +1802,6 @@ public class Enemy : MonoBehaviour
     }
     //these ones above
     /////////////////////////////////////////////////////////////////////////////////////////////////////
-    void Wait(bool play)
-    {
-        animator.SetBool("isWaiting", play);
-    }
     void PickPlayer(int playerindex)
     {
         attackThisPlayer = battleManager.players[playerindex].playerReference;
@@ -1875,15 +1821,60 @@ public class Enemy : MonoBehaviour
     }
     void EndSkill()
     {
-        animator.SetBool("SkillInUse", false);
+        currentState = EnemyState.idle;
         EndTurn();
+        waitQTurns = waitTimeAtStart;
+        waitTime = waitTimeAtStart;
+        animator.SetBool("SkillInUse", false);
+    }
+    void GroundSmashSkill()
+    {
+        int randomRow = Random.Range(0, 1);
+        
+
+        if (randomRow == 0)
+        {
+            print("Picked Back Row");
+
+            AttackOberon(eAttack * 1.5f);
+            print("Attacked" + attackThisPlayer.name);
+
+
+            AttackFrea(eAttack * 1.5f);
+            print("Then Attacked " + attackThisPlayer.name);
+            attackThisPlayer.TakeDamage(eAttack * 1.5f);
+
+            attackThisPlayer = battleManager.players[1].playerReference;
+            print("Attacked" + attackThisPlayer.nameOfCharacter);
+            attackThisPlayer.TakeDamage(eAttack);
+
+            attackThisPlayer = battleManager.players[2].playerReference;
+            print("Then Attacked " + attackThisPlayer.nameOfCharacter);
+            attackThisPlayer.TakeDamage(eAttack);
+
+        }
+
+        else if (randomRow == 1)
+        {
+            print("Picked Back Row");
+
+            AttackFargas(eAttack * 1.5f);
+            print("Attacked" + attackThisPlayer.name);
+
+            AttackArcelus(eAttack * 1.5f);
+            print("Then Attacked " + attackThisPlayer.name);
+            attackThisPlayer.TakeDamage(eAttack * 1.5f);
+
+            attackThisPlayer = battleManager.players[0].playerReference;
+            print("Attacked" + attackThisPlayer.nameOfCharacter);
+            attackThisPlayer.TakeDamage(eAttack);
+
+            attackThisPlayer = battleManager.players[3].playerReference;
+            print("Then Attacked " + attackThisPlayer.nameOfCharacter);
+            attackThisPlayer.TakeDamage(eAttack);
+        }
     }
 
-    void EndGroundSmashSkill()
-    {
-        animator.SetBool("SkillInUse", false);
-        EndTurn();
-    }
     protected void Death()
     {
         if (!dead)
