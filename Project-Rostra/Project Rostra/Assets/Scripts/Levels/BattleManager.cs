@@ -67,7 +67,7 @@ public class BattleManager : MonoBehaviour
     //At the beginning of each battle, each player and enemy will use the singleton to update their stats
     #region singleton
 
-    private void Awake()
+    protected virtual void Awake()
     {
         if (instance == null)
         {
@@ -113,7 +113,7 @@ public class BattleManager : MonoBehaviour
 
     #endregion
 
-    private void Start()
+    protected virtual void Start()
     {
        // Debug.Log("BTL Start");
         uiBtl = UIBTL.instance;
@@ -135,7 +135,7 @@ public class BattleManager : MonoBehaviour
     }
 
 
-    private void Update()
+    protected virtual void Update()
     {
        // Debug.Log(numberOfPlayers);
         //Number of players is decreased by the player scripts
@@ -166,7 +166,7 @@ public class BattleManager : MonoBehaviour
     }
 
     //Called at the beginning of the battle to store references to current enemies. Needed to be able to update the queue
-    public void AddEnemy(int enemyIndex, int agi, int str, int crit, int speed, int currentHp, int maxHp, Enemy enemyRef, string name)
+    public virtual void AddEnemy(int enemyIndex, int agi, int str, int crit, int speed, int currentHp, int maxHp, Enemy enemyRef, string name)
     {
             enemies[enemyIndex].playerIndex = enemyIndex;
             enemies[enemyIndex].agi = agi;
@@ -196,7 +196,7 @@ public class BattleManager : MonoBehaviour
         uiBtl.enemies[enemyIndex] = enemyRef; //Update the UI system with the enemy
     }
 
-    public void StartBattle()
+    public virtual void StartBattle()
     {
 
         //Store and sort the agilities of the players and enemies in ascending order
@@ -239,7 +239,7 @@ public class BattleManager : MonoBehaviour
 
     }
 
-    public void NextOnQueue()
+    public virtual void NextOnQueue()
     {
         //Check if the next on Q is a player or an enemy and call the correct function
         if (battleQueue[0].playerReference != null && battleQueue[0].enemyReference == null)
@@ -257,7 +257,7 @@ public class BattleManager : MonoBehaviour
         battleQueue.RemoveAt(0);
     }
 
-    public void BuildQueue()
+    public virtual void BuildQueue()
     {
         //Compare the player with the highest speed to the enemy with the highest speed
         if (pSpeeds.Count > 0)
@@ -381,7 +381,7 @@ public class BattleManager : MonoBehaviour
 
 
     //Called by each player at the end of each battle
-    public void EndOfBattle(bool victory)
+    public virtual void EndOfBattle(bool victory)
     {
         battleHasEnded = true;
         battleInProgress = false;
@@ -411,7 +411,7 @@ public class BattleManager : MonoBehaviour
     }
 
     //Called by the exp manager on awake and when the player's level changes
-    public void UpdateFromExp(int playerIndex, int currentExp, int maxExp)
+    public virtual void UpdateFromExp(int playerIndex, int currentExp, int maxExp)
     {
         players[playerIndex].exp = currentExp;
         players[playerIndex].expNeededForNextLevel = maxExp;
@@ -420,7 +420,7 @@ public class BattleManager : MonoBehaviour
     }
     
 
-    public void LevelUp(int playerIndex)
+    public virtual void LevelUp(int playerIndex)
     {
         //Called from the Victory Screen
         //The new EXP is what remains after reaching the new level
@@ -436,7 +436,7 @@ public class BattleManager : MonoBehaviour
         Debug.Log("You need this much to level up again! " + players[playerIndex].expNeededForNextLevel);
     }
 
-    public void UpdatePlayerStats(int playerIndex)
+    public virtual void UpdatePlayerStats(int playerIndex)
     {
         players[playerIndex].currentHP = PartyStats.chara[playerIndex].hitpoints;
         players[playerIndex].maxHP = PartyStats.chara[playerIndex].TotalMaxHealth;
@@ -452,7 +452,7 @@ public class BattleManager : MonoBehaviour
         players[playerIndex].expNeededForNextLevel = PartyStats.chara[playerIndex].neededExperience;
     }
 
-    private void TellInventoryToUpdateConsumables()
+    protected virtual void TellInventoryToUpdateConsumables()
     {
 
         var length = MainInventory.INVENTORY_SIZE;

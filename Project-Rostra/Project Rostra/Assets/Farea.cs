@@ -5,11 +5,19 @@ using UnityEngine;
 public class Farea : Enemy
 {
 
-    private int attackChance = 0; //Used to determine whether a skil or a normal attack will be used.
+    private float attackChance = 0; //Used to determine whether a skil or a normal attack will be used.
     private bool isThereADeadPlayer = false; //One of the Farea's skills relies on one of the players being dead
     private int bossPhase = 1; //Used to know which skills are available for the boss to use at which phase
     private float totalDamageSustained = 0.0f; //Used for Mother's Pain Skill. Becomes zero after the skill is used
-    private float totalDamageThreshold = 300.0f; //When the Farea has sustained 300 or more damage and is in phase 2, it will do Mother's Pain Next
+    private float totalDamageThreshold = 400.0f; //When the Farea has sustained 300 or more damage and is in phase 2, it will do Mother's Pain Next
+    private float skillChanceModifier = 1.0f; //Used in phase 2 to prioritize certain skills depending on the situation
+    private Player thisPlayerIsDead; //Used as a reference for You Are Not Mine
+    private Vector2 mothersPainInitialLoc = new Vector2(24.24f, -2.35f);
+
+    public GameObject deadlyTiesObject;
+
+    private bool youAreNotMineUsedOnceThisFight = false; 
+
 
 
     private enum fareaSkills //Only the skills that will require waiting for a number of turns before executing
@@ -35,6 +43,12 @@ public class Farea : Enemy
     //Lullaby
     public GameObject lullWait;
 
+    //MothersPain
+    public GameObject mothersPainWait;
+
+    //You Are Not Mine
+    public GameObject youAreNotMineObject;
+
 
     protected override void Start()
     {
@@ -58,6 +72,10 @@ public class Farea : Enemy
         wObj.gameObject.SetActive(false);
         wailWait.gameObject.SetActive(false);
         lullWait.gameObject.SetActive(false);
+        mothersPainWait.gameObject.SetActive(false);
+        deadlyTiesObject.gameObject.SetActive(false);
+        chain.gameObject.SetActive(false);
+        youAreNotMineObject.gameObject.SetActive(false);
 
         statToDebuff = new string[2];
         statToDebuff[0] = "Defense";
@@ -72,15 +90,27 @@ public class Farea : Enemy
 
     public override void TakeDamage(float playerAttack, int numberOfAttacks)
     {
-       
+        Debug.Log("Number of attacks " + numberOfAttacks);
         Debug.Log("Received player attack: " + playerAttack);
+        if(tieThisPlayer!=null)
+        {
+            tieThisPlayer.TakeDamage(playerAttack); //Damage the tied player should you get damaged
+            tiedTimer--;
+            if (tiedTimer <= 0)
+            {
+                tiedTimer = 0;
+                tieThisPlayer.Untie();
+                chain.gameObject.SetActive(false);
+                tieThisPlayer = null;
+            }
+        }
         float damage = playerAttack - ((eDefence / (20.0f + eDefence)) * playerAttack);
         currentHP -= damage;
+        totalDamageSustained += damage;
         damageText.gameObject.SetActive(true);
         damageText.text = Mathf.RoundToInt(damage).ToString();
         battleManager.enemies[enemyIndexInBattleManager].currentHP = currentHP; //Update the BTL manager with the new health
         HP.fillAmount = currentHP / maxHP;
-        animator.SetBool("Hit", true);
 
         if (currentHP <= 0.0f)
         {
@@ -104,6 +134,25 @@ public class Farea : Enemy
                 uiBTL.EndTurn(); //Only end the turn after the damage has been taken
             }
         }
+
+        if (currentState != EnemyState.waiting)
+        {
+            animator.SetBool("Hit", true);
+        }
+
+        if(currentHP < 0.5f*maxHP)
+        {
+            //If the current health is less than half the max health, then make it more probable to use You Are Not Mine
+            //If you have not used it yet
+            if (!youAreNotMineUsedOnceThisFight)
+            {
+                Debug.Log("Farea current HP: " + currentHP);
+                Debug.Log("Farea max HP: " + maxHP);
+
+                skillChanceModifier = 2.0f;
+            }
+        }
+
     }
 
     private void StartPhase2()
@@ -120,6 +169,8 @@ public class Farea : Enemy
         HP.fillAmount = 1.0f;
         animator.SetBool("Hit", false);
         animator.SetBool("Death", false);
+        animator.SetInteger("WaitingIndex", 0);
+        waitTurnsText.gameObject.SetActive(false);
     }
 
     public override void EnemyTurn()
@@ -127,6 +178,7 @@ public class Farea : Enemy
         //Check if we're waiting on a skill first
         if (currentState == EnemyState.waiting)
         {
+            
             waitQTurns--;
             waitTurnsText.text = waitQTurns.ToString(); //Update the UI
             if (waitQTurns <= 0)
@@ -145,29 +197,29 @@ public class Farea : Enemy
         else
         {
                 //Only update the attackChance when no skill is on the waiting list
-                attackChance = Random.Range(0, 100);
-               // attackChance = 80; //Testing
+                attackChance = Random.Range(0.0f, 100.0f);
+                //attackChance = 30; //Testing
 
             if (bossPhase == 1)
             {
-                if (attackChance >= 0 && attackChance < 10) //Normal attack
+                if (attackChance >= 0.0f && attackChance < 10.0f) //Normal attack
                 {
                     DumbAttack();
                 }
-                else if (attackChance >= 10 && attackChance < 40) //Wails of Frailty
+                else if (attackChance >= 10.0f && attackChance < 40.0f) //Wails of Frailty
                 {
                     GoToWaitState(fareaSkills.wails, 2, 2);
                     //Summon skill effect
                     wailWait.gameObject.SetActive(true);
                     uiBTL.UpdateActivityText("Wails of Frailty");
                 }
-                else if(attackChance >= 40 && attackChance < 70) //Judgment and Wrath
+                else if(attackChance >= 40.0f && attackChance < 70.0f) //Judgment and Wrath
                 {
                     attackThisPlayer = battleManager.players[Random.Range(0, 4)].playerReference;
                     animator.SetBool("JudgementAndWrath", true);
                     uiBTL.UpdateActivityText("Judgement & Wrath");
                 }
-                else if (attackChance >= 70 && attackChance <= 100) // Lullaby Of Despair
+                else if (attackChance >= 70.0f && attackChance <= 100.0f) // Lullaby Of Despair
                 {
                     GoToWaitState(fareaSkills.lullabyOfDepsair, 1, 2);
                     //Summon skill effect
@@ -178,13 +230,84 @@ public class Farea : Enemy
             }
             else if(bossPhase == 2)
             {
-                //Check if one of the players is dead --> if yes, there's a chance to use You Are Not Mine
-                for (int i = 0; i < uiBTL.playersDead.Length; i++)
+                if (totalDamageSustained >= totalDamageThreshold)
                 {
-                    if (uiBTL.playersDead[i] == true)
+                    //If the total damage sustained is over the threshold, Mother's Pain must be done in 2 turns rathe than 3
+                    GoToWaitState(fareaSkills.mothersPain, 1, 3);
+                    //Summon skill effect
+                    mothersPainWait.gameObject.SetActive(true);
+                    uiBTL.UpdateActivityText("Mother's Pain");
+                }
+                else
+                {
+                    //Check if one of the players is dead --> if yes, there's a chance to use You Are Not Mine
+                    for (int i = 0; i < uiBTL.playersDead.Length; i++)
                     {
-                        isThereADeadPlayer = true;
-                        break;
+                        if (uiBTL.playersDead[i] == true)
+                        {
+                            isThereADeadPlayer = true;
+                            thisPlayerIsDead = battleManager.players[i].playerReference;
+                            break;
+                        }
+                    }
+                    attackChance = Random.Range(0.0f, 100.0f);
+                    //attackChance = 50; //Testing
+                    if(attackChance>= 0.0f && attackChance < 20.0f * skillChanceModifier && isThereADeadPlayer)
+                    {
+                        //You are not mine
+                        GoToWaitState(fareaSkills.youAreNotMine, 1, 2);
+                        //Summon skill effect
+                        youAreNotMineObject.gameObject.SetActive(true);
+                        uiBTL.UpdateActivityText("You Are Not Mine");
+                    }
+                    //Mother's Pain
+                    else if(attackChance >= 20.0f && attackChance < 40.0f * skillChanceModifier)
+                    {
+                        GoToWaitState(fareaSkills.mothersPain, 1, 3);
+                        //Summon skill effect
+                        mothersPainWait.gameObject.SetActive(true);
+                        uiBTL.UpdateActivityText("Mother's Pain");
+                    }
+                    else if(attackChance >= 40.0f && attackChance < 60.0f * skillChanceModifier)
+                    {
+                        if (tieThisPlayer == null)
+                        {
+                            //Deadly Ties
+                            deadlyTiesObject.gameObject.SetActive(true);
+                            chain.gameObject.SetActive(true);
+                            TieAPlayer();
+                            tiedTimer = 4;
+                            animator.SetBool("DeadlyTies", true);
+                            uiBTL.UpdateActivityText("DeadlyTies");
+                        }
+                        else
+                        {
+                            EnemyTurn(); //If you're already tied to a player, try again
+                        }
+                    }
+                    else if (attackChance >= 60.0f && attackChance < 70.0f) //Wails of Frailty
+                    {
+                        GoToWaitState(fareaSkills.wails, 2, 2);
+                        //Summon skill effect
+                        wailWait.gameObject.SetActive(true);
+                        uiBTL.UpdateActivityText("Wails of Frailty");
+                    }
+                    else if (attackChance >= 70.0f && attackChance < 80.0f) //Judgment and Wrath
+                    {
+                        attackThisPlayer = battleManager.players[Random.Range(0, 4)].playerReference;
+                        animator.SetBool("JudgementAndWrath", true);
+                        uiBTL.UpdateActivityText("Judgement & Wrath");
+                    }
+                    else if (attackChance >= 80.0f && attackChance <= 90.0f) // Lullaby Of Despair
+                    {
+                        GoToWaitState(fareaSkills.lullabyOfDepsair, 1, 2);
+                        //Summon skill effect
+                        lullWait.gameObject.SetActive(true);
+                        uiBTL.UpdateActivityText("Lullaby Of Despair");
+                    }
+                    else if (attackChance >= 90.0f && attackChance <= 100.0f) //Normal attack
+                    {
+                        DumbAttack();
                     }
                 }
             }
@@ -233,6 +356,24 @@ public class Farea : Enemy
         wObj.gameObject.SetActive(true);
     }
 
+    private void DeadlyTies()
+    {
+        //Affect the player and tie them
+        tieThisPlayer.TakeDamage(0.0f, 0, "", Player.playerAilments.tied, this, 0.0f, tiedTimer, false);
+        animator.SetBool("DeadlyTies", false);
+        deadlyTiesObject.gameObject.SetActive(false);
+        uiBTL.EndTurn();
+    }
+
+    private void TieAPlayer()
+    {
+        tieThisPlayer = battleManager.players[Random.Range(0, 4)].playerReference;
+        if(tieThisPlayer.dead)
+        {
+            TieAPlayer(); //Make sure whatever player you choose is alive
+        }
+    }
+
     //Called from the animator to check which skill to execute after waiting
 
     private void SkillEffect()
@@ -254,11 +395,8 @@ public class Farea : Enemy
                         objPooler.SpawnFromPool("WailAttack", battleManager.players[i].playerReference.transform.position, gameObject.transform.rotation);
                     }
                 }
-                //Reset animator
-                chosenSkill = fareaSkills.none;
-                animator.SetInteger("WaitingIndex", 0);
                 wailWait.gameObject.SetActive(false);
-                uiBTL.EndTurn();
+
                 break;
             case fareaSkills.lullabyOfDepsair:
                 //Update the UI
@@ -276,17 +414,43 @@ public class Farea : Enemy
                     //Otherwise just damage the player
                     attackThisPlayer.TakeDamage(eAttack * 1.5f);
                 }
-                //Reset the animator
-                chosenSkill = fareaSkills.none;
-                animator.SetInteger("WaitingIndex", 0);
                 lullWait.gameObject.SetActive(false);
-                uiBTL.EndTurn();
+
                 break;
             case fareaSkills.mothersPain:
+                for (int i = 0; i < battleManager.players.Length; i++)
+                {
+                    if (!battleManager.players[i].playerReference.dead)
+                    {
+                        battleManager.players[i].playerReference.TakeDamage(0.5f* totalDamageSustained); //Damage the players with half the totalDamageSustained
+
+                        objPooler.SpawnFromPool("MothersPain", mothersPainInitialLoc, gameObject.transform.rotation);
+                    }
+                }
+                totalDamageSustained = 0.0f; //Reset the variable
+                mothersPainWait.gameObject.SetActive(false);
                 break;
             case fareaSkills.youAreNotMine:
+                if(thisPlayerIsDead.dead)
+                {
+                    youAreNotMineObject.gameObject.SetActive(false);
+                    objPooler.SpawnFromPool("YouAreNotMine", thisPlayerIsDead.transform.position, gameObject.transform.rotation);
+                    Heal(thisPlayerIsDead.maxHP * 0.7f);
+                    youAreNotMineUsedOnceThisFight = true; //The skill check modifier will not change the next time the Farea drops below max health
+                    skillChanceModifier = 1.0f;
+                    thisPlayerIsDead = null;
+                }
+                else
+                {
+                    thisPlayerIsDead.TakeDamage(eAttack * 1.5f);
+                }
                 break;
         }
+
+        //Reset the skill and the animator
+        chosenSkill = fareaSkills.none;
+        animator.SetInteger("WaitingIndex", 0);
+        uiBTL.EndTurn();
 
     }
 }

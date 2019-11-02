@@ -42,7 +42,7 @@ public class ExpManager : MonoBehaviour {
 		PartyStats.chara[0].neededExperience = 150;
 
 		//Oberon
-		PartyStats.chara[1].hitpoints = 250.0f;
+		PartyStats.chara[1].hitpoints = 200.0f;
 		PartyStats.chara[1].maxHealth = 250.0f;
 		PartyStats.chara[1].magicpoints = 150.0f;
 		PartyStats.chara[1].maxMana = 150.0f;

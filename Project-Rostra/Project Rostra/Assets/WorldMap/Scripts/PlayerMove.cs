@@ -35,6 +35,7 @@ public class PlayerMove : MonoBehaviour
 			animator.SetFloat("Horizontal", horizontalMove);
 			animator.SetFloat("Vertical", verticalMove);
 			animator.SetFloat("Speed", moveVelocity.sqrMagnitude);
+			TalkToNPC();
 		}
 		else if(dm.canWalk == false)
 		{
@@ -58,8 +59,12 @@ public class PlayerMove : MonoBehaviour
 	{
 		if (col.CompareTag("NPC"))
 		{
+            Debug.Log("CONVERSING CAN DO");
 			ct = col.GetComponent<ConversationTrigger>();
-			
+			if (ct.pressZ != null)
+			{
+				ct.SetPressZ(true);
+			}
 		}
 	}
 	// set your CT to null once you exit the range of the NPC
@@ -67,14 +72,19 @@ public class PlayerMove : MonoBehaviour
 	{
 		if (col.CompareTag("NPC") && col.GetComponent<ConversationTrigger>() == ct)
 		{
+			if (ct.pressZ != null)
+			{
+				ct.SetPressZ(false);
+			}
 			ct = null;
 			Debug.Log(col.GetComponent<ConversationTrigger>());
+			
 		}
 	}
 	// this is will handle talking to the NPC 
 	public void TalkToNPC()
 	{
-		if ((dm.nextDialogue == true && dm.isActive == false) && Input.GetButtonDown("Confirm") && ct != null && ct.isChoiceDepend == false && ct.dialogue.hasPlayed == false)
+		if ((dm.nextDialogue == true && dm.isActive == false) && Input.GetButtonDown("Confirm") && ct != null && ct.isChoiceDepend == false)
 		{
 			ct.TriggerConvo();
 			Debug.Log("Talking");

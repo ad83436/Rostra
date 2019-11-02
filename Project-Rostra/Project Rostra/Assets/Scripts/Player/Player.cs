@@ -53,8 +53,8 @@ public class Player : MonoBehaviour
     private bool affectedByFear = false;
 
     //Tied
-    private int tiedTimer = 0; //Used to disable tied after it being used three times (damage or heal)
     private Enemy tiedToThisEnemy = null; //Should the player be tied to an enemy, the enemy should be healed by half the heal amount the player recieves when healed
+    public GameObject tiedSymbol;
 
 
     //Queue
@@ -140,6 +140,7 @@ public class Player : MonoBehaviour
     //UI
     public Image hpImage;
     public Image rageImage;
+    public Image mpImage;
     public Text damageText;
     public Text healText;
     public Text mpText;
@@ -156,7 +157,7 @@ public class Player : MonoBehaviour
     private float actualAgi;
     private float actualCRIT;
     private float actualSTR;
-    public bool healable; //False when dead and in rage mode
+    public bool healable; //False when dead or in rage mode
 
     //Targeted enemy info
     private Enemy attackingThisEnemy;
@@ -232,6 +233,7 @@ public class Player : MonoBehaviour
 
         //UI
         hpImage.fillAmount = currentHP / maxHP;
+        mpImage.fillAmount = currentMP / maxMP;
         rageImage.fillAmount = currentRage / maxRage;
         damageText.gameObject.SetActive(false);
         healText.gameObject.SetActive(false);
@@ -248,6 +250,7 @@ public class Player : MonoBehaviour
 
         //Ailments
         fearSymbol.gameObject.SetActive(false);
+        tiedSymbol.gameObject.SetActive(false);
     }
 
     private void Update()
@@ -597,8 +600,8 @@ public class Player : MonoBehaviour
                         break;
                     case playerAilments.tied:
                         currentAilment = playerAilments.tied;
-                        tiedTimer = debuffTimer;
                         tiedToThisEnemy = enemyReference;
+                        tiedSymbol.gameObject.SetActive(true);
                         break;
                 }
                 break;
@@ -729,6 +732,7 @@ public class Player : MonoBehaviour
             BuffStats("Strength", skills.SkillStats(chosenSkill)[0], 3);
             chosenSkill = (int)SKILLS.NO_SKILL;
             currentMP -= mpCost;
+            mpImage.fillAmount = currentMP / maxMP;
             battleManager.players[playerIndex].currentMP = currentMP;
             PartyStats.chara[playerIndex].magicpoints = currentMP;
             uiBTL.UpdatePlayerMPControlPanel();
@@ -813,6 +817,7 @@ public class Player : MonoBehaviour
                 playerAnimator.SetBool("Turn", false);
                 skillAnimatorName = "Attack";
                 currentMP -= mpCost;
+                mpImage.fillAmount = currentMP / maxMP;
                 battleManager.players[playerIndex].currentMP = currentMP;
                 PartyStats.chara[playerIndex].magicpoints = currentMP;
                 break;
@@ -1107,7 +1112,7 @@ public class Player : MonoBehaviour
                             if (CalculateCrit() <= crit)
                             {
                                 Debug.Log("Skill Crit");
-                                battleManager.enemies[i].enemyReference.TakeDamage(0.7f * actualATK + skills.SkillStats(chosenSkill)[0], numberOfAttacks); //Damage is the half the player's attack stat and the skill's attack stat
+                                battleManager.enemies[i].enemyReference.TakeDamage(0.7f * actualATK + skills.SkillStats(chosenSkill)[0], numberOfAttacks); //Damage is half the player's attack stat and the skill's attack stat
                                 if (drainEye) //Check if Drain Eye is active
                                 {
                                     Heal(0.01f * (drainEyeModifier * (0.7f * actualATK + skills.SkillStats(chosenSkill)[0])));
@@ -1204,6 +1209,7 @@ public class Player : MonoBehaviour
         //Claculate the new MP and reset the player's state
         chosenSkill = (int)SKILLS.NO_SKILL;
         currentMP -= mpCost;
+        mpImage.fillAmount = currentMP / maxMP;
         battleManager.players[playerIndex].currentMP = currentMP;
         PartyStats.chara[playerIndex].magicpoints = currentMP;
         uiBTL.UpdatePlayerMPControlPanel();
@@ -1240,6 +1246,11 @@ public class Player : MonoBehaviour
             currentRage = 0.0f;
         }
 
+        if(currentAilment == playerAilments.tied)
+        {
+            tiedToThisEnemy.HealDueToTied(healAmount);
+        }
+
         //Update the UI
         hpImage.fillAmount = currentHP / maxHP;
         rageImage.fillAmount = currentRage / maxRage;
@@ -1255,6 +1266,7 @@ public class Player : MonoBehaviour
         EnableEffect("MP", 0);
         float mpAmount = percentage * maxMP;
         currentMP += mpAmount;
+        mpImage.fillAmount = currentMP / maxMP;
         mpText.gameObject.SetActive(true);
         mpText.text = Mathf.RoundToInt(mpAmount).ToString();
         battleManager.players[playerIndex].currentMP = currentMP;
@@ -1501,6 +1513,11 @@ public class Player : MonoBehaviour
                 {
                     healText.gameObject.SetActive(true);
                     healText.text = value.ToString();
+
+                    if(currentAilment == playerAilments.tied) //If the player is tied to an enemy, that enemy should be healed as well
+                    {
+                        tiedToThisEnemy.HealDueToTied(value);
+                    }
                 }
                 break;
             case "MP":
@@ -1671,6 +1688,12 @@ public class Player : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    public void Untie()
+    {
+        tiedSymbol.gameObject.SetActive(false);
+        currentAilment = playerAilments.none;
     }
 
     #endregion

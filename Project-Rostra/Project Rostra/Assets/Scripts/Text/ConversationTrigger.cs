@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 // written by: Sean Fowke
 public class ConversationTrigger : MonoBehaviour
 {
@@ -12,8 +14,8 @@ public class ConversationTrigger : MonoBehaviour
 	// call this method in order to trigger the conversation
 	public bool isChoiceDepend;
 	// does the conversation only trigger once
-	//public bool isOneShot;
-	//private bool hasPlayed;
+	public Text pressZ;
+
 	public void TriggerConvo()
 	{
 		DialogueManager.instance.StartConversation(dialogue);
@@ -32,5 +34,10 @@ public class ConversationTrigger : MonoBehaviour
 	public void TriggerCutsceneDialogue()
 	{
 		DialogueManager.instance.StartConversation(dialogue);
+	}
+
+	public void SetPressZ(bool b)
+	{
+		pressZ.enabled = b;
 	}
 }

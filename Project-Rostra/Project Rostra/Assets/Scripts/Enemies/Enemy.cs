@@ -68,7 +68,14 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected EnemyState currentState;
     protected int waitQTurns = 0; //Update this when you want a skill to have wait time
     public Text waitTurnsText;
-   
+
+
+    //Tied ailment
+    protected Player tieThisPlayer;
+    protected int tiedTimer = 4; //Used to nullify the tied player reference whenever the Farea takes damage or gets healed
+    public GameObject healthObject;
+    public GameObject chain;
+
     protected void Awake()
     {
         print("Very First  " + currentHP);
@@ -1886,5 +1893,29 @@ public class Enemy : MonoBehaviour
             uiBTL.EndTurn(); //Only end the turn after the enemy is dead
         }
     }
+
+    //An enemy tied to a player should get healed when the player is healed. Called from the tied player
+    public virtual void HealDueToTied(float healAmount)
+    {
+        currentHP += healAmount;
+        HP.fillAmount = currentHP / maxHP;
+        healthObject.gameObject.SetActive(true);
+        tiedTimer--; //Tied timer decreases when damaged or healed
+        if (tiedTimer <= 0)
+        {
+            tiedTimer = 0;
+            tieThisPlayer.Untie();
+            chain.gameObject.SetActive(false);
+            tieThisPlayer = null;
+        }
+    }
+
+    public virtual void Heal(float healAmount)
+    {
+        currentHP += healAmount;
+        HP.fillAmount = currentHP / maxHP;
+        healthObject.gameObject.SetActive(true);
+    }
+
 }
 
