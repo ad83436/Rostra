@@ -16,6 +16,8 @@ public class Farea : Enemy
 
     public GameObject deadlyTiesObject;
 
+    private bool youAreNotMineUsedOnceThisFight = false; 
+
 
 
     private enum fareaSkills //Only the skills that will require waiting for a number of turns before executing
@@ -44,6 +46,9 @@ public class Farea : Enemy
     //MothersPain
     public GameObject mothersPainWait;
 
+    //You Are Not Mine
+    public GameObject youAreNotMineObject;
+
 
     protected override void Start()
     {
@@ -70,6 +75,7 @@ public class Farea : Enemy
         mothersPainWait.gameObject.SetActive(false);
         deadlyTiesObject.gameObject.SetActive(false);
         chain.gameObject.SetActive(false);
+        youAreNotMineObject.gameObject.SetActive(false);
 
         statToDebuff = new string[2];
         statToDebuff[0] = "Defense";
@@ -132,6 +138,19 @@ public class Farea : Enemy
         if (currentState != EnemyState.waiting)
         {
             animator.SetBool("Hit", true);
+        }
+
+        if(currentHP < 0.5f*maxHP)
+        {
+            //If the current health is less than half the max health, then make it more probable to use You Are Not Mine
+            //If you have not used it yet
+            if (!youAreNotMineUsedOnceThisFight)
+            {
+                Debug.Log("Farea current HP: " + currentHP);
+                Debug.Log("Farea max HP: " + maxHP);
+
+                skillChanceModifier = 2.0f;
+            }
         }
 
     }
@@ -231,12 +250,17 @@ public class Farea : Enemy
                             break;
                         }
                     }
-                    //attackChance = Random.Range(0.0f, 100.0f);
-                    attackChance = 50; //Testing
+                    attackChance = Random.Range(0.0f, 100.0f);
+                    //attackChance = 50; //Testing
                     if(attackChance>= 0.0f && attackChance < 20.0f * skillChanceModifier && isThereADeadPlayer)
                     {
                         //You are not mine
+                        GoToWaitState(fareaSkills.youAreNotMine, 1, 2);
+                        //Summon skill effect
+                        youAreNotMineObject.gameObject.SetActive(true);
+                        uiBTL.UpdateActivityText("You Are Not Mine");
                     }
+                    //Mother's Pain
                     else if(attackChance >= 20.0f && attackChance < 40.0f * skillChanceModifier)
                     {
                         GoToWaitState(fareaSkills.mothersPain, 1, 3);
@@ -251,7 +275,7 @@ public class Farea : Enemy
                             //Deadly Ties
                             deadlyTiesObject.gameObject.SetActive(true);
                             chain.gameObject.SetActive(true);
-                            tieThisPlayer = battleManager.players[Random.Range(0, 4)].playerReference;
+                            TieAPlayer();
                             tiedTimer = 4;
                             animator.SetBool("DeadlyTies", true);
                             uiBTL.UpdateActivityText("DeadlyTies");
@@ -341,6 +365,15 @@ public class Farea : Enemy
         uiBTL.EndTurn();
     }
 
+    private void TieAPlayer()
+    {
+        tieThisPlayer = battleManager.players[Random.Range(0, 4)].playerReference;
+        if(tieThisPlayer.dead)
+        {
+            TieAPlayer(); //Make sure whatever player you choose is alive
+        }
+    }
+
     //Called from the animator to check which skill to execute after waiting
 
     private void SkillEffect()
@@ -398,6 +431,19 @@ public class Farea : Enemy
                 mothersPainWait.gameObject.SetActive(false);
                 break;
             case fareaSkills.youAreNotMine:
+                if(thisPlayerIsDead.dead)
+                {
+                    youAreNotMineObject.gameObject.SetActive(false);
+                    objPooler.SpawnFromPool("YouAreNotMine", thisPlayerIsDead.transform.position, gameObject.transform.rotation);
+                    Heal(thisPlayerIsDead.maxHP * 0.7f);
+                    youAreNotMineUsedOnceThisFight = true; //The skill check modifier will not change the next time the Farea drops below max health
+                    skillChanceModifier = 1.0f;
+                    thisPlayerIsDead = null;
+                }
+                else
+                {
+                    thisPlayerIsDead.TakeDamage(eAttack * 1.5f);
+                }
                 break;
         }
 
