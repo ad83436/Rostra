@@ -10,7 +10,8 @@ public enum EnemyClassType
 public enum EnemyState
 {
     idle,
-    waiting
+    waiting,
+    skilling,// used for skills that last more than one turn
 };
 
 public enum EnemyAttackType
@@ -57,7 +58,7 @@ public enum AllEnemySkills
     //support
     Increase_Multiple_Stats,
     All_Enemy_Heal,
-    Switch_Stats,   
+    Raise_Defence   
 };
 
 public enum EnemyName

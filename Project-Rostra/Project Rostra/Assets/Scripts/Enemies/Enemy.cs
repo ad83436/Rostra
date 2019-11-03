@@ -29,6 +29,7 @@ public class Enemy : MonoBehaviour
     int countDownToBlow;
     public int blowStrength;
     int enemyStartingAtk;
+    int enemyStartingDefence;
     int[] skills;
     public List<float> playerStatNeeded;
     public List<float> enemyStatNeeded;
@@ -110,6 +111,7 @@ public class Enemy : MonoBehaviour
 
         ChoosePlayer();
         enemyStartingAtk = Mathf.CeilToInt(eAttack);
+        enemyStartingDefence = Mathf.CeilToInt(eDefence);
         print(currentHP);
 
         currentState = EnemyState.idle;
@@ -158,6 +160,27 @@ public class Enemy : MonoBehaviour
                 uiBTL.EndTurn();
             }
 
+        }
+
+        else if (currentState == EnemyState.skilling)
+        {
+            waitQTurns--;
+            waitTime--;
+
+            //waitTurnsText.text = waitQTurns.ToString(); //Update the UI
+            if (waitQTurns <= 0)
+            {
+                //waitTurnsText.gameObject.SetActive(false); //Turn off the text. Don't forget to enable it when the enemy goes to waiting state
+                MakeSkillsWork(canUseSkill);
+
+                //Execute skill here 
+            }
+
+            else
+            {
+                //End the turn
+                uiBTL.EndTurn();
+            }
         }
 
         else
@@ -1241,7 +1264,7 @@ public class Enemy : MonoBehaviour
                 {
                     (int) AllEnemySkills.Increase_Multiple_Stats,
                     (int) AllEnemySkills.All_Enemy_Heal,
-                    (int) AllEnemySkills.Switch_Stats
+                    (int) AllEnemySkills.Raise_Defence
                 };
 
                 if ((int)canUseSkill == skills[0])
@@ -1256,7 +1279,7 @@ public class Enemy : MonoBehaviour
 
                 else if ((int)canUseSkill == skills[2])
                 {
-                    //skill not set 
+                     waitTime = 2;
                 }
 
                 break;
@@ -1647,8 +1670,6 @@ public class Enemy : MonoBehaviour
             pickedValue = value_1;
             return pickedValue;
         }
-
-
     }
     int PickRandomNumber(int value_0, int value_1, int value_2)
     {
@@ -1816,6 +1837,7 @@ public class Enemy : MonoBehaviour
     {
         uiBTL.EndTurn();
     }
+
     void EndSkill()
     {
         currentState = EnemyState.idle;
@@ -1889,6 +1911,8 @@ public class Enemy : MonoBehaviour
         attackThisPlayer.TakeDamage(eAttack);
         eAttack = enemyStartingAtk;
     }
+
+
 
     protected void Death()
     {
