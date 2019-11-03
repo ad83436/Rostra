@@ -322,7 +322,6 @@ public class ItemShopUI : MonoBehaviour {
 					Group_Main.alpha = 0f; // hide UI
                     IsOpen = false;
                     activeMerchant.currentState = MerchantTrigger.merchantState.idle; //Make sure the conversation with the merchant does not start again if the player chooses Exit
-                    activeMerchant.canTalkAgain = false;
                     activeMerchant = null;
                         return;
 				}
