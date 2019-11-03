@@ -48,13 +48,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyIndexInBattleManager: 0
   eMana: 0
-  eAttack: 0
-  eAgility: 0
-  eDefence: 0
-  eStrength: 0
+  eAttack: 12
+  eAgility: 7
+  eDefence: 15
+  eStrength: 15
   eSpeed: 0
-  eBaseLevel: 0
-  eCurrentLevel: 0
+  eBaseLevel: 5
+  eCurrentLevel: 13
   eName: 
   eRange: 0
   waitTime: 0
@@ -75,9 +75,10 @@ MonoBehaviour:
   hit: 0
   blow: 0
   isStatModed: 0
-  enemyClass: 0
-  enemyAttack: 6
-  canUseSkill: 3
+  skillNeedsCharge: 0
+  enemyClass: 1
+  enemyAttack: 1
+  canUseSkill: 9
   enemyName: 8
   currentState: 0
   waitTurnsText: {fileID: 0}
