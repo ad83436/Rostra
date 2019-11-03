@@ -45,7 +45,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -7.8326817}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -56,7 +56,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1, y: 62.552654}
   m_EdgeRadius: 0
 --- !u!114 &5305940240086103332
 MonoBehaviour:
@@ -83,9 +83,9 @@ MonoBehaviour:
     - Well... looks like this is Hadria
     - Finally we get well deserved rest!
     - It's not like you need a rest, you barely did anything.
-    - 'Well carrying around this much skill and intellect is a tiring process. One
-      must ensure that they don''t tire themselves out. '
-    - 'Sure... you must be exhausted. '
+    - But I totally shielded Frea from that attack. And then I stabbed a monster in
+      the face. Then I did this cool combat roll and then I...
+    - Yeah yeah ok we get it
     - Let's focus. We to go find the barkeep. They will know somone who last saw Domel
     - I agree, let's go.
     portrait:
@@ -104,7 +104,7 @@ MonoBehaviour:
     - 5
     - 6
     - 6
-    typingSpeed: 0.01
+    typingSpeed: 0.001
     isChoice: 0
     choiceLine: 0
     choice1: {fileID: 0}
