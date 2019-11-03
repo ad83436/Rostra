@@ -1,0 +1,128 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5305940240086103333
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5305940240086103334}
+  - component: {fileID: 5305940240086103335}
+  - component: {fileID: 5305940240086103332}
+  m_Layer: 0
+  m_Name: TriggerDialogue
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5305940240086103334
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5305940240086103333}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -287.77, y: -16.46161, z: -1.7505184}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &5305940240086103335
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5305940240086103333}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -7.8326817}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 62.552654}
+  m_EdgeRadius: 0
+--- !u!114 &5305940240086103332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5305940240086103333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43509005be49f1c4f973fd54f9269559, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogue:
+    names:
+    - Fargas
+    - Oberon
+    - Arcelus
+    - Oberon
+    - Arcelus
+    - Frea
+    - Fargas
+    sentences:
+    - Well... looks like this is Hadria
+    - Finally we get well deserved rest!
+    - It's not like you need a rest, you barely did anything.
+    - But I totally shielded Frea from that attack. And then I stabbed a monster in
+      the face. Then I did this cool combat roll and then I...
+    - Yeah yeah ok we get it
+    - Let's focus. We to go find the barkeep. They will know somone who last saw Domel
+    - I agree, let's go.
+    portrait:
+    - {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825, type: 3}
+    - {fileID: 21300000, guid: e24a4049526ca704eb781c65db5c188d, type: 3}
+    - {fileID: 21300000, guid: f40486206916ccc4a9bf37f57f448dee, type: 3}
+    - {fileID: 21300000, guid: e24a4049526ca704eb781c65db5c188d, type: 3}
+    - {fileID: 21300000, guid: f40486206916ccc4a9bf37f57f448dee, type: 3}
+    - {fileID: 21300000, guid: 1f1660c1b92d23a4fb0b75fcca80183d, type: 3}
+    - {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825, type: 3}
+    povChange:
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    - 6
+    typingSpeed: 0.001
+    isChoice: 0
+    choiceLine: 0
+    choice1: {fileID: 0}
+    choice2: {fileID: 0}
+    willRemember: 0
+    choiceSet: 0
+    choiceCare1: {fileID: 0}
+    choiceCare2: {fileID: 0}
+    choiceText1: 
+    choiceText2: 
+    normal: {fileID: 0}
+    hasPlayed: 0
+    willCount: 0
+    maxWillCount: 0
+    isBattle: 0
+    triggerBool: 0
+    isOneShot: 0
+  choiceCare: 0
+  isChoiceDepend: 0
+  pressZ: {fileID: 0}
+  directTriggerText: 1

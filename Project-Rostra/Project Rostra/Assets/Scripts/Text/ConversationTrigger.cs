@@ -15,7 +15,9 @@ public class ConversationTrigger : MonoBehaviour
 	public bool isChoiceDepend;
 	// does the conversation only trigger once
 	public Text pressZ;
-
+	// does this directly trigger the text?
+	public bool directTriggerText;
+	private bool played = false;
 	public void TriggerConvo()
 	{
 		DialogueManager.instance.StartConversation(dialogue);
@@ -39,5 +41,14 @@ public class ConversationTrigger : MonoBehaviour
 	public void SetPressZ(bool b)
 	{
 		pressZ.enabled = b;
+	}
+
+	private void OnTriggerEnter2D(Collider2D col)
+	{
+		if (directTriggerText == true && col.gameObject.CompareTag("Player") && played == false)
+		{
+			TriggerConvo();
+			played = true;
+		}
 	}
 }
