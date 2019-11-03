@@ -33,7 +33,7 @@ public class MerchantTrigger : ConversationTrigger
 
     }
 
-    public override void TriggerConvo()
+    public override void TriggerConvo() //Override Trigger Convo so it works as it's supposed to for merchants
     {
         if(!canTalkAgain)
         {
