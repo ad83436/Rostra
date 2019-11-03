@@ -54,7 +54,7 @@ PrefabInstance:
     - target: {fileID: 2626243625421622227, guid: 335a038814e3ddd47a79a28e6ddf7ff0,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -15.665466
+      value: -46.94
       objectReference: {fileID: 0}
     - target: {fileID: 2626243625421622227, guid: 335a038814e3ddd47a79a28e6ddf7ff0,
         type: 3}
@@ -101,6 +101,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2626243625421622226, guid: 335a038814e3ddd47a79a28e6ddf7ff0,
+        type: 3}
+      propertyPath: m_FlipX
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 335a038814e3ddd47a79a28e6ddf7ff0, type: 3}
 --- !u!4 &7649961395922274035 stripped
@@ -141,7 +146,7 @@ PrefabInstance:
     - target: {fileID: 2626243625421622227, guid: 335a038814e3ddd47a79a28e6ddf7ff0,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -10.28
+      value: -41.55453
       objectReference: {fileID: 0}
     - target: {fileID: 2626243625421622227, guid: 335a038814e3ddd47a79a28e6ddf7ff0,
         type: 3}
@@ -244,7 +249,7 @@ PrefabInstance:
     - target: {fileID: 2626243625421622227, guid: 335a038814e3ddd47a79a28e6ddf7ff0,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -10.279999
+      value: -41.55453
       objectReference: {fileID: 0}
     - target: {fileID: 2626243625421622227, guid: 335a038814e3ddd47a79a28e6ddf7ff0,
         type: 3}
@@ -417,7 +422,7 @@ PrefabInstance:
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
       propertyPath: cs.dialogues.Array.data[1].povChange.Array.size
-      value: 0
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
@@ -510,18 +515,19 @@ PrefabInstance:
         type: 3}
       propertyPath: cs.dialogues.Array.data[1].sentences.Array.data[3]
       value: Well Torven, while I do everything in my power to find him, you can go
-        get drunk and whine about everything that does not go your way.
+        get drunk and plot with your kin.
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
       propertyPath: cs.dialogues.Array.data[1].sentences.Array.data[4]
-      value: Leave it up to the Alchemy Guild to be the first ones to throw insults.
-        I'm leaving.
+      value: Don't you dare bring my kin into this. If I had my way there would be
+        no place on this earth for people like you.
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
       propertyPath: cs.dialogues.Array.data[1].sentences.Array.data[5]
-      value: As am I.
+      value: 'It is a good thing you are not. There would be more death in this world
+        if that were true. '
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
@@ -559,6 +565,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 26feff2f0d4e92349a70bba8a0c18d31,
         type: 3}
+    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
+        type: 3}
+      propertyPath: cs.dialogues.Array.data[1].povChange.Array.data[5]
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
       propertyPath: cs.dialogues.Array.data[1].typingSpeed
