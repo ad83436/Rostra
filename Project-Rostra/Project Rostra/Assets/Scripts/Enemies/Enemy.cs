@@ -1268,15 +1268,15 @@ public class Enemy : MonoBehaviour
 
         switch (ChosenSkill)
         {
-            #region ground smash skill
+           
             case AllEnemySkills.Ground_Smash:
 
                 animator.SetBool("isWaiting", false);
                 animator.SetBool("SkillInUse", true);
                 break;
-            #endregion
+          
             //Skill that hits a player random amount of time 
-            #region slice and dice skill
+           
             case AllEnemySkills.Slice_And_Dice:
 
                 int hitAmount = Random.Range(0, 5);
@@ -1440,7 +1440,6 @@ public class Enemy : MonoBehaviour
                 }
 
                 break;
-            #endregion
 
             #region increase multiple stats
             //increase a stat based off class
@@ -1534,21 +1533,8 @@ public class Enemy : MonoBehaviour
             #region bite
             case AllEnemySkills.Bite:
 
-                attackThisPlayer = battleManager.players[PickRandomNumber(battleManager.players[0].playerReference.playerIndex, battleManager.players[1].playerReference.playerIndex, battleManager.players[2].playerReference.playerIndex, battleManager.players[3].playerReference.playerIndex)].playerReference;
-                if (attackThisPlayer.currentHP <= 0)
-                {
-                    MakeSkillsWork(AllEnemySkills.Bite);
-                }
-
-                print("Enemy Attack is " + eAttack);
-                print(attackThisPlayer.nameOfCharacter + " Was Attacked With the Bite Skill");
-                Mathf.CeilToInt(attackMod = (eAttack * .5f));
-                eAttack += attackMod;
-                print("Enemy New Attack is " + eAttack);
-                CalculateHit();
-                animator.SetBool("Attack", true);
-                eAttack = enemyStartingAtk;
-
+                animator.SetBool("isWaiting", false);
+                animator.SetBool("SkillInUse", true);
                 break;
             #endregion
 
@@ -1828,7 +1814,6 @@ public class Enemy : MonoBehaviour
     void EndSkill()
     {
         currentState = EnemyState.idle;
-        
         waitQTurns = waitTimeAtStart;
         waitTime = waitTimeAtStart;
         animator.SetBool("SkillInUse", false);
@@ -1880,6 +1865,25 @@ public class Enemy : MonoBehaviour
             print("Then Attacked " + attackThisPlayer.nameOfCharacter);
             attackThisPlayer.TakeDamage(eAttack);
         }
+    }
+
+    void BiteSkill()
+    {
+        float attackMod;
+        attackThisPlayer = battleManager.players[PickRandomNumber(battleManager.players[0].playerReference.playerIndex, battleManager.players[1].playerReference.playerIndex, battleManager.players[2].playerReference.playerIndex, battleManager.players[3].playerReference.playerIndex)].playerReference;
+        if (attackThisPlayer.currentHP <= 0)
+        {
+            BiteSkill();
+        }
+
+        print("Enemy Attack is " + eAttack);
+        print(attackThisPlayer.nameOfCharacter + " Was Attacked With the Bite Skill");
+        Mathf.CeilToInt(attackMod = (eAttack * .5f));
+        eAttack += attackMod;
+        print("Enemy New Attack is " + eAttack);
+        CalculateHit();
+        animator.SetBool("Attack", true);
+        eAttack = enemyStartingAtk;
     }
 
     protected void Death()
