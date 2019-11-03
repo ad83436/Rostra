@@ -17,8 +17,8 @@ public class ConversationTrigger : MonoBehaviour
 	public Text pressZ;
 	// does this directly trigger the text?
 	public bool directTriggerText;
-	private bool played = false;
-	public void TriggerConvo()
+	protected bool played = false;
+	public virtual void TriggerConvo()
 	{
 		DialogueManager.instance.StartConversation(dialogue);
 	}
@@ -43,7 +43,7 @@ public class ConversationTrigger : MonoBehaviour
 		pressZ.enabled = b;
 	}
 
-	private void OnTriggerEnter2D(Collider2D col)
+	protected virtual void OnTriggerEnter2D(Collider2D col)
 	{
 		if (directTriggerText == true && col.gameObject.CompareTag("Player") && played == false)
 		{

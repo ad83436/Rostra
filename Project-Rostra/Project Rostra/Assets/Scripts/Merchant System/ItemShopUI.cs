@@ -8,6 +8,7 @@ public class ItemShopUI : MonoBehaviour {
 	// Singleton and static properties
 	public static ItemShopUI Singleton { get; private set; }
 	public static bool IsOpen { get; private set; }
+    public MerchantTrigger activeMerchant;
 
 	// UI Color variables
 	[SerializeField] private Color Color_Highlight;
@@ -319,7 +320,11 @@ public class ItemShopUI : MonoBehaviour {
 					Index_Selection = 0; // reset index
 					State_UI = 0; // change to inactive state
 					Group_Main.alpha = 0f; // hide UI
-					return;
+                    IsOpen = false;
+                    activeMerchant.currentState = MerchantTrigger.merchantState.idle; //Make sure the conversation with the merchant does not start again if the player chooses Exit
+                    activeMerchant.canTalkAgain = false;
+                    activeMerchant = null;
+                        return;
 				}
 
 				// move index
@@ -349,7 +354,12 @@ public class ItemShopUI : MonoBehaviour {
 							Index_Selection = 0; // reset index
 							State_UI = 0; // change to inactive state
 							Group_Main.alpha = 0f; // hide UI
-							return;
+                            IsOpen = false;
+                            activeMerchant.currentState = MerchantTrigger.merchantState.idle; //Make sure the conversation with the merchant does not start again if the player chooses Exit
+                            activeMerchant.canTalkAgain = false;
+                            activeMerchant = null;
+
+                                return;
 						default: break;
 					}
 
@@ -486,7 +496,7 @@ public class ItemShopUI : MonoBehaviour {
 	public static void OpenItemShop() {
 		Singleton.State_UI = 1;
 		Singleton.Group_Main.alpha = 1f;
-		IsOpen = false;
+		IsOpen = true;
 	}
 
 	#endregion
