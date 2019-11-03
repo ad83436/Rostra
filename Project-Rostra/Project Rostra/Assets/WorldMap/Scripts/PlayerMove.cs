@@ -24,7 +24,7 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
-		if (dm.canWalk && !BattleManager.battleInProgress && !PauseMenuController.isPaused)
+		if (dm.canWalk && !BattleManager.battleInProgress && !PauseMenuController.isPaused && !ItemShopUI.IsOpen)
 		{
 			moveInput.x = Input.GetAxisRaw("Horizontal");
 			moveInput.y = Input.GetAxisRaw("Vertical");
@@ -84,7 +84,7 @@ public class PlayerMove : MonoBehaviour
 	// this is will handle talking to the NPC 
 	public void TalkToNPC()
 	{
-		if ((dm.nextDialogue == true && dm.isActive == false) && Input.GetButtonDown("Confirm") && ct != null && ct.isChoiceDepend == false)
+		if ((dm.nextDialogue == true && dm.isActive == false) && Input.GetButtonDown("Confirm") && ct != null && ct.isChoiceDepend == false && !ItemShopUI.IsOpen)
 		{
 			ct.TriggerConvo();
 			Debug.Log("Talking");
