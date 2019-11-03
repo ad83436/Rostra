@@ -239,8 +239,13 @@ public class Enemy : MonoBehaviour
 
                             else
                             {
-                                AttackLowHp();
-                                print(eName + " Did not use their skill but used their types attack");
+                                print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
+                                currentState = EnemyState.waiting;
+                                waitQTurns = waitTime;
+                                animator.SetBool("isWaiting", true);
+                                EndTurn();
+                                //AttackLowHp();
+                                //print(eName + " Did not use their skill but used their types attack");
                             }
                         }
 
@@ -1881,8 +1886,7 @@ public class Enemy : MonoBehaviour
         Mathf.CeilToInt(attackMod = (eAttack * .5f));
         eAttack += attackMod;
         print("Enemy New Attack is " + eAttack);
-        CalculateHit();
-        animator.SetBool("Attack", true);
+        attackThisPlayer.TakeDamage(eAttack);
         eAttack = enemyStartingAtk;
     }
 
@@ -1890,10 +1894,13 @@ public class Enemy : MonoBehaviour
     {
         if (!dead)
         {
+            currentState = EnemyState.idle;
             spriteRenderer.enabled = false;
             enemyCanvas.SetActive(false);
             dead = true;
+            gameObject.SetActive(false);
             uiBTL.EnemyIsDead(enemyIndexInBattleManager);
+
             uiBTL.EndTurn(); //Only end the turn after the enemy is dead
         }
     }
