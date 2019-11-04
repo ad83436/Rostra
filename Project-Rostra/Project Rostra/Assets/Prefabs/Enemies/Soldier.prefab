@@ -172,15 +172,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c49573c71ef3f541813f91b7a35cd10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyIndexInBattleManager: 1
+  enemyIndexInBattleManager: 3
   eMana: 0
-  eAttack: 22
-  eAgility: 13
-  eDefence: 14
-  eStrength: 15
+  eAttack: 18
+  eAgility: 9
+  eDefence: 8
+  eStrength: 17
   eSpeed: 10
   eBaseLevel: 1
-  eCurrentLevel: 10
+  eCurrentLevel: 2
   eName: Soldier
   eRange: 0
   waitTime: 0
@@ -192,8 +192,8 @@ MonoBehaviour:
   eCritical: 5
   qImage: {fileID: 21300000, guid: a08c25fce83805c4fa7b68967e929629, type: 3}
   HP: {fileID: 1405176034582042746}
-  maxHP: 120
-  currentHP: 10
+  maxHP: 130
+  currentHP: 130
   damageText: {fileID: 2836062761733822273}
   healText: {fileID: 2893322329922529736}
   enemyCanvas: {fileID: 9096833780443251242}
@@ -201,10 +201,15 @@ MonoBehaviour:
   hit: 0
   blow: 0
   isStatModed: 0
+  skillNeedsCharge: 0
   enemyClass: 0
-  enemyAttack: 0
+  enemyAttack: 2
   canUseSkill: 8
   enemyName: 13
+  currentState: 0
+  waitTurnsText: {fileID: 0}
+  healthObject: {fileID: 0}
+  chain: {fileID: 0}
 --- !u!95 &6612120055157309320
 Animator:
   serializedVersion: 3

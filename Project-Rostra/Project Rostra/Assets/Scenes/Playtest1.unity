@@ -2231,6 +2231,75 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 69faed7d604a1474c9fbcbcff6ce3ae2, type: 3}
+--- !u!1001 &115340529
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6954618973376743999, guid: 570e370c97f1ff047a2f361b787d9287,
+        type: 3}
+      propertyPath: m_Name
+      value: AudioManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 6954618973376743984, guid: 570e370c97f1ff047a2f361b787d9287,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -298.19113
+      objectReference: {fileID: 0}
+    - target: {fileID: 6954618973376743984, guid: 570e370c97f1ff047a2f361b787d9287,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -7.246353
+      objectReference: {fileID: 0}
+    - target: {fileID: 6954618973376743984, guid: 570e370c97f1ff047a2f361b787d9287,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -17.452343
+      objectReference: {fileID: 0}
+    - target: {fileID: 6954618973376743984, guid: 570e370c97f1ff047a2f361b787d9287,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6954618973376743984, guid: 570e370c97f1ff047a2f361b787d9287,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6954618973376743984, guid: 570e370c97f1ff047a2f361b787d9287,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6954618973376743984, guid: 570e370c97f1ff047a2f361b787d9287,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6954618973376743984, guid: 570e370c97f1ff047a2f361b787d9287,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 6954618973376743984, guid: 570e370c97f1ff047a2f361b787d9287,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6954618973376743984, guid: 570e370c97f1ff047a2f361b787d9287,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6954618973376743984, guid: 570e370c97f1ff047a2f361b787d9287,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 570e370c97f1ff047a2f361b787d9287, type: 3}
 --- !u!1 &126959872
 GameObject:
   m_ObjectHideFlags: 0
@@ -6621,8 +6690,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemies:
-  - {fileID: 1234658493057158479, guid: 991942d1c70012248a48c594ab357b40, type: 3}
-  enemyLevels: 01000000
+  - {fileID: 2487905135032201599, guid: 3c7d329df66cd7349923408792b8e755, type: 3}
+  - {fileID: 8830413635625265082, guid: 09875b434c97e954a8ca9276dca80ae4, type: 3}
+  - {fileID: 8830413635625265082, guid: 09875b434c97e954a8ca9276dca80ae4, type: 3}
+  - {fileID: 8830413635625265082, guid: 09875b434c97e954a8ca9276dca80ae4, type: 3}
+  - {fileID: 2487905135032201599, guid: 3c7d329df66cd7349923408792b8e755, type: 3}
+  enemyLevels: 0300000002000000020000000200000003000000
   fadePanel: {fileID: 0}
   endTestPanel: {fileID: 126959872}
   enemySpwn: {fileID: 1950009557}
@@ -6854,7 +6927,7 @@ PrefabInstance:
     - target: {fileID: 5063818996988190477, guid: e39707a10eec55043a689f4f4f23dd65,
         type: 3}
       propertyPath: isBoss
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e39707a10eec55043a689f4f4f23dd65, type: 3}

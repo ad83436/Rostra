@@ -45,8 +45,8 @@ public class PauseMenuController : MonoBehaviour {
 	#region Initialization
 
 	private void Awake() {
-		if (instance == null) instance = this;
-		else Debug.LogError("instance was not null in the PauseMenuController");
+        if (instance == null) instance = this;
+        else Destroy(this.gameObject);
 		group = GetComponent<CanvasGroup>();
 		group.alpha = 0f;
 

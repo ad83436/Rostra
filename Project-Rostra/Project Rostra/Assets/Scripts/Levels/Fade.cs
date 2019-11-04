@@ -24,6 +24,7 @@ public class Fade : MonoBehaviour
     public DefeatScreen defeatPanel;
     public GameObject endTestPanel;
     private UIBTL uiBtl;
+    private AudioManager audioManager;
 
 
     void Start()
@@ -38,6 +39,7 @@ public class Fade : MonoBehaviour
         transitionToMainMenu = false;
         canGoToSurvey = false;
         uiBtl = UIBTL.instance;
+        audioManager = AudioManager.instance;
 
         if (endTestPanel)
         {
@@ -99,6 +101,7 @@ public class Fade : MonoBehaviour
                     Debug.Log("Transition is now falseee");
                     transitionToWorldMap = false;
                     SceneManager.UnloadSceneAsync(SceneManager.GetSceneByName("Queue Scene"));
+                    audioManager.PlayThisClip("WorldMapMusic1");
                 }
                 else if (transitionToEndTest)
                 {
@@ -112,6 +115,7 @@ public class Fade : MonoBehaviour
                     if (cutsceneTriggerRef != null)
                     {
                         cutsceneTriggerRef.TriggerCutscene(); //Load the cutscene while fading out
+                        audioManager.PlayThisClip("Cutscene1");
                         cutsceneTriggerRef = null;
                     }
                 }
@@ -120,6 +124,7 @@ public class Fade : MonoBehaviour
                     fadeOut = !fadeOut;
                     CutsceneManager.instance.End();
                     transitionOutOfACutscene = false;
+                    audioManager.PlayThisClip("WorldMapMusic1");
                 }
                 else if(transitionToMainMenu)
                 {
@@ -141,16 +146,19 @@ public class Fade : MonoBehaviour
     {
         fadeOut = !fadeOut;
         transitionToBattle = true;
+        audioManager.PlayThisClip("BattleMusic1");
     }
 
     public void FlipFadeToVictory()
     {
+        audioManager.PlayThisClip("VictoryMusic1");
         fadeOut = !fadeOut;
         transitionToVictory = true;
     }
 
     public void FlipFadeToDefeat()
     {
+        audioManager.PlayThisClip("DefeatMusic1");
         fadeOut = !fadeOut;
         transitionToDefeat = true;
     }
@@ -166,9 +174,11 @@ public class Fade : MonoBehaviour
     {
         transitionOutOfACutscene = true;
         fadeOut = !fadeOut;
+       
     }
     public void TransitionIntoBattle()
     {
+       
         enemyHolder.TransitionIntoBattle();
     }
 

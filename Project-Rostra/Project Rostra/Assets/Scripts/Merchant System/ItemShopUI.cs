@@ -285,10 +285,10 @@ public class ItemShopUI : MonoBehaviour {
 	private void Awake() {
 		// Singleton
 		if (Singleton == null) Singleton = this;
-		else Debug.LogError("There are multiple itemshop UIs loaded");
+		else Destroy(this.gameObject);
 
-		// Static
-		IsOpen = false;
+        // Static
+        IsOpen = false;
 
 		// Canvas groups
 		Group_Main.alpha = 0f;
