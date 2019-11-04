@@ -24,7 +24,7 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
-		if (dm.canWalk && !BattleManager.battleInProgress && !PauseMenuController.isPaused && !ItemShopUI.IsOpen)
+		if (dm.canWalk && !BattleManager.battleInProgress && !PauseMenuController.isPaused && !ItemShopUI.IsOpen && CutsceneManager.instance.isActive == false)
 		{
 			moveInput.x = Input.GetAxisRaw("Horizontal");
 			moveInput.y = Input.GetAxisRaw("Vertical");
