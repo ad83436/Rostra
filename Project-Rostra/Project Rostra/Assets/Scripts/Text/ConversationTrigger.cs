@@ -13,7 +13,6 @@ public class ConversationTrigger : MonoBehaviour
 	// these two dialogues will be spit out depending on the choice that was made. 
 	// call this method in order to trigger the conversation
 	public bool isChoiceDepend;
-	// does the conversation only trigger once
 	public Text pressZ;
 	// does this directly trigger the text?
 	public bool directTriggerText;
@@ -44,7 +43,7 @@ public class ConversationTrigger : MonoBehaviour
 		pressZ.enabled = b;
 	}
 
-	protected virtual void OnTriggerEnter2D(Collider2D col)
+	private void OnTriggerEnter2D(Collider2D col)
 	{
 		if (directTriggerText == true && col.gameObject.CompareTag("Player") && played == false)
 		{

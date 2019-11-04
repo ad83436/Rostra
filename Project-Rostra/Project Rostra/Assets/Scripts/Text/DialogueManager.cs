@@ -179,12 +179,14 @@ public class DialogueManager : MonoBehaviour
 			// this loop is going to go through each individual text and add it to the queue
 			foreach (string s in d.sentences)
 			{
+				print("Do thing");
 				// loop and queue up the elements
 				textElements.Enqueue(s);
 			}
 
 			NextSentence(); // show the next sentence call the end script if no more text
 							// get the lenght of our povchange array
+			
 			lenght = d.povChange.Length;
 			continueButton.SetActive(false);
 			//if we set the boolean to enable a choice tree we save a local copy of it
@@ -223,6 +225,7 @@ public class DialogueManager : MonoBehaviour
 				}
 			}
 			d.hasPlayed = true;
+			
 		}
 
 	}
@@ -243,7 +246,7 @@ public class DialogueManager : MonoBehaviour
 		{
 			change = -1;
 		}
-		
+		Debug.Log(textElements.Count);
 		// if the count of our queue is zero go home
 		if (textElements.Count == 0)
 		{
@@ -269,6 +272,7 @@ public class DialogueManager : MonoBehaviour
 	// go home you done
 	public void End()
 	{
+		Debug.Log("End");
 		charName.text = "";
 		text.text = "";
 		portrait.sprite = null;
@@ -510,6 +514,5 @@ public class DialogueManager : MonoBehaviour
 			battle = false;
 			UIBTL.conversationAfterBattle = true;
 		}
-		
 	}
 }
