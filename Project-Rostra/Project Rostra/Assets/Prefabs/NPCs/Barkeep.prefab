@@ -377,8 +377,7 @@ MonoBehaviour:
       we need and are hellbent creating the elixir of immortality.
     - 'Or so they say. Domels the only one who was willing to talk to both sides and
       worked tirelessly to ensure that conflict would never become a war. '
-    - Bless him, he always puts the good of the people before his own. However both
-      sides have been blaming Domels disappearance on each other.
+    - However both sides have been blaming Domels disappearance on each other.
     - ' It''s become a pretty sore subject. People are starting to worry for his safety. '
     - I am too.
     - Where was he last seen?
@@ -387,8 +386,7 @@ MonoBehaviour:
       in the right direction.
     - Alright, we can go talk to them and find out where Domel went.
     - If the Alchemy Guild members or The Dwarves see you talking to the other side
-      they'll get suspicious and won't give you the info you're looking for. If I
-      was you I'd only pick one.
+      they'll get suspicious. If I was you I'd only pick one.
     - Which do you consider to be the most trustworthy?
     - 'Don''t reckon I know. Been keeping outta troubles in the hopes that this whole
       thing will blow over. I will say this. '
@@ -459,6 +457,8 @@ MonoBehaviour:
   choiceCare: 0
   isChoiceDepend: 0
   pressZ: {fileID: 1734714614}
+  directTriggerText: 0
+  addMilestone: 0
 --- !u!114 &8257735968710607304
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -517,6 +517,8 @@ MonoBehaviour:
   choiceCare: 0
   isChoiceDepend: 0
   pressZ: {fileID: 0}
+  directTriggerText: 0
+  addMilestone: 0
 --- !u!114 &8257735968710607305
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -576,6 +578,8 @@ MonoBehaviour:
   choiceCare: 0
   isChoiceDepend: 0
   pressZ: {fileID: 0}
+  directTriggerText: 0
+  addMilestone: 0
 --- !u!114 &8257735968710607302
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -617,3 +621,5 @@ MonoBehaviour:
   choiceCare: 0
   isChoiceDepend: 0
   pressZ: {fileID: 0}
+  directTriggerText: 0
+  addMilestone: 0
