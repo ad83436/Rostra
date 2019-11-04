@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class MainInventory : MonoBehaviour {
 	public static MainInventory invInstance;    // Holds the current inventory instance in a single variable
-	public static int totalMoney = 500000;           // The amount of money the player has
+	public static int totalMoney = 500;           // The amount of money the player has
 	public static int INVENTORY_SIZE = 60;      // The maximum size of the inventory
 	public int[,] invItem = new int[INVENTORY_SIZE, 3];
 	// NOTE -- Element 0 is the item's ID value that will point to its name, description, icon, etc.
@@ -58,23 +58,23 @@ public class MainInventory : MonoBehaviour {
 
 	// FOR TESTING
 	private void Start() {
-		invItem[0, 0] = (int)ITEM_ID.TEST_WEAPON1;
-		invItem[0, 1] = 1;
+		//invItem[0, 0] = (int)ITEM_ID.TEST_WEAPON1;
+		//invItem[0, 1] = 1;
 
-		invItem[1, 0] = (int)ITEM_ID.HP_POTION;
-		invItem[1, 1] = ItemStackLimit((int)ITEM_ID.HP_POTION);
+		invItem[0, 0] = (int)ITEM_ID.HP_POTION;
+        invItem[0, 1] = 5;
 		consumableInv.Add(1);
 
-		invItem[2, 0] = (int)ITEM_ID.MP_ELIXER;
-		invItem[2, 1] = ItemStackLimit((int)ITEM_ID.MP_ELIXER);
+		invItem[1, 0] = (int)ITEM_ID.MP_ELIXER;
+        invItem[1, 1] = 2;
 		consumableInv.Add(2);
 
-        invItem[3, 0] = (int)ITEM_ID.HOPE_POTION;
-        invItem[3, 1] = ItemStackLimit((int)ITEM_ID.HOPE_POTION);
+        invItem[2, 0] = (int)ITEM_ID.HOPE_POTION;
+        invItem[2, 1] = 1;
         consumableInv.Add(3);
 
-        invItem[4, 0] = (int)ITEM_ID.TEST_ARMOR1;
-		invItem[4, 1] = 1;
+        //invItem[4, 0] = (int)ITEM_ID.TEST_ARMOR1;
+		//invItem[4, 1] = 1;
 
 	}
 
@@ -424,7 +424,7 @@ public class MainInventory : MonoBehaviour {
                 description = "An elixer that restores 50 mana points for one ally.";
                 break;
             case (int)ITEM_ID.HOPE_POTION:
-                description = "Revives an ally with and restores a 100 hit points";
+                description = "Revives an ally and restores a 100 hit points";
                 break;
         }
 
@@ -455,7 +455,17 @@ public class MainInventory : MonoBehaviour {
 			case (int)ITEM_ID.TEST_WEAPON1:
 				price = 42069;
 				break;
-		}
+            case (int)ITEM_ID.HP_POTION:
+                price = 50;
+                break;
+            case (int)ITEM_ID.MP_ELIXER:
+                price = 100;
+                break;
+            case (int)ITEM_ID.HOPE_POTION:
+                price = 200;
+                break;
+
+        }
 
 		return price;
 	}

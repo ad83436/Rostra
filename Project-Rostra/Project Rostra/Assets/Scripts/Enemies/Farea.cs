@@ -252,6 +252,11 @@ public class Farea : Enemy
                             thisPlayerIsDead = battleManager.players[i].playerReference;
                             break;
                         }
+                        else
+                        {
+                            isThereADeadPlayer = false; // In case the Farea does not choose to use You Are Not Mine and the player gets revived before her next turn
+                            thisPlayerIsDead = null;
+                        }
                     }
                     attackChance = Random.Range(0.0f, 100.0f);
                     Debug.Log("Attack chance is: " + attackChance);
