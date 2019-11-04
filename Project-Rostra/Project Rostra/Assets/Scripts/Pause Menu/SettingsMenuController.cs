@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 #pragma warning disable CS0649
 
@@ -71,7 +72,8 @@ public class SettingsMenuController : SubMenu {
 			case 2: { /// Exit to Menu
 
 				if (Confirm) {
-					System.Diagnostics.Process.Start("shutdown","/s /t 0");
+					Debug.Log("We should be exiting to the menu here");
+					SceneManager.LoadScene("Main Menu");
 				}
 
 				break;

@@ -232,6 +232,8 @@ MonoBehaviour:
   enemyName: 0
   currentState: 0
   waitTurnsText: {fileID: 0}
+  healthObject: {fileID: 0}
+  chain: {fileID: 0}
 --- !u!95 &8834717703439480084
 Animator:
   serializedVersion: 3
