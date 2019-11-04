@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+// oo oo ah ah
 public class Interactables : MonoBehaviour
 {
     public Transform player;
