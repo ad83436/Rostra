@@ -18,6 +18,7 @@ public class ConversationTrigger : MonoBehaviour
 	// does this directly trigger the text?
 	public bool directTriggerText;
 	protected bool played = false;
+	public int addMilestone;
 	public virtual void TriggerConvo()
 	{
 		DialogueManager.instance.StartConversation(dialogue);
@@ -49,6 +50,14 @@ public class ConversationTrigger : MonoBehaviour
 		{
 			TriggerConvo();
 			played = true;
+		}
+	}
+
+	public void AddMilestone(int i)
+	{
+		if (addMilestone > 0)
+		{
+			QuestManager.AddMilestone(i);
 		}
 	}
 }
