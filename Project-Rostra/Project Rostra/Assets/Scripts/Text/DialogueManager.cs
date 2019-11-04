@@ -148,7 +148,7 @@ public class DialogueManager : MonoBehaviour
 
 	public void StartConversation(Dialogue d)
 	{
-
+        Debug.Log("HELL DUDE!! STARTED CONVERSATION");
 		if (d.willCount == true)
 		{
 			willCount++;
@@ -301,7 +301,7 @@ public class DialogueManager : MonoBehaviour
 	// this is a coroutine that will take our chars from the string and print one at a time 
 	IEnumerator TypeLetters(string s)
 	{
-
+        Debug.Log("TYPING LETTERS TYPING");
 		text.text = "";
 		continueCountTotal = 0;
 		continueCountTotal = s.ToCharArray().Length;
