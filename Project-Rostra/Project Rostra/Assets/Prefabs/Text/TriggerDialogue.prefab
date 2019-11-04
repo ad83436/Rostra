@@ -86,7 +86,8 @@ MonoBehaviour:
     - But I totally shielded Frea from that attack. And then I stabbed a monster in
       the face. Then I did this cool combat roll and then I...
     - Yeah yeah ok we get it
-    - Let's focus. We to go find the barkeep. They will know somone who last saw Domel
+    - Let's focus. We to go talk to the barkeep. They will know somone who last saw
+      Domel
     - I agree, let's go.
     portrait:
     - {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825, type: 3}
@@ -126,3 +127,4 @@ MonoBehaviour:
   isChoiceDepend: 0
   pressZ: {fileID: 0}
   directTriggerText: 1
+  addMilestone: 1

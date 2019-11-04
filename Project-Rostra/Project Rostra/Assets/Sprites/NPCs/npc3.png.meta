@@ -11,6 +11,9 @@ TextureImporter:
   - first:
       213: -6302151453381002533
     second: Grendol_Right
+  - first:
+      213: 2366919467701991071
+    second: Musician
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -145,7 +148,7 @@ TextureImporter:
         width: 15
         height: 30
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -153,6 +156,27 @@ TextureImporter:
       bones: []
       spriteID: 15bc150a07526294b8d9bf9b20d7e294
       internalID: -6302151453381002533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Musician
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 108
+        width: 17
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: abfed5a1b678b474ab32831029e00600
+      internalID: 2366919467701991071
       vertices: []
       indices: 
       edges: []
