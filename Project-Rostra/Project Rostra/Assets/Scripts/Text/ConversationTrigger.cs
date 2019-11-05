@@ -17,10 +17,19 @@ public class ConversationTrigger : MonoBehaviour
 	// does this directly trigger the text?
 	public bool directTriggerText;
 	protected bool played = false;
+	public bool oneShot = false;
 	public virtual void TriggerConvo()
 	{
-		DialogueManager.instance.StartConversation(dialogue);
-
+		if (played == true && oneShot == true)
+		{
+			TriggerNormalDialogue();
+		}
+		else
+		{
+			played = true;
+			DialogueManager.instance.StartConversation(dialogue);
+		}
+		
 	}
 	// 1 = dwarf, 2 = guild, 3 = kill, 4 = spare, 5 = tell, 6 = lie
 	public void TriggerChoiceDependantConvo()
@@ -30,7 +39,7 @@ public class ConversationTrigger : MonoBehaviour
 
 	public void TriggerNormalDialogue()
 	{
-		DialogueManager.instance.PlayNormalDialogue(dialogue);
+		DialogueManager.instance.StartConversation(dialogue.normal.dialogue);
 	}
 
 	public void TriggerCutsceneDialogue()
