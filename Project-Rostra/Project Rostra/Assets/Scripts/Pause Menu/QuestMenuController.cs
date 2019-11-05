@@ -21,7 +21,7 @@ public class QuestMenuController : SubMenu {
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	private void UpdateCurrentQuest() {
-		Test_QuestDesc.text = QuestManager.questName;
+		Test_QuestName.text = QuestManager.questName;
 		Test_QuestMile.text = QuestManager.milestoneName;
 		Test_QuestDesc.text = QuestManager.description;
 	}
