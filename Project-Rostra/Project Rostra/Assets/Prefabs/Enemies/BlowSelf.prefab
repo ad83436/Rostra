@@ -577,7 +577,7 @@ MonoBehaviour:
   eMana: 0
   eAttack: 1
   eAgility: 1
-  eDefence: 20
+  eDefence: 40
   eStrength: 1
   eSpeed: 0
   eBaseLevel: 1
@@ -594,8 +594,8 @@ MonoBehaviour:
   eCritical: 0
   qImage: {fileID: 0}
   HP: {fileID: 4637663984237281351}
-  maxHP: 0
-  currentHP: 0
+  maxHP: 200
+  currentHP: 200
   damageText: {fileID: 2592514485684720800}
   healText: {fileID: 1474065017911847777}
   enemyCanvas: {fileID: 3051991930182286263}

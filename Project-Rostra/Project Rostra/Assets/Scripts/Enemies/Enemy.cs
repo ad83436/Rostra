@@ -109,14 +109,13 @@ public class Enemy : MonoBehaviour
         healText.gameObject.SetActive(false);
 
         if (enemyName == EnemyName.Mimic) { blowSelfObject.SetActive(false); }
+
         else
         {
             blowSelfObject = null;
         }
 
     
-           
-
         haveAddedMyself = false;
         hit = false;
         dead = false;
@@ -181,6 +180,7 @@ public class Enemy : MonoBehaviour
 
         }
 
+        // used for skills that dont need to wait to activate instead happen right away and last for multiple turns 
         else if (currentState == EnemyState.skilling)
         {
             waitQTurns--;
@@ -198,6 +198,7 @@ public class Enemy : MonoBehaviour
             {
                 switch (enemyAttack)
                 {
+                    #region Dumb
                     case EnemyAttackType.Dumb:
 
                         if (skillChance >= 47)
@@ -227,7 +228,9 @@ public class Enemy : MonoBehaviour
                             DumbAttack();
                         }
                         break;
+#endregion
 
+                    #region Opportunistic
                     case EnemyAttackType.Opportunistic:
 
                         if (attackChance > 30)
@@ -293,7 +296,9 @@ public class Enemy : MonoBehaviour
                             }
                         }
                         break;
+                    #endregion
 
+                    #region Assassin
                     case EnemyAttackType.Assassin:
 
                         if (attackChance > 30)
@@ -360,7 +365,9 @@ public class Enemy : MonoBehaviour
                             }
                         }
                         break;
+                    #endregion
 
+                    #region Bruiser
                     case EnemyAttackType.Bruiser:
 
                         if (attackChance > 30)
@@ -423,9 +430,12 @@ public class Enemy : MonoBehaviour
                             }
                         }
                         break;
+#endregion
 
+                    #region Healer
                     case EnemyAttackType.Healer:
-
+                       
+                        float chanceOfHealth = Random.Range(0.2f, 0.9f); //  how low should  the health be before it is healed //CHANGE THIS FUCKING VARIABLE NAME ANDRE!!
                         if (skillChance >= 49)
                         {
                             if (skillNeedsCharge)
@@ -450,10 +460,26 @@ public class Enemy : MonoBehaviour
 
                         else
                         {
-                            HealEnemy();
-                        }
-                        break;
+                            enemyToHeal = EnemyToHeal();
 
+                            if (enemyToHeal.currentHP <= (enemyToHeal.maxHP * chanceOfHealth))
+                            {
+                                print("Healed Enemy at Index " + enemyToHeal.enemyIndexInBattleManager);
+                                animator.SetBool("Heal", true);
+                            
+                            }
+
+                            else
+                            {
+                                print("dumb Attacked");
+                                DumbAttack();
+                            }
+                        }
+
+                        break;
+#endregion
+
+                    #region Heal Support
                     case EnemyAttackType.Heal_Support:
 
                         if (skillChance >= 49)
@@ -483,7 +509,9 @@ public class Enemy : MonoBehaviour
                             SupportHeal(theHealer);
                         }
                         break;
+#endregion
 
+                    #region Strategist
                     case EnemyAttackType.Strategist:
 
                         if (attackChance > 30)
@@ -552,7 +580,9 @@ public class Enemy : MonoBehaviour
 
                         DumbAttack();
                         break;
+#endregion
 
+                    #region Relentless Attack
                     case EnemyAttackType.Relentless:
 
                         if (attackChance > 30)
@@ -615,7 +645,9 @@ public class Enemy : MonoBehaviour
                             }
                         }
                         break;
+                    #endregion
 
+                    #region Blow Self
                     case EnemyAttackType.Enemy_Blows_Self:
 
                         if (skillChance >= 49)
@@ -629,6 +661,7 @@ public class Enemy : MonoBehaviour
                             countDownToBlow--;
                         }
                         break;
+                        #endregion
                 }
             }
 
@@ -882,12 +915,11 @@ public class Enemy : MonoBehaviour
             animator.SetBool("SkillInUse", true);
         }
     }
-    void HealEnemy()
+    Enemy EnemyToHeal()
     {
         int[] healthHolder = new int[battleManager.enemies.Length];// why i did this i will never know change it when not too lazy
         float lowestHealth; //holds ref the lowest health in enemyStat List
-        int healthMod = Random.Range(5, 20);// how much health should be applied to the enemies currentHP
-        float chanceOfHealth = Random.Range(0.2f, 0.9f); //  how low should  the health be before it is healed //CHANGE THIS FUCKING VARIABLE NAME ANDRE!!
+       
 
         for (int i = 0; i < healthHolder.Length; ++i)
         {
@@ -914,11 +946,13 @@ public class Enemy : MonoBehaviour
             if (battleManager.enemies[i].currentHP == lowestHealth)
             {
                 enemyToHeal = battleManager.enemies[i].enemyReference;
+                return enemyToHeal;
             }
         }
-
+        enemyStatNeeded.Clear();
+        return enemyToHeal;
         //if the enemy that needs to be healths current hp is less that a percentage of max hp plus 0.1 so that its never below 20%
-        if (enemyToHeal.currentHP <= (enemyToHeal.maxHP * chanceOfHealth))
+        /*if (enemyToHeal.currentHP <= (enemyToHeal.maxHP * chanceOfHealth))
         {
             if (enemyToHeal.currentHP + healthMod >= enemyToHeal.maxHP)
             {
@@ -933,12 +967,12 @@ public class Enemy : MonoBehaviour
             }
             uiBTL.EndTurn();
         }
-
+        
         else
         {
             DumbAttack();
-        }
-        enemyStatNeeded.Clear();
+        }*/
+        
     }
     void SupportHeal(Enemy theHealer)
     {
@@ -1052,7 +1086,7 @@ public class Enemy : MonoBehaviour
 
                 else if (randomStat == 2)
                 {
-                    HealEnemy();
+                    //HealEnemy();
                 }
 
                 else
@@ -1079,7 +1113,7 @@ public class Enemy : MonoBehaviour
 
             else if (randomStat == 2)
             {
-                HealEnemy();
+               // HealEnemy();
             }
 
             else
@@ -1715,7 +1749,7 @@ public class Enemy : MonoBehaviour
 
                 else
                 {
-                    HealEnemy();
+                    MakeSkillsWork(AllEnemySkills.All_Enemy_Heal);
                 }
 
                 uiBTL.EndTurn();
@@ -2151,6 +2185,23 @@ public class Enemy : MonoBehaviour
             uiBTL.EndTurn(); //Only end the turn after the enemy is dead
         }
     }
+    void HealEnemy()
+    {
+        int healthMod = Random.Range(5, 20);// how much health should be applied to the enemies currentHP
+        if (enemyToHeal.currentHP + healthMod >= enemyToHeal.maxHP)
+        {
+            enemyToHeal.currentHP = enemyToHeal.maxHP;
+            battleManager.enemies[enemyToHeal.enemyIndexInBattleManager].currentHP = enemyToHeal.currentHP;
+        }
+
+        else
+        {
+            enemyToHeal.currentHP += healthMod;
+            battleManager.enemies[enemyToHeal.enemyIndexInBattleManager].currentHP = enemyToHeal.currentHP;
+        }
+
+        EndTurn();
+    }
     //An enemy tied to a player should get healed when the player is healed. Called from the tied player 
     public virtual void HealDueToTied(float healAmount)
     { 
@@ -2172,5 +2223,6 @@ public class Enemy : MonoBehaviour
         HP.fillAmount = currentHP / maxHP;
         healthObject.gameObject.SetActive(true);
     }
+   
 }
 
