@@ -22,7 +22,7 @@ public class PlayerMove : MonoBehaviour
         dm = DialogueManager.instance;
     }
 
-    void Update()
+    void LateUpdate()
     {
 		if (dm.canWalk && !BattleManager.battleInProgress && !PauseMenuController.isPaused && !ItemShopUI.IsOpen && CutsceneManager.instance.isActive == false)
 		{

@@ -478,11 +478,11 @@ public class DialogueManager : MonoBehaviour
 		{
 			NextSentence();
 		}
-		if (dia.isChoice == true && boxCount == choiceCount && Input.GetKeyDown(KeyCode.LeftArrow))
+		if (dia.isChoice == true && boxCount == choiceCount && Input.GetKeyDown(KeyCode.LeftArrow) && canEnter == true)
 		{
 			choiceNum = 1;
 		}
-		else if (dia.isChoice == true && boxCount == choiceCount && Input.GetKeyDown(KeyCode.RightArrow))
+		else if (dia.isChoice == true && boxCount == choiceCount && Input.GetKeyDown(KeyCode.RightArrow) && canEnter == true)
 		{
 			choiceNum = 2;
 		}
