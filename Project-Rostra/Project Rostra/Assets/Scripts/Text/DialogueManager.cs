@@ -486,11 +486,11 @@ public class DialogueManager : MonoBehaviour
 		{
 			choiceNum = 2;
 		}
-		if (Input.GetButtonDown("Confirm") && choiceNum == 1 && boxCount == choiceCount && dia.isChoice == true)
+		if (Input.GetButtonDown("Confirm") && choiceNum == 1 && boxCount == choiceCount && dia.isChoice == true && canEnter == true)
 		{
 			SelectFirstChoice();
 		}
-		else if (Input.GetButtonDown("Confirm") && choiceNum == 2 && boxCount == choiceCount && dia.isChoice == true)
+		else if (Input.GetButtonDown("Confirm") && choiceNum == 2 && boxCount == choiceCount && dia.isChoice == true && canEnter == true)
 		{
 			SelectSecondChoice();
 		}
