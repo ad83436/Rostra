@@ -22,6 +22,7 @@ public class MerchantTrigger : ConversationTrigger
             case merchantState.idle:
                 if (!DialogueManager.instance.isActive && interactedWith)
                 {
+                    
                     ItemShopUI.OpenItemShop();
                     currentState = merchantState.active;
                     interactedWith = false;

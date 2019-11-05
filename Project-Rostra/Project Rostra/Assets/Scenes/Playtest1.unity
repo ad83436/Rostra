@@ -2396,7 +2396,7 @@ PrefabInstance:
     - target: {fileID: 4680228678307591170, guid: fb169ced7c50e894ca46fee893a3f0b1,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4680228678307591196, guid: fb169ced7c50e894ca46fee893a3f0b1,
         type: 3}
@@ -6534,6 +6534,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Barkeep
       objectReference: {fileID: 0}
+    - target: {fileID: 1734714614, guid: 967e01baec8f1c24fbdcd7c446249479, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2695883018746198836, guid: 967e01baec8f1c24fbdcd7c446249479,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6609,10 +6613,6 @@ PrefabInstance:
       propertyPath: pressZ
       value: 
       objectReference: {fileID: 1580380114}
-    - target: {fileID: 1734714614, guid: 967e01baec8f1c24fbdcd7c446249479, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1734714613, guid: 967e01baec8f1c24fbdcd7c446249479, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -6740,7 +6740,7 @@ MonoBehaviour:
   - {fileID: 8830413635625265082, guid: 09875b434c97e954a8ca9276dca80ae4, type: 3}
   - {fileID: 8830413635625265082, guid: 09875b434c97e954a8ca9276dca80ae4, type: 3}
   - {fileID: 2487905135032201599, guid: 3c7d329df66cd7349923408792b8e755, type: 3}
-  enemyLevels: 0300000002000000020000000200000003000000
+  enemyLevels: 0500000004000000040000000400000005000000
   fadePanel: {fileID: 0}
   endTestPanel: {fileID: 126959872}
   enemySpwn: {fileID: 1950009557}

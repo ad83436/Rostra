@@ -29,7 +29,7 @@ public class ExpManager : MonoBehaviour {
 		//Will be changed to use a load file instead
 
 		//Fargas
-		PartyStats.chara[0].hitpoints = 20.0f;
+		PartyStats.chara[0].hitpoints = 40.0f;
 		PartyStats.chara[0].maxHealth = 200.0f;
 		PartyStats.chara[0].magicpoints = 200.0f;
 		PartyStats.chara[0].maxMana = 200.0f;
@@ -233,7 +233,7 @@ public class ExpManager : MonoBehaviour {
 			case 2: //Frea
 				switch (skill) {
                     case SKILLS.Fr_DoubleShot:      return new int[] { 35, 14, 190, 200, 15, 16, 14 };
-                    case SKILLS.Fr_PiercingShot:	return new int[] { 40, 14, 265, 200, 17, 16, 14 };
+                    case SKILLS.Fr_PiercingShot:	return new int[] { 35, 14, 190, 200, 16, 16, 14 }; //return new int[] { 40, 14, 265, 200, 15, 16, 14 };
                     case SKILLS.Fr_ArrowRain:       return new int[] { 37, 14, 190, 325, 16, 16, 14 };
                     case SKILLS.Fr_IDontMiss:       return new int[] { 35, 16, 265, 325, 16, 16, 16 };
                     case SKILLS.Fr_PhantomShot:     return new int[] { 42, 18, 265, 400, 18, 16, 16 };
@@ -244,7 +244,7 @@ public class ExpManager : MonoBehaviour {
 			case 3: //Arcelus
 				switch (skill) {
                     case SKILLS.Ar_Heal:        return new int[] { 18, 13, 180, 250, 13, 26, 12 };
-                    case SKILLS.Ar_HealingAura:	return new int[] { 20, 13, 180, 325, 13, 26, 12 };
+                    case SKILLS.Ar_HealingAura:	return new int[] { 18, 13, 180, 325, 13, 26, 12 }; //case SKILLS.Ar_HealingAura:	return new int[] { 20, 13, 180, 325, 13, 26, 12 };
                     case SKILLS.Ar_DrainEye:    return new int[] { 18, 13, 255, 325, 13, 26, 12 };
                     case SKILLS.Ar_LullabyOfHope: return new int[] { 18, 15, 180, 400, 13, 26, 14 };
                     case SKILLS.Ar_ManaCharge: return new int[] { 19, 13, 255, 325, 14, 26, 12 };

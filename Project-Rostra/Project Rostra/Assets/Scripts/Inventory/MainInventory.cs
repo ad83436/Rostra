@@ -71,15 +71,13 @@ public class MainInventory : MonoBehaviour {
 
 		invItem[0, 0] = (int)ITEM_ID.HP_POTION;
         invItem[0, 1] = 5;
-		consumableInv.Add(1);
 
 		invItem[1, 0] = (int)ITEM_ID.MP_ELIXER;
         invItem[1, 1] = 2;
-		consumableInv.Add(2);
 
         invItem[2, 0] = (int)ITEM_ID.HOPE_POTION;
         invItem[2, 1] = 1;
-        consumableInv.Add(3);
+
 
         //invItem[4, 0] = (int)ITEM_ID.TEST_ARMOR1;
 		//invItem[4, 1] = 1;
@@ -690,7 +688,7 @@ public class MainInventory : MonoBehaviour {
         {
             case (int)ITEM_ID.TEST_POTION_HP:
             case (int)ITEM_ID.HP_POTION:
-                return itemIcons[1];//Potion is 1
+                return itemIcons[1]; //Potion is 1
             case (int)ITEM_ID.TEST_POTION_MP:
             case (int)ITEM_ID.MP_ELIXER:
                 return itemIcons[2]; //Elixer is 2

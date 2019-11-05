@@ -66,7 +66,7 @@ public class PauseMenuController : MonoBehaviour {
 
 	private void Update() {
 		//update inputs
-		pause = Input.GetButtonDown("Pause") && !BattleManager.battleInProgress; //Player should not be able to open the menu insdie the battle
+		pause = Input.GetButtonDown("Pause") && !BattleManager.battleInProgress && !DialogueManager.instance.isActive; //Player should not be able to open the menu insdie the battle
 		Cancel = Input.GetButtonDown("Cancel");
 
 		if ((pause && activeMenu) || (isPaused && activeMenu && Cancel)) {

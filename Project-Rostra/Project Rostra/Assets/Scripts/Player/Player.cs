@@ -667,6 +667,7 @@ public class Player : MonoBehaviour
         currentRage = PartyStats.chara[playerIndex].rage;
 
         hpImage.fillAmount = currentHP / maxHP;
+        mpImage.fillAmount = currentMP / maxMP;
         rageImage.fillAmount = currentRage / maxRage;
 
         if (currentRage >= maxRage)
