@@ -666,11 +666,13 @@ public class UIBTL : MonoBehaviour
                         //Show three the first three items in the inventory
                         for (int i = 0; i < 3 && i < inventory.consumableInv.Count; i++)
                         {
+                            Debug.Log("Item names are : "+ itemNames[i].text);
                             itemIconsInPanel[i].sprite = inventory.ItemIcon(inventory.invItem[inventory.consumableInv[itemsPanelIndex + i], 0]);// itemIcons[inventory.invItem[inventory.consumableInv[itemsPanelIndex + i], 0]];
                             itemNames[i].text = inventory.ItemName(inventory.invItem[inventory.consumableInv[itemsPanelIndex + i], 0]);
                             itemCount[i].text = inventory.invItem[inventory.consumableInv[itemsPanelIndex + i], 1].ToString();
                         }
                         currentState = btlUIState.choosingItemsCommand;
+                        Debug.Log("Item index = : " + itemHPosIndex);
                     }
                     break;
                 case 4://Hilighter is at RAGE
@@ -910,7 +912,7 @@ public class UIBTL : MonoBehaviour
             itemsPanelIndex = 0;
             currentState = btlUIState.choosingBasicCommand;
         }
-        else if (Input.GetButtonDown("Confirm"))//Player has chosen an item
+        else if (Input.GetButtonDown("Confirm") && inventory.invItem[inventory.consumableInv[itemsPanelIndex], 1] > 0)//Player has chosen an item
         {
             //Make sure you choose an item that is usable and not equipable
             previousState = btlUIState.choosingItemsCommand; //Needed to know what to reference when choosing the player

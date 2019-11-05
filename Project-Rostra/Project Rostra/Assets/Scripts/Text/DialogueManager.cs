@@ -158,7 +158,7 @@ public class DialogueManager : MonoBehaviour
 
 	public void StartConversation(Dialogue d)
 	{
-        Debug.Log("HELL DUDE!! STARTED CONVERSATION");
+		canEnter = false;
 		if (d.willCount == true)
 		{
 			willCount++;
@@ -341,13 +341,12 @@ public class DialogueManager : MonoBehaviour
 			if (boxCount == choiceCount)
 			{
 				continueButton.SetActive(false);
-				canEnter = true;
 				choice1.gameObject.SetActive(true);
 				choice2.gameObject.SetActive(true);
 				choice1.text = dia.choiceText1;
 				choice2.text = dia.choiceText2;
 			}
-			yield return new WaitForSeconds(dia.typingSpeed);
+			yield return new WaitForSeconds(dia.typingSpeed * (Input.GetButton("Confirm") ? 0.01f : 1f));
 		}
 	}
 	// did you pick door 1 
@@ -478,19 +477,19 @@ public class DialogueManager : MonoBehaviour
 		{
 			NextSentence();
 		}
-		if (dia.isChoice == true && boxCount == choiceCount && Input.GetKeyDown(KeyCode.LeftArrow))
+		if (dia.isChoice == true && boxCount == choiceCount && Input.GetKeyDown(KeyCode.LeftArrow) && canEnter == true)
 		{
 			choiceNum = 1;
 		}
-		else if (dia.isChoice == true && boxCount == choiceCount && Input.GetKeyDown(KeyCode.RightArrow))
+		else if (dia.isChoice == true && boxCount == choiceCount && Input.GetKeyDown(KeyCode.RightArrow) && canEnter == true)
 		{
 			choiceNum = 2;
 		}
-		if (Input.GetButtonDown("Confirm") && choiceNum == 1 && boxCount == choiceCount && dia.isChoice == true)
+		if (Input.GetButtonDown("Confirm") && choiceNum == 1 && boxCount == choiceCount && dia.isChoice == true && canEnter == true)
 		{
 			SelectFirstChoice();
 		}
-		else if (Input.GetButtonDown("Confirm") && choiceNum == 2 && boxCount == choiceCount && dia.isChoice == true)
+		else if (Input.GetButtonDown("Confirm") && choiceNum == 2 && boxCount == choiceCount && dia.isChoice == true && canEnter == true)
 		{
 			SelectSecondChoice();
 		}

@@ -667,6 +667,7 @@ public class Player : MonoBehaviour
         currentRage = PartyStats.chara[playerIndex].rage;
 
         hpImage.fillAmount = currentHP / maxHP;
+        mpImage.fillAmount = currentMP / maxMP;
         rageImage.fillAmount = currentRage / maxRage;
 
         if (currentRage >= maxRage)
@@ -825,6 +826,12 @@ public class Player : MonoBehaviour
                 skillNameForObjPooler = "FFSkill1";
                 skillAnimatorName = "ASkill";
                 skillWaitingIndex = 1; //Should there be waiting time, this index is used to know which waiting animation to go to
+                break;
+            case (int)SKILLS.Fa_SwordOfFury:
+                skillNameForObjPooler = "SoFSkill";
+                skillAnimatorName = "ASkill";
+                skillWaitingIndex = 2; //Should there be waiting time, this index is used to know which waiting animation to go to
+
                 break;
         }
 
