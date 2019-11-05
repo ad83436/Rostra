@@ -107,14 +107,24 @@ public class DialogueManager : MonoBehaviour
 		if (instance == null)
 		{
 			instance = this;
-		}
+            GameManager.instance.listOfUndestroyables.Add(this.gameObject);
+        }
 		else
 		{
 			Destroy(gameObject);
 		}
 	}
 
-	void Start()
+    private void OnDestroy()
+    {
+        if (instance == this)
+        {
+            instance = null;
+        }
+    }
+
+
+    void Start()
     {
 		
 		DontDestroyOnLoad(this.gameObject);
@@ -148,7 +158,7 @@ public class DialogueManager : MonoBehaviour
 
 	public void StartConversation(Dialogue d)
 	{
-
+        Debug.Log("HELL DUDE!! STARTED CONVERSATION");
 		if (d.willCount == true)
 		{
 			willCount++;
@@ -162,6 +172,10 @@ public class DialogueManager : MonoBehaviour
 
 		if (nextDialogue == true)
 		{
+			if (d.addMilestone > 0)
+			{
+				AddMilestone(d.addMilestone);
+			}
 			Debug.Log("Started Convo");
 			text.text = "";
 			//turn off the highlighting and set everything to default in case it wasn't reset
@@ -305,7 +319,7 @@ public class DialogueManager : MonoBehaviour
 	// this is a coroutine that will take our chars from the string and print one at a time 
 	IEnumerator TypeLetters(string s)
 	{
-
+        Debug.Log("TYPING LETTERS TYPING");
 		text.text = "";
 		continueCountTotal = 0;
 		continueCountTotal = s.ToCharArray().Length;
@@ -412,12 +426,20 @@ public class DialogueManager : MonoBehaviour
 		{
 			Debug.Log("Playing Normal Text");
 			StartConversation(dia.choiceCare1.dialogue.normal.dialogue);
+			if (dia.choice1.dialogue.normal.dialogue.addMilestone > 0)
+			{
+				AddMilestone(dia.choice1.dialogue.normal.dialogue.addMilestone);
+			}
 		}
 		else
 		{
 			if (choice > choices.Length / 2 && (choices[(int)choice] == false && choices[(int)choice - choices.Length / 2] == false))
 			{
 				StartConversation(dia.normal.dialogue);
+				if (dia.choice1.dialogue.normal.dialogue.addMilestone > 0)
+				{
+					AddMilestone(dia.choice1.dialogue.normal.dialogue.addMilestone);
+				}
 				Debug.Log((int)choice - choices.Length / 2);
 			}
 			// if it's less than half add half
@@ -431,7 +453,10 @@ public class DialogueManager : MonoBehaviour
 			{
 				dia.choiceCare1.dialogue.hasPlayed = true;
 				StartConversation(dia.choiceCare1.dialogue);
-				
+				if(dia.choice1.dialogue.addMilestone > 0)
+				{
+					AddMilestone(dia.choice1.dialogue.addMilestone);
+				}
 			}
 			// init dialogue 2
 			else if (choices[(int)choice] == false)
@@ -514,5 +539,10 @@ public class DialogueManager : MonoBehaviour
 			battle = false;
 			UIBTL.conversationAfterBattle = true;
 		}
+	}
+
+	public void AddMilestone(int i)
+	{
+		QuestManager.AddMilestone(i);
 	}
 }

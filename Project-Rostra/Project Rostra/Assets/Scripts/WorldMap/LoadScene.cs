@@ -32,7 +32,6 @@ public class LoadScene : MonoBehaviour
 				SceneManager.UnloadSceneAsync(unloadScene);
 				player.SetActive(true);
 			}
-
 		}
 	}
 }

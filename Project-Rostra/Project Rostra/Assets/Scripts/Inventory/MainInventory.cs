@@ -49,15 +49,23 @@ public class MainInventory : MonoBehaviour {
 		if (invInstance == null) {
 			invInstance = this;
 			DontDestroyOnLoad(gameObject);
-		} else {
+            GameManager.instance.listOfUndestroyables.Add(this.gameObject);
+        } else {
 			Destroy(gameObject);
 		}
 		// Set all 3rd elements in the array to -1 (Equipped by nobody) 
 		for (int i = 0; i < INVENTORY_SIZE; i++) { invItem[i, 2] = -1; }
 	}
 
-	// FOR TESTING
-	private void Start() {
+    private void OnDestroy()
+    {
+        if (invInstance == this)
+        {
+            invInstance = null;
+        }
+    }
+    // FOR TESTING
+    private void Start() {
 		//invItem[0, 0] = (int)ITEM_ID.TEST_WEAPON1;
 		//invItem[0, 1] = 1;
 

@@ -354,9 +354,11 @@ MonoBehaviour:
     isBattle: 0
     triggerBool: 0
     isOneShot: 0
+    addMilestone: 0
   choiceCare: 1
   isChoiceDepend: 1
   pressZ: {fileID: 2067512502}
+  directTriggerText: 0
 --- !u!114 &1257990562384444598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -407,16 +409,16 @@ MonoBehaviour:
       to continue the demo. '
     portrait:
     - {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825, type: 3}
-    - {fileID: 21300000, guid: 26feff2f0d4e92349a70bba8a0c18d31, type: 3}
+    - {fileID: 21300000, guid: bc67c4137ad9fc246937d8bfa972edf7, type: 3}
     - {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825, type: 3}
     - {fileID: 21300000, guid: 1f1660c1b92d23a4fb0b75fcca80183d, type: 3}
     - {fileID: 21300000, guid: e24a4049526ca704eb781c65db5c188d, type: 3}
     - {fileID: 21300000, guid: f40486206916ccc4a9bf37f57f448dee, type: 3}
-    - {fileID: 21300000, guid: 26feff2f0d4e92349a70bba8a0c18d31, type: 3}
+    - {fileID: 21300000, guid: bc67c4137ad9fc246937d8bfa972edf7, type: 3}
     - {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825, type: 3}
-    - {fileID: 21300000, guid: 26feff2f0d4e92349a70bba8a0c18d31, type: 3}
+    - {fileID: 21300000, guid: bc67c4137ad9fc246937d8bfa972edf7, type: 3}
     - {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825, type: 3}
-    - {fileID: 21300000, guid: 26feff2f0d4e92349a70bba8a0c18d31, type: 3}
+    - {fileID: 21300000, guid: bc67c4137ad9fc246937d8bfa972edf7, type: 3}
     - {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825, type: 3}
     - {fileID: 21300000, guid: dd3d4b940a009d14dbfe8b78c3b4f6ca, type: 3}
     povChange:
@@ -451,9 +453,11 @@ MonoBehaviour:
     isBattle: 0
     triggerBool: 6
     isOneShot: 1
+    addMilestone: 3
   choiceCare: 0
   isChoiceDepend: 0
   pressZ: {fileID: 0}
+  directTriggerText: 0
 --- !u!114 &1257990562384444601
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -474,7 +478,7 @@ MonoBehaviour:
       head of those guild pigs is here in the tavern. Gotta keep my eyes out so he
       don't hurt the good people here.
     portrait:
-    - {fileID: 21300000, guid: 26feff2f0d4e92349a70bba8a0c18d31, type: 3}
+    - {fileID: 21300000, guid: bc67c4137ad9fc246937d8bfa972edf7, type: 3}
     povChange: []
     typingSpeed: 0
     isChoice: 0
@@ -494,9 +498,11 @@ MonoBehaviour:
     isBattle: 0
     triggerBool: 0
     isOneShot: 0
+    addMilestone: 0
   choiceCare: 0
   isChoiceDepend: 0
   pressZ: {fileID: 0}
+  directTriggerText: 0
 --- !u!114 &1257990562384444600
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -514,9 +520,9 @@ MonoBehaviour:
     - Torven
     sentences:
     - 'I''ve heard that you''ve been talking to the Alchemy Guild. Get out of my sight
-      you traiterous rat. '
+      you traitorous rat. '
     portrait:
-    - {fileID: 21300000, guid: 26feff2f0d4e92349a70bba8a0c18d31, type: 3}
+    - {fileID: 21300000, guid: bc67c4137ad9fc246937d8bfa972edf7, type: 3}
     povChange: []
     typingSpeed: 0
     isChoice: 0
@@ -536,9 +542,11 @@ MonoBehaviour:
     isBattle: 0
     triggerBool: 0
     isOneShot: 0
+    addMilestone: 0
   choiceCare: 0
   isChoiceDepend: 0
   pressZ: {fileID: 0}
+  directTriggerText: 0
 --- !u!114 &600204649
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -578,6 +586,8 @@ MonoBehaviour:
     isBattle: 0
     triggerBool: 0
     isOneShot: 0
+    addMilestone: 0
   choiceCare: 0
   isChoiceDepend: 0
   pressZ: {fileID: 0}
+  directTriggerText: 0

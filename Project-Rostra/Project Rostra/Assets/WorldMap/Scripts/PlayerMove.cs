@@ -24,7 +24,7 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
-		if (dm.canWalk && !BattleManager.battleInProgress && !PauseMenuController.isPaused && !ItemShopUI.IsOpen)
+		if (dm.canWalk && !BattleManager.battleInProgress && !PauseMenuController.isPaused && !ItemShopUI.IsOpen && CutsceneManager.instance.isActive == false)
 		{
 			moveInput.x = Input.GetAxisRaw("Horizontal");
 			moveInput.y = Input.GetAxisRaw("Vertical");
@@ -35,7 +35,7 @@ public class PlayerMove : MonoBehaviour
 			animator.SetFloat("Horizontal", horizontalMove);
 			animator.SetFloat("Vertical", verticalMove);
 			animator.SetFloat("Speed", moveVelocity.sqrMagnitude);
-			
+			TalkToNPC();
 		}
 		else if(dm.canWalk == false)
 		{
@@ -46,13 +46,6 @@ public class PlayerMove : MonoBehaviour
 		}
 	}
 
-	private void LateUpdate()
-	{
-		if (dm.canWalk && !BattleManager.battleInProgress && !PauseMenuController.isPaused && !ItemShopUI.IsOpen)
-		{
-			TalkToNPC();
-		}
-	}
 
 	void FixedUpdate()
     {

@@ -286,9 +286,14 @@ public class ItemShopUI : MonoBehaviour {
 	#region Initialization & Destruction
 
 	private void Awake() {
-		// Singleton
-		if (Singleton == null) Singleton = this;
-		else Destroy(this.gameObject);
+        // Singleton
+        if (Singleton == null)
+        {
+            Singleton = this;
+            DontDestroyOnLoad(this.transform.parent.gameObject);
+            GameManager.instance.listOfUndestroyables.Add(this.transform.parent.gameObject);
+        }
+        else Destroy(this.gameObject);
 
         // Static
         IsOpen = false;

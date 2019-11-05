@@ -8,6 +8,7 @@ public class MainMenu : MonoBehaviour
 {
     public GameObject hilighter;
     public GameObject[] hPos;
+    public GameManager gameManager;
 
     private int menuIndex;
     public Image fade;
@@ -50,6 +51,8 @@ public class MainMenu : MonoBehaviour
 
         howToPlayPanel.gameObject.SetActive(false);
         controlsPanel.gameObject.SetActive(false);
+
+        Instantiate(gameManager, gameManager.transform.position, gameManager.transform.rotation);
     }
 
     void Update()
@@ -166,7 +169,7 @@ public class MainMenu : MonoBehaviour
             fade.fillAmount += 0.02f;
             if (fade.fillAmount >= 1.0f)
             {
-                SceneManager.LoadScene("Playtest1");
+                SceneManager.LoadScene("PlayTest2");
             }
         }
     }
