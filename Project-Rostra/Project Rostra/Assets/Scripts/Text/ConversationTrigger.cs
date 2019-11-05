@@ -17,10 +17,10 @@ public class ConversationTrigger : MonoBehaviour
 	// does this directly trigger the text?
 	public bool directTriggerText;
 	protected bool played = false;
-	public int addMilestone;
 	public virtual void TriggerConvo()
 	{
 		DialogueManager.instance.StartConversation(dialogue);
+
 	}
 	// 1 = dwarf, 2 = guild, 3 = kill, 4 = spare, 5 = tell, 6 = lie
 	public void TriggerChoiceDependantConvo()
@@ -52,11 +52,5 @@ public class ConversationTrigger : MonoBehaviour
 		}
 	}
 
-	public void AddMilestone(int i)
-	{
-		if (addMilestone > 0)
-		{
-			QuestManager.AddMilestone(i);
-		}
-	}
+
 }
