@@ -98,7 +98,7 @@ public class Player : MonoBehaviour
     private bool agilityBuffed = false;
     private bool strBuffed = false;
     private bool drainEye = false;
-    private float drainEyeModifier = 0.2f; //Used to calculate the heal percentage
+    private float drainEyeModifier = 0.4f; //Used to calculate the heal percentage
     private float defenseBuffSkillQCounter = 0; //How many turns until the defense buff is reversed. Need three counters as multiple stats could be buffed/debuffed at the same time
     private float attackBuffSkillQCounter = 0;
     private float agilityBuffSkillQCounter = 0;
@@ -834,6 +834,7 @@ public class Player : MonoBehaviour
                 skillWaitingIndex = 1; //Should there be waiting time, this index is used to know which waiting animation to go to
                 break;
             case (int)SKILLS.Fa_SwordOfFury:
+               
                 skillTarget = 0;
                 skillNameForObjPooler = "SoFSkill";
                 skillAnimatorName = "ASkill";
@@ -970,7 +971,10 @@ public class Player : MonoBehaviour
         }
         if (skillTarget == 0) // Damaging one enemy
         {
-            Debug.Log("Damage enemy");
+            if (attackingThisEnemy.dead)
+            {
+                FindAnAliveEnemy(); //Make sure you don't target a dead enemy
+            }
             CalculateHitForSkill();
             if (hit)
             {
@@ -1723,6 +1727,21 @@ public class Player : MonoBehaviour
     {
         tiedSymbol.gameObject.SetActive(false);
         currentAilment = playerAilments.none;
+    }
+
+    private void FindAnAliveEnemy()
+    {
+        Debug.Log("Result === " + (Random.Range(0, uiBTL.numberOfEnemies - 1)).ToString());
+
+        //Make sure the enemy you're trying to attack is alive
+        for (int i = 0; i < uiBTL.enemiesDead.Length; i++)
+        {
+            if (uiBTL.enemiesDead[i] == false && uiBTL.enemies[i] != null)
+            {
+                attackingThisEnemy = uiBTL.enemies[i];
+                break;
+            }
+        }
     }
 
     #endregion
