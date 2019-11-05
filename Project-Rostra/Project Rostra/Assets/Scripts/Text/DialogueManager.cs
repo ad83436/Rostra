@@ -158,7 +158,7 @@ public class DialogueManager : MonoBehaviour
 
 	public void StartConversation(Dialogue d)
 	{
-        Debug.Log("HELL DUDE!! STARTED CONVERSATION");
+		canEnter = false;
 		if (d.willCount == true)
 		{
 			willCount++;
