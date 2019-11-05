@@ -469,8 +469,17 @@ public class Enemy : MonoBehaviour
 
                             if (enemyToHeal.currentHP <= (enemyToHeal.maxHP * chanceOfHealth))
                             {
-                                print("Healed Enemy at Index " + enemyToHeal.enemyIndexInBattleManager);
-                                animator.SetBool("Heal", true);
+                                if (enemyToHeal.dead)
+                                {
+                                    DumbAttack();
+                                }
+
+                                else
+                                {
+                                    print("Healed Enemy at Index " + enemyToHeal.enemyIndexInBattleManager);
+                                    animator.SetBool("Heal", true);
+                                }
+                             
                             
                             }
 
@@ -2207,7 +2216,7 @@ public class Enemy : MonoBehaviour
         {
             enemyToHeal.currentHP += healthMod;
             battleManager.enemies[enemyToHeal.enemyIndexInBattleManager].currentHP = enemyToHeal.currentHP;
-            enemyToHeal.HP.fillAmount = enemyToHeal.currentHP;
+            enemyToHeal.HP.fillAmount = enemyToHeal.currentHP /enemyToHeal.maxHP;
         }
         animator.SetBool("Heal", false);
         EndTurn();
