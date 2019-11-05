@@ -465,7 +465,7 @@ public class Enemy : MonoBehaviour
 
                         else
                         {
-                            enemyToHeal = EnemyToHeal();
+                             EnemyToHeal();
 
                             if (enemyToHeal.currentHP <= (enemyToHeal.maxHP * chanceOfHealth))
                             {
@@ -920,7 +920,7 @@ public class Enemy : MonoBehaviour
             animator.SetBool("SkillInUse", true);
         }
     }
-    Enemy EnemyToHeal()
+    void EnemyToHeal()
     {
         int[] healthHolder = new int[battleManager.enemies.Length];// why i did this i will never know change it when not too lazy
         float lowestHealth; //holds ref the lowest health in enemyStat List
@@ -929,7 +929,7 @@ public class Enemy : MonoBehaviour
         for (int i = 0; i < healthHolder.Length; ++i)
         {
             //add enemies currentHp to enemyStat List only if they arnt dead
-            if (battleManager.enemies[i].currentHP > 0 && !dead)
+            if (battleManager.enemies[i].currentHP > 0 && !dead && this != battleManager.enemies[i].enemyReference)
             {
                 enemyStatNeeded.Add(battleManager.enemies[i].currentHP);
             }
@@ -951,11 +951,11 @@ public class Enemy : MonoBehaviour
             if (battleManager.enemies[i].currentHP == lowestHealth)
             {
                 enemyToHeal = battleManager.enemies[i].enemyReference;
-                return enemyToHeal;
+                
             }
         }
         enemyStatNeeded.Clear();
-        return enemyToHeal;
+       
         //if the enemy that needs to be healths current hp is less that a percentage of max hp plus 0.1 so that its never below 20%
         /*if (enemyToHeal.currentHP <= (enemyToHeal.maxHP * chanceOfHealth))
         {
@@ -1764,31 +1764,8 @@ public class Enemy : MonoBehaviour
 
             #region heal all enemies
             case AllEnemySkills.All_Enemy_Heal:
-                healthMod = 100;
-                print("Used The Heal All Skill");
-
-                for (int i = 0; i < battleManager.enemies.Length; ++i)
-                {
-                    if (battleManager.enemies[i].enemyReference != null && this != battleManager.enemies[i].enemyReference)
-                    {
-                        if (!battleManager.enemies[i].enemyReference.dead)
-                        {
-                            enemyToHeal = battleManager.enemies[i].enemyReference;
-                            print("Enemy was healed at index " + enemyToHeal.enemyIndexInBattleManager);
-                            enemyToHeal.currentHP += healthMod;
-                            print("Enemies new Hp is " + enemyToHeal.currentHP);
-
-                            if (enemyToHeal.currentHP > enemyToHeal.maxHP)
-                            {
-                                enemyToHeal.currentHP = enemyToHeal.maxHP;
-                                print("Enemies new Hp is " + enemyToHeal.currentHP);
-                            }
-                        }
-                    }
-                }
-
-                uiBTL.EndTurn();
-
+                animator.SetBool("isWaiting", false);
+                animator.SetBool("SkillInUse", true);
                 break;
             #endregion
 
@@ -2176,6 +2153,31 @@ public class Enemy : MonoBehaviour
         }
       
     }
+    void HealAllSkill()
+    {
+        int healthMod = 100;
+        print("Used The Heal All Skill");
+
+        for (int i = 0; i < battleManager.enemies.Length; ++i)
+        {
+            if (battleManager.enemies[i].enemyReference != null && this != battleManager.enemies[i].enemyReference)
+            {
+                if (!battleManager.enemies[i].enemyReference.dead)
+                {
+                    enemyToHeal = battleManager.enemies[i].enemyReference;
+                    print("Enemy was healed at index " + enemyToHeal.enemyIndexInBattleManager);
+                    enemyToHeal.currentHP += healthMod;
+                    print("Enemies new Hp is " + enemyToHeal.currentHP);
+
+                    if (enemyToHeal.currentHP > enemyToHeal.maxHP)
+                    {
+                        enemyToHeal.currentHP = enemyToHeal.maxHP;
+                        print("Enemies new Hp is " + enemyToHeal.currentHP);
+                    }
+                }
+            }
+        }
+    }
     protected void Death()
     {
         if (!dead)
@@ -2204,7 +2206,7 @@ public class Enemy : MonoBehaviour
             enemyToHeal.currentHP += healthMod;
             battleManager.enemies[enemyToHeal.enemyIndexInBattleManager].currentHP = enemyToHeal.currentHP;
         }
-
+        animator.SetBool("Heal", false);
         EndTurn();
     }
     //An enemy tied to a player should get healed when the player is healed. Called from the tied player 
