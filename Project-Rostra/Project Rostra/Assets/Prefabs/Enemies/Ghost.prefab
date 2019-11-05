@@ -573,7 +573,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c49573c71ef3f541813f91b7a35cd10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyIndexInBattleManager: 0
+  enemyIndexInBattleManager: 2
   eMana: 0
   eAttack: 12
   eAgility: 8
@@ -594,8 +594,8 @@ MonoBehaviour:
   eCritical: 0
   qImage: {fileID: 0}
   HP: {fileID: 40231761370589730}
-  maxHP: 0
-  currentHP: 0
+  maxHP: 200
+  currentHP: 200
   damageText: {fileID: 367104045820670827}
   healText: {fileID: 6154067893123293131}
   enemyCanvas: {fileID: 2942152278580068095}
