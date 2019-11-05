@@ -116,7 +116,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1734714616
 RectTransform:
   m_ObjectHideFlags: 0
@@ -459,6 +459,7 @@ MonoBehaviour:
   isChoiceDepend: 0
   pressZ: {fileID: 1734714614}
   directTriggerText: 0
+  oneShot: 1
 --- !u!114 &8257735968710607304
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -517,8 +518,9 @@ MonoBehaviour:
     addMilestone: 0
   choiceCare: 0
   isChoiceDepend: 0
-  pressZ: {fileID: 0}
+  pressZ: {fileID: 1734714614}
   directTriggerText: 0
+  oneShot: 0
 --- !u!114 &8257735968710607305
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -578,8 +580,9 @@ MonoBehaviour:
     addMilestone: 0
   choiceCare: 0
   isChoiceDepend: 0
-  pressZ: {fileID: 0}
+  pressZ: {fileID: 1734714614}
   directTriggerText: 0
+  oneShot: 0
 --- !u!114 &8257735968710607302
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -621,5 +624,6 @@ MonoBehaviour:
     addMilestone: 0
   choiceCare: 0
   isChoiceDepend: 0
-  pressZ: {fileID: 0}
+  pressZ: {fileID: 1734714614}
   directTriggerText: 0
+  oneShot: 0
