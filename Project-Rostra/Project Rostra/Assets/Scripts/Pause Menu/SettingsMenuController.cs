@@ -73,7 +73,9 @@ public class SettingsMenuController : SubMenu {
 
 				if (Confirm) {
 					Debug.Log("We should be exiting to the menu here");
-					SceneManager.LoadScene("Main Menu");
+                    PauseMenuController.isPaused = false;
+                    GameManager.instance.DestoryUndestroyables();
+                    SceneManager.LoadScene("Main Menu");
 				}
 
 				break;

@@ -107,14 +107,24 @@ public class DialogueManager : MonoBehaviour
 		if (instance == null)
 		{
 			instance = this;
-		}
+            GameManager.instance.listOfUndestroyables.Add(this.gameObject);
+        }
 		else
 		{
 			Destroy(gameObject);
 		}
 	}
 
-	void Start()
+    private void OnDestroy()
+    {
+        if (instance == this)
+        {
+            instance = null;
+        }
+    }
+
+
+    void Start()
     {
 		
 		DontDestroyOnLoad(this.gameObject);

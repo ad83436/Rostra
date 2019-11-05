@@ -41,16 +41,26 @@ public class CutsceneManager : MonoBehaviour
 		if (instance == null)
 		{
 			instance = this;
-		}
+            DontDestroyOnLoad(this.gameObject);
+            GameManager.instance.listOfUndestroyables.Add(this.gameObject);
+        }
 		else
 		{
 			Destroy(gameObject);
 		}
 	}
 
-	private void Start()
+    private void OnDestroy()
+    {
+        if (instance == this)
+        {
+            instance = null;
+        }
+    }
+
+    private void Start()
 	{
-		DontDestroyOnLoad(this.gameObject);
+		
 		current = 0;
 		entranceCount = 0;
 		moveCount = 0;
