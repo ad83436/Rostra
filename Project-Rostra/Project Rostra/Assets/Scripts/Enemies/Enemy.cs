@@ -26,7 +26,7 @@ public class Enemy : MonoBehaviour
     int waitTimeAtStart;
     public int playerIndexHolder;
     public int timeAttacking;
-    int countDownToBlow;
+    [SerializeField] int countDownToBlow;
     public int blowStrength;
     int enemyStartingAtk;
     int enemyStartingDefence;
@@ -57,6 +57,7 @@ public class Enemy : MonoBehaviour
     public bool hit;
     public bool blow;
     public bool isStatModed;
+    public bool test;
     [SerializeField] bool skillNeedsCharge; // check if the skill in use uses a charge time or the skill is instantly activated 
 
     protected GameObject demoEffect;
@@ -76,6 +77,8 @@ public class Enemy : MonoBehaviour
     protected int tiedTimer = 4; //Used to nullify the tied player reference whenever the Farea takes damage or gets healed 
     public GameObject healthObject; 
     public GameObject chain;
+    public GameObject blowSelfObject;
+
 
 
     protected void Awake()
@@ -85,6 +88,7 @@ public class Enemy : MonoBehaviour
         AssingClassSkills(this);
         GiveNamesAndSkills();
     }
+
     protected virtual void Start()
     {
         print("First" + currentHP);
@@ -103,6 +107,15 @@ public class Enemy : MonoBehaviour
 
         damageText.gameObject.SetActive(false);
         healText.gameObject.SetActive(false);
+
+        if (enemyName == EnemyName.Mimic) { blowSelfObject.SetActive(false); }
+        else
+        {
+            blowSelfObject = null;
+        }
+
+    
+           
 
         haveAddedMyself = false;
         hit = false;
@@ -126,6 +139,10 @@ public class Enemy : MonoBehaviour
         {
             AddEnemyToBattle();
             haveAddedMyself = true;
+        }
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            EndTurn();
         }
 
     }
@@ -603,29 +620,13 @@ public class Enemy : MonoBehaviour
 
                         if (skillChance >= 49)
                         {
-                            if (skillNeedsCharge)
-                            {
-                                print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
-                                currentState = EnemyState.waiting;
-                                waitQTurns = waitTime;
-                                animator.SetBool("isWaiting", true);
-                                EndTurn();
-                            }
-
-                            else
-                            {
-                                print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
-                                currentState = EnemyState.skilling;
-                                waitQTurns = waitTime;
-                                animator.SetBool("SkillInUse", true);
-                                MakeSkillsWork(canUseSkill);
-                                EndTurn();
-                            }
+                            MakeSkillsWork(canUseSkill);
                         }
 
                         else
                         {
-                            BlowSelf();
+                            BlowSelfCountDown();
+                            countDownToBlow--;
                         }
                         break;
                 }
@@ -852,27 +853,34 @@ public class Enemy : MonoBehaviour
 
         eAttack = enemyStartingAtk;
     }
-    void BlowSelf()
+    void BlowSelfCountDown()
     {
-        countDownToBlow--;
+
+        if(countDownToBlow == 1)
+        {
+            countDownToBlow--;
+        }
+
         blowStrength += Random.Range(10, 15);
 
-        if (countDownToBlow <= 0)
+        if (countDownToBlow > 0)
+        {
+            blowSelfObject.SetActive(true);
+            animator.SetBool("Collect", true);
+        }
+
+        
+
+        else if (countDownToBlow <= 0)
         {
             blow = true;
             currentHP = 0;
-
         }
 
         if (blow)
         {
-            print("Enemy blew self with a blow strength of " + blowStrength);
-            AttackWholeField(blowStrength);
-            blow = false;
-            animator.SetBool("Death", true);
+            animator.SetBool("SkillInUse", true);
         }
-
-        uiBTL.EndTurn();
     }
     void HealEnemy()
     {
@@ -1767,15 +1775,13 @@ public class Enemy : MonoBehaviour
                 break;
             #endregion
 
-            #region blow self
             case AllEnemySkills.Blow_Self:
+
                 print("Enemy Blew slef skillfully ");
-                currentHP = 0;
                 blowStrength = 200;
-                AttackWholeField(blowStrength);
-                blowStrength = 0;
+                animator.SetBool("SkillInUse", true);
+                
                 break;
-            #endregion
 
             #region ball roll
             case AllEnemySkills.Ball_Roll:
@@ -2036,6 +2042,12 @@ public class Enemy : MonoBehaviour
         animator.SetBool("SkillInUse", false);
         EndTurn();
     }
+    void EndCollect()
+    {
+        animator.SetBool("Collect", false);
+        blowSelfObject.SetActive(false);
+        EndTurn();
+    }
     void GroundSmashSkill()
     {
         int randomRow = Random.Range(0, 1);
@@ -2083,6 +2095,12 @@ public class Enemy : MonoBehaviour
             attackThisPlayer.TakeDamage(eAttack);
         }
     }
+    void BlowSelf()
+    {
+        AttackWholeField(blowStrength);
+        blow = false;
+        countDownToBlow = 0;
+    }
     void BiteSkill()
     {
         float attackMod;
@@ -2119,7 +2137,6 @@ public class Enemy : MonoBehaviour
         }
       
     }
-
     protected void Death()
     {
         if (!dead)
@@ -2134,7 +2151,7 @@ public class Enemy : MonoBehaviour
             uiBTL.EndTurn(); //Only end the turn after the enemy is dead
         }
     }
-        //An enemy tied to a player should get healed when the player is healed. Called from the tied player 
+    //An enemy tied to a player should get healed when the player is healed. Called from the tied player 
     public virtual void HealDueToTied(float healAmount)
     { 
         currentHP += healAmount; 
@@ -2149,14 +2166,11 @@ public class Enemy : MonoBehaviour
             tieThisPlayer = null; 
         } 
     }
-
     public virtual void Heal(float healAmount)
     {
         currentHP += healAmount;
         HP.fillAmount = currentHP / maxHP;
         healthObject.gameObject.SetActive(true);
     }
-
-
 }
 
