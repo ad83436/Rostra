@@ -13,7 +13,8 @@ public class ExpManager : MonoBehaviour {
 		if (instance == null) {
 			instance = this;
 			DontDestroyOnLoad(gameObject);
-		} else {
+            GameManager.instance.listOfUndestroyables.Add(this.gameObject);
+        } else {
 			Destroy(gameObject);
 		}
 	}
@@ -28,7 +29,7 @@ public class ExpManager : MonoBehaviour {
 		//Will be changed to use a load file instead
 
 		//Fargas
-		PartyStats.chara[0].hitpoints = 200.0f;
+		PartyStats.chara[0].hitpoints = 20.0f;
 		PartyStats.chara[0].maxHealth = 200.0f;
 		PartyStats.chara[0].magicpoints = 200.0f;
 		PartyStats.chara[0].maxMana = 200.0f;
@@ -56,7 +57,7 @@ public class ExpManager : MonoBehaviour {
 		PartyStats.chara[1].neededExperience = 150;
 
 		//Frea
-		PartyStats.chara[2].hitpoints = 190.0f;
+		PartyStats.chara[2].hitpoints = 20.0f;
 		PartyStats.chara[2].maxHealth = 190.0f;
 		PartyStats.chara[2].magicpoints = 200.0f;
 		PartyStats.chara[2].maxMana = 200.0f;

@@ -30,13 +30,26 @@ public static class QuestManager
 		switch (m)
 		{
 			case 1:
-				questName = "Test Quest";
-				location = 1;
-				description = "This is a test case in order to test to see if Sean is a good programmer or not.";
+				questName = "Find Brenna";
+				location = 3;
+				description = "Well, we've arrived in Hadria. We should go and see if the local barkeep can tell us anything";
 				milestone = m;
-				milestoneName = "Have you ever heard the Tragedy of Darth Plagueis?";
+				milestoneName = "Find the Barkeep";
 				break;
-
+			case 2:
+				questName = "Find Brenna";
+				location = 3;
+				description = "I've spoken to the Barkeep, now we just need to find out where our contact is";
+				milestone = m;
+				milestoneName = "Find the contact";
+				break;
+			case 3:
+				questName = "Find Brenna";
+				location = 3;
+				description = "We have all the info we need, we should leave the tavern";
+				milestone = m;
+				milestoneName = "Leave the Inn";
+				break;
 		}
 
 	}

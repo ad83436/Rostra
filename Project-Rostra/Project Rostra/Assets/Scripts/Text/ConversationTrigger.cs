@@ -13,14 +13,23 @@ public class ConversationTrigger : MonoBehaviour
 	// these two dialogues will be spit out depending on the choice that was made. 
 	// call this method in order to trigger the conversation
 	public bool isChoiceDepend;
-	// does the conversation only trigger once
 	public Text pressZ;
 	// does this directly trigger the text?
 	public bool directTriggerText;
 	protected bool played = false;
+	public bool oneShot = false;
 	public virtual void TriggerConvo()
 	{
-		DialogueManager.instance.StartConversation(dialogue);
+		if (played == true && oneShot == true)
+		{
+			TriggerNormalDialogue();
+		}
+		else
+		{
+			played = true;
+			DialogueManager.instance.StartConversation(dialogue);
+		}
+		
 	}
 	// 1 = dwarf, 2 = guild, 3 = kill, 4 = spare, 5 = tell, 6 = lie
 	public void TriggerChoiceDependantConvo()
@@ -30,7 +39,7 @@ public class ConversationTrigger : MonoBehaviour
 
 	public void TriggerNormalDialogue()
 	{
-		DialogueManager.instance.PlayNormalDialogue(dialogue);
+		DialogueManager.instance.StartConversation(dialogue.normal.dialogue);
 	}
 
 	public void TriggerCutsceneDialogue()
@@ -43,7 +52,7 @@ public class ConversationTrigger : MonoBehaviour
 		pressZ.enabled = b;
 	}
 
-	protected virtual void OnTriggerEnter2D(Collider2D col)
+	private void OnTriggerEnter2D(Collider2D col)
 	{
 		if (directTriggerText == true && col.gameObject.CompareTag("Player") && played == false)
 		{
@@ -51,4 +60,6 @@ public class ConversationTrigger : MonoBehaviour
 			played = true;
 		}
 	}
+
+
 }

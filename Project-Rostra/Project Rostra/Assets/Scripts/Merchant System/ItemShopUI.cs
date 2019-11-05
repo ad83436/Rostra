@@ -80,7 +80,7 @@ public class ItemShopUI : MonoBehaviour {
 		return count;
 	}
 
-	private void UpdateGoldCounter() {
+	public void UpdateGoldCounter() {
 		Text_GoldCounter.text = "Gold: " + MainInventory.totalMoney;
 	}
 
@@ -188,7 +188,7 @@ public class ItemShopUI : MonoBehaviour {
 		ShopItem item = new ShopItem();
 		item.ItemID = MainInv.invItem[relindex + Index_TopOfList, 0];
 		item.Name = MainInv.ItemName(item.ItemID);
-		item.Price = MainInv.ItemPrice(item.ItemID);
+		item.Price = MainInv.ItemSellPrice(item.ItemID);
 		item.Description = item.Name + "\n\n" + MainInv.ItemDescription(item.ItemID);
 		item.Stacked = MainInv.invItem[relindex + Index_TopOfList, 1];
 
@@ -203,7 +203,7 @@ public class ItemShopUI : MonoBehaviour {
 		for (; i < 5; i++) {
 			item.ItemID = MainInv.invItem[i, 0];
 			item.Name = MainInv.ItemName(item.ItemID);
-			item.Price = MainInv.ItemPrice(item.ItemID);
+			item.Price = MainInv.ItemSellPrice(item.ItemID);
 			item.Description = item.Name + "\n\n" + MainInv.ItemDescription(item.ItemID);
 			item.Stacked = MainInv.invItem[i, 1];
 			Deque_ShopItems.push_end(item);
@@ -222,7 +222,7 @@ public class ItemShopUI : MonoBehaviour {
 		ShopItem item = new ShopItem();
 		item.ItemID = MainInv.invItem[Index_TopOfList, 0];
 		item.Name = MainInv.ItemName(item.ItemID);
-		item.Price = MainInv.ItemPrice(item.ItemID);
+		item.Price = MainInv.ItemSellPrice(item.ItemID);
 		item.Description = item.Name + "\n\n" + MainInv.ItemDescription(item.ItemID);
 		item.Stacked = MainInv.invItem[Index_TopOfList, 1];
 
@@ -242,7 +242,7 @@ public class ItemShopUI : MonoBehaviour {
 		ShopItem item = new ShopItem();
 		item.ItemID = MainInv.invItem[Index_TopOfList + 5, 0];
 		item.Name = MainInv.ItemName(item.ItemID);
-		item.Price = MainInv.ItemPrice(item.ItemID);
+		item.Price = MainInv.ItemSellPrice(item.ItemID);
 		item.Description = item.Name + "\n\n" + MainInv.ItemDescription(item.ItemID);
 		item.Stacked = MainInv.invItem[Index_TopOfList + 5, 1];
 
@@ -250,25 +250,28 @@ public class ItemShopUI : MonoBehaviour {
 		Deque_ShopItems.push_end(item);
 	}
 
-	#endregion
+    #endregion
 
-	private void UpdateListUI() {
-		if (Deque_ShopItems.Count != 5) {
-			Debug.LogError("There are " + Deque_ShopItems.Count + " in the deque");
-		}
+    private void UpdateListUI()
+    {
+        if (Deque_ShopItems.Count != 5)
+        {
+            Debug.LogError("There are " + Deque_ShopItems.Count + " in the deque");
+        }
 
-		for (int i = 0; i < 5; i++) {
-			TextArr_ListNames[i].text = Deque_ShopItems[i].Name;
-			if (Deque_ShopItems[i].Price > 0) TextArr_ListPrices[i].text = (State_UI == 2 ? "Buy Price: " : "Sell Price: ") +
-										 (Deque_ShopItems[i].Price == 0 ? "---" : "" + Deque_ShopItems[i].Price); // weird thing
-			else TextArr_ListPrices[i].text = "---";
-			if (Deque_ShopItems[i].Stacked > 1) TextArr_ListOwned[i].text = (State_UI == 3 ? "Stack: " : "Own: ") +
-										(Deque_ShopItems[i].Stacked == 0 ? "---" : "" + Deque_ShopItems[i].Stacked); // weird thing 2
-			else TextArr_ListOwned[i].text = "---";
-		}
-	}
+        for (int i = 0; i < 5; i++)
+        {
+            TextArr_ListNames[i].text = Deque_ShopItems[i].Name;
+            if (Deque_ShopItems[i].Price > 0) TextArr_ListPrices[i].text = (State_UI == 2 ? "Buy Price: " : "Sell Price: ") +
+                                         (Deque_ShopItems[i].Price == 0 ? "---" : "" + Deque_ShopItems[i].Price); // weird thing
+            else TextArr_ListPrices[i].text = "---";
+            if (Deque_ShopItems[i].Stacked > 0) TextArr_ListOwned[i].text = (State_UI == 3 ? "Stack: " : "Own: ") +
+                                        (Deque_ShopItems[i].Stacked == 0 ? "---" : "" + Deque_ShopItems[i].Stacked); // weird thing 2
+            else TextArr_ListOwned[i].text = "---";
+        }
+    }
 
-	private void UpdateDescription(string text) {
+    private void UpdateDescription(string text) {
 		Text_Description.text = text;
 	}
 	
@@ -283,12 +286,17 @@ public class ItemShopUI : MonoBehaviour {
 	#region Initialization & Destruction
 
 	private void Awake() {
-		// Singleton
-		if (Singleton == null) Singleton = this;
-		else Debug.LogError("There are multiple itemshop UIs loaded");
+        // Singleton
+        if (Singleton == null)
+        {
+            Singleton = this;
+            DontDestroyOnLoad(this.transform.parent.gameObject);
+            GameManager.instance.listOfUndestroyables.Add(this.transform.parent.gameObject);
+        }
+        else Destroy(this.gameObject);
 
-		// Static
-		IsOpen = false;
+        // Static
+        IsOpen = false;
 
 		// Canvas groups
 		Group_Main.alpha = 0f;
@@ -341,13 +349,16 @@ public class ItemShopUI : MonoBehaviour {
 							State_UI = 2; // change to buy state
 							Group_Selection.alpha = 0f; // hide selection UI
 							Group_List.alpha = 1f; // show list UI
-							break;
+                            UpdateGoldCounter();
+
+                            break;
 						case 1:
 							FillDequeWithSellables(); // fill the deque
 							State_UI = 3; // change to sell state
 							Group_Selection.alpha = 0f; // hide selection UI
 							Group_List.alpha = 1f; // show list UI
-							break;
+                            UpdateGoldCounter();
+                            break;
 						case 2:
 							ImageArr_Selection[Index_Selection].color = Color_Unhighlight; // unselect
 							Index_Selection = 0; // reset index
@@ -493,7 +504,8 @@ public class ItemShopUI : MonoBehaviour {
 	#region Most Important Function
 
 	public static void OpenItemShop() {
-		Singleton.State_UI = 1;
+        Singleton.UpdateGoldCounter();
+        Singleton.State_UI = 1;
 		Singleton.Group_Main.alpha = 1f;
 		IsOpen = true;
 	}

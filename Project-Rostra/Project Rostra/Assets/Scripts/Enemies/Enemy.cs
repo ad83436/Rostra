@@ -1364,6 +1364,7 @@ public class Enemy : MonoBehaviour
     }
     public void IncreaseStatsBasedOnLevel(int enemyCurrentLevel)
     {
+        Debug.Log("Enemy Current Level: " + enemyCurrentLevel);
         enemyCurrentLevel = eCurrentLevel;
         //eHP increase is still temporary until we agree how much each class'es HP increases with leveling up
         float skillPoints = enemyCurrentLevel - eBaseLevel;
@@ -1371,23 +1372,23 @@ public class Enemy : MonoBehaviour
         switch (enemyClass)
         {
             case EnemyClassType.DPS:
-                eAttack = Mathf.CeilToInt(eAttack + (skillPoints * 0.6f));
-                eAgility = Mathf.CeilToInt(eAgility + (skillPoints * 0.4f));
-                currentHP = Mathf.CeilToInt(currentHP + (skillPoints * 35.0f * 0.5f));
+                eAttack = Mathf.CeilToInt(eAttack + (skillPoints * 0.2f));
+                eAgility = Mathf.CeilToInt(eAgility + (skillPoints * 0.1f));
+                currentHP = Mathf.CeilToInt(currentHP + (skillPoints * 3.0f));
                 Debug.Log(eName + " is a " + enemyClass + " Class of enemy");
                 break;
 
             case EnemyClassType.Tank:
-                eAttack = Mathf.CeilToInt(eAttack + (skillPoints * 0.3f));
-                eDefence = Mathf.CeilToInt(eDefence + (skillPoints * 0.7f));
-                currentHP = Mathf.CeilToInt(currentHP + (skillPoints * 60.0f * 0.5f));
+                eAttack = Mathf.CeilToInt(eAttack + (skillPoints * 0.1f));
+                eDefence = Mathf.CeilToInt(eDefence + (skillPoints * 0.2f));
+                currentHP = Mathf.CeilToInt(currentHP + (skillPoints * 4.0f));
                 Debug.Log(eName + " is a " + enemyClass + " Class of enemy");
                 break;
 
             case EnemyClassType.Support:
-                eAttack = Mathf.CeilToInt(eAttack + (skillPoints * 0.4f));
-                eAgility = Mathf.CeilToInt(eAgility + (skillPoints * 0.6f));
-                currentHP = Mathf.CeilToInt(currentHP + (skillPoints * 85.0f * 0.5f));
+                eAttack = Mathf.CeilToInt(eAttack + (skillPoints * 0.1f));
+                eAgility = Mathf.CeilToInt(eAgility + (skillPoints * 0.2f));
+                currentHP = Mathf.CeilToInt(currentHP + (skillPoints * 5.0f));
                 Debug.Log(eName + " is a " + enemyClass + " Class of enemy");
                 break;
         }

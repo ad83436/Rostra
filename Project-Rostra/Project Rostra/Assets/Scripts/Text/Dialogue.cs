@@ -53,4 +53,5 @@ public class Dialogue
 	public int triggerBool;
 	//
 	public bool isOneShot;
+	public int addMilestone;
 }

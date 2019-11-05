@@ -353,9 +353,11 @@ MonoBehaviour:
     isBattle: 0
     triggerBool: 0
     isOneShot: 0
+    addMilestone: 0
   choiceCare: 4
   isChoiceDepend: 1
   pressZ: {fileID: 1354388581}
+  directTriggerText: 0
 --- !u!114 &6941273051793765718
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -375,7 +377,7 @@ MonoBehaviour:
     - 'I''ve heard that you''ve been talking those slippery Dwarves. I cannot associate
       myself with someone who talks to those savages. '
     portrait:
-    - {fileID: 21300000, guid: 26feff2f0d4e92349a70bba8a0c18d31, type: 3}
+    - {fileID: 21300000, guid: 3744c0c20009b844a9cef7bca3baa96b, type: 3}
     povChange: []
     typingSpeed: 0
     isChoice: 0
@@ -395,9 +397,11 @@ MonoBehaviour:
     isBattle: 0
     triggerBool: 0
     isOneShot: 0
+    addMilestone: 0
   choiceCare: 0
   isChoiceDepend: 0
   pressZ: {fileID: 0}
+  directTriggerText: 0
 --- !u!114 &6941273051793765719
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -444,16 +448,16 @@ MonoBehaviour:
       to continue the demo. '
     portrait:
     - {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825, type: 3}
-    - {fileID: 21300000, guid: 26feff2f0d4e92349a70bba8a0c18d31, type: 3}
+    - {fileID: 21300000, guid: 3744c0c20009b844a9cef7bca3baa96b, type: 3}
     - {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825, type: 3}
     - {fileID: 21300000, guid: 1f1660c1b92d23a4fb0b75fcca80183d, type: 3}
     - {fileID: 21300000, guid: e24a4049526ca704eb781c65db5c188d, type: 3}
     - {fileID: 21300000, guid: f40486206916ccc4a9bf37f57f448dee, type: 3}
-    - {fileID: 21300000, guid: 26feff2f0d4e92349a70bba8a0c18d31, type: 3}
+    - {fileID: 21300000, guid: 3744c0c20009b844a9cef7bca3baa96b, type: 3}
     - {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825, type: 3}
-    - {fileID: 21300000, guid: 26feff2f0d4e92349a70bba8a0c18d31, type: 3}
+    - {fileID: 21300000, guid: 3744c0c20009b844a9cef7bca3baa96b, type: 3}
     - {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825, type: 3}
-    - {fileID: 21300000, guid: 26feff2f0d4e92349a70bba8a0c18d31, type: 3}
+    - {fileID: 21300000, guid: 3744c0c20009b844a9cef7bca3baa96b, type: 3}
     - {fileID: 21300000, guid: dd3d4b940a009d14dbfe8b78c3b4f6ca, type: 3}
     povChange:
     - 1
@@ -486,9 +490,11 @@ MonoBehaviour:
     isBattle: 0
     triggerBool: 6
     isOneShot: 1
+    addMilestone: 3
   choiceCare: 0
   isChoiceDepend: 0
   pressZ: {fileID: 0}
+  directTriggerText: 0
 --- !u!114 &6941273051793765704
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -510,7 +516,7 @@ MonoBehaviour:
     - A rabble rouser is in the tavern at the moment. I would like to ensure this
       individual does not start something and injure innocent people. As you were.
     portrait:
-    - {fileID: 21300000, guid: 26feff2f0d4e92349a70bba8a0c18d31, type: 3}
+    - {fileID: 21300000, guid: 3744c0c20009b844a9cef7bca3baa96b, type: 3}
     povChange: []
     typingSpeed: 0
     isChoice: 0
@@ -530,9 +536,11 @@ MonoBehaviour:
     isBattle: 0
     triggerBool: 0
     isOneShot: 0
+    addMilestone: 0
   choiceCare: 0
   isChoiceDepend: 0
   pressZ: {fileID: 0}
+  directTriggerText: 0
 --- !u!114 &189502064
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -572,6 +580,8 @@ MonoBehaviour:
     isBattle: 0
     triggerBool: 0
     isOneShot: 0
+    addMilestone: 0
   choiceCare: 0
   isChoiceDepend: 0
   pressZ: {fileID: 0}
+  directTriggerText: 0
