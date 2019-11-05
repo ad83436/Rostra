@@ -782,6 +782,12 @@ public class Player : MonoBehaviour
             skillAnimatorName = "BuffDef";
             skillWaitingIndex = 1;
         }
+        else if(skillID == (int)SKILLS.Fa_WarCry)
+        {
+            skillTarget = 9; //All player buff
+            skillAnimatorName = "ASkill";
+            skillWaitingIndex = 3;
+        }
 
         if (waitTime <= 0)
         {
@@ -828,6 +834,7 @@ public class Player : MonoBehaviour
                 skillWaitingIndex = 1; //Should there be waiting time, this index is used to know which waiting animation to go to
                 break;
             case (int)SKILLS.Fa_SwordOfFury:
+                skillTarget = 0;
                 skillNameForObjPooler = "SoFSkill";
                 skillAnimatorName = "ASkill";
                 skillWaitingIndex = 2; //Should there be waiting time, this index is used to know which waiting animation to go to
@@ -1211,6 +1218,21 @@ public class Player : MonoBehaviour
                     }
                 }
                 playerAnimator.SetBool("BuffDef", false);
+            }
+            else if (chosenSkill == (int)SKILLS.Fa_WarCry) //Defense buff // Placeholder
+            {
+                for (int i = 0; i < battleManager.players.Length; i++)
+                {
+                    if (battleManager.players[i].playerReference != null)
+                    {
+                        //Make sure the character being buffed is alive and not in RAGE mode
+                        if (!battleManager.players[i].playerReference.dead && battleManager.players[i].playerReference.currentState != playerState.Rage)
+                        {
+                            battleManager.players[i].playerReference.BuffStats("Attack", skills.SkillStats(chosenSkill)[0], 3);
+                        }
+                    }
+                }
+                playerAnimator.SetBool("ASkill", false);
             }
         }
         //Claculate the new MP and reset the player's state
