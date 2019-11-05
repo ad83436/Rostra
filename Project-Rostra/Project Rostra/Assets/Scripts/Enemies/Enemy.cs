@@ -1524,7 +1524,7 @@ public class Enemy : MonoBehaviour
     void MakeSkillsWork(AllEnemySkills ChosenSkill)
     {
         float attackMod;
-        int healthMod;
+        //int healthMod;
         int playerIndexRef;
         int randomRow = Random.Range(0, 1);
 
@@ -2168,6 +2168,7 @@ public class Enemy : MonoBehaviour
                     print("Enemy was healed at index " + enemyToHeal.enemyIndexInBattleManager);
                     enemyToHeal.currentHP += healthMod;
                     print("Enemies new Hp is " + enemyToHeal.currentHP);
+                    enemyToHeal.HP.fillAmount = enemyToHeal.currentHP;
 
                     if (enemyToHeal.currentHP > enemyToHeal.maxHP)
                     {
@@ -2199,12 +2200,14 @@ public class Enemy : MonoBehaviour
         {
             enemyToHeal.currentHP = enemyToHeal.maxHP;
             battleManager.enemies[enemyToHeal.enemyIndexInBattleManager].currentHP = enemyToHeal.currentHP;
+            enemyToHeal.HP.fillAmount = enemyToHeal.currentHP;
         }
 
         else
         {
             enemyToHeal.currentHP += healthMod;
             battleManager.enemies[enemyToHeal.enemyIndexInBattleManager].currentHP = enemyToHeal.currentHP;
+            enemyToHeal.HP.fillAmount = enemyToHeal.currentHP;
         }
         animator.SetBool("Heal", false);
         EndTurn();
