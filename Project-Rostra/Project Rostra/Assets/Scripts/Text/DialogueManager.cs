@@ -341,7 +341,6 @@ public class DialogueManager : MonoBehaviour
 			if (boxCount == choiceCount)
 			{
 				continueButton.SetActive(false);
-				canEnter = true;
 				choice1.gameObject.SetActive(true);
 				choice2.gameObject.SetActive(true);
 				choice1.text = dia.choiceText1;
