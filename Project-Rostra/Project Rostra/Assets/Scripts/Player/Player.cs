@@ -827,6 +827,12 @@ public class Player : MonoBehaviour
                 skillAnimatorName = "ASkill";
                 skillWaitingIndex = 1; //Should there be waiting time, this index is used to know which waiting animation to go to
                 break;
+            case (int)SKILLS.Fa_SwordOfFury:
+                skillNameForObjPooler = "SoFSkill";
+                skillAnimatorName = "ASkill";
+                skillWaitingIndex = 2; //Should there be waiting time, this index is used to know which waiting animation to go to
+
+                break;
         }
 
         //Do we have to wait?
