@@ -40,15 +40,24 @@ public class SkillsInventory : MonoBehaviour {
         AddToUnlockedSkills((int)SKILLS.Ob_ShieldAllAllies, 1);
         EquipSkill((int)SKILLS.Ob_ShieldAllAllies, 1, 1);
 
+        AddToUnlockedSkills((int)SKILLS.Fr_DoubleShot, 2);
+        EquipSkill((int)SKILLS.Fr_DoubleShot, 0, 2);
+        AddToUnlockedSkills((int)SKILLS.Fr_IDontMiss, 2);
+        EquipSkill((int)SKILLS.Fr_IDontMiss, 1, 2);
         AddToUnlockedSkills((int)SKILLS.Fr_ArrowRain, 2);
-        EquipSkill((int)SKILLS.Fr_ArrowRain, 0, 2);
+        EquipSkill((int)SKILLS.Fr_ArrowRain, 2, 2);
         AddToUnlockedSkills((int)SKILLS.Fr_NeverAgain, 2);
-        EquipSkill((int)SKILLS.Fr_NeverAgain, 1, 2);
+        EquipSkill((int)SKILLS.Fr_NeverAgain, 3, 2);
 
         AddToUnlockedSkills((int)SKILLS.Ar_Heal, 3);
         EquipSkill((int)SKILLS.Ar_Heal, 0, 3);
+        AddToUnlockedSkills((int)SKILLS.Ar_DrainEye, 3);
+        EquipSkill((int)SKILLS.Ar_DrainEye, 1, 3);
         AddToUnlockedSkills((int)SKILLS.Ar_LullabyOfHope, 3);
-        EquipSkill((int)SKILLS.Ar_LullabyOfHope, 1, 3);
+        EquipSkill((int)SKILLS.Ar_LullabyOfHope, 2, 3);
+        AddToUnlockedSkills((int)SKILLS.Ar_Armageddon, 3);
+        EquipSkill((int)SKILLS.Ar_Armageddon, 3, 3);
+
     }
 
     private void OnDestroy()
@@ -467,7 +476,7 @@ public class SkillsInventory : MonoBehaviour {
                 skillStat[1] = 100;
                 skillStat[2] = 0;
                 skillStat[4] = (float)SKILL_TYPE.SINGLE_PLAYER_HEAL;
-                skillStat[5] = 40;
+                skillStat[5] = 60;
                 break;
             case (int)SKILLS.Ar_HealingAura:
                 skillStat[0] = 30;

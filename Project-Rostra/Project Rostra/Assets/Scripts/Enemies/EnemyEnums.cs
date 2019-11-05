@@ -44,6 +44,9 @@ public enum EnemyStatReference
 
 public enum AllEnemySkills
 {
+    //Default
+    No_Skill,
+
     //Tank
     Ground_Smash,
     Blow_Self,

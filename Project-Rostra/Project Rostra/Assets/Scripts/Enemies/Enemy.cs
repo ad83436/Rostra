@@ -194,6 +194,11 @@ public class Enemy : MonoBehaviour
             float attackChance = Random.Range(0, 100); // determines if the ememy will use its type attack or a dumb attack 
             float skillChance = Random.Range(0, 50);// determines if the enemy will use a skill or not //TEMP VALUES//
 
+            if(canUseSkill == AllEnemySkills.No_Skill)
+            {
+                skillChance = -1.0f;
+            }
+
             if (!dead)
             {
                 switch (enemyAttack)

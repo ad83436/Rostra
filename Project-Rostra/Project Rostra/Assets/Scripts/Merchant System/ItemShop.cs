@@ -33,9 +33,9 @@ public class ItemShop : MonoBehaviour {
         if (singleton == null) singleton = this;
         else Debug.Log("The fookin itemshop already exists");
 
-        shopItems.Add((int)ITEM_ID.HP_POTION);
-        shopItems.Add((int)ITEM_ID.MP_ELIXER);
-        shopItems.Add((int)ITEM_ID.HOPE_POTION);
+      //  shopItems.Add((int)ITEM_ID.HP_POTION);
+     //   shopItems.Add((int)ITEM_ID.MP_ELIXER);
+      //  shopItems.Add((int)ITEM_ID.HOPE_POTION);
 
 
     }
