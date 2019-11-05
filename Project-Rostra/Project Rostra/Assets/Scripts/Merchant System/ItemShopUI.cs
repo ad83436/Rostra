@@ -291,6 +291,7 @@ public class ItemShopUI : MonoBehaviour {
         {
             Singleton = this;
             DontDestroyOnLoad(this.transform.parent.gameObject);
+            GameManager.instance.listOfUndestroyables.Add(this.transform.parent.gameObject);
         }
         else Destroy(this.gameObject);
 

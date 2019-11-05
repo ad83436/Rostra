@@ -26,6 +26,8 @@ public class SkillsInventory : MonoBehaviour {
         if (invInstance == null) {
             invInstance = this;
             DontDestroyOnLoad(gameObject);
+            GameManager.instance.listOfUndestroyables.Add(this.gameObject);
+
         } else {
             Destroy(gameObject);
         }
@@ -38,23 +40,23 @@ public class SkillsInventory : MonoBehaviour {
         AddToUnlockedSkills((int)SKILLS.Ob_ShieldAllAllies, 1);
         EquipSkill((int)SKILLS.Ob_ShieldAllAllies, 1, 1);
 
-        AddToUnlockedSkills((int)SKILLS.Fr_DoubleShot, 2);
-        EquipSkill((int)SKILLS.Fr_DoubleShot, 0, 2);
         AddToUnlockedSkills((int)SKILLS.Fr_ArrowRain, 2);
-        EquipSkill((int)SKILLS.Fr_ArrowRain, 1, 2);
-        AddToUnlockedSkills((int)SKILLS.Fr_IDontMiss, 2);
-        EquipSkill((int)SKILLS.Fr_IDontMiss, 2, 2);
+        EquipSkill((int)SKILLS.Fr_ArrowRain, 0, 2);
         AddToUnlockedSkills((int)SKILLS.Fr_NeverAgain, 2);
-        EquipSkill((int)SKILLS.Fr_NeverAgain, 3, 2);
+        EquipSkill((int)SKILLS.Fr_NeverAgain, 1, 2);
 
         AddToUnlockedSkills((int)SKILLS.Ar_Heal, 3);
         EquipSkill((int)SKILLS.Ar_Heal, 0, 3);
-        AddToUnlockedSkills((int)SKILLS.Ar_DrainEye, 3);
-        EquipSkill((int)SKILLS.Ar_DrainEye, 1, 3);
-        AddToUnlockedSkills((int)SKILLS.Ar_ManaCharge, 3);
-        EquipSkill((int)SKILLS.Ar_ManaCharge, 2, 3);
-        AddToUnlockedSkills((int)SKILLS.Ar_Armageddon, 3);
-        EquipSkill((int)SKILLS.Ar_Armageddon, 3, 3);
+        AddToUnlockedSkills((int)SKILLS.Ar_LullabyOfHope, 3);
+        EquipSkill((int)SKILLS.Ar_LullabyOfHope, 1, 3);
+    }
+
+    private void OnDestroy()
+    {
+        if (invInstance == this)
+        {
+            invInstance = null;
+        }
     }
 
     // Handling keyboard functionality
@@ -442,7 +444,7 @@ public class SkillsInventory : MonoBehaviour {
             case (int)SKILLS.Fr_NeverAgain:
                 skillStat[0] = 100;
                 skillStat[1] = 18;
-                skillStat[2] = 4;
+                skillStat[2] = 3;
                 skillStat[4] = (float)SKILL_TYPE.ALL_TARGETS_ATK;
                 skillStat[5] = 100;
                 break;
@@ -498,7 +500,7 @@ public class SkillsInventory : MonoBehaviour {
             case (int)SKILLS.Ar_Armageddon:
                 skillStat[0] = 100;
                 skillStat[1] = 18;
-                skillStat[2] = 4;
+                skillStat[2] = 3;
                 skillStat[4] = (float)SKILL_TYPE.ALL_TARGETS_ATK;
                 skillStat[5] = 100;
                 break;

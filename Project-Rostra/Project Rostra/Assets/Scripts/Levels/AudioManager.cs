@@ -35,10 +35,19 @@ public class AudioManager : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(this.gameObject);
+            GameManager.instance.listOfUndestroyables.Add(this.gameObject);
         }
         else
         {
             Destroy(gameObject);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if(instance == this)
+        {
+            instance = null;
         }
     }
 
