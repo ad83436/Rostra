@@ -454,11 +454,11 @@ MonoBehaviour:
     isBattle: 0
     triggerBool: 0
     isOneShot: 0
+    addMilestone: 2
   choiceCare: 0
   isChoiceDepend: 0
   pressZ: {fileID: 1734714614}
   directTriggerText: 0
-  addMilestone: 0
 --- !u!114 &8257735968710607304
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -514,11 +514,11 @@ MonoBehaviour:
     isBattle: 0
     triggerBool: 0
     isOneShot: 0
+    addMilestone: 0
   choiceCare: 0
   isChoiceDepend: 0
   pressZ: {fileID: 0}
   directTriggerText: 0
-  addMilestone: 0
 --- !u!114 &8257735968710607305
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -575,11 +575,11 @@ MonoBehaviour:
     isBattle: 0
     triggerBool: 0
     isOneShot: 0
+    addMilestone: 0
   choiceCare: 0
   isChoiceDepend: 0
   pressZ: {fileID: 0}
   directTriggerText: 0
-  addMilestone: 0
 --- !u!114 &8257735968710607302
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -618,8 +618,8 @@ MonoBehaviour:
     isBattle: 0
     triggerBool: 0
     isOneShot: 0
+    addMilestone: 0
   choiceCare: 0
   isChoiceDepend: 0
   pressZ: {fileID: 0}
   directTriggerText: 0
-  addMilestone: 0
