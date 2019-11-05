@@ -346,7 +346,7 @@ public class DialogueManager : MonoBehaviour
 				choice1.text = dia.choiceText1;
 				choice2.text = dia.choiceText2;
 			}
-			yield return new WaitForSeconds(dia.typingSpeed);
+			yield return new WaitForSeconds(dia.typingSpeed * (Input.GetButton("Confirm") ? 0.01f : 1f));
 		}
 	}
 	// did you pick door 1 
