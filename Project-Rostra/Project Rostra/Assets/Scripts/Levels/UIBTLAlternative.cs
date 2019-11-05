@@ -19,14 +19,6 @@ public class UIBTLAlternative : UIBTL {
 		base.EnemyIsDead(enemyIndex);
 	}
 
-	public override bool Equals(object other) {
-		return base.Equals(other);
-	}
-
-	public override int GetHashCode() {
-		return base.GetHashCode();
-	}
-
 	public override void ImageRecycle(int imageIndex) {
 		base.ImageRecycle(imageIndex);
 	}

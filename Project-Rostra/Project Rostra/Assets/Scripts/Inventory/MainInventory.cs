@@ -435,6 +435,14 @@ public class MainInventory : MonoBehaviour {
 
 	#region Item Prices for Purchasing
 
+	public int ItemSellPrice(int itemID) {
+		return (int)(ItemPrice(itemID) * 0.67f);
+	}
+	
+	public int BonusItemSellPrice(int itemID) {
+		return (int)(ItemPrice(itemID) * 0.9f);
+	}
+
 	public int ItemPrice(int itemID) {
 		int price = 0;
 

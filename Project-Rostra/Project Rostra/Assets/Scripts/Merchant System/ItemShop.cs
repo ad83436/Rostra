@@ -302,9 +302,9 @@ public class ItemShop : MonoBehaviour {
         if (canSell) {
             MainInventory.invInstance.RemoveItem(slotID, itemNum);
             if (saleBonus) {
-                MainInventory.totalMoney += (int)((MainInventory.invInstance.ItemPrice(itemID) * itemNum) * 0.9);
+                MainInventory.totalMoney += MainInventory.invInstance.BonusItemSellPrice(itemID);
             } else {
-                MainInventory.totalMoney += (int) ((MainInventory.invInstance.ItemPrice(itemID) * itemNum) * 0.67);
+                MainInventory.totalMoney += MainInventory.invInstance.ItemSellPrice(itemID);
             }
         }
 

@@ -188,7 +188,7 @@ public class ItemShopUI : MonoBehaviour {
 		ShopItem item = new ShopItem();
 		item.ItemID = MainInv.invItem[relindex + Index_TopOfList, 0];
 		item.Name = MainInv.ItemName(item.ItemID);
-		item.Price = MainInv.ItemPrice(item.ItemID);
+		item.Price = MainInv.ItemSellPrice(item.ItemID);
 		item.Description = item.Name + "\n\n" + MainInv.ItemDescription(item.ItemID);
 		item.Stacked = MainInv.invItem[relindex + Index_TopOfList, 1];
 
@@ -203,7 +203,7 @@ public class ItemShopUI : MonoBehaviour {
 		for (; i < 5; i++) {
 			item.ItemID = MainInv.invItem[i, 0];
 			item.Name = MainInv.ItemName(item.ItemID);
-			item.Price = MainInv.ItemPrice(item.ItemID);
+			item.Price = MainInv.ItemSellPrice(item.ItemID);
 			item.Description = item.Name + "\n\n" + MainInv.ItemDescription(item.ItemID);
 			item.Stacked = MainInv.invItem[i, 1];
 			Deque_ShopItems.push_end(item);
@@ -222,7 +222,7 @@ public class ItemShopUI : MonoBehaviour {
 		ShopItem item = new ShopItem();
 		item.ItemID = MainInv.invItem[Index_TopOfList, 0];
 		item.Name = MainInv.ItemName(item.ItemID);
-		item.Price = MainInv.ItemPrice(item.ItemID);
+		item.Price = MainInv.ItemSellPrice(item.ItemID);
 		item.Description = item.Name + "\n\n" + MainInv.ItemDescription(item.ItemID);
 		item.Stacked = MainInv.invItem[Index_TopOfList, 1];
 
@@ -242,7 +242,7 @@ public class ItemShopUI : MonoBehaviour {
 		ShopItem item = new ShopItem();
 		item.ItemID = MainInv.invItem[Index_TopOfList + 5, 0];
 		item.Name = MainInv.ItemName(item.ItemID);
-		item.Price = MainInv.ItemPrice(item.ItemID);
+		item.Price = MainInv.ItemSellPrice(item.ItemID);
 		item.Description = item.Name + "\n\n" + MainInv.ItemDescription(item.ItemID);
 		item.Stacked = MainInv.invItem[Index_TopOfList + 5, 1];
 
