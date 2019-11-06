@@ -34,6 +34,10 @@ public class SkillsInventory : MonoBehaviour {
 
         AddToUnlockedSkills((int)SKILLS.Fa_SwiftStrike, 0);
         EquipSkill((int)SKILLS.Fa_SwiftStrike, 0, 0);
+        AddToUnlockedSkills((int)SKILLS.Fa_SwordOfFury, 0);
+        EquipSkill((int)SKILLS.Fa_SwordOfFury, 1, 0);
+        AddToUnlockedSkills((int)SKILLS.Fa_WarCry, 0);
+        EquipSkill((int)SKILLS.Fa_WarCry, 2, 0);
 
         AddToUnlockedSkills((int)SKILLS.Ob_ShieldAlly, 1);
         EquipSkill((int)SKILLS.Ob_ShieldAlly, 0, 1);
@@ -269,6 +273,14 @@ public class SkillsInventory : MonoBehaviour {
                 return "Swift Strike";
             case (int)SKILLS.Fa_SwordOfFury:
                 return "Sword of Fury";
+            case (int)SKILLS.Fa_WarCry:
+                return "War Cry ";
+            case (int)SKILLS.Fa_Sunguard:
+                return "The Sunguard Elite";
+            case (int)SKILLS.Fa_Rally:
+                return "Rally";
+            case (int)SKILLS.Fa_BaldeOfTheFallen:
+                return "Balde Of The Fallen";
             case (int)SKILLS.Fr_DoubleShot:
                 return "Double Shot";
             case (int)SKILLS.Fr_PiercingShot:
@@ -323,6 +335,14 @@ public class SkillsInventory : MonoBehaviour {
                 return "Inflict a flurry of strikes on a row of enemies";
             case (int)SKILLS.Fa_SwordOfFury:
                 return "Inflict a great deal of damage to one enemy";
+            case (int)SKILLS.Fa_WarCry:
+                return "Increase the attack of all allies for three turns ";
+            case (int)SKILLS.Fa_Sunguard:
+                return "Attack one enemy and apply the status Chained on the target and two other random enemies for three turns. Whenever this enemy is damaged, the two other enemies are damaged as well";
+            case (int)SKILLS.Fa_Rally:
+                return "Fargas marks one enemy. For three turns, this enemy sustains double damage.";
+            case (int)SKILLS.Fa_BaldeOfTheFallen:
+                return "Until they're dead, no one can rest. Fargas damages all enemies twice in a flurry of blows";
             case (int)SKILLS.Fr_DoubleShot:
                 return "Frea shoots two arrows in succession at one enemy";
             case (int)SKILLS.Fr_PiercingShot:
@@ -403,17 +423,45 @@ public class SkillsInventory : MonoBehaviour {
                 break;
             case (int)SKILLS.Fa_SwiftStrike:
                 skillStat[0] = 35;
-                skillStat[1] = 100;
+                skillStat[1] = 16;
                 skillStat[2] = 1;
                 skillStat[4] = (float)SKILL_TYPE.FULL_ROW_ATK;
                 skillStat[5] = 40;
                 break;
             case (int)SKILLS.Fa_SwordOfFury:
-                skillStat[0] = 35;
-                skillStat[1] = 100;
+                skillStat[0] = 60;
+                skillStat[1] = 16;
                 skillStat[2] = 1;
                 skillStat[4] = (float)SKILL_TYPE.SINGLE_TARGET_ATK;
+                skillStat[5] = 50;
+                break;
+            case (int)SKILLS.Fa_WarCry:
+                skillStat[0] = 0.3f;
+                skillStat[1] = 100;
+                skillStat[2] = 1;
+                skillStat[4] = (float)SKILL_TYPE.ALL_PLAYER_BUFF;
                 skillStat[5] = 40;
+                break;
+            case (int)SKILLS.Fa_Sunguard:
+                skillStat[0] = 40;
+                skillStat[1] = 18;
+                skillStat[2] = 1;
+                skillStat[4] = (float)SKILL_TYPE.SINGLE_TARGET_ATK;
+                skillStat[5] = 60;
+                break;
+            case (int)SKILLS.Fa_Rally:
+                skillStat[0] = 10;
+                skillStat[1] = 100;
+                skillStat[2] = 0;
+                skillStat[4] = (float)SKILL_TYPE.SINGLE_TARGET_DEBUFF;
+                skillStat[5] = 50;
+                break;
+            case (int)SKILLS.Fa_BaldeOfTheFallen:
+                skillStat[0] = 70;
+                skillStat[1] = 18;
+                skillStat[2] = 3;
+                skillStat[4] = (float)SKILL_TYPE.ALL_TARGETS_ATK;
+                skillStat[5] = 100;
                 break;
             case (int)SKILLS.Fr_DoubleShot:
                 skillStat[0] = 20;
@@ -423,7 +471,7 @@ public class SkillsInventory : MonoBehaviour {
                 skillStat[5] = 25;
                 break;
             case (int)SKILLS.Fr_PiercingShot:
-                skillStat[0] = 50;
+                skillStat[0] = 60;
                 skillStat[1] = 18;
                 skillStat[2] = 1;
                 skillStat[4] = (float)SKILL_TYPE.SINGLE_TARGET_ATK;

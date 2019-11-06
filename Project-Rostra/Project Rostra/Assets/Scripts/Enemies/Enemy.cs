@@ -109,14 +109,13 @@ public class Enemy : MonoBehaviour
         healText.gameObject.SetActive(false);
 
         if (enemyName == EnemyName.Mimic) { blowSelfObject.SetActive(false); }
+
         else
         {
             blowSelfObject = null;
         }
 
     
-           
-
         haveAddedMyself = false;
         hit = false;
         dead = false;
@@ -181,6 +180,7 @@ public class Enemy : MonoBehaviour
 
         }
 
+        // used for skills that dont need to wait to activate instead happen right away and last for multiple turns 
         else if (currentState == EnemyState.skilling)
         {
             waitQTurns--;
@@ -203,6 +203,7 @@ public class Enemy : MonoBehaviour
             {
                 switch (enemyAttack)
                 {
+                    #region Dumb
                     case EnemyAttackType.Dumb:
 
                         if (skillChance >= 47)
@@ -232,7 +233,9 @@ public class Enemy : MonoBehaviour
                             DumbAttack();
                         }
                         break;
+#endregion
 
+                    #region Opportunistic
                     case EnemyAttackType.Opportunistic:
 
                         if (attackChance > 30)
@@ -298,7 +301,9 @@ public class Enemy : MonoBehaviour
                             }
                         }
                         break;
+                    #endregion
 
+                    #region Assassin
                     case EnemyAttackType.Assassin:
 
                         if (attackChance > 30)
@@ -365,7 +370,9 @@ public class Enemy : MonoBehaviour
                             }
                         }
                         break;
+                    #endregion
 
+                    #region Bruiser
                     case EnemyAttackType.Bruiser:
 
                         if (attackChance > 30)
@@ -428,9 +435,12 @@ public class Enemy : MonoBehaviour
                             }
                         }
                         break;
+#endregion
 
+                    #region Healer
                     case EnemyAttackType.Healer:
-
+                       
+                        float chanceOfHealth = Random.Range(0.2f, 0.9f); //  how low should  the health be before it is healed //CHANGE THIS FUCKING VARIABLE NAME ANDRE!!
                         if (skillChance >= 49)
                         {
                             if (skillNeedsCharge)
@@ -455,10 +465,36 @@ public class Enemy : MonoBehaviour
 
                         else
                         {
-                            HealEnemy();
-                        }
-                        break;
+                             EnemyToHeal();
 
+                            if (enemyToHeal == null)
+                            {
+                                DumbAttack();
+                            }
+
+                            else 
+                            {
+
+                                if (enemyToHeal.currentHP <= (enemyToHeal.maxHP * chanceOfHealth))
+                                {
+                                    print("Healed Enemy at Index " + enemyToHeal.enemyIndexInBattleManager);
+                                    animator.SetBool("Heal", true);
+                                }
+
+                                else
+                                {
+                                    print("dumb Attacked");
+                                    DumbAttack();
+                                }
+                            }
+
+                           
+                        }
+
+                        break;
+#endregion
+
+                    #region Heal Support
                     case EnemyAttackType.Heal_Support:
 
                         if (skillChance >= 49)
@@ -488,7 +524,9 @@ public class Enemy : MonoBehaviour
                             SupportHeal(theHealer);
                         }
                         break;
+#endregion
 
+                    #region Strategist
                     case EnemyAttackType.Strategist:
 
                         if (attackChance > 30)
@@ -557,7 +595,9 @@ public class Enemy : MonoBehaviour
 
                         DumbAttack();
                         break;
+#endregion
 
+                    #region Relentless Attack
                     case EnemyAttackType.Relentless:
 
                         if (attackChance > 30)
@@ -620,7 +660,9 @@ public class Enemy : MonoBehaviour
                             }
                         }
                         break;
+                    #endregion
 
+                    #region Blow Self
                     case EnemyAttackType.Enemy_Blows_Self:
 
                         if (skillChance >= 49)
@@ -634,6 +676,7 @@ public class Enemy : MonoBehaviour
                             countDownToBlow--;
                         }
                         break;
+                        #endregion
                 }
             }
 
@@ -716,7 +759,7 @@ public class Enemy : MonoBehaviour
     void AttackLowHp()
     {
         statNeeded = PlayerStatReference.Health;
-        StatNeeded(statNeeded, playerStatNeeded);
+        StatNeeded(statNeeded);
 
         for (int i = 0; i < battleManager.players.Length; i++)
         {
@@ -734,7 +777,7 @@ public class Enemy : MonoBehaviour
     void AttackLowDef()
     {
         statNeeded = PlayerStatReference.Defence;
-        StatNeeded(statNeeded, playerStatNeeded);
+        StatNeeded(statNeeded);
         for (int i = 0; i < 4; i++)
         {
             if (battleManager.players[i].def == Mathf.Min(playerStatNeeded.ToArray()))
@@ -752,7 +795,7 @@ public class Enemy : MonoBehaviour
     void AttackHighAgi()
     {
         statNeeded = PlayerStatReference.Agility;
-        StatNeeded(statNeeded, playerStatNeeded);
+        StatNeeded(statNeeded);
         for (int i = 0; i < 4; i++)
         {
             if (battleManager.players[i].agi == Mathf.Max(playerStatNeeded.ToArray()))
@@ -769,7 +812,7 @@ public class Enemy : MonoBehaviour
     void AttackHighAtk()
     {
         statNeeded = PlayerStatReference.Attack;
-        StatNeeded(statNeeded, playerStatNeeded);
+        StatNeeded(statNeeded);
         for (int i = 0; i < 4; i++)
         {
             if (battleManager.players[i].atk == Mathf.Max(playerStatNeeded.ToArray()))
@@ -887,17 +930,16 @@ public class Enemy : MonoBehaviour
             animator.SetBool("SkillInUse", true);
         }
     }
-    void HealEnemy()
+    void EnemyToHeal()
     {
         int[] healthHolder = new int[battleManager.enemies.Length];// why i did this i will never know change it when not too lazy
         float lowestHealth; //holds ref the lowest health in enemyStat List
-        int healthMod = Random.Range(5, 20);// how much health should be applied to the enemies currentHP
-        float chanceOfHealth = Random.Range(0.2f, 0.9f); //  how low should  the health be before it is healed //CHANGE THIS FUCKING VARIABLE NAME ANDRE!!
+       
 
         for (int i = 0; i < healthHolder.Length; ++i)
         {
             //add enemies currentHp to enemyStat List only if they arnt dead
-            if (battleManager.enemies[i].currentHP > 0 && !dead)
+            if (battleManager.enemies[i].currentHP > 0 && !dead && this != battleManager.enemies[i].enemyReference)
             {
                 enemyStatNeeded.Add(battleManager.enemies[i].currentHP);
             }
@@ -919,31 +961,12 @@ public class Enemy : MonoBehaviour
             if (battleManager.enemies[i].currentHP == lowestHealth)
             {
                 enemyToHeal = battleManager.enemies[i].enemyReference;
+                
             }
         }
 
-        //if the enemy that needs to be healths current hp is less that a percentage of max hp plus 0.1 so that its never below 20%
-        if (enemyToHeal.currentHP <= (enemyToHeal.maxHP * chanceOfHealth))
-        {
-            if (enemyToHeal.currentHP + healthMod >= enemyToHeal.maxHP)
-            {
-                enemyToHeal.currentHP = enemyToHeal.maxHP;
-                battleManager.enemies[enemyToHeal.enemyIndexInBattleManager].currentHP = enemyToHeal.currentHP;
-            }
-
-            else
-            {
-                enemyToHeal.currentHP += healthMod;
-                battleManager.enemies[enemyToHeal.enemyIndexInBattleManager].currentHP = enemyToHeal.currentHP;
-            }
-            uiBTL.EndTurn();
-        }
-
-        else
-        {
-            DumbAttack();
-        }
-        enemyStatNeeded.Clear();
+       
+        
     }
     void SupportHeal(Enemy theHealer)
     {
@@ -1057,7 +1080,7 @@ public class Enemy : MonoBehaviour
 
                 else if (randomStat == 2)
                 {
-                    HealEnemy();
+                    //HealEnemy();
                 }
 
                 else
@@ -1084,7 +1107,7 @@ public class Enemy : MonoBehaviour
 
             else if (randomStat == 2)
             {
-                HealEnemy();
+               // HealEnemy();
             }
 
             else
@@ -1101,7 +1124,7 @@ public class Enemy : MonoBehaviour
 
         enemyToHealRef.Clear();
     }
-    void StatNeeded(PlayerStatReference pStatNeeded, List<float> ListNeeded)
+    void StatNeeded(PlayerStatReference pStatNeeded)
     {
         float statsRefForCheck; //  i know shitty name 
         //returns the lowest HP of the party 
@@ -1112,27 +1135,27 @@ public class Enemy : MonoBehaviour
                 //checks if player current hp from battlemanager is above 0 and if player exist if that's the case add to list
                 if (stat.playerReference != null && stat.currentHP > 0)
                 {
-                    ListNeeded.Add(stat.currentHP);
+                    playerStatNeeded.Add(stat.currentHP);
                 }
             }
             //sort the list DUH
             playerStatNeeded.Sort();
 
-            /* statsRefForCheck = Mathf.Min(ListNeeded.ToArray());
+             statsRefForCheck = Mathf.Min(playerStatNeeded.ToArray());
 
-             for (int i = 0; i < ListNeeded.Count; i++)
+             for (int i = 0; i < playerStatNeeded.Count; i++)
              {
-                 if(ListNeeded[i] != statsRefForCheck)
+                 if(playerStatNeeded[i] != statsRefForCheck)
                  {
-                     ListNeeded.Remove(playerStatNeeded[i]);
+                    playerStatNeeded.Remove(playerStatNeeded[i]);
                      print("Removed" + battleManager.players[i].name);
                  }
 
-                 if (ListNeeded[i] == statsRefForCheck)
+                 if (playerStatNeeded[i] == statsRefForCheck)
                  {
-                     ListNeeded.Remove(playerStatNeeded.Count - 1);
+                    playerStatNeeded.Remove(playerStatNeeded.Count - 1);
                  }
-             }*/
+             }
         }
 
         else if (statNeeded == PlayerStatReference.Agility)
@@ -1142,27 +1165,27 @@ public class Enemy : MonoBehaviour
                 //same idea as with hp
                 if (stat.playerReference != null && stat.currentHP > 0)
                 {
-                    ListNeeded.Add(stat.agi);
+                    playerStatNeeded.Add(stat.agi);
                 }
             }
 
             playerStatNeeded.Sort();
 
-            /* statsRefForCheck = Mathf.Max(ListNeeded.ToArray());
+             statsRefForCheck = Mathf.Max(playerStatNeeded.ToArray());
 
-             for (int i = 0; i < ListNeeded.Count; i++)
+             for (int i = 0; i < playerStatNeeded.Count; i++)
              {
-                 if (ListNeeded[i] != statsRefForCheck)
+                 if (playerStatNeeded[i] != statsRefForCheck)
                  {
-                     ListNeeded.Remove(ListNeeded[i]);
+                    playerStatNeeded.Remove(playerStatNeeded[i]);
                      print("Removed" + battleManager.players[i].name);
                  }
 
-                 else if (ListNeeded[i] == statsRefForCheck)
+                 else if (playerStatNeeded[i] == statsRefForCheck)
                  {
-                     ListNeeded.Remove(playerStatNeeded.Count - 1);
+                    playerStatNeeded.Remove(playerStatNeeded.Count - 1);
                  }
-             }*/
+             }
         }
 
         else if (statNeeded == PlayerStatReference.Attack)
@@ -1172,15 +1195,15 @@ public class Enemy : MonoBehaviour
                 //same idea as with hp
                 if (stat.playerReference != null && stat.currentHP > 0)
                 {
-                    ListNeeded.Add(stat.atk);
+                    playerStatNeeded.Add(stat.atk);
                 }
             }
 
-            ListNeeded.Sort();
+            playerStatNeeded.Sort();
 
             statsRefForCheck = Mathf.Max(playerStatNeeded.ToArray());
 
-            /*for (int i = 0; i < playerStatNeeded.Count; i++)
+            for (int i = 0; i < playerStatNeeded.Count; i++)
             {
                 if (playerStatNeeded[i] != statsRefForCheck)
                 {
@@ -1192,7 +1215,7 @@ public class Enemy : MonoBehaviour
                 {
                     playerStatNeeded.Remove(playerStatNeeded.Count - 1);
                 }
-            }*/
+            }
         }
 
         else
@@ -1203,12 +1226,12 @@ public class Enemy : MonoBehaviour
                 //same idea as with the other two ... just incase you forgot if you are Dead you didnt make the cut
                 if (stat.playerReference != null && stat.currentHP > 0)
                 {
-                    ListNeeded.Add(stat.def);
+                    playerStatNeeded.Add(stat.def);
                 }
             }
-            ListNeeded.Sort();
+            playerStatNeeded.Sort();
 
-            /* statsRefForCheck = Mathf.Min(playerStatNeeded.ToArray());
+             statsRefForCheck = Mathf.Min(playerStatNeeded.ToArray());
              for (int i = 0; i < playerStatNeeded.Count; i++)
              {
                  if (playerStatNeeded[i] != statsRefForCheck)
@@ -1221,7 +1244,7 @@ public class Enemy : MonoBehaviour
                  {
                      playerStatNeeded.Remove(playerStatNeeded.Count - 1);
                  }
-             }*/
+             }
         }
     }
     //function override used to get the stats a enemy same idea as with the player 
@@ -1490,7 +1513,7 @@ public class Enemy : MonoBehaviour
     void MakeSkillsWork(AllEnemySkills ChosenSkill)
     {
         float attackMod;
-        int healthMod;
+        //int healthMod;
         int playerIndexRef;
         int randomRow = Random.Range(0, 1);
 
@@ -1720,7 +1743,7 @@ public class Enemy : MonoBehaviour
 
                 else
                 {
-                    HealEnemy();
+                    MakeSkillsWork(AllEnemySkills.All_Enemy_Heal);
                 }
 
                 uiBTL.EndTurn();
@@ -1728,35 +1751,11 @@ public class Enemy : MonoBehaviour
                 break;
             #endregion
 
-            #region heal all enemies
             case AllEnemySkills.All_Enemy_Heal:
-                healthMod = 100;
-                print("Used The Heal All Skill");
-
-                for (int i = 0; i < battleManager.enemies.Length; ++i)
-                {
-                    if (battleManager.enemies[i].enemyReference != null && this != battleManager.enemies[i].enemyReference)
-                    {
-                        if (!battleManager.enemies[i].enemyReference.dead)
-                        {
-                            enemyToHeal = battleManager.enemies[i].enemyReference;
-                            print("Enemy was healed at index " + enemyToHeal.enemyIndexInBattleManager);
-                            enemyToHeal.currentHP += healthMod;
-                            print("Enemies new Hp is " + enemyToHeal.currentHP);
-
-                            if (enemyToHeal.currentHP > enemyToHeal.maxHP)
-                            {
-                                enemyToHeal.currentHP = enemyToHeal.maxHP;
-                                print("Enemies new Hp is " + enemyToHeal.currentHP);
-                            }
-                        }
-                    }
-                }
-
-                uiBTL.EndTurn();
-
+                animator.SetBool("isWaiting", false);
+                animator.SetBool("SkillInUse", true);
                 break;
-            #endregion
+
 
             
             case AllEnemySkills.Bite:
@@ -1768,14 +1767,8 @@ public class Enemy : MonoBehaviour
 
             #region earth smash
             case AllEnemySkills.Earth_Smash:
-
-                for (int i = 0; i < battleManager.players.Length; ++i)
-                {
-                    attackThisPlayer = battleManager.players[i].playerReference;
-                    attackThisPlayer.TakeDamage(eAttack);
-                }
-
-                uiBTL.EndTurn();
+                animator.SetBool("isWaiting", false);
+                animator.SetBool("SkillInUse", true);
 
                 break;
             #endregion
@@ -2142,6 +2135,40 @@ public class Enemy : MonoBehaviour
         }
       
     }
+    void HealAllSkill()
+    {
+        int healthMod = 100;
+        print("Used The Heal All Skill");
+
+        for (int i = 0; i < battleManager.enemies.Length; ++i)
+        {
+            if (battleManager.enemies[i].enemyReference != null && this != battleManager.enemies[i].enemyReference)
+            {
+                if (!battleManager.enemies[i].enemyReference.dead)
+                {
+                    enemyToHeal = battleManager.enemies[i].enemyReference;
+                    print("Enemy was healed at index " + enemyToHeal.enemyIndexInBattleManager);
+                    enemyToHeal.currentHP += healthMod;
+                    print("Enemies new Hp is " + enemyToHeal.currentHP);
+                    enemyToHeal.HP.fillAmount = enemyToHeal.currentHP;
+
+                    if (enemyToHeal.currentHP > enemyToHeal.maxHP)
+                    {
+                        enemyToHeal.currentHP = enemyToHeal.maxHP;
+                        print("Enemies new Hp is " + enemyToHeal.currentHP);
+                    }
+                }
+            }
+        }
+    }
+    void EarthSmashSkill()
+    {
+        eAttack += Random.Range(5, 10);
+        AttackFargas();
+        AttackOberon();
+        Invoke("AttackFrea", .5f);
+        Invoke("AttackArcelus", .5f);
+    }
     protected void Death()
     {
         if (!dead)
@@ -2155,6 +2182,27 @@ public class Enemy : MonoBehaviour
 
             uiBTL.EndTurn(); //Only end the turn after the enemy is dead
         }
+    }
+    void HealEnemy()
+    {
+        int healthMod = Random.Range(5, 20);// how much health should be applied to the enemies currentHP
+        if (enemyToHeal.currentHP + healthMod >= enemyToHeal.maxHP)
+        {
+            enemyToHeal.currentHP = enemyToHeal.maxHP;
+            battleManager.enemies[enemyToHeal.enemyIndexInBattleManager].currentHP = enemyToHeal.currentHP;
+            enemyToHeal.HP.fillAmount = enemyToHeal.currentHP;
+        }
+
+        else
+        {
+            enemyToHeal.currentHP += healthMod;
+            battleManager.enemies[enemyToHeal.enemyIndexInBattleManager].currentHP = enemyToHeal.currentHP;
+            enemyToHeal.HP.fillAmount = enemyToHeal.currentHP /enemyToHeal.maxHP;
+        }
+
+        animator.SetBool("Heal", false);
+        enemyStatNeeded.Clear();
+        EndTurn();
     }
     //An enemy tied to a player should get healed when the player is healed. Called from the tied player 
     public virtual void HealDueToTied(float healAmount)

@@ -827,6 +827,7 @@ MonoBehaviour:
   waitTime: 0
   playerIndexHolder: 0
   timeAttacking: 0
+  countDownToBlow: 0
   blowStrength: 0
   playerStatNeeded: []
   enemyStatNeeded: []
@@ -842,11 +843,17 @@ MonoBehaviour:
   hit: 0
   blow: 0
   isStatModed: 0
+  test: 0
+  skillNeedsCharge: 0
   enemyClass: 0
   enemyAttack: 0
   canUseSkill: 0
   enemyName: 0
+  currentState: 0
   waitTurnsText: {fileID: 0}
+  healthObject: {fileID: 0}
+  chain: {fileID: 0}
+  blowSelfObject: {fileID: 0}
 --- !u!1 &667189818
 GameObject:
   m_ObjectHideFlags: 0
@@ -955,6 +962,7 @@ MonoBehaviour:
   waitTime: 0
   playerIndexHolder: 0
   timeAttacking: 0
+  countDownToBlow: 0
   blowStrength: 0
   playerStatNeeded: []
   enemyStatNeeded: []
@@ -970,11 +978,17 @@ MonoBehaviour:
   hit: 0
   blow: 0
   isStatModed: 0
+  test: 0
+  skillNeedsCharge: 0
   enemyClass: 0
   enemyAttack: 0
   canUseSkill: 0
   enemyName: 0
+  currentState: 0
   waitTurnsText: {fileID: 0}
+  healthObject: {fileID: 0}
+  chain: {fileID: 0}
+  blowSelfObject: {fileID: 0}
 --- !u!1 &934564987
 GameObject:
   m_ObjectHideFlags: 0
@@ -1159,6 +1173,7 @@ MonoBehaviour:
   waitTime: 0
   playerIndexHolder: 0
   timeAttacking: 0
+  countDownToBlow: 0
   blowStrength: 0
   playerStatNeeded: []
   enemyStatNeeded: []
@@ -1174,11 +1189,17 @@ MonoBehaviour:
   hit: 0
   blow: 0
   isStatModed: 0
+  test: 0
+  skillNeedsCharge: 0
   enemyClass: 0
   enemyAttack: 0
   canUseSkill: 0
   enemyName: 0
+  currentState: 0
   waitTurnsText: {fileID: 0}
+  healthObject: {fileID: 0}
+  chain: {fileID: 0}
+  blowSelfObject: {fileID: 0}
 --- !u!1 &1313233601
 GameObject:
   m_ObjectHideFlags: 0
@@ -1677,6 +1698,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9f30920feb15764ab7ac7c54d8fb984, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &2794915159868658332 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2794915159861226941, guid: 8ee36087513184f4ba2c93e1136be8ef,
+    type: 3}
+  m_PrefabInstance: {fileID: 2794915159868658330}
+  m_PrefabAsset: {fileID: 0}
+--- !u!81 &2794915159868658333
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2794915159868658332}
+  m_Enabled: 1
 --- !u!1001 &3066886499593805204
 PrefabInstance:
   m_ObjectHideFlags: 0
