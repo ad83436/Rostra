@@ -49,7 +49,7 @@ public class WMEnemy : MonoBehaviour
         {
             enemySpwn.AddEnemyToSpawn(enemies[i], i, enemyLevels[i]);
         }
-        SceneManager.LoadScene("Queue Scene", LoadSceneMode.Additive);
+        SceneManager.LoadScene("Tutorial Battle Scene", LoadSceneMode.Additive);
         if (endTestPanel)
         {
             endTestPanel.gameObject.SetActive(true);
