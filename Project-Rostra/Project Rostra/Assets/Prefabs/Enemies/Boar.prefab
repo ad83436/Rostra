@@ -260,6 +260,7 @@ MonoBehaviour:
   waitTime: 0
   playerIndexHolder: 0
   timeAttacking: 0
+  countDownToBlow: 0
   blowStrength: 0
   playerStatNeeded: []
   enemyStatNeeded: []
@@ -275,6 +276,8 @@ MonoBehaviour:
   hit: 0
   blow: 0
   isStatModed: 0
+  test: 0
+  skillNeedsCharge: 0
   enemyClass: 0
   enemyAttack: 2
   canUseSkill: 4
@@ -283,6 +286,7 @@ MonoBehaviour:
   waitTurnsText: {fileID: 0}
   healthObject: {fileID: 0}
   chain: {fileID: 0}
+  blowSelfObject: {fileID: 0}
 --- !u!95 &8076412860856138832
 Animator:
   serializedVersion: 3

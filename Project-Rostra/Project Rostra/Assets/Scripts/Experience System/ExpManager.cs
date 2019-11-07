@@ -29,7 +29,7 @@ public class ExpManager : MonoBehaviour {
 		//Will be changed to use a load file instead
 
 		//Fargas
-		PartyStats.chara[0].hitpoints = 10.0f;
+		PartyStats.chara[0].hitpoints = 200.0f;
 		PartyStats.chara[0].maxHealth = 200.0f;
 		PartyStats.chara[0].magicpoints = 200.0f;
 		PartyStats.chara[0].maxMana = 200.0f;

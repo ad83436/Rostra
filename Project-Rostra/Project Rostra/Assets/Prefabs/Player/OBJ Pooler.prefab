@@ -107,3 +107,6 @@ MonoBehaviour:
     prefab: {fileID: 2756357028259480839, guid: d33a03b657d9557498ca626f5a5324de,
       type: 3}
     poolSize: 1
+  - tag: Sun
+    prefab: {fileID: 423980684228765656, guid: 025b7b5dcc030e341af7a4f74badf525, type: 3}
+    poolSize: 1

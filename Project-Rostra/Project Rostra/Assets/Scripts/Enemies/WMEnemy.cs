@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class WMEnemy : MonoBehaviour
 {
+	public bool tutorial = false;
     public Enemy[] enemies;
     public int[] enemyLevels;
     public Fade fadePanel;
@@ -49,7 +50,7 @@ public class WMEnemy : MonoBehaviour
         {
             enemySpwn.AddEnemyToSpawn(enemies[i], i, enemyLevels[i]);
         }
-        SceneManager.LoadScene("Queue Scene", LoadSceneMode.Additive);
+        SceneManager.LoadScene(tutorial ? "Queue Scene 2" : "Queue Scene", LoadSceneMode.Additive);
         if (endTestPanel)
         {
             endTestPanel.gameObject.SetActive(true);
