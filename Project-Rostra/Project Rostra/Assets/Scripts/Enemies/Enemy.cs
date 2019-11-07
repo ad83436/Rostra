@@ -240,7 +240,7 @@ public class Enemy : MonoBehaviour
 
                         if (attackChance > 30)
                         {
-                            if (skillChance >= 45)
+                            if (skillChance >= 47)
                             {
                                 if (skillNeedsCharge)
                                 {
@@ -308,7 +308,7 @@ public class Enemy : MonoBehaviour
 
                         if (attackChance > 30)
                         {
-                            if (skillChance >= 45)
+                            if (skillChance >= 47)
                             {
                                 if (skillNeedsCharge)
                                 {
@@ -341,7 +341,7 @@ public class Enemy : MonoBehaviour
 
                         else
                         {
-                            if (skillChance > 40)
+                            if (skillChance >= 49)
                             {
                                 if (skillNeedsCharge)
                                 {
@@ -377,7 +377,7 @@ public class Enemy : MonoBehaviour
 
                         if (attackChance > 30)
                         {
-                            if (skillChance >= 45)
+                            if (skillChance >= 47)
                             {
                                 if (skillNeedsCharge)
                                 {
@@ -1151,7 +1151,7 @@ public class Enemy : MonoBehaviour
                      print("Removed" + battleManager.players[i].name);
                  }
 
-                 if (playerStatNeeded[i] == statsRefForCheck)
+                 else if (playerStatNeeded[i] == statsRefForCheck)
                  {
                     playerStatNeeded.Remove(playerStatNeeded.Count - 1);
                  }
@@ -1765,13 +1765,12 @@ public class Enemy : MonoBehaviour
                 break;
             
 
-            #region earth smash
             case AllEnemySkills.Earth_Smash:
                 animator.SetBool("isWaiting", false);
                 animator.SetBool("SkillInUse", true);
 
                 break;
-            #endregion
+           
 
             case AllEnemySkills.Blow_Self:
 
@@ -1783,26 +1782,8 @@ public class Enemy : MonoBehaviour
 
             #region ball roll
             case AllEnemySkills.Ball_Roll:
-
-                if (randomRow == 0)
-                {
-                    AttackOberon();
-                    Invoke("AttackFrea", 1);
-                    Invoke("AttackArcelus", 3);
-                    Invoke("AttackFargas", 4);
-
-                }
-
-                else if (randomRow == 1)
-                {
-                    AttackFargas();
-                    Invoke("AttackFargas", 1);
-                    Invoke("AttackFrea", 3);
-                    Invoke("AttackArcelus", 4);
-
-                }
-
-                Invoke("EndTurn", 5.5f);
+                animator.SetBool("isWaiting", false);
+                animator.SetBool("SkillInUse", true);
                 break;
             #endregion
 
@@ -2168,6 +2149,36 @@ public class Enemy : MonoBehaviour
         AttackOberon();
         Invoke("AttackFrea", .5f);
         Invoke("AttackArcelus", .5f);
+        eAttack = enemyStartingAtk;
+    }
+    void BallRollSkill()
+    {
+        int randomRow = Random.Range(0, 1);
+
+        if (randomRow == 0)
+        {
+            AttackOberon();
+            eAttack += 2;
+            Invoke("AttackFrea", 0.4f);
+            eAttack += 3;
+            Invoke("AttackArcelus", 0.6f);
+            eAttack += 4;
+            Invoke("AttackFargas", 0.8f);
+
+        }
+
+        else if (randomRow == 1)
+        {
+            AttackFargas();
+            eAttack += 2;
+            Invoke("AttackFargas", 0.4f);
+            eAttack += 3;
+            Invoke("AttackFrea", 0.6f);
+            eAttack += 4;
+            Invoke("AttackArcelus", 0.8f);
+
+        }
+        eAttack = enemyStartingAtk;
     }
     protected void Death()
     {
