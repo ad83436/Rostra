@@ -245,10 +245,12 @@ public class BattleManager : MonoBehaviour
         if (battleQueue[0].playerReference != null && battleQueue[0].enemyReference == null)
         {
             uiBtl.ShowThisPlayerUI(battleQueue[0].playerIndex, battleQueue[0].name, battleQueue[0].playerReference);
+			DOM_playerTurn();
         }
         else if (battleQueue[0].playerReference == null && battleQueue[0].enemyReference != null)
         {
             battleQueue[0].enemyReference.EnemyTurn();
+			DOM_enemyTurn();
         }
         //Add it to the end of the Q
         battleQueue.Add(battleQueue[0]);
@@ -256,6 +258,14 @@ public class BattleManager : MonoBehaviour
         //Remove it from the start of the Q 
         battleQueue.RemoveAt(0);
     }
+
+	protected virtual void DOM_playerTurn() {
+
+	}
+	
+	protected virtual void DOM_enemyTurn() {
+
+	}
 
     public virtual void BuildQueue()
     {
