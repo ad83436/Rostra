@@ -428,6 +428,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 574ca7294c12a004085f4bd08067d89e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tutorial: 1
   enemies:
   - {fileID: 8830413635625265082, guid: 09875b434c97e954a8ca9276dca80ae4, type: 3}
   - {fileID: 8830413635625265082, guid: 09875b434c97e954a8ca9276dca80ae4, type: 3}
@@ -2681,7 +2682,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  numberOfEnemies: 5
+  numberOfEnemies: 0
   isBoss: 0
 --- !u!4 &1882814555
 Transform:
