@@ -1443,6 +1443,7 @@ public class Enemy : MonoBehaviour
                     if(chainedWaitTime<=0)
                     {
                         UnchainEnemies();
+                        chainedSymbol.gameObject.SetActive(false);
                     }
                 }
                 break;
