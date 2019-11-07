@@ -532,7 +532,7 @@ public class Player : MonoBehaviour
         battleManager.players[playerIndex].currentHP = currentHP; //Update the BTL manager with the new health
         PartyStats.chara[playerIndex].hitpoints = currentHP; //Update the party stats
 
-        if (currentHP <= 0.0f)
+        if (currentHP < 1.0f) //Avoid near zero
         {
             currentHP = 0.0f;
             battleManager.players[playerIndex].currentHP = currentHP; //Update the BTL manager with the new health
