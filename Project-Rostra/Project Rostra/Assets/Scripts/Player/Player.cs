@@ -834,12 +834,16 @@ public class Player : MonoBehaviour
                 skillWaitingIndex = 1; //Should there be waiting time, this index is used to know which waiting animation to go to
                 break;
             case (int)SKILLS.Fa_SwordOfFury:
-               
                 skillTarget = 0;
                 skillNameForObjPooler = "SoFSkill";
                 skillAnimatorName = "ASkill";
                 skillWaitingIndex = 2; //Should there be waiting time, this index is used to know which waiting animation to go to
-
+                break;
+            case (int)SKILLS.Fa_Sunguard:
+                skillTarget = 0;
+                skillNameForObjPooler = "Sun";
+                skillAnimatorName = "ASkill";
+                skillWaitingIndex = 4; //Should there be waiting time, this index is used to know which waiting animation to go to
                 break;
         }
 
@@ -984,20 +988,43 @@ public class Player : MonoBehaviour
                 btlCam.CameraShake();
                 if (CalculateCrit() <= crit)
                 {
-                    Debug.Log("Skill Crit");
-                    attackingThisEnemy.TakeDamage(0.7f * actualATK + skills.SkillStats(chosenSkill)[0], numberOfAttacks); //Damage is the half the player's attack stat and the skill's attack stat
-                    if(drainEye) //Check if Drain Eye is active
+                    if (chosenSkill == (int)SKILLS.Fa_Sunguard) //Sunguard
                     {
-                        Heal(0.01f * (drainEyeModifier * (0.7f * actualATK + skills.SkillStats(chosenSkill)[0])));
+                        Debug.Log("Skill Crit");
+                        attackingThisEnemy.TakeDamage(0.7f * actualATK + skills.SkillStats(chosenSkill)[0], numberOfAttacks,0,0.0f,3,"",EnemyStatusAilment.chained); //Damage is the half the player's attack stat and the skill's attack stat
+                        if (drainEye) //Check if Drain Eye is active
+                        {
+                            Heal(0.01f * (drainEyeModifier * (0.7f * actualATK + skills.SkillStats(chosenSkill)[0])));
+                        }
+                    }
+                    else
+                    {
+                        //Not sunguard
+                        Debug.Log("Skill Crit");
+                        attackingThisEnemy.TakeDamage(0.7f * actualATK + skills.SkillStats(chosenSkill)[0], numberOfAttacks); //Damage is the half the player's attack stat and the skill's attack stat
+                        if (drainEye) //Check if Drain Eye is active
+                        {
+                            Heal(0.01f * (drainEyeModifier * (0.7f * actualATK + skills.SkillStats(chosenSkill)[0])));
+                        }
                     }
                 }
                 else
                 {
-                    Debug.Log("No Skill Crit");
-                    attackingThisEnemy.TakeDamage(0.5f * actualATK + skills.SkillStats(chosenSkill)[0], numberOfAttacks); //Damage is the half the player's attack stat and the skill's attack stat
-                    if (drainEye) //Check if Drain Eye is active
+                    if (chosenSkill == (int)SKILLS.Fa_Sunguard)
                     {
-                        Heal(0.01f * (drainEyeModifier * (0.5f * actualATK + skills.SkillStats(chosenSkill)[0])));
+                        attackingThisEnemy.TakeDamage(0.5f * actualATK + skills.SkillStats(chosenSkill)[0], numberOfAttacks, 0, 0.0f, 3, "", EnemyStatusAilment.chained); //Damage is the half the player's attack stat and the skill's attack stat
+                        if (drainEye) //Check if Drain Eye is active
+                        {
+                            Heal(0.01f * (drainEyeModifier * (0.5f * actualATK + skills.SkillStats(chosenSkill)[0])));
+                        }
+                    }
+                    else
+                    {
+                        attackingThisEnemy.TakeDamage(0.5f * actualATK + skills.SkillStats(chosenSkill)[0], numberOfAttacks); //Damage is the half the player's attack stat and the skill's attack stat
+                        if (drainEye) //Check if Drain Eye is active
+                        {
+                            Heal(0.01f * (drainEyeModifier * (0.5f * actualATK + skills.SkillStats(chosenSkill)[0])));
+                        }
                     }
                 }
 

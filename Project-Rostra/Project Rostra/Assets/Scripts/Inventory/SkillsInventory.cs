@@ -38,6 +38,8 @@ public class SkillsInventory : MonoBehaviour {
         EquipSkill((int)SKILLS.Fa_SwordOfFury, 1, 0);
         AddToUnlockedSkills((int)SKILLS.Fa_WarCry, 0);
         EquipSkill((int)SKILLS.Fa_WarCry, 2, 0);
+        AddToUnlockedSkills((int)SKILLS.Fa_Sunguard, 0);
+        EquipSkill((int)SKILLS.Fa_Sunguard, 3, 0);
 
         AddToUnlockedSkills((int)SKILLS.Ob_ShieldAlly, 1);
         EquipSkill((int)SKILLS.Ob_ShieldAlly, 0, 1);
@@ -338,7 +340,7 @@ public class SkillsInventory : MonoBehaviour {
             case (int)SKILLS.Fa_WarCry:
                 return "Increase the attack of all allies for three turns ";
             case (int)SKILLS.Fa_Sunguard:
-                return "Attack one enemy and apply the status Chained on the target and two other random enemies for three turns. Whenever this enemy is damaged, the two other enemies are damaged as well";
+                return "The Sun shines brightly on all. Chain three enemies together so they all share the damage taken";
             case (int)SKILLS.Fa_Rally:
                 return "Fargas marks one enemy. For three turns, this enemy sustains double damage.";
             case (int)SKILLS.Fa_BaldeOfTheFallen:
