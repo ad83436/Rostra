@@ -416,7 +416,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            Debug.Log("Player attack has missed");
+            Debug.Log("Frea's Double Shot has missed");
             if (numberOfAttacks <= 0)
             {
                 uiBTL.EndTurn();
@@ -819,7 +819,6 @@ public class Player : MonoBehaviour
         switch(skillID)
         {
             case (int)SKILLS.Fr_DoubleShot: //Double shot is a normal attack done twice
-                Debug.Log("Inside HITTT ");
                 numberOfAttacks = 2;
                 playerAnimator.SetBool("Turn", false);
                 skillAnimatorName = "Attack";
@@ -850,7 +849,6 @@ public class Player : MonoBehaviour
         //Do we have to wait?
         if (waitTime <= 0)
         {
-            Debug.Log("Further Inside HITTT ");
             skillWaitingIndex = 0;
             playerAnimator.SetInteger("WaitingIndex", 0);
             playerAnimator.SetBool(skillAnimatorName, true);

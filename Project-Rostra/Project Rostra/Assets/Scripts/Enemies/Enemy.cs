@@ -88,9 +88,8 @@ public class Enemy : MonoBehaviour
     public EnemyStatusAilment currentStatusAilment = EnemyStatusAilment.none;
     private Enemy[] chainedEnemy; //Stores the information for the chained enemies
     public GameObject chainedSymbol;
+    public GameObject primaryChainedSymbol; //Used to distinguish the primary target of a chain
     private bool primaryChainedTarget = false; // The primary target is the only one to unchain the other targets
-
-
 
     protected void Awake()
     {
@@ -148,6 +147,10 @@ public class Enemy : MonoBehaviour
         if(chainedSymbol)
         {
             chainedSymbol.gameObject.SetActive(false);
+        }
+        if(primaryChainedSymbol)
+        {
+            primaryChainedSymbol.gameObject.SetActive(false);
         }
     }
     protected virtual void Update()
@@ -1290,12 +1293,12 @@ public class Enemy : MonoBehaviour
         {
             if (chainedEnemy[0] != null && !chainedEnemy[0].dead)
             {
-                chainedEnemy[0].TakeChainedDamage(playerAttack);
+                chainedEnemy[0].TakeChainedDamage(playerAttack, numberOfAttacks);
             }
 
             if (chainedEnemy[1] != null && !chainedEnemy[1].dead)
             {
-                chainedEnemy[1].TakeChainedDamage(playerAttack);
+                chainedEnemy[1].TakeChainedDamage(playerAttack, numberOfAttacks);
             }
         }
 
@@ -1344,25 +1347,30 @@ public class Enemy : MonoBehaviour
         {
             if (chainedEnemy[0] != null && !chainedEnemy[0].dead)
             {
-                chainedEnemy[0].TakeChainedDamage(playerAttack);
+                chainedEnemy[0].TakeChainedDamage(playerAttack, numberOfAttacks);
             }
 
             if (chainedEnemy[1] != null && !chainedEnemy[1].dead)
             {
-                chainedEnemy[1].TakeChainedDamage(playerAttack);
+                chainedEnemy[1].TakeChainedDamage(playerAttack, numberOfAttacks);
             }
         }
 
+        
         switch (debuffIndex)
         {
             case 0: // Ailment
+                
                 switch(ailment)
                 {
                     case EnemyStatusAilment.chained:
-                        chainedWaitTime = debuffTimer;
-                        primaryChainedTarget = true;
-                        GetNewChainedEnemies();
-                        chainedSymbol.gameObject.SetActive(true);
+                        if (currentStatusAilment != EnemyStatusAilment.chained) //You can't have two primary chain targets in the same chain
+                        {
+                            chainedWaitTime = debuffTimer;
+                            primaryChainedTarget = true;
+                            GetNewChainedEnemies();
+                            primaryChainedSymbol.gameObject.SetActive(true);
+                        }
                         break;
                     case EnemyStatusAilment.rallied:
                         break;
@@ -1402,7 +1410,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void TakeChainedDamage(float playerAttack)
+    public void TakeChainedDamage(float playerAttack, int numberOfAttacks)
     {
         Debug.Log("Received chained attack: " + playerAttack);
         float damage = playerAttack - ((eDefence / (20.0f + eDefence)) * playerAttack);
@@ -1413,18 +1421,20 @@ public class Enemy : MonoBehaviour
         HP.fillAmount = currentHP / maxHP;
         animator.SetBool("Hit", true);
 
-
-
         if (currentHP < 1.0f) //Avoid near zero
         {
             if (currentStatusAilment == EnemyStatusAilment.chained && primaryChainedTarget) //If the enemy is chained and is the primary target, then unchain the enemies
             {
                 UnchainEnemies();
+                if (numberOfAttacks <= 0) //Need to check for number of attacks for this scenario: Say the number of attacks is 2, and the primary target dies from the first, this means the chain breaks and the turn ends, but the second attack is still coming, and that target of that attack is no longer chained so it WILL call EndTurn() which can cause a turn skip
+                {
+                    uiBTL.EndTurn();
+                }
             }
+
             animator.SetBool("Death", true);
         }
-
-        if (primaryChainedTarget == true)
+        else if(primaryChainedTarget && numberOfAttacks <=0) //If you're not dead, end the turn when getting hit if you're the primary target
         {
             uiBTL.EndTurn();
         }
