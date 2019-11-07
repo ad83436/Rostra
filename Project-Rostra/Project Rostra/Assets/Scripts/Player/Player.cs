@@ -1731,8 +1731,6 @@ public class Player : MonoBehaviour
 
     private void FindAnAliveEnemy()
     {
-        Debug.Log("Result === " + (Random.Range(0, uiBTL.numberOfEnemies - 1)).ToString());
-
         //Make sure the enemy you're trying to attack is alive
         for (int i = 0; i < uiBTL.enemiesDead.Length; i++)
         {
