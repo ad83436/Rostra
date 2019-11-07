@@ -186,6 +186,11 @@ public class DialogueManager : MonoBehaviour
 			anim.SetBool("isOpen", true);
 			// save a local copy of the dialogue we pass in
 			dia = d;
+			// if we need to add an item do it now so won't have to worry about it later 
+			if (dia.addItem == true && dia.itemId > 0)
+			{
+				AddItem(dia.itemId, dia.itemNum);
+			}
 			// display the first name and portraits
 			charName.text = d.names[0];
 			portrait.sprite = d.portrait[0];
@@ -425,9 +430,13 @@ public class DialogueManager : MonoBehaviour
 		{
 			Debug.Log("Playing Normal Text");
 			StartConversation(dia.choiceCare1.dialogue.normal.dialogue);
-			if (dia.choice1.dialogue.normal.dialogue.addMilestone > 0)
+			if (dia.normal.dialogue.addMilestone > 0)
 			{
 				AddMilestone(dia.choice1.dialogue.normal.dialogue.addMilestone);
+			}
+			if (dia.normal.dialogue.addItem == true && dia.normal.dialogue.itemId > 0)
+			{
+				AddItem(dia.normal.dialogue.itemId, dia.normal.dialogue.itemNum);
 			}
 		}
 		else
@@ -435,9 +444,13 @@ public class DialogueManager : MonoBehaviour
 			if (choice > choices.Length / 2 && (choices[(int)choice] == false && choices[(int)choice - choices.Length / 2] == false))
 			{
 				StartConversation(dia.normal.dialogue);
-				if (dia.choice1.dialogue.normal.dialogue.addMilestone > 0)
+				if (dia.normal.dialogue.addMilestone > 0)
 				{
 					AddMilestone(dia.choice1.dialogue.normal.dialogue.addMilestone);
+				}
+				if (dia.normal.dialogue.addItem == true && dia.normal.dialogue.itemId > 0)
+				{
+					AddItem(dia.normal.dialogue.itemId, dia.normal.dialogue.itemNum);
 				}
 				Debug.Log((int)choice - choices.Length / 2);
 			}
@@ -445,6 +458,11 @@ public class DialogueManager : MonoBehaviour
 			else if (choice <= choices.Length / 2 && (choices[(int)choice] == false && choices[(int)choice + choices.Length / 2] == false))
 			{
 				StartConversation(dia.normal.dialogue);
+				if (dia.normal.dialogue.addItem == true && dia.normal.dialogue.itemId > 0)
+				{
+					AddItem(dia.normal.dialogue.itemId, dia.normal.dialogue.itemNum);
+				}
+
 				Debug.Log((int)choice + choices.Length / 2);
 			}
 			// init dialogue 1
@@ -452,7 +470,11 @@ public class DialogueManager : MonoBehaviour
 			{
 				dia.choiceCare1.dialogue.hasPlayed = true;
 				StartConversation(dia.choiceCare1.dialogue);
-				if(dia.choice1.dialogue.addMilestone > 0)
+				if (dia.choiceCare1.dialogue != null && dia.choiceCare1.dialogue.addItem == true && dia.choiceCare1.dialogue.itemId > 0)
+				{
+					AddItem(dia.choiceCare1.dialogue.itemId, dia.choiceCare1.dialogue.itemNum);
+				}
+				if (dia.choice1.dialogue.addMilestone > 0)
 				{
 					AddMilestone(dia.choice1.dialogue.addMilestone);
 				}
@@ -469,6 +491,10 @@ public class DialogueManager : MonoBehaviour
 	public void PlayNormalDialogue(Dialogue d)
 	{
 		StartConversation(d.normal.dialogue);
+		if ( d.normal != null && d.normal.dialogue.addItem == true && d.normal.dialogue.itemId > 0)
+		{
+			AddItem(d.normal.dialogue.itemId, d.normal.dialogue.itemNum);
+		}
 	}
 	// check our keyboard pressed and do things accordingly
 	public void CheckInput()
@@ -543,5 +569,9 @@ public class DialogueManager : MonoBehaviour
 	public void AddMilestone(int i)
 	{
 		QuestManager.AddMilestone(i);
+	}
+	public void AddItem(int id, int num)
+	{
+			MainInventory.invInstance.AddItem(id, num);
 	}
 }

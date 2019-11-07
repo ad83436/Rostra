@@ -60,7 +60,6 @@ public class PlayerMove : MonoBehaviour
 	{
 		if (col.CompareTag("NPC"))
 		{
-            Debug.Log("CONVERSING CAN DO");
 			ct = col.GetComponent<ConversationTrigger>();
 			if (ct.pressZ != null)
 			{
