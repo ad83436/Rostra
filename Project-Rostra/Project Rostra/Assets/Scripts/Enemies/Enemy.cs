@@ -1157,7 +1157,7 @@ public class Enemy : MonoBehaviour
                      print("Removed" + battleManager.players[i].name);
                  }
 
-                 if (playerStatNeeded[i] == statsRefForCheck)
+                else if (playerStatNeeded[i] == statsRefForCheck)
                  {
                     playerStatNeeded.Remove(playerStatNeeded.Count - 1);
                  }
