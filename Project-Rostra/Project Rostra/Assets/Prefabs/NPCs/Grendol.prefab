@@ -358,6 +358,7 @@ MonoBehaviour:
   isChoiceDepend: 1
   pressZ: {fileID: 1354388581}
   directTriggerText: 0
+  oneShot: 0
 --- !u!114 &6941273051793765718
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -402,6 +403,7 @@ MonoBehaviour:
   isChoiceDepend: 0
   pressZ: {fileID: 0}
   directTriggerText: 0
+  oneShot: 0
 --- !u!114 &6941273051793765719
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -427,6 +429,9 @@ MonoBehaviour:
     - Grendol
     - Fargas
     - Grendol
+    - Grendol
+    - Fargas
+    - Grendol
     - 
     sentences:
     - I've heard you know something about Domel is this correct?
@@ -446,6 +451,16 @@ MonoBehaviour:
     - We all want to do every thing we can to help him. Do you know where we can look?
     - 'This is where we will end it off to avoid spoilers. Go to the door of the tavern
       to continue the demo. '
+    - 'I am afraid I can only point you toward where he was last seen. His home. He
+      lives on the outskirts of town. Take this with you. It''s a guide to the monsters
+      around the area. '
+    - Thank you we appreciate it.
+    - 'Please bring back Domel to us. He''s been the only one willing to sit down
+      and talk to us. '
+    - Unlike the other Dwarves who in their arrogance fail to make compromises so
+      we can both prosper. We would like to have our ally back so talk of peace may
+      resume.
+    - Grendol gives you a small book.
     portrait:
     - {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825, type: 3}
     - {fileID: 21300000, guid: 3744c0c20009b844a9cef7bca3baa96b, type: 3}
@@ -455,6 +470,9 @@ MonoBehaviour:
     - {fileID: 21300000, guid: f40486206916ccc4a9bf37f57f448dee, type: 3}
     - {fileID: 21300000, guid: 3744c0c20009b844a9cef7bca3baa96b, type: 3}
     - {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825, type: 3}
+    - {fileID: 21300000, guid: 3744c0c20009b844a9cef7bca3baa96b, type: 3}
+    - {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825, type: 3}
+    - {fileID: 21300000, guid: 3744c0c20009b844a9cef7bca3baa96b, type: 3}
     - {fileID: 21300000, guid: 3744c0c20009b844a9cef7bca3baa96b, type: 3}
     - {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825, type: 3}
     - {fileID: 21300000, guid: 3744c0c20009b844a9cef7bca3baa96b, type: 3}
@@ -472,7 +490,10 @@ MonoBehaviour:
     - 11
     - 12
     - 12
-    typingSpeed: 0
+    - 13
+    - 14
+    - 16
+    typingSpeed: 0.01
     isChoice: 0
     choiceLine: 0
     choice1: {fileID: 0}
@@ -495,6 +516,7 @@ MonoBehaviour:
   isChoiceDepend: 0
   pressZ: {fileID: 0}
   directTriggerText: 0
+  oneShot: 0
 --- !u!114 &6941273051793765704
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -541,6 +563,7 @@ MonoBehaviour:
   isChoiceDepend: 0
   pressZ: {fileID: 0}
   directTriggerText: 0
+  oneShot: 0
 --- !u!114 &189502064
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -557,10 +580,9 @@ MonoBehaviour:
     names:
     - 
     sentences:
-    - 'This is where we will end it off to avoid spoilers. Go to the door of the tavern
-      to continue the demo. '
+    - I'm afraid I've given all the help I can.
     portrait:
-    - {fileID: 21300000, guid: dd3d4b940a009d14dbfe8b78c3b4f6ca, type: 3}
+    - {fileID: 21300000, guid: 3744c0c20009b844a9cef7bca3baa96b, type: 3}
     povChange: []
     typingSpeed: 0
     isChoice: 0
@@ -585,3 +607,4 @@ MonoBehaviour:
   isChoiceDepend: 0
   pressZ: {fileID: 0}
   directTriggerText: 0
+  oneShot: 0

@@ -359,6 +359,7 @@ MonoBehaviour:
   isChoiceDepend: 1
   pressZ: {fileID: 2067512502}
   directTriggerText: 0
+  oneShot: 0
 --- !u!114 &1257990562384444598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -385,6 +386,10 @@ MonoBehaviour:
     - Fargas
     - Torven
     - Fargas
+    - Torven
+    - Fargas
+    - Torven
+    - Fargas
     - 
     sentences:
     - I was told you knew Domel. Is that right?
@@ -405,8 +410,14 @@ MonoBehaviour:
     - I don't want another of my kin to go missing. Besides, It's clear the Alchemy
       Guild assissinated him so they could sow discord and wipe us out.
     - We've all accepted the risks of going. Do you have any more information?
-    - 'This is where we will end it off to avoid spoilers. Go to the door of the tavern
-      to continue the demo. '
+    - No we only know he was last seen by his home. On one of our searches we found
+      this key. It's more use to you than it is to us anyways.
+    - Thank you so much. I appreciate your help
+    - 'If somehow you manage to make ti through the monsters. Please bring him back.
+      He''s our brother we want him back. He bargained with the Guild to try and make
+      our lives better. '
+    - We'll find him. I promise.
+    - Torven gives you a small key
     portrait:
     - {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825, type: 3}
     - {fileID: 21300000, guid: bc67c4137ad9fc246937d8bfa972edf7, type: 3}
@@ -414,6 +425,10 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 1f1660c1b92d23a4fb0b75fcca80183d, type: 3}
     - {fileID: 21300000, guid: e24a4049526ca704eb781c65db5c188d, type: 3}
     - {fileID: 21300000, guid: f40486206916ccc4a9bf37f57f448dee, type: 3}
+    - {fileID: 21300000, guid: bc67c4137ad9fc246937d8bfa972edf7, type: 3}
+    - {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825, type: 3}
+    - {fileID: 21300000, guid: bc67c4137ad9fc246937d8bfa972edf7, type: 3}
+    - {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825, type: 3}
     - {fileID: 21300000, guid: bc67c4137ad9fc246937d8bfa972edf7, type: 3}
     - {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825, type: 3}
     - {fileID: 21300000, guid: bc67c4137ad9fc246937d8bfa972edf7, type: 3}
@@ -434,7 +449,11 @@ MonoBehaviour:
     - 10
     - 13
     - 14
-    - 0
+    - 15
+    - 16
+    - 17
+    - 18
+    - 18
     typingSpeed: 0
     isChoice: 0
     choiceLine: 0
@@ -458,6 +477,7 @@ MonoBehaviour:
   isChoiceDepend: 0
   pressZ: {fileID: 0}
   directTriggerText: 0
+  oneShot: 0
 --- !u!114 &1257990562384444601
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -503,6 +523,7 @@ MonoBehaviour:
   isChoiceDepend: 0
   pressZ: {fileID: 0}
   directTriggerText: 0
+  oneShot: 0
 --- !u!114 &1257990562384444600
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -547,6 +568,7 @@ MonoBehaviour:
   isChoiceDepend: 0
   pressZ: {fileID: 0}
   directTriggerText: 0
+  oneShot: 0
 --- !u!114 &600204649
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -561,12 +583,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogue:
     names:
-    - 
+    - Torven
     sentences:
-    - 'This is where we will end it off to avoid spoilers. Go to the door of the tavern
-      to continue the demo. '
+    - 'What? I''ve helped you all I can. Leave me alone. '
     portrait:
-    - {fileID: 21300000, guid: dd3d4b940a009d14dbfe8b78c3b4f6ca, type: 3}
+    - {fileID: 21300000, guid: bc67c4137ad9fc246937d8bfa972edf7, type: 3}
     povChange: []
     typingSpeed: 0
     isChoice: 0
@@ -591,3 +612,4 @@ MonoBehaviour:
   isChoiceDepend: 0
   pressZ: {fileID: 0}
   directTriggerText: 0
+  oneShot: 0
