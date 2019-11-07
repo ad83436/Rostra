@@ -1281,7 +1281,7 @@ MonoBehaviour:
   - {fileID: 1610847239}
   - {fileID: 1625626003}
   - {fileID: 384126077}
-  - {fileID: 0}
+  - {fileID: 230563281654219761}
   controlsPanel: {fileID: 1233819155}
   rageModeIndicator1: {fileID: 1708998161}
   rageModeIndicator2: {fileID: 539861245}
@@ -2588,6 +2588,12 @@ GameObject:
 --- !u!1 &230563281654219760 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 230563281407309464, guid: 9f72b6d54aeb3c844871b64d15a60701,
+    type: 3}
+  m_PrefabInstance: {fileID: 230563281654219755}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &230563281654219761 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 230563281883375526, guid: 9f72b6d54aeb3c844871b64d15a60701,
     type: 3}
   m_PrefabInstance: {fileID: 230563281654219755}
   m_PrefabAsset: {fileID: 0}
