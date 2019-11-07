@@ -854,6 +854,8 @@ MonoBehaviour:
   healthObject: {fileID: 0}
   chain: {fileID: 0}
   blowSelfObject: {fileID: 0}
+  currentStatusAilment: 0
+  chainedSymbol: {fileID: 0}
 --- !u!1 &667189818
 GameObject:
   m_ObjectHideFlags: 0
@@ -989,6 +991,8 @@ MonoBehaviour:
   healthObject: {fileID: 0}
   chain: {fileID: 0}
   blowSelfObject: {fileID: 0}
+  currentStatusAilment: 0
+  chainedSymbol: {fileID: 0}
 --- !u!1 &934564987
 GameObject:
   m_ObjectHideFlags: 0
@@ -1200,6 +1204,8 @@ MonoBehaviour:
   healthObject: {fileID: 0}
   chain: {fileID: 0}
   blowSelfObject: {fileID: 0}
+  currentStatusAilment: 0
+  chainedSymbol: {fileID: 0}
 --- !u!1 &1313233601
 GameObject:
   m_ObjectHideFlags: 0
@@ -1711,7 +1717,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2794915159868658332}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!1001 &3066886499593805204
 PrefabInstance:
   m_ObjectHideFlags: 0
