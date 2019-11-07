@@ -442,7 +442,7 @@ public class MainInventory : MonoBehaviour {
 				description = "A small key given to you by Torven";
 				break;
 			case (int)ITEM_ID.BOOK:
-				description = "One page sticks out to you. There is ink covering up most of the page but you can make out a few words. A mother who witnessed ... will turn into a Farya upon her death. A Farya usually wears a long white dress and has glowing red eyes... Some say that Farya can talk however this has yet to be proven.";
+				description = "One page sticks out to you. There is ink covering up most of the page but you can make out a few words. A mother who witnessed ... will turn into a Farya upon her death. A Farya usually wears a long white dress and has glowing blue eyes... Some say that Farya can talk however this has yet to be proven.";
 				break;
         }
 

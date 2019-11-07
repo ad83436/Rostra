@@ -14,6 +14,8 @@ public enum ChoiceEnum
 	tell =  4,
 	lie =   5,
 	demo =  6,
+	talkToCo = 7,
+	metAllChars = 8,
 }
 
 
@@ -65,6 +67,8 @@ public class DialogueManager : MonoBehaviour
 	public bool tell;
 	public bool lie;
 	//set 3 ^
+	public bool talkedToCo; // 7
+	public bool metAllChars; // 8 
 	// stores a local copy of which choice set we will be using
 	private float choiceSet;
 	public bool[] choices;
@@ -239,6 +243,9 @@ public class DialogueManager : MonoBehaviour
 					case 6:
 						DialogueManager.instance.demo = true;
 						Debug.Log("We can leave the tavern");
+						break;
+					case 7:
+						DialogueManager.instance.talkedToCo = true;
 						break;
 
 				}
