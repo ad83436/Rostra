@@ -29,9 +29,12 @@ public class BattleManagerAlternative : BattleManager {
 
 	public override void NextOnQueue() {
 		base.NextOnQueue();
+
 	}
 
 	public override void StartBattle() {
+		// start tutorial
+		BatTutorial.Singleton.ResetTutorial();
 		base.StartBattle();
 	}
 
@@ -49,6 +52,14 @@ public class BattleManagerAlternative : BattleManager {
 
 	protected override void Awake() {
 		base.Awake();
+	}
+
+	protected override void DOM_enemyTurn() {
+	}
+
+	protected override void DOM_playerTurn() {
+		// player turn next step in tutorial
+		BatTutorial.Singleton.NextEvent();
 	}
 
 	protected override void Start() {

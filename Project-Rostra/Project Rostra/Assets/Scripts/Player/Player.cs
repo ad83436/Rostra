@@ -532,7 +532,7 @@ public class Player : MonoBehaviour
         battleManager.players[playerIndex].currentHP = currentHP; //Update the BTL manager with the new health
         PartyStats.chara[playerIndex].hitpoints = currentHP; //Update the party stats
 
-        if (currentHP <= 0.0f)
+        if (currentHP < 1.0f) //Avoid near zero
         {
             currentHP = 0.0f;
             battleManager.players[playerIndex].currentHP = currentHP; //Update the BTL manager with the new health
@@ -1731,8 +1731,6 @@ public class Player : MonoBehaviour
 
     private void FindAnAliveEnemy()
     {
-        Debug.Log("Result === " + (Random.Range(0, uiBTL.numberOfEnemies - 1)).ToString());
-
         //Make sure the enemy you're trying to attack is alive
         for (int i = 0; i < uiBTL.enemiesDead.Length; i++)
         {

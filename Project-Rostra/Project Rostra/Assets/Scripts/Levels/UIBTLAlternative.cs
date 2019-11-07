@@ -13,6 +13,8 @@ public class UIBTLAlternative : UIBTL {
 
 	public override void EndTurn() {
 		base.EndTurn();
+		// close tutorial panel
+		BatTutorial.Singleton.Hide();
 	}
 
 	public override void EnemyIsDead(int enemyIndex) {

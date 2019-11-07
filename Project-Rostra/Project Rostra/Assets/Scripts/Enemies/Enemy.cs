@@ -79,6 +79,12 @@ public class Enemy : MonoBehaviour
     public GameObject chain;
     public GameObject blowSelfObject;
 
+    //Status ailments
+    //Chained
+    private int chainedWaitTime = 0; //Keep track of when chained is reverted
+    public EnemyStatusAilment statusAilment = EnemyStatusAilment.none;
+    private Enemy[] chainedEnemy; //Stores the information for the chained enemies
+
 
 
     protected void Awake()
@@ -1265,6 +1271,43 @@ public class Enemy : MonoBehaviour
         animator.SetBool("Hit", true);
 
         if (currentHP <= 0.0f)
+        {
+            animator.SetBool("Death", true);
+        }
+        else
+        {
+            if (numberOfAttacks <= 0)
+            {
+                uiBTL.EndTurn(); //Only end the turn after the damage has been taken
+            }
+        }
+    }
+
+    public virtual void TakeDamage(float playerAttack, int numberOfAttacks, int debuffIndex, float debuffPercent, int debuffTimer, string statToDebuff,  EnemyStatusAilment ailment )
+    {
+        if (playerAttack > 0.0f) //Don't need to calcualte damage if the incoming attack is debuff only
+        {
+            Debug.Log("Received player attack: " + playerAttack);
+            float damage = playerAttack - ((eDefence / (20.0f + eDefence)) * playerAttack);
+            currentHP -= damage;
+            damageText.gameObject.SetActive(true);
+            damageText.text = Mathf.RoundToInt(damage).ToString();
+            battleManager.enemies[enemyIndexInBattleManager].currentHP = currentHP; //Update the BTL manager with the new health
+            HP.fillAmount = currentHP / maxHP;
+        }
+
+        switch(debuffIndex)
+        {
+            case 0: // Ailment
+                
+                break;
+            case 1: //Debuff
+                break;
+        }
+
+        animator.SetBool("Hit", true);
+
+        if (currentHP < 1.0f) //Avoid near zero
         {
             animator.SetBool("Death", true);
         }

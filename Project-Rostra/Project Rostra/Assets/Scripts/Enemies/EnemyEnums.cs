@@ -14,6 +14,13 @@ public enum EnemyState
     skilling,// used for skills that last more than one turn
 };
 
+public enum EnemyStatusAilment
+{
+    none,
+    chained, //Connects an enemy with two other enemies, whenever one of these three is damaged, they all get damaged
+    rallied, // This enemy starts taking double damage. Can be comboed with Chained
+}
+
 public enum EnemyAttackType
 {
     Dumb,

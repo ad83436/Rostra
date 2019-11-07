@@ -100,7 +100,7 @@ public class Fade : MonoBehaviour
                 {
                     Debug.Log("Transition is now falseee");
                     transitionToWorldMap = false;
-                    SceneManager.UnloadSceneAsync(SceneManager.GetSceneByName("Queue Scene"));
+                    SceneManager.UnloadSceneAsync(SceneManager.GetSceneByName(enemyHolder.tutorial ? "Queue Scene 2" : "Queue Scene"));
                     audioManager.PlayThisClip("WorldMapMusic1");
                 }
                 else if (transitionToEndTest)
