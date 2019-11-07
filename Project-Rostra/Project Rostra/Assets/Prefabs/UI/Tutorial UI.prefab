@@ -35,8 +35,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -451.4, y: -92}
-  m_SizeDelta: {x: -991.2, y: -860.5}
+  m_AnchoredPosition: {x: -489, y: 441.13}
+  m_SizeDelta: {x: -991.2, y: -896.37}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5445676352126121264
 CanvasRenderer:
@@ -124,7 +124,7 @@ Canvas:
   m_GameObject: {fileID: 4703368901179186946}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -173,13 +173,24 @@ MonoBehaviour:
   text_battle: {fileID: 1789625877485259151}
   panel_battle: {fileID: 2962448739601842906}
   events:
-  - Press <b>Attack</b> and select an enemy to do a normal attack
-  - Press <b>skills</b>, select a skill, then select a target. Skills have a set wait
-    time and mp usage. The wait time determines how many turns you must wait until
-    the skill activates.
-  - Press <b>Gaurd</b>
-  - <b></b>
-  - <b></b>
+  - Press <color=#ffff00ff><b>Attack</b></color> and select an enemy to do a normal
+    attack.
+  - Press <color=#ffff00ff><b>skills</b></color>, select a skill, then select a target.
+    Skills have a set wait time and mp usage. The wait time determines how many turns
+    you must wait until the skill activates.
+  - Press <color=#ffff00ff><b>Gaurd</b></color> to reduce damage taken for one turn.
+  - 'Press <color=#ffff00ff><b>Items</b></color> to open your inventory and use a
+    consumeable. '
+  - At the top is a <color=#ffff00ff><b>Queue</b></color>. This displays the order
+    in which the characters and enemies will fight in. The order is determined by
+    the speed of each character.
+  - Every player has a <color=#65CE45><b>Health</b></color> bar, <color=#4593CE><b>Mana</b></color>
+    bar, and a <color=#ffff00ff><b>Rage</b></color> bar above thier heads. The Rage
+    bar fills as the health bar drops and the rage bar drops as the health bar fills.
+  - Once the <color=#ffff00ff><b>Rage</b></color> bar has filled, you will be givin
+    the option to enter rage mode which doubles but halfs the health. And many skills
+    become unusable and some get a different effect.
+  - Continue fighting until all enemies are dead to win the battle.
 --- !u!1 &6178076681609151407
 GameObject:
   m_ObjectHideFlags: 0

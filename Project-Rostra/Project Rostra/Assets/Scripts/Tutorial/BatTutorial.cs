@@ -15,7 +15,7 @@ public class BatTutorial : MonoBehaviour {
 
 	// list of events
 	[SerializeField]
-	[TextArea]
+	[Multiline]
 	private List<string> events;
 	// current event
 	private int curevent;
