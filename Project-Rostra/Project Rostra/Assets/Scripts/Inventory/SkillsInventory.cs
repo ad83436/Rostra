@@ -36,8 +36,8 @@ public class SkillsInventory : MonoBehaviour {
         EquipSkill((int)SKILLS.Fa_Rally, 0, 0);
         AddToUnlockedSkills((int)SKILLS.Fa_SwordOfFury, 0);
         EquipSkill((int)SKILLS.Fa_SwordOfFury, 1, 0);
-        AddToUnlockedSkills((int)SKILLS.Fa_WarCry, 0);
-        EquipSkill((int)SKILLS.Fa_WarCry, 2, 0);
+        AddToUnlockedSkills((int)SKILLS.Fa_BladeOfTheFallen, 0);
+        EquipSkill((int)SKILLS.Fa_BladeOfTheFallen, 2, 0);
         AddToUnlockedSkills((int)SKILLS.Fa_Sunguard, 0);
         EquipSkill((int)SKILLS.Fa_Sunguard, 3, 0);
 
@@ -281,7 +281,7 @@ public class SkillsInventory : MonoBehaviour {
                 return "The Sunguard Elite";
             case (int)SKILLS.Fa_Rally:
                 return "Rally";
-            case (int)SKILLS.Fa_BaldeOfTheFallen:
+            case (int)SKILLS.Fa_BladeOfTheFallen:
                 return "Balde Of The Fallen";
             case (int)SKILLS.Fr_DoubleShot:
                 return "Double Shot";
@@ -334,41 +334,41 @@ public class SkillsInventory : MonoBehaviour {
             case (int)SKILLS.TEST_Arcelus:
                 return "Heal skill 1 \n\ntargets players";
             case (int)SKILLS.Fa_SwiftStrike:
-                return "Inflict a flurry of strikes on a row of enemies";
+                return "Inflict a flurry of strikes on a row of enemies.";
             case (int)SKILLS.Fa_SwordOfFury:
-                return "Inflict a great deal of damage to one enemy";
+                return "Inflict a great deal of damage to one enemy.";
             case (int)SKILLS.Fa_WarCry:
-                return "Increase the attack of all allies for three turns ";
+                return "Increase the attack of all allies for three turns. ";
             case (int)SKILLS.Fa_Sunguard:
-                return "The Sun shines brightly on all. Chain three enemies together so they all share the damage taken";
+                return "The Sun shines brightly on all. Chain three enemies together so they all share the damage taken.";
             case (int)SKILLS.Fa_Rally:
                 return "Fargas marks one enemy. For three turns, this enemy sustains double damage. Only one enemy can be rallied against at a time.";
-            case (int)SKILLS.Fa_BaldeOfTheFallen:
-                return "Until they're dead, no one can rest. Fargas damages all enemies twice in a flurry of blows";
+            case (int)SKILLS.Fa_BladeOfTheFallen:
+                return "Never forget the fallen. Fargas damages all enemies. Damage is increased by the attack points of every dead enemy.";
             case (int)SKILLS.Fr_DoubleShot:
-                return "Frea shoots two arrows in succession at one enemy";
+                return "Frea shoots two arrows in succession at one enemy.";
             case (int)SKILLS.Fr_PiercingShot:
-                return "A single strong shot aimed at one enemy";
+                return "A single strong shot aimed at one enemy.";
             case (int)SKILLS.Fr_ArrowRain:
-                return "Frea shoots a rain of arrows that damages all enemies";
+                return "Frea shoots a rain of arrows that damages all enemies.";
             case (int)SKILLS.Fr_IDontMiss:
                 return "Frea takes a deep breath and concentrates. Increases base Strength by 10 for three turns. ";
             case (int)SKILLS.Fr_PhantomShot:
-                return "No one can see it coming. Damages a row of enemies and decreases their attack for three turns";
+                return "No one can see it coming. Damages a row of enemies and decreases their attack for three turns.";
             case (int)SKILLS.Fr_NeverAgain:
-                return "Frea channels all her anger into a single devastating shot that pierces through all enemies";
+                return "Frea channels all her anger into a single devastating shot that pierces through all enemies.";
             case (int)SKILLS.Ob_ShieldAlly:
-                return "Increase the defense of one ally for three turns";
+                return "Increase the defense of one ally for three turns.";
             case (int)SKILLS.Ob_ShieldAllAllies:
-                return "Increase the defense of all allies for three turns";
+                return "Increase the defense of all allies for three turns.";
             case (int)SKILLS.Ar_Heal:
-                return "Restores a portion of a single alive ally’s HP";
+                return "Restores a portion of a single alive ally’s HP.";
             case (int)SKILLS.Ar_HealingAura:
-                return "Restore a portion of all alive allies' HP";
+                return "Restore a portion of all alive allies' HP.";
             case (int)SKILLS.Ar_DrainEye:
-                return "Ally affected by Drain Eye gains health every time they deal damage. Lasts for 3 turns";
+                return "Ally affected by Drain Eye gains health every time they deal damage. Lasts for 3 turns.";
             case (int)SKILLS.Ar_LullabyOfHope:
-                return "Arcelus never gives up on a patient. Revives one ally with half of their HP";
+                return "Arcelus never gives up on a patient. Revives one ally with half of their HP.";
             case (int)SKILLS.Ar_ManaCharge:
                 return "Restores a portion of one ally’s MP.";
             case (int)SKILLS.Ar_Armageddon:
@@ -458,8 +458,8 @@ public class SkillsInventory : MonoBehaviour {
                 skillStat[4] = (float)SKILL_TYPE.SINGLE_TARGET_DEBUFF;
                 skillStat[5] = 50;
                 break;
-            case (int)SKILLS.Fa_BaldeOfTheFallen:
-                skillStat[0] = 70;
+            case (int)SKILLS.Fa_BladeOfTheFallen:
+                skillStat[0] = 40;
                 skillStat[1] = 18;
                 skillStat[2] = 3;
                 skillStat[4] = (float)SKILL_TYPE.ALL_TARGETS_ATK;

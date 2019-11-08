@@ -137,6 +137,8 @@ public class Player : MonoBehaviour
     private Color debuffColor;
     //Rally
     public GameObject rallySymbolFargasOnly;
+    //BladesOfTheFallen
+    private float totalBoFAtkToBeAdded = 0; //Used to calculate the atk points of the dead enemies which will be added to BoF
 
 
     //UI
@@ -911,6 +913,13 @@ public class Player : MonoBehaviour
                 skillTextValue = "Burn!";
                 skillWaitingIndex = 4; //Armageddon is 4
                 break;
+            case (int)SKILLS.Fa_BladeOfTheFallen:
+                skillObjectForObjPooler = "";
+                skillNameForObjPooler = "BoFImpact";
+                skillAnimatorName = "ASkill";
+                skillTextValue = "Give Me Strength!";
+                skillWaitingIndex = 5; //BoF is 5
+                break;
         }
 
         if (waitTime <= 0)
@@ -1173,6 +1182,19 @@ public class Player : MonoBehaviour
         else if (skillTarget == 2) //All enemies attack
         {
             uiBTL.UpdateNumberOfEndTurnsNeededToEndTurn(2);
+
+            if(chosenSkill == (int)SKILLS.Fa_BladeOfTheFallen) //Check for BoF
+            {
+                for (int i = 0; i<uiBTL.enemiesDead.Length;i++)
+                {
+                    if(uiBTL.enemiesDead[i] == true && uiBTL.enemies[i] != null)
+                    {
+                        totalBoFAtkToBeAdded += uiBTL.enemies[i].eAttack; //Add dead enemy attack points to attack passed on
+                    }
+                }
+                Debug.Log("BoF attack to be added is: " + totalBoFAtkToBeAdded);
+            }
+
             for (int i = 0; i < battleManager.enemies.Length; i++)
             {
                 if (battleManager.enemies[i].enemyReference != null)
@@ -1193,19 +1215,19 @@ public class Player : MonoBehaviour
                             if (CalculateCrit() <= crit)
                             {
                                 Debug.Log("Skill Crit");
-                                battleManager.enemies[i].enemyReference.TakeDamage(0.7f * actualATK + skills.SkillStats(chosenSkill)[0], numberOfAttacks); //Damage is half the player's attack stat and the skill's attack stat
-                                if (drainEye) //Check if Drain Eye is active
-                                {
-                                    Heal(0.01f * (drainEyeModifier * (0.7f * actualATK + skills.SkillStats(chosenSkill)[0])));
-                                }
+                                    battleManager.enemies[i].enemyReference.TakeDamage(0.7f * actualATK + skills.SkillStats(chosenSkill)[0] + totalBoFAtkToBeAdded, numberOfAttacks); //Damage is half the player's attack stat and the skill's attack stat
+                                    if (drainEye) //Check if Drain Eye is active
+                                    {
+                                        Heal(0.01f * (drainEyeModifier * (0.7f * actualATK + skills.SkillStats(chosenSkill)[0] + totalBoFAtkToBeAdded)));
+                                    }
                             }
                             else
                             {
                                 Debug.Log("No Skill Crit");
-                                battleManager.enemies[i].enemyReference.TakeDamage(0.5f * actualATK + skills.SkillStats(chosenSkill)[0], numberOfAttacks); //Damage is the half the player's attack stat and the skill's attack stat
+                                battleManager.enemies[i].enemyReference.TakeDamage(0.5f * actualATK + skills.SkillStats(chosenSkill)[0] + totalBoFAtkToBeAdded, numberOfAttacks); //Damage is the half the player's attack stat and the skill's attack stat
                                 if (drainEye) //Check if Drain Eye is active
                                 {
-                                    Heal(0.01f * (drainEyeModifier * (0.7f * actualATK + skills.SkillStats(chosenSkill)[0])));
+                                    Heal(0.01f * (drainEyeModifier * (0.7f * actualATK + skills.SkillStats(chosenSkill)[0] + totalBoFAtkToBeAdded)));
                                 }
                             }
                         }
@@ -1303,6 +1325,7 @@ public class Player : MonoBehaviour
             }
         }
         //Claculate the new MP and reset the player's state
+        totalBoFAtkToBeAdded = 0;
         chosenSkill = (int)SKILLS.NO_SKILL;
         currentMP -= mpCost;
         mpImage.fillAmount = currentMP / maxMP;

@@ -114,3 +114,7 @@ MonoBehaviour:
     prefab: {fileID: 6043137226506361820, guid: 6cb9b67d84dbf3f46aca1e4bc2a2ce27,
       type: 3}
     poolSize: 1
+  - tag: BoFImpact
+    prefab: {fileID: 6040812169596290666, guid: 35511598506807d4ca792358dbfacffb,
+      type: 3}
+    poolSize: 5

@@ -19,7 +19,7 @@ public enum SKILLS { // Minimum Value -- 0x0000, Maximum Value -- 0xFFEF (65519 
     Fa_WarCry =             0x000B,
     Fa_Sunguard =           0x000C,
     Fa_Rally =              0x000D,
-    Fa_BaldeOfTheFallen =   0x000E,
+    Fa_BladeOfTheFallen =   0x000E,
     Fr_PiercingShot =       0x000F,
     Fr_ArrowRain =          0x0010,
     Fr_DoubleShot =         0x0011,
