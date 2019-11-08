@@ -15,7 +15,6 @@ public class Actor : MonoBehaviour
 
     public void MoveActor(Vector3 nLoc)
     {
-        Debug.Log(name + "  Moveedd");
         newLocation = nLoc;
 
         if (!fadeIn)
@@ -29,7 +28,6 @@ public class Actor : MonoBehaviour
         }
         else
         {
-            Debug.Log(name + "FALLSEEE");
             //Fade out the actor, actor will move usin an animation event at the end
             actorAnimator.SetBool("FadeIn", false);
             fadeIn = false;

@@ -77,7 +77,6 @@ public class PlayerMove : MonoBehaviour
 				ct.SetPressZ(false);
 			}
 			ct = null;
-			Debug.Log(col.GetComponent<ConversationTrigger>());
 			
 		}
 	}

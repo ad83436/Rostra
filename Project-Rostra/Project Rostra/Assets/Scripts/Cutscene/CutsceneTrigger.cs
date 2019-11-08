@@ -37,6 +37,7 @@ public class CutsceneTrigger : MonoBehaviour
 		}
 		if (col.CompareTag("Player") && hasActivated == false && DialogueManager.instance.GetChoice(ce) == true && isChoiceDependant == true)
 		{
+			Debug.Log("We are in a choice dependant cutscene");
 			fade.TransitionIntoACutscene(this);
 			DialogueManager.instance.canWalk = false;
 			col.gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);

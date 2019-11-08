@@ -238,14 +238,18 @@ public class DialogueManager : MonoBehaviour
 			isActive = true;
 			if (d.triggerBool > 0)
 			{
+				Debug.Log(d.triggerBool);
 				switch (d.triggerBool)
 				{
 					case 6:
-						DialogueManager.instance.demo = true;
+						demo = true;
+						SetChoice(ChoiceEnum.demo, true);
 						Debug.Log("We can leave the tavern");
 						break;
 					case 7:
-						DialogueManager.instance.talkedToCo = true;
+						talkedToCo = true;
+						SetChoice(ChoiceEnum.talkToCo, true);
+						Debug.Log("We talked to the commander!");
 						break;
 
 				}
@@ -297,7 +301,6 @@ public class DialogueManager : MonoBehaviour
 	// go home you done
 	public void End()
 	{
-		Debug.Log("End");
 		charName.text = "";
 		text.text = "";
 		portrait.sprite = null;
@@ -330,7 +333,6 @@ public class DialogueManager : MonoBehaviour
 	// this is a coroutine that will take our chars from the string and print one at a time 
 	IEnumerator TypeLetters(string s)
 	{
-        Debug.Log("TYPING LETTERS TYPING");
 		text.text = "";
 		continueCountTotal = 0;
 		continueCountTotal = s.ToCharArray().Length;
