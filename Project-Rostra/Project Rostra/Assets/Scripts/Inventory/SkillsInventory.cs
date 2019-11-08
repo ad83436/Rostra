@@ -32,8 +32,8 @@ public class SkillsInventory : MonoBehaviour {
             Destroy(gameObject);
         }
 
-        AddToUnlockedSkills((int)SKILLS.Fa_SwiftStrike, 0);
-        EquipSkill((int)SKILLS.Fa_SwiftStrike, 0, 0);
+        AddToUnlockedSkills((int)SKILLS.Fa_Rally, 0);
+        EquipSkill((int)SKILLS.Fa_Rally, 0, 0);
         AddToUnlockedSkills((int)SKILLS.Fa_SwordOfFury, 0);
         EquipSkill((int)SKILLS.Fa_SwordOfFury, 1, 0);
         AddToUnlockedSkills((int)SKILLS.Fa_WarCry, 0);
@@ -342,7 +342,7 @@ public class SkillsInventory : MonoBehaviour {
             case (int)SKILLS.Fa_Sunguard:
                 return "The Sun shines brightly on all. Chain three enemies together so they all share the damage taken";
             case (int)SKILLS.Fa_Rally:
-                return "Fargas marks one enemy. For three turns, this enemy sustains double damage.";
+                return "Fargas marks one enemy. For three turns, this enemy sustains double damage. Only one enemy can be rallied against at a time.";
             case (int)SKILLS.Fa_BaldeOfTheFallen:
                 return "Until they're dead, no one can rest. Fargas damages all enemies twice in a flurry of blows";
             case (int)SKILLS.Fr_DoubleShot:
@@ -452,7 +452,7 @@ public class SkillsInventory : MonoBehaviour {
                 skillStat[5] = 60;
                 break;
             case (int)SKILLS.Fa_Rally:
-                skillStat[0] = 10;
+                skillStat[0] = 0;
                 skillStat[1] = 100;
                 skillStat[2] = 0;
                 skillStat[4] = (float)SKILL_TYPE.SINGLE_TARGET_DEBUFF;
