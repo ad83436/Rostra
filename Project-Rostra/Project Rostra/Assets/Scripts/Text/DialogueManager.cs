@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 
-public enum ChoiceEnum
+public enum ChoiceEnum : byte
 {
 	dwarf = 0,
 	guild = 1,
@@ -134,7 +134,7 @@ public class DialogueManager : MonoBehaviour
 		DontDestroyOnLoad(this.gameObject);
         // set everything to its default 
         textElements = new Queue<string>();
-		choices = new bool[7];
+		choices = new bool[10]; // was 7
 		change = 0;
 		currentChange = 0;
 		boxCount = 0;
@@ -272,7 +272,6 @@ public class DialogueManager : MonoBehaviour
 		{
 			change = -1;
 		}
-		Debug.Log(textElements.Count);
 		// if the count of our queue is zero go home
 		if (textElements.Count == 0)
 		{
