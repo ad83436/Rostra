@@ -374,9 +374,20 @@ public class Farea : Enemy
         uiBTL.EndTurn();
     }
 
+    //I know the below two functions are basically the same, I can't use recurisve calls with a return function cause it needs you to return something 
+    //Deadly ties chooser
     private void TieAPlayer()
     {
         tieThisPlayer = battleManager.players[Random.Range(0, 4)].playerReference;
+        if (tieThisPlayer.dead)
+        {
+            TieAPlayer(); //Make sure whatever player you choose is alive
+        }
+    }
+    //Lullaby of Despair chooser
+    private void ScareAPlayer()
+    {
+        attackThisPlayer = battleManager.players[Random.Range(0, 4)].playerReference;
         if (tieThisPlayer.dead)
         {
             TieAPlayer(); //Make sure whatever player you choose is alive
@@ -411,7 +422,7 @@ public class Farea : Enemy
                 //Update the UI
                 uiBTL.UpdateActivityText("Lullaby Of Despair");
                 //Choose a player at random
-                attackThisPlayer = battleManager.players[Random.Range(0, battleManager.players.Length)].playerReference;
+                ScareAPlayer();
 
                 //If the player has no ailments, then affect thme with fear
                 if (attackThisPlayer.currentAilment == Player.playerAilments.none) //Make sure you target 

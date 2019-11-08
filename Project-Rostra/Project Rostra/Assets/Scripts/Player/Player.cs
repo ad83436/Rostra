@@ -135,6 +135,10 @@ public class Player : MonoBehaviour
     public GameObject strBuffArrowIndicator;
     private Quaternion arrowRotator;
     private Color debuffColor;
+    //Rally
+    public GameObject rallySymbolFargasOnly;
+    //BladesOfTheFallen
+    private float totalBoFAtkToBeAdded = 0; //Used to calculate the atk points of the dead enemies which will be added to BoF
 
 
     //UI
@@ -162,6 +166,7 @@ public class Player : MonoBehaviour
     //Targeted enemy info
     private Enemy attackingThisEnemy;
     private bool hit; //Hit or miss  
+    private Enemy ralliedAgainstThisEnemy = null; // Keep a reference of the enemy rallied against. Only one rallied enemy can exist at a time
 
     //Guarding
     private float actualDefBeforeGuard; //What if the player uses a def-increasing skill before making this character go to guard?
@@ -212,6 +217,10 @@ public class Player : MonoBehaviour
         agiBuffEffect.gameObject.SetActive(false);
         strBuffEffect.gameObject.SetActive(false);
         drainEyeBuffEffect.gameObject.SetActive(false);
+        if(rallySymbolFargasOnly)
+        {
+            rallySymbolFargasOnly.gameObject.SetActive(false);
+        }
         //MP Heal
 
         //Targeted enemy info
@@ -686,6 +695,7 @@ public class Player : MonoBehaviour
         playerAnimator.SetBool("Turn", false);
     }
 
+    #region Skills
     //---------------------------------------------------Skills---------------------------------------------------//
     public void UseSkillOnOnePlayer(int skillID, float manaCost, float waitTime, Player playerReference)
     {
@@ -844,6 +854,13 @@ public class Player : MonoBehaviour
                 skillAnimatorName = "ASkill";
                 skillWaitingIndex = 4; //Should there be waiting time, this index is used to know which waiting animation to go to
                 break;
+            case (int)SKILLS.Fa_Rally:
+                skillTextValue = "Rally to me!";
+                skillTarget = 0;
+                skillNameForObjPooler = "Rally";
+                skillAnimatorName = "Rally";
+                skillWaitingIndex = 0; //Should there be waiting time, this index is used to know which waiting animation to go to
+                break;
         }
 
         //Do we have to wait?
@@ -895,6 +912,13 @@ public class Player : MonoBehaviour
                 skillAnimatorName = "Heal";
                 skillTextValue = "Burn!";
                 skillWaitingIndex = 4; //Armageddon is 4
+                break;
+            case (int)SKILLS.Fa_BladeOfTheFallen:
+                skillObjectForObjPooler = "";
+                skillNameForObjPooler = "BoFImpact";
+                skillAnimatorName = "ASkill";
+                skillTextValue = "Give Me Strength!";
+                skillWaitingIndex = 5; //BoF is 5
                 break;
         }
 
@@ -980,11 +1004,14 @@ public class Player : MonoBehaviour
             CalculateHitForSkill();
             if (hit)
             {
-                objPooler.SpawnFromPool(skillNameForObjPooler, attackingThisEnemy.gameObject.transform.position, gameObject.transform.rotation);
+                if (chosenSkill != (int)SKILLS.Fa_Rally) //Rally has the object summoned on Fargas
+                {
+                    objPooler.SpawnFromPool(skillNameForObjPooler, attackingThisEnemy.gameObject.transform.position, gameObject.transform.rotation);
+                }
                 Debug.Log("Skill hit");
                 //Summon effect here
                 btlCam.CameraShake();
-                if (CalculateCrit() <= crit)
+                if (CalculateCrit() <= crit) //Critical
                 {
                     if (chosenSkill == (int)SKILLS.Fa_Sunguard) //Sunguard
                     {
@@ -995,9 +1022,19 @@ public class Player : MonoBehaviour
                             Heal(0.01f * (drainEyeModifier * (0.7f * actualATK + skills.SkillStats(chosenSkill)[0])));
                         }
                     }
+                    else if(chosenSkill == (int)SKILLS.Fa_Rally) // Rally
+                    {
+                        rallySymbolFargasOnly.gameObject.SetActive(true);
+                        if (ralliedAgainstThisEnemy != null) //Only one enemy can be rallied against a time
+                        {
+                            ralliedAgainstThisEnemy.NoLongerRallied();
+                        }
+                        attackingThisEnemy.TakeDamage(0.0f, numberOfAttacks, 0, 0.0f, 3, "", EnemyStatusAilment.rallied); //Damage is the half the player's attack stat and the skill's attack stat
+                        ralliedAgainstThisEnemy = attackingThisEnemy;
+                    }
                     else
                     {
-                        //Not sunguard
+                        //Not sunguard or Rally
                         Debug.Log("Skill Crit");
                         attackingThisEnemy.TakeDamage(0.7f * actualATK + skills.SkillStats(chosenSkill)[0], numberOfAttacks); //Damage is the half the player's attack stat and the skill's attack stat
                         if (drainEye) //Check if Drain Eye is active
@@ -1006,7 +1043,7 @@ public class Player : MonoBehaviour
                         }
                     }
                 }
-                else
+                else //Not Critical
                 {
                     if (chosenSkill == (int)SKILLS.Fa_Sunguard)
                     {
@@ -1015,6 +1052,16 @@ public class Player : MonoBehaviour
                         {
                             Heal(0.01f * (drainEyeModifier * (0.5f * actualATK + skills.SkillStats(chosenSkill)[0])));
                         }
+                    }
+                    else if (chosenSkill == (int)SKILLS.Fa_Rally) // Rally
+                    {
+                        rallySymbolFargasOnly.gameObject.SetActive(true);
+                        if (ralliedAgainstThisEnemy != null) //Only one enemy can be rallied against a time
+                        {
+                            ralliedAgainstThisEnemy.NoLongerRallied();
+                        }
+                        attackingThisEnemy.TakeDamage(0.0f, numberOfAttacks, 0, 0.0f, 3, "", EnemyStatusAilment.rallied); //Damage is the half the player's attack stat and the skill's attack stat
+                        ralliedAgainstThisEnemy = attackingThisEnemy;
                     }
                     else
                     {
@@ -1135,6 +1182,19 @@ public class Player : MonoBehaviour
         else if (skillTarget == 2) //All enemies attack
         {
             uiBTL.UpdateNumberOfEndTurnsNeededToEndTurn(2);
+
+            if(chosenSkill == (int)SKILLS.Fa_BladeOfTheFallen) //Check for BoF
+            {
+                for (int i = 0; i<uiBTL.enemiesDead.Length;i++)
+                {
+                    if(uiBTL.enemiesDead[i] == true && uiBTL.enemies[i] != null)
+                    {
+                        totalBoFAtkToBeAdded += uiBTL.enemies[i].eAttack; //Add dead enemy attack points to attack passed on
+                    }
+                }
+                Debug.Log("BoF attack to be added is: " + totalBoFAtkToBeAdded);
+            }
+
             for (int i = 0; i < battleManager.enemies.Length; i++)
             {
                 if (battleManager.enemies[i].enemyReference != null)
@@ -1155,19 +1215,19 @@ public class Player : MonoBehaviour
                             if (CalculateCrit() <= crit)
                             {
                                 Debug.Log("Skill Crit");
-                                battleManager.enemies[i].enemyReference.TakeDamage(0.7f * actualATK + skills.SkillStats(chosenSkill)[0], numberOfAttacks); //Damage is half the player's attack stat and the skill's attack stat
-                                if (drainEye) //Check if Drain Eye is active
-                                {
-                                    Heal(0.01f * (drainEyeModifier * (0.7f * actualATK + skills.SkillStats(chosenSkill)[0])));
-                                }
+                                    battleManager.enemies[i].enemyReference.TakeDamage(0.7f * actualATK + skills.SkillStats(chosenSkill)[0] + totalBoFAtkToBeAdded, numberOfAttacks); //Damage is half the player's attack stat and the skill's attack stat
+                                    if (drainEye) //Check if Drain Eye is active
+                                    {
+                                        Heal(0.01f * (drainEyeModifier * (0.7f * actualATK + skills.SkillStats(chosenSkill)[0] + totalBoFAtkToBeAdded)));
+                                    }
                             }
                             else
                             {
                                 Debug.Log("No Skill Crit");
-                                battleManager.enemies[i].enemyReference.TakeDamage(0.5f * actualATK + skills.SkillStats(chosenSkill)[0], numberOfAttacks); //Damage is the half the player's attack stat and the skill's attack stat
+                                battleManager.enemies[i].enemyReference.TakeDamage(0.5f * actualATK + skills.SkillStats(chosenSkill)[0] + totalBoFAtkToBeAdded, numberOfAttacks); //Damage is the half the player's attack stat and the skill's attack stat
                                 if (drainEye) //Check if Drain Eye is active
                                 {
-                                    Heal(0.01f * (drainEyeModifier * (0.7f * actualATK + skills.SkillStats(chosenSkill)[0])));
+                                    Heal(0.01f * (drainEyeModifier * (0.7f * actualATK + skills.SkillStats(chosenSkill)[0] + totalBoFAtkToBeAdded)));
                                 }
                             }
                         }
@@ -1265,6 +1325,7 @@ public class Player : MonoBehaviour
             }
         }
         //Claculate the new MP and reset the player's state
+        totalBoFAtkToBeAdded = 0;
         chosenSkill = (int)SKILLS.NO_SKILL;
         currentMP -= mpCost;
         mpImage.fillAmount = currentMP / maxMP;
@@ -1351,7 +1412,7 @@ public class Player : MonoBehaviour
         currentAilment = playerAilments.none;
         DisableAllBuffs();
     }
-
+    #endregion
     #region buffs and debuffs
 
     public void BuffStats(string statToBuff, float precentage, float lastsNumberOfTurns)

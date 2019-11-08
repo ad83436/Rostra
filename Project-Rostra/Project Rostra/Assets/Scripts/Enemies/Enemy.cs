@@ -83,13 +83,21 @@ public class Enemy : MonoBehaviour
     public GameObject blowSelfObject;
 
     //Status ailments
+    //An enemy can be affected by two ailments at max
+    public EnemyStatusAilment currentStatusAilment0 = EnemyStatusAilment.none;
+    public EnemyStatusAilment currentStatusAilment1 = EnemyStatusAilment.none;
+
     //+Chained
     private int chainedWaitTime = 0; //Keep track of when chained is reverted
-    public EnemyStatusAilment currentStatusAilment = EnemyStatusAilment.none;
     private Enemy[] chainedEnemy; //Stores the information for the chained enemies
     public GameObject chainedSymbol;
     public GameObject primaryChainedSymbol; //Used to distinguish the primary target of a chain
     private bool primaryChainedTarget = false; // The primary target is the only one to unchain the other targets
+
+    //+Rallied
+    private int ralliedWaitTime = 0;
+    private float ralliedDamageModifier = 1.0f; //When rallied, this modifier increases damage taken
+    public GameObject ralliedSymbol;
 
     protected void Awake()
     {
@@ -151,6 +159,10 @@ public class Enemy : MonoBehaviour
         if(primaryChainedSymbol)
         {
             primaryChainedSymbol.gameObject.SetActive(false);
+        }
+        if(ralliedSymbol)
+        {
+            ralliedSymbol.gameObject.SetActive(false);
         }
     }
     protected virtual void Update()
@@ -1281,6 +1293,7 @@ public class Enemy : MonoBehaviour
 
         Debug.Log("Received player attack: " + playerAttack);
         float damage = playerAttack - ((eDefence / (20.0f + eDefence)) * playerAttack);
+        damage *= ralliedDamageModifier;
         currentHP -= damage;
         damageText.gameObject.SetActive(true);
         damageText.text = Mathf.RoundToInt(damage).ToString();
@@ -1289,22 +1302,23 @@ public class Enemy : MonoBehaviour
         animator.SetBool("Hit", true);
 
 
-        if (currentStatusAilment == EnemyStatusAilment.chained)
+        if (currentStatusAilment0 == EnemyStatusAilment.chained || currentStatusAilment1 == EnemyStatusAilment.chained)
         {
-            if (chainedEnemy[0] != null && !chainedEnemy[0].dead)
-            {
-                chainedEnemy[0].TakeChainedDamage(playerAttack, numberOfAttacks);
-            }
-
+            //If I'm not the primary target, 0 is. Damage 1 before 0 to avoid the turn ending in the case that 0 dies breaking the chain before 1 gets damaged
             if (chainedEnemy[1] != null && !chainedEnemy[1].dead)
             {
-                chainedEnemy[1].TakeChainedDamage(playerAttack, numberOfAttacks);
+                chainedEnemy[1].TakeChainedDamage(playerAttack * ralliedDamageModifier, numberOfAttacks);
+            }
+
+            if (chainedEnemy[0] != null && !chainedEnemy[0].dead)
+            {
+                chainedEnemy[0].TakeChainedDamage(playerAttack * ralliedDamageModifier, numberOfAttacks);
             }
         }
 
-        if (currentHP <= 1.0f) // Avoid near zero
+        if (currentHP < 1.0f) // Avoid near zero
         {
-            if(currentStatusAilment == EnemyStatusAilment.chained && primaryChainedTarget) //If the enemy is chained and is the primary target
+            if((currentStatusAilment0 == EnemyStatusAilment.chained || currentStatusAilment1 == EnemyStatusAilment.chained) && primaryChainedTarget) //If the enemy is chained and is the primary target
             {
                 UnchainEnemies();
             }
@@ -1317,11 +1331,11 @@ public class Enemy : MonoBehaviour
                 //Only end the turn after the damage has been taken
                 //If the enemy is chained, only the primary target can end the turn
                 //All to avoid turn skips
-                if (currentStatusAilment == EnemyStatusAilment.chained && primaryChainedTarget)
+                if ((currentStatusAilment0 == EnemyStatusAilment.chained || currentStatusAilment1 == EnemyStatusAilment.chained) && primaryChainedTarget)
                 {
                     uiBTL.EndTurn();
                 }
-                else if (currentStatusAilment == EnemyStatusAilment.none)
+                else if (currentStatusAilment0 != EnemyStatusAilment.chained && currentStatusAilment1 != EnemyStatusAilment.chained)
                 {
                     uiBTL.EndTurn();
                 }
@@ -1336,26 +1350,28 @@ public class Enemy : MonoBehaviour
             //Didn't recall the original function cause the "Hit" animation ends the turn
             Debug.Log("Received player attack: " + playerAttack);
             float damage = playerAttack - ((eDefence / (20.0f + eDefence)) * playerAttack);
+            damage *= ralliedDamageModifier; //Increase damage if rallied;
             currentHP -= damage;
             damageText.gameObject.SetActive(true);
             damageText.text = Mathf.RoundToInt(damage).ToString();
             battleManager.enemies[enemyIndexInBattleManager].currentHP = currentHP; //Update the BTL manager with the new health
             HP.fillAmount = currentHP / maxHP;
-        }
 
-        if (currentStatusAilment == EnemyStatusAilment.chained)
-        {
-            if (chainedEnemy[0] != null && !chainedEnemy[0].dead)
+
+            //Damage chained enemies should be chained too
+            if (currentStatusAilment0 == EnemyStatusAilment.chained || currentStatusAilment1 == EnemyStatusAilment.chained)
             {
-                chainedEnemy[0].TakeChainedDamage(playerAttack, numberOfAttacks);
-            }
+                if (chainedEnemy[1] != null && !chainedEnemy[1].dead)
+                {
+                    chainedEnemy[1].TakeChainedDamage(playerAttack * ralliedDamageModifier, numberOfAttacks);
+                }
 
-            if (chainedEnemy[1] != null && !chainedEnemy[1].dead)
-            {
-                chainedEnemy[1].TakeChainedDamage(playerAttack, numberOfAttacks);
+                if (chainedEnemy[0] != null && !chainedEnemy[0].dead)
+                {
+                    chainedEnemy[0].TakeChainedDamage(playerAttack * ralliedDamageModifier, numberOfAttacks);
+                }
             }
         }
-
         
         switch (debuffIndex)
         {
@@ -1364,7 +1380,7 @@ public class Enemy : MonoBehaviour
                 switch(ailment)
                 {
                     case EnemyStatusAilment.chained:
-                        if (currentStatusAilment != EnemyStatusAilment.chained) //You can't have two primary chain targets in the same chain
+                        if (currentStatusAilment0 != EnemyStatusAilment.chained && currentStatusAilment1 != EnemyStatusAilment.chained) //You can't have two primary chain targets in the same chain
                         {
                             chainedWaitTime = debuffTimer;
                             primaryChainedTarget = true;
@@ -1373,9 +1389,44 @@ public class Enemy : MonoBehaviour
                         }
                         break;
                     case EnemyStatusAilment.rallied:
+                        if(currentStatusAilment0 != EnemyStatusAilment.rallied && currentStatusAilment1 != EnemyStatusAilment.rallied) //Cannot rally an enemy that's already been rallied against
+                        {
+                            ralliedWaitTime = debuffTimer;
+                            ralliedDamageModifier = 2.0f;
+                            ralliedSymbol.gameObject.SetActive(true);
+                            uiBTL.EndTurn(); //Rally doesn't do any damage
+                        }
                         break;
                 }
-                currentStatusAilment = ailment;
+                //Check which of the two ailments is set to none.
+                // If both of them are filled, overwrite the 0 spot
+                if (currentStatusAilment0 == EnemyStatusAilment.none)
+                {
+                    currentStatusAilment0 = ailment;
+                }
+                else if(currentStatusAilment1 == EnemyStatusAilment.none)
+                {
+                    currentStatusAilment1 = ailment;
+                }
+                else if(currentStatusAilment0 == EnemyStatusAilment.chained)
+                {
+                    if (primaryChainedTarget)
+                    {
+                        UnchainEnemies();
+                        primaryChainedTarget = false;
+                        currentStatusAilment0 = ailment;
+                    }
+                    else
+                    {
+                        NoLongerChained();
+                        chainedSymbol.gameObject.SetActive(false);
+                    }
+                }
+                else if(currentStatusAilment0 == EnemyStatusAilment.rallied)
+                {
+                    NoLongerRallied();
+                    currentStatusAilment0 = ailment;
+                }
                 break;
             case 1: //Debuff
                 break;
@@ -1385,7 +1436,7 @@ public class Enemy : MonoBehaviour
 
         if (currentHP < 1.0f) //Avoid near zero
         {
-            if (currentStatusAilment == EnemyStatusAilment.chained && primaryChainedTarget) //If the enemy is chained and is the primary target, then unchain the enemies
+            if ((currentStatusAilment0 == EnemyStatusAilment.chained || currentStatusAilment1 == EnemyStatusAilment.chained) && primaryChainedTarget) //If the enemy is chained and is the primary target, then unchain the enemies
             {
                 UnchainEnemies();
             }
@@ -1398,11 +1449,11 @@ public class Enemy : MonoBehaviour
                 //Only end the turn after the damage has been taken
                 //If the enemy is chained, only the primary target can end the turn
                 //All to avoid turn skips
-                if (currentStatusAilment == EnemyStatusAilment.chained && primaryChainedTarget)
+                if ((currentStatusAilment0 == EnemyStatusAilment.chained || currentStatusAilment1 == EnemyStatusAilment.chained) && primaryChainedTarget)
                 {
                     uiBTL.EndTurn(); 
                 }
-                else if(currentStatusAilment == EnemyStatusAilment.none)
+                else if(currentStatusAilment0 != EnemyStatusAilment.chained && currentStatusAilment1 != EnemyStatusAilment.chained)
                 {
                     uiBTL.EndTurn();
                 }
@@ -1414,6 +1465,7 @@ public class Enemy : MonoBehaviour
     {
         Debug.Log("Received chained attack: " + playerAttack);
         float damage = playerAttack - ((eDefence / (20.0f + eDefence)) * playerAttack);
+        damage *= ralliedDamageModifier;
         currentHP -= damage;
         damageText.gameObject.SetActive(true);
         damageText.text = Mathf.RoundToInt(damage).ToString();
@@ -1423,7 +1475,7 @@ public class Enemy : MonoBehaviour
 
         if (currentHP < 1.0f) //Avoid near zero
         {
-            if (currentStatusAilment == EnemyStatusAilment.chained && primaryChainedTarget) //If the enemy is chained and is the primary target, then unchain the enemies
+            if ((currentStatusAilment0 == EnemyStatusAilment.chained || currentStatusAilment1 == EnemyStatusAilment.chained) && primaryChainedTarget) //If the enemy is chained and is the primary target, then unchain the enemies
             {
                 UnchainEnemies();
                 if (numberOfAttacks <= 0) //Need to check for number of attacks for this scenario: Say the number of attacks is 2, and the primary target dies from the first, this means the chain breaks and the turn ends, but the second attack is still coming, and that target of that attack is no longer chained so it WILL call EndTurn() which can cause a turn skip
@@ -1444,7 +1496,7 @@ public class Enemy : MonoBehaviour
 
     private void CheckForAilments()
     {
-        switch(currentStatusAilment)
+        switch(currentStatusAilment0)
         {
             case EnemyStatusAilment.chained:
                 if(primaryChainedTarget) //Only the primary chain target can lift off the effect
@@ -1453,20 +1505,55 @@ public class Enemy : MonoBehaviour
                     if(chainedWaitTime<=0)
                     {
                         UnchainEnemies();
-                        chainedSymbol.gameObject.SetActive(false);
+                        primaryChainedTarget = false;
+                        currentStatusAilment0 = EnemyStatusAilment.none;
                     }
                 }
                 break;
             case EnemyStatusAilment.rallied:
+                ralliedWaitTime--;
+                if(ralliedWaitTime<=0)
+                {
+                    uiBTL.UpdateActivityText("The Rally effect has ended");
+                    ralliedSymbol.gameObject.SetActive(false);
+                    ralliedDamageModifier = 1.0f;
+                    currentStatusAilment0 = EnemyStatusAilment.none;
+                }
+                break;
+        }
+
+        switch (currentStatusAilment1)
+        {
+            case EnemyStatusAilment.chained:
+                if (primaryChainedTarget) //Only the primary chain target can lift off the effect
+                {
+                    chainedWaitTime--;
+                    if (chainedWaitTime <= 0)
+                    {
+                        UnchainEnemies();
+                        primaryChainedTarget = false;
+                        currentStatusAilment1 = EnemyStatusAilment.none;
+                    }
+                }
+                break;
+            case EnemyStatusAilment.rallied:
+                ralliedWaitTime--;
+                if (ralliedWaitTime <= 0)
+                {
+                    uiBTL.UpdateActivityText("The Rally effect has ended");
+                    ralliedSymbol.gameObject.SetActive(false);
+                    ralliedDamageModifier = 1.0f;
+                    currentStatusAilment1 = EnemyStatusAilment.none;
+                }
                 break;
         }
     }
 
+    #region Chained
     private void UnchainEnemies()
     {
         //Unchain the enemies
-        currentStatusAilment = EnemyStatusAilment.none;
-        primaryChainedTarget = false;
+        primaryChainedSymbol.gameObject.SetActive(false);
 
         if (chainedEnemy[0] != null && !chainedEnemy[0].dead)
         {
@@ -1489,7 +1576,7 @@ public class Enemy : MonoBehaviour
             if (i != enemyIndexInBattleManager)
             {
                 //Make sure the enemy is alive and has not been chained before
-                if (uiBTL.enemiesDead[i] == false && uiBTL.enemies[i] != null && uiBTL.enemies[i] != chainedEnemy[0] && uiBTL.enemies[i].currentStatusAilment != EnemyStatusAilment.chained)
+                if (uiBTL.enemiesDead[i] == false && uiBTL.enemies[i] != null && uiBTL.enemies[i] != chainedEnemy[0] && uiBTL.enemies[i].currentStatusAilment0 != EnemyStatusAilment.chained)
                 {
                     chainedEnemy[j] = uiBTL.enemies[i];
                     j++;
@@ -1522,7 +1609,7 @@ public class Enemy : MonoBehaviour
     public void YouAreNowChained(Enemy chain0, Enemy chain1) //Chains the enemy when they are not the ones primary targeted
     {
         //Update the ailment and get references to the other two chained enemies
-        currentStatusAilment = EnemyStatusAilment.chained;
+        currentStatusAilment0 = EnemyStatusAilment.chained;
         chainedEnemy[0] = chain0;
         chainedEnemy[1] = chain1;
         chainedSymbol.gameObject.SetActive(true);
@@ -1530,11 +1617,30 @@ public class Enemy : MonoBehaviour
 
     public void NoLongerChained() //Unchains the enemy. Called by the primary target when the timer runs out or when it dies
     {
-        currentStatusAilment = EnemyStatusAilment.none;
+        currentStatusAilment0 = EnemyStatusAilment.none;
         chainedEnemy[0] = null;
         chainedEnemy[1] = null;
         chainedSymbol.gameObject.SetActive(false);
     }
+    #endregion
+    #region Rallied
+
+    public void NoLongerRallied() //Called by the player if they change the rallied target
+    {
+        ralliedWaitTime = 0;
+        ralliedSymbol.gameObject.SetActive(false);
+        ralliedDamageModifier = 1.0f;
+        if(currentStatusAilment0 == EnemyStatusAilment.rallied)
+        {
+            currentStatusAilment0 = EnemyStatusAilment.none;
+        }
+        else if (currentStatusAilment1 == EnemyStatusAilment.rallied)
+        {
+            currentStatusAilment1 = EnemyStatusAilment.none;
+        }
+    }
+
+    #endregion
 
     #endregion
     public void EndHitAnimation()
@@ -2445,6 +2551,9 @@ public class Enemy : MonoBehaviour
     {
         if (!dead)
         {
+            Debug.Log("Ailment 0 is : " + currentStatusAilment0);
+            Debug.Log("Ailment 1 is : " + currentStatusAilment1);
+            Debug.Log("Primary target is: " + primaryChainedTarget);
             currentState = EnemyState.idle;
             spriteRenderer.enabled = false;
             enemyCanvas.SetActive(false);
@@ -2455,11 +2564,12 @@ public class Enemy : MonoBehaviour
             //Only end the turn after the damage has been taken
             //If the enemy is chained, only the primary target can end the turn
             //All to avoid turn skips
-            if (currentStatusAilment == EnemyStatusAilment.chained && primaryChainedTarget)
+            if ((currentStatusAilment0 == EnemyStatusAilment.chained || currentStatusAilment1 == EnemyStatusAilment.chained) && primaryChainedTarget)
             {
+                primaryChainedTarget = false;
                 uiBTL.EndTurn();
             }
-            else if (currentStatusAilment == EnemyStatusAilment.none)
+            else if (currentStatusAilment0 != EnemyStatusAilment.chained && currentStatusAilment1 != EnemyStatusAilment.chained)
             {
                 uiBTL.EndTurn();
             }
