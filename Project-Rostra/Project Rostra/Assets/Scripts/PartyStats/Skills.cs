@@ -34,6 +34,10 @@ public enum SKILLS { // Minimum Value -- 0x0000, Maximum Value -- 0xFFEF (65519 
     Ar_Armageddon =         0x001A,
     Ob_ShieldAlly =         0x001B,
     Ob_ShieldAllAllies =    0x001C,
+    Ob_SpearDance =         0x001D,
+    Ob_LionsPride =         0x001E,
+    Ob_Duel =               0x001F,
+    Ob_Lutenist =           0x0020,
 };
 
 public enum SKILL_TYPE{ // Minimum Value -- 0xFFF0, Maximum Value -- 0xFFFF (16 possible skill types)

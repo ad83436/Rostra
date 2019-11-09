@@ -1455,6 +1455,7 @@ public class UIBTL : MonoBehaviour
                                                        skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[2],
                                                        enemies[enemyIndicatorIndex]);
                 }
+                currentState = btlUIState.idle;
             }
         }
     }
