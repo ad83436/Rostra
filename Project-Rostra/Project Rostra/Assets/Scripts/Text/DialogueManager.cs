@@ -180,7 +180,6 @@ public class DialogueManager : MonoBehaviour
 			{
 				AddMilestone(d.addMilestone);
 			}
-			Debug.Log("Started Convo");
 			text.text = "";
 			//turn off the highlighting and set everything to default in case it wasn't reset
 			highlight1.SetActive(false);
@@ -202,7 +201,6 @@ public class DialogueManager : MonoBehaviour
 			// this loop is going to go through each individual text and add it to the queue
 			foreach (string s in d.sentences)
 			{
-				print("Do thing");
 				// loop and queue up the elements
 				textElements.Enqueue(s);
 			}
@@ -445,7 +443,6 @@ public class DialogueManager : MonoBehaviour
 		// if the choice is more than half of the array take away half the array to get it's counterpart
 		if (d.choiceCare1.dialogue.hasPlayed == true && d.choiceCare1.dialogue.isOneShot == true)
 		{
-			Debug.Log("Playing Normal Text");
 			StartConversation(dia.choiceCare1.dialogue.normal.dialogue);
 			if (dia.normal.dialogue.addMilestone > 0)
 			{

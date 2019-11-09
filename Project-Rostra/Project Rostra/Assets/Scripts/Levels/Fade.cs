@@ -137,14 +137,16 @@ public class Fade : MonoBehaviour
 
     public void FlipFadeToBattle(WMEnemy enemyCollidingWithPlayer)
     {
-        enemyHolder = enemyCollidingWithPlayer;
+		
+		enemyHolder = enemyCollidingWithPlayer;
         fadeOut = true;
         transitionToBattle = true;
     }
     //Two version of flip fade, one for controlled situations where the WM is assigned from the editor and one for the world map
     public void FlipFadeToBattle()
     {
-        fadeOut = !fadeOut;
+		Debug.Log("Flipped To Battle");
+		fadeOut = !fadeOut;
         transitionToBattle = true;
         audioManager.PlayThisClip("BattleMusic1");
     }

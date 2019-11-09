@@ -24,6 +24,10 @@ public class DialogueToBattle : MonoBehaviour
 	{
 		if (col.CompareTag("Player") && DialogueManager.instance.GetChoice(ce) == true && battle == false)
 		{
+<<<<<<< Updated upstream
+=======
+			Debug.Log("Entered Dialogue");
+>>>>>>> Stashed changes
 			DialogueManager.instance.StartConversation(ct.dialogue);
 		}
 	}
@@ -32,10 +36,18 @@ public class DialogueToBattle : MonoBehaviour
 	{
 		if (col.CompareTag("Player") && DialogueManager.instance.GetChoice(ce) == true && DialogueManager.instance.isActive == false && battle == false)
 		{
+<<<<<<< Updated upstream
 			Debug.Log("Transition To Battle");
 			BattleManager.battleInProgress = true;
 			fade.FlipFadeToBattle();
 			battle = true;
+=======
+			battle = true;
+			Debug.Log("Transition To Battle");
+			BattleManager.battleInProgress = true;
+			fade.FlipFadeToBattle();
+
+>>>>>>> Stashed changes
 		}
 	}
 }

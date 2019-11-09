@@ -44,6 +44,11 @@ public class PlayerMove : MonoBehaviour
 			animator.SetFloat("Vertical", 0);
 			animator.SetFloat("Speed", 0);
 		}
+		if (Input.GetKeyDown(KeyCode.K))
+		{
+			DialogueManager.instance.metAllChars = true;
+			DialogueManager.instance.SetChoice(ChoiceEnum.metAllChars, true);
+		}
 	}
 
 
