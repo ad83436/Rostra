@@ -41,7 +41,7 @@ public class SkillsInventory : MonoBehaviour {
         AddToUnlockedSkills((int)SKILLS.Fa_Sunguard, 0);
         EquipSkill((int)SKILLS.Fa_Sunguard, 3, 0);
 
-        AddToUnlockedSkills((int)SKILLS.Ob_ShieldAlly, 1);
+        AddToUnlockedSkills((int)SKILLS.Ob_Duel, 1);
         EquipSkill((int)SKILLS.Ob_ShieldAlly, 0, 1);
         AddToUnlockedSkills((int)SKILLS.Ob_ShieldAllAllies, 1);
         EquipSkill((int)SKILLS.Ob_ShieldAllAllies, 1, 1);
@@ -392,7 +392,7 @@ public class SkillsInventory : MonoBehaviour {
             case (int)SKILLS.Ar_ManaCharge:
                 return "Restores a portion of one ally’s MP.";
             case (int)SKILLS.Ar_Armageddon:
-                return " Sometimes to save someone, another must perish. Arcelus summons pillars of fire damaging all enemies.";
+                return " Sometimes to save someone, another must perish. Arcelus summons pillars of fire burning all enemies.";
             default: return "";
         }
     }
@@ -605,7 +605,7 @@ public class SkillsInventory : MonoBehaviour {
                 skillStat[5] = 30;
                 break;
             case (int)SKILLS.Ar_Armageddon:
-                skillStat[0] = 100;
+                skillStat[0] = 60;
                 skillStat[1] = 18;
                 skillStat[2] = 3;
                 skillStat[4] = (float)SKILL_TYPE.ALL_TARGETS_ATK;

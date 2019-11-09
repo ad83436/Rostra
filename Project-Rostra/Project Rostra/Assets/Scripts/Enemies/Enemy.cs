@@ -99,6 +99,11 @@ public class Enemy : MonoBehaviour
     private float ralliedDamageModifier = 1.0f; //When rallied, this modifier increases damage taken
     public GameObject ralliedSymbol;
 
+    //+Burn
+    private int burnedWaitTime = 0;
+    private float burnDamage = 10.0f; //Damages the enemy at the start of every turn
+    public GameObject burnSymbol;
+
     protected void Awake()
     {
         print("Very First  " + currentHP);
@@ -163,6 +168,10 @@ public class Enemy : MonoBehaviour
         if(ralliedSymbol)
         {
             ralliedSymbol.gameObject.SetActive(false);
+        }
+        if(burnSymbol)
+        {
+            burnSymbol.gameObject.SetActive(false);
         }
     }
     protected virtual void Update()
@@ -1397,6 +1406,14 @@ public class Enemy : MonoBehaviour
                             uiBTL.EndTurn(); //Rally doesn't do any damage
                         }
                         break;
+                    case EnemyStatusAilment.burn:
+                        if (currentStatusAilment0 != EnemyStatusAilment.burn && currentStatusAilment1 != EnemyStatusAilment.burn) //Cannot burn an enemy that's already been burned
+                        {
+                            burnedWaitTime = debuffTimer;
+                            burnSymbol.gameObject.SetActive(true);
+                            uiBTL.EndTurn(); //Rally doesn't do any damage
+                        }
+                        break;
                 }
                 //Check which of the two ailments is set to none.
                 // If both of them are filled, overwrite the 0 spot
@@ -1492,6 +1509,22 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    private void TakeBurnDamage()
+    {
+        //Damage the enemy at the beginning of the turn due to the burining effect
+        burnDamage *= ralliedDamageModifier;
+        currentHP -= burnDamage;
+        damageText.gameObject.SetActive(true);
+        damageText.text = Mathf.RoundToInt(burnDamage).ToString();
+        battleManager.enemies[enemyIndexInBattleManager].currentHP = currentHP; //Update the BTL manager with the new health
+        HP.fillAmount = currentHP / maxHP;
+
+        if (currentHP < 1.0f) //Avoid near zero
+        {
+            uiBTL.EndTurn();
+        }
+    }
+
     #region Status Ailments
 
     private void CheckForAilments()
@@ -1520,6 +1553,16 @@ public class Enemy : MonoBehaviour
                     currentStatusAilment0 = EnemyStatusAilment.none;
                 }
                 break;
+            case EnemyStatusAilment.burn:
+                burnedWaitTime--;
+                TakeBurnDamage();
+                if (burnedWaitTime <= 0)
+                {
+                    uiBTL.UpdateActivityText("The Burn effect has ended");
+                    burnSymbol.gameObject.SetActive(false);
+                    currentStatusAilment0 = EnemyStatusAilment.none;
+                }
+                break;
         }
 
         switch (currentStatusAilment1)
@@ -1543,6 +1586,16 @@ public class Enemy : MonoBehaviour
                     uiBTL.UpdateActivityText("The Rally effect has ended");
                     ralliedSymbol.gameObject.SetActive(false);
                     ralliedDamageModifier = 1.0f;
+                    currentStatusAilment1 = EnemyStatusAilment.none;
+                }
+                break;
+            case EnemyStatusAilment.burn:
+                burnedWaitTime--;
+                TakeBurnDamage();
+                if (burnedWaitTime <= 0)
+                {
+                    uiBTL.UpdateActivityText("The Burn effect has ended");
+                    burnSymbol.gameObject.SetActive(false);
                     currentStatusAilment1 = EnemyStatusAilment.none;
                 }
                 break;

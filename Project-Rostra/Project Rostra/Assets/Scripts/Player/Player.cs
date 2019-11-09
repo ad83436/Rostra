@@ -777,7 +777,7 @@ public class Player : MonoBehaviour
             skillAnimatorName = "BuffDef";
             skillWaitingIndex = 1;
         }
-        else if (skillID == (int)SKILLS.Ob_LionsPride) //I Don't Miss special skill
+        else if (skillID == (int)SKILLS.Ob_LionsPride) //Lion's Pride special skill
         {
             lionsPrideIsActive = true;
             lionsPrideSymbolOberonOnly.gameObject.SetActive(true);
@@ -1275,19 +1275,33 @@ public class Player : MonoBehaviour
                             if (CalculateCrit() <= actualCRIT)
                             {
                                 Debug.Log("Skill Crit");
+                                if (chosenSkill == (int)SKILLS.Ar_Armageddon)
+                                {
+                                    battleManager.enemies[i].enemyReference.TakeDamage(0.7f * actualATK + skills.SkillStats(chosenSkill)[0] + totalBoFAtkToBeAdded, numberOfAttacks,0,0,3,"",EnemyStatusAilment.burn); //Damage is half the player's attack stat and the skill's attack stat
+                                }
+                                else
+                                {
                                     battleManager.enemies[i].enemyReference.TakeDamage(0.7f * actualATK + skills.SkillStats(chosenSkill)[0] + totalBoFAtkToBeAdded, numberOfAttacks); //Damage is half the player's attack stat and the skill's attack stat
-                                    if (drainEye) //Check if Drain Eye is active
-                                    {
-                                        Heal(0.01f * (drainEyeModifier * (0.7f * actualATK + skills.SkillStats(chosenSkill)[0] + totalBoFAtkToBeAdded)));
-                                    }
+                                }
+                                if (drainEye) //Check if Drain Eye is active
+                                {
+                                    Heal(0.01f * (drainEyeModifier * (0.7f * actualATK + skills.SkillStats(chosenSkill)[0] + totalBoFAtkToBeAdded)));
+                                }
                             }
                             else
                             {
                                 Debug.Log("No Skill Crit");
-                                battleManager.enemies[i].enemyReference.TakeDamage(0.5f * actualATK + skills.SkillStats(chosenSkill)[0] + totalBoFAtkToBeAdded, numberOfAttacks); //Damage is the half the player's attack stat and the skill's attack stat
+                                if (chosenSkill == (int)SKILLS.Ar_Armageddon)
+                                {
+                                    battleManager.enemies[i].enemyReference.TakeDamage(0.5f * actualATK + skills.SkillStats(chosenSkill)[0] + totalBoFAtkToBeAdded, numberOfAttacks, 0, 0, 3, "", EnemyStatusAilment.burn); //Damage is half the player's attack stat and the skill's attack stat
+                                }
+                                else
+                                {
+                                    battleManager.enemies[i].enemyReference.TakeDamage(0.5f * actualATK + skills.SkillStats(chosenSkill)[0] + totalBoFAtkToBeAdded, numberOfAttacks); //Damage is the half the player's attack stat and the skill's attack stat
+                                }
                                 if (drainEye) //Check if Drain Eye is active
                                 {
-                                    Heal(0.01f * (drainEyeModifier * (0.7f * actualATK + skills.SkillStats(chosenSkill)[0] + totalBoFAtkToBeAdded)));
+                                    Heal(0.01f * (drainEyeModifier * (0.5f * actualATK + skills.SkillStats(chosenSkill)[0] + totalBoFAtkToBeAdded)));
                                 }
                             }
                         }

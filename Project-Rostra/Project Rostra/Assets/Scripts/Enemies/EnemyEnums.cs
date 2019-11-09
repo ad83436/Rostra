@@ -19,6 +19,7 @@ public enum EnemyStatusAilment
     none,
     chained, //Connects an enemy with two other enemies, whenever one of these three is damaged, they all get damaged
     rallied, // This enemy starts taking double damage. Can be comboed with Chained
+    burn,
 }
 
 public enum EnemyAttackType
