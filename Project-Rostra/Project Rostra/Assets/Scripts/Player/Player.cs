@@ -144,6 +144,11 @@ public class Player : MonoBehaviour
     //SpearDance
     private float critBeforeDance = 0.0f;
 
+    //Lion's Pride
+    public static bool lionsPrideIsActive = false;
+    private int lionsPrideSkillQCounter = 0;
+    public GameObject lionsPrideSymbolOberonOnly;
+
     //UI
     public Image hpImage;
     public Image rageImage;
@@ -220,9 +225,15 @@ public class Player : MonoBehaviour
         agiBuffEffect.gameObject.SetActive(false);
         strBuffEffect.gameObject.SetActive(false);
         drainEyeBuffEffect.gameObject.SetActive(false);
+
         if(rallySymbolFargasOnly)
         {
             rallySymbolFargasOnly.gameObject.SetActive(false);
+        }
+
+        if (lionsPrideSymbolOberonOnly) //Only Oberon will have the symbol
+        {
+            lionsPrideSymbolOberonOnly.gameObject.SetActive(false);
         }
         //MP Heal
 
@@ -263,6 +274,8 @@ public class Player : MonoBehaviour
         //Ailments
         fearSymbol.gameObject.SetActive(false);
         tiedSymbol.gameObject.SetActive(false);
+
+
     }
 
     private void Update()
@@ -541,101 +554,120 @@ public class Player : MonoBehaviour
     #region take damage
     public void TakeDamage(float enemyATK)
     {
-        btlCam.CameraShake();
-        float damage = enemyATK - ((def / (20.0f + def)) * enemyATK);
-        currentHP -= damage;
-        damageText.gameObject.SetActive(true);
-        damageText.text = Mathf.RoundToInt(damage).ToString();
-        battleManager.players[playerIndex].currentHP = currentHP; //Update the BTL manager with the new health
-        PartyStats.chara[playerIndex].hitpoints = currentHP; //Update the party stats
-
-        if (currentHP < 1.0f) //Avoid near zero
+        if (lionsPrideIsActive && playerIndex != 1) //If Lion's Pride is active and the attacked player is not Oberon, then Oberon should take the hit
         {
-            currentHP = 0.0f;
-            battleManager.players[playerIndex].currentHP = currentHP; //Update the BTL manager with the new health
-            PartyStats.chara[playerIndex].hitpoints = currentHP; //Update the party stats
-            hpImage.fillAmount = 0.0f;
-            dead = true;
-            DisableAllBuffs(); //BUffs should not continue beyond death
-            playerAnimator.SetBool("Dead", true);
-            //If you die, you lose your RAGE
-            if (currentState == playerState.Waiting) //If the player is waiting on a skill, reset everything and die
-            {
-                Debug.Log("Huh?");
-                chosenSkill = (int)SKILLS.NO_SKILL;
-                skillWaitTime = 0;
-                skillWaitingIndex = 0;
-                waitTimeText.gameObject.SetActive(false);
-                playerAnimator.SetInteger("WaitingIndex", 0);
-
-            }
-            ResetPlayerRage();
-            uiBTL.PlayerIsDead(playerIndex);
+            battleManager.players[1].playerReference.TakeDamage(enemyATK);
         }
         else
         {
-            hpImage.fillAmount = currentHP / maxHP;
-        }
-        if (currentRage < maxRage && currentState != playerState.Rage) //If there's still capacity for rage while we're not actually in rage, increase the rage meter
-        {
-            currentRage += damage * 1.05f; //Rage amount is always 5% more than the health lost
-            rageImage.fillAmount = currentRage / maxRage;
+            btlCam.CameraShake();
+            float damage = enemyATK - ((def / (20.0f + def)) * enemyATK);
+            currentHP -= damage;
+            damageText.gameObject.SetActive(true);
+            damageText.text = Mathf.RoundToInt(damage).ToString();
+            battleManager.players[playerIndex].currentHP = currentHP; //Update the BTL manager with the new health
+            PartyStats.chara[playerIndex].hitpoints = currentHP; //Update the party stats
 
-            if (currentRage >= maxRage)
+            if (currentHP < 1.0f) //Avoid near zero
             {
-                currentRage = maxRage;
-                canRage = true; //Can now go into rage mode
-            }
-            PartyStats.chara[playerIndex].rage = currentRage; //Update the party stats
-        }
+                if (lionsPrideIsActive && playerIndex == 1)
+                {
+                    lionsPrideIsActive = false; //If Oberon is dead, Lion's Pride should be deactivated
+                    lionsPrideSymbolOberonOnly.gameObject.SetActive(false);
+                }
+                currentHP = 0.0f;
+                battleManager.players[playerIndex].currentHP = currentHP; //Update the BTL manager with the new health
+                PartyStats.chara[playerIndex].hitpoints = currentHP; //Update the party stats
+                hpImage.fillAmount = 0.0f;
+                dead = true;
+                DisableAllBuffs(); //BUffs should not continue beyond death
+                playerAnimator.SetBool("Dead", true);
+                //If you die, you lose your RAGE
+                if (currentState == playerState.Waiting) //If the player is waiting on a skill, reset everything and die
+                {
+                    Debug.Log("Huh?");
+                    chosenSkill = (int)SKILLS.NO_SKILL;
+                    skillWaitTime = 0;
+                    skillWaitingIndex = 0;
+                    waitTimeText.gameObject.SetActive(false);
+                    playerAnimator.SetInteger("WaitingIndex", 0);
 
-        if (currentState != playerState.Waiting)
-        {
-            playerAnimator.SetBool("Hit", true);
+                }
+                ResetPlayerRage();
+                uiBTL.PlayerIsDead(playerIndex);
+            }
+            else
+            {
+                hpImage.fillAmount = currentHP / maxHP;
+            }
+            if (currentRage < maxRage && currentState != playerState.Rage) //If there's still capacity for rage while we're not actually in rage, increase the rage meter
+            {
+                currentRage += damage * 1.05f; //Rage amount is always 5% more than the health lost
+                rageImage.fillAmount = currentRage / maxRage;
+
+                if (currentRage >= maxRage)
+                {
+                    currentRage = maxRage;
+                    canRage = true; //Can now go into rage mode
+                }
+                PartyStats.chara[playerIndex].rage = currentRage; //Update the party stats
+            }
+
+            if (currentState != playerState.Waiting)
+            {
+                playerAnimator.SetBool("Hit", true);
+            }
         }
     }
 
     //Take Damage override to include debuffs
     public void TakeDamage(float enemyAtk,int debuffIndex, string debuffSubIndex, playerAilments ailment, Enemy enemyReference, float debuffValuePercent, int debuffTimer, bool affectNonGuardOnly)
     {
-        if (enemyAtk > 0)
+        if (lionsPrideIsActive && playerIndex != 1) //If Lion's Pride is active and the attacked player is not Oberon, then Oberon should take the hit
         {
-            TakeDamage(enemyAtk); //Call the original one since the player needs to lose health first should the attack passed on be higher than zero
+            battleManager.players[1].playerReference.TakeDamage(enemyAtk, debuffIndex, debuffSubIndex, ailment, enemyReference, debuffValuePercent, debuffTimer, affectNonGuardOnly);
         }
-
-        switch(debuffIndex) //Is it a regular debuff or an ailment?
+        else
         {
-            case 0: //Ailment
-                switch(ailment)
-                {
-                    case playerAilments.fear:
-                        //Get the fear timer and activate the object
-                        currentAilment = playerAilments.fear;
-                        fearTimer = debuffTimer;
-                        Debug.Log(nameOfCharacter + "IS SPOOKED");
-                        fearSymbol.gameObject.SetActive(true);
-                        break;
-                    case playerAilments.tied:
-                        currentAilment = playerAilments.tied;
-                        tiedToThisEnemy = enemyReference;
-                        tiedSymbol.gameObject.SetActive(true);
-                        break;
-                }
-                break;
-            case 1: //Regular
-                        if(affectNonGuardOnly) //If this boolean is true, make sure to only affect characters in a non-guard state
-                        {
-                            if (currentState != playerState.Guard)
-                            {
-                                BuffStats(debuffSubIndex, -debuffValuePercent, debuffTimer);
-                            }
-                        }
-                        else
-                        {
+            if (enemyAtk > 0)
+            {
+                TakeDamage(enemyAtk); //Call the original one since the player needs to lose health first should the attack passed on be higher than zero
+            }
 
+            switch (debuffIndex) //Is it a regular debuff or an ailment?
+            {
+                case 0: //Ailment
+                    switch (ailment)
+                    {
+                        case playerAilments.fear:
+                            //Get the fear timer and activate the object
+                            currentAilment = playerAilments.fear;
+                            fearTimer = debuffTimer;
+                            Debug.Log(nameOfCharacter + "IS SPOOKED");
+                            fearSymbol.gameObject.SetActive(true);
+                            break;
+                        case playerAilments.tied:
+                            currentAilment = playerAilments.tied;
+                            tiedToThisEnemy = enemyReference;
+                            tiedSymbol.gameObject.SetActive(true);
+                            break;
+                    }
+                    break;
+                case 1: //Regular
+                    if (affectNonGuardOnly) //If this boolean is true, make sure to only affect characters in a non-guard state
+                    {
+                        if (currentState != playerState.Guard)
+                        {
                             BuffStats(debuffSubIndex, -debuffValuePercent, debuffTimer);
                         }
-                break;
+                    }
+                    else
+                    {
+
+                        BuffStats(debuffSubIndex, -debuffValuePercent, debuffTimer);
+                    }
+                    break;
+            }
         }
     }
 
@@ -745,6 +777,21 @@ public class Player : MonoBehaviour
             skillAnimatorName = "BuffDef";
             skillWaitingIndex = 1;
         }
+        else if (skillID == (int)SKILLS.Ob_LionsPride) //I Don't Miss special skill
+        {
+            lionsPrideIsActive = true;
+            lionsPrideSymbolOberonOnly.gameObject.SetActive(true);
+            lionsPrideSkillQCounter = 3; //Lions pride counter is different than the defense buff/debuff counter as the defense can be buffed or debuff further on but lion's pride will always only last for three turns
+            skillTarget = 8; //Single player buff
+            BuffStats("Defense", skills.SkillStats(chosenSkill)[0], 3);
+            chosenSkill = (int)SKILLS.NO_SKILL;
+            currentMP -= mpCost;
+            mpImage.fillAmount = currentMP / maxMP;
+            battleManager.players[playerIndex].currentMP = currentMP;
+            PartyStats.chara[playerIndex].magicpoints = currentMP;
+            uiBTL.UpdatePlayerMPControlPanel();
+            currentState = playerState.Idle;
+        }
         else if (skillID == (int)SKILLS.Fr_IDontMiss) //I Don't Miss special skill
         {
             skillTarget = 8; //Single player buff
@@ -756,7 +803,6 @@ public class Player : MonoBehaviour
             PartyStats.chara[playerIndex].magicpoints = currentMP;
             uiBTL.UpdatePlayerMPControlPanel();
             currentState = playerState.Idle;
-
 
         }
 
@@ -1456,6 +1502,7 @@ public class Player : MonoBehaviour
                 }
                 else if (defenseBuffed && ((actualDEF > def && precentage > 0) || (actualDEF < def && precentage < 0))) //If defense has already been buffed, update the Q counter
                 {
+                    actualDEF = def + def * precentage; //Buffs don't stack
                     defenseBuffSkillQCounter = lastsNumberOfTurns;                   
                 }
                 else if (!defenseBuffed) //No buffs or debuffs have occurred so far
@@ -1486,6 +1533,7 @@ public class Player : MonoBehaviour
                 }
                 else if (attackBuffed && ((actualATK > atk && precentage > 0) || (actualATK < atk && precentage < 0))) //Check if the buff or debuff is being extended
                 {
+                    actualATK = atk + atk * precentage;
                     attackBuffSkillQCounter = lastsNumberOfTurns;
                    
                 }
@@ -1514,12 +1562,12 @@ public class Player : MonoBehaviour
                 }
                 else if (agilityBuffed && ((actualAgi > agi && precentage > 0) || (actualAgi < agi && precentage < 0))) //If agility has already been buffed, update the Q counter
                 {
+                    actualAgi = agi + agi * precentage;
                     agilityBuffSkillQCounter = lastsNumberOfTurns;
                    
                 }
                 else if (!agilityBuffed) //No buffs or debuffs have occurred so far
                 {
-                   
                     agilityBuffed = true;
                     actualAgi = agi + agi * precentage;
                     agilityBuffSkillQCounter = lastsNumberOfTurns;
@@ -1542,6 +1590,7 @@ public class Player : MonoBehaviour
                 }
                 else if (strBuffed && ((actualSTR > str && precentage > 0) || (actualSTR < str && precentage < 0))) //If str has already been buffed, update the Q counter
                 {
+                    actualSTR = str + str * precentage;
                     strBuffSkillQCounter = lastsNumberOfTurns;
                     
                 }
@@ -1585,6 +1634,16 @@ public class Player : MonoBehaviour
                 Debug.Log("Buff has ended");
                 uiBTL.UpdateActivityText("DEF is back to normal");
                 defBuffArrowIndicator.gameObject.SetActive(false);
+            }
+        }
+
+        if (lionsPrideIsActive && playerIndex == 1) //Only Oberon can have lion's pride deactivated
+        {
+            lionsPrideSkillQCounter--;
+            if(lionsPrideSkillQCounter<0)
+            {
+                lionsPrideIsActive = false;
+                lionsPrideSymbolOberonOnly.gameObject.SetActive(false);
             }
         }
 

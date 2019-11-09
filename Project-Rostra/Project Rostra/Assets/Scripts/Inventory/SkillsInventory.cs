@@ -47,6 +47,8 @@ public class SkillsInventory : MonoBehaviour {
         EquipSkill((int)SKILLS.Ob_ShieldAllAllies, 1, 1);
         AddToUnlockedSkills((int)SKILLS.Ob_SpearDance, 1);
         EquipSkill((int)SKILLS.Ob_SpearDance, 2, 1);
+        AddToUnlockedSkills((int)SKILLS.Ob_LionsPride, 1);
+        EquipSkill((int)SKILLS.Ob_LionsPride, 2, 1);
 
         AddToUnlockedSkills((int)SKILLS.Fr_DoubleShot, 2);
         EquipSkill((int)SKILLS.Fr_DoubleShot, 0, 2);
