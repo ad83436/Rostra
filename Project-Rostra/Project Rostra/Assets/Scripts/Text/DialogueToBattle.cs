@@ -10,7 +10,6 @@ public class DialogueToBattle : MonoBehaviour
 	ConversationTrigger ct;
 	public ChoiceEnum ce;
 	public Fade fade;
-	private bool battle;
 
     // Start is called before the first frame update
     void Start()
@@ -22,22 +21,10 @@ public class DialogueToBattle : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D col)
 	{
-		if (col.CompareTag("Player") && DialogueManager.instance.GetChoice(ce) == true && battle == false)
+		if (col.CompareTag("Player") && DialogueManager.instance.GetChoice(ce) == true)
 		{
 			Debug.Log("Entered Dialogue");
 			DialogueManager.instance.StartConversation(ct.dialogue);
-		}
-	}
-
-	private void OnTriggerStay2D(Collider2D col)
-	{
-		if (col.CompareTag("Player") && DialogueManager.instance.GetChoice(ce) == true && DialogueManager.instance.isActive == false && battle == false)
-		{
-			battle = true;
-			Debug.Log("Transition To Battle");
-			BattleManager.battleInProgress = true;
-			fade.FlipFadeToBattle();
-
 		}
 	}
 }
