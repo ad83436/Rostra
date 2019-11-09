@@ -10,29 +10,32 @@ public class DialogueToBattle : MonoBehaviour
 	ConversationTrigger ct;
 	public ChoiceEnum ce;
 	public Fade fade;
-	public Collider2D battle;
-	public Collider2D endDemo;
+	private bool battle;
+
     // Start is called before the first frame update
     void Start()
     {
         dm = DialogueManager.instance;
 		ct = GetComponent<ConversationTrigger>();
-		endDemo.enabled = false;
+		battle = false;
     }
-	
+
 	private void OnTriggerEnter2D(Collider2D col)
 	{
-		if (col.CompareTag("Player") && dm.demo == true && battle.enabled == true)
+		if (col.CompareTag("Player") && DialogueManager.instance.GetChoice(ce) == true && battle == false)
+		{
+			DialogueManager.instance.StartConversation(ct.dialogue);
+		}
+	}
+
+	private void OnTriggerStay2D(Collider2D col)
+	{
+		if (col.CompareTag("Player") && DialogueManager.instance.GetChoice(ce) == true && DialogueManager.instance.isActive == false && battle == false)
 		{
 			Debug.Log("Transition To Battle");
-            BattleManager.battleInProgress = true;
+			BattleManager.battleInProgress = true;
 			fade.FlipFadeToBattle();
-			battle.enabled = false;
-			endDemo.enabled = true;
-		}
-		else if (col.CompareTag("Player") && dm.demo == true && endDemo.enabled == true)
-		{
-			fade.FlipToEndTest();
+			battle = true;
 		}
 	}
 }

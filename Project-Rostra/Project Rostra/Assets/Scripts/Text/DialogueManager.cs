@@ -334,6 +334,15 @@ public class DialogueManager : MonoBehaviour
 	IEnumerator TypeLetters(string s)
 	{
 		text.text = "";
+		if (s.Contains("<i>") == true)
+		{
+			text.fontStyle = FontStyle.Italic;
+			s = s.Replace("<i>", "");
+		}
+		else
+		{
+			text.fontStyle = FontStyle.Normal;
+		}
 		continueCountTotal = 0;
 		continueCountTotal = s.ToCharArray().Length;
 		foreach (char l in s.ToCharArray())

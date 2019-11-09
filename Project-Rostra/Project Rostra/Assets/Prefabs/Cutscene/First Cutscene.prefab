@@ -279,25 +279,25 @@ PrefabInstance:
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
       propertyPath: cs.dialogues.Array.data[0].sentences.Array.data[0]
-      value: Northern Rostra... a land once torn apart with war now finds itself an
-        uneasy state.
+      value: <i>Northern Rostra... a land once torn apart with war now finds itself
+        an uneasy state.
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
       propertyPath: cs.dialogues.Array.data[0].sentences.Array.data[1]
-      value: The Kingdom of Ocrest now faces small incursions from it's neighbouring
+      value: <i>The Kingdom of Ocrest now faces small incursions from it's neighbouring
         Kingdom of Turst.
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
       propertyPath: cs.dialogues.Array.data[0].sentences.Array.data[2]
-      value: The Alchemy Guild in their search for immortality dig further into the
-        ground beneath Ocrest at the expense of their dwarven and human workers.
+      value: <i>The Alchemy Guild in their search for immortality dig further into
+        the ground beneath Ocrest at the expense of their dwarven and human workers.
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
       propertyPath: cs.dialogues.Array.data[0].sentences.Array.data[3]
-      value: Anything could be enough to light the spark of war.
+      value: <i>Anything could be enough to light the spark of war.
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
@@ -383,7 +383,7 @@ PrefabInstance:
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
       propertyPath: cs.dialogues.Array.data[2].sentences.Array.data[0]
-      value: 'Two weeks have passed '
+      value: '<i>Two weeks have passed '
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}

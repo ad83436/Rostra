@@ -221,7 +221,9 @@ public class CutsceneManager : MonoBehaviour
 		maxCount++;
 		if (maxCount == c)
 		{
+			// this will set our story choice to be equal
 			DialogueManager.instance.metAllChars = true;
+			DialogueManager.instance.SetChoice(ChoiceEnum.metAllChars, true);
 		}
 	}
 }
