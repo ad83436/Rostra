@@ -41,8 +41,8 @@ public class SkillsInventory : MonoBehaviour {
         AddToUnlockedSkills((int)SKILLS.Fa_Sunguard, 0);
         EquipSkill((int)SKILLS.Fa_Sunguard, 3, 0);
 
-        AddToUnlockedSkills((int)SKILLS.Ob_Duel, 1);
-        EquipSkill((int)SKILLS.Ob_ShieldAlly, 0, 1);
+        AddToUnlockedSkills((int)SKILLS.Ob_FierceStrike, 1);
+        EquipSkill((int)SKILLS.Ob_FierceStrike, 0, 1);
         AddToUnlockedSkills((int)SKILLS.Ob_ShieldAllAllies, 1);
         EquipSkill((int)SKILLS.Ob_ShieldAllAllies, 1, 1);
         AddToUnlockedSkills((int)SKILLS.Ob_SpearDance, 1);
@@ -307,8 +307,8 @@ public class SkillsInventory : MonoBehaviour {
                 return "Spear Dance";
             case (int)SKILLS.Ob_LionsPride:
                 return "Lion's pride";
-            case (int)SKILLS.Ob_Duel:
-                return "Duel";
+            case (int)SKILLS.Ob_FierceStrike:
+                return "Fierce Strike";
             case (int)SKILLS.Ob_Lutenist:
                 return "The Lutenist of Ocrest";
             case (int)SKILLS.Ar_Heal:
@@ -377,8 +377,8 @@ public class SkillsInventory : MonoBehaviour {
                 return "Oberon uses his spear to damage a single row of enemies with an increased chance for critical hits.";
             case (int)SKILLS.Ob_LionsPride:
                 return "Doubles Oberon’s defense. He becomes the sole target of all enemy attacks. Lasts for 3 turns.";
-            case (int)SKILLS.Ob_Duel:
-                return "Targets one enemy. Oberon and the enemy exchange blows until one of them is down. Damage increases as the duel goes on.";
+            case (int)SKILLS.Ob_FierceStrike:
+                return "Oberon returns all the damage he sustained in this battle to all enemies. Here is your damage back!";
             case (int)SKILLS.Ob_Lutenist:
                 return "Oberon ditches his spear to play the lute. All Oberon’s attacks now damage all enemies and increase the defense of all allies. Lasts for 3 turns.";
             case (int)SKILLS.Ar_Heal:
@@ -555,11 +555,11 @@ public class SkillsInventory : MonoBehaviour {
                 skillStat[4] = (float)SKILL_TYPE.SINGLE_PLAYER_BUFF;
                 skillStat[5] = 40;
                 break;
-            case (int)SKILLS.Ob_Duel:
+            case (int)SKILLS.Ob_FierceStrike:
                 skillStat[0] = 0;
-                skillStat[1] = 100;
-                skillStat[2] = 0;
-                skillStat[4] = (float)SKILL_TYPE.SINGLE_TARGET_ATK;
+                skillStat[1] = 18;
+                skillStat[2] = 3;
+                skillStat[4] = (float)SKILL_TYPE.ALL_TARGETS_ATK;
                 skillStat[5] = 30;
                 break;
             case (int)SKILLS.Ob_Lutenist:

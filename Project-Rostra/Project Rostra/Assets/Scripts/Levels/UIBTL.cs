@@ -1641,15 +1641,16 @@ public class UIBTL : MonoBehaviour
 
         if (numberOfDeadEnemies >= numberOfEnemies)
         {
+            battleHasEnded = true;
+            btlManager.EndOfBattle(true);
             fadePanel.FlipFadeToVictory();
-
+            currentState = btlUIState.battleEnd;
             //Make sure to turn off the indicators at the end of the turn, this is to make sure the end screen does not show the indicators
             rageModeIndicator1.gameObject.SetActive(false);
             rageModeIndicator2.gameObject.SetActive(false);
-            battleHasEnded = true;
-            btlManager.EndOfBattle(true);
+
         }
-        currentState = btlUIState.battleEnd;
+        
     }
 
     public virtual void PlayerIsDead(int playerIndex)
@@ -1659,14 +1660,16 @@ public class UIBTL : MonoBehaviour
 
         if(numberOfDeadPlayers>=numberOfPlayers)
         {
-            fadePanel.FlipFadeToDefeat();
-
-            rageModeIndicator1.gameObject.SetActive(false);
-            rageModeIndicator2.gameObject.SetActive(false);
             battleHasEnded = true;
             btlManager.EndOfBattle(false);
+            fadePanel.FlipFadeToDefeat();
+            currentState = btlUIState.battleEnd;
+            rageModeIndicator1.gameObject.SetActive(false);
+            rageModeIndicator2.gameObject.SetActive(false);
+
+
         }
-        currentState = btlUIState.battleEnd;
+
     }
 
     protected virtual void EndBattleUI()

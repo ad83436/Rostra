@@ -149,6 +149,10 @@ public class Player : MonoBehaviour
     private int lionsPrideSkillQCounter = 0;
     public GameObject lionsPrideSymbolOberonOnly;
 
+    //Fierce Strike
+    private float sustainedDamage = 0.0f; //Accumuluates damage to a maximum and returns the favor
+    private float maxSustainedDamage = 300.0f;
+
     //UI
     public Image hpImage;
     public Image rageImage;
@@ -563,6 +567,13 @@ public class Player : MonoBehaviour
             btlCam.CameraShake();
             float damage = enemyATK - ((def / (20.0f + def)) * enemyATK);
             currentHP -= damage;
+
+            if(sustainedDamage < maxSustainedDamage && playerIndex == 1) //Add to sustained damage for Fierce Strike
+            {
+                sustainedDamage += 0.8f* damage;
+                Debug.Log("Oberon Sustained damage is:" + sustainedDamage);
+            }
+
             damageText.gameObject.SetActive(true);
             damageText.text = Mathf.RoundToInt(damage).ToString();
             battleManager.players[playerIndex].currentHP = currentHP; //Update the BTL manager with the new health
@@ -974,6 +985,13 @@ public class Player : MonoBehaviour
                 skillTextValue = "Give Me Strength!";
                 skillWaitingIndex = 5; //BoF is 5
                 break;
+            case (int)SKILLS.Ob_FierceStrike:
+                skillObjectForObjPooler = "";
+                skillNameForObjPooler = "FierceStrike";
+                skillAnimatorName = "BuffDef";
+                skillTextValue = "This is yours!";
+                skillWaitingIndex = 3; //FS is 3
+                break;
         }
 
         if (waitTime <= 0)
@@ -1275,15 +1293,24 @@ public class Player : MonoBehaviour
                             if (CalculateCrit() <= actualCRIT)
                             {
                                 Debug.Log("Skill Crit");
-                                if (chosenSkill == (int)SKILLS.Ar_Armageddon)
+                                if (chosenSkill == (int)SKILLS.Ar_Armageddon) //Armageddon burns
                                 {
                                     battleManager.enemies[i].enemyReference.TakeDamage(0.7f * actualATK + skills.SkillStats(chosenSkill)[0] + totalBoFAtkToBeAdded, numberOfAttacks,0,0,3,"",EnemyStatusAilment.burn); //Damage is half the player's attack stat and the skill's attack stat
+                                }
+                                else if(chosenSkill == (int)SKILLS.Ob_FierceStrike) //Fierce Strike is a revenge attack
+                                {
+                                    battleManager.enemies[i].enemyReference.TakeDamage(0.7f * sustainedDamage, numberOfAttacks); //Fierce strike returns all damage sustained
+
+                                    if (drainEye) //Check if Drain Eye is active
+                                    {
+                                        Heal(0.01f * (drainEyeModifier * (0.7f * sustainedDamage)));
+                                    }
                                 }
                                 else
                                 {
                                     battleManager.enemies[i].enemyReference.TakeDamage(0.7f * actualATK + skills.SkillStats(chosenSkill)[0] + totalBoFAtkToBeAdded, numberOfAttacks); //Damage is half the player's attack stat and the skill's attack stat
                                 }
-                                if (drainEye) //Check if Drain Eye is active
+                                if (drainEye && chosenSkill != (int)SKILLS.Ob_FierceStrike) //Check if Drain Eye is active
                                 {
                                     Heal(0.01f * (drainEyeModifier * (0.7f * actualATK + skills.SkillStats(chosenSkill)[0] + totalBoFAtkToBeAdded)));
                                 }
@@ -1294,6 +1321,15 @@ public class Player : MonoBehaviour
                                 if (chosenSkill == (int)SKILLS.Ar_Armageddon)
                                 {
                                     battleManager.enemies[i].enemyReference.TakeDamage(0.5f * actualATK + skills.SkillStats(chosenSkill)[0] + totalBoFAtkToBeAdded, numberOfAttacks, 0, 0, 3, "", EnemyStatusAilment.burn); //Damage is half the player's attack stat and the skill's attack stat
+                                }
+                                else if (chosenSkill == (int)SKILLS.Ob_FierceStrike) //Fierce Strike is a revenge attack
+                                {
+                                    battleManager.enemies[i].enemyReference.TakeDamage(0.5f * sustainedDamage, numberOfAttacks); //Fierce strike returns all damage sustained
+
+                                    if (drainEye) //Check if Drain Eye is active
+                                    {
+                                        Heal(0.01f * (drainEyeModifier * (0.5f * sustainedDamage)));
+                                    }
                                 }
                                 else
                                 {

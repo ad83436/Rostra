@@ -25,7 +25,7 @@ public static class PartySkills {
                 (int)SKILLS.Ob_ShieldAllAllies,
                 (int)SKILLS.Ob_SpearDance,
                 (int)SKILLS.Ob_LionsPride,
-                (int)SKILLS.Ob_Duel,
+                (int)SKILLS.Ob_FierceStrike,
                 (int)SKILLS.Ob_Lutenist,
                 (int)SKILLS.NO_SKILL,
                 (int)SKILLS.NO_SKILL,

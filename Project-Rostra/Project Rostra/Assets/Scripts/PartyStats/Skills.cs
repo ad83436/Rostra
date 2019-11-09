@@ -36,7 +36,7 @@ public enum SKILLS { // Minimum Value -- 0x0000, Maximum Value -- 0xFFEF (65519 
     Ob_ShieldAllAllies =    0x001C,
     Ob_SpearDance =         0x001D,
     Ob_LionsPride =         0x001E,
-    Ob_Duel =               0x001F,
+    Ob_FierceStrike =       0x001F,
     Ob_Lutenist =           0x0020,
 };
 

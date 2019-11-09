@@ -859,6 +859,7 @@ MonoBehaviour:
   chainedSymbol: {fileID: 0}
   primaryChainedSymbol: {fileID: 0}
   ralliedSymbol: {fileID: 0}
+  burnSymbol: {fileID: 0}
 --- !u!1 &667189818
 GameObject:
   m_ObjectHideFlags: 0
@@ -999,6 +1000,7 @@ MonoBehaviour:
   chainedSymbol: {fileID: 0}
   primaryChainedSymbol: {fileID: 0}
   ralliedSymbol: {fileID: 0}
+  burnSymbol: {fileID: 0}
 --- !u!1 &934564987
 GameObject:
   m_ObjectHideFlags: 0
@@ -1215,6 +1217,7 @@ MonoBehaviour:
   chainedSymbol: {fileID: 0}
   primaryChainedSymbol: {fileID: 0}
   ralliedSymbol: {fileID: 0}
+  burnSymbol: {fileID: 0}
 --- !u!1 &1313233601
 GameObject:
   m_ObjectHideFlags: 0
@@ -1557,11 +1560,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI - Battle Manager
       objectReference: {fileID: 0}
-    - target: {fileID: 230563281705353907, guid: 9f72b6d54aeb3c844871b64d15a60701,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 230563281705353905, guid: 9f72b6d54aeb3c844871b64d15a60701,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1622,19 +1620,6 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 242658911}
-    - target: {fileID: 230563282549537478, guid: 9f72b6d54aeb3c844871b64d15a60701,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 875374378, guid: 9f72b6d54aeb3c844871b64d15a60701, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1576159972, guid: 9f72b6d54aeb3c844871b64d15a60701, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f72b6d54aeb3c844871b64d15a60701, type: 3}
 --- !u!1001 &2794915159868658330

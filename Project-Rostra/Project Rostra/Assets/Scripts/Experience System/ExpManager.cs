@@ -234,7 +234,7 @@ public class ExpManager : MonoBehaviour {
                     case SKILLS.Ob_ShieldAllAllies: return new int[] { 15, 31, 250, 150, 14, 10, 9 };
                     case SKILLS.Ob_SpearDance: return new int[] { 15, 30, 250, 150, 14, 10, 9 };
                     case SKILLS.Ob_LionsPride: return new int[] { 15, 31, 250, 150, 14, 10, 9 };
-                    case SKILLS.Ob_Duel: return new int[] { 15, 30, 250, 150, 14, 10, 9 };
+                    case SKILLS.Ob_FierceStrike: return new int[] { 15, 30, 250, 150, 14, 10, 9 };
                     case SKILLS.Ob_Lutenist: return new int[] { 15, 31, 250, 150, 14, 10, 9 };
                     default: return null;
                 }
