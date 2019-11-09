@@ -576,7 +576,6 @@ public class DialogueManager : MonoBehaviour
 		{
 			fade.FlipFadeToBattle();
 			battle = false;
-			UIBTL.conversationAfterBattle = true;
 		}
 	}
 
