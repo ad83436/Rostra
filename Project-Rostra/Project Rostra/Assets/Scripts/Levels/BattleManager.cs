@@ -416,6 +416,8 @@ public class BattleManager : MonoBehaviour
         //Clear out the enemies array
         for (int i =0;i<5;i++)
         {
+            if(enemies[i].enemyReference != null)
+            Destroy(enemies[i].enemyReference.gameObject);
             enemies[i] = null;
         }
     }

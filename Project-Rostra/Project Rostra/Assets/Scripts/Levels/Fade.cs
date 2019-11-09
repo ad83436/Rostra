@@ -79,59 +79,66 @@ public class Fade : MonoBehaviour
 
             if (thisImage.fillAmount >= 1.0f)
             {
-				if (transitionToBattle)
-				{
-					transitionToBattle = false;
-					TransitionIntoBattle();
-					fadeOut = false;
-				}
-				else if (transitionToVictory)
-				{
-					transitionToVictory = false;
-					TransitionIntoVictory();
-					// uiBtl.StartShowingEndScreen(true); //Show the victory screen stats now
-				}
-				else if (transitionToDefeat)
-				{
-					transitionToDefeat = false;
-					TransitionIntoDefeat();
-					//uiBtl.StartShowingEndScreen(false); //Show the defeat screen
-				}
-				else if (transitionToWorldMap)
-				{
-					Debug.Log("Transition is now falseee");
-					transitionToWorldMap = false;
-					SceneManager.UnloadSceneAsync(SceneManager.GetSceneByName(enemyHolder.tutorial ? "Queue Scene 2" : "Queue Scene"));
-					audioManager.PlayThisClip("WorldMapMusic1");
-				}
-				else if (transitionToEndTest)
-				{
-					transitionToEndTest = false;
-					endTestPanel.gameObject.SetActive(true);
-					canGoToSurvey = true;
-				}
-				else if (transitionIntoACutscene)
-				{
-					fadeOut = !fadeOut; //Fade out again
-					if (cutsceneTriggerRef != null)
-					{
-						cutsceneTriggerRef.TriggerCutscene(); //Load the cutscene while fading out
-						audioManager.PlayThisClip("Cutscene1");
-						cutsceneTriggerRef = null;
-					}
-				}
-				else if (transitionOutOfACutscene)
-				{
-					fadeOut = !fadeOut;
-					CutsceneManager.instance.End();
-					transitionOutOfACutscene = false;
-					audioManager.PlayThisClip("WorldMapMusic1");
-				}
-				else if (transitionToMainMenu)
-				{
-					transitionToMainMenu = false;
-					SceneManager.LoadScene("Main Menu");
-				}
+                if (transitionToBattle)
+                {
+                    transitionToBattle = false;
+                    TransitionIntoBattle();
+                    fadeOut = false;
+                }
+                else if (transitionToVictory)
+                {
+                    transitionToVictory = false;
+                    TransitionIntoVictory();
+                   // uiBtl.StartShowingEndScreen(true); //Show the victory screen stats now
+                }
+                else if (transitionToDefeat)
+                {
+                    transitionToDefeat = false;
+                    TransitionIntoDefeat();
+                    //uiBtl.StartShowingEndScreen(false); //Show the defeat screen
+                }
+                else if (transitionToWorldMap)
+                {
+                    Debug.Log("Transition is now falseee");
+                    transitionToWorldMap = false;
+                    if (enemyHolder != null) //enemyHolder will only exist in sublocations, not in the world map
+                    {
+                        SceneManager.UnloadSceneAsync(SceneManager.GetSceneByName(enemyHolder.tutorial ? "Queue Scene 2" : "Queue Scene"));
+                    }
+                    else
+                    {
+                        SceneManager.UnloadSceneAsync(SceneManager.GetSceneByName("Queue Scene"));
+                    }
+                    audioManager.PlayThisClip("WorldMapMusic1");
+                }
+                else if (transitionToEndTest)
+                {
+                    transitionToEndTest = false;
+                    endTestPanel.gameObject.SetActive(true);
+                    canGoToSurvey = true;
+                }
+                else if(transitionIntoACutscene)
+                {
+                    fadeOut = !fadeOut; //Fade out again
+                    if (cutsceneTriggerRef != null)
+                    {
+                        cutsceneTriggerRef.TriggerCutscene(); //Load the cutscene while fading out
+                        audioManager.PlayThisClip("Cutscene1");
+                        cutsceneTriggerRef = null;
+                    }
+                }
+                else if(transitionOutOfACutscene)
+                {
+                    fadeOut = !fadeOut;
+                    CutsceneManager.instance.End();
+                    transitionOutOfACutscene = false;
+                    audioManager.PlayThisClip("WorldMapMusic1");
+                }
+                else if(transitionToMainMenu)
+                {
+                    transitionToMainMenu = false;
+                    SceneManager.LoadScene("Main Menu");
+                }
             }
         }
     }
