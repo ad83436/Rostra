@@ -378,7 +378,7 @@ public class SkillsInventory : MonoBehaviour {
             case (int)SKILLS.Ob_LionsPride:
                 return "Doubles Oberon’s defense. He becomes the sole target of all enemy attacks. Lasts for 3 turns.";
             case (int)SKILLS.Ob_FierceStrike:
-                return "Oberon returns all the damage he sustained in this battle to all enemies. Here is your damage back!";
+                return "Wait for the enemy to believe you're beaten, then exact sweet revenge. This attack gets stronger the more damage Oberon sustains.";
             case (int)SKILLS.Ob_Lutenist:
                 return "Oberon ditches his spear to play the lute. All Oberon’s attacks now damage all enemies and increase the defense of all allies. Lasts for 3 turns.";
             case (int)SKILLS.Ar_Heal:

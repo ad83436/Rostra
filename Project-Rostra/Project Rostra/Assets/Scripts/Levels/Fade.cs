@@ -100,7 +100,14 @@ public class Fade : MonoBehaviour
                 {
                     Debug.Log("Transition is now falseee");
                     transitionToWorldMap = false;
-                    SceneManager.UnloadSceneAsync(SceneManager.GetSceneByName(enemyHolder.tutorial ? "Queue Scene 2" : "Queue Scene"));
+                    if (enemyHolder != null) //enemyHolder will only exist in sublocations, not in the world map
+                    {
+                        SceneManager.UnloadSceneAsync(SceneManager.GetSceneByName(enemyHolder.tutorial ? "Queue Scene 2" : "Queue Scene"));
+                    }
+                    else
+                    {
+                        SceneManager.UnloadSceneAsync(SceneManager.GetSceneByName("Queue Scene"));
+                    }
                     audioManager.PlayThisClip("WorldMapMusic1");
                 }
                 else if (transitionToEndTest)
