@@ -16,7 +16,6 @@ public class DialogueToBattle : MonoBehaviour
     {
         dm = DialogueManager.instance;
 		ct = GetComponent<ConversationTrigger>();
-		battle = false;
     }
 
 	private void OnTriggerEnter2D(Collider2D col)
