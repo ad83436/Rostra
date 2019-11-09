@@ -444,14 +444,14 @@ public class SkillsInventory : MonoBehaviour {
                 skillStat[5] = 40;
                 break;
             case (int)SKILLS.Fa_SwiftStrike:
-                skillStat[0] = 35;
+                skillStat[0] = 45;
                 skillStat[1] = 16;
                 skillStat[2] = 1;
                 skillStat[4] = (float)SKILL_TYPE.FULL_ROW_ATK;
                 skillStat[5] = 40;
                 break;
             case (int)SKILLS.Fa_SwordOfFury:
-                skillStat[0] = 60;
+                skillStat[0] = 80;
                 skillStat[1] = 16;
                 skillStat[2] = 1;
                 skillStat[4] = (float)SKILL_TYPE.SINGLE_TARGET_ATK;
@@ -481,7 +481,7 @@ public class SkillsInventory : MonoBehaviour {
             case (int)SKILLS.Fa_BladeOfTheFallen:
                 skillStat[0] = 40;
                 skillStat[1] = 18;
-                skillStat[2] = 3;
+                skillStat[2] = 2;
                 skillStat[4] = (float)SKILL_TYPE.ALL_TARGETS_ATK;
                 skillStat[5] = 100;
                 break;
@@ -516,14 +516,14 @@ public class SkillsInventory : MonoBehaviour {
             case (int)SKILLS.Fr_PhantomShot:
                 skillStat[0] = 50;
                 skillStat[1] = 16;
-                skillStat[2] = 2;
+                skillStat[2] = 1;
                 skillStat[4] = (float)SKILL_TYPE.FULL_ROW_ATK;
                 skillStat[5] = 55;
                 break;
             case (int)SKILLS.Fr_NeverAgain:
                 skillStat[0] = 100;
                 skillStat[1] = 18;
-                skillStat[2] = 3;
+                skillStat[2] = 2;
                 skillStat[4] = (float)SKILL_TYPE.ALL_TARGETS_ATK;
                 skillStat[5] = 100;
                 break;
@@ -558,14 +558,14 @@ public class SkillsInventory : MonoBehaviour {
             case (int)SKILLS.Ob_FierceStrike:
                 skillStat[0] = 0;
                 skillStat[1] = 18;
-                skillStat[2] = 3;
+                skillStat[2] = 2;
                 skillStat[4] = (float)SKILL_TYPE.ALL_TARGETS_ATK;
                 skillStat[5] = 30;
                 break;
             case (int)SKILLS.Ob_Lutenist:
                 skillStat[0] = 0;
                 skillStat[1] = 100;
-                skillStat[2] = 3;
+                skillStat[2] = 1;
                 skillStat[4] = (float)SKILL_TYPE.SINGLE_PLAYER_BUFF;
                 skillStat[5] = 100;
                 break;
@@ -579,7 +579,7 @@ public class SkillsInventory : MonoBehaviour {
             case (int)SKILLS.Ar_HealingAura:
                 skillStat[0] = 30;
                 skillStat[1] = 100;
-                skillStat[2] = 2;
+                skillStat[2] = 1;
                 skillStat[4] = (float)SKILL_TYPE.ALL_PLAYER_HEAL;
                 skillStat[5] = 60;
                 break;
@@ -593,7 +593,7 @@ public class SkillsInventory : MonoBehaviour {
             case (int)SKILLS.Ar_LullabyOfHope:
                 skillStat[0] = 50;
                 skillStat[1] = 100;
-                skillStat[2] = 2;
+                skillStat[2] = 1;
                 skillStat[4] = (float)SKILL_TYPE.SINGLE_PLAYER_HEAL;
                 skillStat[5] = 60;
                 break;
@@ -607,7 +607,7 @@ public class SkillsInventory : MonoBehaviour {
             case (int)SKILLS.Ar_Armageddon:
                 skillStat[0] = 60;
                 skillStat[1] = 18;
-                skillStat[2] = 3;
+                skillStat[2] = 2;
                 skillStat[4] = (float)SKILL_TYPE.ALL_TARGETS_ATK;
                 skillStat[5] = 100;
                 break;
