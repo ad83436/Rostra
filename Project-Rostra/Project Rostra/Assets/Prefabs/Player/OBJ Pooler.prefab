@@ -118,3 +118,7 @@ MonoBehaviour:
     prefab: {fileID: 6040812169596290666, guid: 35511598506807d4ca792358dbfacffb,
       type: 3}
     poolSize: 5
+  - tag: SpearDance
+    prefab: {fileID: 4141480326992841744, guid: 8b7dc5ea13b2d2844a4d91c71c61582a,
+      type: 3}
+    poolSize: 3

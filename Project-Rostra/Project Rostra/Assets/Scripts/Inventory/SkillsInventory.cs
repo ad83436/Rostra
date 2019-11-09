@@ -45,6 +45,8 @@ public class SkillsInventory : MonoBehaviour {
         EquipSkill((int)SKILLS.Ob_ShieldAlly, 0, 1);
         AddToUnlockedSkills((int)SKILLS.Ob_ShieldAllAllies, 1);
         EquipSkill((int)SKILLS.Ob_ShieldAllAllies, 1, 1);
+        AddToUnlockedSkills((int)SKILLS.Ob_SpearDance, 1);
+        EquipSkill((int)SKILLS.Ob_SpearDance, 2, 1);
 
         AddToUnlockedSkills((int)SKILLS.Fr_DoubleShot, 2);
         EquipSkill((int)SKILLS.Fr_DoubleShot, 0, 2);
@@ -299,6 +301,14 @@ public class SkillsInventory : MonoBehaviour {
                 return "Shield Ally";
             case (int)SKILLS.Ob_ShieldAllAllies:
                 return "Shield All Allies";
+            case (int)SKILLS.Ob_SpearDance:
+                return "Spear Dance";
+            case (int)SKILLS.Ob_LionsPride:
+                return "Lion's pride";
+            case (int)SKILLS.Ob_Duel:
+                return "Duel";
+            case (int)SKILLS.Ob_Lutenist:
+                return "The Lutenist of Ocrest";
             case (int)SKILLS.Ar_Heal:
                 return "Heal";
             case (int)SKILLS.Ar_HealingAura:
@@ -361,6 +371,14 @@ public class SkillsInventory : MonoBehaviour {
                 return "Increase the defense of one ally for three turns.";
             case (int)SKILLS.Ob_ShieldAllAllies:
                 return "Increase the defense of all allies for three turns.";
+            case (int)SKILLS.Ob_SpearDance:
+                return "Oberon uses his spear to damage a single row of enemies with an increased chance for critical hits.";
+            case (int)SKILLS.Ob_LionsPride:
+                return "Doubles Oberon’s defense. He becomes the sole target of all enemy attacks. Lasts for 3 turns.";
+            case (int)SKILLS.Ob_Duel:
+                return "Targets one enemy. Oberon and the enemy exchange blows until one of them is down. Damage increases as the duel goes on.";
+            case (int)SKILLS.Ob_Lutenist:
+                return "Oberon ditches his spear to play the lute. All Oberon’s attacks now damage all enemies and increase the defense of all allies. Lasts for 3 turns.";
             case (int)SKILLS.Ar_Heal:
                 return "Restores a portion of a single alive ally’s HP.";
             case (int)SKILLS.Ar_HealingAura:
@@ -520,6 +538,34 @@ public class SkillsInventory : MonoBehaviour {
                 skillStat[2] = 1;
                 skillStat[4] = (float)SKILL_TYPE.ALL_PLAYER_BUFF;
                 skillStat[5] = 40;
+                break;
+            case (int)SKILLS.Ob_SpearDance:
+                skillStat[0] = 60;
+                skillStat[1] = 18;
+                skillStat[2] = 1;
+                skillStat[4] = (float)SKILL_TYPE.FULL_ROW_ATK;
+                skillStat[5] = 50;
+                break;
+            case (int)SKILLS.Ob_LionsPride:
+                skillStat[0] = 2.0f;
+                skillStat[1] = 100;
+                skillStat[2] = 0;
+                skillStat[4] = (float)SKILL_TYPE.SINGLE_PLAYER_BUFF;
+                skillStat[5] = 40;
+                break;
+            case (int)SKILLS.Ob_Duel:
+                skillStat[0] = 0;
+                skillStat[1] = 100;
+                skillStat[2] = 0;
+                skillStat[4] = (float)SKILL_TYPE.SINGLE_TARGET_ATK;
+                skillStat[5] = 30;
+                break;
+            case (int)SKILLS.Ob_Lutenist:
+                skillStat[0] = 0;
+                skillStat[1] = 100;
+                skillStat[2] = 3;
+                skillStat[4] = (float)SKILL_TYPE.SINGLE_PLAYER_BUFF;
+                skillStat[5] = 100;
                 break;
             case (int)SKILLS.Ar_Heal:
                 skillStat[0] = 20;

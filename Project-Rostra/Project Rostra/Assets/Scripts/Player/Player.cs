@@ -135,11 +135,14 @@ public class Player : MonoBehaviour
     public GameObject strBuffArrowIndicator;
     private Quaternion arrowRotator;
     private Color debuffColor;
+
     //Rally
     public GameObject rallySymbolFargasOnly;
     //BladesOfTheFallen
     private float totalBoFAtkToBeAdded = 0; //Used to calculate the atk points of the dead enemies which will be added to BoF
 
+    //SpearDance
+    private float critBeforeDance = 0.0f;
 
     //UI
     public Image hpImage;
@@ -383,7 +386,7 @@ public class Player : MonoBehaviour
             //Shake the camera
             btlCam.CameraShake();
             //Check for critical hits
-            if (CalculateCrit() <= crit)
+            if (CalculateCrit() <= actualCRIT)
             {
                 if (chosenSkill == (int)SKILLS.NO_SKILL) //In case the player's skill uses the same animation as the normal attack animation
                 {
@@ -500,6 +503,11 @@ public class Player : MonoBehaviour
 
     private float CalculateCrit()
     {
+        if(chosenSkill == (int)SKILLS.Ob_SpearDance)
+        {
+            critBeforeDance = actualCRIT;
+            actualCRIT *= 4.0f;
+        }
         return Random.Range(0.0f, 100.0f);
     }
 
@@ -950,10 +958,16 @@ public class Player : MonoBehaviour
         //Check which skill to know which animation to run
         if (skillID == (int)SKILLS.Fa_SwiftStrike) 
         {
-            Debug.Log("HIT");
             skillNameForObjPooler = "FFSkill1";
             skillAnimatorName = "ASkill";
             skillWaitingIndex = 1;
+        }
+
+        if (skillID == (int)SKILLS.Ob_SpearDance)
+        {
+            skillNameForObjPooler = "SpearDance";
+            skillAnimatorName = "BuffDef";
+            skillWaitingIndex = 2; //2 is Spear Dance
         }
 
         if (waitTime <= 0)
@@ -1011,7 +1025,7 @@ public class Player : MonoBehaviour
                 Debug.Log("Skill hit");
                 //Summon effect here
                 btlCam.CameraShake();
-                if (CalculateCrit() <= crit) //Critical
+                if (CalculateCrit() <= actualCRIT) //Critical
                 {
                     if (chosenSkill == (int)SKILLS.Fa_Sunguard) //Sunguard
                     {
@@ -1102,7 +1116,7 @@ public class Player : MonoBehaviour
                                 Debug.Log("Skill hit");
                                 //Summon effect here
                                 btlCam.CameraShake();
-                                if (CalculateCrit() <= crit)
+                                if (CalculateCrit() <= actualCRIT)
                                 {
                                     Debug.Log("Skill Crit");
                                     battleManager.enemies[i].enemyReference.TakeDamage(0.7f * actualATK + skills.SkillStats(chosenSkill)[0], numberOfAttacks); //Damage is the half the player's attack stat and the skill's attack stat
@@ -1147,7 +1161,7 @@ public class Player : MonoBehaviour
                                 Debug.Log("Skill hit");
                                 //Summon effect here
                                 btlCam.CameraShake();
-                                if (CalculateCrit() <= crit)
+                                if (CalculateCrit() <= actualCRIT)
                                 {
                                     Debug.Log("Skill Crit");
                                     battleManager.enemies[i].enemyReference.TakeDamage(0.7f * actualATK + skills.SkillStats(chosenSkill)[0], numberOfAttacks); //Damage is the half the player's attack stat and the skill's attack stat
@@ -1212,7 +1226,7 @@ public class Player : MonoBehaviour
                             Debug.Log("Skill hit");
                             //Summon effect here
                             btlCam.CameraShake();
-                            if (CalculateCrit() <= crit)
+                            if (CalculateCrit() <= actualCRIT)
                             {
                                 Debug.Log("Skill Crit");
                                     battleManager.enemies[i].enemyReference.TakeDamage(0.7f * actualATK + skills.SkillStats(chosenSkill)[0] + totalBoFAtkToBeAdded, numberOfAttacks); //Damage is half the player's attack stat and the skill's attack stat
@@ -1323,6 +1337,10 @@ public class Player : MonoBehaviour
                 }
                 playerAnimator.SetBool("ASkill", false);
             }
+        }
+        if(chosenSkill == (int)SKILLS.Ob_SpearDance)
+        {
+            actualCRIT = critBeforeDance; //Return the crit to what it was before using the skill
         }
         //Claculate the new MP and reset the player's state
         totalBoFAtkToBeAdded = 0;
