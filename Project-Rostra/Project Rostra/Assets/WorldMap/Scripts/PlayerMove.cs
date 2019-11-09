@@ -44,6 +44,11 @@ public class PlayerMove : MonoBehaviour
 			animator.SetFloat("Vertical", 0);
 			animator.SetFloat("Speed", 0);
 		}
+		if (Input.GetKeyDown(KeyCode.K))
+		{
+			DialogueManager.instance.metAllChars = true;
+			DialogueManager.instance.SetChoice(ChoiceEnum.metAllChars, true);
+		}
 	}
 
 
@@ -60,7 +65,6 @@ public class PlayerMove : MonoBehaviour
 	{
 		if (col.CompareTag("NPC"))
 		{
-            Debug.Log("CONVERSING CAN DO");
 			ct = col.GetComponent<ConversationTrigger>();
 			if (ct.pressZ != null)
 			{
@@ -78,7 +82,6 @@ public class PlayerMove : MonoBehaviour
 				ct.SetPressZ(false);
 			}
 			ct = null;
-			Debug.Log(col.GetComponent<ConversationTrigger>());
 			
 		}
 	}

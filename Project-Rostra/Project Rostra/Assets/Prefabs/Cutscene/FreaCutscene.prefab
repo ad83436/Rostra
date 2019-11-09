@@ -298,7 +298,7 @@ PrefabInstance:
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
       propertyPath: cs.dialogues.Array.data[0].sentences.Array.size
-      value: 14
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
@@ -408,8 +408,8 @@ PrefabInstance:
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
       propertyPath: cs.dialogues.Array.data[0].sentences.Array.data[1]
-      value: Frea. An assassin turned scout she leads the scouting party of the Ocrestian
-        army.
+      value: <i> Frea. An assassin turned scout she leads the scouting party of the
+        Ocrestian army.
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
@@ -419,65 +419,51 @@ PrefabInstance:
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
       propertyPath: cs.dialogues.Array.data[0].sentences.Array.data[3]
-      value: Good, now give the arm some rest it should take two days to fully heal.
+      value: It is unusual for her to stop sending letters. Has anything happened
+        recently?
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
       propertyPath: cs.dialogues.Array.data[0].sentences.Array.data[4]
-      value: Thank you Arcelus!
+      value: Her husband died recently. She wanted to see me. I've tried talking to
+        the commanders but they won't let me leave. I want to go see her. Can I trust
+        you won't tell the others where I've went?
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
       propertyPath: cs.dialogues.Array.data[0].sentences.Array.data[5]
-      value: You're welcome, just try to be a little more careful sharpening your
-        blade okay? Now what can I do for you Fargas?
+      value: Seeing as how I owe you for getting me away from the Thieves Guild, I
+        find it only fair that I assist you.
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
       propertyPath: cs.dialogues.Array.data[0].sentences.Array.data[6]
-      value: ' hasn''t been sending me any letters recently. Her Brenna''s husband
-        just died and she said she wanted to see me. I''m worried about her and I
-        want to go see her but the commanders forbid it. '
+      value: Listen Frea I appreciate your offer but this leaving the army is too
+        much to ask someone. I want you to stay here.
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
       propertyPath: cs.dialogues.Array.data[0].sentences.Array.data[7]
-      value: Can I trust your silence if I were to go?
+      value: Is leaving the army dangerous? Yes. Will we be on the run? Yes. Would
+        I be miserable if I had stayed here while you risked it all to see your sister?
+        Yes.
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
       propertyPath: cs.dialogues.Array.data[0].sentences.Array.data[8]
-      value: I'm going with you.
+      value: You're willing to go through all this on the hunch that my sister might
+        be in danger?
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
       propertyPath: cs.dialogues.Array.data[0].sentences.Array.data[9]
-      value: No I could never ask that of you. You have to stay here to help the wounded
-        soldiers. Besides, you know what happens to those who desert the military.
-        You're willing to gamble that on the chance that Brenna might be in danger.
+      value: Who was willing to go on the hunch that a girl with an arrow knocked
+        and your commanders head wouldn't fire the bow.
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
       propertyPath: cs.dialogues.Array.data[0].sentences.Array.data[10]
-      value: 'If it wasn''t for your testimony the army would have had my head a long
-        time ago. '
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[0].sentences.Array.data[11]
-      value: Disobeying order to heal front line soldiers carries a hefty price like
-        this, but you saved me from it.
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[0].sentences.Array.data[12]
-      value: If you believe that your sister might be in danger then that's all I
-        need.
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[0].sentences.Array.data[13]
-      value: Thank you.
+      value: Thank you... I don't know what to say.
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
@@ -584,32 +570,32 @@ PrefabInstance:
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
       propertyPath: cs.dialogues.Array.data[0].povChange.Array.data[6]
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
       propertyPath: cs.dialogues.Array.data[0].povChange.Array.data[7]
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
       propertyPath: cs.dialogues.Array.data[0].povChange.Array.data[8]
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
       propertyPath: cs.dialogues.Array.data[0].povChange.Array.data[9]
-      value: 14
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
       propertyPath: cs.dialogues.Array.data[0].povChange.Array.data[10]
-      value: 15
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
       propertyPath: cs.dialogues.Array.data[0].povChange.Array.data[11]
-      value: 15
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
@@ -634,7 +620,7 @@ PrefabInstance:
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
       propertyPath: cs.moves.Array.data[2].x
-      value: -0.76
+      value: 0.33
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
@@ -660,6 +646,26 @@ PrefabInstance:
         type: 3}
       propertyPath: cs.song
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
+        type: 3}
+      propertyPath: ce
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
+        type: 3}
+      propertyPath: isChoiceDependant
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
+        type: 3}
+      propertyPath: willCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
+        type: 3}
+      propertyPath: maxCount
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1430299444, guid: fc807c7c7bed02e44a3cdae90dddf003, type: 3}
       propertyPath: m_Offset.x

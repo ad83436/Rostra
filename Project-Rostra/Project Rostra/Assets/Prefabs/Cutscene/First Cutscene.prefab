@@ -99,16 +99,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2626243625421622227, guid: 335a038814e3ddd47a79a28e6ddf7ff0,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2626243625421622227, guid: 335a038814e3ddd47a79a28e6ddf7ff0,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2626243625421622226, guid: 335a038814e3ddd47a79a28e6ddf7ff0,
         type: 3}
       propertyPath: m_SortingLayerID
@@ -121,18 +111,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 335a038814e3ddd47a79a28e6ddf7ff0, type: 3}
---- !u!1 &6508933484599403913 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2626243625421622224, guid: 335a038814e3ddd47a79a28e6ddf7ff0,
-    type: 3}
-  m_PrefabInstance: {fileID: 9089999270837399129}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6508933484599403914 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2626243625421622227, guid: 335a038814e3ddd47a79a28e6ddf7ff0,
     type: 3}
   m_PrefabInstance: {fileID: 9089999270837399129}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2401738044621202032 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6877729094111497257, guid: 335a038814e3ddd47a79a28e6ddf7ff0,
+    type: 3}
+  m_PrefabInstance: {fileID: 9089999270837399129}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dad2f7844aec3c84d8d2b27d814a15fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &9089999271872212630
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -202,17 +198,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
+      propertyPath: cs.dialogues.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
+        type: 3}
       propertyPath: cs.dialogues.Array.data[0].sentences.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.moves.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.timings.Array.size
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
@@ -237,11 +228,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
-      propertyPath: cs.dialogues.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
       propertyPath: cs.dialogues.Array.data[2].names.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -262,6 +248,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
+      propertyPath: cs.moves.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
+        type: 3}
+      propertyPath: cs.timings.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
+        type: 3}
       propertyPath: cs.dialogueEntrance.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -277,41 +273,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
-      propertyPath: cs.dialogueEntrance.Array.data[0]
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
       propertyPath: cs.dialogues.Array.data[0].names.Array.data[0]
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
       propertyPath: cs.dialogues.Array.data[0].sentences.Array.data[0]
-      value: Northern Rostra... a land once torn apart with war now finds itself an
-        uneasy state.
+      value: <i>Northern Rostra... a land once torn apart with war now finds itself
+        an uneasy state.
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
       propertyPath: cs.dialogues.Array.data[0].sentences.Array.data[1]
-      value: The Kingdom of Ocrest now faces small incursions from it's neighbouring
+      value: <i>The Kingdom of Ocrest now faces small incursions from it's neighbouring
         Kingdom of Turst.
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
       propertyPath: cs.dialogues.Array.data[0].sentences.Array.data[2]
-      value: The Alchemy Guild in their search for immortality dig further into the
-        ground beneath Ocrest at the expense of their dwarven and human workers.
+      value: <i>The Alchemy Guild in their search for immortality dig further into
+        the ground beneath Ocrest at the expense of their dwarven and human workers.
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
       propertyPath: cs.dialogues.Array.data[0].sentences.Array.data[3]
-      value: Anything could be enough to light the spark of war.
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[0].sentences.Array.data[4]
-      value: Two weeks pass.
+      value: <i>Anything could be enough to light the spark of war.
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
@@ -321,78 +307,8 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
-      propertyPath: cs.actors.Array.data[0]
-      value: 
-      objectReference: {fileID: 6508933484599403913}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.moves.Array.data[5].x
-      value: -2.56
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.moves.Array.data[5].y
-      value: 5.04
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.timings.Array.data[5]
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.moves.Array.data[0].y
-      value: -0.56
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.moves.Array.data[1].y
-      value: -0.56
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.moves.Array.data[2].y
-      value: 5.04
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.moves.Array.data[0].x
-      value: -2.83
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.moves.Array.data[1].x
-      value: -1.04
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.moves.Array.data[2].x
-      value: -2.56
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.moves.Array.data[3].x
-      value: -2.56
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.moves.Array.data[4].x
-      value: -2.56
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.moves.Array.data[3].y
-      value: -0.56
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.moves.Array.data[4].y
-      value: 5.04
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogueEntrance.Array.data[1]
-      value: 1
+      propertyPath: cs.dialogues.Array.data[0].typingSpeed
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
@@ -417,6 +333,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
+      propertyPath: cs.dialogues.Array.data[1].sentences.Array.data[2]
+      value: Fargas I've never asked for much, but I need to see you right now more
+        than ever. Please brother I beg of you.
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
+        type: 3}
+      propertyPath: cs.dialogues.Array.data[1].sentences.Array.data[3]
+      value: Signed Brenna.
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
+        type: 3}
       propertyPath: cs.dialogues.Array.data[1].sentences.Array.data[4]
       value: 'Brenna you know what would happen if I were to desert the Sunguard.
         I will ask my commanders tomorrow if I can come and see you. '
@@ -429,30 +356,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
-      propertyPath: cs.dialogues.Array.data[1].sentences.Array.data[6]
-      value: I wouldn't worry too much. Maybe she just hasn't had the time to write
-        back?
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[1].sentences.Array.data[2]
-      value: Fargas I've never asked for much, but I need to see you right now more
-        than ever. Please brother I beg of you.
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[1].sentences.Array.data[3]
-      value: Signed Brenna.
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
       propertyPath: cs.dialogues.Array.data[1].portrait.Array.data[0]
-      value: 
-      objectReference: {fileID: 21300000, guid: dd3d4b940a009d14dbfe8b78c3b4f6ca,
-        type: 3}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[1].portrait.Array.data[1]
       value: 
       objectReference: {fileID: 21300000, guid: dd3d4b940a009d14dbfe8b78c3b4f6ca,
         type: 3}
@@ -468,18 +372,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
-      propertyPath: cs.camLocation.z
-      value: -10
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[1].povChange.Array.data[3]
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[0].sentences.Array.data[5]
-      value: 
+      propertyPath: cs.dialogues.Array.data[1].typingSpeed
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
@@ -488,41 +382,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
-      propertyPath: cs.dialogues.Array.data[2].names.Array.data[2]
-      value: Fargas
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
       propertyPath: cs.dialogues.Array.data[2].sentences.Array.data[0]
-      value: 'Two weeks have passed '
+      value: '<i>Two weeks have passed '
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
       propertyPath: cs.dialogues.Array.data[2].sentences.Array.data[1]
-      value: Well the recruits aren't going to train themselves.
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[2].sentences.Array.data[2]
-      value: Fargas I've never asked for much, but I need to see you right now more
-        than ever. Please brother I beg of you.
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[2].sentences.Array.data[3]
-      value: Signed Brenna.
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[2].sentences.Array.data[4]
-      value: 'Brenna you know what would happen if I were to desert the Sunguard.
-        I will ask my commanders tomorrow if I can come and see you. '
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[2].sentences.Array.data[5]
-      value: I pray to Yavarna that I can. It's been many years since we last saw
-        each other. Signed Fargas
+      value: 'I haven''t received a letter from Brenna in weeks. I''m really starting
+        to worry about Brenna. I should go talk to the captain. Maybe he can give
+        me some time to go see her. '
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
@@ -538,12 +406,6 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
-      propertyPath: cs.dialogues.Array.data[2].portrait.Array.data[2]
-      value: 
-      objectReference: {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825,
-        type: 3}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
       propertyPath: cs.dialogues.Array.data[2].povChange.Array.data[0]
       value: 1
       objectReference: {fileID: 0}
@@ -554,34 +416,59 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
-      propertyPath: cs.dialogues.Array.data[2].povChange.Array.data[2]
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogueEntrance.Array.data[2]
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[2].isChoice
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
       propertyPath: cs.dialogues.Array.data[2].typingSpeed
       value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
-      propertyPath: cs.dialogues.Array.data[0].typingSpeed
-      value: 0.01
+      propertyPath: cs.moves.Array.data[0].x
+      value: -2.83
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
-      propertyPath: cs.dialogues.Array.data[1].typingSpeed
-      value: 0.01
+      propertyPath: cs.moves.Array.data[0].y
+      value: -0.56
       objectReference: {fileID: 0}
+    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
+        type: 3}
+      propertyPath: cs.moves.Array.data[1].x
+      value: -1.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
+        type: 3}
+      propertyPath: cs.moves.Array.data[1].y
+      value: -0.56
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
+        type: 3}
+      propertyPath: cs.moves.Array.data[2].x
+      value: -2.56
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
+        type: 3}
+      propertyPath: cs.moves.Array.data[2].y
+      value: 5.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
+        type: 3}
+      propertyPath: cs.dialogueEntrance.Array.data[0]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
+        type: 3}
+      propertyPath: cs.dialogueEntrance.Array.data[1]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
+        type: 3}
+      propertyPath: cs.dialogueEntrance.Array.data[2]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
+        type: 3}
+      propertyPath: cs.actors.Array.data[0]
+      value: 
+      objectReference: {fileID: 2401738044621202032}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc807c7c7bed02e44a3cdae90dddf003, type: 3}
 --- !u!4 &186886922052285407 stripped

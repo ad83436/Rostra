@@ -54,4 +54,7 @@ public class Dialogue
 	//
 	public bool isOneShot;
 	public int addMilestone;
+	public bool addItem; // will this conversation add an item to the player
+	public int itemId; // if so will what item
+	public int itemNum;
 }

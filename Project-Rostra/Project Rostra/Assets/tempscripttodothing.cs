@@ -5,7 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class tempscripttodothing : MonoBehaviour {
 
+	[SerializeField]
+	private string sceneToLoad;
+
 	private void Start() {
-		SceneManager.LoadScene("Tutorial enter battle");
+		SceneManager.LoadScene(sceneToLoad);
 	}
 }

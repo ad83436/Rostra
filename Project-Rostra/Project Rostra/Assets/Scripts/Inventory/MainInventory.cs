@@ -393,6 +393,12 @@ public class MainInventory : MonoBehaviour {
             case (int)ITEM_ID.HOPE_POTION:
                 name = "Hope";
                 break;
+			case (int)ITEM_ID.SMALL_KEY:
+				name = "Small Key";
+				break;
+			case (int)ITEM_ID.BOOK:
+				name = "Book";
+				break;
 
         }
 		return name;
@@ -432,6 +438,12 @@ public class MainInventory : MonoBehaviour {
             case (int)ITEM_ID.HOPE_POTION:
                 description = "Revives an ally and restores a 100 hit points";
                 break;
+			case (int)ITEM_ID.SMALL_KEY:
+				description = "A small key given to you by Torven";
+				break;
+			case (int)ITEM_ID.BOOK:
+				description = "One page sticks out to you. There is ink covering up most of the page but you can make out a few words. A mother who witnessed ... will turn into a Farya upon her death. A Farya usually wears a long white dress and has glowing blue eyes... Some say that Farya can talk however this has yet to be proven.";
+				break;
         }
 
 		return description;
@@ -478,6 +490,7 @@ public class MainInventory : MonoBehaviour {
             case (int)ITEM_ID.HOPE_POTION:
                 price = 200;
                 break;
+				
 
         }
 
@@ -505,6 +518,12 @@ public class MainInventory : MonoBehaviour {
 				break;
 			case (int)ITEM_ID.TEST_WEAPON1:
 				itemClass = (int)ITEM_CLASS.WEAPON;
+				break;
+			case (int)ITEM_ID.SMALL_KEY:
+				itemClass = (int)ITEM_CLASS.UNSELLABLE;
+				break;
+			case (int)ITEM_ID.BOOK:
+				itemClass = (int)ITEM_CLASS.UNSELLABLE;
 				break;
 		}
 
@@ -670,6 +689,12 @@ public class MainInventory : MonoBehaviour {
 			case (int)ITEM_ID.TEST_ARMOR1:
 				itemType = (int)ITEM_TYPE.EQUIPABLE;
 				break;
+			case (int)ITEM_ID.SMALL_KEY:
+				itemType = (int)ITEM_TYPE.KEY_ITEM;
+				break;
+			case (int)ITEM_ID.BOOK:
+				itemType = (int)ITEM_TYPE.KEY_ITEM;
+				break;
             default:
                 itemType = (int)ITEM_TYPE.EQUIPABLE;
                 break;
@@ -698,6 +723,10 @@ public class MainInventory : MonoBehaviour {
                 return itemIcons[4];
             case (int)ITEM_ID.TEST_WEAPON1:
                 return itemIcons[5];
+			case (int)ITEM_ID.SMALL_KEY:
+				return itemIcons[6];
+			case (int)ITEM_ID.BOOK:
+				return itemIcons[7];
             default:
                 return itemIcons[0];
         }

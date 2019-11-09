@@ -354,6 +354,9 @@ MonoBehaviour:
     triggerBool: 0
     isOneShot: 0
     addMilestone: 0
+    addItem: 0
+    itemId: 0
+    itemNum: 0
   choiceCare: 4
   isChoiceDepend: 1
   pressZ: {fileID: 1354388581}
@@ -399,6 +402,9 @@ MonoBehaviour:
     triggerBool: 0
     isOneShot: 0
     addMilestone: 0
+    addItem: 0
+    itemId: 0
+    itemNum: 0
   choiceCare: 0
   isChoiceDepend: 0
   pressZ: {fileID: 0}
@@ -429,7 +435,6 @@ MonoBehaviour:
     - Grendol
     - Fargas
     - Grendol
-    - Grendol
     - Fargas
     - Grendol
     - 
@@ -449,8 +454,6 @@ MonoBehaviour:
       way of communicating with them. I do not want you to go looking for him and
       fall victim to those monsters.
     - We all want to do every thing we can to help him. Do you know where we can look?
-    - 'This is where we will end it off to avoid spoilers. Go to the door of the tavern
-      to continue the demo. '
     - 'I am afraid I can only point you toward where he was last seen. His home. He
       lives on the outskirts of town. Take this with you. It''s a guide to the monsters
       around the area. '
@@ -473,7 +476,6 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 3744c0c20009b844a9cef7bca3baa96b, type: 3}
     - {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825, type: 3}
     - {fileID: 21300000, guid: 3744c0c20009b844a9cef7bca3baa96b, type: 3}
-    - {fileID: 21300000, guid: 3744c0c20009b844a9cef7bca3baa96b, type: 3}
     - {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825, type: 3}
     - {fileID: 21300000, guid: 3744c0c20009b844a9cef7bca3baa96b, type: 3}
     - {fileID: 21300000, guid: dd3d4b940a009d14dbfe8b78c3b4f6ca, type: 3}
@@ -489,10 +491,9 @@ MonoBehaviour:
     - 10
     - 11
     - 12
-    - 12
     - 13
-    - 14
-    - 16
+    - 15
+    - 15
     typingSpeed: 0.01
     isChoice: 0
     choiceLine: 0
@@ -512,6 +513,9 @@ MonoBehaviour:
     triggerBool: 6
     isOneShot: 1
     addMilestone: 3
+    addItem: 1
+    itemId: 10
+    itemNum: 1
   choiceCare: 0
   isChoiceDepend: 0
   pressZ: {fileID: 0}
@@ -559,6 +563,9 @@ MonoBehaviour:
     triggerBool: 0
     isOneShot: 0
     addMilestone: 0
+    addItem: 0
+    itemId: 0
+    itemNum: 0
   choiceCare: 0
   isChoiceDepend: 0
   pressZ: {fileID: 0}
@@ -603,6 +610,9 @@ MonoBehaviour:
     triggerBool: 0
     isOneShot: 0
     addMilestone: 0
+    addItem: 0
+    itemId: 0
+    itemNum: 0
   choiceCare: 0
   isChoiceDepend: 0
   pressZ: {fileID: 0}

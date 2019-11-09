@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 
-public enum ChoiceEnum
+public enum ChoiceEnum : byte
 {
 	dwarf = 0,
 	guild = 1,
@@ -14,6 +14,8 @@ public enum ChoiceEnum
 	tell =  4,
 	lie =   5,
 	demo =  6,
+	talkToCo = 7,
+	metAllChars = 8,
 }
 
 
@@ -65,6 +67,8 @@ public class DialogueManager : MonoBehaviour
 	public bool tell;
 	public bool lie;
 	//set 3 ^
+	public bool talkedToCo; // 7
+	public bool metAllChars; // 8 
 	// stores a local copy of which choice set we will be using
 	private float choiceSet;
 	public bool[] choices;
@@ -130,7 +134,7 @@ public class DialogueManager : MonoBehaviour
 		DontDestroyOnLoad(this.gameObject);
         // set everything to its default 
         textElements = new Queue<string>();
-		choices = new bool[7];
+		choices = new bool[10]; // was 7
 		change = 0;
 		currentChange = 0;
 		boxCount = 0;
@@ -176,7 +180,6 @@ public class DialogueManager : MonoBehaviour
 			{
 				AddMilestone(d.addMilestone);
 			}
-			Debug.Log("Started Convo");
 			text.text = "";
 			//turn off the highlighting and set everything to default in case it wasn't reset
 			highlight1.SetActive(false);
@@ -186,6 +189,11 @@ public class DialogueManager : MonoBehaviour
 			anim.SetBool("isOpen", true);
 			// save a local copy of the dialogue we pass in
 			dia = d;
+			// if we need to add an item do it now so won't have to worry about it later 
+			if (dia.addItem == true && dia.itemId > 0)
+			{
+				AddItem(dia.itemId, dia.itemNum);
+			}
 			// display the first name and portraits
 			charName.text = d.names[0];
 			portrait.sprite = d.portrait[0];
@@ -193,7 +201,6 @@ public class DialogueManager : MonoBehaviour
 			// this loop is going to go through each individual text and add it to the queue
 			foreach (string s in d.sentences)
 			{
-				print("Do thing");
 				// loop and queue up the elements
 				textElements.Enqueue(s);
 			}
@@ -229,11 +236,18 @@ public class DialogueManager : MonoBehaviour
 			isActive = true;
 			if (d.triggerBool > 0)
 			{
+				Debug.Log(d.triggerBool);
 				switch (d.triggerBool)
 				{
 					case 6:
-						DialogueManager.instance.demo = true;
+						demo = true;
+						SetChoice(ChoiceEnum.demo, true);
 						Debug.Log("We can leave the tavern");
+						break;
+					case 7:
+						talkedToCo = true;
+						SetChoice(ChoiceEnum.talkToCo, true);
+						Debug.Log("We talked to the commander!");
 						break;
 
 				}
@@ -260,7 +274,6 @@ public class DialogueManager : MonoBehaviour
 		{
 			change = -1;
 		}
-		Debug.Log(textElements.Count);
 		// if the count of our queue is zero go home
 		if (textElements.Count == 0)
 		{
@@ -286,7 +299,6 @@ public class DialogueManager : MonoBehaviour
 	// go home you done
 	public void End()
 	{
-		Debug.Log("End");
 		charName.text = "";
 		text.text = "";
 		portrait.sprite = null;
@@ -319,8 +331,16 @@ public class DialogueManager : MonoBehaviour
 	// this is a coroutine that will take our chars from the string and print one at a time 
 	IEnumerator TypeLetters(string s)
 	{
-        Debug.Log("TYPING LETTERS TYPING");
 		text.text = "";
+		if (s.Contains("<i>") == true)
+		{
+			text.fontStyle = FontStyle.Italic;
+			s = s.Replace("<i>", "");
+		}
+		else
+		{
+			text.fontStyle = FontStyle.Normal;
+		}
 		continueCountTotal = 0;
 		continueCountTotal = s.ToCharArray().Length;
 		foreach (char l in s.ToCharArray())
@@ -423,11 +443,14 @@ public class DialogueManager : MonoBehaviour
 		// if the choice is more than half of the array take away half the array to get it's counterpart
 		if (d.choiceCare1.dialogue.hasPlayed == true && d.choiceCare1.dialogue.isOneShot == true)
 		{
-			Debug.Log("Playing Normal Text");
 			StartConversation(dia.choiceCare1.dialogue.normal.dialogue);
-			if (dia.choice1.dialogue.normal.dialogue.addMilestone > 0)
+			if (dia.normal.dialogue.addMilestone > 0)
 			{
 				AddMilestone(dia.choice1.dialogue.normal.dialogue.addMilestone);
+			}
+			if (dia.normal.dialogue.addItem == true && dia.normal.dialogue.itemId > 0)
+			{
+				AddItem(dia.normal.dialogue.itemId, dia.normal.dialogue.itemNum);
 			}
 		}
 		else
@@ -435,9 +458,13 @@ public class DialogueManager : MonoBehaviour
 			if (choice > choices.Length / 2 && (choices[(int)choice] == false && choices[(int)choice - choices.Length / 2] == false))
 			{
 				StartConversation(dia.normal.dialogue);
-				if (dia.choice1.dialogue.normal.dialogue.addMilestone > 0)
+				if (dia.normal.dialogue.addMilestone > 0)
 				{
 					AddMilestone(dia.choice1.dialogue.normal.dialogue.addMilestone);
+				}
+				if (dia.normal.dialogue.addItem == true && dia.normal.dialogue.itemId > 0)
+				{
+					AddItem(dia.normal.dialogue.itemId, dia.normal.dialogue.itemNum);
 				}
 				Debug.Log((int)choice - choices.Length / 2);
 			}
@@ -445,6 +472,11 @@ public class DialogueManager : MonoBehaviour
 			else if (choice <= choices.Length / 2 && (choices[(int)choice] == false && choices[(int)choice + choices.Length / 2] == false))
 			{
 				StartConversation(dia.normal.dialogue);
+				if (dia.normal.dialogue.addItem == true && dia.normal.dialogue.itemId > 0)
+				{
+					AddItem(dia.normal.dialogue.itemId, dia.normal.dialogue.itemNum);
+				}
+
 				Debug.Log((int)choice + choices.Length / 2);
 			}
 			// init dialogue 1
@@ -452,7 +484,11 @@ public class DialogueManager : MonoBehaviour
 			{
 				dia.choiceCare1.dialogue.hasPlayed = true;
 				StartConversation(dia.choiceCare1.dialogue);
-				if(dia.choice1.dialogue.addMilestone > 0)
+				if (dia.choiceCare1.dialogue != null && dia.choiceCare1.dialogue.addItem == true && dia.choiceCare1.dialogue.itemId > 0)
+				{
+					AddItem(dia.choiceCare1.dialogue.itemId, dia.choiceCare1.dialogue.itemNum);
+				}
+				if (dia.choice1.dialogue.addMilestone > 0)
 				{
 					AddMilestone(dia.choice1.dialogue.addMilestone);
 				}
@@ -469,6 +505,10 @@ public class DialogueManager : MonoBehaviour
 	public void PlayNormalDialogue(Dialogue d)
 	{
 		StartConversation(d.normal.dialogue);
+		if ( d.normal != null && d.normal.dialogue.addItem == true && d.normal.dialogue.itemId > 0)
+		{
+			AddItem(d.normal.dialogue.itemId, d.normal.dialogue.itemNum);
+		}
 	}
 	// check our keyboard pressed and do things accordingly
 	public void CheckInput()
@@ -543,5 +583,9 @@ public class DialogueManager : MonoBehaviour
 	public void AddMilestone(int i)
 	{
 		QuestManager.AddMilestone(i);
+	}
+	public void AddItem(int id, int num)
+	{
+			MainInventory.invInstance.AddItem(id, num);
 	}
 }
