@@ -16,6 +16,8 @@ public enum ITEM_ID { // Minimum Value -- 0x0000, Maximum Value -- 0xFEFF (65280
     HP_POTION =         0x0006,
     MP_ELIXER =         0x0007,
     HOPE_POTION =       0x0008,
+	SMALL_KEY =         0x0009,
+	BOOK =              0x000A,
 };
 
 enum ITEM_TYPE { // Minimum Value -- 0xFF00, Maximum Value -- 0xFF4F (64 possible item types)

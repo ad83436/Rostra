@@ -176,7 +176,7 @@ public class MainMenu : MonoBehaviour
             fade.fillAmount += 0.02f;
             if (fade.fillAmount >= 1.0f)
             {
-                SceneManager.LoadScene("WorldMap");
+                SceneManager.LoadScene("PlayTest2");
             }
         }
     }
