@@ -123,16 +123,6 @@ public class CutsceneManager : MonoBehaviour
                 // if we aren't already in a cutscene
                 if (DialogueManager.instance.isActive == false && moveLenght >= 0)
                 {
-                    //fade in
-                    //if (timingsCM[current] <= anim.GetCurrentAnimatorStateInfo(0).length)
-                    //{
-                    // anim.SetBool("FadeIn", true);
-                    //}
-                    // this is gonna check if our next point is visible by the camera if not then fade out
-                    //	if (canSeen.x <= 0 && canSeen.x >= 1 && canSeen.y <= 0 && canSeen.y >= 1)
-                    //{
-                    //anim.SetBool("FadeIn", false);
-                    //  }
                     timingsCM[current] -= Time.deltaTime;
                 }
                 // if our current move has dialogue attached to it
@@ -164,16 +154,11 @@ public class CutsceneManager : MonoBehaviour
                     }
                     else
                     {
-                        //End();
                         fade.TransitionOutOfACutscene();
                     }
                     moveLenght--;
                     actorsCM[actorCount].MoveActor(new Vector3(movesCM[current].x, movesCM[current].y, actorsCM[actorCount].transform.localPosition.z));
                     // nothing should be happening here either
-
-                    //anim.ResetTrigger("FadeOut");
-                    //anim.ResetTrigger("FadeIn");
-                    //anim.SetBool("FadeIn", true);
                 }
                 /// 
                 if (povCount <= povChangesCM.Length - 1 && current == povChangesCM[povCount] && actorsCM.Length > 0 && povChangesCM.Length > 0)
