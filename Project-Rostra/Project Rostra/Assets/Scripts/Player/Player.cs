@@ -154,6 +154,9 @@ public class Player : MonoBehaviour
     private float maxSustainedDamage = 300.0f;
     public Text sustainedDamageText;
 
+    //Lutenist
+    private string[] statToAffect;
+
     //UI
     public Image hpImage;
     public Image rageImage;
@@ -293,6 +296,13 @@ public class Player : MonoBehaviour
                     break;
                 }
             }
+
+            //Lutenist of Ocrest array of strings
+            statToAffect = new string[4];
+            statToAffect[0] = "Defense";
+            statToAffect[1] = "Attack";
+            statToAffect[2] = "Agility";
+            statToAffect[3] = "Strength";
         }
         
 
@@ -692,7 +702,6 @@ public class Player : MonoBehaviour
                     }
                     else
                     {
-
                         BuffStats(debuffSubIndex, -debuffValuePercent, debuffTimer);
                     }
                     break;
@@ -875,12 +884,21 @@ public class Player : MonoBehaviour
             skillAnimatorName = "BuffDef";
             skillWaitingIndex = 1;
         }
+        else if(skillID == (int)SKILLS.Ob_Lutenist)
+        {
+            skillTarget = 9;
+            skillNameForObjPooler = "LutenistEffect";
+            skillAnimatorName = "BuffDef";
+            skillTextValue = "Charge!";
+            skillWaitingIndex = 4; //LU is 3
+        }
         else if(skillID == (int)SKILLS.Fa_WarCry)
         {
             skillTarget = 9; //All player buff
             skillAnimatorName = "ASkill";
             skillWaitingIndex = 3;
         }
+
 
         if (waitTime <= 0)
         {
@@ -1411,7 +1429,6 @@ public class Player : MonoBehaviour
                             }
                         }
                     }
-                    playerAnimator.SetBool("Heal", false);
                 }
             }
             else if (skillTarget == 8) //Buff single player
@@ -1443,9 +1460,8 @@ public class Player : MonoBehaviour
                             }
                         }
                     }
-                    playerAnimator.SetBool("BuffDef", false);
                 }
-                else if (chosenSkill == (int)SKILLS.Fa_WarCry) //Defense buff // Placeholder
+                else if (chosenSkill == (int)SKILLS.Fa_WarCry) //Warcry
                 {
                     for (int i = 0; i < battleManager.players.Length; i++)
                     {
@@ -1458,9 +1474,42 @@ public class Player : MonoBehaviour
                             }
                         }
                     }
-                    playerAnimator.SetBool("ASkill", false);
                 }
+                if (chosenSkill == (int)SKILLS.Ob_Lutenist) //Lutenist 
+                {
+                    uiBTL.UpdateNumberOfEndTurnsNeededToEndTurn(2); //There's a target all enemies element to it too
+                    objPooler.SpawnFromPool(skillNameForObjPooler, gameObject.transform.position, gameObject.transform.rotation);
+
+                    for (int i = 0; i < battleManager.players.Length; i++) //Buff random stat for each player
+                    {
+                        if (battleManager.players[i].playerReference != null)
+                        {
+                            //Make sure the character being buffed is alive and not in RAGE mode
+                            if (!battleManager.players[i].playerReference.dead && battleManager.players[i].playerReference.currentState != playerState.Rage)
+                            {
+                                battleManager.players[i].playerReference.BuffStats(statToAffect[Random.Range(0,statToAffect.Length)], skills.SkillStats(chosenSkill)[0], 3);
+                            }
+                        }
+                    }
+
+                    for(int i =0; i < battleManager.enemies.Length; i++) //Debuff a random stat for each enemy
+                    {
+                        if(battleManager.enemies[i].enemyReference!=null)
+                        {
+                            if(!battleManager.enemies[i].enemyReference.dead)
+                            {
+                                //Passing in a positive value cause the enemy's function negates the value
+                                battleManager.enemies[i].enemyReference.TakeDamage(0.0f, 0, 1, skills.SkillStats(chosenSkill)[0], 3, statToAffect[Random.Range(0, statToAffect.Length)], EnemyStatusAilment.none);// Debuff a random stat for the enemies
+                            }
+                        }
+                    }
+                }
+                playerAnimator.SetBool(skillAnimatorName, false);
+                playerAnimator.SetInteger("WaitingIndex", 0);
             }
+
+            // ----- End of Skill Effect -----  //
+
             if (chosenSkill == (int)SKILLS.Ob_SpearDance)
             {
                 actualCRIT = critBeforeDance; //Return the crit to what it was before using the skill
@@ -1696,8 +1745,6 @@ public class Player : MonoBehaviour
                 }
                 break;
         }
-
-       
     }
 
     private void CheckForBuffs()
@@ -1886,7 +1933,10 @@ public class Player : MonoBehaviour
                 break;
         }
 
-        uiBTL.EndTurn(); //End the turn of the current player (i.e. the buffer) when the buffing is done
+        if (chosenSkill != (int)SKILLS.Ob_Lutenist) //When using Lutenist, the turn is ended by the enemies
+        {
+            uiBTL.EndTurn(); //End the turn of the current player (i.e. the buffer) when the buffing is done
+        }
     }
     
     private void DisableAllBuffs() //Called when the player dies. Disables all buffs.

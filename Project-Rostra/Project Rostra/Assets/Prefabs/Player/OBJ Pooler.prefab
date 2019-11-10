@@ -126,3 +126,6 @@ MonoBehaviour:
     prefab: {fileID: 1993473902015434748, guid: 8158257223fbf124d8ad1480e947b794,
       type: 3}
     poolSize: 5
+  - tag: LutenistEffect
+    prefab: {fileID: 55853879983042136, guid: a59ca392be54c644ca8a1796b7f8b111, type: 3}
+    poolSize: 1

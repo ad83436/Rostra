@@ -43,8 +43,8 @@ public class SkillsInventory : MonoBehaviour {
 
         AddToUnlockedSkills((int)SKILLS.Ob_FierceStrike, 1);
         EquipSkill((int)SKILLS.Ob_FierceStrike, 0, 1);
-        AddToUnlockedSkills((int)SKILLS.Ob_ShieldAllAllies, 1);
-        EquipSkill((int)SKILLS.Ob_ShieldAllAllies, 1, 1);
+        AddToUnlockedSkills((int)SKILLS.Ob_Lutenist, 1);
+        EquipSkill((int)SKILLS.Ob_Lutenist, 1, 1);
         AddToUnlockedSkills((int)SKILLS.Ob_SpearDance, 1);
         EquipSkill((int)SKILLS.Ob_SpearDance, 2, 1);
         AddToUnlockedSkills((int)SKILLS.Ob_LionsPride, 1);
@@ -286,7 +286,7 @@ public class SkillsInventory : MonoBehaviour {
             case (int)SKILLS.Fa_Rally:
                 return "Rally";
             case (int)SKILLS.Fa_BladeOfTheFallen:
-                return "Balde Of The Fallen";
+                return "Blade Of The Fallen";
             case (int)SKILLS.Fr_DoubleShot:
                 return "Double Shot";
             case (int)SKILLS.Fr_PiercingShot:
@@ -364,7 +364,7 @@ public class SkillsInventory : MonoBehaviour {
             case (int)SKILLS.Fr_ArrowRain:
                 return "Frea shoots a rain of arrows that damages all enemies.";
             case (int)SKILLS.Fr_IDontMiss:
-                return "Frea takes a deep breath and concentrates. Increases base Strength by 10 for three turns. ";
+                return "Frea takes a deep breath and concentrates. Increases base Strength by 30% for three turns. ";
             case (int)SKILLS.Fr_PhantomShot:
                 return "No one can see it coming. Damages a row of enemies and decreases their attack for three turns.";
             case (int)SKILLS.Fr_NeverAgain:
@@ -380,7 +380,7 @@ public class SkillsInventory : MonoBehaviour {
             case (int)SKILLS.Ob_FierceStrike:
                 return "Wait for the enemy to believe you're beaten, then exact sweet revenge. This attack gets stronger the more damage Oberon sustains.";
             case (int)SKILLS.Ob_Lutenist:
-                return "Oberon ditches his spear to play the lute. All Oberon’s attacks now damage all enemies and increase the defense of all allies. Lasts for 3 turns.";
+                return "Oberon plays the lute to improve morale. All enemies suffer a random debuff and all allies get a random buff.";
             case (int)SKILLS.Ar_Heal:
                 return "Restores a portion of a single alive ally’s HP.";
             case (int)SKILLS.Ar_HealingAura:
@@ -500,14 +500,14 @@ public class SkillsInventory : MonoBehaviour {
                 skillStat[5] = 40;
                 break;
             case (int)SKILLS.Fr_ArrowRain:
-                skillStat[0] = 35;
+                skillStat[0] = 50;
                 skillStat[1] = 15;
                 skillStat[2] = 1;
                 skillStat[4] = (float)SKILL_TYPE.ALL_TARGETS_ATK;
                 skillStat[5] = 45;
                 break;
             case (int)SKILLS.Fr_IDontMiss:
-                skillStat[0] = 10;
+                skillStat[0] = 0.3f;
                 skillStat[1] = 100;
                 skillStat[2] = 0;
                 skillStat[4] = (float)SKILL_TYPE.SINGLE_PLAYER_BUFF;
@@ -521,7 +521,7 @@ public class SkillsInventory : MonoBehaviour {
                 skillStat[5] = 55;
                 break;
             case (int)SKILLS.Fr_NeverAgain:
-                skillStat[0] = 100;
+                skillStat[0] = 180;
                 skillStat[1] = 18;
                 skillStat[2] = 2;
                 skillStat[4] = (float)SKILL_TYPE.ALL_TARGETS_ATK;
@@ -560,14 +560,14 @@ public class SkillsInventory : MonoBehaviour {
                 skillStat[1] = 18;
                 skillStat[2] = 2;
                 skillStat[4] = (float)SKILL_TYPE.ALL_TARGETS_ATK;
-                skillStat[5] = 30;
+                skillStat[5] = 100;
                 break;
             case (int)SKILLS.Ob_Lutenist:
-                skillStat[0] = 0;
+                skillStat[0] = 0.3f;
                 skillStat[1] = 100;
                 skillStat[2] = 1;
-                skillStat[4] = (float)SKILL_TYPE.SINGLE_PLAYER_BUFF;
-                skillStat[5] = 100;
+                skillStat[4] = (float)SKILL_TYPE.ALL_PLAYER_HEAL;
+                skillStat[5] = 50;
                 break;
             case (int)SKILLS.Ar_Heal:
                 skillStat[0] = 20;
