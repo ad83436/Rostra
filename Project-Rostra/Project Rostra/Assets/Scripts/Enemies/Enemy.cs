@@ -242,10 +242,6 @@ public class Enemy : MonoBehaviour
     {
         battleManager.AddEnemy(enemyIndexInBattleManager, Mathf.RoundToInt(eAgility), Mathf.RoundToInt(eStrength), Mathf.RoundToInt(eCritical), Mathf.RoundToInt(eSpeed), Mathf.RoundToInt(currentHP), Mathf.RoundToInt(maxHP), this, name);
     }
-    /// <summary>
-    /// HEY LISTEN !!!!!!!! Feel Free Change the values in EnemyTurn if you must do so, as these are all test values sho like a good tweaking now and then.
-    /// </summary>
-    /// 
     public virtual void EnemyTurn()
     {
         if (!battleManager.battleHasEnded) //If all the players are dead, don't run the turn. Precautionary if statement.

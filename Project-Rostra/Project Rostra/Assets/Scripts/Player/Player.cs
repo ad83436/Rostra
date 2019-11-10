@@ -1287,7 +1287,7 @@ public class Player : MonoBehaviour
                                         Debug.Log("No Skill Crit");
                                         if (chosenSkill == (int)SKILLS.Ar_IceAge)
                                         {
-                                            battleManager.enemies[i].enemyReference.TakeDamage(0.5f * actualATK + skills.SkillStats(chosenSkill)[0], numberOfAttacks, 1, 0.3f, 3, "Defense", EnemyStatusAilment.none); //Damage is the half the player's attack stat and the skill's attack stat
+                                            battleManager.enemies[i].enemyReference.TakeDamage(0.5f * actualATK + skills.SkillStats(chosenSkill)[0], numberOfAttacks, 1, 0.3f, 3, "Agility", EnemyStatusAilment.none); //Damage is the half the player's attack stat and the skill's attack stat
                                         }
                                         else
                                         {
@@ -1663,6 +1663,7 @@ public class Player : MonoBehaviour
         chosenSkill = (int)SKILLS.NO_SKILL;
         currentAilment = playerAilments.none;
         DisableAllBuffs();
+        uiBTL.PlayerHasBeenRevived(playerIndex);
     }
     #endregion
     #region buffs and debuffs

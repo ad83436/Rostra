@@ -85,6 +85,12 @@ public class UIBTL : MonoBehaviour
     private Vector2 imagesOriginalSize; //Used to restore images to their original sizes after being hilighted
     private Vector2 imagesHilightedSize; //Makes the selected image a bit bigger to make it highlighted
     private Image highlightedImage; //Used to know which image was hilighted so we can shrink it before moving forward
+    private Image[] playerImageReferences;
+    private Image[] enemyImageReferences;
+    private int[] playerImageIndexes;
+    private int[] enemyImageIndexes;
+    private Color colorAfterDeath;
+
 
     //States
     private enum btlUIState
@@ -176,6 +182,11 @@ public class UIBTL : MonoBehaviour
         targetPos = images[0].transform.localPosition;
         imagesOriginalSize = images[0].rectTransform.sizeDelta;
         imagesHilightedSize = new Vector2(144.32f, 64.97f);
+        playerImageReferences = new Image[5];
+        enemyImageReferences = new Image[5];
+        playerImageIndexes = new int[5];
+        enemyImageIndexes = new int[5];
+        colorAfterDeath = new Color(0.5f, 0.5f, 0.5f, 1.0f);
 
         imageMovementSpeed = 250.0f;
         imageMaxDistance = 149.0f;
@@ -277,19 +288,28 @@ public class UIBTL : MonoBehaviour
         }
     }
 
-    public virtual void AddImageToQ(Sprite nextOnQImage)
+    public virtual void AddImageToQ(Sprite nextOnQImage,int index, bool player)
     {
         //Called from the BTL manager when adding characters to the Q
         imagesQ.Add(nextOnQImage);
+
+        //Store the index of the last image referenced by the playerindex
+        if (player)
+        {
+            playerImageIndexes[index] = imagesQ.Count - 1;
+        }
+        else
+        {
+            enemyImageIndexes[index] = imagesQ.Count - 1;
+        }
     }
 
     public virtual void QueueIsReady()
     {
+        //Called from the BTL manager when the Q has been built
         highlightedImage = images[0];
         images[0].rectTransform.sizeDelta = imagesHilightedSize;
         backdropHighlighter.gameObject.SetActive(true);
-        //Called from the BTL manager when the Q has been built
-        Debug.Log("Images count " + imagesQ.Count);
         //Fill up the Q until its of size 9. Only 6 will be on screen at a time however.
         switch (imagesQ.Count)
         {
@@ -353,6 +373,13 @@ public class UIBTL : MonoBehaviour
                 break;
 
         }
+
+        for(int i =0; i<5; i++)
+        {
+            playerImageReferences[i] = images[playerImageIndexes[i]];
+            enemyImageReferences[i] = images[enemyImageIndexes[i]];
+        }
+
 
     }
 
@@ -1172,6 +1199,7 @@ public class UIBTL : MonoBehaviour
                             itemsPanelIndex = 0; //Reset the itemsPanelIndex
                             btlManager.players[playerIndicatorIndex].playerReference.UpdatePlayerStats();
                             playerInControl.ForcePlayerTurnAnimationOff();
+                            PlayerHasBeenRevived(playerIndicatorIndex);
                             EndTurn();
                     }
                 }
@@ -1637,6 +1665,7 @@ public class UIBTL : MonoBehaviour
     public virtual void EnemyIsDead(int enemyIndex)
     {
         enemiesDead[enemyIndex] = true;
+        enemyImageReferences[enemyIndex].color = colorAfterDeath;
         numberOfDeadEnemies++;
 
         if (numberOfDeadEnemies >= numberOfEnemies)
@@ -1656,6 +1685,7 @@ public class UIBTL : MonoBehaviour
     public virtual void PlayerIsDead(int playerIndex)
     {
         playersDead[playerIndex] = true;
+        playerImageReferences[playerIndex].color = colorAfterDeath;
         numberOfDeadPlayers++;
 
         if(numberOfDeadPlayers>=numberOfPlayers)
@@ -1670,6 +1700,14 @@ public class UIBTL : MonoBehaviour
 
         }
 
+    }
+
+    public void PlayerHasBeenRevived(int index)
+    {
+        //Restore the color of the dead player image
+        colorAfterDeath.r = colorAfterDeath.b = colorAfterDeath.g = 1.0f;
+        playerImageReferences[index].color = colorAfterDeath;
+        colorAfterDeath.r = colorAfterDeath.b = colorAfterDeath.g = 0.5f;
     }
 
     protected virtual void EndBattleUI()
