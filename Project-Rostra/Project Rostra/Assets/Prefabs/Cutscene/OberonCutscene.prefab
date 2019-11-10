@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dad2f7844aec3c84d8d2b27d814a15fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fadeIn: 0
 --- !u!114 &1924895973
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59,6 +60,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dad2f7844aec3c84d8d2b27d814a15fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fadeIn: 0
 --- !u!114 &1487817364
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -71,6 +73,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dad2f7844aec3c84d8d2b27d814a15fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fadeIn: 0
 --- !u!114 &685095004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -83,6 +86,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dad2f7844aec3c84d8d2b27d814a15fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fadeIn: 0
 --- !u!1001 &1737420524527421257
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -444,8 +448,8 @@ PrefabInstance:
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
       propertyPath: cs.dialogues.Array.data[2].sentences.Array.data[1]
-      value: 'Oberon. A high born Ocrestian lute player turned spearman for the Ocrestian
-        Army. '
+      value: <i>Oberon. A high born Ocrestian lute player turned spearman for the
+        Ocrestian Army.
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
@@ -794,6 +798,26 @@ PrefabInstance:
         type: 3}
       propertyPath: cs.song
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
+        type: 3}
+      propertyPath: ce
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
+        type: 3}
+      propertyPath: isChoiceDependant
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
+        type: 3}
+      propertyPath: willCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
+        type: 3}
+      propertyPath: maxCount
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1430299444, guid: fc807c7c7bed02e44a3cdae90dddf003, type: 3}
       propertyPath: m_Offset.x

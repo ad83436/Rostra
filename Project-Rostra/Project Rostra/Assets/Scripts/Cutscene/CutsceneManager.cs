@@ -35,6 +35,8 @@ public class CutsceneManager : MonoBehaviour
 	public GameObject pl;
 	private Vector2 returnPosition;
 	private bool fadeOut = false;
+	private int maxCount;
+	public ChoiceEnum ce;
 	// Start is called before the first frame update
 	void Awake()
 	{
@@ -66,7 +68,8 @@ public class CutsceneManager : MonoBehaviour
 		moveCount = 0;
 		actorCount = 0;
 		povCount = 0;
-		audios = GetComponent<AudioSource>();
+		maxCount = 0;
+		//audios = GetComponent<AudioSource>();
 	}
 	// Update is called once per frame
 	void Update()
@@ -213,5 +216,14 @@ public class CutsceneManager : MonoBehaviour
 		}
 	}
 
-
+	public void TriggerBool(int c)
+	{
+		maxCount++;
+		if (maxCount == c)
+		{
+			// this will set our story choice to be equal
+			DialogueManager.instance.metAllChars = true;
+			DialogueManager.instance.SetChoice(ChoiceEnum.metAllChars, true);
+		}
+	}
 }

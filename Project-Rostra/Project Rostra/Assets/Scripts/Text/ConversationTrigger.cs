@@ -18,6 +18,7 @@ public class ConversationTrigger : MonoBehaviour
 	public bool directTriggerText;
 	protected bool played = false;
 	public bool oneShot = false;
+	 // and how many?
 	public virtual void TriggerConvo()
 	{
 		if (played == true && oneShot == true)
@@ -61,5 +62,5 @@ public class ConversationTrigger : MonoBehaviour
 		}
 	}
 
-
+	
 }

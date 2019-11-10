@@ -854,8 +854,21 @@ MonoBehaviour:
   healthObject: {fileID: 0}
   chain: {fileID: 0}
   blowSelfObject: {fileID: 0}
-  currentStatusAilment: 0
+  defBuffEffect: {fileID: 0}
+  atkBuffEffect: {fileID: 0}
+  agiBuffEffect: {fileID: 0}
+  strBuffEffect: {fileID: 0}
+  debuffArrow: {fileID: 0}
+  atkBuffArrowIndicator: {fileID: 0}
+  defBuffArrowIndicator: {fileID: 0}
+  agiBuffArrowIndicator: {fileID: 0}
+  strBuffArrowIndicator: {fileID: 0}
+  currentStatusAilment0: 0
+  currentStatusAilment1: 0
   chainedSymbol: {fileID: 0}
+  primaryChainedSymbol: {fileID: 0}
+  ralliedSymbol: {fileID: 0}
+  burnSymbol: {fileID: 0}
 --- !u!1 &667189818
 GameObject:
   m_ObjectHideFlags: 0
@@ -991,8 +1004,21 @@ MonoBehaviour:
   healthObject: {fileID: 0}
   chain: {fileID: 0}
   blowSelfObject: {fileID: 0}
-  currentStatusAilment: 0
+  defBuffEffect: {fileID: 0}
+  atkBuffEffect: {fileID: 0}
+  agiBuffEffect: {fileID: 0}
+  strBuffEffect: {fileID: 0}
+  debuffArrow: {fileID: 0}
+  atkBuffArrowIndicator: {fileID: 0}
+  defBuffArrowIndicator: {fileID: 0}
+  agiBuffArrowIndicator: {fileID: 0}
+  strBuffArrowIndicator: {fileID: 0}
+  currentStatusAilment0: 0
+  currentStatusAilment1: 0
   chainedSymbol: {fileID: 0}
+  primaryChainedSymbol: {fileID: 0}
+  ralliedSymbol: {fileID: 0}
+  burnSymbol: {fileID: 0}
 --- !u!1 &934564987
 GameObject:
   m_ObjectHideFlags: 0
@@ -1204,8 +1230,21 @@ MonoBehaviour:
   healthObject: {fileID: 0}
   chain: {fileID: 0}
   blowSelfObject: {fileID: 0}
-  currentStatusAilment: 0
+  defBuffEffect: {fileID: 0}
+  atkBuffEffect: {fileID: 0}
+  agiBuffEffect: {fileID: 0}
+  strBuffEffect: {fileID: 0}
+  debuffArrow: {fileID: 0}
+  atkBuffArrowIndicator: {fileID: 0}
+  defBuffArrowIndicator: {fileID: 0}
+  agiBuffArrowIndicator: {fileID: 0}
+  strBuffArrowIndicator: {fileID: 0}
+  currentStatusAilment0: 0
+  currentStatusAilment1: 0
   chainedSymbol: {fileID: 0}
+  primaryChainedSymbol: {fileID: 0}
+  ralliedSymbol: {fileID: 0}
+  burnSymbol: {fileID: 0}
 --- !u!1 &1313233601
 GameObject:
   m_ObjectHideFlags: 0
@@ -1608,16 +1647,8 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 242658911}
-    - target: {fileID: 230563282549537478, guid: 9f72b6d54aeb3c844871b64d15a60701,
+    - target: {fileID: 230563280832064223, guid: 9f72b6d54aeb3c844871b64d15a60701,
         type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 875374378, guid: 9f72b6d54aeb3c844871b64d15a60701, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1576159972, guid: 9f72b6d54aeb3c844871b64d15a60701, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -1729,6 +1760,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Oberon
+      objectReference: {fileID: 0}
+    - target: {fileID: 3066886500637916766, guid: 939d3c1cf3442e845a8639c0f8765cc6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3066886500637916760, guid: 939d3c1cf3442e845a8639c0f8765cc6,
         type: 3}
@@ -1888,6 +1924,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fargas
       objectReference: {fileID: 0}
+    - target: {fileID: 3631274366451639316, guid: ddb0e69164656ed42ae244f42b7ae689,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3631274366451639314, guid: ddb0e69164656ed42ae244f42b7ae689,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2045,6 +2086,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Arcelus
+      objectReference: {fileID: 0}
+    - target: {fileID: 4814549479490380498, guid: ddf53751e53c6964891198554f96b520,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4814549479490380524, guid: ddf53751e53c6964891198554f96b520,
         type: 3}

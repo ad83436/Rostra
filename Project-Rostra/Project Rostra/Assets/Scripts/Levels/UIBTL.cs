@@ -85,6 +85,18 @@ public class UIBTL : MonoBehaviour
     private Vector2 imagesOriginalSize; //Used to restore images to their original sizes after being hilighted
     private Vector2 imagesHilightedSize; //Makes the selected image a bit bigger to make it highlighted
     private Image highlightedImage; //Used to know which image was hilighted so we can shrink it before moving forward
+    private Image[] playerImageReferences;
+    private Image[] enemyImageReferences;
+    private int[] playerImageIndexes;
+    private int[] enemyImageIndexes;
+    private Color colorAfterDeath;
+    private bool enemyHasDied = false; //When an enemy dies, we need to move all the images before the last one first
+    private int deadEnemyImageIndex = 0;
+    private Vector2 deadEnemyImagePos;
+    private Image[] allTheImagesBeforeTheDeadOne;
+    private float [] imageXPositions; //Store the image positions to change recycle position when an enemy dies
+    private int previousDeadIndex = 8; //If we kill multiple enemies at the same time, we should move until we're past the one with the lowest index
+
 
     //States
     private enum btlUIState
@@ -173,9 +185,22 @@ public class UIBTL : MonoBehaviour
 
         imagesQ = new List<Sprite>();
         imageRecyclePos = images[8].gameObject.transform.localPosition;
+        Debug.Log("At the beginning " + imageRecyclePos.x);
         targetPos = images[0].transform.localPosition;
         imagesOriginalSize = images[0].rectTransform.sizeDelta;
         imagesHilightedSize = new Vector2(144.32f, 64.97f);
+        playerImageReferences = new Image[5];
+        enemyImageReferences = new Image[5];
+        playerImageIndexes = new int[5];
+        enemyImageIndexes = new int[5];
+        colorAfterDeath = new Color(0.5f, 0.5f, 0.5f, 1.0f);
+        allTheImagesBeforeTheDeadOne = new Image[9];
+        imageXPositions = new float[9];
+
+        for(int i =0;i< imageXPositions.Length; i++)
+        {
+            imageXPositions[i] = images[i].gameObject.transform.localPosition.x;
+        }
 
         imageMovementSpeed = 250.0f;
         imageMaxDistance = 149.0f;
@@ -236,11 +261,14 @@ public class UIBTL : MonoBehaviour
 
     protected virtual void Update()
     {
+        if (enemyHasDied)
+        {
+            ReArrangeQ();
+        }
         if (moveImagesNow)
         {
             //Called on End Turn
             MoveQImages();
-
         }
 
         switch (currentState)
@@ -277,19 +305,28 @@ public class UIBTL : MonoBehaviour
         }
     }
 
-    public virtual void AddImageToQ(Sprite nextOnQImage)
+    public virtual void AddImageToQ(Sprite nextOnQImage,int index, bool player)
     {
         //Called from the BTL manager when adding characters to the Q
         imagesQ.Add(nextOnQImage);
+
+        //Store the index of the last image referenced by the playerindex
+        if (player)
+        {
+            playerImageIndexes[index] = imagesQ.Count - 1;
+        }
+        else
+        {
+            enemyImageIndexes[index] = imagesQ.Count - 1;
+        }
     }
 
     public virtual void QueueIsReady()
     {
+        //Called from the BTL manager when the Q has been built
         highlightedImage = images[0];
         images[0].rectTransform.sizeDelta = imagesHilightedSize;
         backdropHighlighter.gameObject.SetActive(true);
-        //Called from the BTL manager when the Q has been built
-        Debug.Log("Images count " + imagesQ.Count);
         //Fill up the Q until its of size 9. Only 6 will be on screen at a time however.
         switch (imagesQ.Count)
         {
@@ -354,6 +391,13 @@ public class UIBTL : MonoBehaviour
 
         }
 
+        for(int i =0; i<5; i++)
+        {
+            playerImageReferences[i] = images[playerImageIndexes[i]];
+            enemyImageReferences[i] = images[enemyImageIndexes[i]];
+        }
+
+
     }
 
     public virtual void MoveQImages()
@@ -375,40 +419,49 @@ public class UIBTL : MonoBehaviour
 
         //Move all the images an amount of imageMaxDistance to the right
 
-        targetPos.x = images[0].transform.localPosition.x + imageMaxDistance;
-        images[0].transform.localPosition = Vector2.MoveTowards(images[0].transform.localPosition, targetPos, imageMovementSpeed * Time.deltaTime);
+        for (int i = 0; i < images.Length; i++)
+        {
+            if (images[i].gameObject.activeSelf)
+            {
+                targetPos.x = images[i].transform.localPosition.x + imageMaxDistance;
+                images[i].transform.localPosition = Vector2.MoveTowards(images[i].transform.localPosition, targetPos, imageMovementSpeed * Time.deltaTime);
+            }
 
-        targetPos.x = images[1].transform.localPosition.x + imageMaxDistance;
-        images[1].transform.localPosition = Vector2.MoveTowards(images[1].transform.localPosition, targetPos, imageMovementSpeed * Time.deltaTime);
+        }
+    }
 
-        targetPos.x = images[2].transform.localPosition.x + imageMaxDistance;
-        images[2].transform.localPosition = Vector2.MoveTowards(images[2].transform.localPosition, targetPos, imageMovementSpeed * Time.deltaTime);
+    public virtual void ReArrangeQ() //Called when an enemy has died, we need to move all the images before the dead image
+    {
+        for(int i =0;i<images.Length;i++) //Store references to all the images before the dead one
+        {
+            if(images[i].transform.localPosition.x < deadEnemyImagePos.x)
+            {
+                allTheImagesBeforeTheDeadOne[i] = images[i];
+            }
+        }
 
-        targetPos.x = images[3].transform.localPosition.x + imageMaxDistance;
-        images[3].transform.localPosition = Vector2.MoveTowards(images[3].transform.localPosition, targetPos, imageMovementSpeed * Time.deltaTime);
-
-        targetPos.x = images[4].transform.localPosition.x + imageMaxDistance;
-        images[4].transform.localPosition = Vector2.MoveTowards(images[4].transform.localPosition, targetPos, imageMovementSpeed * Time.deltaTime);
-
-        targetPos.x = images[5].transform.localPosition.x + imageMaxDistance;
-        images[5].transform.localPosition = Vector2.MoveTowards(images[5].transform.localPosition, targetPos, imageMovementSpeed * Time.deltaTime);
-
-        targetPos.x = images[6].transform.localPosition.x + imageMaxDistance;
-        images[6].transform.localPosition = Vector2.MoveTowards(images[6].transform.localPosition, targetPos, imageMovementSpeed * Time.deltaTime);
-
-        targetPos.x = images[7].transform.localPosition.x + imageMaxDistance;
-        images[7].transform.localPosition = Vector2.MoveTowards(images[7].transform.localPosition, targetPos, imageMovementSpeed * Time.deltaTime);
-
-        targetPos.x = images[8].transform.localPosition.x + imageMaxDistance;
-        images[8].transform.localPosition = Vector2.MoveTowards(images[8].transform.localPosition, targetPos, imageMovementSpeed * Time.deltaTime);
-
+        for (int i = 0; i < allTheImagesBeforeTheDeadOne.Length; i++)
+        {
+            if (allTheImagesBeforeTheDeadOne[i] != null) //Move the images...
+            {
+                targetPos.x = images[i].transform.localPosition.x + imageMaxDistance;
+                images[i].transform.localPosition = Vector2.MoveTowards(images[i].transform.localPosition, targetPos, imageMovementSpeed * Time.deltaTime);
+                if(images[i].transform.localPosition.x >= images[deadEnemyImageIndex].transform.localPosition.x) //...Until they're in the same position as the dead one
+                {
+                    Debug.Log("III " + i + " YEAH WE'RE FLIPPING BOOLS!");
+                    enemyHasDied = false;
+                    moveImagesNow = true;
+                    images[deadEnemyImageIndex].gameObject.SetActive(false); //Disable the dead one
+                    break;
+                }
+            }
+        }
     }
 
     //Called when the image at the far right of the Q collides with the recycle image collider
     public virtual void ImageRecycle(int imageIndex)
     {
-        //We've hit the recycler, stop moving!
-        moveImagesNow = false;
+
         backdropHighlighter.gameObject.SetActive(true);
         switch (imageIndex) //Which image hit the recycler?
         {
@@ -461,6 +514,8 @@ public class UIBTL : MonoBehaviour
         }
 
         DisableActivtyText(); //Disable the activity text when the next turn starts
+        //We've hit the recycler, stop moving!
+        moveImagesNow = false;
     }
 
     //Called from the BTL Manager to update the UI based on which player's turn it is
@@ -754,8 +809,8 @@ public class UIBTL : MonoBehaviour
                 {
                     skillsPanel.gameObject.SetActive(false);
 
-                    //Check for Frea's special I Don't Miss skill which automatically targets her
-                    if (PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator] == (int)SKILLS.Fr_IDontMiss)
+                    //Check for Frea's special I Don't Miss skillc and Oberon's Lion's Pride skill which automatically targets the controlled character
+                    if (PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator] == (int)SKILLS.Fr_IDontMiss || PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator] == (int)SKILLS.Ob_LionsPride)
                     {
                         UpdateActivityText(skills.SkillName(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator]));
                         playerInControl.UseSkillOnOnePlayer(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator],
@@ -1172,6 +1227,7 @@ public class UIBTL : MonoBehaviour
                             itemsPanelIndex = 0; //Reset the itemsPanelIndex
                             btlManager.players[playerIndicatorIndex].playerReference.UpdatePlayerStats();
                             playerInControl.ForcePlayerTurnAnimationOff();
+                            PlayerHasBeenRevived(playerIndicatorIndex);
                             EndTurn();
                     }
                 }
@@ -1435,12 +1491,27 @@ public class UIBTL : MonoBehaviour
             }
             else if (previousState == btlUIState.choosingSkillsCommand)
             {
+                //If the player is using something other than Rally, then choose normally...
+                if(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator] != (int)SKILLS.Fa_Rally)
+                { 
                 Debug.Log("Enemy has been chosen");
                 UpdateActivityText(skills.SkillName(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator]));
                 playerInControl.UseSkillOnOneEnemy(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator],
                                                    skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[5],
                                                    skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[2],
                                                    enemies[enemyIndicatorIndex]);
+                }
+                //..Otherwise, make sure the enemy chosen has not been rallied against already
+                else if (PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator] == (int)SKILLS.Fa_Rally && enemies[enemyIndicatorIndex].currentStatusAilment0 != EnemyStatusAilment.rallied && enemies[enemyIndicatorIndex].currentStatusAilment1 != EnemyStatusAilment.rallied)
+                {
+                    Debug.Log("Enemy has been chosen");
+                    UpdateActivityText(skills.SkillName(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator]));
+                    playerInControl.UseSkillOnOneEnemy(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator],
+                                                       skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[5],
+                                                       skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[2],
+                                                       enemies[enemyIndicatorIndex]);
+                }
+                currentState = btlUIState.idle;
             }
         }
     }
@@ -1615,43 +1686,116 @@ public class UIBTL : MonoBehaviour
                 playerInControl.ForcePlayerTurnAnimationOff();
                 currentState = btlUIState.idle;
             }
-            moveImagesNow = true;
+            if (!enemyHasDied) //If an enemy has died, don't move the images just yet
+            {
+                moveImagesNow = true;
+            }
+
+        }
+    }
+
+    public virtual void EndTurn(bool test)
+    {
+        if (numberOfEndTurnCalls > 0)
+        {
+            numberOfEndTurnCalls--;
+            Debug.Log("From End Turn" + numberOfEndTurnCalls);
+        }
+        else
+        {
+            if (playerInControl != null)
+            {
+                if (playerInControl.currentState == Player.playerState.Rage)
+                {
+                    //Make sure to turn off the indicators at the end of the turn, this is to make sure the end screen does not show the indicators
+                    rageModeIndicator1.gameObject.SetActive(false);
+                    rageModeIndicator2.gameObject.SetActive(false);
+                }
+                playerTurnIndicator.SetActive(false);
+                chooseEnemyArrow.SetActive(false);
+                controlsPanel.gameObject.SetActive(false);
+                itemsPanel.gameObject.SetActive(false);
+                firstTimeOpenedSkillsPanel = false; //Get ready for the next player in case they want to use thier skills
+                controlsIndicator = 0;
+                highlighter.gameObject.transform.position = highlighiterPos[0].transform.position;
+                numberOfEndTurnCalls = 0;
+                playerInControl.ForcePlayerTurnAnimationOff();
+                currentState = btlUIState.idle;
+            }
+            btlManager.NextOnQueue();
         }
     }
 
     public virtual void EnemyIsDead(int enemyIndex)
     {
         enemiesDead[enemyIndex] = true;
+        colorAfterDeath.a = 0.0f;
+        enemyImageReferences[enemyIndex].color = colorAfterDeath;
+        colorAfterDeath.a = 1.0f;
+
+        for (int i =0;i<images.Length; i++)
+        {
+            if(enemyImageReferences[enemyIndex] == images[i])
+            {
+                if (previousDeadIndex > i) //Only the lowest index should be taken (for mutli kills)
+                {
+                    Debug.Log("Previous is: " + previousDeadIndex);
+                    Debug.Log("IIII is: " + i);
+                    previousDeadIndex = i;
+                    deadEnemyImageIndex = i; //Find the image index inside images[] of the dead enemy so you can re-arrange the Q
+                    deadEnemyImagePos = images[i].gameObject.transform.localPosition;
+                }
+            }
+        }
         numberOfDeadEnemies++;
+
+        imageRecyclePos.x = imageXPositions[8 - numberOfDeadEnemies]; //Get the new recylce position
+
+        if (deadEnemyImagePos.x >= imageRecyclePos.x) //If the dead enemy was the last image on the Q, we don't need to rearrange it
+        {
+            enemyHasDied = true; //Rearrange the Q  
+        }
 
         if (numberOfDeadEnemies >= numberOfEnemies)
         {
+            battleHasEnded = true;
+            btlManager.EndOfBattle(true);
             fadePanel.FlipFadeToVictory();
-
+            currentState = btlUIState.battleEnd;
             //Make sure to turn off the indicators at the end of the turn, this is to make sure the end screen does not show the indicators
             rageModeIndicator1.gameObject.SetActive(false);
             rageModeIndicator2.gameObject.SetActive(false);
-            battleHasEnded = true;
-            btlManager.EndOfBattle(true);
+
         }
-        currentState = btlUIState.battleEnd;
+        
     }
 
     public virtual void PlayerIsDead(int playerIndex)
     {
         playersDead[playerIndex] = true;
+        playerImageReferences[playerIndex].color = colorAfterDeath;
         numberOfDeadPlayers++;
 
         if(numberOfDeadPlayers>=numberOfPlayers)
         {
-            fadePanel.FlipFadeToDefeat();
-
-            rageModeIndicator1.gameObject.SetActive(false);
-            rageModeIndicator2.gameObject.SetActive(false);
             battleHasEnded = true;
             btlManager.EndOfBattle(false);
+            fadePanel.FlipFadeToDefeat();
+            currentState = btlUIState.battleEnd;
+            rageModeIndicator1.gameObject.SetActive(false);
+            rageModeIndicator2.gameObject.SetActive(false);
+
+
         }
-        currentState = btlUIState.battleEnd;
+
+    }
+
+    public void PlayerHasBeenRevived(int index)
+    {
+        //Restore the color of the dead player image
+        colorAfterDeath.r = colorAfterDeath.b = colorAfterDeath.g = 1.0f;
+        playerImageReferences[index].color = colorAfterDeath;
+        colorAfterDeath.r = colorAfterDeath.b = colorAfterDeath.g = 0.5f;
     }
 
     protected virtual void EndBattleUI()

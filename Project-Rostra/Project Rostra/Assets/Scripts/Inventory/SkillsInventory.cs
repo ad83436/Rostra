@@ -32,24 +32,28 @@ public class SkillsInventory : MonoBehaviour {
             Destroy(gameObject);
         }
 
-        AddToUnlockedSkills((int)SKILLS.Fa_SwiftStrike, 0);
-        EquipSkill((int)SKILLS.Fa_SwiftStrike, 0, 0);
+        AddToUnlockedSkills((int)SKILLS.Fa_Rally, 0);
+        EquipSkill((int)SKILLS.Fa_Rally, 0, 0);
         AddToUnlockedSkills((int)SKILLS.Fa_SwordOfFury, 0);
         EquipSkill((int)SKILLS.Fa_SwordOfFury, 1, 0);
-        AddToUnlockedSkills((int)SKILLS.Fa_WarCry, 0);
-        EquipSkill((int)SKILLS.Fa_WarCry, 2, 0);
+        AddToUnlockedSkills((int)SKILLS.Fa_BladeOfTheFallen, 0);
+        EquipSkill((int)SKILLS.Fa_BladeOfTheFallen, 2, 0);
         AddToUnlockedSkills((int)SKILLS.Fa_Sunguard, 0);
         EquipSkill((int)SKILLS.Fa_Sunguard, 3, 0);
 
-        AddToUnlockedSkills((int)SKILLS.Ob_ShieldAlly, 1);
-        EquipSkill((int)SKILLS.Ob_ShieldAlly, 0, 1);
-        AddToUnlockedSkills((int)SKILLS.Ob_ShieldAllAllies, 1);
-        EquipSkill((int)SKILLS.Ob_ShieldAllAllies, 1, 1);
+        AddToUnlockedSkills((int)SKILLS.Ob_FierceStrike, 1);
+        EquipSkill((int)SKILLS.Ob_FierceStrike, 0, 1);
+        AddToUnlockedSkills((int)SKILLS.Ob_Lutenist, 1);
+        EquipSkill((int)SKILLS.Ob_Lutenist, 1, 1);
+        AddToUnlockedSkills((int)SKILLS.Ob_SpearDance, 1);
+        EquipSkill((int)SKILLS.Ob_SpearDance, 2, 1);
+        AddToUnlockedSkills((int)SKILLS.Ob_LionsPride, 1);
+        EquipSkill((int)SKILLS.Ob_LionsPride, 3, 1);
 
         AddToUnlockedSkills((int)SKILLS.Fr_DoubleShot, 2);
         EquipSkill((int)SKILLS.Fr_DoubleShot, 0, 2);
-        AddToUnlockedSkills((int)SKILLS.Fr_IDontMiss, 2);
-        EquipSkill((int)SKILLS.Fr_IDontMiss, 1, 2);
+        AddToUnlockedSkills((int)SKILLS.Fr_BleedingEdge, 2);
+        EquipSkill((int)SKILLS.Fr_BleedingEdge, 1, 2);
         AddToUnlockedSkills((int)SKILLS.Fr_ArrowRain, 2);
         EquipSkill((int)SKILLS.Fr_ArrowRain, 2, 2);
         AddToUnlockedSkills((int)SKILLS.Fr_NeverAgain, 2);
@@ -57,12 +61,16 @@ public class SkillsInventory : MonoBehaviour {
 
         AddToUnlockedSkills((int)SKILLS.Ar_Heal, 3);
         EquipSkill((int)SKILLS.Ar_Heal, 0, 3);
-        AddToUnlockedSkills((int)SKILLS.Ar_DrainEye, 3);
-        EquipSkill((int)SKILLS.Ar_DrainEye, 1, 3);
+        AddToUnlockedSkills((int)SKILLS.Ar_IceAge, 3);
+        EquipSkill((int)SKILLS.Ar_IceAge, 1, 3);
         AddToUnlockedSkills((int)SKILLS.Ar_LullabyOfHope, 3);
         EquipSkill((int)SKILLS.Ar_LullabyOfHope, 2, 3);
         AddToUnlockedSkills((int)SKILLS.Ar_Armageddon, 3);
         EquipSkill((int)SKILLS.Ar_Armageddon, 3, 3);
+
+        AddToUnlockedSkills((int)SKILLS.Ar_DrainEye, 3);
+        AddToUnlockedSkills((int)SKILLS.Ar_HealingAura, 3);
+        AddToUnlockedSkills((int)SKILLS.Ar_ManaCharge, 3);
 
     }
 
@@ -281,8 +289,8 @@ public class SkillsInventory : MonoBehaviour {
                 return "The Sunguard Elite";
             case (int)SKILLS.Fa_Rally:
                 return "Rally";
-            case (int)SKILLS.Fa_BaldeOfTheFallen:
-                return "Balde Of The Fallen";
+            case (int)SKILLS.Fa_BladeOfTheFallen:
+                return "Blade Of The Fallen";
             case (int)SKILLS.Fr_DoubleShot:
                 return "Double Shot";
             case (int)SKILLS.Fr_PiercingShot:
@@ -291,14 +299,22 @@ public class SkillsInventory : MonoBehaviour {
                 return "Arrow Rain";
             case (int)SKILLS.Fr_IDontMiss:
                 return "I Don't Miss.";
-            case (int)SKILLS.Fr_PhantomShot:
-                return "Phantom Shot";
+            case (int)SKILLS.Fr_BleedingEdge:
+                return "Bleeding Edge";
             case (int)SKILLS.Fr_NeverAgain:
                 return "Never Again!";
             case (int)SKILLS.Ob_ShieldAlly:
                 return "Shield Ally";
             case (int)SKILLS.Ob_ShieldAllAllies:
                 return "Shield All Allies";
+            case (int)SKILLS.Ob_SpearDance:
+                return "Spear Dance";
+            case (int)SKILLS.Ob_LionsPride:
+                return "Lion's pride";
+            case (int)SKILLS.Ob_FierceStrike:
+                return "Fierce Strike";
+            case (int)SKILLS.Ob_Lutenist:
+                return "The Lutenist of Ocrest";
             case (int)SKILLS.Ar_Heal:
                 return "Heal";
             case (int)SKILLS.Ar_HealingAura:
@@ -311,6 +327,8 @@ public class SkillsInventory : MonoBehaviour {
                 return "Mana Charge";
             case (int)SKILLS.Ar_Armageddon:
                 return "Armageddon";
+            case (int)SKILLS.Ar_IceAge:
+                return "Ice Age";
             default: //In case no skill is equipped at that slot
                 return "---";
         }
@@ -334,45 +352,55 @@ public class SkillsInventory : MonoBehaviour {
             case (int)SKILLS.TEST_Arcelus:
                 return "Heal skill 1 \n\ntargets players";
             case (int)SKILLS.Fa_SwiftStrike:
-                return "Inflict a flurry of strikes on a row of enemies";
+                return "Inflict a flurry of strikes on a row of enemies.";
             case (int)SKILLS.Fa_SwordOfFury:
-                return "Inflict a great deal of damage to one enemy";
+                return "Inflict a great deal of damage to one enemy.";
             case (int)SKILLS.Fa_WarCry:
-                return "Increase the attack of all allies for three turns ";
+                return "Increase the attack of all allies for three turns. ";
             case (int)SKILLS.Fa_Sunguard:
-                return "The Sun shines brightly on all. Chain three enemies together so they all share the damage taken";
+                return "The Sun shines brightly on all. Chain three enemies together so they all share the damage taken.";
             case (int)SKILLS.Fa_Rally:
-                return "Fargas marks one enemy. For three turns, this enemy sustains double damage.";
-            case (int)SKILLS.Fa_BaldeOfTheFallen:
-                return "Until they're dead, no one can rest. Fargas damages all enemies twice in a flurry of blows";
+                return "Fargas marks one enemy. For three turns, this enemy sustains double damage. Only one enemy can be rallied against at a time.";
+            case (int)SKILLS.Fa_BladeOfTheFallen:
+                return "Never forget the fallen. Fargas damages all enemies. Damage is increased by the attack points of every dead enemy.";
             case (int)SKILLS.Fr_DoubleShot:
-                return "Frea shoots two arrows in succession at one enemy";
+                return "Frea shoots two arrows in succession at one enemy.";
             case (int)SKILLS.Fr_PiercingShot:
-                return "A single strong shot aimed at one enemy";
+                return "A single strong shot aimed at one enemy.";
             case (int)SKILLS.Fr_ArrowRain:
-                return "Frea shoots a rain of arrows that damages all enemies";
+                return "Frea shoots a rain of arrows that damages all enemies.";
             case (int)SKILLS.Fr_IDontMiss:
-                return "Frea takes a deep breath and concentrates. Increases base Strength by 10 for three turns. ";
-            case (int)SKILLS.Fr_PhantomShot:
-                return "No one can see it coming. Damages a row of enemies and decreases their attack for three turns";
+                return "Frea takes a deep breath and concentrates. Increases base Strength by 30% for three turns. ";
+            case (int)SKILLS.Fr_BleedingEdge:
+                return "Frea pulls out a dagger and takes matters into her own hands. She inflicts damage X 3 to an enemy and sustains their defense X 2 as damage to herself.";
             case (int)SKILLS.Fr_NeverAgain:
-                return "Frea channels all her anger into a single devastating shot that pierces through all enemies";
+                return "Frea channels all her anger into a single devastating shot that pierces through all enemies.";
             case (int)SKILLS.Ob_ShieldAlly:
-                return "Increase the defense of one ally for three turns";
+                return "Increase the defense of one ally for three turns.";
             case (int)SKILLS.Ob_ShieldAllAllies:
-                return "Increase the defense of all allies for three turns";
+                return "Increase the defense of all allies for three turns.";
+            case (int)SKILLS.Ob_SpearDance:
+                return "Oberon uses his spear to damage a single row of enemies with an increased chance for critical hits.";
+            case (int)SKILLS.Ob_LionsPride:
+                return "Doubles Oberon’s defense. He becomes the sole target of all enemy attacks. Lasts for 3 turns.";
+            case (int)SKILLS.Ob_FierceStrike:
+                return "Wait for the enemy to believe you're beaten, then exact sweet revenge. This attack gets stronger the more damage Oberon sustains.";
+            case (int)SKILLS.Ob_Lutenist:
+                return "Oberon plays the lute to improve morale. All enemies suffer a random debuff and all allies get a random buff.";
             case (int)SKILLS.Ar_Heal:
-                return "Restores a portion of a single alive ally’s HP";
+                return "Restores a portion of a single alive ally’s HP.";
             case (int)SKILLS.Ar_HealingAura:
-                return "Restore a portion of all alive allies' HP";
+                return "Restore a portion of all alive allies' HP.";
             case (int)SKILLS.Ar_DrainEye:
-                return "Ally affected by Drain Eye gains health every time they deal damage. Lasts for 3 turns";
+                return "Ally affected by Drain Eye gains health every time they deal damage. Lasts for 3 turns.";
             case (int)SKILLS.Ar_LullabyOfHope:
-                return "Arcelus never gives up on a patient. Revives one ally with half of their HP";
+                return "Arcelus never gives up on a patient. Revives one ally with half of their HP.";
             case (int)SKILLS.Ar_ManaCharge:
                 return "Restores a portion of one ally’s MP.";
             case (int)SKILLS.Ar_Armageddon:
-                return " Sometimes to save someone, another must perish. Arcelus summons pillars of fire damaging all enemies.";
+                return " Sometimes to save someone, another must perish. Arcelus summons pillars of fire burning all enemies.";
+            case (int)SKILLS.Ar_IceAge:
+                return "Arcelus summons ice damaging a row of enemies and lowering their agility.";
             default: return "";
         }
     }
@@ -424,16 +452,16 @@ public class SkillsInventory : MonoBehaviour {
                 skillStat[5] = 40;
                 break;
             case (int)SKILLS.Fa_SwiftStrike:
-                skillStat[0] = 35;
+                skillStat[0] = 45;
                 skillStat[1] = 16;
                 skillStat[2] = 1;
                 skillStat[4] = (float)SKILL_TYPE.FULL_ROW_ATK;
                 skillStat[5] = 40;
                 break;
             case (int)SKILLS.Fa_SwordOfFury:
-                skillStat[0] = 60;
+                skillStat[0] = 80;
                 skillStat[1] = 16;
-                skillStat[2] = 1;
+                skillStat[2] = 0;
                 skillStat[4] = (float)SKILL_TYPE.SINGLE_TARGET_ATK;
                 skillStat[5] = 50;
                 break;
@@ -452,16 +480,16 @@ public class SkillsInventory : MonoBehaviour {
                 skillStat[5] = 60;
                 break;
             case (int)SKILLS.Fa_Rally:
-                skillStat[0] = 10;
+                skillStat[0] = 0;
                 skillStat[1] = 100;
                 skillStat[2] = 0;
                 skillStat[4] = (float)SKILL_TYPE.SINGLE_TARGET_DEBUFF;
                 skillStat[5] = 50;
                 break;
-            case (int)SKILLS.Fa_BaldeOfTheFallen:
-                skillStat[0] = 70;
+            case (int)SKILLS.Fa_BladeOfTheFallen:
+                skillStat[0] = 40;
                 skillStat[1] = 18;
-                skillStat[2] = 3;
+                skillStat[2] = 2;
                 skillStat[4] = (float)SKILL_TYPE.ALL_TARGETS_ATK;
                 skillStat[5] = 100;
                 break;
@@ -480,30 +508,30 @@ public class SkillsInventory : MonoBehaviour {
                 skillStat[5] = 40;
                 break;
             case (int)SKILLS.Fr_ArrowRain:
-                skillStat[0] = 35;
+                skillStat[0] = 50;
                 skillStat[1] = 15;
                 skillStat[2] = 1;
                 skillStat[4] = (float)SKILL_TYPE.ALL_TARGETS_ATK;
                 skillStat[5] = 45;
                 break;
             case (int)SKILLS.Fr_IDontMiss:
-                skillStat[0] = 10;
+                skillStat[0] = 0.3f;
                 skillStat[1] = 100;
                 skillStat[2] = 0;
                 skillStat[4] = (float)SKILL_TYPE.SINGLE_PLAYER_BUFF;
                 skillStat[5] = 35;
                 break;
-            case (int)SKILLS.Fr_PhantomShot:
-                skillStat[0] = 50;
+            case (int)SKILLS.Fr_BleedingEdge:
+                skillStat[0] = 40;
                 skillStat[1] = 16;
-                skillStat[2] = 2;
-                skillStat[4] = (float)SKILL_TYPE.FULL_ROW_ATK;
-                skillStat[5] = 55;
+                skillStat[2] = 0;
+                skillStat[4] = (float)SKILL_TYPE.SINGLE_TARGET_ATK;
+                skillStat[5] = 35;
                 break;
             case (int)SKILLS.Fr_NeverAgain:
-                skillStat[0] = 100;
+                skillStat[0] = 180;
                 skillStat[1] = 18;
-                skillStat[2] = 3;
+                skillStat[2] = 2;
                 skillStat[4] = (float)SKILL_TYPE.ALL_TARGETS_ATK;
                 skillStat[5] = 100;
                 break;
@@ -521,6 +549,34 @@ public class SkillsInventory : MonoBehaviour {
                 skillStat[4] = (float)SKILL_TYPE.ALL_PLAYER_BUFF;
                 skillStat[5] = 40;
                 break;
+            case (int)SKILLS.Ob_SpearDance:
+                skillStat[0] = 60;
+                skillStat[1] = 18;
+                skillStat[2] = 1;
+                skillStat[4] = (float)SKILL_TYPE.FULL_ROW_ATK;
+                skillStat[5] = 50;
+                break;
+            case (int)SKILLS.Ob_LionsPride:
+                skillStat[0] = 2.0f;
+                skillStat[1] = 100;
+                skillStat[2] = 0;
+                skillStat[4] = (float)SKILL_TYPE.SINGLE_PLAYER_BUFF;
+                skillStat[5] = 40;
+                break;
+            case (int)SKILLS.Ob_FierceStrike:
+                skillStat[0] = 0;
+                skillStat[1] = 18;
+                skillStat[2] = 2;
+                skillStat[4] = (float)SKILL_TYPE.ALL_TARGETS_ATK;
+                skillStat[5] = 100;
+                break;
+            case (int)SKILLS.Ob_Lutenist:
+                skillStat[0] = 0.3f;
+                skillStat[1] = 100;
+                skillStat[2] = 1;
+                skillStat[4] = (float)SKILL_TYPE.ALL_PLAYER_HEAL;
+                skillStat[5] = 50;
+                break;
             case (int)SKILLS.Ar_Heal:
                 skillStat[0] = 20;
                 skillStat[1] = 100;
@@ -531,7 +587,7 @@ public class SkillsInventory : MonoBehaviour {
             case (int)SKILLS.Ar_HealingAura:
                 skillStat[0] = 30;
                 skillStat[1] = 100;
-                skillStat[2] = 2;
+                skillStat[2] = 1;
                 skillStat[4] = (float)SKILL_TYPE.ALL_PLAYER_HEAL;
                 skillStat[5] = 60;
                 break;
@@ -545,7 +601,7 @@ public class SkillsInventory : MonoBehaviour {
             case (int)SKILLS.Ar_LullabyOfHope:
                 skillStat[0] = 50;
                 skillStat[1] = 100;
-                skillStat[2] = 2;
+                skillStat[2] = 1;
                 skillStat[4] = (float)SKILL_TYPE.SINGLE_PLAYER_HEAL;
                 skillStat[5] = 60;
                 break;
@@ -557,11 +613,18 @@ public class SkillsInventory : MonoBehaviour {
                 skillStat[5] = 30;
                 break;
             case (int)SKILLS.Ar_Armageddon:
-                skillStat[0] = 100;
+                skillStat[0] = 70;
                 skillStat[1] = 18;
-                skillStat[2] = 3;
+                skillStat[2] = 2;
                 skillStat[4] = (float)SKILL_TYPE.ALL_TARGETS_ATK;
                 skillStat[5] = 100;
+                break;
+            case (int)SKILLS.Ar_IceAge:
+                skillStat[0] = 50;
+                skillStat[1] = 16;
+                skillStat[2] = 1;
+                skillStat[4] = (float)SKILL_TYPE.FULL_ROW_ATK;
+                skillStat[5] = 50;
                 break;
             default:
                 skillStat[0] = 0;

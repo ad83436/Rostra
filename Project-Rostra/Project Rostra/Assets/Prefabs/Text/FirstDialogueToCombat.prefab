@@ -1,0 +1,210 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7480942244496457064
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7480942244496456982}
+  - component: {fileID: 7480942244496457065}
+  - component: {fileID: 7480942244496456983}
+  - component: {fileID: 7480942244496456980}
+  m_Layer: 0
+  m_Name: FirstDialogueToCombat
+  m_TagString: DialogueTrigger
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7480942244496456982
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7480942244496457064}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -376.7, y: -101.41, z: -601.58435}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7480942244496457065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7480942244496457064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43509005be49f1c4f973fd54f9269559, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogue:
+    names:
+    - Fargas
+    - Frea
+    - Arcelus
+    - Oberon
+    - Arcelus
+    - Oberon
+    - Arcelus
+    - Frea
+    - Oberon
+    - Fargas
+    - 
+    - Soldier
+    - Arcelus
+    - Fargas
+    - Soldier
+    - Fargas
+    - Soldier
+    - Fargas
+    - Solider
+    - Fargas
+    - Soldier
+    sentences:
+    - We should make our way to the south entrance. It's the least guarded I know.
+      From now on we are fugitives. I thank you for accompanying me and making this
+      sacrifice.
+    - I want to help in any way I can Fargas.
+    - It's my pleasure. Besides, who else is going to stitch you up when you inevitably
+      find yourself lying face first in the mud bleeding like a slit pig?
+    - Listen, it's all good. Having the greatest spearman in Ocrest was a wise move.
+    - That's rich coming from the guy who nearly stabbed his eye out yesterday.
+    - Hey it was a training accident. Recruit gave me a good scare was all. Who saved
+      you when we were in the Radisian Fields?
+    - <i> Grumble...
+    - Stop acting like children! If one of the guards hear us we're dead!
+    - Lighten up, we were just having a bit of fun. Besides name any of the guards
+      that can stand toe to toe with us?
+    - I agree with Frea we should leave now. Brenna's home will be on the outskirts
+      of village of Hadria, we should hurry.
+    - <i> A few guards approch the party
+    - Up at this time of night are we?
+    - Way to go Oberon.
+    - 'Nothing wrong here just wanted to talk to my friends. '
+    - 'You shouldn''t be over here. Captain''s orders. '
+    - 'I know, we were just heading back. '
+    - Then why did I hear you talking about leaving for Hadria. We don't have any
+      orders to go there. Don't tell me you're thinking about running off.
+    - 'Listen we need to get to Hadria it''s important. '
+    - It's not important enough to betray your superiors. I'm placing you under arrest.
+    - 'I can''t let you do this. '
+    - Then we will do what we must. Soldiers, arrest them!
+    portrait:
+    - {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825, type: 3}
+    - {fileID: 21300000, guid: 1f1660c1b92d23a4fb0b75fcca80183d, type: 3}
+    - {fileID: 21300000, guid: f40486206916ccc4a9bf37f57f448dee, type: 3}
+    - {fileID: 21300000, guid: e24a4049526ca704eb781c65db5c188d, type: 3}
+    - {fileID: 21300000, guid: f40486206916ccc4a9bf37f57f448dee, type: 3}
+    - {fileID: 21300000, guid: e24a4049526ca704eb781c65db5c188d, type: 3}
+    - {fileID: 21300000, guid: f40486206916ccc4a9bf37f57f448dee, type: 3}
+    - {fileID: 21300000, guid: 1f1660c1b92d23a4fb0b75fcca80183d, type: 3}
+    - {fileID: 21300000, guid: e24a4049526ca704eb781c65db5c188d, type: 3}
+    - {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825, type: 3}
+    - {fileID: 21300000, guid: dd3d4b940a009d14dbfe8b78c3b4f6ca, type: 3}
+    - {fileID: 21300000, guid: 60ca9ec4b6d4ab94689907e719fed4b6, type: 3}
+    - {fileID: 21300000, guid: f40486206916ccc4a9bf37f57f448dee, type: 3}
+    - {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825, type: 3}
+    - {fileID: 21300000, guid: 60ca9ec4b6d4ab94689907e719fed4b6, type: 3}
+    - {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825, type: 3}
+    - {fileID: 21300000, guid: 60ca9ec4b6d4ab94689907e719fed4b6, type: 3}
+    - {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825, type: 3}
+    - {fileID: 21300000, guid: 60ca9ec4b6d4ab94689907e719fed4b6, type: 3}
+    - {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825, type: 3}
+    - {fileID: 21300000, guid: 60ca9ec4b6d4ab94689907e719fed4b6, type: 3}
+    povChange:
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    - 7
+    - 8
+    - 9
+    - 10
+    - 11
+    - 12
+    - 13
+    - 14
+    - 15
+    - 16
+    - 17
+    - 18
+    - 19
+    - 20
+    - 20
+    typingSpeed: 0.001
+    isChoice: 0
+    choiceLine: 0
+    choice1: {fileID: 0}
+    choice2: {fileID: 0}
+    willRemember: 0
+    choiceSet: 0
+    choiceCare1: {fileID: 0}
+    choiceCare2: {fileID: 0}
+    choiceText1: 
+    choiceText2: 
+    normal: {fileID: 0}
+    hasPlayed: 0
+    willCount: 0
+    maxWillCount: 0
+    isBattle: 1
+    triggerBool: 0
+    isOneShot: 0
+    addMilestone: 0
+    addItem: 0
+    itemId: 0
+    itemNum: 0
+  choiceCare: 0
+  isChoiceDepend: 0
+  pressZ: {fileID: 0}
+  directTriggerText: 0
+  oneShot: 0
+--- !u!61 &7480942244496456983
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7480942244496457064}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.07852745, y: 0.0981617}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2.649086, y: 3.2380524}
+  m_EdgeRadius: 0
+--- !u!114 &7480942244496456980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7480942244496457064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4aa10e7e6479f464aac569691ed2f11d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ce: 8
+  fade: {fileID: 0}
