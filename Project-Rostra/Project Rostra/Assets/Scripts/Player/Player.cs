@@ -406,6 +406,7 @@ public class Player : MonoBehaviour
         }
         else
         {
+            Debug.Log("Somehow I'm dead and called End Turn");
             uiBTL.EndTurn();
         }
     }

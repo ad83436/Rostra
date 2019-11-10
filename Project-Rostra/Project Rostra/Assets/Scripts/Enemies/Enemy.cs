@@ -246,10 +246,6 @@ public class Enemy : MonoBehaviour
     {
         if (!battleManager.battleHasEnded) //If all the players are dead, don't run the turn. Precautionary if statement.
         {
-            uiBTL.DisableActivtyText();
-            CheckForAilments();
-            CheckForBuffs();
-
             if (currentState == EnemyState.waiting)
             {
                 waitTime--;
@@ -292,6 +288,10 @@ public class Enemy : MonoBehaviour
 
                 if (!dead)
                 {
+                    uiBTL.DisableActivtyText();
+                    CheckForAilments();
+                    CheckForBuffs();
+
                     switch (enemyAttack)
                     {
                         #region Dumb
@@ -771,10 +771,6 @@ public class Enemy : MonoBehaviour
                     }
                 }
 
-                else
-                {
-                    uiBTL.EndTurn();
-                }
             }
         }
     }
@@ -829,6 +825,7 @@ public class Enemy : MonoBehaviour
             Debug.Log("Enemy has missed");
         }
         animator.SetBool("Attack", false);
+        Debug.Log("Hi I'm the enemy, I have called End Turn()");
         uiBTL.EndTurn();
     }
     protected void DumbAttack()
@@ -2958,9 +2955,6 @@ public class Enemy : MonoBehaviour
     {
         if (!dead)
         {
-            Debug.Log("Ailment 0 is : " + currentStatusAilment0);
-            Debug.Log("Ailment 1 is : " + currentStatusAilment1);
-            Debug.Log("Primary target is: " + primaryChainedTarget);
             currentState = EnemyState.idle;
             spriteRenderer.enabled = false;
             enemyCanvas.SetActive(false);

@@ -242,17 +242,37 @@ public class BattleManager : MonoBehaviour
         {
             uiBtl.ShowThisPlayerUI(battleQueue[0].playerIndex, battleQueue[0].name, battleQueue[0].playerReference);
 			DOM_playerTurn();
+
+            //Add it to the end of the Q
+            battleQueue.Add(battleQueue[0]);
+            //Debug.Log("I've added "  + battleQueue[battleQueue.Count - 1].name);
+            //Remove it from the start of the Q 
+            battleQueue.RemoveAt(0);
         }
         else if (battleQueue[0].playerReference == null && battleQueue[0].enemyReference != null)
         {
-            battleQueue[0].enemyReference.EnemyTurn();
-			DOM_enemyTurn();
+            if (!battleQueue[0].enemyReference.dead)
+            {
+                battleQueue[0].enemyReference.EnemyTurn();
+                DOM_enemyTurn();
+
+                //Add it to the end of the Q
+                battleQueue.Add(battleQueue[0]);
+                //Debug.Log("I've added "  + battleQueue[battleQueue.Count - 1].name);
+                //Remove it from the start of the Q 
+                battleQueue.RemoveAt(0);
+            }
+            else
+            {
+                //Add it to the end of the Q
+                battleQueue.Add(battleQueue[0]);
+                //Debug.Log("I've added "  + battleQueue[battleQueue.Count - 1].name);
+                //Remove it from the start of the Q 
+                battleQueue.RemoveAt(0);
+                NextOnQueue();
+            }
         }
-        //Add it to the end of the Q
-        battleQueue.Add(battleQueue[0]);
-        //Debug.Log("I've added "  + battleQueue[battleQueue.Count - 1].name);
-        //Remove it from the start of the Q 
-        battleQueue.RemoveAt(0);
+
     }
 
 	protected virtual void DOM_playerTurn() {
