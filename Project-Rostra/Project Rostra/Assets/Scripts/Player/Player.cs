@@ -1101,11 +1101,18 @@ public class Player : MonoBehaviour
             skillWaitingIndex = 1;
         }
 
-        if (skillID == (int)SKILLS.Ob_SpearDance)
+        else if (skillID == (int)SKILLS.Ob_SpearDance)
         {
             skillNameForObjPooler = "SpearDance";
             skillAnimatorName = "BuffDef";
             skillWaitingIndex = 2; //2 is Spear Dance
+        }
+
+        else if(skillID == (int)SKILLS.Ar_IceAge)
+        {
+            skillNameForObjPooler = "IceAge";
+            skillAnimatorName = "Heal";
+            skillWaitingIndex = 2; //Same animation as mana heal
         }
 
         if (waitTime <= 0)
@@ -1261,7 +1268,15 @@ public class Player : MonoBehaviour
                                     if (CalculateCrit() <= actualCRIT)
                                     {
                                         Debug.Log("Skill Crit");
-                                        battleManager.enemies[i].enemyReference.TakeDamage(0.7f * actualATK + skills.SkillStats(chosenSkill)[0], numberOfAttacks); //Damage is the half the player's attack stat and the skill's attack stat
+
+                                        if (chosenSkill == (int)SKILLS.Ar_IceAge)
+                                        {
+                                            battleManager.enemies[i].enemyReference.TakeDamage(0.7f * actualATK + skills.SkillStats(chosenSkill)[0], numberOfAttacks,1,0.3f,3,"Defense",EnemyStatusAilment.none); //Damage is the half the player's attack stat and the skill's attack stat
+                                        }
+                                        else
+                                        {
+                                            battleManager.enemies[i].enemyReference.TakeDamage(0.7f * actualATK + skills.SkillStats(chosenSkill)[0], numberOfAttacks); //Damage is the half the player's attack stat and the skill's attack stat
+                                        }
                                         if (drainEye) //Check if Drain Eye is active
                                         {
                                             Heal(0.01f * (drainEyeModifier * (0.7f * actualATK + skills.SkillStats(chosenSkill)[0])));
@@ -1270,7 +1285,14 @@ public class Player : MonoBehaviour
                                     else
                                     {
                                         Debug.Log("No Skill Crit");
-                                        battleManager.enemies[i].enemyReference.TakeDamage(0.5f * actualATK + skills.SkillStats(chosenSkill)[0], numberOfAttacks); //Damage is the half the player's attack stat and the skill's attack stat
+                                        if (chosenSkill == (int)SKILLS.Ar_IceAge)
+                                        {
+                                            battleManager.enemies[i].enemyReference.TakeDamage(0.5f * actualATK + skills.SkillStats(chosenSkill)[0], numberOfAttacks, 1, 0.3f, 3, "Defense", EnemyStatusAilment.none); //Damage is the half the player's attack stat and the skill's attack stat
+                                        }
+                                        else
+                                        {
+                                            battleManager.enemies[i].enemyReference.TakeDamage(0.5f * actualATK + skills.SkillStats(chosenSkill)[0], numberOfAttacks); //Damage is the half the player's attack stat and the skill's attack stat
+                                        }
                                         if (drainEye) //Check if Drain Eye is active
                                         {
                                             Heal(0.01f * (drainEyeModifier * (0.5f * actualATK + skills.SkillStats(chosenSkill)[0])));

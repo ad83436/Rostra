@@ -32,12 +32,13 @@ public enum SKILLS { // Minimum Value -- 0x0000, Maximum Value -- 0xFFEF (65519 
     Ar_LullabyOfHope =      0x0018,
     Ar_ManaCharge =         0x0019,
     Ar_Armageddon =         0x001A,
-    Ob_ShieldAlly =         0x001B,
-    Ob_ShieldAllAllies =    0x001C,
-    Ob_SpearDance =         0x001D,
-    Ob_LionsPride =         0x001E,
-    Ob_FierceStrike =       0x001F,
-    Ob_Lutenist =           0x0020,
+    Ar_IceAge =             0x001B,
+    Ob_ShieldAlly =         0x001C,
+    Ob_ShieldAllAllies =    0x001D,
+    Ob_SpearDance =         0x001E,
+    Ob_LionsPride =         0x001F,
+    Ob_FierceStrike =       0x0020,
+    Ob_Lutenist =           0x0021,
 };
 
 public enum SKILL_TYPE{ // Minimum Value -- 0xFFF0, Maximum Value -- 0xFFFF (16 possible skill types)

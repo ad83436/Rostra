@@ -51,7 +51,7 @@ public static class PartySkills {
                 (int)SKILLS.Ar_LullabyOfHope,
                 (int)SKILLS.Ar_ManaCharge,
                 (int)SKILLS.Ar_Armageddon,
-                (int)SKILLS.NO_SKILL,
+                (int)SKILLS.Ar_IceAge,
                 (int)SKILLS.NO_SKILL,
             }),
     };

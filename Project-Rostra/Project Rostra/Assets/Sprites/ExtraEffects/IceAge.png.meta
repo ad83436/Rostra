@@ -1,0 +1,955 @@
+fileFormatVersion: 2
+guid: 05f1ffe8eec69dd4a9ea0fbad7d13b5c
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 716459119434627888
+    second: IceAge_0
+  - first:
+      213: -9041298284725801628
+    second: IceAge_1
+  - first:
+      213: -4061152984984282134
+    second: IceAge_2
+  - first:
+      213: -8881255580986115098
+    second: IceAge_3
+  - first:
+      213: 1540717981565897785
+    second: IceAge_4
+  - first:
+      213: 3926863933278562091
+    second: IceAge_5
+  - first:
+      213: 5955978978834425616
+    second: IceAge_6
+  - first:
+      213: 6054328763930156122
+    second: IceAge_7
+  - first:
+      213: 6011283468342049365
+    second: IceAge_8
+  - first:
+      213: 3972186501084448879
+    second: IceAge_9
+  - first:
+      213: 982489111304670118
+    second: IceAge_10
+  - first:
+      213: -5808035022796888013
+    second: IceAge_11
+  - first:
+      213: 736857486633444358
+    second: IceAge_12
+  - first:
+      213: 4470871721783062032
+    second: IceAge_13
+  - first:
+      213: -4911978355179670210
+    second: IceAge_14
+  - first:
+      213: -1897685490628643960
+    second: IceAge_15
+  - first:
+      213: -2447967444769891331
+    second: IceAge_16
+  - first:
+      213: 8565353937345939889
+    second: IceAge_17
+  - first:
+      213: 5466533160309739360
+    second: IceAge_18
+  - first:
+      213: 6649562442674466228
+    second: IceAge_19
+  - first:
+      213: 355451552428955552
+    second: IceAge_20
+  - first:
+      213: -2619557191470150195
+    second: IceAge_21
+  - first:
+      213: 6768264153474922496
+    second: IceAge_22
+  - first:
+      213: -8009223148238005720
+    second: IceAge_23
+  - first:
+      213: 5370369979871248714
+    second: IceAge_24
+  - first:
+      213: -1447100080960301288
+    second: IceAge_25
+  - first:
+      213: 4207379069317717001
+    second: IceAge_26
+  - first:
+      213: 1758016895263877254
+    second: IceAge_27
+  - first:
+      213: 3488652026283194625
+    second: IceAge_28
+  - first:
+      213: -2061408239437591804
+    second: IceAge_29
+  - first:
+      213: 7637226348022492733
+    second: IceAge_30
+  - first:
+      213: -5158626720778917865
+    second: IceAge_31
+  - first:
+      213: -4788049151776522817
+    second: IceAge_32
+  - first:
+      213: -5470295351186323250
+    second: IceAge_33
+  - first:
+      213: -4277902175267029705
+    second: IceAge_34
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 35
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: IceAge_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1106.5714
+        width: 187.4
+        height: 184.42857
+      alignment: 9
+      pivot: {x: 0.5, y: 0.338594}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e850a91576786214c97e9022faece8a3
+      internalID: 716459119434627888
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAge_1
+      rect:
+        serializedVersion: 2
+        x: 187
+        y: 1106.5714
+        width: 187.4
+        height: 184.42857
+      alignment: 9
+      pivot: {x: 0.5, y: 0.338594}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f2e0992aa5ff0f48ad0de40697ecc9d
+      internalID: -9041298284725801628
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAge_2
+      rect:
+        serializedVersion: 2
+        x: 374
+        y: 1107
+        width: 187
+        height: 184
+      alignment: 9
+      pivot: {x: 0.5, y: 0.338594}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: db86269cddc8abf438e6b21178fef586
+      internalID: -4061152984984282134
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAge_3
+      rect:
+        serializedVersion: 2
+        x: 561
+        y: 1106.5714
+        width: 187.4
+        height: 184.42857
+      alignment: 9
+      pivot: {x: 0.5, y: 0.338594}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d1fcc63b5c815a428e449a153c76eb3
+      internalID: -8881255580986115098
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAge_4
+      rect:
+        serializedVersion: 2
+        x: 748
+        y: 1106.5714
+        width: 187.4
+        height: 184.42857
+      alignment: 9
+      pivot: {x: 0.5, y: 0.338594}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 51dbd3f31dae69a49a48fcb68e35a3d9
+      internalID: 1540717981565897785
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAge_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 922.5714
+        width: 187.4
+        height: 184.42857
+      alignment: 9
+      pivot: {x: 0.5, y: 0.338594}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 94656e09fc2306b43840b7f2a1720070
+      internalID: 3926863933278562091
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAge_6
+      rect:
+        serializedVersion: 2
+        x: 187
+        y: 922.5714
+        width: 187.4
+        height: 184.42857
+      alignment: 9
+      pivot: {x: 0.5, y: 0.338594}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 209f05b6fc409a54894a6d18e17c5ad4
+      internalID: 5955978978834425616
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAge_7
+      rect:
+        serializedVersion: 2
+        x: 374
+        y: 922.5714
+        width: 187.4
+        height: 184.42857
+      alignment: 9
+      pivot: {x: 0.5, y: 0.338594}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: afe07a1e4bf90b04aa315e3fb15b3a24
+      internalID: 6054328763930156122
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAge_8
+      rect:
+        serializedVersion: 2
+        x: 561
+        y: 922.5714
+        width: 187.4
+        height: 184.42857
+      alignment: 9
+      pivot: {x: 0.5, y: 0.338594}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 19e83472d57f1cd4f8ac26b71f39611d
+      internalID: 6011283468342049365
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAge_9
+      rect:
+        serializedVersion: 2
+        x: 748
+        y: 922.5714
+        width: 187.4
+        height: 184.42857
+      alignment: 9
+      pivot: {x: 0.5, y: 0.338594}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7ab375e9f8c0f2b4f85ec09a475db007
+      internalID: 3972186501084448879
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAge_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 738.5714
+        width: 187.4
+        height: 184.42857
+      alignment: 9
+      pivot: {x: 0.5, y: 0.338594}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c9f0c1a30281eb429488acaa64e475b
+      internalID: 982489111304670118
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAge_11
+      rect:
+        serializedVersion: 2
+        x: 187
+        y: 738.5714
+        width: 187.4
+        height: 184.42857
+      alignment: 9
+      pivot: {x: 0.5, y: 0.338594}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b48c3883a99a3754fad5021eb7f5418d
+      internalID: -5808035022796888013
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAge_12
+      rect:
+        serializedVersion: 2
+        x: 374
+        y: 738.5714
+        width: 187.4
+        height: 184.42857
+      alignment: 9
+      pivot: {x: 0.5, y: 0.338594}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c5f1c44ff97be624594ee57dbca0025a
+      internalID: 736857486633444358
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAge_13
+      rect:
+        serializedVersion: 2
+        x: 561
+        y: 738.5714
+        width: 187.4
+        height: 184.42857
+      alignment: 9
+      pivot: {x: 0.5, y: 0.338594}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a82fe77477b0a67478282552a6e9afc8
+      internalID: 4470871721783062032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAge_14
+      rect:
+        serializedVersion: 2
+        x: 748
+        y: 738.5714
+        width: 187.4
+        height: 184.42857
+      alignment: 9
+      pivot: {x: 0.5, y: 0.338594}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b05fd46531b10da4cbcf6ad22a8b6891
+      internalID: -4911978355179670210
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAge_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 554.5714
+        width: 187.4
+        height: 184.42857
+      alignment: 9
+      pivot: {x: 0.5, y: 0.338594}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 562c839934e383c40a7aaae657d9cf04
+      internalID: -1897685490628643960
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAge_16
+      rect:
+        serializedVersion: 2
+        x: 187
+        y: 554.5714
+        width: 187.4
+        height: 184.42857
+      alignment: 9
+      pivot: {x: 0.5, y: 0.338594}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9408e3b1e96a9144c8f7d10fa77aa80c
+      internalID: -2447967444769891331
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAge_17
+      rect:
+        serializedVersion: 2
+        x: 374
+        y: 554.5714
+        width: 187.4
+        height: 184.42857
+      alignment: 9
+      pivot: {x: 0.5, y: 0.338594}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7ad53edcc699f134dad64ec4dcac3001
+      internalID: 8565353937345939889
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAge_18
+      rect:
+        serializedVersion: 2
+        x: 561
+        y: 554.5714
+        width: 187.4
+        height: 184.42857
+      alignment: 9
+      pivot: {x: 0.5, y: 0.338594}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5866f4a976d9a6347b4a653896d3688d
+      internalID: 5466533160309739360
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAge_19
+      rect:
+        serializedVersion: 2
+        x: 748
+        y: 554.5714
+        width: 187.4
+        height: 184.42857
+      alignment: 9
+      pivot: {x: 0.5, y: 0.338594}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b0f5130ce4396349852b65328a29940
+      internalID: 6649562442674466228
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAge_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 370.5714
+        width: 187.4
+        height: 184.42857
+      alignment: 9
+      pivot: {x: 0.5, y: 0.338594}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b3e6de70a0b434241946cf36daa4d682
+      internalID: 355451552428955552
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAge_21
+      rect:
+        serializedVersion: 2
+        x: 187
+        y: 370.5714
+        width: 187.4
+        height: 184.42857
+      alignment: 9
+      pivot: {x: 0.5, y: 0.338594}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2809d1356bd447e418633d5eedf86356
+      internalID: -2619557191470150195
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAge_22
+      rect:
+        serializedVersion: 2
+        x: 372
+        y: 371
+        width: 187
+        height: 184
+      alignment: 9
+      pivot: {x: 0.5, y: 0.338594}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 908e035ba92d5994ca343afb16fed3ad
+      internalID: 6768264153474922496
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAge_23
+      rect:
+        serializedVersion: 2
+        x: 561
+        y: 370.5714
+        width: 187.4
+        height: 184.42857
+      alignment: 9
+      pivot: {x: 0.5, y: 0.338594}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e61a8f95327265040bc1a1ff55eb97b4
+      internalID: -8009223148238005720
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAge_24
+      rect:
+        serializedVersion: 2
+        x: 748
+        y: 370.5714
+        width: 187.4
+        height: 184.42857
+      alignment: 9
+      pivot: {x: 0.5, y: 0.338594}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 360901ba4c0abd34c98a7690a1b3ea1d
+      internalID: 5370369979871248714
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAge_25
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 187
+        width: 187
+        height: 184
+      alignment: 9
+      pivot: {x: 0.5, y: 0.338594}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0cc7920a16273b9488914f07ecf1385a
+      internalID: -1447100080960301288
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAge_26
+      rect:
+        serializedVersion: 2
+        x: 187
+        y: 186.57143
+        width: 187.4
+        height: 184.42857
+      alignment: 9
+      pivot: {x: 0.5, y: 0.338594}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b33c26464e210a4ab68add53b566903
+      internalID: 4207379069317717001
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAge_27
+      rect:
+        serializedVersion: 2
+        x: 374
+        y: 186.57143
+        width: 187.4
+        height: 184.42857
+      alignment: 9
+      pivot: {x: 0.5, y: 0.338594}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d349e0058f9beb847a0bd3eaf32afe7a
+      internalID: 1758016895263877254
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAge_28
+      rect:
+        serializedVersion: 2
+        x: 561
+        y: 186.57143
+        width: 187.4
+        height: 184.42857
+      alignment: 9
+      pivot: {x: 0.5, y: 0.338594}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a0e31060fb08404aa7c2e781b90d035
+      internalID: 3488652026283194625
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAge_29
+      rect:
+        serializedVersion: 2
+        x: 748
+        y: 186.57143
+        width: 187.4
+        height: 184.42857
+      alignment: 9
+      pivot: {x: 0.5, y: 0.338594}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 55738952763d8ff4dbd58ead7fbd6046
+      internalID: -2061408239437591804
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAge_30
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2.5714264
+        width: 187.4
+        height: 184.42857
+      alignment: 9
+      pivot: {x: 0.5, y: 0.338594}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b6cb66234615554bb67d028c57184ff
+      internalID: 7637226348022492733
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAge_31
+      rect:
+        serializedVersion: 2
+        x: 187
+        y: 2.5714264
+        width: 187.4
+        height: 184.42857
+      alignment: 9
+      pivot: {x: 0.5, y: 0.338594}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f3495e508f3b8b347917d852c9ae8e75
+      internalID: -5158626720778917865
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAge_32
+      rect:
+        serializedVersion: 2
+        x: 374
+        y: 2.5714264
+        width: 187.4
+        height: 184.42857
+      alignment: 9
+      pivot: {x: 0.5, y: 0.338594}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 94608fc83b7083f48aa3be4ed17b4c53
+      internalID: -4788049151776522817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAge_33
+      rect:
+        serializedVersion: 2
+        x: 561
+        y: 2.5714264
+        width: 187.4
+        height: 184.42857
+      alignment: 9
+      pivot: {x: 0.5, y: 0.338594}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 88f8fe3adc88cda4fbd891a0a2cfce6b
+      internalID: -5470295351186323250
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAge_34
+      rect:
+        serializedVersion: 2
+        x: 748
+        y: 2.5714264
+        width: 187.4
+        height: 184.42857
+      alignment: 9
+      pivot: {x: 0.5, y: 0.338594}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f2f94d5cefb833049950c1f4e581287c
+      internalID: -4277902175267029705
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

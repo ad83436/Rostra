@@ -61,12 +61,16 @@ public class SkillsInventory : MonoBehaviour {
 
         AddToUnlockedSkills((int)SKILLS.Ar_Heal, 3);
         EquipSkill((int)SKILLS.Ar_Heal, 0, 3);
-        AddToUnlockedSkills((int)SKILLS.Ar_DrainEye, 3);
-        EquipSkill((int)SKILLS.Ar_DrainEye, 1, 3);
+        AddToUnlockedSkills((int)SKILLS.Ar_IceAge, 3);
+        EquipSkill((int)SKILLS.Ar_IceAge, 1, 3);
         AddToUnlockedSkills((int)SKILLS.Ar_LullabyOfHope, 3);
         EquipSkill((int)SKILLS.Ar_LullabyOfHope, 2, 3);
         AddToUnlockedSkills((int)SKILLS.Ar_Armageddon, 3);
         EquipSkill((int)SKILLS.Ar_Armageddon, 3, 3);
+
+        AddToUnlockedSkills((int)SKILLS.Ar_DrainEye, 3);
+        AddToUnlockedSkills((int)SKILLS.Ar_HealingAura, 3);
+        AddToUnlockedSkills((int)SKILLS.Ar_ManaCharge, 3);
 
     }
 
@@ -323,6 +327,8 @@ public class SkillsInventory : MonoBehaviour {
                 return "Mana Charge";
             case (int)SKILLS.Ar_Armageddon:
                 return "Armageddon";
+            case (int)SKILLS.Ar_IceAge:
+                return "Ice Age";
             default: //In case no skill is equipped at that slot
                 return "---";
         }
@@ -393,6 +399,8 @@ public class SkillsInventory : MonoBehaviour {
                 return "Restores a portion of one ally’s MP.";
             case (int)SKILLS.Ar_Armageddon:
                 return " Sometimes to save someone, another must perish. Arcelus summons pillars of fire burning all enemies.";
+            case (int)SKILLS.Ar_IceAge:
+                return "Arcelus summons ice damaging a row of enemies and lowering their agility.";
             default: return "";
         }
     }
@@ -605,11 +613,18 @@ public class SkillsInventory : MonoBehaviour {
                 skillStat[5] = 30;
                 break;
             case (int)SKILLS.Ar_Armageddon:
-                skillStat[0] = 60;
+                skillStat[0] = 70;
                 skillStat[1] = 18;
                 skillStat[2] = 2;
                 skillStat[4] = (float)SKILL_TYPE.ALL_TARGETS_ATK;
                 skillStat[5] = 100;
+                break;
+            case (int)SKILLS.Ar_IceAge:
+                skillStat[0] = 50;
+                skillStat[1] = 16;
+                skillStat[2] = 1;
+                skillStat[4] = (float)SKILL_TYPE.FULL_ROW_ATK;
+                skillStat[5] = 50;
                 break;
             default:
                 skillStat[0] = 0;

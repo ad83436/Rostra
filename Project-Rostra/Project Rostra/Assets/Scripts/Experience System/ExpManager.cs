@@ -256,6 +256,7 @@ public class ExpManager : MonoBehaviour {
                     case SKILLS.Ar_DrainEye:    return new int[] { 18, 13, 255, 325, 13, 26, 12 };
                     case SKILLS.Ar_LullabyOfHope: return new int[] { 18, 15, 180, 400, 13, 26, 14 };
                     case SKILLS.Ar_ManaCharge: return new int[] { 19, 13, 255, 325, 14, 26, 12 };
+                    case SKILLS.Ar_IceAge:     return new int[] { 22, 15, 330, 475, 15, 26, 14 };
                     case SKILLS.Ar_Armageddon: return new int[] { 22, 15, 330, 475, 15, 26, 14 };
                     default: return null;
                 }

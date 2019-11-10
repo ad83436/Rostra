@@ -136,3 +136,7 @@ MonoBehaviour:
   - tag: BleedingEdgeImpact
     prefab: {fileID: 770094323551684568, guid: 77faad54b312bf544b4d330632bbd2d7, type: 3}
     poolSize: 1
+  - tag: IceAge
+    prefab: {fileID: 7403836438864160025, guid: dba99b032dfa5e44ca97752150a7b021,
+      type: 3}
+    poolSize: 3
