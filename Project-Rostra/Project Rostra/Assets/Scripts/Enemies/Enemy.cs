@@ -247,6 +247,7 @@ public class Enemy : MonoBehaviour
     {
         battleManager.AddEnemy(enemyIndexInBattleManager, Mathf.RoundToInt(eAgility), Mathf.RoundToInt(eStrength), Mathf.RoundToInt(eCritical), Mathf.RoundToInt(eSpeed), Mathf.RoundToInt(currentHP), Mathf.RoundToInt(maxHP), this, name);
     }
+
     public virtual void EnemyTurn()
     {
         if (!battleManager.battleHasEnded) //If all the players are dead, don't run the turn. Precautionary if statement.
@@ -260,7 +261,7 @@ public class Enemy : MonoBehaviour
                 {
                     //waitTurnsText.gameObject.SetActive(false); //Turn off the text. Don't forget to enable it when the enemy goes to waiting state
                     MakeSkillsWork(canUseSkill);
-
+                    hitAmount = Random.Range(1, 5);
                     //Execute skill here 
                 }
 
