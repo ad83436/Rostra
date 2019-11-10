@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class UIBTLAlternative : UIBTL {
-	public override void AddImageToQ(Sprite nextOnQImage) {
-		base.AddImageToQ(nextOnQImage);
-	}
+	public override void AddImageToQ(Sprite nextOnQImage, int index, bool player)
+    {
+        base.AddImageToQ(nextOnQImage,  index, player);
+
+    }
 
 	public override void DisableActivtyText() {
 		base.DisableActivtyText();

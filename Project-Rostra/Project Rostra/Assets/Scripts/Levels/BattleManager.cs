@@ -233,10 +233,6 @@ public class BattleManager : MonoBehaviour
         {
             NextOnQueue();
         }
-
-
-
-
     }
 
     public virtual void NextOnQueue()
@@ -246,17 +242,37 @@ public class BattleManager : MonoBehaviour
         {
             uiBtl.ShowThisPlayerUI(battleQueue[0].playerIndex, battleQueue[0].name, battleQueue[0].playerReference);
 			DOM_playerTurn();
+
+            //Add it to the end of the Q
+            battleQueue.Add(battleQueue[0]);
+            //Debug.Log("I've added "  + battleQueue[battleQueue.Count - 1].name);
+            //Remove it from the start of the Q 
+            battleQueue.RemoveAt(0);
         }
         else if (battleQueue[0].playerReference == null && battleQueue[0].enemyReference != null)
         {
-            battleQueue[0].enemyReference.EnemyTurn();
-			DOM_enemyTurn();
+            if (!battleQueue[0].enemyReference.dead)
+            {
+                battleQueue[0].enemyReference.EnemyTurn();
+                DOM_enemyTurn();
+
+                //Add it to the end of the Q
+                battleQueue.Add(battleQueue[0]);
+                //Debug.Log("I've added "  + battleQueue[battleQueue.Count - 1].name);
+                //Remove it from the start of the Q 
+                battleQueue.RemoveAt(0);
+            }
+            else
+            {
+                //Add it to the end of the Q
+                battleQueue.Add(battleQueue[0]);
+                //Debug.Log("I've added "  + battleQueue[battleQueue.Count - 1].name);
+                //Remove it from the start of the Q 
+                battleQueue.RemoveAt(0);
+                NextOnQueue();
+            }
         }
-        //Add it to the end of the Q
-        battleQueue.Add(battleQueue[0]);
-        //Debug.Log("I've added "  + battleQueue[battleQueue.Count - 1].name);
-        //Remove it from the start of the Q 
-        battleQueue.RemoveAt(0);
+
     }
 
 	protected virtual void DOM_playerTurn() {
@@ -336,7 +352,7 @@ public class BattleManager : MonoBehaviour
                //The player has a higher agility
                battleQueue.Add(players[maxPlayerIndex]);
                //Add the player's image to the UI
-               uiBtl.AddImageToQ(players[maxPlayerIndex].playerReference.qImage);
+               uiBtl.AddImageToQ(players[maxPlayerIndex].playerReference.qImage, players[maxPlayerIndex].playerIndex, true);
                //Remove the player's agility from the list
                pSpeeds.RemoveAt(pSpeeds.Count - 1);
                //Add the player's index to the array of removed players
@@ -348,7 +364,7 @@ public class BattleManager : MonoBehaviour
                 //The enemy has the higher agility
                 battleQueue.Add(enemies[maxEnemyIndex]);
                 //Add the enemy's image to the UI
-                uiBtl.AddImageToQ(enemies[maxEnemyIndex].enemyReference.qImage);
+                uiBtl.AddImageToQ(enemies[maxEnemyIndex].enemyReference.qImage, enemies[maxEnemyIndex].playerIndex, false);
                 Debug.Log(enemies[maxEnemyIndex].enemyReference.qImage);
                 //Remove the enemy's agility from the list
                 eSpeeds.RemoveAt(eSpeeds.Count - 1);
@@ -362,7 +378,7 @@ public class BattleManager : MonoBehaviour
         {
             battleQueue.Add(players[maxPlayerIndex]);
             //Add the player's image to the UI
-            uiBtl.AddImageToQ(players[maxPlayerIndex].playerReference.qImage);
+            uiBtl.AddImageToQ(players[maxPlayerIndex].playerReference.qImage, players[maxPlayerIndex].playerIndex, true);
             pSpeeds.RemoveAt(pSpeeds.Count - 1);
             removedPlayerIndexes[maxPlayerIndex] = maxPlayerIndex;
         }
@@ -371,7 +387,7 @@ public class BattleManager : MonoBehaviour
         {
             battleQueue.Add(enemies[maxEnemyIndex]);
             //Add the enemy's image to the UI
-            uiBtl.AddImageToQ(enemies[maxEnemyIndex].enemyReference.qImage);
+            uiBtl.AddImageToQ(enemies[maxEnemyIndex].enemyReference.qImage, enemies[maxEnemyIndex].playerIndex,false);
             Debug.Log(enemies[maxEnemyIndex].enemyReference.qImage);
             eSpeeds.RemoveAt(eSpeeds.Count - 1);
             removedEnemyIndexes[maxEnemyIndex] = maxEnemyIndex;
