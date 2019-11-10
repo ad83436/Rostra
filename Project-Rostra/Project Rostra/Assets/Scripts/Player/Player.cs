@@ -1271,7 +1271,7 @@ public class Player : MonoBehaviour
 
                                         if (chosenSkill == (int)SKILLS.Ar_IceAge)
                                         {
-                                            battleManager.enemies[i].enemyReference.TakeDamage(0.7f * actualATK + skills.SkillStats(chosenSkill)[0], numberOfAttacks,1,0.3f,3,"Defense",EnemyStatusAilment.none); //Damage is the half the player's attack stat and the skill's attack stat
+                                            battleManager.enemies[i].enemyReference.TakeDamage(0.7f * actualATK + skills.SkillStats(chosenSkill)[0], numberOfAttacks,1,0.3f,3,"Agility",EnemyStatusAilment.none); //Damage is the half the player's attack stat and the skill's attack stat
                                         }
                                         else
                                         {
