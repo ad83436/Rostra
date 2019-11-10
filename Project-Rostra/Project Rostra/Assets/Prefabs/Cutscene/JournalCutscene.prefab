@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 868221953216651889}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -9.35, z: 1}
+  m_LocalPosition: {x: 0, y: -9.35, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 868221953544098666}
@@ -69,7 +69,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 0871fcccda2e4384aa8d4b491930f685, type: 3}
+  m_Sprite: {fileID: 21300000, guid: cbaeb2366c81bac42a1384bba2e0eaed, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -314,12 +314,12 @@ PrefabInstance:
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
       propertyPath: cs.camLocation.x
-      value: -242
+      value: -75
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
       propertyPath: cs.camLocation.y
-      value: -9
+      value: -9.49
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
@@ -435,8 +435,9 @@ PrefabInstance:
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
       propertyPath: cs.dialogues.Array.data[1].sentences.Array.data[5]
-      value: My children are frightened. I don't know what to do.... I need to go
-        see Domel I just hope he isn't working in the mines.
+      value: The children are frightened. I don't know what to do.... I need to go
+        see Domel I just hope he isn't working in the mines. I don't want to leave
+        my cchildren but I must go...
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
@@ -490,19 +491,18 @@ PrefabInstance:
         type: 3}
       propertyPath: cs.dialogues.Array.data[1].sentences.Array.data[14]
       value: Settle down for a moment! The journal mentioned the guy's a miner, right?
-        I used to spend a lot of time in the taverns playing for miners after work.
+        I used to spend a lot of time in the taverns playing for miners.
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
       propertyPath: cs.dialogues.Array.data[1].sentences.Array.data[15]
-      value: They tend to get chatty after a few drinks. The local bartender definitely
+      value: They tend to get chatty after a few drinks. The local barkeep definitely
         either knows where he is or at least has an idea of where he might be.
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
       propertyPath: cs.dialogues.Array.data[1].sentences.Array.data[16]
-      value: He does have a point. Bartenders also like to keep secrets for a nice
-        tip.
+      value: He does have a point. Barkeeps also like to keep secrets for a nice tip.
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
@@ -517,7 +517,7 @@ PrefabInstance:
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
       propertyPath: cs.dialogues.Array.data[1].sentences.Array.data[19]
-      value: You have a point. A really good point. Atleast for someone who almost
+      value: You have a point. A really good point. At least for someone who almost
         stabbed his eye out.
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
@@ -697,6 +697,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
+      propertyPath: cs.dialogues.Array.data[1].triggerBool
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
+        type: 3}
       propertyPath: cs.moves.Array.data[0].x
       value: 0
       objectReference: {fileID: 0}
@@ -718,12 +723,12 @@ PrefabInstance:
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
       propertyPath: cs.moves.Array.data[2].x
-      value: -2
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
       propertyPath: cs.moves.Array.data[2].y
-      value: -11
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
