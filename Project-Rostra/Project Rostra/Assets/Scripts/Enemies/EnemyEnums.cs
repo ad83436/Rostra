@@ -88,5 +88,6 @@ public enum EnemyName
     Octodad,
     Yeti,
     Solider,
-    Lieutenant
+    Lieutenant,
+    Red_Reptile
 };

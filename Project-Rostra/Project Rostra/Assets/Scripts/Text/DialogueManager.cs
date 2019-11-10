@@ -16,6 +16,7 @@ public enum ChoiceEnum : byte
 	demo =  6,
 	talkToCo = 7,
 	metAllChars = 8,
+	sawJournal = 9,
 }
 
 
@@ -69,6 +70,7 @@ public class DialogueManager : MonoBehaviour
 	//set 3 ^
 	public bool talkedToCo; // 7
 	public bool metAllChars; // 8 
+	public bool sawJournal;
 	// stores a local copy of which choice set we will be using
 	private float choiceSet;
 	public bool[] choices;
@@ -248,6 +250,11 @@ public class DialogueManager : MonoBehaviour
 						talkedToCo = true;
 						SetChoice(ChoiceEnum.talkToCo, true);
 						Debug.Log("We talked to the commander!");
+						break;
+					case 9:
+						sawJournal = true;
+						SetChoice(ChoiceEnum.sawJournal, true);
+						Debug.Log("Saw the journal");
 						break;
 
 				}
