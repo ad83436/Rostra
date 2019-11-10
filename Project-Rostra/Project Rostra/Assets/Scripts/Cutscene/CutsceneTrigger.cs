@@ -34,6 +34,7 @@ public class CutsceneTrigger : MonoBehaviour
 			{
 				CutsceneManager.instance.TriggerBool(maxCount);
 			}
+			CutsceneManager.instance.pl = col.gameObject;
 		}
 		if (col.CompareTag("Player") && hasActivated == false && DialogueManager.instance.GetChoice(ce) == true && isChoiceDependant == true)
 		{
@@ -46,6 +47,7 @@ public class CutsceneTrigger : MonoBehaviour
 			{
 				CutsceneManager.instance.TriggerBool(maxCount);
 			}
+			CutsceneManager.instance.pl = col.gameObject;
 		}
 		
 	}
@@ -58,6 +60,7 @@ public class CutsceneTrigger : MonoBehaviour
 			col.gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);
 			DialogueManager.instance.canWalk = false;
 			hasActivated = true;
+			CutsceneManager.instance.pl = col.gameObject;
 		}
 
 	}
