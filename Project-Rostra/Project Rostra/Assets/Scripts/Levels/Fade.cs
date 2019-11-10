@@ -20,6 +20,7 @@ public class Fade : MonoBehaviour
     private bool transitionOutOfACutscene;
     private bool canGoToSurvey;
 
+
     public VictoryScreen victoryPanel;
     public DefeatScreen defeatPanel;
     public GameObject endTestPanel;
@@ -218,4 +219,5 @@ public class Fade : MonoBehaviour
         fadeOut = !fadeOut;
         transitionToEndTest = true;
     }
+
 }
