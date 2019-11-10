@@ -52,8 +52,8 @@ public class SkillsInventory : MonoBehaviour {
 
         AddToUnlockedSkills((int)SKILLS.Fr_DoubleShot, 2);
         EquipSkill((int)SKILLS.Fr_DoubleShot, 0, 2);
-        AddToUnlockedSkills((int)SKILLS.Fr_IDontMiss, 2);
-        EquipSkill((int)SKILLS.Fr_IDontMiss, 1, 2);
+        AddToUnlockedSkills((int)SKILLS.Fr_BleedingEdge, 2);
+        EquipSkill((int)SKILLS.Fr_BleedingEdge, 1, 2);
         AddToUnlockedSkills((int)SKILLS.Fr_ArrowRain, 2);
         EquipSkill((int)SKILLS.Fr_ArrowRain, 2, 2);
         AddToUnlockedSkills((int)SKILLS.Fr_NeverAgain, 2);
@@ -295,8 +295,8 @@ public class SkillsInventory : MonoBehaviour {
                 return "Arrow Rain";
             case (int)SKILLS.Fr_IDontMiss:
                 return "I Don't Miss.";
-            case (int)SKILLS.Fr_PhantomShot:
-                return "Phantom Shot";
+            case (int)SKILLS.Fr_BleedingEdge:
+                return "Bleeding Edge";
             case (int)SKILLS.Fr_NeverAgain:
                 return "Never Again!";
             case (int)SKILLS.Ob_ShieldAlly:
@@ -365,8 +365,8 @@ public class SkillsInventory : MonoBehaviour {
                 return "Frea shoots a rain of arrows that damages all enemies.";
             case (int)SKILLS.Fr_IDontMiss:
                 return "Frea takes a deep breath and concentrates. Increases base Strength by 30% for three turns. ";
-            case (int)SKILLS.Fr_PhantomShot:
-                return "No one can see it coming. Damages a row of enemies and decreases their attack for three turns.";
+            case (int)SKILLS.Fr_BleedingEdge:
+                return "Frea pulls out a dagger and takes matters into her own hands. She inflicts damage X 3 to an enemy and sustains their defense X 2 as damage to herself.";
             case (int)SKILLS.Fr_NeverAgain:
                 return "Frea channels all her anger into a single devastating shot that pierces through all enemies.";
             case (int)SKILLS.Ob_ShieldAlly:
@@ -453,7 +453,7 @@ public class SkillsInventory : MonoBehaviour {
             case (int)SKILLS.Fa_SwordOfFury:
                 skillStat[0] = 80;
                 skillStat[1] = 16;
-                skillStat[2] = 1;
+                skillStat[2] = 0;
                 skillStat[4] = (float)SKILL_TYPE.SINGLE_TARGET_ATK;
                 skillStat[5] = 50;
                 break;
@@ -513,12 +513,12 @@ public class SkillsInventory : MonoBehaviour {
                 skillStat[4] = (float)SKILL_TYPE.SINGLE_PLAYER_BUFF;
                 skillStat[5] = 35;
                 break;
-            case (int)SKILLS.Fr_PhantomShot:
-                skillStat[0] = 50;
+            case (int)SKILLS.Fr_BleedingEdge:
+                skillStat[0] = 40;
                 skillStat[1] = 16;
-                skillStat[2] = 1;
-                skillStat[4] = (float)SKILL_TYPE.FULL_ROW_ATK;
-                skillStat[5] = 55;
+                skillStat[2] = 0;
+                skillStat[4] = (float)SKILL_TYPE.SINGLE_TARGET_ATK;
+                skillStat[5] = 35;
                 break;
             case (int)SKILLS.Fr_NeverAgain:
                 skillStat[0] = 180;

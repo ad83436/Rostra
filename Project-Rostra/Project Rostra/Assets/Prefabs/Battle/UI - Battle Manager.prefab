@@ -4820,10 +4820,10 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: eada3c905db7a974895ff520ebfa27a9, type: 3}
-    m_FontSize: 12
+    m_FontSize: 10
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 0
     m_MaxSize: 40
     m_Alignment: 0
     m_AlignByGeometry: 0
@@ -4831,7 +4831,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Skill Description Goes Here
+  m_Text: Frea pulls out a dagger and takes matters into her own hands. She inflicts
+    double damage to an enemy and sustains their defense as damage to herself.
 --- !u!1 &1828761593
 GameObject:
   m_ObjectHideFlags: 0
@@ -13744,7 +13745,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 5
 --- !u!1 &6408667393590087913
 GameObject:
   m_ObjectHideFlags: 0

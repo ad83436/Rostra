@@ -157,6 +157,9 @@ public class Player : MonoBehaviour
     //Lutenist
     private string[] statToAffect;
 
+    //Bleeding Edge
+    private float atkBeforeBleedingEdge = 0.0f; //BE doubles the attack points momentarily
+
     //UI
     public Image hpImage;
     public Image rageImage;
@@ -425,8 +428,23 @@ public class Player : MonoBehaviour
         CalculateHit();
         if (hit)
         {
+            //If we're using Bleeding Edge, damage Frea by the defense of the enemy
+            if (chosenSkill == (int)SKILLS.Fr_BleedingEdge)
+            {
+                TakeDamage(2.0f * attackingThisEnemy.eDefence);
+            }
+
             //Attack Effect
-            objPooler.SpawnFromPool("PlayerNormalAttack", attackingThisEnemy.gameObject.transform.position, gameObject.transform.rotation);
+            if (chosenSkill != (int)SKILLS.Fr_BleedingEdge)
+            {
+                objPooler.SpawnFromPool("PlayerNormalAttack", attackingThisEnemy.gameObject.transform.position, gameObject.transform.rotation);
+            }
+            else
+            {
+                //Summon the BE effects 
+                objPooler.SpawnFromPool("BleedingEdgeEffect", gameObject.transform.position, gameObject.transform.rotation);
+                objPooler.SpawnFromPool("BleedingEdgeImpact", attackingThisEnemy.gameObject.transform.position, gameObject.transform.rotation);
+            }
             //Shake the camera
             btlCam.CameraShake();
             //Check for critical hits
@@ -492,8 +510,17 @@ public class Player : MonoBehaviour
         if (numberOfAttacks <= 0) //Check that all attacks have been done
         {
             playerAnimator.SetBool("Attack", false);
-        }
 
+            if (chosenSkill != (int)SKILLS.NO_SKILL)
+            {
+                if(chosenSkill == (int)SKILLS.Fr_BleedingEdge)
+                {
+                    actualATK = atkBeforeBleedingEdge; //Reset the actual attack
+                }
+
+                chosenSkill = (int)SKILLS.NO_SKILL; //Reset the chosen skill. Precautianory.
+            }
+        }
     }
     #endregion
 
@@ -938,6 +965,17 @@ public class Player : MonoBehaviour
                 battleManager.players[playerIndex].currentMP = currentMP;
                 PartyStats.chara[playerIndex].magicpoints = currentMP;
                 break;
+            case (int)SKILLS.Fr_BleedingEdge:
+                numberOfAttacks = 1;
+                atkBeforeBleedingEdge = actualATK;
+                actualATK *= 3.0f; // Bleeding edge doubles the attack momentarily
+                playerAnimator.SetBool("Turn", false);
+                skillAnimatorName = "Attack";
+                currentMP -= mpCost;
+                mpImage.fillAmount = currentMP / maxMP;
+                battleManager.players[playerIndex].currentMP = currentMP;
+                PartyStats.chara[playerIndex].magicpoints = currentMP;
+                break;
             case (int)SKILLS.Fr_PiercingShot:
                 skillNameForObjPooler = "FFSkill1";
                 skillAnimatorName = "ASkill";
@@ -946,8 +984,8 @@ public class Player : MonoBehaviour
             case (int)SKILLS.Fa_SwordOfFury:
                 skillTarget = 0;
                 skillNameForObjPooler = "SoFSkill";
-                skillAnimatorName = "ASkill";
-                skillWaitingIndex = 2; //Should there be waiting time, this index is used to know which waiting animation to go to
+                skillAnimatorName = "Fury";
+                skillWaitingIndex = 0; //Should there be waiting time, this index is used to know which waiting animation to go to
                 break;
             case (int)SKILLS.Fa_Sunguard:
                 skillTarget = 0;

@@ -129,3 +129,10 @@ MonoBehaviour:
   - tag: LutenistEffect
     prefab: {fileID: 55853879983042136, guid: a59ca392be54c644ca8a1796b7f8b111, type: 3}
     poolSize: 1
+  - tag: BleedingEdgeEffect
+    prefab: {fileID: 5799415417138236401, guid: fa27cc9c46d203846a8bcb9db1264817,
+      type: 3}
+    poolSize: 1
+  - tag: BleedingEdgeImpact
+    prefab: {fileID: 770094323551684568, guid: 77faad54b312bf544b4d330632bbd2d7, type: 3}
+    poolSize: 1

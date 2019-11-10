@@ -23,7 +23,7 @@ public enum SKILLS { // Minimum Value -- 0x0000, Maximum Value -- 0xFFEF (65519 
     Fr_PiercingShot =       0x000F,
     Fr_ArrowRain =          0x0010,
     Fr_DoubleShot =         0x0011,
-    Fr_PhantomShot =        0x0012,
+    Fr_BleedingEdge =       0x0012,
     Fr_IDontMiss =          0x0013,
     Fr_NeverAgain =         0x0014,
     Ar_Heal =               0x0015,
