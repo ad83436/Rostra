@@ -37,7 +37,7 @@ public static class PartySkills {
                 (int)SKILLS.Fr_PiercingShot,
                 (int)SKILLS.Fr_ArrowRain,
                 (int)SKILLS.Fr_IDontMiss,
-                (int)SKILLS.Fr_PhantomShot,
+                (int)SKILLS.Fr_BleedingEdge,
                 (int)SKILLS.Fr_NeverAgain,
                 (int)SKILLS.NO_SKILL,
                 (int)SKILLS.NO_SKILL,

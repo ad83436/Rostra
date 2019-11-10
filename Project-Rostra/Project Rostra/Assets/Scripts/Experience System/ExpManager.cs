@@ -244,7 +244,7 @@ public class ExpManager : MonoBehaviour {
                     case SKILLS.Fr_PiercingShot:	return new int[] { 35, 14, 190, 200, 16, 16, 14 }; //return new int[] { 40, 14, 265, 200, 15, 16, 14 };
                     case SKILLS.Fr_ArrowRain:       return new int[] { 37, 14, 265, 275, 16, 16, 14 };
                     case SKILLS.Fr_IDontMiss:       return new int[] { 35, 16, 265, 350, 16, 16, 16 };
-                    case SKILLS.Fr_PhantomShot:     return new int[] { 42, 18, 265, 425, 18, 16, 16 };
+                    case SKILLS.Fr_BleedingEdge:     return new int[] { 42, 18, 265, 425, 18, 16, 16 };
                     case SKILLS.Fr_NeverAgain:      return new int[] { 44, 20, 340, 425, 20, 18, 17 };
                     default: return null;
                         
