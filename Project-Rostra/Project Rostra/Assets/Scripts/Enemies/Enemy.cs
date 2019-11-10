@@ -82,26 +82,54 @@ public class Enemy : MonoBehaviour
     //Blowself
     public GameObject blowSelfObject;
 
+    //Buffs/Debuffs
+
+    protected bool defenseBuffed = false;
+    protected bool attackBuffed = false;
+    protected bool agilityBuffed = false;
+    protected bool strBuffed = false;
+    protected float defenseBuffSkillQCounter = 0; //How many turns until the defense buff is reversed. Need three counters as multiple stats could be buffed/debuffed at the same time
+    protected float attackBuffSkillQCounter = 0;
+    protected float agilityBuffSkillQCounter = 0;
+    protected float strBuffSkillQCounter = 0;
+    public GameObject defBuffEffect;
+    public GameObject atkBuffEffect;
+    public GameObject agiBuffEffect;
+    public GameObject strBuffEffect;
+    public SpriteRenderer debuffArrow;
+    public GameObject atkBuffArrowIndicator;
+    public GameObject defBuffArrowIndicator;
+    public GameObject agiBuffArrowIndicator;
+    public GameObject strBuffArrowIndicator;
+    protected Quaternion arrowRotator;
+    protected Color debuffColor;
+    //Actual stats --> Stats after they've been modified in battle
+    protected float actualATK;
+    protected float actualDEF;
+    protected float actualAgi;
+    protected float actualCRIT;
+    protected float actualSTR;
+
     //Status ailments
     //An enemy can be affected by two ailments at max
     public EnemyStatusAilment currentStatusAilment0 = EnemyStatusAilment.none;
     public EnemyStatusAilment currentStatusAilment1 = EnemyStatusAilment.none;
 
     //+Chained
-    private int chainedWaitTime = 0; //Keep track of when chained is reverted
-    private Enemy[] chainedEnemy; //Stores the information for the chained enemies
+    protected int chainedWaitTime = 0; //Keep track of when chained is reverted
+    protected Enemy[] chainedEnemy; //Stores the information for the chained enemies
     public GameObject chainedSymbol;
     public GameObject primaryChainedSymbol; //Used to distinguish the primary target of a chain
-    private bool primaryChainedTarget = false; // The primary target is the only one to unchain the other targets
+    protected bool primaryChainedTarget = false; // The primary target is the only one to unchain the other targets
 
     //+Rallied
-    private int ralliedWaitTime = 0;
-    private float ralliedDamageModifier = 1.0f; //When rallied, this modifier increases damage taken
+    protected int ralliedWaitTime = 0;
+    protected float ralliedDamageModifier = 1.0f; //When rallied, this modifier increases damage taken
     public GameObject ralliedSymbol;
 
     //+Burn
-    private int burnedWaitTime = 0;
-    private float burnDamage = 10.0f; //Damages the enemy at the start of every turn
+    protected int burnedWaitTime = 0;
+    protected float burnDamage = 10.0f; //Damages the enemy at the start of every turn
     public GameObject burnSymbol;
 
     protected void Awake()
@@ -173,6 +201,26 @@ public class Enemy : MonoBehaviour
         {
             burnSymbol.gameObject.SetActive(false);
         }
+        if(debuffArrow)
+        {
+            debuffArrow.gameObject.SetActive(false);
+        }
+        if(atkBuffArrowIndicator)
+        {
+            atkBuffArrowIndicator.gameObject.SetActive(false);
+        }
+        if (strBuffArrowIndicator)
+        {
+            strBuffArrowIndicator.gameObject.SetActive(false);
+        }
+        if (defBuffArrowIndicator)
+        {
+            defBuffArrowIndicator.gameObject.SetActive(false);
+        }
+        if (agiBuffArrowIndicator)
+        {
+            agiBuffArrowIndicator.gameObject.SetActive(false);
+        }
     }
     protected virtual void Update()
     {
@@ -200,90 +248,59 @@ public class Enemy : MonoBehaviour
     /// 
     public virtual void EnemyTurn()
     {
-        uiBTL.DisableActivtyText();
-        CheckForAilments();
-
-        if (currentState == EnemyState.waiting)
+        if (!battleManager.battleHasEnded) //If all the players are dead, don't run the turn. Precautionary if statement.
         {
-            waitTime--;
-            waitQTurns--;
-            //waitTurnsText.text = waitQTurns.ToString(); //Update the UI
-            if (waitQTurns <= 0)
+            uiBTL.DisableActivtyText();
+            CheckForAilments();
+            CheckForBuffs();
+
+            if (currentState == EnemyState.waiting)
             {
-                //waitTurnsText.gameObject.SetActive(false); //Turn off the text. Don't forget to enable it when the enemy goes to waiting state
-                MakeSkillsWork(canUseSkill);
-             
-                //Execute skill here 
+                waitTime--;
+                waitQTurns--;
+                //waitTurnsText.text = waitQTurns.ToString(); //Update the UI
+                if (waitQTurns <= 0)
+                {
+                    //waitTurnsText.gameObject.SetActive(false); //Turn off the text. Don't forget to enable it when the enemy goes to waiting state
+                    MakeSkillsWork(canUseSkill);
+
+                    //Execute skill here 
+                }
+
+                else
+                {
+                    //End the turn
+                    uiBTL.EndTurn();
+                }
+
+            }
+
+            // used for skills that dont need to wait to activate instead happen right away and last for multiple turns 
+            else if (currentState == EnemyState.skilling)
+            {
+                waitQTurns--;
+                waitTime--;
+                if (waitQTurns <= 0) { MakeSkillsWork(canUseSkill); }
+                EndTurn();
             }
 
             else
             {
-                //End the turn
-                uiBTL.EndTurn();
-            }
+                float attackChance = Random.Range(0, 100); // determines if the ememy will use its type attack or a dumb attack 
+                float skillChance = Random.Range(0, 50);// determines if the enemy will use a skill or not //TEMP VALUES//
 
-        }
-
-        // used for skills that dont need to wait to activate instead happen right away and last for multiple turns 
-        else if (currentState == EnemyState.skilling)
-        {
-            waitQTurns--;
-            waitTime--;
-            if (waitQTurns <= 0) { MakeSkillsWork(canUseSkill); }
-            EndTurn();
-        }
-
-        else
-        {
-            float attackChance = Random.Range(0, 100); // determines if the ememy will use its type attack or a dumb attack 
-            float skillChance = Random.Range(0, 50);// determines if the enemy will use a skill or not //TEMP VALUES//
-
-            if(canUseSkill == AllEnemySkills.No_Skill)
-            {
-                skillChance = -1.0f;
-            }
-
-            if (!dead)
-            {
-                switch (enemyAttack)
+                if (canUseSkill == AllEnemySkills.No_Skill)
                 {
-                    #region Dumb
-                    case EnemyAttackType.Dumb:
+                    skillChance = -1.0f;
+                }
 
-                        if (skillChance >= 47)
-                        {
-                            if (skillNeedsCharge)
-                            {
-                                print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
-                                currentState = EnemyState.waiting;
-                                waitQTurns = waitTime;
-                                animator.SetBool("isWaiting", true);
-                                EndTurn();
-                            }
+                if (!dead)
+                {
+                    switch (enemyAttack)
+                    {
+                        #region Dumb
+                        case EnemyAttackType.Dumb:
 
-                            else
-                            {
-                                print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
-                                currentState = EnemyState.skilling;
-                                waitQTurns = waitTime;
-                                animator.SetBool("SkillInUse", true);
-                                MakeSkillsWork(canUseSkill);
-                                EndTurn();
-                            }
-                        }
-
-                        else
-                        {
-                            DumbAttack();
-                        }
-                        break;
-#endregion
-
-                    #region Opportunistic
-                    case EnemyAttackType.Opportunistic:
-
-                        if (attackChance > 30)
-                        {
                             if (skillChance >= 47)
                             {
                                 if (skillNeedsCharge)
@@ -292,38 +309,6 @@ public class Enemy : MonoBehaviour
                                     currentState = EnemyState.waiting;
                                     waitQTurns = waitTime;
                                     animator.SetBool("isWaiting", true);
-                                
-                                    EndTurn();
-                                }
-
-                                else
-                                {
-                                    print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
-                                    currentState = EnemyState.skilling;
-                                    waitQTurns = waitTime;
-                                    animator.SetBool("SkillInUse", true);
-                                    MakeSkillsWork(canUseSkill);
-                                    EndTurn();
-                                }
-                            }
-
-                            else
-                            {
-                                AttackHighAgi();
-                            }
-                        }
-
-                        else
-                        {
-                            if (skillChance >= 50)
-                            {
-                                if (skillNeedsCharge)
-                                {
-                                    print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
-                                    currentState = EnemyState.waiting;
-                                    waitQTurns = waitTime;
-                                    animator.SetBool("isWaiting", true);
-                                   
                                     EndTurn();
                                 }
 
@@ -341,50 +326,216 @@ public class Enemy : MonoBehaviour
                             else
                             {
                                 DumbAttack();
-                                print(eName + " Did not use their skill but used a Dumb attack");
                             }
-                        }
-                        break;
-                    #endregion
+                            break;
+                        #endregion
 
-                    #region Assassin
-                    case EnemyAttackType.Assassin:
+                        #region Opportunistic
+                        case EnemyAttackType.Opportunistic:
 
-                        if (attackChance > 30)
-                        {
-                            if (skillChance >= 47)
+                            if (attackChance > 30)
                             {
-                                if (skillNeedsCharge)
+                                if (skillChance >= 47)
                                 {
-                                    print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
-                                    currentState = EnemyState.waiting;
-                                    waitQTurns = waitTime;
-                                    animator.SetBool("isWaiting", true);
-                                    EndTurn();
+                                    if (skillNeedsCharge)
+                                    {
+                                        print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
+                                        currentState = EnemyState.waiting;
+                                        waitQTurns = waitTime;
+                                        animator.SetBool("isWaiting", true);
+
+                                        EndTurn();
+                                    }
+
+                                    else
+                                    {
+                                        print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
+                                        currentState = EnemyState.skilling;
+                                        waitQTurns = waitTime;
+                                        animator.SetBool("SkillInUse", true);
+                                        MakeSkillsWork(canUseSkill);
+                                        EndTurn();
+                                    }
                                 }
 
                                 else
                                 {
-                                    print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
-                                    currentState = EnemyState.skilling;
-                                    waitQTurns = waitTime;
-                                    animator.SetBool("SkillInUse", true);
-                                    MakeSkillsWork(canUseSkill);
-                                    EndTurn();
+                                    AttackHighAgi();
                                 }
                             }
 
                             else
                             {
-   
-                                AttackLowHp();
-                                print(eName + " Did not use their skill but used their types attack");
+                                if (skillChance >= 50)
+                                {
+                                    if (skillNeedsCharge)
+                                    {
+                                        print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
+                                        currentState = EnemyState.waiting;
+                                        waitQTurns = waitTime;
+                                        animator.SetBool("isWaiting", true);
+
+                                        EndTurn();
+                                    }
+
+                                    else
+                                    {
+                                        print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
+                                        currentState = EnemyState.skilling;
+                                        waitQTurns = waitTime;
+                                        animator.SetBool("SkillInUse", true);
+                                        MakeSkillsWork(canUseSkill);
+                                        EndTurn();
+                                    }
+                                }
+
+                                else
+                                {
+                                    DumbAttack();
+                                    print(eName + " Did not use their skill but used a Dumb attack");
+                                }
                             }
-                        }
+                            break;
+                        #endregion
+
+                        #region Assassin
+                        case EnemyAttackType.Assassin:
+
+                            if (attackChance > 30)
+                            {
+                                if (skillChance >= 47)
+                                {
+                                    if (skillNeedsCharge)
+                                    {
+                                        print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
+                                        currentState = EnemyState.waiting;
+                                        waitQTurns = waitTime;
+                                        animator.SetBool("isWaiting", true);
+                                        EndTurn();
+                                    }
+
+                                    else
+                                    {
+                                        print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
+                                        currentState = EnemyState.skilling;
+                                        waitQTurns = waitTime;
+                                        animator.SetBool("SkillInUse", true);
+                                        MakeSkillsWork(canUseSkill);
+                                        EndTurn();
+                                    }
+                                }
+
+                                else
+                                {
+
+                                    AttackLowHp();
+                                    print(eName + " Did not use their skill but used their types attack");
+                                }
+                            }
 
 
-                        else
-                        {
+                            else
+                            {
+                                if (skillChance >= 49)
+                                {
+                                    if (skillNeedsCharge)
+                                    {
+                                        print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
+                                        currentState = EnemyState.waiting;
+                                        waitQTurns = waitTime;
+                                        animator.SetBool("isWaiting", true);
+                                        EndTurn();
+                                    }
+
+                                    else
+                                    {
+                                        print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
+                                        currentState = EnemyState.skilling;
+                                        waitQTurns = waitTime;
+                                        animator.SetBool("SkillInUse", true);
+                                        MakeSkillsWork(canUseSkill);
+                                        EndTurn();
+                                    }
+                                }
+
+                                else
+                                {
+                                    DumbAttack();
+                                    print(eName + " Did not use their skill but used a Dumb attack");
+                                }
+                            }
+                            break;
+                        #endregion
+
+                        #region Bruiser
+                        case EnemyAttackType.Bruiser:
+
+                            if (attackChance > 30)
+                            {
+                                if (skillChance >= 47)
+                                {
+                                    if (skillNeedsCharge)
+                                    {
+                                        print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
+                                        currentState = EnemyState.waiting;
+                                        waitQTurns = waitTime;
+                                        animator.SetBool("isWaiting", true);
+                                        EndTurn();
+                                    }
+
+                                    else
+                                    {
+                                        print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
+                                        currentState = EnemyState.skilling;
+                                        waitQTurns = waitTime;
+                                        animator.SetBool("SkillInUse", true);
+                                        MakeSkillsWork(canUseSkill);
+                                        EndTurn();
+                                    }
+                                }
+
+                                else
+                                {
+                                    AttackHighAtk();
+                                }
+                            }
+
+                            else
+                            {
+                                if (skillChance >= 50)
+                                {
+                                    if (skillNeedsCharge)
+                                    {
+                                        print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
+                                        currentState = EnemyState.waiting;
+                                        waitQTurns = waitTime;
+                                        animator.SetBool("isWaiting", true);
+                                        EndTurn();
+                                    }
+
+                                    else
+                                    {
+                                        print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
+                                        currentState = EnemyState.skilling;
+                                        waitQTurns = waitTime;
+                                        animator.SetBool("SkillInUse", true);
+                                        MakeSkillsWork(canUseSkill);
+                                        EndTurn();
+                                    }
+                                }
+
+                                else
+                                {
+                                    DumbAttack();
+                                }
+                            }
+                            break;
+                        #endregion
+
+                        #region Healer
+                        case EnemyAttackType.Healer:
+
+                            float chanceOfHealth = Random.Range(0.2f, 0.9f); //  how low should  the health be before it is healed //CHANGE THIS FUCKING VARIABLE NAME ANDRE!!
                             if (skillChance >= 49)
                             {
                                 if (skillNeedsCharge)
@@ -409,19 +560,39 @@ public class Enemy : MonoBehaviour
 
                             else
                             {
-                                DumbAttack();
-                                print(eName + " Did not use their skill but used a Dumb attack");
+                                EnemyToHeal();
+
+                                if (enemyToHeal == null)
+                                {
+                                    DumbAttack();
+                                }
+
+                                else
+                                {
+
+                                    if (enemyToHeal.currentHP <= (enemyToHeal.maxHP * chanceOfHealth))
+                                    {
+                                        print("Healed Enemy at Index " + enemyToHeal.enemyIndexInBattleManager);
+                                        animator.SetBool("Heal", true);
+                                    }
+
+                                    else
+                                    {
+                                        print("dumb Attacked");
+                                        DumbAttack();
+                                    }
+                                }
+
+
                             }
-                        }
-                        break;
-                    #endregion
 
-                    #region Bruiser
-                    case EnemyAttackType.Bruiser:
+                            break;
+                        #endregion
 
-                        if (attackChance > 30)
-                        {
-                            if (skillChance >= 47)
+                        #region Heal Support
+                        case EnemyAttackType.Heal_Support:
+
+                            if (skillChance >= 49)
                             {
                                 if (skillNeedsCharge)
                                 {
@@ -445,288 +616,169 @@ public class Enemy : MonoBehaviour
 
                             else
                             {
-                                AttackHighAtk();
+                                SupportHeal(theHealer);
                             }
-                        }
+                            break;
+                        #endregion
 
-                        else
-                        {
-                            if (skillChance >= 50)
+                        #region Strategist
+                        case EnemyAttackType.Strategist:
+
+                            if (attackChance > 30)
                             {
-                                if (skillNeedsCharge)
+                                if (attackChance >= 45)
                                 {
-                                    print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
-                                    currentState = EnemyState.waiting;
-                                    waitQTurns = waitTime;
-                                    animator.SetBool("isWaiting", true);
-                                    EndTurn();
+                                    if (skillNeedsCharge)
+                                    {
+                                        print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
+                                        currentState = EnemyState.waiting;
+                                        waitQTurns = waitTime;
+                                        animator.SetBool("isWaiting", true);
+                                        EndTurn();
+                                    }
+
+                                    else
+                                    {
+                                        print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
+                                        currentState = EnemyState.skilling;
+                                        waitQTurns = waitTime;
+                                        animator.SetBool("SkillInUse", true);
+                                        MakeSkillsWork(canUseSkill);
+                                        EndTurn();
+                                    }
                                 }
 
                                 else
                                 {
-                                    print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
-                                    currentState = EnemyState.skilling;
-                                    waitQTurns = waitTime;
-                                    animator.SetBool("SkillInUse", true);
-                                    MakeSkillsWork(canUseSkill);
-                                    EndTurn();
+                                    AttackHighAgi();
+                                    print(eName + " Did not use their skill but used their types attack");
                                 }
                             }
 
                             else
                             {
-                                DumbAttack();
-                            }
-                        }
-                        break;
-#endregion
-
-                    #region Healer
-                    case EnemyAttackType.Healer:
-                       
-                        float chanceOfHealth = Random.Range(0.2f, 0.9f); //  how low should  the health be before it is healed //CHANGE THIS FUCKING VARIABLE NAME ANDRE!!
-                        if (skillChance >= 49)
-                        {
-                            if (skillNeedsCharge)
-                            {
-                                print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
-                                currentState = EnemyState.waiting;
-                                waitQTurns = waitTime;
-                                animator.SetBool("isWaiting", true);
-                                EndTurn();
-                            }
-
-                            else
-                            {
-                                print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
-                                currentState = EnemyState.skilling;
-                                waitQTurns = waitTime;
-                                animator.SetBool("SkillInUse", true);
-                                MakeSkillsWork(canUseSkill);
-                                EndTurn();
-                            }
-                        }
-
-                        else
-                        {
-                             EnemyToHeal();
-
-                            if (enemyToHeal == null)
-                            {
-                                DumbAttack();
-                            }
-
-                            else 
-                            {
-
-                                if (enemyToHeal.currentHP <= (enemyToHeal.maxHP * chanceOfHealth))
+                                if (skillChance >= 50)
                                 {
-                                    print("Healed Enemy at Index " + enemyToHeal.enemyIndexInBattleManager);
-                                    animator.SetBool("Heal", true);
+                                    if (skillNeedsCharge)
+                                    {
+                                        print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
+                                        currentState = EnemyState.waiting;
+                                        waitQTurns = waitTime;
+                                        animator.SetBool("isWaiting", true);
+                                        EndTurn();
+                                    }
+
+                                    else
+                                    {
+                                        print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
+                                        currentState = EnemyState.skilling;
+                                        waitQTurns = waitTime;
+                                        animator.SetBool("SkillInUse", true);
+                                        MakeSkillsWork(canUseSkill);
+                                        EndTurn();
+                                    }
                                 }
 
                                 else
                                 {
-                                    print("dumb Attacked");
                                     DumbAttack();
                                 }
                             }
+                            break;
 
-                           
-                        }
+                        case EnemyAttackType.Demo:
 
-                        break;
-#endregion
-
-                    #region Heal Support
-                    case EnemyAttackType.Heal_Support:
-
-                        if (skillChance >= 49)
-                        {
-                            if (skillNeedsCharge)
-                            {
-                                print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
-                                currentState = EnemyState.waiting;
-                                waitQTurns = waitTime;
-                                animator.SetBool("isWaiting", true);
-                                EndTurn();
-                            }
-
-                            else
-                            {
-                                print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
-                                currentState = EnemyState.skilling;
-                                waitQTurns = waitTime;
-                                animator.SetBool("SkillInUse", true);
-                                MakeSkillsWork(canUseSkill);
-                                EndTurn();
-                            }
-                        }
-
-                        else
-                        {
-                            SupportHeal(theHealer);
-                        }
-                        break;
-#endregion
-
-                    #region Strategist
-                    case EnemyAttackType.Strategist:
-
-                        if (attackChance > 30)
-                        {
-                            if (attackChance >= 45)
-                            {
-                                if (skillNeedsCharge)
-                                {
-                                    print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
-                                    currentState = EnemyState.waiting;
-                                    waitQTurns = waitTime;
-                                    animator.SetBool("isWaiting", true);
-                                    EndTurn();
-                                }
-
-                                else
-                                {
-                                    print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
-                                    currentState = EnemyState.skilling;
-                                    waitQTurns = waitTime;
-                                    animator.SetBool("SkillInUse", true);
-                                    MakeSkillsWork(canUseSkill);
-                                    EndTurn();
-                                }
-                            }
-
-                            else
-                            {
-                                AttackHighAgi();
-                                print(eName + " Did not use their skill but used their types attack");
-                            }
-                        }
-
-                        else
-                        {
-                            if (skillChance >= 50)
-                            {
-                                if (skillNeedsCharge)
-                                {
-                                    print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
-                                    currentState = EnemyState.waiting;
-                                    waitQTurns = waitTime;
-                                    animator.SetBool("isWaiting", true);
-                                    EndTurn();
-                                }
-
-                                else
-                                {
-                                    print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
-                                    currentState = EnemyState.skilling;
-                                    waitQTurns = waitTime;
-                                    animator.SetBool("SkillInUse", true);
-                                    MakeSkillsWork(canUseSkill);
-                                    EndTurn();
-                                }
-                            }
-
-                            else
-                            {
-                                DumbAttack();
-                            }
-                        }
-                        break;
-
-                    case EnemyAttackType.Demo:
-
-                        DumbAttack();
-                        break;
-#endregion
-
-                    #region Relentless Attack
-                    case EnemyAttackType.Relentless:
-
-                        if (attackChance > 30)
-                        {
-                            if (skillChance >= 45)
-                            {
-                                if (skillNeedsCharge)
-                                {
-                                    print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
-                                    currentState = EnemyState.waiting;
-                                    waitQTurns = waitTime;
-                                    animator.SetBool("isWaiting", true);
-                                    EndTurn();
-                                }
-
-                                else
-                                {
-                                    print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
-                                    currentState = EnemyState.skilling;
-                                    waitQTurns = waitTime;
-                                    animator.SetBool("SkillInUse", true);
-                                    MakeSkillsWork(canUseSkill);
-                                    EndTurn();
-                                }
-                            }
-
-                            else
-                            {
-                                RelentlessAttack(playerIndexHolder, timeAttacking);
-                            }
-                        }
-
-                        else
-                        {
-                            if (skillChance >= 50)
-                            {
-                                if (skillNeedsCharge)
-                                {
-                                    print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
-                                    currentState = EnemyState.waiting;
-                                    waitQTurns = waitTime;
-                                    animator.SetBool("isWaiting", true);
-                                    EndTurn();
-                                }
-
-                                else
-                                {
-                                    print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
-                                    currentState = EnemyState.skilling;
-                                    waitQTurns = waitTime;
-                                    animator.SetBool("SkillInUse", true);
-                                    MakeSkillsWork(canUseSkill);
-                                    EndTurn();
-                                }
-                            }
-
-                            else
-                            {
-                                DumbAttack();
-                            }
-                        }
-                        break;
-                    #endregion
-
-                    #region Blow Self
-                    case EnemyAttackType.Enemy_Blows_Self:
-
-                        if (skillChance >= 49)
-                        {
-                            MakeSkillsWork(canUseSkill);
-                        }
-
-                        else
-                        {
-                            BlowSelfCountDown();
-                            countDownToBlow--;
-                        }
-                        break;
+                            DumbAttack();
+                            break;
                         #endregion
-                }
-            }
 
-            else
-            {
-                uiBTL.EndTurn();
+                        #region Relentless Attack
+                        case EnemyAttackType.Relentless:
+
+                            if (attackChance > 30)
+                            {
+                                if (skillChance >= 45)
+                                {
+                                    if (skillNeedsCharge)
+                                    {
+                                        print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
+                                        currentState = EnemyState.waiting;
+                                        waitQTurns = waitTime;
+                                        animator.SetBool("isWaiting", true);
+                                        EndTurn();
+                                    }
+
+                                    else
+                                    {
+                                        print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
+                                        currentState = EnemyState.skilling;
+                                        waitQTurns = waitTime;
+                                        animator.SetBool("SkillInUse", true);
+                                        MakeSkillsWork(canUseSkill);
+                                        EndTurn();
+                                    }
+                                }
+
+                                else
+                                {
+                                    RelentlessAttack(playerIndexHolder, timeAttacking);
+                                }
+                            }
+
+                            else
+                            {
+                                if (skillChance >= 50)
+                                {
+                                    if (skillNeedsCharge)
+                                    {
+                                        print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
+                                        currentState = EnemyState.waiting;
+                                        waitQTurns = waitTime;
+                                        animator.SetBool("isWaiting", true);
+                                        EndTurn();
+                                    }
+
+                                    else
+                                    {
+                                        print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
+                                        currentState = EnemyState.skilling;
+                                        waitQTurns = waitTime;
+                                        animator.SetBool("SkillInUse", true);
+                                        MakeSkillsWork(canUseSkill);
+                                        EndTurn();
+                                    }
+                                }
+
+                                else
+                                {
+                                    DumbAttack();
+                                }
+                            }
+                            break;
+                        #endregion
+
+                        #region Blow Self
+                        case EnemyAttackType.Enemy_Blows_Self:
+
+                            if (skillChance >= 49)
+                            {
+                                MakeSkillsWork(canUseSkill);
+                            }
+
+                            else
+                            {
+                                BlowSelfCountDown();
+                                countDownToBlow--;
+                            }
+                            break;
+                            #endregion
+                    }
+                }
+
+                else
+                {
+                    uiBTL.EndTurn();
+                }
             }
         }
     }
@@ -1352,7 +1404,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public virtual void TakeDamage(float playerAttack, int numberOfAttacks, int debuffIndex, float debuffPercent, int debuffTimer, string statToDebuff,  EnemyStatusAilment ailment )
+    public virtual void TakeDamage(float playerAttack, int numberOfAttacks, int debuffIndex, float debuffValuePercent, int debuffTimer, string debuffSubIndex,  EnemyStatusAilment ailment )
     {
         if (playerAttack > 0.0f) //Don't need to calcualte damage if the incoming attack is debuff only
         {
@@ -1446,6 +1498,7 @@ public class Enemy : MonoBehaviour
                 }
                 break;
             case 1: //Debuff
+                BuffStats(debuffSubIndex, -debuffValuePercent, debuffTimer);
                 break;
         }
 
@@ -1696,6 +1749,311 @@ public class Enemy : MonoBehaviour
     #endregion
 
     #endregion
+
+    #region buffs and debuffs
+
+    public void BuffStats(string statToBuff, float precentage, float lastsNumberOfTurns)
+    {
+        Debug.Log("Stat to buff: " + statToBuff);
+        lastsNumberOfTurns++; //Add one more turn since the system should count the number of turns based on the caster not the receiver. This way ensures that the queue goes around equal to the number of turns it the buff/debuff is supposed to last
+        switch (statToBuff)
+        {
+            case "Defense":
+                if (precentage > 0)
+                {
+                    EnableEffect("DefBuff", 0);
+                }
+                else
+                {
+                    EnableEffect("DefDebuff", 0);
+                }
+                if (defenseBuffed && ((actualDEF < eDefence && precentage > 0) || (actualDEF > eDefence && precentage < 0))) //Check for debuffs first
+                {
+                    actualDEF = eDefence;
+                    defenseBuffSkillQCounter = 0; //Negate the debuff completely
+                    defBuffArrowIndicator.gameObject.SetActive(false);
+                }
+                else if (defenseBuffed && ((actualDEF > eDefence && precentage > 0) || (actualDEF < eDefence && precentage < 0))) //If defense has already been buffed, update the Q counter
+                {
+                    actualDEF = eDefence + eDefence * precentage; //Buffs don't stack
+                    defenseBuffSkillQCounter = lastsNumberOfTurns;
+                }
+                else if (!defenseBuffed) //No buffs or debuffs have occurred so far
+                {
+                    defenseBuffed = true;
+                    actualDEF = eDefence + eDefence * precentage;
+                    defenseBuffSkillQCounter = lastsNumberOfTurns;
+                }
+                break;
+            case "Attack":
+                if (precentage > 0)
+                {
+                    EnableEffect("AtkBuff", 0);
+                }
+                else
+                {
+                    EnableEffect("AtkDebuff", 0);
+                }
+                if (attackBuffed && ((actualATK < eAttack && precentage > 0) || (actualATK > eAttack && precentage < 0))) //Check if we'er being debuffed after being buffed or vice versa, if so, reset the attack
+                {
+                    actualATK = eAttack;
+                    attackBuffSkillQCounter = 0; //Negate the debuff completely
+                    atkBuffArrowIndicator.gameObject.SetActive(false);
+                }
+                else if (attackBuffed && ((actualATK > eAttack && precentage > 0) || (actualATK < eAttack && precentage < 0))) //Check if the buff or debuff is being extended
+                {
+                    actualATK = eAttack + eAttack * precentage;
+                    attackBuffSkillQCounter = lastsNumberOfTurns;
+
+                }
+                else if (!attackBuffed) //No buffs or debuffs have occurred so far
+                {
+                    attackBuffed = true;
+                    actualATK = eAttack + eAttack * precentage;
+                    attackBuffSkillQCounter = lastsNumberOfTurns;
+                }
+                break;
+            case "Agility":
+                if (precentage > 0)
+                {
+                    EnableEffect("AgiBuff", 0);
+                }
+                else
+                {
+                    EnableEffect("AgiDebuff", 0);
+                }
+                if (agilityBuffed && ((actualAgi < eAgility && precentage > 0) || (actualAgi > eAgility && precentage < 0))) //Check for debuffs first
+                {
+                    actualAgi = eAgility;
+                    agilityBuffSkillQCounter = 0; //Negate the debuff completely
+                    agiBuffArrowIndicator.gameObject.SetActive(false);
+                }
+                else if (agilityBuffed && ((actualAgi > eAgility && precentage > 0) || (actualAgi < eAgility && precentage < 0))) //If agility has already been buffed, update the Q counter
+                {
+                    actualAgi = eAgility + eAgility * precentage;
+                    agilityBuffSkillQCounter = lastsNumberOfTurns;
+
+                }
+                else if (!agilityBuffed) //No buffs or debuffs have occurred so far
+                {
+                    agilityBuffed = true;
+                    actualAgi = eAgility + eAgility * precentage;
+                    agilityBuffSkillQCounter = lastsNumberOfTurns;
+                }
+                break;
+            case "Strength":
+                if (precentage > 0)
+                {
+                    EnableEffect("StrBuff", 0);
+                }
+                else
+                {
+                    EnableEffect("StrDebuff", 0);
+                }
+                if (strBuffed && ((actualSTR < eStrength && precentage > 0) || (actualSTR > eStrength && precentage < 0))) //Check for debuffs first
+                {
+                    actualSTR = eStrength;
+                    strBuffSkillQCounter = 0; //Negate the debuff completely
+                    strBuffArrowIndicator.gameObject.SetActive(false);
+                }
+                else if (strBuffed && ((actualSTR > eStrength && precentage > 0) || (actualSTR < eStrength && precentage < 0))) //If str has already been buffed, update the Q counter
+                {
+                    actualSTR = eStrength + eStrength * precentage;
+                    strBuffSkillQCounter = lastsNumberOfTurns;
+
+                }
+                else if (!strBuffed) //No buffs or debuffs have occurred so far
+                {
+
+                    strBuffed = true;
+                    actualSTR = eStrength + eStrength * precentage;
+                    strBuffSkillQCounter = lastsNumberOfTurns;
+                }
+                break;
+        }
+    }
+
+    private void CheckForBuffs()
+    {
+        if (defenseBuffed && defenseBuffSkillQCounter > 0)
+        {
+            defenseBuffSkillQCounter--;
+            if (defenseBuffSkillQCounter <= 0)
+            {
+                defenseBuffSkillQCounter = 0;
+                defenseBuffed = false;
+                actualDEF = eDefence;
+                Debug.Log("Buff has ended");
+                uiBTL.UpdateActivityText("Enemy DEF is back to normal");
+                defBuffArrowIndicator.gameObject.SetActive(false);
+            }
+        }
+
+        if (attackBuffed && attackBuffSkillQCounter > 0)
+        {
+            attackBuffSkillQCounter--;
+            if (attackBuffSkillQCounter <= 0)
+            {
+                attackBuffSkillQCounter = 0;
+                attackBuffed = false;
+                actualATK = eAttack;
+                uiBTL.UpdateActivityText("Enemy ATK is back to normal");
+                atkBuffArrowIndicator.gameObject.SetActive(false);
+            }
+        }
+
+        if (agilityBuffed && agilityBuffSkillQCounter > 0)
+        {
+            agilityBuffSkillQCounter--;
+            if (agilityBuffSkillQCounter <= 0)
+            {
+                agilityBuffSkillQCounter = 0;
+                agilityBuffed = false;
+                actualAgi = eAgility;
+                uiBTL.UpdateActivityText("Enemy AGI is back to normal");
+                agiBuffArrowIndicator.gameObject.SetActive(false);
+            }
+        }
+
+        if (strBuffed && strBuffSkillQCounter > 0)
+        {
+            strBuffSkillQCounter--;
+            if (strBuffSkillQCounter <= 0)
+            {
+                strBuffSkillQCounter = 0;
+                strBuffed = false;
+                actualSTR = eStrength;
+                uiBTL.UpdateActivityText("Enemy STR is back to normal");
+                strBuffArrowIndicator.gameObject.SetActive(false);
+            }
+        }
+    }
+
+    public void EnableEffect(string effectName, int value) //Value is used by items as they add static amounts rather than percentages. Skills will pass value as zero.
+    {
+        switch (effectName)
+        {
+            case "Heal":
+                /*  healEffect.gameObject.SetActive(true);
+                  if (value > 0) //Check if the function call coming from an item.
+                  {
+                      healText.gameObject.SetActive(true);
+                      healText.text = value.ToString();
+
+                      if (currentAilment == playerAilments.tied) //If the player is tied to an enemy, that enemy should be healed as well
+                      {
+                          tiedToThisEnemy.HealDueToTied(value);
+                      }
+                  }
+                  */
+                break;
+                
+            case "MP":
+               /* mpEffect.gameObject.SetActive(true);
+                if (value > 0)
+                {
+                    mpText.gameObject.SetActive(true);
+                    mpText.text = value.ToString();
+                }
+                break;
+                */
+            case "DefBuff":
+                defBuffEffect.gameObject.SetActive(true);
+                defBuffArrowIndicator.gameObject.SetActive(true);
+                arrowRotator = Quaternion.Euler(0.0f, 0.0f, 180.0f);
+                defBuffArrowIndicator.transform.rotation = arrowRotator;
+                break;
+            case "DefDebuff":
+                debuffColor.r = 0.4958386f;
+                debuffColor.g = 0.1921569f;
+                debuffColor.b = 0.8588235f;
+                debuffArrow.gameObject.SetActive(true);
+                debuffArrow.color = debuffColor;
+                defBuffArrowIndicator.gameObject.SetActive(true);
+                arrowRotator = Quaternion.Euler(0.0f, 0.0f, 0.0f);
+                defBuffArrowIndicator.transform.rotation = arrowRotator;
+                break;
+            case "AtkBuff":
+                atkBuffEffect.gameObject.SetActive(true);
+                atkBuffArrowIndicator.gameObject.SetActive(true);
+                arrowRotator = Quaternion.Euler(0.0f, 0.0f, 180.0f);
+                atkBuffArrowIndicator.transform.rotation = arrowRotator;
+                break;
+            case "AtkDebuff":
+                debuffColor.r = 0.8584906f;
+                debuffColor.g = 0.1903257f;
+                debuffColor.b = 0.1903257f;
+                debuffArrow.gameObject.SetActive(true);
+                debuffArrow.color = debuffColor;
+                atkBuffArrowIndicator.gameObject.SetActive(true);
+                arrowRotator = Quaternion.Euler(0.0f, 0.0f, 0.0f);
+                atkBuffArrowIndicator.transform.rotation = arrowRotator;
+                break;
+            case "AgiBuff":
+                agiBuffEffect.gameObject.SetActive(true);
+                agiBuffArrowIndicator.gameObject.SetActive(true);
+                arrowRotator = Quaternion.Euler(0.0f, 0.0f, 180.0f);
+                agiBuffArrowIndicator.transform.rotation = arrowRotator;
+                break;
+            case "AgiDebuff":
+                debuffColor.r = 0.03582038f;
+                debuffColor.g = 0.3113208f;
+                debuffColor.b = 0.01909043f;
+                debuffArrow.gameObject.SetActive(true);
+                debuffArrow.color = debuffColor;
+                agiBuffArrowIndicator.gameObject.SetActive(true);
+                arrowRotator = Quaternion.Euler(0.0f, 0.0f, 0.0f);
+                agiBuffArrowIndicator.transform.rotation = arrowRotator;
+                break;
+            case "StrBuff":
+                strBuffEffect.gameObject.SetActive(true);
+                strBuffArrowIndicator.gameObject.SetActive(true);
+                arrowRotator = Quaternion.Euler(0.0f, 0.0f, 180.0f);
+                strBuffArrowIndicator.transform.rotation = arrowRotator;
+                break;
+            case "StrDebuff":
+                debuffColor.r = 0.896f;
+                debuffColor.g = 0.4148713f;
+                debuffColor.b = 0.1940637f;
+                debuffArrow.gameObject.SetActive(true);
+                debuffArrow.color = debuffColor;
+                strBuffArrowIndicator.gameObject.SetActive(true);
+                arrowRotator = Quaternion.Euler(0.0f, 0.0f, 0.0f);
+                strBuffArrowIndicator.transform.rotation = arrowRotator;
+                break;
+        }
+    }
+
+    private void DisableAllBuffs() //Called when the player dies. Disables all buffs.
+    {
+        if (attackBuffed)
+        {
+            actualATK = eAttack;
+            attackBuffed = false;
+            attackBuffSkillQCounter = 0;
+        }
+        if (defenseBuffed)
+        {
+            actualDEF = eDefence;
+            defenseBuffed = false;
+            defenseBuffSkillQCounter = 0;
+        }
+        if (agilityBuffed)
+        {
+            actualAgi = eAgility;
+            agilityBuffed = false;
+            agilityBuffSkillQCounter = 0;
+        }
+        if (strBuffed)
+        {
+            actualSTR = eStrength;
+            strBuffed = false;
+            strBuffSkillQCounter = 0;
+        }
+    }
+
+    #endregion
+
     public void EndHitAnimation()
     {
         animator.SetBool("Hit", false);
