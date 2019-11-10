@@ -6,9 +6,11 @@ using UnityEngine;
 
 public class TransitionToWM : MonoBehaviour
 {
+	// where do you want to go
 	public Vector2 loadPosition;
+	// get a reference to the player
 	public GameObject player;
-	// If you've set this to true you need to 
+	// If you've set this to true you need to check a bool 
 	public bool needsBool;
 	public ChoiceEnum ce;
 	public bool transitionToWM;
