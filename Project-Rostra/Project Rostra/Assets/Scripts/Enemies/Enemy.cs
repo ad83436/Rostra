@@ -1232,56 +1232,39 @@ public class Enemy : MonoBehaviour
         //add enemies to the list
         for (int i = 0; i < battleManager.enemies.Length; ++i)
         {
-            if (battleManager.enemies[i].enemyReference == this)
+            if (battleManager.enemies[i].enemyReference != this && battleManager.enemies[i].enemyReference != null && battleManager.enemies[i].currentHP > 0)
             {
-                theHealer = battleManager.enemies[i].enemyReference; // which enemy instance is calling this function he is  the healer 
-            }
-
-            if (battleManager.enemies[i].enemyReference != this)
-            {
-                if (battleManager.enemies[i].enemyReference != null && battleManager.enemies[i].currentHP > 0)
-                {
-                    enemyToHealRef.Add(battleManager.enemies[i].enemyReference); // all the other enemies in the battle go into here 
-                }
+                enemyToHealRef.Add(battleManager.enemies[i].enemyReference); // all the other enemies in the battle go into here 
             }
         }
 
         if (enemyToHealRef.Count == 5)
         {
             healAtIndex = PickRandomNumber(enemyToHealRef[0].enemyIndexInBattleManager, enemyToHealRef[1].enemyIndexInBattleManager, enemyToHealRef[2].enemyIndexInBattleManager, enemyToHealRef[3].enemyIndexInBattleManager, enemyToHealRef[4].enemyIndexInBattleManager);
-            print("Heal at Index " + healAtIndex);
-            print(enemyToHealRef[healAtIndex].enemyIndexInBattleManager);
             enemyToHeal = battleManager.enemies[healAtIndex].enemyReference;
         }
 
         else if (enemyToHealRef.Count == 4)
         {
             healAtIndex = PickRandomNumber(enemyToHealRef[0].enemyIndexInBattleManager, enemyToHealRef[1].enemyIndexInBattleManager, enemyToHealRef[2].enemyIndexInBattleManager, enemyToHealRef[3].enemyIndexInBattleManager);
-            print("Heal at Index " + healAtIndex);
-
             enemyToHeal = battleManager.enemies[healAtIndex].enemyReference;
         }
 
         else if (enemyToHealRef.Count == 3)
         {
             healAtIndex = PickRandomNumber(enemyToHealRef[0].enemyIndexInBattleManager, enemyToHealRef[1].enemyIndexInBattleManager, enemyToHealRef[2].enemyIndexInBattleManager);
-            print("Heal at Index " + healAtIndex);
-            print(enemyToHealRef[healAtIndex].enemyIndexInBattleManager);
             enemyToHeal = battleManager.enemies[healAtIndex].enemyReference; ;
         }
 
         else if (enemyToHealRef.Count == 2)
         {
             healAtIndex = PickRandomNumber(enemyToHealRef[0].enemyIndexInBattleManager, enemyToHealRef[1].enemyIndexInBattleManager);
-            print("Heal at Index " + healAtIndex);
             enemyToHeal = battleManager.enemies[healAtIndex].enemyReference;
         }
 
         else
         {
-            healAtIndex = enemyToHealRef[0].enemyIndexInBattleManager;
-            print("Heal at Index " + healAtIndex);
-            print(enemyToHealRef[healAtIndex].enemyIndexInBattleManager);
+            healAtIndex = enemyToHealRef[enemyToHealRef.Count-1].enemyIndexInBattleManager;
             enemyToHeal = enemyToHealRef[healAtIndex];
         }
 
