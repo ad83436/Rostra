@@ -125,7 +125,6 @@ public class Fade : MonoBehaviour
                         cutsceneTriggerRef.TriggerCutscene(); //Load the cutscene while fading out
                         audioManager.PlayThisClip("Cutscene1");
                         cutsceneTriggerRef = null;
-						Debug.Log("We in");
 					}
                 }
                 else if(transitionOutOfACutscene)
@@ -134,7 +133,6 @@ public class Fade : MonoBehaviour
                     CutsceneManager.instance.End();
                     transitionOutOfACutscene = false;
                     audioManager.PlayThisClip("WorldMapMusic1");
-					Debug.Log("We Outtie");
                 }
                 else if(transitionToMainMenu)
                 {

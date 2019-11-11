@@ -20,7 +20,7 @@ public class CutsceneTrigger : MonoBehaviour
 	public void TriggerCutscene()
 	{
 		returnPositon = transform.position;
-		CutsceneManager.instance.StartCutscene(cs, returnPositon);
+		CutsceneManager.instance.StartCutscene(cs, returnPositon, fade);
 	}
 	private void OnTriggerEnter2D(Collider2D col)
 	{
