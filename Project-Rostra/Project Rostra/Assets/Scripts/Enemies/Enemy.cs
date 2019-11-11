@@ -224,6 +224,8 @@ public class Enemy : MonoBehaviour
         {
             agiBuffArrowIndicator.gameObject.SetActive(false);
         }
+
+        debuffColor = new Color(1.0f, 1.0f, 1.0f, 1.0f);
     }
 
     protected virtual void Update()
