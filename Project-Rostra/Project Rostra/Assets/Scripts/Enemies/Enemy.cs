@@ -647,16 +647,19 @@ public class Enemy : MonoBehaviour
                                     if (randomStat == 0)
                                     {
                                         AttackHighAtk();
+                                        print("Stat is Modded Attack");
                                     }
 
                                     else if (randomStat == 1)
                                     {
                                         AttackLowDef();
+                                        print("Stat is Modded Attack");
                                     }
 
                                     else if (randomStat == 2)
                                     {
                                         AttackLowHp();
+                                        print("Stat is Modded Attack");
                                     }
                                 }
 
@@ -665,16 +668,19 @@ public class Enemy : MonoBehaviour
                                     if (randomStat == 0)
                                     {
                                         animator.SetBool("ModAtk", true);
+                                        print("ModedStat");
                                     }
 
                                     else if (randomStat == 1)
                                     {
                                         animator.SetBool("ModDef", true);
+                                        print("ModedStat");
                                     }
 
                                     else if (randomStat == 2)
                                     {
                                         animator.SetBool("ModAgi", true);
+
                                     }
                                 }
                             }
@@ -1132,6 +1138,7 @@ public class Enemy : MonoBehaviour
         enemyToHeal.amountModed++;
         enemyToHeal.eAttack += modAmount;
         animator.SetBool("ModAtk", false);
+        EndTurn();
         print(enemyToHeal.eName + " At index " + enemyToHeal.enemyIndexInBattleManager + " had " + modAmount + " Added to it's Attack");
         print("enemy at index " + enemyToHeal.enemyIndexInBattleManager + " Had stats moded " + enemyToHeal.amountModed + " time(s) ");
     }
@@ -1142,6 +1149,7 @@ public class Enemy : MonoBehaviour
         enemyToHeal.amountModed++;
         enemyToHeal.eDefence += modAmount;
         animator.SetBool("ModDef", false);
+        EndTurn();
         print(enemyToHeal.eName + " At index " + enemyToHeal.enemyIndexInBattleManager + "had " + modAmount + " Added to it's Defence");
         print("enemy at index " + enemyToHeal.enemyIndexInBattleManager + " Had stats moded " + enemyToHeal.amountModed + " time(s) ");
     }
@@ -1152,6 +1160,7 @@ public class Enemy : MonoBehaviour
         enemyToHeal.amountModed++;
         enemyToHeal.eAgility += modAmount;
         animator.SetBool("ModAgi", false);
+        EndTurn();
         print(enemyToHeal.eName + " At index " + enemyToHeal.enemyIndexInBattleManager + " had " + modAmount + " Added to it's Agailty");
         print("enemy at index " + enemyToHeal.enemyIndexInBattleManager + " Had stats moded " + enemyToHeal.amountModed + " time(s) ");
     }
@@ -2288,11 +2297,6 @@ public class Enemy : MonoBehaviour
                 else if ((int)canUseSkill == skills[1])
                 {
                     waitTime = 4;
-                }
-
-                else if ((int)canUseSkill == skills[2])
-                {
-                     waitTime = 2;
                 }
 
                 break;
