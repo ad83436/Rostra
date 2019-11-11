@@ -36,6 +36,7 @@ public class Enemy : MonoBehaviour
     private int defenceMod;
     public List<float> playerStatNeeded;
     public List<float> enemyStatNeeded;
+    List<Enemy> enemyToHealRef = new List<Enemy>(); //list of all the enemies other then the instance calling this function
     public float eCritical;
     public Sprite qImage;
     protected Player attackThisPlayer;
@@ -263,7 +264,7 @@ public class Enemy : MonoBehaviour
                 {
                     //waitTurnsText.gameObject.SetActive(false); //Turn off the text. Don't forget to enable it when the enemy goes to waiting state
                     MakeSkillsWork(canUseSkill);
-                    hitAmount = Random.Range(1, 5);
+                    
                     //Execute skill here 
                 }
 
@@ -620,7 +621,62 @@ public class Enemy : MonoBehaviour
 
                             else
                             {
-                                SupportHeal(theHealer);
+                                EnemyToMod();
+                                int randomStat = Random.Range(0, 2); //pick a random stat to add to 
+
+                                if(enemyToHeal == null || enemyToHeal.dead)
+                                {
+                                    if (randomStat == 0)
+                                    {
+                                        AttackHighAtk();
+                                    }
+
+                                    else if (randomStat == 1)
+                                    {
+                                        AttackLowDef();
+                                    }
+
+                                    else if (randomStat == 2)
+                                    {
+                                        AttackLowHp();
+                                    }
+                                }
+
+                                if (enemyToHeal.isStatModed)
+                                {
+                                    if (randomStat == 0)
+                                    {
+                                        AttackHighAtk();
+                                    }
+
+                                    else if (randomStat == 1)
+                                    {
+                                        AttackLowDef();
+                                    }
+
+                                    else if (randomStat == 2)
+                                    {
+                                        AttackLowHp();
+                                    }
+                                }
+
+                                else if (!enemyToHeal.isStatModed)
+                                {
+                                    if (randomStat == 0)
+                                    {
+                                        animator.SetBool("ModAtk", true);
+                                    }
+
+                                    else if (randomStat == 1)
+                                    {
+                                        animator.SetBool("ModDef", true);
+                                    }
+
+                                    else if (randomStat == 2)
+                                    {
+                                        animator.SetBool("ModAgi", true);
+                                    }
+                                }
                             }
                             break;
                         #endregion
@@ -709,6 +765,7 @@ public class Enemy : MonoBehaviour
                                         currentState = EnemyState.waiting;
                                         waitQTurns = waitTime;
                                         animator.SetBool("isWaiting", true);
+                                        hitAmount = Random.Range(1, 5);
                                         EndTurn();
                                     }
 
@@ -938,7 +995,7 @@ public class Enemy : MonoBehaviour
         float attackMod;
         attackThisPlayer = battleManager.players[playerIndex].playerReference;
 
-        if (attackThisPlayer.currentHP <= 0)
+        if (attackThisPlayer.dead)
         {
             ChoosePlayer();
             RelentlessAttack(playerIndexHolder, timeAttacking);
@@ -958,10 +1015,9 @@ public class Enemy : MonoBehaviour
             Mathf.CeilToInt(attackMod = eAttack * 0.1f);
             eAttack += attackMod;
             print("enemy has attacked " + timeAttacking + " time(s) since the start of the battle with a attack of " + eAttack);
-            ++timeAttacking;
             CalculateHit();
             animator.SetBool("Attack", true);
-
+            ++timeAttacking;
         }
 
         else if (timeAttacking == 3)
@@ -969,9 +1025,9 @@ public class Enemy : MonoBehaviour
             Mathf.CeilToInt(attackMod = eAttack * 0.2f);
             eAttack += attackMod;
             print("enemy has attacked " + timeAttacking + " time(s) since the start of the battle with a attack of " + eAttack);
-            ++timeAttacking;
             CalculateHit();
             animator.SetBool("Attack", true);
+            ++timeAttacking;
         }
 
         else if (timeAttacking == 4)
@@ -979,9 +1035,9 @@ public class Enemy : MonoBehaviour
             Mathf.CeilToInt(attackMod = eAttack * 0.3f);
             eAttack += attackMod;
             print("enemy has attacked " + timeAttacking + " time(s) since the start of the battle with a attack of " + eAttack);
-            ++timeAttacking;
             CalculateHit();
             animator.SetBool("Attack", true);
+            ++timeAttacking;
         }
 
         else if (timeAttacking == 5)
@@ -989,10 +1045,9 @@ public class Enemy : MonoBehaviour
             Mathf.CeilToInt(attackMod = eAttack * 0.4f);
             eAttack += attackMod;
             print("enemy has attacked " + timeAttacking + " time(s) since the start of the battle with a attack of " + eAttack);
-            ++timeAttacking;
             CalculateHit();
             animator.SetBool("Attack", true);
-
+            ++timeAttacking;
         }
 
         else
@@ -1042,7 +1097,6 @@ public class Enemy : MonoBehaviour
         int[] healthHolder = new int[battleManager.enemies.Length];// why i did this i will never know change it when not too lazy
         float lowestHealth; //holds ref the lowest health in enemyStat List
        
-
         for (int i = 0; i < healthHolder.Length; ++i)
         {
             //add enemies currentHp to enemyStat List only if they arnt dead
@@ -1068,22 +1122,44 @@ public class Enemy : MonoBehaviour
             if (battleManager.enemies[i].currentHP == lowestHealth)
             {
                 enemyToHeal = battleManager.enemies[i].enemyReference;
-                
             }
         }
-
-       
-        
     }
 
-    void SupportHeal(Enemy theHealer)
+    void ModAttack()
     {
-        int statMod; // temp values 
-        List<Enemy> enemyToHealRef = new List<Enemy>(); //list of all the enemies other then the instance calling this function
-        int randomStat = Random.Range(0, 2); //pick a random stat to add to 
-        int randomStatAtk = Random.Range(0, 3);//pick a random stat based Attack
-        int healAtIndex;
+        int modAmount = Random.Range(5, 20);
+        enemyToHeal.amountModed++;
+        enemyToHeal.eAttack += modAmount;
+        animator.SetBool("ModAtk", false);
+        print(enemyToHeal.eName + " At index " + enemyToHeal.enemyIndexInBattleManager + " had " + modAmount + " Added to it's Attack");
+        print("enemy at index " + enemyToHeal.enemyIndexInBattleManager + " Had stats moded " + enemyToHeal.amountModed + " time(s) ");
+    }
 
+    void ModDefence()
+    {
+        int modAmount = Random.Range(5, 20);
+        enemyToHeal.amountModed++;
+        enemyToHeal.eDefence += modAmount;
+        animator.SetBool("ModDef", false);
+        print(enemyToHeal.eName + " At index " + enemyToHeal.enemyIndexInBattleManager + "had " + modAmount + " Added to it's Defence");
+        print("enemy at index " + enemyToHeal.enemyIndexInBattleManager + " Had stats moded " + enemyToHeal.amountModed + " time(s) ");
+    }
+
+    void ModAgility()
+    {
+        int modAmount = Random.Range(5, 20);
+        enemyToHeal.amountModed++;
+        enemyToHeal.eAgility += modAmount;
+        animator.SetBool("ModAgi", false);
+        print(enemyToHeal.eName + " At index " + enemyToHeal.enemyIndexInBattleManager + " had " + modAmount + " Added to it's Agailty");
+        print("enemy at index " + enemyToHeal.enemyIndexInBattleManager + " Had stats moded " + enemyToHeal.amountModed + " time(s) ");
+    }
+
+    void EnemyToMod()
+    {
+        
+        int healAtIndex;
         //add enemies to the list
         for (int i = 0; i < battleManager.enemies.Length; ++i)
         {
@@ -1140,97 +1216,10 @@ public class Enemy : MonoBehaviour
             enemyToHeal = enemyToHealRef[healAtIndex];
         }
 
-        if (enemyToHeal.isStatModed)
-        {
-            if (theHealer.eAttack > enemyToHeal.eAttack && randomStat == 0)
-            {
-                enemyToHeal.amountModed++;
-                statMod = Random.Range(5, 20);
-                enemyToHeal.eAttack += statMod;
-                print(enemyToHeal.eName + " At index " + enemyToHeal.enemyIndexInBattleManager + " had " + statMod + " Added to it's Attack");
-                print("enemy at index " + enemyToHeal.enemyIndexInBattleManager + " Had stats moded " + enemyToHeal.amountModed + " time(s) ");
-                uiBTL.EndTurn();
-            }
-
-            else if (theHealer.eDefence > enemyToHeal.eDefence && randomStat == 1)
-            {
-                enemyToHeal.amountModed++;
-                statMod = Random.Range(5, 20);
-                enemyToHeal.eDefence += statMod;
-                print(enemyToHeal.eName + " At index " + enemyToHeal.enemyIndexInBattleManager + "had " + statMod + " Added to it's Defence");
-                print("enemy at index " + enemyToHeal.enemyIndexInBattleManager + " Had stats moded " + enemyToHeal.amountModed + " time(s) ");
-                uiBTL.EndTurn();
-            }
-
-            else if (theHealer.eAgility > enemyToHeal.eAgility && randomStat == 2)
-            {
-                enemyToHeal.amountModed++;
-                statMod = Random.Range(5, 20);
-                enemyToHeal.eAgility += statMod;
-                print(enemyToHeal.eName + " At index " + enemyToHeal.enemyIndexInBattleManager + " had " + statMod + " Added to it's Agailty");
-                print("enemy at index " + enemyToHeal.enemyIndexInBattleManager + " Had stats moded " + enemyToHeal.amountModed + " time(s) ");
-                uiBTL.EndTurn();
-            }
-
-            else
-            {
-                if (randomStatAtk == 0)
-                {
-                    AttackLowDef();
-                    print("used AttackLowDef()");
-                }
-
-                else if (randomStatAtk == 1)
-                {
-                    AttackHighAtk();
-                    print("used AttackHighAtk()");
-                }
-
-                else if (randomStat == 2)
-                {
-                    //HealEnemy();
-                }
-
-                else
-                {
-                    AttackHighAgi();
-                    print("used AttackHighAgi()");
-                }
-            }
-        }
-
-        else
-        {
-            if (randomStatAtk == 0)
-            {
-                AttackLowDef();
-                print("used AttackLowDef()");
-            }
-
-            else if (randomStatAtk == 1)
-            {
-                AttackHighAtk();
-                print("used AttackHighAtk()");
-            }
-
-            else if (randomStat == 2)
-            {
-               // HealEnemy();
-            }
-
-            else
-            {
-                AttackHighAgi();
-                print("used AttackHighAgi()");
-            }
-        }
-
         if (enemyToHeal.amountModed >= 2)
         {
             enemyToHeal.isStatModed = true;
         }
-
-        enemyToHealRef.Clear();
     }
 
     void StatNeeded(PlayerStatReference pStatNeeded)
