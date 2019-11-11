@@ -34,7 +34,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -5.7000275, y: -6.4333363}
+  m_AnchoredPosition: {x: -2, y: -34.5}
   m_SizeDelta: {x: 55.96, y: 3.82}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3718137994418646850
@@ -86,7 +86,7 @@ GameObject:
   - component: {fileID: 36759020817880624}
   - component: {fileID: 744152910140203419}
   - component: {fileID: 7806082075836577786}
-  - component: {fileID: 2891497167867949404}
+  - component: {fileID: 1438619378872875853}
   m_Layer: 0
   m_Name: MooShroom
   m_TagString: Untagged
@@ -102,7 +102,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1619417628817514069}
   m_LocalRotation: {x: -0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.8256369, y: 0.15150404, z: -27.333605}
+  m_LocalPosition: {x: 0.74, y: 0.78, z: -27.333605}
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children:
   - {fileID: 3438545787259044342}
@@ -144,18 +144,19 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 0}
+  m_SortingLayerID: 1927818603
+  m_SortingLayer: 1
+  m_SortingOrder: 25
+  m_Sprite: {fileID: 2968609019833404269, guid: 0d35841b21b54c746831c2efa7805e94,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.02, y: 0.83}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &7806082075836577786
@@ -170,15 +171,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c49573c71ef3f541813f91b7a35cd10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyIndexInBattleManager: 0
+  enemyIndexInBattleManager: 2
   eMana: 0
-  eAttack: 0
-  eAgility: 0
-  eDefence: 0
-  eStrength: 0
-  eSpeed: 0
-  eBaseLevel: 0
-  eCurrentLevel: 0
+  eAttack: 5
+  eAgility: 22
+  eDefence: 10
+  eStrength: 10
+  eSpeed: 5
+  eBaseLevel: 1
+  eCurrentLevel: 15
   eName: 
   eRange: 0
   waitTime: 0
@@ -191,45 +192,61 @@ MonoBehaviour:
   enemyStatNeeded: []
   eCritical: 0
   qImage: {fileID: 0}
-  HP: {fileID: 0}
+  HP: {fileID: 4934621552202127559}
   maxHP: 0
   currentHP: 0
-  damageText: {fileID: 0}
-  healText: {fileID: 0}
-  enemyCanvas: {fileID: 0}
+  damageText: {fileID: 9019312148612872372}
+  healText: {fileID: 2242203753484499048}
+  enemyCanvas: {fileID: 6884947942540884563}
   dead: 0
   hit: 0
   blow: 0
   isStatModed: 0
   test: 0
   skillNeedsCharge: 0
-  enemyClass: 0
-  enemyAttack: 0
+  enemyClass: 2
+  enemyAttack: 5
   canUseSkill: 0
-  enemyName: 0
+  enemyName: 7
   currentState: 0
   waitTurnsText: {fileID: 0}
   healthObject: {fileID: 0}
   chain: {fileID: 0}
   blowSelfObject: {fileID: 0}
-  currentStatusAilment: 0
+  defBuffEffect: {fileID: 0}
+  atkBuffEffect: {fileID: 0}
+  agiBuffEffect: {fileID: 0}
+  strBuffEffect: {fileID: 0}
+  debuffArrow: {fileID: 0}
+  atkBuffArrowIndicator: {fileID: 0}
+  defBuffArrowIndicator: {fileID: 0}
+  agiBuffArrowIndicator: {fileID: 0}
+  strBuffArrowIndicator: {fileID: 0}
+  currentStatusAilment0: 0
+  currentStatusAilment1: 0
   chainedSymbol: {fileID: 0}
   primaryChainedSymbol: {fileID: 0}
---- !u!111 &2891497167867949404
-Animation:
+  ralliedSymbol: {fileID: 0}
+  burnSymbol: {fileID: 0}
+--- !u!95 &1438619378872875853
+Animator:
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1619417628817514069}
   m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 0}
-  m_Animations: []
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d564b52d005550b4abf3d8160a1412d4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &5924874682634135823
 GameObject:
   m_ObjectHideFlags: 0
@@ -266,7 +283,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -31, y: 6.099921}
+  m_AnchoredPosition: {x: -27.299973, y: -21.96674}
   m_SizeDelta: {x: 61.31, y: 29.51}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7244340186339334155
@@ -378,7 +395,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 14.1, y: 6.099998}
+  m_AnchoredPosition: {x: 17.80003, y: -21.966663}
   m_SizeDelta: {x: 61.31, y: 29.51}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4845824451835149014
@@ -494,7 +511,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -1.3543632, y: -2.7215042}
+  m_AnchoredPosition: {x: -0, y: 1.83}
   m_SizeDelta: {x: 244, y: 163}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &6859812546410261693
@@ -610,7 +627,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -5.8, y: -6.5}
+  m_AnchoredPosition: {x: -2.0999722, y: -34.56666}
   m_SizeDelta: {x: 58.48, y: 5.94}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3261386122481666133
