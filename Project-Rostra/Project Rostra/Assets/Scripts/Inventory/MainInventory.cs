@@ -72,7 +72,7 @@ public class MainInventory : MonoBehaviour {
 		invItem[0, 0] = (int)ITEM_ID.HP_POTION;
         invItem[0, 1] = 5;
 
-		invItem[1, 0] = (int)ITEM_ID.MP_ELIXER;
+		invItem[1, 0] = (int)ITEM_ID.MP_ELIXIR;
         invItem[1, 1] = 2;
 
         invItem[2, 0] = (int)ITEM_ID.HOPE_POTION;
@@ -387,7 +387,7 @@ public class MainInventory : MonoBehaviour {
             case (int)ITEM_ID.HP_POTION:
                 name = "Potion";
                 break;
-            case (int)ITEM_ID.MP_ELIXER:
+            case (int)ITEM_ID.MP_ELIXIR:
                 name = "Elixer";
                 break;
             case (int)ITEM_ID.HOPE_POTION:
@@ -432,7 +432,7 @@ public class MainInventory : MonoBehaviour {
             case (int)ITEM_ID.HP_POTION:
                 description = "A potion that restores 50 hit points for one ally.";
                 break;
-            case (int)ITEM_ID.MP_ELIXER:
+            case (int)ITEM_ID.MP_ELIXIR:
                 description = "An elixer that restores 50 mana points for one ally.";
                 break;
             case (int)ITEM_ID.HOPE_POTION:
@@ -484,7 +484,7 @@ public class MainInventory : MonoBehaviour {
             case (int)ITEM_ID.HP_POTION:
                 price = 50;
                 break;
-            case (int)ITEM_ID.MP_ELIXER:
+            case (int)ITEM_ID.MP_ELIXIR:
                 price = 100;
                 break;
             case (int)ITEM_ID.HOPE_POTION:
@@ -645,7 +645,7 @@ public class MainInventory : MonoBehaviour {
 				itemAddAmount = 50;
 				UpdatePlayerHitpoints(itemAddAmount, playerID);
 				break;
-			case (int)ITEM_ID.MP_ELIXER:
+			case (int)ITEM_ID.MP_ELIXIR:
 				itemAddAmount = 50;
 				UpdatePlayerMagicpoints(itemAddAmount, playerID);
 				break;
@@ -678,7 +678,7 @@ public class MainInventory : MonoBehaviour {
 			case (int)ITEM_ID.TEST_POTION_HP:
 			case (int)ITEM_ID.TEST_POTION_MP:
             case (int)ITEM_ID.HP_POTION:
-            case (int)ITEM_ID.MP_ELIXER:
+            case (int)ITEM_ID.MP_ELIXIR:
             case (int)ITEM_ID.HOPE_POTION:
                 itemType = (int)ITEM_TYPE.CONSUMABLE;
 				break;
@@ -715,7 +715,7 @@ public class MainInventory : MonoBehaviour {
             case (int)ITEM_ID.HP_POTION:
                 return itemIcons[1]; //Potion is 1
             case (int)ITEM_ID.TEST_POTION_MP:
-            case (int)ITEM_ID.MP_ELIXER:
+            case (int)ITEM_ID.MP_ELIXIR:
                 return itemIcons[2]; //Elixer is 2
             case (int)ITEM_ID.HOPE_POTION:
                 return itemIcons[3]; //Hope is 3
@@ -747,7 +747,7 @@ public class MainInventory : MonoBehaviour {
 				stackSize = 20;
 				break;
 			case (int)ITEM_ID.TEST_POTION_MP:
-            case (int)ITEM_ID.MP_ELIXER:
+            case (int)ITEM_ID.MP_ELIXIR:
             case (int)ITEM_ID.HOPE_POTION:
                 stackSize = 10;
 				break;
