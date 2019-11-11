@@ -210,8 +210,10 @@ MonoBehaviour:
   eRange: 0
   waitTime: 0
   playerIndexHolder: 0
-  timeAttacking: 0
+  timeAttackingForSlice: 0
+  countDownToBlow: 0
   blowStrength: 0
+  hitAmount: 0
   playerStatNeeded: []
   enemyStatNeeded: []
   eCritical: 3
@@ -226,14 +228,32 @@ MonoBehaviour:
   hit: 0
   blow: 0
   isStatModed: 0
+  test: 0
+  skillNeedsCharge: 0
   enemyClass: 1
   enemyAttack: 2
-  canUseSkill: 0
+  canUseSkill: 1
   enemyName: 0
   currentState: 0
   waitTurnsText: {fileID: 0}
   healthObject: {fileID: 0}
   chain: {fileID: 0}
+  blowSelfObject: {fileID: 0}
+  defBuffEffect: {fileID: 0}
+  atkBuffEffect: {fileID: 0}
+  agiBuffEffect: {fileID: 0}
+  strBuffEffect: {fileID: 0}
+  debuffArrow: {fileID: 0}
+  atkBuffArrowIndicator: {fileID: 0}
+  defBuffArrowIndicator: {fileID: 0}
+  agiBuffArrowIndicator: {fileID: 0}
+  strBuffArrowIndicator: {fileID: 0}
+  currentStatusAilment0: 0
+  currentStatusAilment1: 0
+  chainedSymbol: {fileID: 0}
+  primaryChainedSymbol: {fileID: 0}
+  ralliedSymbol: {fileID: 0}
+  burnSymbol: {fileID: 0}
 --- !u!95 &8834717703439480084
 Animator:
   serializedVersion: 3

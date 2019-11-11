@@ -194,9 +194,10 @@ MonoBehaviour:
   eRange: 0
   waitTime: 0
   playerIndexHolder: 0
-  timeAttacking: 0
+  timeAttackingForSlice: 0
   countDownToBlow: 0
   blowStrength: 0
+  hitAmount: 0
   playerStatNeeded: []
   enemyStatNeeded: []
   eCritical: 5
@@ -206,6 +207,7 @@ MonoBehaviour:
   currentHP: 130
   damageText: {fileID: 2836062761733822273}
   healText: {fileID: 2893322329922529736}
+  missText: {fileID: 3638812318527913856}
   enemyCanvas: {fileID: 9096833780443251242}
   dead: 0
   hit: 0
@@ -443,6 +445,118 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bbbfc238e364864fa9a0823bd15a745, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &9016410535863563951
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3580398172805895484}
+  - component: {fileID: 7248864007001897114}
+  - component: {fileID: 3638812318527913856}
+  - component: {fileID: 8035572710732398860}
+  - component: {fileID: 1293564239746274195}
+  m_Layer: 5
+  m_Name: MissText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &3580398172805895484
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9016410535863563951}
+  m_LocalRotation: {x: -0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: -0.9166839, y: 0.9166839, z: 0.9166839}
+  m_Children: []
+  m_Father: {fileID: 2078327363938730196}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 19.7, y: 17.6}
+  m_SizeDelta: {x: 61.31, y: 29.51}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &7248864007001897114
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9016410535863563951}
+  m_CullTransparentMesh: 0
+--- !u!114 &3638812318527913856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9016410535863563951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: eada3c905db7a974895ff520ebfa27a9, type: 3}
+    m_FontSize: 22
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 1
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: Miss
+--- !u!95 &8035572710732398860
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9016410535863563951}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b5bb9106f68e02841b98bd85f64918af, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1293564239746274195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9016410535863563951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bbbfc238e364864fa9a0823bd15a745, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9096833780443251242
 GameObject:
   m_ObjectHideFlags: 0
@@ -477,6 +591,7 @@ RectTransform:
   - {fileID: 1978535247477066408}
   - {fileID: 2515552770355467769}
   - {fileID: 1039030179525152189}
+  - {fileID: 3580398172805895484}
   m_Father: {fileID: 7520457458482610560}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

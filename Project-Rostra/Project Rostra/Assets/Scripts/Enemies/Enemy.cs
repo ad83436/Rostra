@@ -52,6 +52,7 @@ public class Enemy : MonoBehaviour
     public float currentHP;
     public Text damageText;
     public Text healText;
+    public Text missText;
     public GameObject enemyCanvas;
 
     protected bool haveAddedMyself;
@@ -112,6 +113,7 @@ public class Enemy : MonoBehaviour
     protected float actualAgi;
     protected float actualCRIT;
     protected float actualSTR;
+    protected float actualDamage; //Made zero when it's a miss
 
     //Status ailments
     //An enemy can be affected by two ailments at max
@@ -162,6 +164,10 @@ public class Enemy : MonoBehaviour
 
         damageText.gameObject.SetActive(false);
         healText.gameObject.SetActive(false);
+        if(missText != null)
+        {
+            missText.gameObject.SetActive(false);
+        }
 
         if (enemyName == EnemyName.Mimic) { blowSelfObject.SetActive(false); }
 
@@ -850,7 +856,7 @@ public class Enemy : MonoBehaviour
     protected virtual void CalculateHit()
     {
         //20 sided die + str <? enemy agility
-        if (Random.Range(0.0f, 20.0f) + eStrength < attackThisPlayer.agi)
+        if (Random.Range(0.0f, 20.0f) + eStrength < attackThisPlayer.actualAgi)
         {
             hit = false;
         }
@@ -894,13 +900,12 @@ public class Enemy : MonoBehaviour
                 attackThisPlayer.TakeDamage(eAttack);
             }
         }
-
         else
         {
             Debug.Log("Enemy has missed");
+            attackThisPlayer.TakeDamage(0.0f); //Pass in zero, i.e miss
         }
         animator.SetBool("Attack", false);
-        Debug.Log("Hi I'm the enemy, I have called End Turn()");
         uiBTL.EndTurn();
     }
 
@@ -1363,55 +1368,64 @@ public class Enemy : MonoBehaviour
     //Calcualte the damage
     public virtual void TakeDamage(float playerAttack, int numberOfAttacks)
     {
-
-        Debug.Log("Received player attack: " + playerAttack);
-        float damage = playerAttack - ((eDefence / (20.0f + eDefence)) * playerAttack);
-        damage *= ralliedDamageModifier;
-        currentHP -= damage;
-        damageText.gameObject.SetActive(true);
-        damageText.text = Mathf.RoundToInt(damage).ToString();
-        battleManager.enemies[enemyIndexInBattleManager].currentHP = currentHP; //Update the BTL manager with the new health
-        HP.fillAmount = currentHP / maxHP;
-        animator.SetBool("Hit", true);
-
-
-        if (currentStatusAilment0 == EnemyStatusAilment.chained || currentStatusAilment1 == EnemyStatusAilment.chained)
+        if (playerAttack > 0.0f)
         {
-            //If I'm not the primary target, 0 is. Damage 1 before 0 to avoid the turn ending in the case that 0 dies breaking the chain before 1 gets damaged
-            if (chainedEnemy[1] != null && !chainedEnemy[1].dead)
+            Debug.Log("Received player attack: " + playerAttack);
+            float damage = playerAttack - ((actualDEF / (20.0f + actualDEF)) * playerAttack);
+            damage *= ralliedDamageModifier;
+            currentHP -= damage;
+            damageText.gameObject.SetActive(true);
+            damageText.text = Mathf.RoundToInt(damage).ToString();
+            battleManager.enemies[enemyIndexInBattleManager].currentHP = currentHP; //Update the BTL manager with the new health
+            HP.fillAmount = currentHP / maxHP;
+            animator.SetBool("Hit", true);
+
+
+            if (currentStatusAilment0 == EnemyStatusAilment.chained || currentStatusAilment1 == EnemyStatusAilment.chained)
             {
-                chainedEnemy[1].TakeChainedDamage(playerAttack * ralliedDamageModifier, numberOfAttacks);
+                //If I'm not the primary target, 0 is. Damage 1 before 0 to avoid the turn ending in the case that 0 dies breaking the chain before 1 gets damaged
+                if (chainedEnemy[1] != null && !chainedEnemy[1].dead)
+                {
+                    chainedEnemy[1].TakeChainedDamage(playerAttack * ralliedDamageModifier, numberOfAttacks);
+                }
+
+                if (chainedEnemy[0] != null && !chainedEnemy[0].dead)
+                {
+                    chainedEnemy[0].TakeChainedDamage(playerAttack * ralliedDamageModifier, numberOfAttacks);
+                }
             }
 
-            if (chainedEnemy[0] != null && !chainedEnemy[0].dead)
+            if (currentHP < 1.0f) // Avoid near zero
             {
-                chainedEnemy[0].TakeChainedDamage(playerAttack * ralliedDamageModifier, numberOfAttacks);
+                if ((currentStatusAilment0 == EnemyStatusAilment.chained || currentStatusAilment1 == EnemyStatusAilment.chained) && primaryChainedTarget) //If the enemy is chained and is the primary target
+                {
+                    UnchainEnemies();
+                }
+                animator.SetBool("Death", true);
             }
-        }
-
-        if (currentHP < 1.0f) // Avoid near zero
-        {
-            if((currentStatusAilment0 == EnemyStatusAilment.chained || currentStatusAilment1 == EnemyStatusAilment.chained) && primaryChainedTarget) //If the enemy is chained and is the primary target
+            else
             {
-                UnchainEnemies();
+                if (numberOfAttacks <= 0)
+                {
+                    //Only end the turn after the damage has been taken
+                    //If the enemy is chained, only the primary target can end the turn
+                    //All to avoid turn skips
+                    if ((currentStatusAilment0 == EnemyStatusAilment.chained || currentStatusAilment1 == EnemyStatusAilment.chained) && primaryChainedTarget)
+                    {
+                        uiBTL.EndTurn();
+                    }
+                    else if (currentStatusAilment0 != EnemyStatusAilment.chained && currentStatusAilment1 != EnemyStatusAilment.chained)
+                    {
+                        uiBTL.EndTurn();
+                    }
+                }
             }
-            animator.SetBool("Death", true);
         }
         else
         {
-            if (numberOfAttacks <= 0)
+            if(missText != null)
             {
-                //Only end the turn after the damage has been taken
-                //If the enemy is chained, only the primary target can end the turn
-                //All to avoid turn skips
-                if ((currentStatusAilment0 == EnemyStatusAilment.chained || currentStatusAilment1 == EnemyStatusAilment.chained) && primaryChainedTarget)
-                {
-                    uiBTL.EndTurn();
-                }
-                else if (currentStatusAilment0 != EnemyStatusAilment.chained && currentStatusAilment1 != EnemyStatusAilment.chained)
-                {
-                    uiBTL.EndTurn();
-                }
+                missText.gameObject.SetActive(true);
             }
         }
     }
@@ -1422,7 +1436,7 @@ public class Enemy : MonoBehaviour
         {
             //Didn't recall the original function cause the "Hit" animation ends the turn
             Debug.Log("Received player attack: " + playerAttack);
-            float damage = playerAttack - ((eDefence / (20.0f + eDefence)) * playerAttack);
+            float damage = playerAttack - ((actualDEF / (20.0f + actualDEF)) * playerAttack);
             damage *= ralliedDamageModifier; //Increase damage if rallied;
             currentHP -= damage;
             damageText.gameObject.SetActive(true);
@@ -1445,100 +1459,109 @@ public class Enemy : MonoBehaviour
                 }
             }
         }
-        
-        switch (debuffIndex)
+        if (playerAttack >= 0.0f) //if incoming damage is negative, then it was a miss
         {
-            case 0: // Ailment
-                
-                switch(ailment)
-                {
-                    case EnemyStatusAilment.chained:
-                        if (currentStatusAilment0 != EnemyStatusAilment.chained && currentStatusAilment1 != EnemyStatusAilment.chained) //You can't have two primary chain targets in the same chain
-                        {
-                            chainedWaitTime = debuffTimer;
-                            primaryChainedTarget = true;
-                            GetNewChainedEnemies();
-                            primaryChainedSymbol.gameObject.SetActive(true);
-                        }
-                        break;
-                    case EnemyStatusAilment.rallied:
-                        if(currentStatusAilment0 != EnemyStatusAilment.rallied && currentStatusAilment1 != EnemyStatusAilment.rallied) //Cannot rally an enemy that's already been rallied against
-                        {
-                            ralliedWaitTime = debuffTimer;
-                            ralliedDamageModifier = 2.0f;
-                            ralliedSymbol.gameObject.SetActive(true);
-                            uiBTL.EndTurn(); //Rally doesn't do any damage
-                        }
-                        break;
-                    case EnemyStatusAilment.burn:
-                        if (currentStatusAilment0 != EnemyStatusAilment.burn && currentStatusAilment1 != EnemyStatusAilment.burn) //Cannot burn an enemy that's already been burned
-                        {
-                            burnedWaitTime = debuffTimer;
-                            burnSymbol.gameObject.SetActive(true);
-                            uiBTL.EndTurn(); //Rally doesn't do any damage
-                        }
-                        break;
-                }
-                //Check which of the two ailments is set to none.
-                // If both of them are filled, overwrite the 0 spot
-                if (currentStatusAilment0 == EnemyStatusAilment.none)
-                {
-                    currentStatusAilment0 = ailment;
-                }
-                else if(currentStatusAilment1 == EnemyStatusAilment.none)
-                {
-                    currentStatusAilment1 = ailment;
-                }
-                else if(currentStatusAilment0 == EnemyStatusAilment.chained)
-                {
-                    if (primaryChainedTarget)
+            switch (debuffIndex)
+            {
+                case 0: // Ailment
+
+                    switch (ailment)
                     {
-                        UnchainEnemies();
-                        primaryChainedTarget = false;
+                        case EnemyStatusAilment.chained:
+                            if (currentStatusAilment0 != EnemyStatusAilment.chained && currentStatusAilment1 != EnemyStatusAilment.chained) //You can't have two primary chain targets in the same chain
+                            {
+                                chainedWaitTime = debuffTimer;
+                                primaryChainedTarget = true;
+                                GetNewChainedEnemies();
+                                primaryChainedSymbol.gameObject.SetActive(true);
+                            }
+                            break;
+                        case EnemyStatusAilment.rallied:
+                            if (currentStatusAilment0 != EnemyStatusAilment.rallied && currentStatusAilment1 != EnemyStatusAilment.rallied) //Cannot rally an enemy that's already been rallied against
+                            {
+                                ralliedWaitTime = debuffTimer;
+                                ralliedDamageModifier = 2.0f;
+                                ralliedSymbol.gameObject.SetActive(true);
+                                uiBTL.EndTurn(); //Rally doesn't do any damage
+                            }
+                            break;
+                        case EnemyStatusAilment.burn:
+                            if (currentStatusAilment0 != EnemyStatusAilment.burn && currentStatusAilment1 != EnemyStatusAilment.burn) //Cannot burn an enemy that's already been burned
+                            {
+                                burnedWaitTime = debuffTimer;
+                                burnSymbol.gameObject.SetActive(true);
+                                uiBTL.EndTurn(); //Rally doesn't do any damage
+                            }
+                            break;
+                    }
+                    //Check which of the two ailments is set to none.
+                    // If both of them are filled, overwrite the 0 spot
+                    if (currentStatusAilment0 == EnemyStatusAilment.none)
+                    {
                         currentStatusAilment0 = ailment;
                     }
-                    else
+                    else if (currentStatusAilment1 == EnemyStatusAilment.none)
                     {
-                        NoLongerChained();
-                        chainedSymbol.gameObject.SetActive(false);
+                        currentStatusAilment1 = ailment;
+                    }
+                    else if (currentStatusAilment0 == EnemyStatusAilment.chained)
+                    {
+                        if (primaryChainedTarget)
+                        {
+                            UnchainEnemies();
+                            primaryChainedTarget = false;
+                            currentStatusAilment0 = ailment;
+                        }
+                        else
+                        {
+                            NoLongerChained();
+                            chainedSymbol.gameObject.SetActive(false);
+                        }
+                    }
+                    else if (currentStatusAilment0 == EnemyStatusAilment.rallied)
+                    {
+                        NoLongerRallied();
+                        currentStatusAilment0 = ailment;
+                    }
+                    break;
+                case 1: //Debuff
+                    BuffStats(debuffSubIndex, -debuffValuePercent, debuffTimer);
+                    break;
+            }
+
+            animator.SetBool("Hit", true);
+
+            if (currentHP < 1.0f) //Avoid near zero
+            {
+                if ((currentStatusAilment0 == EnemyStatusAilment.chained || currentStatusAilment1 == EnemyStatusAilment.chained) && primaryChainedTarget) //If the enemy is chained and is the primary target, then unchain the enemies
+                {
+                    UnchainEnemies();
+                }
+                animator.SetBool("Death", true);
+            }
+            else
+            {
+                if (numberOfAttacks <= 0)
+                {
+                    //Only end the turn after the damage has been taken
+                    //If the enemy is chained, only the primary target can end the turn
+                    //All to avoid turn skips
+                    if ((currentStatusAilment0 == EnemyStatusAilment.chained || currentStatusAilment1 == EnemyStatusAilment.chained) && primaryChainedTarget)
+                    {
+                        uiBTL.EndTurn();
+                    }
+                    else if (currentStatusAilment0 != EnemyStatusAilment.chained && currentStatusAilment1 != EnemyStatusAilment.chained)
+                    {
+                        uiBTL.EndTurn();
                     }
                 }
-                else if(currentStatusAilment0 == EnemyStatusAilment.rallied)
-                {
-                    NoLongerRallied();
-                    currentStatusAilment0 = ailment;
-                }
-                break;
-            case 1: //Debuff
-                BuffStats(debuffSubIndex, -debuffValuePercent, debuffTimer);
-                break;
-        }
-
-        animator.SetBool("Hit", true);
-
-        if (currentHP < 1.0f) //Avoid near zero
-        {
-            if ((currentStatusAilment0 == EnemyStatusAilment.chained || currentStatusAilment1 == EnemyStatusAilment.chained) && primaryChainedTarget) //If the enemy is chained and is the primary target, then unchain the enemies
-            {
-                UnchainEnemies();
             }
-                animator.SetBool("Death", true);
         }
         else
         {
-            if (numberOfAttacks <= 0)
+            if (missText != null)
             {
-                //Only end the turn after the damage has been taken
-                //If the enemy is chained, only the primary target can end the turn
-                //All to avoid turn skips
-                if ((currentStatusAilment0 == EnemyStatusAilment.chained || currentStatusAilment1 == EnemyStatusAilment.chained) && primaryChainedTarget)
-                {
-                    uiBTL.EndTurn(); 
-                }
-                else if(currentStatusAilment0 != EnemyStatusAilment.chained && currentStatusAilment1 != EnemyStatusAilment.chained)
-                {
-                    uiBTL.EndTurn();
-                }
+                missText.gameObject.SetActive(true);
             }
         }
     }
@@ -2335,58 +2358,9 @@ public class Enemy : MonoBehaviour
             #region increase multiple stats
             //increase a stat based off class
             case AllEnemySkills.Increase_Multiple_Stats:
-                int statIncrease = PickRandomNumber(10, 20);
-                for (int i = 0; i < battleManager.enemies.Length; ++i)
-                {
-                    if (this == battleManager.enemies[i].enemyReference)
-                    {
-                        theHealer = battleManager.enemies[i].enemyReference;
-                    }
-
-                    if (this != battleManager.enemies[i].enemyReference && battleManager.enemies[i].enemyReference != null)
-                    {
-                        enemyToHeal = battleManager.enemies[i].enemyReference;
-                    }
-                }
-
-                if (enemyToHeal.dead)
-                {
-                    MakeSkillsWork(AllEnemySkills.Increase_Multiple_Stats);
-                }
-
-                if (!enemyToHeal.isStatModed)
-                {
-                    if (enemyToHeal.enemyClass == EnemyClassType.DPS)
-                    {
-                        enemyToHeal.eAttack += statIncrease * 0.6f;
-                        enemyToHeal.eAgility += statIncrease * 0.4f;
-                        print("Enemy At Index " + enemyToHeal.enemyIndexInBattleManager + " Has had Attack modified by " + (statIncrease * 0.6f) + " Also has had Agility modfied by " + (statIncrease * 0.4f));
-                        enemyToHeal.isStatModed = true;
-                    }
-
-                    else if (enemyToHeal.enemyClass == EnemyClassType.Tank)
-                    {
-                        enemyToHeal.eAttack += statIncrease * 0.3f;
-                        enemyToHeal.eDefence += statIncrease * 0.7f;
-                        print("Enemy At Index " + enemyToHeal.enemyIndexInBattleManager + " Has had Attack modified by " + (statIncrease * 0.3f) + " Also has had Defence modfied by " + (statIncrease * 0.7f));
-                        enemyToHeal.isStatModed = true;
-                    }
-
-                    else if (enemyToHeal.enemyClass == EnemyClassType.Support)
-                    {
-                        enemyToHeal.eAttack += statIncrease * 0.4f;
-                        enemyToHeal.eAgility += statIncrease * 0.6f;
-                        print("Enemy At Index " + enemyToHeal.enemyIndexInBattleManager + " Has had Attack modified by " + (statIncrease * 0.4f) + " Also has had Agility modfied by " + (statIncrease * 0.6f));
-                        enemyToHeal.isStatModed = true;
-                    }
-                }
-
-                else
-                {
-                    MakeSkillsWork(AllEnemySkills.All_Enemy_Heal);
-                }
-
-                uiBTL.EndTurn();
+                EnemyToMod();
+                animator.SetBool("isWaiting", false);
+                animator.SetBool("SkillInUse", true);
 
                 break;
             #endregion
@@ -2598,25 +2572,57 @@ public class Enemy : MonoBehaviour
     void AttackFargas(float damage)
     {
         attackThisPlayer = battleManager.players[0].playerReference;
-        attackThisPlayer.TakeDamage(Mathf.CeilToInt(damage));
+        CalculateHit();
+        if (hit)
+        {
+            attackThisPlayer.TakeDamage(Mathf.CeilToInt(damage));
+        }
+        else
+        {
+            attackThisPlayer.TakeDamage(0.0f);
+        }
     }
 
     void AttackOberon(float damage)
     {
         attackThisPlayer = battleManager.players[1].playerReference;
-        attackThisPlayer.TakeDamage(Mathf.CeilToInt(damage));
+        CalculateHit();
+        if (hit)
+        {
+            attackThisPlayer.TakeDamage(Mathf.CeilToInt(damage));
+        }
+        else
+        {
+            attackThisPlayer.TakeDamage(0.0f);
+        }
     }
 
     void AttackFrea(float damage)
     {
         attackThisPlayer = battleManager.players[2].playerReference;
-        attackThisPlayer.TakeDamage(Mathf.CeilToInt(damage));
+        CalculateHit();
+        if (hit)
+        {
+            attackThisPlayer.TakeDamage(Mathf.CeilToInt(damage));
+        }
+        else
+        {
+            attackThisPlayer.TakeDamage(0.0f);
+        }
     }
 
     void AttackArcelus(float damage)
     {
         attackThisPlayer = battleManager.players[3].playerReference;
-        attackThisPlayer.TakeDamage(Mathf.CeilToInt(damage));
+        CalculateHit();
+        if (hit)
+        {
+            attackThisPlayer.TakeDamage(Mathf.CeilToInt(damage));
+        }
+        else
+        {
+            attackThisPlayer.TakeDamage(0.0f);
+        }
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2625,25 +2631,57 @@ public class Enemy : MonoBehaviour
     void AttackFargas()
     {
         attackThisPlayer = battleManager.players[0].playerReference;
-        attackThisPlayer.TakeDamage(eAttack);
+        CalculateHit();
+        if (hit)
+        {
+            attackThisPlayer.TakeDamage(eAttack);
+        }
+        else
+        {
+            attackThisPlayer.TakeDamage(0.0f);
+        }
     }
 
     void AttackOberon()
     {
         attackThisPlayer = battleManager.players[1].playerReference;
-        attackThisPlayer.TakeDamage(eAttack);
+        CalculateHit();
+        if (hit)
+        {
+            attackThisPlayer.TakeDamage(eAttack);
+        }
+        else
+        {
+            attackThisPlayer.TakeDamage(0.0f);
+        }
     }
 
     void AttackFrea()
     {
         attackThisPlayer = battleManager.players[2].playerReference;
-        attackThisPlayer.TakeDamage(eAttack);
+        CalculateHit();
+        if (hit)
+        {
+            attackThisPlayer.TakeDamage(eAttack);
+        }
+        else
+        {
+            attackThisPlayer.TakeDamage(0.0f);
+        }
     }
 
     void AttackArcelus()
     {
         attackThisPlayer = battleManager.players[3].playerReference;
-        attackThisPlayer.TakeDamage(eAttack);
+        CalculateHit();
+        if (hit)
+        {
+            attackThisPlayer.TakeDamage(eAttack);
+        }
+        else
+        {
+            attackThisPlayer.TakeDamage(0.0f);
+        }
     }
 
     //these ones above
@@ -2656,8 +2694,17 @@ public class Enemy : MonoBehaviour
 
     void AttackPlayer(int playerindex, int damage)
     {
-        attackThisPlayer = battleManager.players[playerindex].playerReference;
-        attackThisPlayer.TakeDamage(damage);
+        CalculateHit();
+        if (hit)
+        {
+            attackThisPlayer = battleManager.players[playerindex].playerReference;
+            attackThisPlayer.TakeDamage(eAttack);
+        }
+        else
+        {
+            attackThisPlayer = battleManager.players[playerindex].playerReference;
+            attackThisPlayer.TakeDamage(0.0f);
+        }
     }
 
     void PickEnemy(int enemyIndex)
@@ -2690,7 +2737,6 @@ public class Enemy : MonoBehaviour
     {
         int randomRow = Random.Range(0, 1);
         
-
         if (randomRow == 0)
         {
             print("Picked Back Row");
@@ -2698,19 +2744,8 @@ public class Enemy : MonoBehaviour
             AttackOberon(eAttack * 1.5f);
             print("Attacked" + attackThisPlayer.name);
 
-
             AttackFrea(eAttack * 1.5f);
             print("Then Attacked " + attackThisPlayer.name);
-            attackThisPlayer.TakeDamage(eAttack * 1.5f);
-
-            attackThisPlayer = battleManager.players[1].playerReference;
-            print("Attacked" + attackThisPlayer.nameOfCharacter);
-            attackThisPlayer.TakeDamage(eAttack);
-
-            attackThisPlayer = battleManager.players[2].playerReference;
-            print("Then Attacked " + attackThisPlayer.nameOfCharacter);
-            attackThisPlayer.TakeDamage(eAttack);
-
         }
 
         else if (randomRow == 1)
@@ -2718,19 +2753,8 @@ public class Enemy : MonoBehaviour
             print("Picked Back Row");
 
             AttackFargas(eAttack * 1.5f);
-            print("Attacked" + attackThisPlayer.name);
-
             AttackArcelus(eAttack * 1.5f);
             print("Then Attacked " + attackThisPlayer.name);
-            attackThisPlayer.TakeDamage(eAttack * 1.5f);
-
-            attackThisPlayer = battleManager.players[0].playerReference;
-            print("Attacked" + attackThisPlayer.nameOfCharacter);
-            attackThisPlayer.TakeDamage(eAttack);
-
-            attackThisPlayer = battleManager.players[3].playerReference;
-            print("Then Attacked " + attackThisPlayer.nameOfCharacter);
-            attackThisPlayer.TakeDamage(eAttack);
         }
     }
 
@@ -2755,7 +2779,16 @@ public class Enemy : MonoBehaviour
         Mathf.CeilToInt(attackMod = (eAttack * .5f));
         eAttack += attackMod;
         print("Enemy New Attack is " + eAttack);
-        attackThisPlayer.TakeDamage(eAttack);
+        CalculateHit();
+        if(hit)
+        {
+            attackThisPlayer.TakeDamage(eAttack);
+        }
+        else
+        {
+            attackThisPlayer.TakeDamage(0.0f);
+        }
+        
         eAttack = enemyStartingAtk;
     }
 
@@ -2848,11 +2881,19 @@ public class Enemy : MonoBehaviour
 
     void SliceAndDiceSkill()
     {
+        CalculateHit();
 
         if (hitAmount == 1)
         {
             eAttack += (eAttack * 0.1f);
-            attackThisPlayer.TakeDamage(eAttack);
+            if (hit)
+            {
+                attackThisPlayer.TakeDamage(eAttack);
+            }
+            else
+            {
+                attackThisPlayer.TakeDamage(0.0f);
+            }
             EndSkill();
         }
         
@@ -2861,14 +2902,28 @@ public class Enemy : MonoBehaviour
             if (timeAttackingForSlice == 1)
             {
                 eAttack += (eAttack * 0.1f);
-                attackThisPlayer.TakeDamage(eAttack);
+                if (hit)
+                {
+                    attackThisPlayer.TakeDamage(eAttack);
+                }
+                else
+                {
+                    attackThisPlayer.TakeDamage(0.0f);
+                }
                 timeAttackingForSlice++;
             }
 
             else if(timeAttackingForSlice == 2)
             {
                 eAttack += (eAttack * 0.2f);
-                attackThisPlayer.TakeDamage(eAttack);
+                if (hit)
+                {
+                    attackThisPlayer.TakeDamage(eAttack);
+                }
+                else
+                {
+                    attackThisPlayer.TakeDamage(0.0f);
+                }
                 EndSkill();
                 timeAttackingForSlice = 1;
                 eAttack = enemyStartingAtk;
@@ -2880,21 +2935,42 @@ public class Enemy : MonoBehaviour
             if (timeAttackingForSlice == 1)
             {
                 eAttack += (eAttack * 0.1f);
-                attackThisPlayer.TakeDamage(eAttack);
+                if (hit)
+                {
+                    attackThisPlayer.TakeDamage(eAttack);
+                }
+                else
+                {
+                    attackThisPlayer.TakeDamage(0.0f);
+                }
                 timeAttackingForSlice++;
             }
 
             else if (timeAttackingForSlice == 2)
             {
                 eAttack += (eAttack * 0.2f);
-                attackThisPlayer.TakeDamage(eAttack);
+                if (hit)
+                {
+                    attackThisPlayer.TakeDamage(eAttack);
+                }
+                else
+                {
+                    attackThisPlayer.TakeDamage(0.0f);
+                }
                 timeAttackingForSlice++;
             }
 
             else if (timeAttacking == 3)
             {
                 eAttack += (eAttack * 0.3f);
-                attackThisPlayer.TakeDamage(eAttack);
+                if (hit)
+                {
+                    attackThisPlayer.TakeDamage(eAttack);
+                }
+                else
+                {
+                    attackThisPlayer.TakeDamage(0.0f);
+                }
                 EndSkill();
                 timeAttackingForSlice = 1;
                 eAttack = enemyStartingAtk;
@@ -2906,28 +2982,56 @@ public class Enemy : MonoBehaviour
             if (timeAttackingForSlice == 1)
             {
                 eAttack += (eAttack * 0.1f);
-                attackThisPlayer.TakeDamage(eAttack);
+                if (hit)
+                {
+                    attackThisPlayer.TakeDamage(eAttack);
+                }
+                else
+                {
+                    attackThisPlayer.TakeDamage(0.0f);
+                }
                 timeAttackingForSlice++;
             }
 
             else if (timeAttackingForSlice == 2)
             {
                 eAttack += (eAttack * 0.2f);
-                attackThisPlayer.TakeDamage(eAttack);
+                if (hit)
+                {
+                    attackThisPlayer.TakeDamage(eAttack);
+                }
+                else
+                {
+                    attackThisPlayer.TakeDamage(0.0f);
+                }
                 timeAttackingForSlice++;
             }
 
             else if (timeAttackingForSlice == 3)
             {
                 eAttack += (eAttack * 0.3f);
-                attackThisPlayer.TakeDamage(eAttack);
+                if (hit)
+                {
+                    attackThisPlayer.TakeDamage(eAttack);
+                }
+                else
+                {
+                    attackThisPlayer.TakeDamage(0.0f);
+                }
                 timeAttackingForSlice++;
             }
 
             else if (timeAttackingForSlice == 4)
             {
                 eAttack += (eAttack * 0.4f);
-                attackThisPlayer.TakeDamage(eAttack);
+                if (hit)
+                {
+                    attackThisPlayer.TakeDamage(eAttack);
+                }
+                else
+                {
+                    attackThisPlayer.TakeDamage(0.0f);
+                }
                 EndSkill();
                 timeAttackingForSlice = 1;
                 eAttack = enemyStartingAtk;
@@ -2939,40 +3043,106 @@ public class Enemy : MonoBehaviour
             if (timeAttackingForSlice == 1)
             {
                 eAttack += (eAttack * 0.1f);
-                attackThisPlayer.TakeDamage(eAttack);
+                if (hit)
+                {
+                    attackThisPlayer.TakeDamage(eAttack);
+                }
+                else
+                {
+                    attackThisPlayer.TakeDamage(0.0f);
+                }
                 timeAttackingForSlice++;
             }
 
             else if (timeAttackingForSlice == 2)
             {
                 eAttack += (eAttack * 0.2f);
-                attackThisPlayer.TakeDamage(eAttack);
+                if (hit)
+                {
+                    attackThisPlayer.TakeDamage(eAttack);
+                }
+                else
+                {
+                    attackThisPlayer.TakeDamage(0.0f);
+                }
                 timeAttackingForSlice++;
             }
 
             else if (timeAttackingForSlice == 3)
             {
                 eAttack += (eAttack * 0.3f);
-                attackThisPlayer.TakeDamage(eAttack);
+                if (hit)
+                {
+                    attackThisPlayer.TakeDamage(eAttack);
+                }
+                else
+                {
+                    attackThisPlayer.TakeDamage(0.0f);
+                }
                 timeAttackingForSlice++;
             }
 
             else if (timeAttackingForSlice == 4)
             {
                 eAttack += (eAttack * 0.4f);
-                attackThisPlayer.TakeDamage(eAttack);
+                if (hit)
+                {
+                    attackThisPlayer.TakeDamage(eAttack);
+                }
+                else
+                {
+                    attackThisPlayer.TakeDamage(0.0f);
+                }
                 timeAttackingForSlice++;
             }
 
             else if(timeAttackingForSlice == 5)
             {
                 eAttack += (eAttack * 0.5f);
-                attackThisPlayer.TakeDamage(eAttack);
+                if (hit)
+                {
+                    attackThisPlayer.TakeDamage(eAttack);
+                }
+                else
+                {
+                    attackThisPlayer.TakeDamage(0.0f);
+                }
                 EndSkill();
                 timeAttackingForSlice = 1;
             }
         }
         eAttack = enemyStartingAtk;
+    }
+
+    void MultipleStatSkill()
+    {
+
+        int statIncrease = PickRandomNumber(10, 15);
+
+
+        if (enemyToHeal.enemyClass == EnemyClassType.DPS)
+        {
+            enemyToHeal.eAttack += statIncrease * 0.6f;
+            enemyToHeal.eAgility += statIncrease * 0.4f;
+            print("Enemy At Index " + enemyToHeal.enemyIndexInBattleManager + " Has had Attack modified by " + (statIncrease * 0.6f) + " Also has had Agility modfied by " + (statIncrease * 0.4f));
+            enemyToHeal.isStatModed = true;
+        }
+
+        else if (enemyToHeal.enemyClass == EnemyClassType.Tank)
+        {
+            enemyToHeal.eAttack += statIncrease * 0.3f;
+            enemyToHeal.eDefence += statIncrease * 0.7f;
+            print("Enemy At Index " + enemyToHeal.enemyIndexInBattleManager + " Has had Attack modified by " + (statIncrease * 0.3f) + " Also has had Defence modfied by " + (statIncrease * 0.7f));
+            enemyToHeal.isStatModed = true;
+        }
+
+        else if (enemyToHeal.enemyClass == EnemyClassType.Support)
+        {
+            enemyToHeal.eAttack += statIncrease * 0.4f;
+            enemyToHeal.eAgility += statIncrease * 0.6f;
+            print("Enemy At Index " + enemyToHeal.enemyIndexInBattleManager + " Has had Attack modified by " + (statIncrease * 0.4f) + " Also has had Agility modfied by " + (statIncrease * 0.6f));
+            enemyToHeal.isStatModed = true;
+        }
     }
     
     protected void Death()

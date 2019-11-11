@@ -168,6 +168,7 @@ public class Player : MonoBehaviour
     public Text healText;
     public Text mpText;
     public Text skillText;
+    public Text missText;
     private string skillTextValue = "";
     public Text waitTimeText;
 
@@ -177,7 +178,7 @@ public class Player : MonoBehaviour
     //Actual stats --> Stats after they've been modified in battle
     private float actualATK;
     private float actualDEF;
-    private float actualAgi;
+    public float actualAgi;
     private float actualCRIT;
     private float actualSTR;
     public bool healable; //False when dead or in rage mode
@@ -271,6 +272,7 @@ public class Player : MonoBehaviour
         rageImage.fillAmount = currentRage / maxRage;
         damageText.gameObject.SetActive(false);
         healText.gameObject.SetActive(false);
+        missText.gameObject.SetActive(false);
         skillText.gameObject.SetActive(false);
         mpText.gameObject.SetActive(false);
         waitTimeText.gameObject.SetActive(false);
@@ -491,7 +493,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            Debug.Log("Frea's Double Shot has missed");
+            attackingThisEnemy.TakeDamage(-1.0f, 0);
             if (numberOfAttacks <= 0)
             {
                 uiBTL.EndTurn();
@@ -613,77 +615,84 @@ public class Player : MonoBehaviour
     #region take damage
     public void TakeDamage(float enemyATK)
     {
-        if (lionsPrideIsActive && playerIndex != 1) //If Lion's Pride is active and the attacked player is not Oberon, then Oberon should take the hit
+        if (enemyATK > 0.0f)
         {
-            battleManager.players[1].playerReference.TakeDamage(enemyATK);
-        }
-        else
-        {
-            btlCam.CameraShake();
-            float damage = enemyATK - ((def / (20.0f + def)) * enemyATK);
-            currentHP -= damage;
-
-            if(sustainedDamage < maxSustainedDamage && playerIndex == 1) //Add to sustained damage for Fierce Strike
+            if (lionsPrideIsActive && playerIndex != 1) //If Lion's Pride is active and the attacked player is not Oberon, then Oberon should take the hit
             {
-                sustainedDamage += 0.8f* damage;
-                sustainedDamageText.text = Mathf.RoundToInt(sustainedDamage).ToString();
-                Debug.Log("Oberon Sustained damage is:" + sustainedDamage);
-            }
-
-            damageText.gameObject.SetActive(true);
-            damageText.text = Mathf.RoundToInt(damage).ToString();
-            battleManager.players[playerIndex].currentHP = currentHP; //Update the BTL manager with the new health
-            PartyStats.chara[playerIndex].hitpoints = currentHP; //Update the party stats
-
-            if (currentHP < 1.0f) //Avoid near zero
-            {
-                if (lionsPrideIsActive && playerIndex == 1)
-                {
-                    lionsPrideIsActive = false; //If Oberon is dead, Lion's Pride should be deactivated
-                    lionsPrideSymbolOberonOnly.gameObject.SetActive(false);
-                }
-                currentHP = 0.0f;
-                battleManager.players[playerIndex].currentHP = currentHP; //Update the BTL manager with the new health
-                PartyStats.chara[playerIndex].hitpoints = currentHP; //Update the party stats
-                hpImage.fillAmount = 0.0f;
-                dead = true;
-                DisableAllBuffs(); //BUffs should not continue beyond death
-                playerAnimator.SetBool("Dead", true);
-                //If you die, you lose your RAGE
-                if (currentState == playerState.Waiting) //If the player is waiting on a skill, reset everything and die
-                {
-                    Debug.Log("Huh?");
-                    chosenSkill = (int)SKILLS.NO_SKILL;
-                    skillWaitTime = 0;
-                    skillWaitingIndex = 0;
-                    waitTimeText.gameObject.SetActive(false);
-                    playerAnimator.SetInteger("WaitingIndex", 0);
-
-                }
-                ResetPlayerRage();
-                uiBTL.PlayerIsDead(playerIndex);
+                battleManager.players[1].playerReference.TakeDamage(enemyATK);
             }
             else
             {
-                hpImage.fillAmount = currentHP / maxHP;
-            }
-            if (currentRage < maxRage && currentState != playerState.Rage) //If there's still capacity for rage while we're not actually in rage, increase the rage meter
-            {
-                currentRage += damage * 1.05f; //Rage amount is always 5% more than the health lost
-                rageImage.fillAmount = currentRage / maxRage;
+                btlCam.CameraShake();
+                float damage = enemyATK - ((def / (20.0f + def)) * enemyATK);
+                currentHP -= damage;
 
-                if (currentRage >= maxRage)
+                if (sustainedDamage < maxSustainedDamage && playerIndex == 1) //Add to sustained damage for Fierce Strike
                 {
-                    currentRage = maxRage;
-                    canRage = true; //Can now go into rage mode
+                    sustainedDamage += 0.8f * damage;
+                    sustainedDamageText.text = Mathf.RoundToInt(sustainedDamage).ToString();
+                    Debug.Log("Oberon Sustained damage is:" + sustainedDamage);
                 }
-                PartyStats.chara[playerIndex].rage = currentRage; //Update the party stats
-            }
 
-            if (currentState != playerState.Waiting)
-            {
-                playerAnimator.SetBool("Hit", true);
+                damageText.gameObject.SetActive(true);
+                damageText.text = Mathf.RoundToInt(damage).ToString();
+                battleManager.players[playerIndex].currentHP = currentHP; //Update the BTL manager with the new health
+                PartyStats.chara[playerIndex].hitpoints = currentHP; //Update the party stats
+
+                if (currentHP < 1.0f) //Avoid near zero
+                {
+                    if (lionsPrideIsActive && playerIndex == 1)
+                    {
+                        lionsPrideIsActive = false; //If Oberon is dead, Lion's Pride should be deactivated
+                        lionsPrideSymbolOberonOnly.gameObject.SetActive(false);
+                    }
+                    currentHP = 0.0f;
+                    battleManager.players[playerIndex].currentHP = currentHP; //Update the BTL manager with the new health
+                    PartyStats.chara[playerIndex].hitpoints = currentHP; //Update the party stats
+                    hpImage.fillAmount = 0.0f;
+                    dead = true;
+                    DisableAllBuffs(); //BUffs should not continue beyond death
+                    playerAnimator.SetBool("Dead", true);
+                    //If you die, you lose your RAGE
+                    if (currentState == playerState.Waiting) //If the player is waiting on a skill, reset everything and die
+                    {
+                        Debug.Log("Huh?");
+                        chosenSkill = (int)SKILLS.NO_SKILL;
+                        skillWaitTime = 0;
+                        skillWaitingIndex = 0;
+                        waitTimeText.gameObject.SetActive(false);
+                        playerAnimator.SetInteger("WaitingIndex", 0);
+
+                    }
+                    ResetPlayerRage();
+                    uiBTL.PlayerIsDead(playerIndex);
+                }
+                else
+                {
+                    hpImage.fillAmount = currentHP / maxHP;
+                }
+                if (currentRage < maxRage && currentState != playerState.Rage) //If there's still capacity for rage while we're not actually in rage, increase the rage meter
+                {
+                    currentRage += damage * 1.05f; //Rage amount is always 5% more than the health lost
+                    rageImage.fillAmount = currentRage / maxRage;
+
+                    if (currentRage >= maxRage)
+                    {
+                        currentRage = maxRage;
+                        canRage = true; //Can now go into rage mode
+                    }
+                    PartyStats.chara[playerIndex].rage = currentRage; //Update the party stats
+                }
+
+                if (currentState != playerState.Waiting)
+                {
+                    playerAnimator.SetBool("Hit", true);
+                }
             }
+        }
+        else
+        {
+            missText.gameObject.SetActive(true);
         }
     }
 
@@ -1240,11 +1249,9 @@ public class Player : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("Skill miss");
+                    attackingThisEnemy.TakeDamage(-1.0f,0);
                     uiBTL.EndTurn();
                 }
-
-
                 playerAnimator.SetBool(skillAnimatorName, false);
 
             }
@@ -1319,7 +1326,7 @@ public class Player : MonoBehaviour
                                 }
                                 else
                                 {
-                                    Debug.Log("Skill miss");
+                                    attackingThisEnemy.TakeDamage(-1.0f, 0);
                                     uiBTL.EndTurn();
                                 }
                             }
@@ -1364,7 +1371,7 @@ public class Player : MonoBehaviour
                                 }
                                 else
                                 {
-                                    Debug.Log("Skill miss");
+                                    attackingThisEnemy.TakeDamage(-1.0f, 0);
                                     uiBTL.EndTurn();
 
                                 }
@@ -1461,7 +1468,7 @@ public class Player : MonoBehaviour
                             }
                             else
                             {
-                                Debug.Log("Skill miss");
+                                attackingThisEnemy.TakeDamage(-1.0f, 0);
                                 uiBTL.EndTurn();
                             }
                         }
