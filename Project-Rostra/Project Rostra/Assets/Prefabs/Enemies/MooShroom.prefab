@@ -197,6 +197,7 @@ MonoBehaviour:
   currentHP: 0
   damageText: {fileID: 9019312148612872372}
   healText: {fileID: 2242203753484499048}
+  missText: {fileID: 0}
   enemyCanvas: {fileID: 6884947942540884563}
   dead: 0
   hit: 0
@@ -206,7 +207,7 @@ MonoBehaviour:
   skillNeedsCharge: 0
   enemyClass: 2
   enemyAttack: 5
-  canUseSkill: 0
+  canUseSkill: 8
   enemyName: 7
   currentState: 0
   waitTurnsText: {fileID: 0}

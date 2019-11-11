@@ -2359,8 +2359,19 @@ public class Enemy : MonoBehaviour
             //increase a stat based off class
             case AllEnemySkills.Increase_Multiple_Stats:
                 EnemyToMod();
-                animator.SetBool("isWaiting", false);
-                animator.SetBool("SkillInUse", true);
+
+                if (enemyToHeal.isStatModed)
+                {
+                    animator.SetBool("isWaiting", false);
+                    animator.SetBool("SkillInUse1", true);
+                }
+
+                else if (!enemyToHeal.isStatModed)
+                {
+
+                    animator.SetBool("isWaiting", false);
+                    animator.SetBool("SkillInUse", true);
+                }
 
                 break;
             #endregion
@@ -2368,6 +2379,7 @@ public class Enemy : MonoBehaviour
             case AllEnemySkills.All_Enemy_Heal:
                 animator.SetBool("isWaiting", false);
                 animator.SetBool("SkillInUse", true);
+
                 break;
 
 
@@ -2837,6 +2849,7 @@ public class Enemy : MonoBehaviour
                 }
             }
         }
+        EndSkill();
     }
 
     void EarthSmashSkill()
@@ -3116,9 +3129,7 @@ public class Enemy : MonoBehaviour
 
     void MultipleStatSkill()
     {
-
         int statIncrease = PickRandomNumber(10, 15);
-
 
         if (enemyToHeal.enemyClass == EnemyClassType.DPS)
         {
@@ -3143,6 +3154,8 @@ public class Enemy : MonoBehaviour
             print("Enemy At Index " + enemyToHeal.enemyIndexInBattleManager + " Has had Attack modified by " + (statIncrease * 0.4f) + " Also has had Agility modfied by " + (statIncrease * 0.6f));
             enemyToHeal.isStatModed = true;
         }
+
+        EndSkill();
     }
     
     protected void Death()
