@@ -1038,6 +1038,7 @@ public class Player : MonoBehaviour
                 skillNameForObjPooler = "ArrowImpact";
                 skillAnimatorName = "ASkill";
                 skillWaitingIndex = 1;
+                chosenSkill = (int)SKILLS.NO_SKILL;
                 break;
             case (int)SKILLS.Fr_NeverAgain:
                 skillObjectForObjPooler = "NeverAgain";
