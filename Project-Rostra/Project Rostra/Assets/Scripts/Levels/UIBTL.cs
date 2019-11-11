@@ -203,7 +203,7 @@ public class UIBTL : MonoBehaviour
 
         for (int i =0;i< imageXPositions.Length; i++)
         {
-            imageXPositions[i] = images[i].gameObject.transform.localPosition.x; //-5.0f is tolerance
+            imageXPositions[i] = images[i].gameObject.transform.localPosition.x - 20.0f; //-20.0f is tolerance
         }
 
         imageMovementSpeed = 250.0f;
@@ -804,6 +804,7 @@ public class UIBTL : MonoBehaviour
         if (Input.GetButtonDown("Cancel"))
         {
             skillsPanel.gameObject.SetActive(false);
+            controlsPanel.gameObject.SetActive(true);
             controlsIndicator = 2; //Back to skills in the choosingbasicommands
             currentState = btlUIState.choosingBasicCommand;
         }
@@ -1000,6 +1001,7 @@ public class UIBTL : MonoBehaviour
         if (Input.GetButtonDown("Cancel"))
         {
             itemsPanel.gameObject.SetActive(false);
+            controlsPanel.gameObject.SetActive(true);
             controlsIndicator = 3; //Back to items in the choosingbasicommands
             itemsPanelIndex = 0;
             currentState = btlUIState.choosingBasicCommand;
@@ -1162,6 +1164,7 @@ public class UIBTL : MonoBehaviour
             else if (previousState == btlUIState.choosingSkillsCommand)
             {
                 skillsPanel.gameObject.SetActive(true);
+                controlsPanel.gameObject.SetActive(true);
                 currentState = btlUIState.choosingSkillsCommand;
             }
         }
@@ -1316,11 +1319,13 @@ public class UIBTL : MonoBehaviour
         {
             if (previousState == btlUIState.choosingBasicCommand)
             {
+                controlsPanel.gameObject.SetActive(true);
                 currentState = btlUIState.choosingBasicCommand;
             }
             else if (previousState == btlUIState.choosingSkillsCommand)
             {
                 skillsPanel.gameObject.SetActive(true);
+                controlsPanel.gameObject.SetActive(true);
                 currentState = btlUIState.choosingSkillsCommand;
             }
 
@@ -1570,10 +1575,12 @@ public class UIBTL : MonoBehaviour
             if (previousState == btlUIState.choosingBasicCommand)
             {
                 currentState = btlUIState.choosingBasicCommand;
+                controlsPanel.gameObject.SetActive(true);
             }
             else if (previousState == btlUIState.choosingSkillsCommand)
             {
                 skillsPanel.gameObject.SetActive(true);
+                controlsPanel.gameObject.SetActive(true);
                 currentState = btlUIState.choosingSkillsCommand;
             }
 
@@ -1604,10 +1611,12 @@ public class UIBTL : MonoBehaviour
             if (previousState == btlUIState.choosingBasicCommand)
             {
                 currentState = btlUIState.choosingBasicCommand;
+                controlsPanel.gameObject.SetActive(true);
             }
             else if (previousState == btlUIState.choosingSkillsCommand)
             {
                 skillsPanel.gameObject.SetActive(true);
+                controlsPanel.gameObject.SetActive(true);
                 currentState = btlUIState.choosingSkillsCommand;
             }
 
@@ -1620,7 +1629,7 @@ public class UIBTL : MonoBehaviour
         switch (chooseEnemyRowIndicator)
         {
             case 0:
-                if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow))
+                if ((Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow)) && (numberOfEnemies >= 4 && (!enemiesDead[3] || !enemiesDead[4])))
                 {
                     chooseEnemyRowIndicator++; //Move row indicator to the ranged row
 
@@ -1640,7 +1649,7 @@ public class UIBTL : MonoBehaviour
                 }
                 break;
             case 1:
-                if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow))
+                if ((Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow)) && (!enemiesDead[0] || !enemiesDead[1] || !enemiesDead[2]))
                 {
                     chooseEnemyRowIndicator--; //Move row indicator to the front row
 
