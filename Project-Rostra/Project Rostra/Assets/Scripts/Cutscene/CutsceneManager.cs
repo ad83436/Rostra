@@ -80,7 +80,7 @@ public class CutsceneManager : MonoBehaviour
 		}
 	}
 
-	public void StartCutscene(Cutscene cs, Vector2 returnPos)
+	public void StartCutscene(Cutscene cs, Vector2 returnPos, Fade f)
 	{
 		// call the copy constructor and save a local copy of what cutscene we passed in
 		// set up the current cutscene info
@@ -108,6 +108,7 @@ public class CutsceneManager : MonoBehaviour
 		songEntrance = copy.songEntrance;
 		//anim = actorsCM[0].GetComponent<Animator>();
 		DialogueManager.instance.canWalk = false;
+		fade = f; 
 
 	}
 
