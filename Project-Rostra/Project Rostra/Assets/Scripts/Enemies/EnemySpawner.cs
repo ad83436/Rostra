@@ -72,6 +72,7 @@ public class EnemySpawner : MonoBehaviour
                     enemySpawned = Instantiate(enemiesToSpawn[i], enemyPos[i].transform.position, gameObject.transform.rotation);
                     enemySpawned.enemyIndexInBattleManager = i;
                     enemySpawned.IncreaseStatsBasedOnLevel(enemyLevels[i]);
+                    enemiesToSpawn[i] = null; //reset
                 }
             }
         }
