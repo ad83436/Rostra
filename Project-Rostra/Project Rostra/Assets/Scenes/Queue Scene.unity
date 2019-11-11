@@ -839,6 +839,7 @@ MonoBehaviour:
   currentHP: 0
   damageText: {fileID: 0}
   healText: {fileID: 0}
+  missText: {fileID: 0}
   enemyCanvas: {fileID: 0}
   dead: 0
   hit: 0
@@ -990,6 +991,7 @@ MonoBehaviour:
   currentHP: 0
   damageText: {fileID: 0}
   healText: {fileID: 0}
+  missText: {fileID: 0}
   enemyCanvas: {fileID: 0}
   dead: 0
   hit: 0
@@ -1217,6 +1219,7 @@ MonoBehaviour:
   currentHP: 0
   damageText: {fileID: 0}
   healText: {fileID: 0}
+  missText: {fileID: 0}
   enemyCanvas: {fileID: 0}
   dead: 0
   hit: 0

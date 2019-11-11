@@ -251,8 +251,8 @@ public class BattleManager : MonoBehaviour
         }
         else if (battleQueue[0].playerReference == null && battleQueue[0].enemyReference != null)
         {
-            if (!battleQueue[0].enemyReference.dead)
-            {
+           // if (!battleQueue[0].enemyReference.dead)
+           // {
                 battleQueue[0].enemyReference.EnemyTurn();
                 DOM_enemyTurn();
 
@@ -261,16 +261,16 @@ public class BattleManager : MonoBehaviour
                 //Debug.Log("I've added "  + battleQueue[battleQueue.Count - 1].name);
                 //Remove it from the start of the Q 
                 battleQueue.RemoveAt(0);
-            }
-            else
-            {
-                //Add it to the end of the Q
-                battleQueue.Add(battleQueue[0]);
+           // }
+           // else
+           // {
+          //      //Add it to the end of the Q
+               // battleQueue.Add(battleQueue[0]);
                 //Debug.Log("I've added "  + battleQueue[battleQueue.Count - 1].name);
                 //Remove it from the start of the Q 
-                battleQueue.RemoveAt(0);
-                NextOnQueue();
-            }
+               // battleQueue.RemoveAt(0);
+               // NextOnQueue();
+          //  }
         }
 
     }
