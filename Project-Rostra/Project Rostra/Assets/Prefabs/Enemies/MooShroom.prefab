@@ -174,7 +174,7 @@ MonoBehaviour:
   enemyIndexInBattleManager: 2
   eMana: 0
   eAttack: 5
-  eAgility: 22
+  eAgility: 15
   eDefence: 10
   eStrength: 10
   eSpeed: 5
@@ -193,8 +193,8 @@ MonoBehaviour:
   eCritical: 0
   qImage: {fileID: 0}
   HP: {fileID: 4934621552202127559}
-  maxHP: 0
-  currentHP: 0
+  maxHP: 150
+  currentHP: 150
   damageText: {fileID: 9019312148612872372}
   healText: {fileID: 2242203753484499048}
   missText: {fileID: 0}
