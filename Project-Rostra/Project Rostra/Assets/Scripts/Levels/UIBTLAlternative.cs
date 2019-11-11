@@ -103,10 +103,6 @@ public class UIBTLAlternative : UIBTL {
 		base.ChoosingSkillsCommand();
 	}
 
-	protected override void EndBattleUI() {
-		base.EndBattleUI();
-	}
-
 	protected override void MoveEnemyIndicatorToFirstAliveEnemy() {
 		base.MoveEnemyIndicatorToFirstAliveEnemy();
 	}

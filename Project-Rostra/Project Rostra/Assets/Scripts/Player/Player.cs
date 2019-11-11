@@ -1250,6 +1250,23 @@ public class Player : MonoBehaviour
             }
             else if (skillTarget == 1) //Full row attack
             {
+                //First Make sure at least one enemy is alive in the row you've chosen
+                if (enemyRowIndicator == 0)
+                {
+                    if(uiBTL.enemiesDead[0] && uiBTL.enemiesDead[1] && uiBTL.enemiesDead[2]) 
+                    {
+                        enemyRowIndicator = 1;
+                    }
+                }
+                else if(enemyRowIndicator == 1)
+                {
+                    if (uiBTL.enemiesDead[3] && uiBTL.enemiesDead[4])
+                    {
+                        enemyRowIndicator = 0;
+                    }
+                }
+
+
                 uiBTL.UpdateNumberOfEndTurnsNeededToEndTurn(enemyRowIndicator); //Tell the UIBTL which row you're attacking
                 if (enemyRowIndicator == 0)
                 {

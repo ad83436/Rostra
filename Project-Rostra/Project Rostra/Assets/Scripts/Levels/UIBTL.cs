@@ -91,11 +91,10 @@ public class UIBTL : MonoBehaviour
     private int[] enemyImageIndexes;
     private Color colorAfterDeath;
     private bool enemyHasDied = false; //When an enemy dies, we need to move all the images before the last one first
-    private int deadEnemyImageIndex = 0;
-    private Vector2 deadEnemyImagePos;
-    private Image[] allTheImagesBeforeTheDeadOne;
+    private List<int> deadEnemyImageIndex; //Store the dead enemy image indexes. Need a list for multi kills
+    private List<float> deadEnemyImagePos;
+    private Image [] allTheImagesBeforeTheDeadOne;
     private float [] imageXPositions; //Store the image positions to change recycle position when an enemy dies
-    private int previousDeadIndex = 8; //If we kill multiple enemies at the same time, we should move until we're past the one with the lowest index
 
 
     //States
@@ -110,7 +109,9 @@ public class UIBTL : MonoBehaviour
         choosingPlayer, //Player has chosen a supporting command
         choosingAllPlayers,
         battleEnd,
-        idle //Used after the player ends their turn. This is to prevent input from the player during enemy turns
+        idle, //Used after the player ends their turn. This is to prevent input from the player during enemy turns
+        rearrangingQ, //Used when an enemy dies to rearrange the current images
+        updateQ // Used to move the Q images
     }
 
     private btlUIState currentState;
@@ -196,8 +197,10 @@ public class UIBTL : MonoBehaviour
         colorAfterDeath = new Color(0.5f, 0.5f, 0.5f, 1.0f);
         allTheImagesBeforeTheDeadOne = new Image[9];
         imageXPositions = new float[9];
+        deadEnemyImageIndex = new List<int>();
+        deadEnemyImagePos = new List<float>();
 
-        for(int i =0;i< imageXPositions.Length; i++)
+        for (int i =0;i< imageXPositions.Length; i++)
         {
             imageXPositions[i] = images[i].gameObject.transform.localPosition.x;
         }
@@ -261,16 +264,6 @@ public class UIBTL : MonoBehaviour
 
     protected virtual void Update()
     {
-        if (enemyHasDied)
-        {
-            ReArrangeQ();
-        }
-        if (moveImagesNow)
-        {
-            //Called on End Turn
-            MoveQImages();
-        }
-
         switch (currentState)
         {
             case btlUIState.choosingBasicCommand:
@@ -301,6 +294,16 @@ public class UIBTL : MonoBehaviour
                 EndBattleUI();
                 break;
             case btlUIState.idle:
+                break;
+            case btlUIState.rearrangingQ:
+                ReArrangeQ();
+                break;
+            case btlUIState.updateQ:
+                if (moveImagesNow)
+                {
+                    //Called on End Turn
+                    MoveQImages();
+                }
                 break;
         }
     }
@@ -432,29 +435,56 @@ public class UIBTL : MonoBehaviour
 
     public virtual void ReArrangeQ() //Called when an enemy has died, we need to move all the images before the dead image
     {
-        for(int i =0;i<images.Length;i++) //Store references to all the images before the dead one
+        if (enemyHasDied)
         {
-            if(images[i].transform.localPosition.x < deadEnemyImagePos.x)
+            if (deadEnemyImagePos.Count > 0)
             {
-                allTheImagesBeforeTheDeadOne[i] = images[i];
-            }
-        }
-
-        for (int i = 0; i < allTheImagesBeforeTheDeadOne.Length; i++)
-        {
-            if (allTheImagesBeforeTheDeadOne[i] != null) //Move the images...
-            {
-                targetPos.x = images[i].transform.localPosition.x + imageMaxDistance;
-                images[i].transform.localPosition = Vector2.MoveTowards(images[i].transform.localPosition, targetPos, imageMovementSpeed * Time.deltaTime);
-                if(images[i].transform.localPosition.x >= images[deadEnemyImageIndex].transform.localPosition.x) //...Until they're in the same position as the dead one
+                for (int i = 0; i < images.Length; i++) //Store references to all the images before the dead one
                 {
-                    Debug.Log("III " + i + " YEAH WE'RE FLIPPING BOOLS!");
-                    enemyHasDied = false;
-                    moveImagesNow = true;
-                    images[deadEnemyImageIndex].gameObject.SetActive(false); //Disable the dead one
-                    break;
+                    if (images[i].transform.localPosition.x < deadEnemyImagePos[0] && images[i].gameObject.activeSelf)
+                    {
+                        allTheImagesBeforeTheDeadOne[i] = images[i];
+                       // Debug.Log("Before dead one: " + allTheImagesBeforeTheDeadOne[i].name);
+                    }
+                }
+
+
+                for (int i = 0; i < allTheImagesBeforeTheDeadOne.Length; i++)
+                {
+                    if (allTheImagesBeforeTheDeadOne[i] != null && allTheImagesBeforeTheDeadOne[i].gameObject.activeSelf) //Move the images...
+                    {
+                        targetPos.x = allTheImagesBeforeTheDeadOne[i].transform.localPosition.x + imageMaxDistance;
+                        allTheImagesBeforeTheDeadOne[i].transform.localPosition = Vector2.MoveTowards(images[i].transform.localPosition, targetPos, imageMovementSpeed * Time.deltaTime);
+                        if (allTheImagesBeforeTheDeadOne[i].transform.localPosition.x >= images[deadEnemyImageIndex[0]].transform.localPosition.x) //...Until they're in the same position as the dead one
+                        {
+                            //Debug.Log("Name of dead image: " + images[deadEnemyImageIndex[0]].name + "Position: " + images[deadEnemyImageIndex[0]].transform.localPosition.x);
+                           // Debug.Log("Name Of exceeding image " + allTheImagesBeforeTheDeadOne[i].name + "Position: " + allTheImagesBeforeTheDeadOne[i].transform.localPosition.x);
+                            images[deadEnemyImageIndex[0]].gameObject.SetActive(false); //Disable the dead one
+
+                            //If there are still more positions, remove the zero index, and go agane                                                            
+                            deadEnemyImageIndex.RemoveAt(0);
+                            deadEnemyImagePos.RemoveAt(0);
+                            break;
+                        }
+                    }
                 }
             }
+            else
+            {
+                enemyHasDied = false;
+            }
+        }
+        else
+        {
+            for(int i =0;i<allTheImagesBeforeTheDeadOne.Length;i++)
+            {
+                allTheImagesBeforeTheDeadOne[i] = null; //Reset the array
+            }
+            moveImagesNow = true;
+            currentState = btlUIState.updateQ;
+            deadEnemyImageIndex.Clear(); //Reset
+            deadEnemyImagePos.Clear();
+            Debug.Log("We have moved to Update Q");
         }
     }
 
@@ -624,6 +654,7 @@ public class UIBTL : MonoBehaviour
                         currentState = btlUIState.choosingEnemy;
                         chooseEnemyArrow.SetActive(true);
                         activeRange = playerInControl.range;
+                        controlsPanel.gameObject.SetActive(false);
 
                         MoveEnemyIndicatorToFirstAliveEnemy();
 
@@ -721,13 +752,11 @@ public class UIBTL : MonoBehaviour
                         //Show three the first three items in the inventory
                         for (int i = 0; i < 3 && i < inventory.consumableInv.Count; i++)
                         {
-                            Debug.Log("Item names are : "+ itemNames[i].text);
                             itemIconsInPanel[i].sprite = inventory.ItemIcon(inventory.invItem[inventory.consumableInv[itemsPanelIndex + i], 0]);// itemIcons[inventory.invItem[inventory.consumableInv[itemsPanelIndex + i], 0]];
                             itemNames[i].text = inventory.ItemName(inventory.invItem[inventory.consumableInv[itemsPanelIndex + i], 0]);
                             itemCount[i].text = inventory.invItem[inventory.consumableInv[itemsPanelIndex + i], 1].ToString();
                         }
                         currentState = btlUIState.choosingItemsCommand;
-                        Debug.Log("Item index = : " + itemHPosIndex);
                     }
                     break;
                 case 4://Hilighter is at RAGE
@@ -808,6 +837,7 @@ public class UIBTL : MonoBehaviour
                 if (playerInControl.currentMP >= skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[5])
                 {
                     skillsPanel.gameObject.SetActive(false);
+                    controlsPanel.gameObject.SetActive(false);
 
                     //Check for Frea's special I Don't Miss skillc and Oberon's Lion's Pride skill which automatically targets the controlled character
                     if (PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator] == (int)SKILLS.Fr_IDontMiss || PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator] == (int)SKILLS.Ob_LionsPride)
@@ -974,6 +1004,7 @@ public class UIBTL : MonoBehaviour
             choosePlayerArrow.transform.position = choosePlayerPos[0].transform.position; //Move the player indicator on top of Fargas for now
             playerIndicatorIndex = 0;
             itemsPanel.gameObject.SetActive(false);
+            controlsPanel.gameObject.SetActive(false);
             choosePlayerArrow.gameObject.SetActive(true);
             currentState = btlUIState.choosingPlayer;
         }
@@ -1118,6 +1149,7 @@ public class UIBTL : MonoBehaviour
             if (previousState == btlUIState.choosingItemsCommand)
             {
                 itemsPanel.gameObject.SetActive(true);
+                controlsPanel.gameObject.SetActive(true);
                 currentState = btlUIState.choosingItemsCommand;
             }
             else if (previousState == btlUIState.choosingSkillsCommand)
@@ -1313,10 +1345,12 @@ public class UIBTL : MonoBehaviour
             if (previousState == btlUIState.choosingBasicCommand)
             {
                 currentState = btlUIState.choosingBasicCommand;
+                controlsPanel.gameObject.SetActive(true);
             }
             else if (previousState == btlUIState.choosingSkillsCommand)
             {
                 skillsPanel.gameObject.SetActive(true);
+                controlsPanel.gameObject.SetActive(true);
                 currentState = btlUIState.choosingSkillsCommand;
             }
 
@@ -1500,6 +1534,12 @@ public class UIBTL : MonoBehaviour
                                                    skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[5],
                                                    skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[2],
                                                    enemies[enemyIndicatorIndex]);
+
+                    if(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator] == (int)SKILLS.Fr_DoubleShot || //Ignore input from the player after choosing an enemy for these two skills to avoid the machine gun bug
+                        PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator] == (int)SKILLS.Fr_BleedingEdge)
+                    {
+                        currentState = btlUIState.idle;
+                    }
                 }
                 //..Otherwise, make sure the enemy chosen has not been rallied against already
                 else if (PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator] == (int)SKILLS.Fa_Rally && enemies[enemyIndicatorIndex].currentStatusAilment0 != EnemyStatusAilment.rallied && enemies[enemyIndicatorIndex].currentStatusAilment1 != EnemyStatusAilment.rallied)
@@ -1511,7 +1551,6 @@ public class UIBTL : MonoBehaviour
                                                        skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[2],
                                                        enemies[enemyIndicatorIndex]);
                 }
-                currentState = btlUIState.idle;
             }
         }
     }
@@ -1660,10 +1699,10 @@ public class UIBTL : MonoBehaviour
 
     public virtual void EndTurn()
     {
+        Debug.Log("End turn has been called");
         if (numberOfEndTurnCalls > 0)
         {
             numberOfEndTurnCalls--;
-            Debug.Log("From End Turn" + numberOfEndTurnCalls);
         }
         else
         {
@@ -1684,45 +1723,9 @@ public class UIBTL : MonoBehaviour
                 highlighter.gameObject.transform.position = highlighiterPos[0].transform.position;
                 numberOfEndTurnCalls = 0;
                 playerInControl.ForcePlayerTurnAnimationOff();
-                currentState = btlUIState.idle;
-            }
-            if (!enemyHasDied) //If an enemy has died, don't move the images just yet
-            {
-                moveImagesNow = true;
+                currentState = btlUIState.rearrangingQ;
             }
 
-        }
-    }
-
-    public virtual void EndTurn(bool test)
-    {
-        if (numberOfEndTurnCalls > 0)
-        {
-            numberOfEndTurnCalls--;
-            Debug.Log("From End Turn" + numberOfEndTurnCalls);
-        }
-        else
-        {
-            if (playerInControl != null)
-            {
-                if (playerInControl.currentState == Player.playerState.Rage)
-                {
-                    //Make sure to turn off the indicators at the end of the turn, this is to make sure the end screen does not show the indicators
-                    rageModeIndicator1.gameObject.SetActive(false);
-                    rageModeIndicator2.gameObject.SetActive(false);
-                }
-                playerTurnIndicator.SetActive(false);
-                chooseEnemyArrow.SetActive(false);
-                controlsPanel.gameObject.SetActive(false);
-                itemsPanel.gameObject.SetActive(false);
-                firstTimeOpenedSkillsPanel = false; //Get ready for the next player in case they want to use thier skills
-                controlsIndicator = 0;
-                highlighter.gameObject.transform.position = highlighiterPos[0].transform.position;
-                numberOfEndTurnCalls = 0;
-                playerInControl.ForcePlayerTurnAnimationOff();
-                currentState = btlUIState.idle;
-            }
-            btlManager.NextOnQueue();
         }
     }
 
@@ -1735,25 +1738,34 @@ public class UIBTL : MonoBehaviour
 
         for (int i =0;i<images.Length; i++)
         {
-            if(enemyImageReferences[enemyIndex] == images[i])
+            if(enemyImageReferences[enemyIndex] == images[i]) //Get the dead image
             {
-                if (previousDeadIndex > i) //Only the lowest index should be taken (for mutli kills)
-                {
-                    Debug.Log("Previous is: " + previousDeadIndex);
-                    Debug.Log("IIII is: " + i);
-                    previousDeadIndex = i;
-                    deadEnemyImageIndex = i; //Find the image index inside images[] of the dead enemy so you can re-arrange the Q
-                    deadEnemyImagePos = images[i].gameObject.transform.localPosition;
-                }
+                //Debug.Log("new index is " + enemyIndex);
+                    deadEnemyImageIndex.Add(i); //Find the image index inside images[] of the dead enemy so you can re-arrange the Q
+                    deadEnemyImagePos.Add(images[i].gameObject.transform.localPosition.x);
+                break;
             }
         }
         numberOfDeadEnemies++;
 
-        imageRecyclePos.x = imageXPositions[8 - numberOfDeadEnemies]; //Get the new recylce position
+        if (imageRecyclePos.x < imageXPositions[8 - numberOfDeadEnemies]) //Check if the recycle position is to the left of the dead image
+        {
+           // Debug.Log("We have obtained a new recylce position");
+            imageRecyclePos.x = imageXPositions[8 - numberOfDeadEnemies]; //Get the new recylce position
+        }
 
-        if (deadEnemyImagePos.x >= imageRecyclePos.x) //If the dead enemy was the last image on the Q, we don't need to rearrange it
+       // Debug.Log("RECYCLE POSITION " + imageRecyclePos.x + "OF IMAGE " + (8 - numberOfDeadEnemies));
+
+        //If the dead enemy was the last image on the Q, we don't need to rearrange it
+        //We need to find the max position so that if multiple enemies die at the same time, we make sure to move the images as one of them could have thier image positione lower than the recycle position
+        if (FindMaxImagePosition(deadEnemyImagePos) >= imageRecyclePos.x) 
         {
             enemyHasDied = true; //Rearrange the Q  
+        }
+        else
+        {
+            //Debug.Log("YEAH AS I EXPECTED " + deadEnemyImagePos[0] + " AND RECYLCE POS " + imageRecyclePos.x);
+            enemyImageReferences[enemyIndex].gameObject.SetActive(false);
         }
 
         if (numberOfDeadEnemies >= numberOfEnemies)
@@ -1765,9 +1777,23 @@ public class UIBTL : MonoBehaviour
             //Make sure to turn off the indicators at the end of the turn, this is to make sure the end screen does not show the indicators
             rageModeIndicator1.gameObject.SetActive(false);
             rageModeIndicator2.gameObject.SetActive(false);
-
         }
+
+        currentState = btlUIState.rearrangingQ;
         
+    }
+
+    private float FindMaxImagePosition(List<float> list) //Get the max position
+    {
+        float maxDis = float.MinValue;
+        foreach (float dis in list)
+        {
+            if (dis > maxDis)
+            {
+                maxDis = dis;
+            }
+        }
+        return maxDis;
     }
 
     public virtual void PlayerIsDead(int playerIndex)
