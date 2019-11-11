@@ -2953,11 +2953,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1257990562384444598, guid: d88e632621d169b4f96f296898977892,
-        type: 3}
-      propertyPath: dialogue.triggerBool
-      value: 10
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d88e632621d169b4f96f296898977892, type: 3}
 --- !u!1001 &632895430
