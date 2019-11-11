@@ -2335,58 +2335,9 @@ public class Enemy : MonoBehaviour
             #region increase multiple stats
             //increase a stat based off class
             case AllEnemySkills.Increase_Multiple_Stats:
-                int statIncrease = PickRandomNumber(10, 20);
-                for (int i = 0; i < battleManager.enemies.Length; ++i)
-                {
-                    if (this == battleManager.enemies[i].enemyReference)
-                    {
-                        theHealer = battleManager.enemies[i].enemyReference;
-                    }
-
-                    if (this != battleManager.enemies[i].enemyReference && battleManager.enemies[i].enemyReference != null)
-                    {
-                        enemyToHeal = battleManager.enemies[i].enemyReference;
-                    }
-                }
-
-                if (enemyToHeal.dead)
-                {
-                    MakeSkillsWork(AllEnemySkills.Increase_Multiple_Stats);
-                }
-
-                if (!enemyToHeal.isStatModed)
-                {
-                    if (enemyToHeal.enemyClass == EnemyClassType.DPS)
-                    {
-                        enemyToHeal.eAttack += statIncrease * 0.6f;
-                        enemyToHeal.eAgility += statIncrease * 0.4f;
-                        print("Enemy At Index " + enemyToHeal.enemyIndexInBattleManager + " Has had Attack modified by " + (statIncrease * 0.6f) + " Also has had Agility modfied by " + (statIncrease * 0.4f));
-                        enemyToHeal.isStatModed = true;
-                    }
-
-                    else if (enemyToHeal.enemyClass == EnemyClassType.Tank)
-                    {
-                        enemyToHeal.eAttack += statIncrease * 0.3f;
-                        enemyToHeal.eDefence += statIncrease * 0.7f;
-                        print("Enemy At Index " + enemyToHeal.enemyIndexInBattleManager + " Has had Attack modified by " + (statIncrease * 0.3f) + " Also has had Defence modfied by " + (statIncrease * 0.7f));
-                        enemyToHeal.isStatModed = true;
-                    }
-
-                    else if (enemyToHeal.enemyClass == EnemyClassType.Support)
-                    {
-                        enemyToHeal.eAttack += statIncrease * 0.4f;
-                        enemyToHeal.eAgility += statIncrease * 0.6f;
-                        print("Enemy At Index " + enemyToHeal.enemyIndexInBattleManager + " Has had Attack modified by " + (statIncrease * 0.4f) + " Also has had Agility modfied by " + (statIncrease * 0.6f));
-                        enemyToHeal.isStatModed = true;
-                    }
-                }
-
-                else
-                {
-                    MakeSkillsWork(AllEnemySkills.All_Enemy_Heal);
-                }
-
-                uiBTL.EndTurn();
+                EnemyToMod();
+                animator.SetBool("isWaiting", false);
+                animator.SetBool("SkillInUse", true);
 
                 break;
             #endregion
@@ -2696,21 +2647,7 @@ public class Enemy : MonoBehaviour
             print("Picked Back Row");
 
             AttackOberon(eAttack * 1.5f);
-            print("Attacked" + attackThisPlayer.name);
-
-
             AttackFrea(eAttack * 1.5f);
-            print("Then Attacked " + attackThisPlayer.name);
-            attackThisPlayer.TakeDamage(eAttack * 1.5f);
-
-            attackThisPlayer = battleManager.players[1].playerReference;
-            print("Attacked" + attackThisPlayer.nameOfCharacter);
-            attackThisPlayer.TakeDamage(eAttack);
-
-            attackThisPlayer = battleManager.players[2].playerReference;
-            print("Then Attacked " + attackThisPlayer.nameOfCharacter);
-            attackThisPlayer.TakeDamage(eAttack);
-
         }
 
         else if (randomRow == 1)
@@ -2718,19 +2655,7 @@ public class Enemy : MonoBehaviour
             print("Picked Back Row");
 
             AttackFargas(eAttack * 1.5f);
-            print("Attacked" + attackThisPlayer.name);
-
             AttackArcelus(eAttack * 1.5f);
-            print("Then Attacked " + attackThisPlayer.name);
-            attackThisPlayer.TakeDamage(eAttack * 1.5f);
-
-            attackThisPlayer = battleManager.players[0].playerReference;
-            print("Attacked" + attackThisPlayer.nameOfCharacter);
-            attackThisPlayer.TakeDamage(eAttack);
-
-            attackThisPlayer = battleManager.players[3].playerReference;
-            print("Then Attacked " + attackThisPlayer.nameOfCharacter);
-            attackThisPlayer.TakeDamage(eAttack);
         }
     }
 
@@ -2973,6 +2898,37 @@ public class Enemy : MonoBehaviour
             }
         }
         eAttack = enemyStartingAtk;
+    }
+
+    void MultipleStatSkill()
+    {
+
+        int statIncrease = PickRandomNumber(10, 15);
+
+
+        if (enemyToHeal.enemyClass == EnemyClassType.DPS)
+        {
+            enemyToHeal.eAttack += statIncrease * 0.6f;
+            enemyToHeal.eAgility += statIncrease * 0.4f;
+            print("Enemy At Index " + enemyToHeal.enemyIndexInBattleManager + " Has had Attack modified by " + (statIncrease * 0.6f) + " Also has had Agility modfied by " + (statIncrease * 0.4f));
+            enemyToHeal.isStatModed = true;
+        }
+
+        else if (enemyToHeal.enemyClass == EnemyClassType.Tank)
+        {
+            enemyToHeal.eAttack += statIncrease * 0.3f;
+            enemyToHeal.eDefence += statIncrease * 0.7f;
+            print("Enemy At Index " + enemyToHeal.enemyIndexInBattleManager + " Has had Attack modified by " + (statIncrease * 0.3f) + " Also has had Defence modfied by " + (statIncrease * 0.7f));
+            enemyToHeal.isStatModed = true;
+        }
+
+        else if (enemyToHeal.enemyClass == EnemyClassType.Support)
+        {
+            enemyToHeal.eAttack += statIncrease * 0.4f;
+            enemyToHeal.eAgility += statIncrease * 0.6f;
+            print("Enemy At Index " + enemyToHeal.enemyIndexInBattleManager + " Has had Attack modified by " + (statIncrease * 0.4f) + " Also has had Agility modfied by " + (statIncrease * 0.6f));
+            enemyToHeal.isStatModed = true;
+        }
     }
     
     protected void Death()
