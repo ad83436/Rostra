@@ -902,6 +902,11 @@ public class Enemy : MonoBehaviour
                             #endregion
                     }
                 }
+                else
+                {
+                    Debug.Log("Enemy has Just called end turn");
+                    uiBTL.EndTurn();
+                }
 
             }
         }

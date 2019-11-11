@@ -442,20 +442,24 @@ public class UIBTL : MonoBehaviour
        // Debug.Log("Dead deadEnemyImagePos count " + deadEnemyImagePos.Count);
         if (enemyHasDied)
         {
+            Debug.Log("Dead positions count is : " + deadEnemyImagePos.Count);
             if (deadEnemyImagePos.Count > 0)
             {
+                for(int i = 0; i<deadEnemyImageIndex.Count; i++)
+                {
+                    images[deadEnemyImageIndex[i]].GetComponent<Collider2D>().enabled = false;
+                }
+
                 for (int i = 0; i < images.Length; i++) //Store references to all the images before the dead one
                 {
                     if (images[i].transform.localPosition.x < FindMaxImagePosition(deadEnemyImagePos) && images[i].gameObject.activeSelf)
                     {
                         allTheImagesBeforeTheDeadOne[i] = images[i];
-                        Debug.Log("Before dead one: " + allTheImagesBeforeTheDeadOne[i].name);
+                        //Debug.Log("Before dead one: " + allTheImagesBeforeTheDeadOne[i].name);
                     }
                 }
-                Debug.Log("Before dead one length " + allTheImagesBeforeTheDeadOne.Length);
-
-
-                    for (int i = 0; i < allTheImagesBeforeTheDeadOne.Length; i++)
+                
+                for (int i = 0; i < allTheImagesBeforeTheDeadOne.Length; i++)
                     {
                         if (allTheImagesBeforeTheDeadOne[i] != null && allTheImagesBeforeTheDeadOne[i].gameObject.activeSelf) //Move the images...
                         {
@@ -466,9 +470,9 @@ public class UIBTL : MonoBehaviour
                             {
                                 Debug.Log("Name of dead image: " + images[deadEnemyImageIndex[0]].name + "Position: " + images[deadEnemyImageIndex[0]].transform.localPosition.x);
                                 Debug.Log("Name Of exceeding image " + allTheImagesBeforeTheDeadOne[i].name + "Position: " + allTheImagesBeforeTheDeadOne[i].transform.localPosition.x);
-                                images[deadEnemyImageIndex[0]].gameObject.SetActive(false); //Disable the dead one
 
-                                //If there are still more positions, remove the zero index, and go agane                                                            
+                                images[deadEnemyImageIndex[0]].gameObject.SetActive(false);
+                            //If there are still more positions, remove the zero index, and go agane                                                            
                                 deadEnemyImageIndex.RemoveAt(0);
                                 deadEnemyImagePos.RemoveAt(0);
                                 break;
@@ -1748,42 +1752,40 @@ public class UIBTL : MonoBehaviour
     public virtual void EnemyIsDead(int enemyIndex)
     {
         enemiesDead[enemyIndex] = true;
-        colorAfterDeath.a = 0.0f;
         enemyImageReferences[enemyIndex].color = colorAfterDeath;
-        colorAfterDeath.a = 1.0f;
-
-        for (int i =0;i<images.Length; i++)
-        {
-            if(enemyImageReferences[enemyIndex] == images[i]) //Get the dead image
-            {
-                //Debug.Log("new index is " + enemyIndex);
-                    deadEnemyImageIndex.Add(i); //Find the image index inside images[] of the dead enemy so you can re-arrange the Q
-                    deadEnemyImagePos.Add(images[i].gameObject.transform.localPosition.x);
-                break;
-            }
-        }
         numberOfDeadEnemies++;
+        /*  for (int i =0;i<images.Length; i++)
+          {
+              if(enemyImageReferences[enemyIndex] == images[i]) //Get the dead image
+              {
+                  //Debug.Log("new index is " + enemyIndex);
+                      deadEnemyImageIndex.Add(i); //Find the image index inside images[] of the dead enemy so you can re-arrange the Q
+                      deadEnemyImagePos.Add(images[i].gameObject.transform.localPosition.x);
+                  break;
+              }
+          }
+          */
 
-        if (imageRecyclePos.x < imageXPositions[lastImageIndex - numberOfDeadEnemies]) //Check if the recycle position is to the left of the dead image
-        {
-            Debug.Log("We have obtained a new recylce position");
-            imageRecyclePos.x = imageXPositions[lastImageIndex - numberOfDeadEnemies]; //Get the new recylce position
-        }
+        /*  if (imageRecyclePos.x < imageXPositions[lastImageIndex - numberOfDeadEnemies]) //Check if the recycle position is to the left of the dead image
+          {
+              Debug.Log("We have obtained a new recylce position");
+              imageRecyclePos.x = imageXPositions[lastImageIndex - numberOfDeadEnemies]; //Get the new recylce position
+          }
 
-        Debug.Log("RECYCLE POSITION " + imageRecyclePos.x + "OF IMAGE " + (8 - numberOfDeadEnemies));
+          Debug.Log("RECYCLE POSITION " + imageRecyclePos.x + "OF IMAGE " + (8 - numberOfDeadEnemies));
 
-        //If the dead enemy was the last image on the Q, we don't need to rearrange it
-        //We need to find the max position so that if multiple enemies die at the same time, we make sure to move the images as one of them could have thier image positione lower than the recycle position
-        if (FindMaxImagePosition(deadEnemyImagePos) >= imageRecyclePos.x) 
-        {
-            enemyHasDied = true; //Rearrange the Q  
-        }
-        else
-        {
-            Debug.Log("YEAH AS I EXPECTED " + FindMaxImagePosition(deadEnemyImagePos) + " AND RECYLCE POS " + imageRecyclePos.x);
-            enemyImageReferences[enemyIndex].gameObject.SetActive(false);
-        }
-
+          //If the dead enemy was the last image on the Q, we don't need to rearrange it
+          //We need to find the max position so that if multiple enemies die at the same time, we make sure to move the images as one of them could have thier image positione lower than the recycle position
+          if (FindMaxImagePosition(deadEnemyImagePos) >= imageRecyclePos.x) 
+          {
+              enemyHasDied = true; //Rearrange the Q  
+          }
+          else
+          {
+              Debug.Log("YEAH AS I EXPECTED " + FindMaxImagePosition(deadEnemyImagePos) + " AND RECYLCE POS " + imageRecyclePos.x);
+              enemyImageReferences[enemyIndex].gameObject.SetActive(false);
+          }
+          */
         if (numberOfDeadEnemies >= numberOfEnemies)
         {
             battleHasEnded = true;
