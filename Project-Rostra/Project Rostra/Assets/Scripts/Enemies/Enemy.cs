@@ -603,7 +603,7 @@ public class Enemy : MonoBehaviour
                         #region Heal Support
                         case EnemyAttackType.Heal_Support:
 
-                            if (skillChance >= 49)
+                            if (skillChance >= 20)
                             {
                                 if (skillNeedsCharge)
                                 {
@@ -653,40 +653,95 @@ public class Enemy : MonoBehaviour
                                     if (randomStat == 0)
                                     {
                                         AttackHighAtk();
-                                        print("Stat is Modded Attack");
                                     }
 
-                                    else if (randomStat == 1)
+                                    else if (randomStat == 1 )
                                     {
                                         AttackLowDef();
-                                        print("Stat is Modded Attack");
                                     }
 
                                     else if (randomStat == 2)
                                     {
                                         AttackLowHp();
-                                        print("Stat is Modded Attack");
                                     }
                                 }
 
                                 else if (!enemyToHeal.isStatModed)
                                 {
-                                    if (randomStat == 0)
+                                    if (randomStat == 0 && eAttack > enemyToHeal.eAttack)
                                     {
                                         animator.SetBool("ModAtk", true);
-                                        print("ModedStat");
                                     }
 
-                                    else if (randomStat == 1)
+                                    else  if (randomStat == 0 && eAttack <= enemyToHeal.eAttack)
+                                    {
+                                        randomStat = Random.Range(0, 2);
+
+                                        if(randomStat == 0)
+                                        {
+                                            AttackHighAtk();
+                                        }
+
+                                        else if(randomStat == 1)
+                                        {
+                                            AttackLowDef();
+                                        }
+
+                                        else
+                                        {
+                                            AttackLowHp();
+                                        }
+                                    }
+
+                                    if (randomStat == 1 && eDefence > enemyToHeal.eDefence)
                                     {
                                         animator.SetBool("ModDef", true);
-                                        print("ModedStat");
                                     }
 
-                                    else if (randomStat == 2)
+                                    else if (randomStat == 1 && eDefence <= enemyToHeal.eDefence)
+                                    {
+                                        randomStat = Random.Range(0, 2);
+
+                                        if (randomStat == 0)
+                                        {
+                                            AttackHighAtk();
+                                        }
+
+                                        else if (randomStat == 1)
+                                        {
+                                            AttackLowDef();
+                                        }
+
+                                        else
+                                        {
+                                            AttackLowHp();
+                                        }
+                                    }
+
+                                    if (randomStat == 2 && eAgility > enemyToHeal.eAgility)
                                     {
                                         animator.SetBool("ModAgi", true);
 
+                                    }
+
+                                    else if (randomStat == 2 && eAgility <= enemyToHeal.eAgility)
+                                    {
+                                        randomStat = Random.Range(0, 2);
+
+                                        if (randomStat == 0)
+                                        {
+                                            AttackHighAtk();
+                                        }
+
+                                        else if (randomStat == 1)
+                                        {
+                                            AttackLowDef();
+                                        }
+
+                                        else
+                                        {
+                                            AttackLowHp();
+                                        }
                                     }
                                 }
                             }
@@ -2355,6 +2410,7 @@ public class Enemy : MonoBehaviour
                     ChoosePlayer();
                     MakeSkillsWork(AllEnemySkills.Slice_And_Dice);
                 }
+
                 animator.SetBool("isWaiting", false);
                 animator.SetBool("SkillInUse", true);
 
@@ -2364,6 +2420,11 @@ public class Enemy : MonoBehaviour
             //increase a stat based off class
             case AllEnemySkills.Increase_Multiple_Stats:
                 EnemyToMod();
+
+                if(enemyToHeal == null)
+                {
+                    DumbAttack();
+                }
 
                 if (enemyToHeal.isStatModed)
                 {
@@ -2854,7 +2915,15 @@ public class Enemy : MonoBehaviour
                 }
             }
         }
-        EndSkill();
+
+        if(enemyAttack == EnemyAttackType.Heal_Support)
+        {
+            currentState = EnemyState.idle;
+            waitQTurns = waitTimeAtStart;
+            waitTime = waitTimeAtStart;
+            animator.SetBool("SkillInUse1", false);
+            EndTurn();
+        }
     }
 
     void EarthSmashSkill()
