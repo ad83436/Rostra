@@ -171,7 +171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c49573c71ef3f541813f91b7a35cd10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyIndexInBattleManager: 3
+  enemyIndexInBattleManager: 2
   eMana: 0
   eAttack: 5
   eAgility: 22
@@ -192,22 +192,22 @@ MonoBehaviour:
   enemyStatNeeded: []
   eCritical: 0
   qImage: {fileID: 0}
-  HP: {fileID: 0}
+  HP: {fileID: 4934621552202127559}
   maxHP: 0
   currentHP: 0
-  damageText: {fileID: 0}
-  healText: {fileID: 0}
-  enemyCanvas: {fileID: 0}
+  damageText: {fileID: 9019312148612872372}
+  healText: {fileID: 2242203753484499048}
+  enemyCanvas: {fileID: 6884947942540884563}
   dead: 0
   hit: 0
   blow: 0
   isStatModed: 0
   test: 0
   skillNeedsCharge: 0
-  enemyClass: 0
-  enemyAttack: 0
+  enemyClass: 2
+  enemyAttack: 5
   canUseSkill: 0
-  enemyName: 0
+  enemyName: 7
   currentState: 0
   waitTurnsText: {fileID: 0}
   healthObject: {fileID: 0}
