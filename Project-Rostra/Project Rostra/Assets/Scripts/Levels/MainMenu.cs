@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
+	[Header("Change this to change scene")]
+	public string SceneToLoad;
     public GameObject hilighter;
     public GameObject[] hPos;
     public GameManager gameManager;
@@ -176,7 +178,7 @@ public class MainMenu : MonoBehaviour
             fade.fillAmount += 0.02f;
             if (fade.fillAmount >= 1.0f)
             {
-                SceneManager.LoadScene("PlayTest2");
+                SceneManager.LoadScene(SceneToLoad);
             }
         }
     }
