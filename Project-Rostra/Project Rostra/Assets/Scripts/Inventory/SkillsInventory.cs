@@ -38,8 +38,8 @@ public class SkillsInventory : MonoBehaviour {
         EquipSkill((int)SKILLS.Fa_SwordOfFury, 1, 0);
         AddToUnlockedSkills((int)SKILLS.Fa_BladeOfTheFallen, 0);
         EquipSkill((int)SKILLS.Fa_BladeOfTheFallen, 2, 0);
-        AddToUnlockedSkills((int)SKILLS.Fa_Sunguard, 0);
-        EquipSkill((int)SKILLS.Fa_Sunguard, 3, 0);
+        AddToUnlockedSkills((int)SKILLS.Fa_SwiftStrike, 0);
+        EquipSkill((int)SKILLS.Fa_SwiftStrike, 3, 0);
 
         AddToUnlockedSkills((int)SKILLS.Ob_FierceStrike, 1);
         EquipSkill((int)SKILLS.Ob_FierceStrike, 0, 1);
@@ -509,7 +509,7 @@ public class SkillsInventory : MonoBehaviour {
                 break;
             case (int)SKILLS.Fr_ArrowRain:
                 skillStat[0] = 50;
-                skillStat[1] = 15;
+                skillStat[1] = 18;
                 skillStat[2] = 1;
                 skillStat[4] = (float)SKILL_TYPE.ALL_TARGETS_ATK;
                 skillStat[5] = 45;
