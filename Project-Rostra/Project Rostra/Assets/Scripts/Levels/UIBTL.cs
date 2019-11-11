@@ -95,6 +95,7 @@ public class UIBTL : MonoBehaviour
     private List<float> deadEnemyImagePos;
     private Image [] allTheImagesBeforeTheDeadOne;
     private float [] imageXPositions; //Store the image positions to change recycle position when an enemy dies
+    private int lastImageIndex = 8; // This is the index of the last image, i.e. the first recycle position
 
 
     //States
@@ -259,6 +260,8 @@ public class UIBTL : MonoBehaviour
         {
             choosePlayerArrowForSelectAll[i].gameObject.SetActive(false);
         }
+
+        lastImageIndex = numberOfEnemies + 3; //Number of enemies + number of players - 1
     }
 
 
@@ -451,8 +454,7 @@ public class UIBTL : MonoBehaviour
                 }
                 Debug.Log("Before dead one length " + allTheImagesBeforeTheDeadOne.Length);
 
-                if (allTheImagesBeforeTheDeadOne.Length > 0)
-                {
+
                     for (int i = 0; i < allTheImagesBeforeTheDeadOne.Length; i++)
                     {
                         if (allTheImagesBeforeTheDeadOne[i] != null && allTheImagesBeforeTheDeadOne[i].gameObject.activeSelf) //Move the images...
@@ -473,11 +475,6 @@ public class UIBTL : MonoBehaviour
                             }
                         }
                     }
-                }
-                else
-                {
-                    enemyHasDied = false;
-                }
             }
             else
             {
@@ -1758,10 +1755,10 @@ public class UIBTL : MonoBehaviour
         }
         numberOfDeadEnemies++;
 
-        if (imageRecyclePos.x < imageXPositions[8 - numberOfDeadEnemies]) //Check if the recycle position is to the left of the dead image
+        if (imageRecyclePos.x < imageXPositions[lastImageIndex - numberOfDeadEnemies]) //Check if the recycle position is to the left of the dead image
         {
             Debug.Log("We have obtained a new recylce position");
-            imageRecyclePos.x = imageXPositions[8 - numberOfDeadEnemies]; //Get the new recylce position
+            imageRecyclePos.x = imageXPositions[lastImageIndex - numberOfDeadEnemies]; //Get the new recylce position
         }
 
         Debug.Log("RECYCLE POSITION " + imageRecyclePos.x + "OF IMAGE " + (8 - numberOfDeadEnemies));
