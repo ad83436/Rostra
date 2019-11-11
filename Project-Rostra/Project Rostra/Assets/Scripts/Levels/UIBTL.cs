@@ -202,7 +202,7 @@ public class UIBTL : MonoBehaviour
 
         for (int i =0;i< imageXPositions.Length; i++)
         {
-            imageXPositions[i] = images[i].gameObject.transform.localPosition.x;
+            imageXPositions[i] = images[i].gameObject.transform.localPosition.x; //-5.0f is tolerance
         }
 
         imageMovementSpeed = 250.0f;
@@ -435,38 +435,48 @@ public class UIBTL : MonoBehaviour
 
     public virtual void ReArrangeQ() //Called when an enemy has died, we need to move all the images before the dead image
     {
+       // Debug.Log("We are rearranging " + enemyHasDied);
+       // Debug.Log("Dead deadEnemyImagePos count " + deadEnemyImagePos.Count);
         if (enemyHasDied)
         {
             if (deadEnemyImagePos.Count > 0)
             {
                 for (int i = 0; i < images.Length; i++) //Store references to all the images before the dead one
                 {
-                    if (images[i].transform.localPosition.x < deadEnemyImagePos[0] && images[i].gameObject.activeSelf)
+                    if (images[i].transform.localPosition.x < FindMaxImagePosition(deadEnemyImagePos) && images[i].gameObject.activeSelf)
                     {
                         allTheImagesBeforeTheDeadOne[i] = images[i];
-                       // Debug.Log("Before dead one: " + allTheImagesBeforeTheDeadOne[i].name);
+                        Debug.Log("Before dead one: " + allTheImagesBeforeTheDeadOne[i].name);
                     }
                 }
+                Debug.Log("Before dead one length " + allTheImagesBeforeTheDeadOne.Length);
 
-
-                for (int i = 0; i < allTheImagesBeforeTheDeadOne.Length; i++)
+                if (allTheImagesBeforeTheDeadOne.Length > 0)
                 {
-                    if (allTheImagesBeforeTheDeadOne[i] != null && allTheImagesBeforeTheDeadOne[i].gameObject.activeSelf) //Move the images...
+                    for (int i = 0; i < allTheImagesBeforeTheDeadOne.Length; i++)
                     {
-                        targetPos.x = allTheImagesBeforeTheDeadOne[i].transform.localPosition.x + imageMaxDistance;
-                        allTheImagesBeforeTheDeadOne[i].transform.localPosition = Vector2.MoveTowards(images[i].transform.localPosition, targetPos, imageMovementSpeed * Time.deltaTime);
-                        if (allTheImagesBeforeTheDeadOne[i].transform.localPosition.x >= images[deadEnemyImageIndex[0]].transform.localPosition.x) //...Until they're in the same position as the dead one
+                        if (allTheImagesBeforeTheDeadOne[i] != null && allTheImagesBeforeTheDeadOne[i].gameObject.activeSelf) //Move the images...
                         {
-                            //Debug.Log("Name of dead image: " + images[deadEnemyImageIndex[0]].name + "Position: " + images[deadEnemyImageIndex[0]].transform.localPosition.x);
-                           // Debug.Log("Name Of exceeding image " + allTheImagesBeforeTheDeadOne[i].name + "Position: " + allTheImagesBeforeTheDeadOne[i].transform.localPosition.x);
-                            images[deadEnemyImageIndex[0]].gameObject.SetActive(false); //Disable the dead one
+                            Debug.Log("We're comparing to this: " + images[deadEnemyImageIndex[0]]);
+                            targetPos.x = allTheImagesBeforeTheDeadOne[i].transform.localPosition.x + imageMaxDistance;
+                            allTheImagesBeforeTheDeadOne[i].transform.localPosition = Vector2.MoveTowards(images[i].transform.localPosition, targetPos, imageMovementSpeed * Time.deltaTime);
+                            if (allTheImagesBeforeTheDeadOne[i].transform.localPosition.x >= images[deadEnemyImageIndex[0]].transform.localPosition.x) //...Until they're in the same position as the dead one
+                            {
+                                Debug.Log("Name of dead image: " + images[deadEnemyImageIndex[0]].name + "Position: " + images[deadEnemyImageIndex[0]].transform.localPosition.x);
+                                Debug.Log("Name Of exceeding image " + allTheImagesBeforeTheDeadOne[i].name + "Position: " + allTheImagesBeforeTheDeadOne[i].transform.localPosition.x);
+                                images[deadEnemyImageIndex[0]].gameObject.SetActive(false); //Disable the dead one
 
-                            //If there are still more positions, remove the zero index, and go agane                                                            
-                            deadEnemyImageIndex.RemoveAt(0);
-                            deadEnemyImagePos.RemoveAt(0);
-                            break;
+                                //If there are still more positions, remove the zero index, and go agane                                                            
+                                deadEnemyImageIndex.RemoveAt(0);
+                                deadEnemyImagePos.RemoveAt(0);
+                                break;
+                            }
                         }
                     }
+                }
+                else
+                {
+                    enemyHasDied = false;
                 }
             }
             else
@@ -1750,11 +1760,11 @@ public class UIBTL : MonoBehaviour
 
         if (imageRecyclePos.x < imageXPositions[8 - numberOfDeadEnemies]) //Check if the recycle position is to the left of the dead image
         {
-           // Debug.Log("We have obtained a new recylce position");
+            Debug.Log("We have obtained a new recylce position");
             imageRecyclePos.x = imageXPositions[8 - numberOfDeadEnemies]; //Get the new recylce position
         }
 
-       // Debug.Log("RECYCLE POSITION " + imageRecyclePos.x + "OF IMAGE " + (8 - numberOfDeadEnemies));
+        Debug.Log("RECYCLE POSITION " + imageRecyclePos.x + "OF IMAGE " + (8 - numberOfDeadEnemies));
 
         //If the dead enemy was the last image on the Q, we don't need to rearrange it
         //We need to find the max position so that if multiple enemies die at the same time, we make sure to move the images as one of them could have thier image positione lower than the recycle position
@@ -1764,7 +1774,7 @@ public class UIBTL : MonoBehaviour
         }
         else
         {
-            //Debug.Log("YEAH AS I EXPECTED " + deadEnemyImagePos[0] + " AND RECYLCE POS " + imageRecyclePos.x);
+            Debug.Log("YEAH AS I EXPECTED " + FindMaxImagePosition(deadEnemyImagePos) + " AND RECYLCE POS " + imageRecyclePos.x);
             enemyImageReferences[enemyIndex].gameObject.SetActive(false);
         }
 
