@@ -399,27 +399,33 @@ public class ItemsMenuController : SubMenu {
 									 itemDeque[relativeindex].count > 1 ? "" + itemDeque[relativeindex].count : "");
 	}
 
-	private void UpdateListUI() {
-		for (int i = 0; i < mainUItemsList.Length; i++) {
-			string charaname = "";
-			switch (itemDeque[i].equippedBy) {
-				case 0:
-					charaname += "Fargas";
-					break;
-				case 1:
-					charaname += "Oberon";
-					break;
-				case 2:
-					charaname += "Frea";
-					break;
-				case 3:
-					charaname += "Arcelus";
-					break;
-				default: break;
-			}
-			mainUItemsList[i].SetNormalItem(null, itemDeque[i].name, charaname, itemDeque[i].count > 1 ? "" + itemDeque[i].count : "");
-		}
-	}
+    private void UpdateListUI()
+    {
+        for (int i = 0; i < mainUItemsList.Length; i++)
+        {
+            string charaname = "";
+            if (itemDeque[i].isequipable != 0)
+            {
+                switch (itemDeque[i].equippedBy)
+                {
+                    case 0:
+                        charaname += "Fargas";
+                        break;
+                    case 1:
+                        charaname += "Oberon";
+                        break;
+                    case 2:
+                        charaname += "Frea";
+                        break;
+                    case 3:
+                        charaname += "Arcelus";
+                        break;
+                    default: break;
+                }
+            }
+            mainUItemsList[i].SetNormalItem(invinst.ItemIcon(itemDeque[i].itemID), itemDeque[i].name, charaname, itemDeque[i].count > 1 ? "" + itemDeque[i].count : "");
+        }
+    }
 
 	private void ScrollDownMain() {
 		if (Up && itemindex > 0) --itemindex;
