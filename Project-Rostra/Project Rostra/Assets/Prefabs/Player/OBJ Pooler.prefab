@@ -140,3 +140,7 @@ MonoBehaviour:
     prefab: {fileID: 7403836438864160025, guid: dba99b032dfa5e44ca97752150a7b021,
       type: 3}
     poolSize: 3
+  - tag: LightingBolt
+    prefab: {fileID: 7977375129470454462, guid: e57efee4367b2f84ab5f3f2342d78ad8,
+      type: 3}
+    poolSize: 2
