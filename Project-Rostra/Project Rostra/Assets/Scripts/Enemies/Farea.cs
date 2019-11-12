@@ -79,6 +79,68 @@ public class Farea : Enemy
         statToDebuff = new string[2];
         statToDebuff[0] = "Defense";
         statToDebuff[1] = "Attack";
+
+
+        if (chainedSymbol)
+        {
+            chainedSymbol.gameObject.SetActive(false);
+        }
+        if (primaryChainedSymbol)
+        {
+            primaryChainedSymbol.gameObject.SetActive(false);
+        }
+        if (ralliedSymbol)
+        {
+            ralliedSymbol.gameObject.SetActive(false);
+        }
+        if (burnSymbol)
+        {
+            burnSymbol.gameObject.SetActive(false);
+        }
+        if (debuffArrow)
+        {
+            debuffArrow.gameObject.SetActive(false);
+        }
+        if (atkBuffArrowIndicator)
+        {
+            atkBuffArrowIndicator.gameObject.SetActive(false);
+        }
+        if (strBuffArrowIndicator)
+        {
+            strBuffArrowIndicator.gameObject.SetActive(false);
+        }
+        if (defBuffArrowIndicator)
+        {
+            defBuffArrowIndicator.gameObject.SetActive(false);
+        }
+        if (agiBuffArrowIndicator)
+        {
+            agiBuffArrowIndicator.gameObject.SetActive(false);
+        }
+        if (healthObject)
+        {
+            healthObject.gameObject.SetActive(false);
+        }
+        if (waitTurnsText)
+        {
+            waitTurnsText.gameObject.SetActive(false);
+        }
+        if (atkBuffEffect)
+        {
+            atkBuffEffect.gameObject.SetActive(false);
+        }
+        if (defBuffEffect)
+        {
+            defBuffEffect.gameObject.SetActive(false);
+        }
+        if (agiBuffEffect)
+        {
+            agiBuffEffect.gameObject.SetActive(false);
+        }
+        if (strBuffEffect)
+        {
+            strBuffEffect.gameObject.SetActive(false);
+        }
     }
 
 
