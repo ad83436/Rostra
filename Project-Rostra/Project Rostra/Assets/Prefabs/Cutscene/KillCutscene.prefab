@@ -473,7 +473,7 @@ PrefabInstance:
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
       propertyPath: cs.dialogues.Array.data[0].sentences.Array.data[0]
-      value: Fargas brings down his blade and kills the spirit.
+      value: <i>Fargas brings down his blade and kills the spirit.
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
@@ -796,6 +796,11 @@ PrefabInstance:
         type: 3}
       propertyPath: ce
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
+        type: 3}
+      propertyPath: isChoiceDependant
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1430299444, guid: fc807c7c7bed02e44a3cdae90dddf003, type: 3}
       propertyPath: m_Offset.x

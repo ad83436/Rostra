@@ -44,10 +44,12 @@ public class TransitionToWM : MonoBehaviour
 			player.transform.localScale = new Vector3(2, 2, player.transform.localScale.z);
 			if (isBoss == true)
 			{
+				Debug.Log("Boss");
 				EnemySpawner.instance.isBoss = true;
 			}
 			else
 			{
+				Debug.Log("Boss");
 				EnemySpawner.instance.isBoss = false;
 			}
 		}
@@ -57,10 +59,12 @@ public class TransitionToWM : MonoBehaviour
 			player.transform.localScale = new Vector3(3, 3, player.transform.localScale.z);
 			if (isBoss == true)
 			{
+				Debug.Log("Boss");
 				EnemySpawner.instance.isBoss = true;
 			}
 			else
 			{
+				Debug.Log("Boss");
 				EnemySpawner.instance.isBoss = false;
 			}
 		}
@@ -70,10 +74,12 @@ public class TransitionToWM : MonoBehaviour
 			player.transform.localScale = new Vector3(2, 2, player.transform.localScale.z);
 			if (isBoss == true)
 			{
+				Debug.Log("Boss");
 				EnemySpawner.instance.isBoss = true;
 			}
 			else
 			{
+				Debug.Log("Boss");
 				EnemySpawner.instance.isBoss = false;
 			}
 		}
@@ -83,10 +89,12 @@ public class TransitionToWM : MonoBehaviour
 			player.transform.localScale = new Vector3(3, 3, player.transform.localScale.z);
 			if (isBoss == true)
 			{
+				Debug.Log("Boss");
 				EnemySpawner.instance.isBoss = true;
 			}
 			else
 			{
+				Debug.Log("Boss");
 				EnemySpawner.instance.isBoss = false;
 			}
 		}
