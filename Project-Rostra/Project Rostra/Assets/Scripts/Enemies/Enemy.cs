@@ -82,6 +82,7 @@ public class Enemy : MonoBehaviour
     protected int tiedTimer = 4; //Used to nullify the tied player reference whenever the Farea takes damage or gets healed 
     public GameObject healthObject; 
     public GameObject chain; //Symbol used for tied 
+    public GameObject lightingObject;
 
     //Blowself
     public GameObject blowSelfObject;
@@ -1261,56 +1262,39 @@ public class Enemy : MonoBehaviour
         //add enemies to the list
         for (int i = 0; i < battleManager.enemies.Length; ++i)
         {
-            if (battleManager.enemies[i].enemyReference == this)
+            if (battleManager.enemies[i].enemyReference != this && battleManager.enemies[i].enemyReference != null && battleManager.enemies[i].currentHP > 0)
             {
-                theHealer = battleManager.enemies[i].enemyReference; // which enemy instance is calling this function he is  the healer 
-            }
-
-            if (battleManager.enemies[i].enemyReference != this)
-            {
-                if (battleManager.enemies[i].enemyReference != null && battleManager.enemies[i].currentHP > 0)
-                {
-                    enemyToHealRef.Add(battleManager.enemies[i].enemyReference); // all the other enemies in the battle go into here 
-                }
+                enemyToHealRef.Add(battleManager.enemies[i].enemyReference); // all the other enemies in the battle go into here 
             }
         }
 
         if (enemyToHealRef.Count == 5)
         {
             healAtIndex = PickRandomNumber(enemyToHealRef[0].enemyIndexInBattleManager, enemyToHealRef[1].enemyIndexInBattleManager, enemyToHealRef[2].enemyIndexInBattleManager, enemyToHealRef[3].enemyIndexInBattleManager, enemyToHealRef[4].enemyIndexInBattleManager);
-            print("Heal at Index " + healAtIndex);
-            print(enemyToHealRef[healAtIndex].enemyIndexInBattleManager);
             enemyToHeal = battleManager.enemies[healAtIndex].enemyReference;
         }
 
         else if (enemyToHealRef.Count == 4)
         {
             healAtIndex = PickRandomNumber(enemyToHealRef[0].enemyIndexInBattleManager, enemyToHealRef[1].enemyIndexInBattleManager, enemyToHealRef[2].enemyIndexInBattleManager, enemyToHealRef[3].enemyIndexInBattleManager);
-            print("Heal at Index " + healAtIndex);
-
             enemyToHeal = battleManager.enemies[healAtIndex].enemyReference;
         }
 
         else if (enemyToHealRef.Count == 3)
         {
             healAtIndex = PickRandomNumber(enemyToHealRef[0].enemyIndexInBattleManager, enemyToHealRef[1].enemyIndexInBattleManager, enemyToHealRef[2].enemyIndexInBattleManager);
-            print("Heal at Index " + healAtIndex);
-            print(enemyToHealRef[healAtIndex].enemyIndexInBattleManager);
             enemyToHeal = battleManager.enemies[healAtIndex].enemyReference; ;
         }
 
         else if (enemyToHealRef.Count == 2)
         {
             healAtIndex = PickRandomNumber(enemyToHealRef[0].enemyIndexInBattleManager, enemyToHealRef[1].enemyIndexInBattleManager);
-            print("Heal at Index " + healAtIndex);
             enemyToHeal = battleManager.enemies[healAtIndex].enemyReference;
         }
 
         else
         {
-            healAtIndex = enemyToHealRef[0].enemyIndexInBattleManager;
-            print("Heal at Index " + healAtIndex);
-            print(enemyToHealRef[healAtIndex].enemyIndexInBattleManager);
+            healAtIndex = enemyToHealRef[enemyToHealRef.Count-1].enemyIndexInBattleManager;
             enemyToHeal = enemyToHealRef[healAtIndex];
         }
 
@@ -2340,31 +2324,24 @@ public class Enemy : MonoBehaviour
                     (int) AllEnemySkills.Slice_And_Dice,
                     (int)AllEnemySkills.Bite,
                     (int)AllEnemySkills.Ball_Roll,
-                    (int)AllEnemySkills.Attack_Multiple
                 };
 
                 // give wait times to skills 
                 if ((int)canUseSkill == skills[0])
                 {
-                    waitTime = 4;
+                    waitTime = 2;
                 }
 
                 else if ((int)canUseSkill == skills[1])
                 {
-                    waitTime = 3;
+                    waitTime = 2;
                 }
 
                 else if ((int)canUseSkill == skills[2])
                 {
-                    waitTime = 2;
+                    waitTime = 1;
 
                 }
-
-                else if ((int)canUseSkill == skills[3])
-                {
-                    waitTime = 2;
-                }
-
                 break;
 
             case EnemyClassType.Tank:
@@ -2377,13 +2354,13 @@ public class Enemy : MonoBehaviour
                     (int) AllEnemySkills.Raise_Defence
                 };
 
-                if ((int)canUseSkill == skills[0]) { waitTime = 3; }
+                if ((int)canUseSkill == skills[0]) { waitTime = 2; }
                
                 else if ((int)canUseSkill == skills[1]) { }
                
-                else if ((int)canUseSkill == skills[2]) { waitTime = 2; }
+                else if ((int)canUseSkill == skills[2]) { waitTime = 1; }
                
-                else if((int)canUseSkill == skills[3]) { waitTime = 3; }
+                else if((int)canUseSkill == skills[3]) { waitTime = 2; }
 
                 break;
 
@@ -2398,12 +2375,12 @@ public class Enemy : MonoBehaviour
 
                 if ((int)canUseSkill == skills[0])
                 {
-                    waitTime = 3;
+                    waitTime = 2;
                 }
 
                 else if ((int)canUseSkill == skills[1])
                 {
-                    waitTime = 4;
+                    waitTime = 2;
                 }
 
                 break;
@@ -2844,10 +2821,11 @@ public class Enemy : MonoBehaviour
             print("Picked Back Row");
 
             AttackOberon(eAttack * 1.5f);
-            print("Attacked" + attackThisPlayer.name);
+            
 
             AttackFrea(eAttack * 1.5f);
-            print("Then Attacked " + attackThisPlayer.name);
+            objPooler.SpawnFromPool("LightingBolt", battleManager.players[2].playerReference.gameObject.transform.position, battleManager.players[2].playerReference.gameObject.transform.rotation);
+            objPooler.SpawnFromPool("LightingBolt", battleManager.players[1].playerReference.gameObject.transform.position, battleManager.players[1].playerReference.gameObject.transform.rotation);
         }
 
         else if (randomRow == 1)
@@ -2855,8 +2833,11 @@ public class Enemy : MonoBehaviour
             print("Picked Back Row");
 
             AttackFargas(eAttack * 1.5f);
+
+
             AttackArcelus(eAttack * 1.5f);
-            print("Then Attacked " + attackThisPlayer.name);
+            objPooler.SpawnFromPool("LightingBolt", battleManager.players[3].playerReference.gameObject.transform.position, battleManager.players[3].playerReference.gameObject.transform.rotation);
+            objPooler.SpawnFromPool("LightingBolt", battleManager.players[0].playerReference.gameObject.transform.position, battleManager.players[0].enemyReference.gameObject.transform.rotation);
         }
     }
 
