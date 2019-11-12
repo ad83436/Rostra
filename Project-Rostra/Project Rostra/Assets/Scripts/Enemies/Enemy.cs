@@ -328,6 +328,7 @@ public class Enemy : MonoBehaviour
 
                 if (!dead)
                 {
+                    uiBTL.backdropHighlighter.gameObject.SetActive(true);
                     uiBTL.DisableActivtyText();
                     CheckForAilments();
                     CheckForBuffs();
