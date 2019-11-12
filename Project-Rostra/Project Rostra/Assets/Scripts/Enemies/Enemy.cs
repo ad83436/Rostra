@@ -2300,31 +2300,24 @@ public class Enemy : MonoBehaviour
                     (int) AllEnemySkills.Slice_And_Dice,
                     (int)AllEnemySkills.Bite,
                     (int)AllEnemySkills.Ball_Roll,
-                    (int)AllEnemySkills.Attack_Multiple
                 };
 
                 // give wait times to skills 
                 if ((int)canUseSkill == skills[0])
                 {
-                    waitTime = 4;
+                    waitTime = 2;
                 }
 
                 else if ((int)canUseSkill == skills[1])
                 {
-                    waitTime = 3;
+                    waitTime = 2;
                 }
 
                 else if ((int)canUseSkill == skills[2])
                 {
-                    waitTime = 2;
+                    waitTime = 1;
 
                 }
-
-                else if ((int)canUseSkill == skills[3])
-                {
-                    waitTime = 2;
-                }
-
                 break;
 
             case EnemyClassType.Tank:
@@ -2337,13 +2330,13 @@ public class Enemy : MonoBehaviour
                     (int) AllEnemySkills.Raise_Defence
                 };
 
-                if ((int)canUseSkill == skills[0]) { waitTime = 3; }
+                if ((int)canUseSkill == skills[0]) { waitTime = 2; }
                
                 else if ((int)canUseSkill == skills[1]) { }
                
-                else if ((int)canUseSkill == skills[2]) { waitTime = 2; }
+                else if ((int)canUseSkill == skills[2]) { waitTime = 1; }
                
-                else if((int)canUseSkill == skills[3]) { waitTime = 3; }
+                else if((int)canUseSkill == skills[3]) { waitTime = 2; }
 
                 break;
 
@@ -2358,12 +2351,12 @@ public class Enemy : MonoBehaviour
 
                 if ((int)canUseSkill == skills[0])
                 {
-                    waitTime = 3;
+                    waitTime = 2;
                 }
 
                 else if ((int)canUseSkill == skills[1])
                 {
-                    waitTime = 4;
+                    waitTime = 2;
                 }
 
                 break;
