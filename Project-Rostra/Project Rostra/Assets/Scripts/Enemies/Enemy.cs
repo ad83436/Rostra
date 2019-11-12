@@ -290,10 +290,10 @@ public class Enemy : MonoBehaviour
             {
                 waitTime--;
                 waitQTurns--;
-                //waitTurnsText.text = waitQTurns.ToString(); //Update the UI
+                waitTurnsText.text = waitQTurns.ToString(); //Update the UI
                 if (waitQTurns <= 0)
                 {
-                    //waitTurnsText.gameObject.SetActive(false); //Turn off the text. Don't forget to enable it when the enemy goes to waiting state
+                    waitTurnsText.gameObject.SetActive(false); //Turn off the text. Don't forget to enable it when the enemy goes to waiting state
                     MakeSkillsWork(canUseSkill);
                     
                     //Execute skill here 
@@ -345,6 +345,8 @@ public class Enemy : MonoBehaviour
                                     print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
                                     currentState = EnemyState.waiting;
                                     waitQTurns = waitTime;
+                                    waitTurnsText.text = waitQTurns.ToString(); //Update the UI
+                                    waitTurnsText.gameObject.SetActive(true);
                                     animator.SetBool("isWaiting", true);
                                     EndTurn();
                                 }
@@ -379,6 +381,8 @@ public class Enemy : MonoBehaviour
                                         print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
                                         currentState = EnemyState.waiting;
                                         waitQTurns = waitTime;
+                                        waitTurnsText.text = waitQTurns.ToString(); //Update the UI
+                                        waitTurnsText.gameObject.SetActive(true);
                                         animator.SetBool("isWaiting", true);
 
                                         EndTurn();
@@ -410,6 +414,8 @@ public class Enemy : MonoBehaviour
                                         print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
                                         currentState = EnemyState.waiting;
                                         waitQTurns = waitTime;
+                                        waitTurnsText.text = waitQTurns.ToString(); //Update the UI
+                                        waitTurnsText.gameObject.SetActive(true);
                                         animator.SetBool("isWaiting", true);
 
                                         EndTurn();
@@ -447,6 +453,8 @@ public class Enemy : MonoBehaviour
                                         print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
                                         currentState = EnemyState.waiting;
                                         waitQTurns = waitTime;
+                                        waitTurnsText.text = waitQTurns.ToString(); //Update the UI
+                                        waitTurnsText.gameObject.SetActive(true);
                                         animator.SetBool("isWaiting", true);
                                         EndTurn();
                                     }
@@ -480,6 +488,8 @@ public class Enemy : MonoBehaviour
                                         print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
                                         currentState = EnemyState.waiting;
                                         waitQTurns = waitTime;
+                                        waitTurnsText.text = waitQTurns.ToString(); //Update the UI
+                                        waitTurnsText.gameObject.SetActive(true);
                                         animator.SetBool("isWaiting", true);
                                         EndTurn();
                                     }
@@ -516,6 +526,8 @@ public class Enemy : MonoBehaviour
                                         print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
                                         currentState = EnemyState.waiting;
                                         waitQTurns = waitTime;
+                                        waitTurnsText.gameObject.SetActive(true);
+                                        waitTurnsText.text = waitQTurns.ToString(); //Update the UI
                                         animator.SetBool("isWaiting", true);
                                         EndTurn();
                                     }
@@ -546,6 +558,8 @@ public class Enemy : MonoBehaviour
                                         print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
                                         currentState = EnemyState.waiting;
                                         waitQTurns = waitTime;
+                                        waitTurnsText.gameObject.SetActive(true);
+                                        waitTurnsText.text = waitQTurns.ToString(); //Update the UI
                                         animator.SetBool("isWaiting", true);
                                         EndTurn();
                                     }
@@ -580,6 +594,8 @@ public class Enemy : MonoBehaviour
                                     print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
                                     currentState = EnemyState.waiting;
                                     waitQTurns = waitTime;
+                                    waitTurnsText.gameObject.SetActive(true);
+                                    waitTurnsText.text = waitQTurns.ToString(); //Update the UI
                                     animator.SetBool("isWaiting", true);
                                     EndTurn();
                                 }
@@ -636,6 +652,8 @@ public class Enemy : MonoBehaviour
                                     print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
                                     currentState = EnemyState.waiting;
                                     waitQTurns = waitTime;
+                                    waitTurnsText.gameObject.SetActive(true);
+                                    waitTurnsText.text = waitQTurns.ToString(); //Update the UI
                                     animator.SetBool("isWaiting", true);
                                     EndTurn();
                                 }
@@ -786,6 +804,8 @@ public class Enemy : MonoBehaviour
                                         print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
                                         currentState = EnemyState.waiting;
                                         waitQTurns = waitTime;
+                                        waitTurnsText.text = waitQTurns.ToString(); //Update the UI
+                                        waitTurnsText.gameObject.SetActive(true);                                   
                                         animator.SetBool("isWaiting", true);
                                         EndTurn();
                                     }
@@ -817,6 +837,8 @@ public class Enemy : MonoBehaviour
                                         print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
                                         currentState = EnemyState.waiting;
                                         waitQTurns = waitTime;
+                                        waitTurnsText.text = waitQTurns.ToString(); //Update the UI
+                                        waitTurnsText.gameObject.SetActive(true);
                                         animator.SetBool("isWaiting", true);
                                         EndTurn();
                                     }
@@ -857,6 +879,8 @@ public class Enemy : MonoBehaviour
                                         print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
                                         currentState = EnemyState.waiting;
                                         waitQTurns = waitTime;
+                                        waitTurnsText.text = waitQTurns.ToString(); //Update the UI
+                                        waitTurnsText.gameObject.SetActive(true);
                                         animator.SetBool("isWaiting", true);
                                         hitAmount = Random.Range(1, 5);
                                         EndTurn();
@@ -888,6 +912,8 @@ public class Enemy : MonoBehaviour
                                         print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
                                         currentState = EnemyState.waiting;
                                         waitQTurns = waitTime;
+                                        waitTurnsText.text = waitQTurns.ToString(); //Update the UI
+                                        waitTurnsText.gameObject.SetActive(true);
                                         animator.SetBool("isWaiting", true);
                                         EndTurn();
                                     }
