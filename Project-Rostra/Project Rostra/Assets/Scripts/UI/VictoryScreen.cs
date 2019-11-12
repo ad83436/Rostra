@@ -128,6 +128,9 @@ public class VictoryScreen : MonoBehaviour
     private bool oberonAddinExp;
     private bool startFadingOberonIn;
 
+    //Gold
+    public Text goldText;
+
 
     void Start()
     {
@@ -135,7 +138,7 @@ public class VictoryScreen : MonoBehaviour
         fadingIn = false;
         btlManager = BattleManager.instance;
         expStep = 0.0f;
-
+        goldText.gameObject.SetActive(false);
         fargasLevelUpBack.gameObject.SetActive(false);
         fargasLevelUpFore.gameObject.SetActive(false);
         freaLevelUpBack.gameObject.SetActive(false);
@@ -193,6 +196,8 @@ public class VictoryScreen : MonoBehaviour
                 panelItemsColor.r = panelItemsColor.g = panelItemsColor.b = 1.0f;
                 panelItemsColor.a = 0.0f;
                 fadingIn = false;
+                goldText.text = "Gold: " + btlManager.goldGain.ToString(); //Update the gold;
+                goldText.gameObject.SetActive(true);
                 GetNewStats();
             }
             //We still haven't done anybody's EXP yet, so we start with Fargas

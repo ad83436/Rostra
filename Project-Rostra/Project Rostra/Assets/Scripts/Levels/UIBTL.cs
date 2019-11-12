@@ -1816,6 +1816,7 @@ public class UIBTL : MonoBehaviour
             battleHasEnded = true;
             btlManager.EndOfBattle(true);
             fadePanel.FlipFadeToVictory();
+            MainInventory.totalMoney += btlManager.goldGain; //Increase the gold the player has
             currentState = btlUIState.battleEnd;
             //Make sure to turn off the indicators at the end of the turn, this is to make sure the end screen does not show the indicators
             rageModeIndicator1.gameObject.SetActive(false);

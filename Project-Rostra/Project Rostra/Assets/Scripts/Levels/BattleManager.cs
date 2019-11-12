@@ -57,6 +57,7 @@ public class BattleManager : MonoBehaviour
     //Temp
     private int totalLevels;//The sum of the enemies level
     public int expGain; //Determined by the enemy levels
+    public int goldGain;
 
     //Battle progress
     public bool battleHasEnded;
@@ -189,7 +190,9 @@ public class BattleManager : MonoBehaviour
             allEnemiesAdded = true;
             //Temp code
             expGain = 20 * totalLevels;
+            goldGain = 5 * totalLevels;
             Debug.Log("EXP GAINNN " + expGain);
+            Debug.Log("Gold GAINNN " + goldGain);
         }
 
         //This will probably need to change to avoid race conditions between startbattle and build Q
@@ -416,6 +419,10 @@ public class BattleManager : MonoBehaviour
             for (int i = 0; i < 4; i++)
             {
                 //Update the remaining HP of players in the btl manager and the partystats
+                if(players[i].playerReference.currentHP<=0.0f)
+                {
+                    players[i].playerReference.currentHP = 10.0f; //If a player dies, they leave the battle with 10 hp
+                }
                 players[i].currentHP = PartyStats.chara[i].hitpoints = players[i].playerReference.currentHP;
                 players[i].currentMP = PartyStats.chara[i].magicpoints = players[i].playerReference.currentMP;
                 //If the player ended the battle in rage mode, reset the rage to 0
