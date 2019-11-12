@@ -342,7 +342,6 @@ public class Enemy : MonoBehaviour
                             {
                                 if (skillNeedsCharge)
                                 {
-                                    print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
                                     currentState = EnemyState.waiting;
                                     waitQTurns = waitTime;
                                     waitTurnsText.text = waitQTurns.ToString(); //Update the UI
@@ -353,7 +352,6 @@ public class Enemy : MonoBehaviour
 
                                 else
                                 {
-                                    print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
                                     currentState = EnemyState.skilling;
                                     waitQTurns = waitTime;
                                     animator.SetBool("SkillInUse", true);
@@ -378,7 +376,6 @@ public class Enemy : MonoBehaviour
                                 {
                                     if (skillNeedsCharge)
                                     {
-                                        print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
                                         currentState = EnemyState.waiting;
                                         waitQTurns = waitTime;
                                         waitTurnsText.text = waitQTurns.ToString(); //Update the UI
@@ -390,7 +387,6 @@ public class Enemy : MonoBehaviour
 
                                     else
                                     {
-                                        print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
                                         currentState = EnemyState.skilling;
                                         waitQTurns = waitTime;
                                         animator.SetBool("SkillInUse", true);
@@ -411,7 +407,6 @@ public class Enemy : MonoBehaviour
                                 {
                                     if (skillNeedsCharge)
                                     {
-                                        print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
                                         currentState = EnemyState.waiting;
                                         waitQTurns = waitTime;
                                         waitTurnsText.text = waitQTurns.ToString(); //Update the UI
@@ -423,7 +418,6 @@ public class Enemy : MonoBehaviour
 
                                     else
                                     {
-                                        print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
                                         currentState = EnemyState.skilling;
                                         waitQTurns = waitTime;
                                         animator.SetBool("SkillInUse", true);
@@ -450,7 +444,6 @@ public class Enemy : MonoBehaviour
                                 {
                                     if (skillNeedsCharge)
                                     {
-                                        print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
                                         currentState = EnemyState.waiting;
                                         waitQTurns = waitTime;
                                         waitTurnsText.text = waitQTurns.ToString(); //Update the UI
@@ -461,7 +454,6 @@ public class Enemy : MonoBehaviour
 
                                     else
                                     {
-                                        print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
                                         currentState = EnemyState.skilling;
                                         waitQTurns = waitTime;
                                         animator.SetBool("SkillInUse", true);
@@ -474,7 +466,6 @@ public class Enemy : MonoBehaviour
                                 {
 
                                     AttackLowHp();
-                                    print(eName + " Did not use their skill but used their types attack");
                                 }
                             }
 
@@ -485,7 +476,6 @@ public class Enemy : MonoBehaviour
                                 {
                                     if (skillNeedsCharge)
                                     {
-                                        print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
                                         currentState = EnemyState.waiting;
                                         waitQTurns = waitTime;
                                         waitTurnsText.text = waitQTurns.ToString(); //Update the UI
@@ -496,7 +486,6 @@ public class Enemy : MonoBehaviour
 
                                     else
                                     {
-                                        print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
                                         currentState = EnemyState.skilling;
                                         waitQTurns = waitTime;
                                         animator.SetBool("SkillInUse", true);
@@ -508,7 +497,6 @@ public class Enemy : MonoBehaviour
                                 else
                                 {
                                     DumbAttack();
-                                    print(eName + " Did not use their skill but used a Dumb attack");
                                 }
                             }
                             break;
@@ -523,7 +511,6 @@ public class Enemy : MonoBehaviour
                                 {
                                     if (skillNeedsCharge)
                                     {
-                                        print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
                                         currentState = EnemyState.waiting;
                                         waitQTurns = waitTime;
                                         waitTurnsText.gameObject.SetActive(true);
@@ -534,7 +521,6 @@ public class Enemy : MonoBehaviour
 
                                     else
                                     {
-                                        print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
                                         currentState = EnemyState.skilling;
                                         waitQTurns = waitTime;
                                         animator.SetBool("SkillInUse", true);
@@ -555,7 +541,6 @@ public class Enemy : MonoBehaviour
                                 {
                                     if (skillNeedsCharge)
                                     {
-                                        print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
                                         currentState = EnemyState.waiting;
                                         waitQTurns = waitTime;
                                         waitTurnsText.gameObject.SetActive(true);
@@ -566,7 +551,6 @@ public class Enemy : MonoBehaviour
 
                                     else
                                     {
-                                        print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
                                         currentState = EnemyState.skilling;
                                         waitQTurns = waitTime;
                                         animator.SetBool("SkillInUse", true);
@@ -587,11 +571,10 @@ public class Enemy : MonoBehaviour
                         case EnemyAttackType.Healer:
 
                             float chanceOfHealth = Random.Range(0.2f, 0.9f); //  how low should  the health be before it is healed //CHANGE THIS FUCKING VARIABLE NAME ANDRE!!
-                            if (skillChance >= 49)
+                            if (skillChance >= 20)
                             {
                                 if (skillNeedsCharge)
                                 {
-                                    print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
                                     currentState = EnemyState.waiting;
                                     waitQTurns = waitTime;
                                     waitTurnsText.gameObject.SetActive(true);
@@ -602,7 +585,6 @@ public class Enemy : MonoBehaviour
 
                                 else
                                 {
-                                    print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
                                     currentState = EnemyState.skilling;
                                     waitQTurns = waitTime;
                                     animator.SetBool("SkillInUse", true);
@@ -625,13 +607,11 @@ public class Enemy : MonoBehaviour
 
                                     if (enemyToHeal.currentHP <= (enemyToHeal.maxHP * chanceOfHealth))
                                     {
-                                        print("Healed Enemy at Index " + enemyToHeal.enemyIndexInBattleManager);
                                         animator.SetBool("Heal", true);
                                     }
 
                                     else
                                     {
-                                        print("dumb Attacked");
                                         DumbAttack();
                                     }
                                 }
@@ -645,11 +625,10 @@ public class Enemy : MonoBehaviour
                         #region Heal Support
                         case EnemyAttackType.Heal_Support:
 
-                            if (skillChance >= 20)
+                            if (skillChance >= 49)
                             {
                                 if (skillNeedsCharge)
                                 {
-                                    print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
                                     currentState = EnemyState.waiting;
                                     waitQTurns = waitTime;
                                     waitTurnsText.gameObject.SetActive(true);
@@ -660,7 +639,6 @@ public class Enemy : MonoBehaviour
 
                                 else
                                 {
-                                    print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
                                     currentState = EnemyState.skilling;
                                     waitQTurns = waitTime;
                                     animator.SetBool("SkillInUse", true);
@@ -801,7 +779,6 @@ public class Enemy : MonoBehaviour
                                 {
                                     if (skillNeedsCharge)
                                     {
-                                        print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
                                         currentState = EnemyState.waiting;
                                         waitQTurns = waitTime;
                                         waitTurnsText.text = waitQTurns.ToString(); //Update the UI
@@ -812,7 +789,6 @@ public class Enemy : MonoBehaviour
 
                                     else
                                     {
-                                        print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
                                         currentState = EnemyState.skilling;
                                         waitQTurns = waitTime;
                                         animator.SetBool("SkillInUse", true);
@@ -824,7 +800,6 @@ public class Enemy : MonoBehaviour
                                 else
                                 {
                                     AttackHighAgi();
-                                    print(eName + " Did not use their skill but used their types attack");
                                 }
                             }
 
@@ -834,7 +809,6 @@ public class Enemy : MonoBehaviour
                                 {
                                     if (skillNeedsCharge)
                                     {
-                                        print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
                                         currentState = EnemyState.waiting;
                                         waitQTurns = waitTime;
                                         waitTurnsText.text = waitQTurns.ToString(); //Update the UI
@@ -845,7 +819,6 @@ public class Enemy : MonoBehaviour
 
                                     else
                                     {
-                                        print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
                                         currentState = EnemyState.skilling;
                                         waitQTurns = waitTime;
                                         animator.SetBool("SkillInUse", true);
@@ -876,7 +849,6 @@ public class Enemy : MonoBehaviour
                                 {
                                     if (skillNeedsCharge)
                                     {
-                                        print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
                                         currentState = EnemyState.waiting;
                                         waitQTurns = waitTime;
                                         waitTurnsText.text = waitQTurns.ToString(); //Update the UI
@@ -888,7 +860,6 @@ public class Enemy : MonoBehaviour
 
                                     else
                                     {
-                                        print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
                                         currentState = EnemyState.skilling;
                                         waitQTurns = waitTime;
                                         animator.SetBool("SkillInUse", true);
@@ -909,7 +880,6 @@ public class Enemy : MonoBehaviour
                                 {
                                     if (skillNeedsCharge)
                                     {
-                                        print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
                                         currentState = EnemyState.waiting;
                                         waitQTurns = waitTime;
                                         waitTurnsText.text = waitQTurns.ToString(); //Update the UI
@@ -920,7 +890,6 @@ public class Enemy : MonoBehaviour
 
                                     else
                                     {
-                                        print("Enemy At Index" + enemyIndexInBattleManager + " Used Skill");
                                         currentState = EnemyState.skilling;
                                         waitQTurns = waitTime;
                                         animator.SetBool("SkillInUse", true);
@@ -2945,6 +2914,8 @@ public class Enemy : MonoBehaviour
                         print("Enemies new Hp is " + enemyToHeal.currentHP);
                     }
                 }
+
+                battleManager.enemies[i].enemyReference.healthObject.SetActive(true);
             }
         }
 
@@ -3307,6 +3278,7 @@ public class Enemy : MonoBehaviour
             enemyToHeal.HP.fillAmount = enemyToHeal.currentHP /enemyToHeal.maxHP;
         }
 
+        enemyToHeal.healthObject.SetActive(true);
         animator.SetBool("Heal", false);
         enemyStatNeeded.Clear();
         EndTurn();
