@@ -231,6 +231,30 @@ public class Enemy : MonoBehaviour
         {
             agiBuffArrowIndicator.gameObject.SetActive(false);
         }
+        if(healthObject)
+        {
+            healthObject.gameObject.SetActive(false);
+        }
+        if(waitTurnsText)
+        {
+            waitTurnsText.gameObject.SetActive(false);
+        }
+        if(atkBuffEffect)
+        {
+            atkBuffEffect.gameObject.SetActive(false);
+        }
+        if (defBuffEffect)
+        {
+            defBuffEffect.gameObject.SetActive(false);
+        }
+        if (agiBuffEffect)
+        {
+            agiBuffEffect.gameObject.SetActive(false);
+        }
+        if (strBuffEffect)
+        {
+            strBuffEffect.gameObject.SetActive(false);
+        }
 
         debuffColor = new Color(1.0f, 1.0f, 1.0f, 1.0f);
     }
