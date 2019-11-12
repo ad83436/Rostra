@@ -730,6 +730,7 @@ MonoBehaviour:
   waitTurnsText: {fileID: 1576180145874111784}
   healthObject: {fileID: 2592635063617368660}
   chain: {fileID: 0}
+  lightingObject: {fileID: 0}
   blowSelfObject: {fileID: 0}
   defBuffEffect: {fileID: 3509668202406425957}
   atkBuffEffect: {fileID: 9190353397441688137}
@@ -1081,6 +1082,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.0099983
+      objectReference: {fileID: 0}
+    - target: {fileID: 5069062051708576907, guid: 9b55465ff82f04b429c1403fd10c00c3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9b55465ff82f04b429c1403fd10c00c3, type: 3}
