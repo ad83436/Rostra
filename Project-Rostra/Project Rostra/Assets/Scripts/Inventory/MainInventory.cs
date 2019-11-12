@@ -66,8 +66,7 @@ public class MainInventory : MonoBehaviour {
     }
     // FOR TESTING
     private void Start() {
-		invItem[3, 0] = (int)ITEM_ID.TEST_WEAPON1;
-		invItem[3, 1] = 1;
+
 
 		invItem[0, 0] = (int)ITEM_ID.HP_POTION;
         invItem[0, 1] = 5;
@@ -78,11 +77,21 @@ public class MainInventory : MonoBehaviour {
         invItem[2, 0] = (int)ITEM_ID.HOPE_POTION;
         invItem[2, 1] = 1;
 
+        invItem[3, 0] = (int)ITEM_ID.TEST_WEAPON1;
+        invItem[3, 1] = 1;
 
         invItem[4, 0] = (int)ITEM_ID.TEST_ARMOR1;
 		invItem[4, 1] = 1;
 
-	}
+
+        invItem[5, 0] = (int)ITEM_ID.COURAGE_POTION;
+        invItem[5, 1] = 5;
+
+
+        invItem[6, 0] = (int)ITEM_ID.SEVERANCE_POTION;
+        invItem[6, 1] = 5;
+
+    }
 
 	// Handling keyboard functionality
 	private void Update() {
@@ -399,6 +408,12 @@ public class MainInventory : MonoBehaviour {
 			case (int)ITEM_ID.BOOK:
 				name = "Book";
 				break;
+            case (int)ITEM_ID.COURAGE_POTION:
+                name = "Courage Potion";
+                break;
+            case (int)ITEM_ID.SEVERANCE_POTION:
+                name = "Severance Potion";
+                break;
 
         }
 		return name;
@@ -444,6 +459,12 @@ public class MainInventory : MonoBehaviour {
 			case (int)ITEM_ID.BOOK:
 				description = "One page sticks out to you. There is ink covering up most of the page but you can make out a few words. A mother who witnessed ... will turn into a Farya upon her death. A Farya usually wears a long white dress and has glowing blue eyes... Some say that Farya can talk however this has yet to be proven.";
 				break;
+            case (int)ITEM_ID.COURAGE_POTION: //Cures Fear
+                description = "Soldiers often use this before a charge. Cures Fear status.";
+                break;
+            case (int)ITEM_ID.SEVERANCE_POTION: //Cures Tied
+                description = "Frees a soul from the chains that bind it. Cures Tied status.";
+                break;
         }
 
 		return description;
@@ -490,7 +511,13 @@ public class MainInventory : MonoBehaviour {
             case (int)ITEM_ID.HOPE_POTION:
                 price = 200;
                 break;
-				
+            case (int)ITEM_ID.COURAGE_POTION:
+                price = 100;
+                break;
+            case (int)ITEM_ID.SEVERANCE_POTION:
+                price = 100;
+                break;
+
 
         }
 
@@ -508,7 +535,12 @@ public class MainInventory : MonoBehaviour {
 		switch (itemID) {
 			case (int)ITEM_ID.TEST_POTION_HP:
 			case (int)ITEM_ID.TEST_POTION_MP:
-				itemClass = (int)ITEM_CLASS.POTIONS;
+            case (int)ITEM_ID.HP_POTION:
+            case (int)ITEM_ID.MP_ELIXIR:
+            case (int)ITEM_ID.HOPE_POTION:
+            case (int)ITEM_ID.COURAGE_POTION:
+            case (int)ITEM_ID.SEVERANCE_POTION:
+                itemClass = (int)ITEM_CLASS.POTIONS;
 				break;
 			case (int)ITEM_ID.TEST_QUEST_ITEM:
 				itemClass = (int)ITEM_CLASS.UNSELLABLE;
@@ -547,7 +579,7 @@ public class MainInventory : MonoBehaviour {
 				options.Add("Drop");
 				break;
 			case (int)ITEM_TYPE.KEY_ITEM:
-				options.Add("Use");
+//				options.Add("Use");
 				options.Add("Move");
 				break;
 			case (int)ITEM_TYPE.EQUIPABLE:
@@ -680,6 +712,8 @@ public class MainInventory : MonoBehaviour {
             case (int)ITEM_ID.HP_POTION:
             case (int)ITEM_ID.MP_ELIXIR:
             case (int)ITEM_ID.HOPE_POTION:
+            case (int)ITEM_ID.COURAGE_POTION:
+            case (int)ITEM_ID.SEVERANCE_POTION:
                 itemType = (int)ITEM_TYPE.CONSUMABLE;
 				break;
 			case (int)ITEM_ID.TEST_QUEST_ITEM:
@@ -727,6 +761,10 @@ public class MainInventory : MonoBehaviour {
 				return itemIcons[6];
 			case (int)ITEM_ID.BOOK:
 				return itemIcons[7];
+            case (int)ITEM_ID.COURAGE_POTION:
+                return itemIcons[8];
+            case (int)ITEM_ID.SEVERANCE_POTION:
+                return itemIcons[9];
             default:
                 return itemIcons[0];
         }
@@ -749,6 +787,8 @@ public class MainInventory : MonoBehaviour {
 			case (int)ITEM_ID.TEST_POTION_MP:
             case (int)ITEM_ID.MP_ELIXIR:
             case (int)ITEM_ID.HOPE_POTION:
+            case (int)ITEM_ID.COURAGE_POTION:
+            case (int)ITEM_ID.SEVERANCE_POTION:
                 stackSize = 10;
 				break;
         }

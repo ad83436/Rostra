@@ -202,7 +202,7 @@ public class UIBTL : MonoBehaviour
 
         for (int i =0;i< imageXPositions.Length; i++)
         {
-            imageXPositions[i] = images[i].gameObject.transform.localPosition.x - 20.0f; //-20.0f is tolerance
+            imageXPositions[i] = images[i].gameObject.transform.localPosition.x; //-20.0f is tolerance
         }
 
         imageMovementSpeed = 250.0f;
@@ -1260,7 +1260,9 @@ public class UIBTL : MonoBehaviour
             if (previousState == btlUIState.choosingItemsCommand)
             {
                 //Make sure you're not using the hope potion, the player you're targeting is not dead and is not in RAGE
-                if (inventory.invItem[inventory.consumableInv[itemsPanelIndex], 0] != (int)ITEM_ID.HOPE_POTION) 
+                if (inventory.invItem[inventory.consumableInv[itemsPanelIndex], 0] != (int)ITEM_ID.HOPE_POTION &&
+                    inventory.invItem[inventory.consumableInv[itemsPanelIndex], 0] != (int)ITEM_ID.COURAGE_POTION &&
+                    inventory.invItem[inventory.consumableInv[itemsPanelIndex], 0] != (int)ITEM_ID.SEVERANCE_POTION) 
                 {
                     if (!btlManager.players[playerIndicatorIndex].playerReference.dead)
                     {
@@ -1285,7 +1287,7 @@ public class UIBTL : MonoBehaviour
                         }
                     }
                 }
-                else //If it is indeed the Hope potion, then the player targeted needs to be dead
+                else if (inventory.invItem[inventory.consumableInv[itemsPanelIndex], 0] == (int)ITEM_ID.HOPE_POTION)  //If it is indeed the Hope potion, then the player targeted needs to be dead
                 {
                     if (btlManager.players[playerIndicatorIndex].playerReference.dead)
                     {
@@ -1299,6 +1301,32 @@ public class UIBTL : MonoBehaviour
                             playerInControl.ForcePlayerTurnAnimationOff();
                             PlayerHasBeenRevived(playerIndicatorIndex);
                             EndTurn();
+                    }
+                }
+                else if (inventory.invItem[inventory.consumableInv[itemsPanelIndex], 0] == (int)ITEM_ID.COURAGE_POTION)
+                {
+                    if (!btlManager.players[playerIndicatorIndex].playerReference.dead && btlManager.players[playerIndicatorIndex].playerReference.currentAilment == Player.playerAilments.fear )
+                    {
+                        choosePlayerArrow.gameObject.SetActive(false);
+                        UpdateActivityText(inventory.ItemName(inventory.invItem[inventory.consumableInv[itemsPanelIndex], 0]));
+                        btlManager.players[playerIndicatorIndex].playerReference.NegateStatusEffect(Player.playerAilments.fear);
+                        itemCount[itemHPosIndex].text = inventory.invItem[inventory.consumableInv[0], 1].ToString();
+                        itemsPanelIndex = 0; //Reset the itemsPanelIndex
+                        playerInControl.ForcePlayerTurnAnimationOff();
+                        EndTurn();
+                    }
+                }
+                else if (inventory.invItem[inventory.consumableInv[itemsPanelIndex], 0] == (int)ITEM_ID.SEVERANCE_POTION)
+                {
+                    if (!btlManager.players[playerIndicatorIndex].playerReference.dead && btlManager.players[playerIndicatorIndex].playerReference.currentAilment == Player.playerAilments.tied)
+                    {
+                        choosePlayerArrow.gameObject.SetActive(false);
+                        UpdateActivityText(inventory.ItemName(inventory.invItem[inventory.consumableInv[itemsPanelIndex], 0]));
+                        btlManager.players[playerIndicatorIndex].playerReference.NegateStatusEffect(Player.playerAilments.tied);
+                        itemCount[itemHPosIndex].text = inventory.invItem[inventory.consumableInv[0], 1].ToString();
+                        itemsPanelIndex = 0; //Reset the itemsPanelIndex
+                        playerInControl.ForcePlayerTurnAnimationOff();
+                        EndTurn();
                     }
                 }
             }
