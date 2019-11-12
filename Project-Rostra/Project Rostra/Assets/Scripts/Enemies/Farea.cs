@@ -173,7 +173,7 @@ public class Farea : Enemy
         battleManager.enemies[enemyIndexInBattleManager].currentHP = currentHP; //Update the BTL manager with the new health
         HP.fillAmount = currentHP / maxHP;
 
-        if (currentHP <= 0.0f)
+        if (currentHP <= 1.0f)
         {
             if (bossPhase == 1)
             {
@@ -279,7 +279,7 @@ public class Farea : Enemy
                 }
                 else if (attackChance >= 40.0f && attackChance < 70.0f) //Judgment and Wrath
                 {
-                    attackThisPlayer = battleManager.players[Random.Range(0, 4)].playerReference;
+                    attackThisPlayer = battleManager.players[Random.Range(0, 3)].playerReference;
                     animator.SetBool("JudgementAndWrath", true);
                     uiBTL.UpdateActivityText("Judgement & Wrath");
                 }
@@ -365,7 +365,7 @@ public class Farea : Enemy
                     }
                     else if (attackChance >= 70.0f && attackChance < 80.0f) //Judgment and Wrath
                     {
-                        attackThisPlayer = battleManager.players[Random.Range(0, 4)].playerReference;
+                        attackThisPlayer = battleManager.players[Random.Range(0, 3)].playerReference;
                         animator.SetBool("JudgementAndWrath", true);
                         uiBTL.UpdateActivityText("Judgement & Wrath");
                     }
@@ -440,7 +440,7 @@ public class Farea : Enemy
     //Deadly ties chooser
     private void TieAPlayer()
     {
-        tieThisPlayer = battleManager.players[Random.Range(0, 4)].playerReference;
+        tieThisPlayer = battleManager.players[Random.Range(0, 3)].playerReference;
         if (tieThisPlayer.dead)
         {
             TieAPlayer(); //Make sure whatever player you choose is alive
@@ -449,7 +449,7 @@ public class Farea : Enemy
     //Lullaby of Despair chooser
     private void ScareAPlayer()
     {
-        attackThisPlayer = battleManager.players[Random.Range(0, 4)].playerReference;
+        attackThisPlayer = battleManager.players[Random.Range(0, 3)].playerReference;
         if (tieThisPlayer.dead)
         {
             TieAPlayer(); //Make sure whatever player you choose is alive
