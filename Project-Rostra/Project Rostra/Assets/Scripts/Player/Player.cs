@@ -171,6 +171,7 @@ public class Player : MonoBehaviour
     public Text missText;
     private string skillTextValue = "";
     public Text waitTimeText;
+    public GameObject statusPotionEffect; //Activated when a status ailment potion is used
 
     //Camera
     public BattleCamera btlCam;
@@ -237,6 +238,7 @@ public class Player : MonoBehaviour
         agiBuffEffect.gameObject.SetActive(false);
         strBuffEffect.gameObject.SetActive(false);
         drainEyeBuffEffect.gameObject.SetActive(false);
+        statusPotionEffect.gameObject.SetActive(false);
 
         if(rallySymbolFargasOnly)
         {
@@ -2106,8 +2108,33 @@ public class Player : MonoBehaviour
     {
         tiedSymbol.gameObject.SetActive(false);
         currentAilment = playerAilments.none;
+        uiBTL.UpdateActivityText(nameOfCharacter + " is no longer tied");
     }
 
+    public void NegateStatusEffect(playerAilments ailment)
+    {
+        switch (ailment)
+        {
+            case playerAilments.fear:
+                statusPotionEffect.gameObject.SetActive(true);
+                currentAilment = playerAilments.none;
+                fearSymbol.gameObject.SetActive(false);
+                fearTimer = 0;
+                affectedByFear = false;
+                uiBTL.UpdateActivityText(nameOfCharacter + " is no longer afraid");
+                break;
+            case playerAilments.tied:
+                tiedToThisEnemy.deadlyTiesObject.gameObject.SetActive(false);
+                tiedToThisEnemy.chain.gameObject.SetActive(false);
+                statusPotionEffect.gameObject.SetActive(true);
+                tiedSymbol.gameObject.SetActive(false);
+                currentAilment = playerAilments.none;
+                uiBTL.UpdateActivityText(nameOfCharacter + " is no longer tied");
+                break;
+        }
+    }
+
+    #endregion
     private void FindAnAliveEnemy()
     {
         //Make sure the enemy you're trying to attack is alive
@@ -2121,5 +2148,5 @@ public class Player : MonoBehaviour
         }
     }
 
-    #endregion
+
 }

@@ -13,8 +13,6 @@ public class Farea : Enemy
     private Player thisPlayerIsDead; //Used as a reference for You Are Not Mine
     private Vector2 mothersPainInitialLoc = new Vector2(24.24f, -2.35f);
 
-    public GameObject deadlyTiesObject;
-
     private bool youAreNotMineUsedOnceThisFight = false;
 
 
@@ -262,7 +260,7 @@ public class Farea : Enemy
         {
             //Only update the attackChance when no skill is on the waiting list
             attackChance = Random.Range(0.0f, 100.0f);
-            //attackChance = 30; //Testing
+            //attackChance = 50; //Testing
 
             if (bossPhase == 1)
             {
@@ -320,7 +318,7 @@ public class Farea : Enemy
                             thisPlayerIsDead = null;
                         }
                     }
-                    attackChance = Random.Range(0.0f, 100.0f);
+                    attackChance = Random.Range(0.0f, 100.0f * skillChanceModifier);
                     Debug.Log("Attack chance is: " + attackChance);
                     //attackChance = 50; //Testing
                     if (attackChance >= 0.0f && attackChance < 20.0f * skillChanceModifier && isThereADeadPlayer)
@@ -450,9 +448,9 @@ public class Farea : Enemy
     private void ScareAPlayer()
     {
         attackThisPlayer = battleManager.players[Random.Range(0, 3)].playerReference;
-        if (tieThisPlayer.dead)
+        if (attackThisPlayer.dead)
         {
-            TieAPlayer(); //Make sure whatever player you choose is alive
+            ScareAPlayer(); //Make sure whatever player you choose is alive
         }
     }
 

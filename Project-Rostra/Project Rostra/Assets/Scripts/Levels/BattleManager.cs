@@ -189,7 +189,7 @@ public class BattleManager : MonoBehaviour
         {
             allEnemiesAdded = true;
             //Temp code
-            expGain = 20 * totalLevels;
+            expGain = 10 * totalLevels;
             goldGain = 5 * totalLevels;
             Debug.Log("EXP GAINNN " + expGain);
             Debug.Log("Gold GAINNN " + goldGain);
