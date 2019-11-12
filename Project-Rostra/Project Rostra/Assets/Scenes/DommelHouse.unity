@@ -14231,6 +14231,11 @@ PrefabInstance:
       propertyPath: dialogue.triggerBool
       value: 12
       objectReference: {fileID: 0}
+    - target: {fileID: 2653198307189550255, guid: c76d5dd8dc485bd479c1a80c1fc0afec,
+        type: 3}
+      propertyPath: oneShot
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2653198307189550251, guid: c76d5dd8dc485bd479c1a80c1fc0afec,
         type: 3}
       propertyPath: m_Sprite
@@ -14673,12 +14678,12 @@ PrefabInstance:
     - target: {fileID: 867748845056458707, guid: 1049f6c024b4f5a49919bf0bc201bbde,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: 867748845056458707, guid: 1049f6c024b4f5a49919bf0bc201bbde,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 867748845056458707, guid: 1049f6c024b4f5a49919bf0bc201bbde,
         type: 3}
@@ -14720,6 +14725,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8123089090278092117, guid: 1049f6c024b4f5a49919bf0bc201bbde,
+        type: 3}
+      propertyPath: fade
+      value: 
+      objectReference: {fileID: 212276441}
+    - target: {fileID: 8123089090278092117, guid: 1049f6c024b4f5a49919bf0bc201bbde,
+        type: 3}
+      propertyPath: pl
+      value: 
+      objectReference: {fileID: 1374373282}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1049f6c024b4f5a49919bf0bc201bbde, type: 3}
 --- !u!1001 &826816069
@@ -14900,12 +14915,12 @@ PrefabInstance:
     - target: {fileID: 6928795035196295453, guid: 11f9cf09c9499ab41b06f8f31f6b4e7a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.7
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6928795035196295453, guid: 11f9cf09c9499ab41b06f8f31f6b4e7a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 6928795035196295453, guid: 11f9cf09c9499ab41b06f8f31f6b4e7a,
         type: 3}
@@ -14947,6 +14962,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2060916730576287188, guid: 11f9cf09c9499ab41b06f8f31f6b4e7a,
+        type: 3}
+      propertyPath: fade
+      value: 
+      objectReference: {fileID: 212276441}
+    - target: {fileID: 2060916730576287188, guid: 11f9cf09c9499ab41b06f8f31f6b4e7a,
+        type: 3}
+      propertyPath: pl
+      value: 
+      objectReference: {fileID: 1374373282}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 11f9cf09c9499ab41b06f8f31f6b4e7a, type: 3}
 --- !u!1 &894618509
@@ -36797,12 +36822,12 @@ PrefabInstance:
     - target: {fileID: 6956292027799549237, guid: 0951f2793dadde648962124890327555,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 228.39
+      value: 228.48
       objectReference: {fileID: 0}
     - target: {fileID: 6956292027799549237, guid: 0951f2793dadde648962124890327555,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.26
+      value: -0.29
       objectReference: {fileID: 0}
     - target: {fileID: 6956292027799549237, guid: 0951f2793dadde648962124890327555,
         type: 3}
@@ -36854,5 +36879,55 @@ PrefabInstance:
       propertyPath: fade
       value: 
       objectReference: {fileID: 212276441}
+    - target: {fileID: 6956292027799549243, guid: 0951f2793dadde648962124890327555,
+        type: 3}
+      propertyPath: d.choiceLine
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6956292027799549243, guid: 0951f2793dadde648962124890327555,
+        type: 3}
+      propertyPath: d.willRemember
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6956292027799549243, guid: 0951f2793dadde648962124890327555,
+        type: 3}
+      propertyPath: d.choiceSet
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6956292027799549236, guid: 0951f2793dadde648962124890327555,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: -0.08490896
+      objectReference: {fileID: 0}
+    - target: {fileID: 6956292027799549236, guid: 0951f2793dadde648962124890327555,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 3.2830973
+      objectReference: {fileID: 0}
+    - target: {fileID: 6956292027799549236, guid: 0951f2793dadde648962124890327555,
+        type: 3}
+      propertyPath: m_Offset.x
+      value: -0.037727356
+      objectReference: {fileID: 0}
+    - target: {fileID: 6956292027799549236, guid: 0951f2793dadde648962124890327555,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 2.6604462
+      objectReference: {fileID: 0}
+    - target: {fileID: 6956292027799549242, guid: 0951f2793dadde648962124890327555,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[0]
+      value: kill
+      objectReference: {fileID: 0}
+    - target: {fileID: 6956292027799549242, guid: 0951f2793dadde648962124890327555,
+        type: 3}
+      propertyPath: dialogue.willRemember
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6956292027799549242, guid: 0951f2793dadde648962124890327555,
+        type: 3}
+      propertyPath: dialogue.choiceSet
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0951f2793dadde648962124890327555, type: 3}

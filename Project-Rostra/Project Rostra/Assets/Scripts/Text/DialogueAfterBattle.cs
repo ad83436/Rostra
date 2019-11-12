@@ -16,6 +16,7 @@ public class DialogueAfterBattle : MonoBehaviour
 		{
 			DialogueManager.instance.StartConversation(d);
 			played = true;
+			col.gameObject.transform.position = new Vector2(col.gameObject.transform.position.x + 0.00001f, col.gameObject.transform.position.y);
 		}
 	}
 

@@ -453,6 +453,7 @@ public class DialogueManager : MonoBehaviour
 			}
 		}
 		
+
 	}
 	// or door two
 	public void SelectSecondChoice()

@@ -50,6 +50,8 @@ public class PlayerMove : MonoBehaviour
 			DialogueManager.instance.SetChoice(ChoiceEnum.metAllChars, true);
 			DialogueManager.instance.dwarf = true;
 			DialogueManager.instance.SetChoice(ChoiceEnum.dwarf, true);
+			DialogueManager.instance.battleFarea = true;
+			DialogueManager.instance.SetChoice(ChoiceEnum.battleFarea, true);
 		}
 	}
 
