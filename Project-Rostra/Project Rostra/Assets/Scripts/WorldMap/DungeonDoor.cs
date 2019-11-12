@@ -25,7 +25,7 @@ public class DungeonDoor : MonoBehaviour
 
 	private void OnTriggerStay2D(Collider2D col)
 	{
-		if (col.CompareTag("Player") && DialogueManager.instance.GetChoice(ChoiceEnum.dwarf) == true && Input.GetButtonDown("Confirm") && isOpen == false)
+		if (col.CompareTag("Player") && DialogueManager.instance.GetChoice(ChoiceEnum.dwarf) == true && Input.GetButtonDown("Confirm") && isOpen == false && DialogueManager.instance.isActive == false)
 		{
 			DialogueManager.instance.StartConversation(success);
 			sr.sprite = open;
@@ -33,7 +33,7 @@ public class DungeonDoor : MonoBehaviour
 			collision.enabled = false;
 			this.enabled = false;
 		}
-		else if ((col.CompareTag("Player") && DialogueManager.instance.GetChoice(ChoiceEnum.dwarf) == false && Input.GetButtonDown("Confirm")))
+		else if (col.CompareTag("Player") && DialogueManager.instance.GetChoice(ChoiceEnum.dwarf) == false && Input.GetButtonDown("Confirm") && DialogueManager.instance.isActive == false)
 		{
 			DialogueManager.instance.StartConversation(failure);
 		}

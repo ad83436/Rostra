@@ -146,7 +146,7 @@ public class DialogueManager : MonoBehaviour
 		DontDestroyOnLoad(this.gameObject);
         // set everything to its default 
         textElements = new Queue<string>();
-		choices = new bool[10]; // was 7
+		choices = new bool[14]; // was 7
 		change = 0;
 		currentChange = 0;
 		boxCount = 0;
