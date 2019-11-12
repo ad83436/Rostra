@@ -83,6 +83,7 @@ public class Enemy : MonoBehaviour
     public GameObject healthObject; 
     public GameObject chain; //Symbol used for tied 
     public GameObject lightingObject;
+    public GameObject deadlyTiesObject;
 
     //Blowself
     public GameObject blowSelfObject;

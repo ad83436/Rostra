@@ -13,8 +13,6 @@ public class Farea : Enemy
     private Player thisPlayerIsDead; //Used as a reference for You Are Not Mine
     private Vector2 mothersPainInitialLoc = new Vector2(24.24f, -2.35f);
 
-    public GameObject deadlyTiesObject;
-
     private bool youAreNotMineUsedOnceThisFight = false;
 
 
@@ -79,6 +77,68 @@ public class Farea : Enemy
         statToDebuff = new string[2];
         statToDebuff[0] = "Defense";
         statToDebuff[1] = "Attack";
+
+
+        if (chainedSymbol)
+        {
+            chainedSymbol.gameObject.SetActive(false);
+        }
+        if (primaryChainedSymbol)
+        {
+            primaryChainedSymbol.gameObject.SetActive(false);
+        }
+        if (ralliedSymbol)
+        {
+            ralliedSymbol.gameObject.SetActive(false);
+        }
+        if (burnSymbol)
+        {
+            burnSymbol.gameObject.SetActive(false);
+        }
+        if (debuffArrow)
+        {
+            debuffArrow.gameObject.SetActive(false);
+        }
+        if (atkBuffArrowIndicator)
+        {
+            atkBuffArrowIndicator.gameObject.SetActive(false);
+        }
+        if (strBuffArrowIndicator)
+        {
+            strBuffArrowIndicator.gameObject.SetActive(false);
+        }
+        if (defBuffArrowIndicator)
+        {
+            defBuffArrowIndicator.gameObject.SetActive(false);
+        }
+        if (agiBuffArrowIndicator)
+        {
+            agiBuffArrowIndicator.gameObject.SetActive(false);
+        }
+        if (healthObject)
+        {
+            healthObject.gameObject.SetActive(false);
+        }
+        if (waitTurnsText)
+        {
+            waitTurnsText.gameObject.SetActive(false);
+        }
+        if (atkBuffEffect)
+        {
+            atkBuffEffect.gameObject.SetActive(false);
+        }
+        if (defBuffEffect)
+        {
+            defBuffEffect.gameObject.SetActive(false);
+        }
+        if (agiBuffEffect)
+        {
+            agiBuffEffect.gameObject.SetActive(false);
+        }
+        if (strBuffEffect)
+        {
+            strBuffEffect.gameObject.SetActive(false);
+        }
     }
 
 
@@ -111,7 +171,7 @@ public class Farea : Enemy
         battleManager.enemies[enemyIndexInBattleManager].currentHP = currentHP; //Update the BTL manager with the new health
         HP.fillAmount = currentHP / maxHP;
 
-        if (currentHP <= 0.0f)
+        if (currentHP <= 1.0f)
         {
             if (bossPhase == 1)
             {
@@ -200,7 +260,7 @@ public class Farea : Enemy
         {
             //Only update the attackChance when no skill is on the waiting list
             attackChance = Random.Range(0.0f, 100.0f);
-            //attackChance = 30; //Testing
+            //attackChance = 50; //Testing
 
             if (bossPhase == 1)
             {
@@ -217,7 +277,7 @@ public class Farea : Enemy
                 }
                 else if (attackChance >= 40.0f && attackChance < 70.0f) //Judgment and Wrath
                 {
-                    attackThisPlayer = battleManager.players[Random.Range(0, 4)].playerReference;
+                    attackThisPlayer = battleManager.players[Random.Range(0, 3)].playerReference;
                     animator.SetBool("JudgementAndWrath", true);
                     uiBTL.UpdateActivityText("Judgement & Wrath");
                 }
@@ -258,7 +318,7 @@ public class Farea : Enemy
                             thisPlayerIsDead = null;
                         }
                     }
-                    attackChance = Random.Range(0.0f, 100.0f);
+                    attackChance = Random.Range(0.0f, 100.0f * skillChanceModifier);
                     Debug.Log("Attack chance is: " + attackChance);
                     //attackChance = 50; //Testing
                     if (attackChance >= 0.0f && attackChance < 20.0f * skillChanceModifier && isThereADeadPlayer)
@@ -303,7 +363,7 @@ public class Farea : Enemy
                     }
                     else if (attackChance >= 70.0f && attackChance < 80.0f) //Judgment and Wrath
                     {
-                        attackThisPlayer = battleManager.players[Random.Range(0, 4)].playerReference;
+                        attackThisPlayer = battleManager.players[Random.Range(0, 3)].playerReference;
                         animator.SetBool("JudgementAndWrath", true);
                         uiBTL.UpdateActivityText("Judgement & Wrath");
                     }
@@ -378,7 +438,7 @@ public class Farea : Enemy
     //Deadly ties chooser
     private void TieAPlayer()
     {
-        tieThisPlayer = battleManager.players[Random.Range(0, 4)].playerReference;
+        tieThisPlayer = battleManager.players[Random.Range(0, 3)].playerReference;
         if (tieThisPlayer.dead)
         {
             TieAPlayer(); //Make sure whatever player you choose is alive
@@ -387,10 +447,10 @@ public class Farea : Enemy
     //Lullaby of Despair chooser
     private void ScareAPlayer()
     {
-        attackThisPlayer = battleManager.players[Random.Range(0, 4)].playerReference;
-        if (tieThisPlayer.dead)
+        attackThisPlayer = battleManager.players[Random.Range(0, 3)].playerReference;
+        if (attackThisPlayer.dead)
         {
-            TieAPlayer(); //Make sure whatever player you choose is alive
+            ScareAPlayer(); //Make sure whatever player you choose is alive
         }
     }
 
