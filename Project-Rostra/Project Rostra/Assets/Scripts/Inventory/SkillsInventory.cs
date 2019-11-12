@@ -452,14 +452,14 @@ public class SkillsInventory : MonoBehaviour {
                 skillStat[5] = 40;
                 break;
             case (int)SKILLS.Fa_SwiftStrike:
-                skillStat[0] = 45;
+                skillStat[0] = 60;
                 skillStat[1] = 16;
                 skillStat[2] = 1;
                 skillStat[4] = (float)SKILL_TYPE.FULL_ROW_ATK;
                 skillStat[5] = 40;
                 break;
             case (int)SKILLS.Fa_SwordOfFury:
-                skillStat[0] = 80;
+                skillStat[0] = 40;
                 skillStat[1] = 16;
                 skillStat[2] = 0;
                 skillStat[4] = (float)SKILL_TYPE.SINGLE_TARGET_ATK;
