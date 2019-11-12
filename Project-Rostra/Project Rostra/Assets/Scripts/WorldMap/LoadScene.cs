@@ -30,8 +30,9 @@ public class LoadScene : MonoBehaviour
 
 			if (unload == true)
 			{
-				SceneManager.UnloadSceneAsync(sceneToUnLoad);
 				player.SetActive(true);
+				canvasToTurnOff.gameObject.SetActive(true);
+				SceneManager.UnloadSceneAsync(sceneToUnLoad);
 			}
 		}
 	}

@@ -7,7 +7,14 @@ using UnityEngine;
 
 public enum ChoiceEnum : byte
 {
-	dwarf = 0,
+	// hey sean why does the list start at 10 then goes to 1? I mean what kind of shitty programming is that?
+	// I don't wanna have to add an extra bool to check to see if a convo wants to flip a bool if zero do nothing
+	// in an ideal world I wouldn't do this but i'm running out of time and fuck it. If whoever is reading this wants to do it
+	// maybe i'll buy lunch 
+
+
+
+	// Nevermind was bugging me too so I moved it down
 	guild = 1,
 	kill =  2,
 	spare = 3,
@@ -17,6 +24,8 @@ public enum ChoiceEnum : byte
 	talkToCo = 7,
 	metAllChars = 8,
 	sawJournal = 9,
+	dwarf = 10,
+	talkToContact = 11,
 }
 
 
@@ -70,7 +79,8 @@ public class DialogueManager : MonoBehaviour
 	//set 3 ^
 	public bool talkedToCo; // 7
 	public bool metAllChars; // 8 
-	public bool sawJournal;
+	public bool sawJournal; // 9
+	public bool talkedToContact;
 	// stores a local copy of which choice set we will be using
 	private float choiceSet;
 	public bool[] choices;
@@ -136,7 +146,7 @@ public class DialogueManager : MonoBehaviour
 		DontDestroyOnLoad(this.gameObject);
         // set everything to its default 
         textElements = new Queue<string>();
-		choices = new bool[10]; // was 7
+		choices = new bool[14]; // was 7
 		change = 0;
 		currentChange = 0;
 		boxCount = 0;
@@ -160,6 +170,10 @@ public class DialogueManager : MonoBehaviour
 		hasCountTriggered = false;
 		battle = false;
 		demo = false;
+		talkedToCo = false;
+		sawJournal = false;
+		talkedToContact = false;
+		metAllChars = false;
 	}
 
 	public void StartConversation(Dialogue d)
@@ -241,6 +255,13 @@ public class DialogueManager : MonoBehaviour
 				Debug.Log(d.triggerBool);
 				switch (d.triggerBool)
 				{
+					case 1:
+						guild = true;
+						SetChoice(ChoiceEnum.guild, true);
+						talkedToContact = true;
+						SetChoice(ChoiceEnum.talkToContact, true);
+						Debug.Log("Chose the Guild");
+						break;
 					case 6:
 						demo = true;
 						SetChoice(ChoiceEnum.demo, true);
@@ -255,6 +276,13 @@ public class DialogueManager : MonoBehaviour
 						sawJournal = true;
 						SetChoice(ChoiceEnum.sawJournal, true);
 						Debug.Log("Saw the journal");
+						break;
+					case 10:
+						dwarf = true;
+						SetChoice(ChoiceEnum.dwarf, true);
+						talkedToContact = true;
+						SetChoice(ChoiceEnum.talkToContact, true);
+						Debug.Log("Chose the Dwarves");
 						break;
 
 				}

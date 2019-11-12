@@ -14,7 +14,7 @@ public enum ITEM_ID { // Minimum Value -- 0x0000, Maximum Value -- 0xFEFF (65280
 	TEST_ARMOR1 =       0x0004, // Test Item        (Leather Armor)
 	TEST_WEAPON1 =      0x0005, // Test Item        (Iron Sword)
     HP_POTION =         0x0006,
-    MP_ELIXER =         0x0007,
+    MP_ELIXIR =         0x0007,
     HOPE_POTION =       0x0008,
 	SMALL_KEY =         0x0009,
 	BOOK =              0x000A,

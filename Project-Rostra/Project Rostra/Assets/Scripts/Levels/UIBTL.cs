@@ -1273,7 +1273,7 @@ public class UIBTL : MonoBehaviour
                             {
                                 btlManager.players[playerIndicatorIndex].playerReference.EnableEffect("Heal", inventory.itemAddAmount); //Update the heal text
                             }
-                            else if (inventory.invItem[inventory.consumableInv[itemsPanelIndex], 0] == (int)ITEM_ID.MP_ELIXER)
+                            else if (inventory.invItem[inventory.consumableInv[itemsPanelIndex], 0] == (int)ITEM_ID.MP_ELIXIR)
                             {
                                 btlManager.players[playerIndicatorIndex].playerReference.EnableEffect("MP", inventory.itemAddAmount); //Update the heal text
                             }

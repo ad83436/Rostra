@@ -48,6 +48,8 @@ public class PlayerMove : MonoBehaviour
 		{
 			DialogueManager.instance.metAllChars = true;
 			DialogueManager.instance.SetChoice(ChoiceEnum.metAllChars, true);
+			DialogueManager.instance.dwarf = true;
+			DialogueManager.instance.SetChoice(ChoiceEnum.dwarf, true);
 		}
 	}
 

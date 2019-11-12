@@ -355,6 +355,9 @@ MonoBehaviour:
     triggerBool: 0
     isOneShot: 0
     addMilestone: 0
+    addItem: 0
+    itemId: 0
+    itemNum: 0
   choiceCare: 1
   isChoiceDepend: 1
   pressZ: {fileID: 2067512502}
@@ -470,9 +473,12 @@ MonoBehaviour:
     willCount: 0
     maxWillCount: 0
     isBattle: 0
-    triggerBool: 6
+    triggerBool: 10
     isOneShot: 1
     addMilestone: 3
+    addItem: 1
+    itemId: 10
+    itemNum: 1
   choiceCare: 0
   isChoiceDepend: 0
   pressZ: {fileID: 0}
@@ -519,6 +525,9 @@ MonoBehaviour:
     triggerBool: 0
     isOneShot: 0
     addMilestone: 0
+    addItem: 0
+    itemId: 0
+    itemNum: 0
   choiceCare: 0
   isChoiceDepend: 0
   pressZ: {fileID: 0}
@@ -564,6 +573,9 @@ MonoBehaviour:
     triggerBool: 0
     isOneShot: 0
     addMilestone: 0
+    addItem: 0
+    itemId: 0
+    itemNum: 0
   choiceCare: 0
   isChoiceDepend: 0
   pressZ: {fileID: 0}
@@ -608,6 +620,9 @@ MonoBehaviour:
     triggerBool: 0
     isOneShot: 0
     addMilestone: 0
+    addItem: 0
+    itemId: 0
+    itemNum: 0
   choiceCare: 0
   isChoiceDepend: 0
   pressZ: {fileID: 0}
