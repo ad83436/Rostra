@@ -82,6 +82,7 @@ public class Enemy : MonoBehaviour
     protected int tiedTimer = 4; //Used to nullify the tied player reference whenever the Farea takes damage or gets healed 
     public GameObject healthObject; 
     public GameObject chain; //Symbol used for tied 
+    public GameObject lightingObject;
 
     //Blowself
     public GameObject blowSelfObject;
@@ -2803,10 +2804,11 @@ public class Enemy : MonoBehaviour
             print("Picked Back Row");
 
             AttackOberon(eAttack * 1.5f);
-            print("Attacked" + attackThisPlayer.name);
+            
 
             AttackFrea(eAttack * 1.5f);
-            print("Then Attacked " + attackThisPlayer.name);
+            objPooler.SpawnFromPool("LightingBolt", battleManager.players[2].playerReference.gameObject.transform.position, battleManager.players[2].playerReference.gameObject.transform.rotation);
+            objPooler.SpawnFromPool("LightingBolt", battleManager.players[1].playerReference.gameObject.transform.position, battleManager.players[1].playerReference.gameObject.transform.rotation);
         }
 
         else if (randomRow == 1)
@@ -2814,8 +2816,11 @@ public class Enemy : MonoBehaviour
             print("Picked Back Row");
 
             AttackFargas(eAttack * 1.5f);
+
+
             AttackArcelus(eAttack * 1.5f);
-            print("Then Attacked " + attackThisPlayer.name);
+            objPooler.SpawnFromPool("LightingBolt", battleManager.players[3].playerReference.gameObject.transform.position, battleManager.players[3].playerReference.gameObject.transform.rotation);
+            objPooler.SpawnFromPool("LightingBolt", battleManager.players[0].playerReference.gameObject.transform.position, battleManager.players[0].enemyReference.gameObject.transform.rotation);
         }
     }
 
