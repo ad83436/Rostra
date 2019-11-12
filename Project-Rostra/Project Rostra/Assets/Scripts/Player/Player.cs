@@ -345,6 +345,7 @@ public class Player : MonoBehaviour
     {
         if (!dead)
         {
+            uiBTL.backdropHighlighter.gameObject.SetActive(true);
             playerAnimator.SetBool("Turn", true);
 
             CheckForAilments();

@@ -97,7 +97,6 @@ public class UIBTL : MonoBehaviour
     private float [] imageXPositions; //Store the image positions to change recycle position when an enemy dies
     private int lastImageIndex = 8; // This is the index of the last image, i.e. the first recycle position
 
-
     //States
     private enum btlUIState
     {
@@ -502,54 +501,79 @@ public class UIBTL : MonoBehaviour
     //Called when the image at the far right of the Q collides with the recycle image collider
     public virtual void ImageRecycle(int imageIndex)
     {
-
-        backdropHighlighter.gameObject.SetActive(true);
         switch (imageIndex) //Which image hit the recycler?
         {
             case 0:
                 images[0].gameObject.transform.localPosition = imageRecyclePos;
-                images[1].rectTransform.sizeDelta = imagesHilightedSize;
-                highlightedImage = images[1];
+                if (backdropHighlighter.gameObject.activeSelf)
+                {
+                    images[1].rectTransform.sizeDelta = imagesHilightedSize;
+                    highlightedImage = images[1];
+                }
                 break;
             case 1:
                 images[1].gameObject.transform.localPosition = imageRecyclePos;
-                images[2].rectTransform.sizeDelta = imagesHilightedSize;
-                highlightedImage = images[2];
+                if (backdropHighlighter.gameObject.activeSelf)
+                {
+                    images[2].rectTransform.sizeDelta = imagesHilightedSize;
+                    highlightedImage = images[2];
+                }
                 break;
             case 2:
                 images[2].gameObject.transform.localPosition = imageRecyclePos;
-                images[3].rectTransform.sizeDelta = imagesHilightedSize;
-                highlightedImage = images[3];
+                if (backdropHighlighter.gameObject.activeSelf)
+                {
+                    images[3].rectTransform.sizeDelta = imagesHilightedSize;
+                    highlightedImage = images[3];
+                }
                 break;
             case 3:
                 images[3].gameObject.transform.localPosition = imageRecyclePos;
-                images[4].rectTransform.sizeDelta = imagesHilightedSize;
-                highlightedImage = images[4];
+                if (backdropHighlighter.gameObject.activeSelf)
+                {
+                    images[4].rectTransform.sizeDelta = imagesHilightedSize;
+                    highlightedImage = images[4];
+                }
                 break;
             case 4:
                 images[4].gameObject.transform.localPosition = imageRecyclePos;
-                images[5].rectTransform.sizeDelta = imagesHilightedSize;
-                highlightedImage = images[5];
+                if (backdropHighlighter.gameObject.activeSelf)
+                {
+                    images[5].rectTransform.sizeDelta = imagesHilightedSize;
+                    highlightedImage = images[5];
+                }
                 break;
             case 5:
                 images[5].gameObject.transform.localPosition = imageRecyclePos;
-                images[6].rectTransform.sizeDelta = imagesHilightedSize;
-                highlightedImage = images[6];
+                if (backdropHighlighter.gameObject.activeSelf)
+                {
+                    images[6].rectTransform.sizeDelta = imagesHilightedSize;
+                    highlightedImage = images[6];
+                }
                 break;
             case 6:
                 images[6].gameObject.transform.localPosition = imageRecyclePos;
-                images[7].rectTransform.sizeDelta = imagesHilightedSize;
-                highlightedImage = images[7];
+                if (backdropHighlighter.gameObject.activeSelf)
+                {
+                    images[7].rectTransform.sizeDelta = imagesHilightedSize;
+                    highlightedImage = images[7];
+                }
                 break;
             case 7:
                 images[7].gameObject.transform.localPosition = imageRecyclePos;
-                images[8].rectTransform.sizeDelta = imagesHilightedSize;
-                highlightedImage = images[8];
+                if (backdropHighlighter.gameObject.activeSelf)
+                {
+                    images[8].rectTransform.sizeDelta = imagesHilightedSize;
+                    highlightedImage = images[8];
+                }
                 break;
             case 8:
                 images[8].gameObject.transform.localPosition = imageRecyclePos;
-                images[0].rectTransform.sizeDelta = imagesHilightedSize;
-                highlightedImage = images[0];
+                if (backdropHighlighter.gameObject.activeSelf)
+                {
+                    images[0].rectTransform.sizeDelta = imagesHilightedSize;
+                    highlightedImage = images[0];
+                }
                 break;
 
         }
@@ -1753,6 +1777,7 @@ public class UIBTL : MonoBehaviour
     {
         enemiesDead[enemyIndex] = true;
         enemyImageReferences[enemyIndex].color = colorAfterDeath;
+        enemyImageReferences[enemyIndex].GetComponent<QImage>().EnableSkull();
         numberOfDeadEnemies++;
         /*  for (int i =0;i<images.Length; i++)
           {
@@ -1818,6 +1843,7 @@ public class UIBTL : MonoBehaviour
     {
         playersDead[playerIndex] = true;
         playerImageReferences[playerIndex].color = colorAfterDeath;
+        playerImageReferences[playerIndex].GetComponent<QImage>().EnableSkull();
         numberOfDeadPlayers++;
 
         if(numberOfDeadPlayers>=numberOfPlayers)
@@ -1839,6 +1865,7 @@ public class UIBTL : MonoBehaviour
         //Restore the color of the dead player image
         colorAfterDeath.r = colorAfterDeath.b = colorAfterDeath.g = 1.0f;
         playerImageReferences[index].color = colorAfterDeath;
+        playerImageReferences[index].GetComponent<QImage>().DisableSkull();
         colorAfterDeath.r = colorAfterDeath.b = colorAfterDeath.g = 0.5f;
     }
 
