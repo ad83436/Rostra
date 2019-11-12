@@ -25,6 +25,7 @@ public enum ChoiceEnum : byte
 	metAllChars = 8,
 	sawJournal = 9,
 	dwarf = 10,
+	talkToContact = 11,
 }
 
 
@@ -78,7 +79,8 @@ public class DialogueManager : MonoBehaviour
 	//set 3 ^
 	public bool talkedToCo; // 7
 	public bool metAllChars; // 8 
-	public bool sawJournal;
+	public bool sawJournal; // 9
+	public bool talkedToContact;
 	// stores a local copy of which choice set we will be using
 	private float choiceSet;
 	public bool[] choices;
@@ -168,6 +170,10 @@ public class DialogueManager : MonoBehaviour
 		hasCountTriggered = false;
 		battle = false;
 		demo = false;
+		talkedToCo = false;
+		sawJournal = false;
+		talkedToContact = false;
+		metAllChars = false;
 	}
 
 	public void StartConversation(Dialogue d)
@@ -252,6 +258,8 @@ public class DialogueManager : MonoBehaviour
 					case 1:
 						guild = true;
 						SetChoice(ChoiceEnum.guild, true);
+						talkedToContact = true;
+						SetChoice(ChoiceEnum.talkToContact, true);
 						Debug.Log("Chose the Guild");
 						break;
 					case 6:
@@ -272,6 +280,8 @@ public class DialogueManager : MonoBehaviour
 					case 10:
 						dwarf = true;
 						SetChoice(ChoiceEnum.dwarf, true);
+						talkedToContact = true;
+						SetChoice(ChoiceEnum.talkToContact, true);
 						Debug.Log("Chose the Dwarves");
 						break;
 

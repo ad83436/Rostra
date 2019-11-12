@@ -26,12 +26,14 @@ public class LoadScene : MonoBehaviour
 				player.SetActive(false);
 				canvasToTurnOff.gameObject.SetActive(false);
 				SceneManager.LoadScene(sceneToLoad, LoadSceneMode.Additive);
+				SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneToLoad));
 			}
 
 			if (unload == true)
 			{
-				SceneManager.UnloadSceneAsync(sceneToUnLoad);
 				player.SetActive(true);
+				canvasToTurnOff.gameObject.SetActive(true);
+				SceneManager.UnloadSceneAsync(sceneToUnLoad);
 			}
 		}
 	}

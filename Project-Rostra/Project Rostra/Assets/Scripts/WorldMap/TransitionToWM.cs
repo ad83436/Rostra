@@ -17,6 +17,7 @@ public class TransitionToWM : MonoBehaviour
 	public bool stopsPlayer;
 	public Collider2D collision;
 	public Dialogue dia;
+	public bool isBoss;
 	// Start is called before the first frame update
 	void Start()
     {
@@ -41,21 +42,53 @@ public class TransitionToWM : MonoBehaviour
 		{
 			player.transform.position = loadPosition;
 			player.transform.localScale = new Vector3(2, 2, player.transform.localScale.z);
+			if (isBoss == true)
+			{
+				EnemySpawner.instance.isBoss = true;
+			}
+			else
+			{
+				EnemySpawner.instance.isBoss = false;
+			}
 		}
 		else if (col.CompareTag("Player") && needsBool == true && DialogueManager.instance.GetChoice(ce) == true && transitionToWM == false && stopsPlayer == false)
 		{
 			player.transform.position = loadPosition;
 			player.transform.localScale = new Vector3(3, 3, player.transform.localScale.z);
+			if (isBoss == true)
+			{
+				EnemySpawner.instance.isBoss = true;
+			}
+			else
+			{
+				EnemySpawner.instance.isBoss = false;
+			}
 		}
 		else if (col.CompareTag("Player") && needsBool == false && transitionToWM == true && stopsPlayer == false)
 		{
 			player.transform.position = loadPosition;
 			player.transform.localScale = new Vector3(2, 2, player.transform.localScale.z);
+			if (isBoss == true)
+			{
+				EnemySpawner.instance.isBoss = true;
+			}
+			else
+			{
+				EnemySpawner.instance.isBoss = false;
+			}
 		}
 		else if (col.CompareTag("Player") && needsBool == false && transitionToWM == false && stopsPlayer == false)
 		{
 			player.transform.position = loadPosition;
 			player.transform.localScale = new Vector3(3, 3, player.transform.localScale.z);
+			if (isBoss == true)
+			{
+				EnemySpawner.instance.isBoss = true;
+			}
+			else
+			{
+				EnemySpawner.instance.isBoss = false;
+			}
 		}
 	}
 	// start a conversation if your being blocked by a real collider... We'll need this for Hadria Domel's house
