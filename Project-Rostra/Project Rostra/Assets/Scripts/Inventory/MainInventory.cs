@@ -66,8 +66,8 @@ public class MainInventory : MonoBehaviour {
     }
     // FOR TESTING
     private void Start() {
-		//invItem[0, 0] = (int)ITEM_ID.TEST_WEAPON1;
-		//invItem[0, 1] = 1;
+		invItem[3, 0] = (int)ITEM_ID.TEST_WEAPON1;
+		invItem[3, 1] = 1;
 
 		invItem[0, 0] = (int)ITEM_ID.HP_POTION;
         invItem[0, 1] = 5;
@@ -79,8 +79,8 @@ public class MainInventory : MonoBehaviour {
         invItem[2, 1] = 1;
 
 
-        //invItem[4, 0] = (int)ITEM_ID.TEST_ARMOR1;
-		//invItem[4, 1] = 1;
+        invItem[4, 0] = (int)ITEM_ID.TEST_ARMOR1;
+		invItem[4, 1] = 1;
 
 	}
 
@@ -388,7 +388,7 @@ public class MainInventory : MonoBehaviour {
                 name = "Potion";
                 break;
             case (int)ITEM_ID.MP_ELIXIR:
-                name = "Elixer";
+                name = "Elixir";
                 break;
             case (int)ITEM_ID.HOPE_POTION:
                 name = "Hope";
@@ -433,7 +433,7 @@ public class MainInventory : MonoBehaviour {
                 description = "A potion that restores 50 hit points for one ally.";
                 break;
             case (int)ITEM_ID.MP_ELIXIR:
-                description = "An elixer that restores 50 mana points for one ally.";
+                description = "An elixir that restores 50 mana points for one ally.";
                 break;
             case (int)ITEM_ID.HOPE_POTION:
                 description = "Revives an ally and restores a 100 hit points";
