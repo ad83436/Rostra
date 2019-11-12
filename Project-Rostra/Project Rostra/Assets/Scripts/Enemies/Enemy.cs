@@ -2854,11 +2854,8 @@ public class Enemy : MonoBehaviour
             BiteSkill();
         }
 
-        print("Enemy Attack is " + eAttack);
-        print(attackThisPlayer.nameOfCharacter + " Was Attacked With the Bite Skill");
         Mathf.CeilToInt(attackMod = (eAttack * .5f));
         eAttack += attackMod;
-        print("Enemy New Attack is " + eAttack);
         CalculateHit();
         if(hit)
         {
@@ -2878,8 +2875,6 @@ public class Enemy : MonoBehaviour
         {
             defenceMod = Mathf.CeilToInt(Random.Range((eDefence * .2f), (eDefence * .5f)));
             eDefence += defenceMod;
-
-            print("A Defence mod of " + defenceMod + " Will be added to the " + eName + " At Index " + enemyIndexInBattleManager + " For " + waitTime + " Turns");
         }
 
         if(waitTime <= 0)
@@ -2904,15 +2899,12 @@ public class Enemy : MonoBehaviour
                 if (!battleManager.enemies[i].enemyReference.dead)
                 {
                     enemyToHeal = battleManager.enemies[i].enemyReference;
-                    print("Enemy was healed at index " + enemyToHeal.enemyIndexInBattleManager);
                     enemyToHeal.currentHP += healthMod;
-                    print("Enemies new Hp is " + enemyToHeal.currentHP);
                     enemyToHeal.HP.fillAmount = enemyToHeal.currentHP;
 
                     if (enemyToHeal.currentHP > enemyToHeal.maxHP)
                     {
                         enemyToHeal.currentHP = enemyToHeal.maxHP;
-                        print("Enemies new Hp is " + enemyToHeal.currentHP);
                     }
                 }
 
@@ -3213,7 +3205,6 @@ public class Enemy : MonoBehaviour
         {
             enemyToHeal.eAttack += statIncrease * 0.6f;
             enemyToHeal.eAgility += statIncrease * 0.4f;
-            print("Enemy At Index " + enemyToHeal.enemyIndexInBattleManager + " Has had Attack modified by " + (statIncrease * 0.6f) + " Also has had Agility modfied by " + (statIncrease * 0.4f));
             enemyToHeal.isStatModed = true;
         }
 
@@ -3221,7 +3212,6 @@ public class Enemy : MonoBehaviour
         {
             enemyToHeal.eAttack += statIncrease * 0.3f;
             enemyToHeal.eDefence += statIncrease * 0.7f;
-            print("Enemy At Index " + enemyToHeal.enemyIndexInBattleManager + " Has had Attack modified by " + (statIncrease * 0.3f) + " Also has had Defence modfied by " + (statIncrease * 0.7f));
             enemyToHeal.isStatModed = true;
         }
 
@@ -3229,7 +3219,6 @@ public class Enemy : MonoBehaviour
         {
             enemyToHeal.eAttack += statIncrease * 0.4f;
             enemyToHeal.eAgility += statIncrease * 0.6f;
-            print("Enemy At Index " + enemyToHeal.enemyIndexInBattleManager + " Has had Attack modified by " + (statIncrease * 0.4f) + " Also has had Agility modfied by " + (statIncrease * 0.6f));
             enemyToHeal.isStatModed = true;
         }
 
