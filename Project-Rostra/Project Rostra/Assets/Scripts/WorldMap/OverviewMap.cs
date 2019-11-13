@@ -16,6 +16,12 @@ public class OverviewMap : MonoBehaviour
         image[0].enabled = false;
         image[1].enabled = false;
         image[2].enabled = false;
+        image[3].enabled = false;
+        image[4].enabled = false;
+        image[5].enabled = false;
+        image[6].enabled = false;
+        image[7].enabled = false;
+        image[8].enabled = false;
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -28,6 +34,12 @@ public class OverviewMap : MonoBehaviour
                 image[0].enabled = true;
                 image[1].enabled = true;
                 image[2].enabled = true;
+                image[3].enabled = true;
+                image[4].enabled = true;
+                image[5].enabled = true;
+                image[6].enabled = true;
+                image[7].enabled = true;
+                image[8].enabled = true;
             }
         }
     }
