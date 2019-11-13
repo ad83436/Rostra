@@ -149,69 +149,176 @@ public class Farea : Enemy
 
     public override void TakeDamage(float playerAttack, int numberOfAttacks)
     {
-        Debug.Log("Number of attacks " + numberOfAttacks);
-        Debug.Log("Received player attack: " + playerAttack);
-        if (tieThisPlayer != null)
+        if (playerAttack > 0.0f)
         {
-            tieThisPlayer.TakeDamage(playerAttack); //Damage the tied player should you get damaged
-            tiedTimer--;
-            if (tiedTimer <= 0)
+            if (tieThisPlayer != null)
             {
-                tiedTimer = 0;
-                tieThisPlayer.Untie();
-                chain.gameObject.SetActive(false);
-                tieThisPlayer = null;
+                tieThisPlayer.TakeDamage(playerAttack); //Damage the tied player should you get damaged
+                tiedTimer--;
+                if (tiedTimer <= 0)
+                {
+                    tiedTimer = 0;
+                    tieThisPlayer.Untie();
+                    chain.gameObject.SetActive(false);
+                    tieThisPlayer = null;
+                }
             }
-        }
-        float damage = playerAttack - ((eDefence / (20.0f + eDefence)) * playerAttack);
-        currentHP -= damage;
-        totalDamageSustained += damage;
-        damageText.gameObject.SetActive(true);
-        damageText.text = Mathf.RoundToInt(damage).ToString();
-        battleManager.enemies[enemyIndexInBattleManager].currentHP = currentHP; //Update the BTL manager with the new health
-        HP.fillAmount = currentHP / maxHP;
+            float damage = playerAttack - ((eDefence / (20.0f + eDefence)) * playerAttack);
+            currentHP -= damage;
+            totalDamageSustained += damage;
+            damageText.gameObject.SetActive(true);
+            damageText.text = Mathf.RoundToInt(damage).ToString();
+            battleManager.enemies[enemyIndexInBattleManager].currentHP = currentHP; //Update the BTL manager with the new health
+            HP.fillAmount = currentHP / maxHP;
 
-        if (currentHP <= 1.0f)
-        {
-            if (bossPhase == 1)
+            if (currentHP <= 1.0f)
             {
-                //Reset and get ready for phase 2
-                currentState = EnemyState.idle;
-                waitTime = 0;
-                waitTurnsText.text = "0";
-                chosenSkill = fareaSkills.none;
-                lullWait.gameObject.SetActive(false);
-                wailWait.gameObject.SetActive(false);
-                animator.SetBool("Phase2", true);
+                if (bossPhase == 1)
+                {
+                    //Reset and get ready for phase 2
+                    animator.SetBool("Phase2", true);
+                    currentState = EnemyState.idle;
+                    waitTime = 0;
+                    waitTurnsText.text = "0";
+                    chosenSkill = fareaSkills.none;
+                    lullWait.gameObject.SetActive(false);
+                    wailWait.gameObject.SetActive(false);
+
+                }
+                animator.SetBool("Death", true);
             }
-            animator.SetBool("Death", true);
+            else
+            {
+                if (numberOfAttacks <= 0)
+                {
+                    uiBTL.EndTurn(); //Only end the turn after the damage has been taken
+                }
+            }
+
+            if (currentState != EnemyState.waiting)
+            {
+                animator.SetBool("Hit", true);
+            }
+
+            if (currentHP < 0.5f * maxHP)
+            {
+                //If the current health is less than half the max health, then make it more probable to use You Are Not Mine
+                //If you have not used it yet
+                if (!youAreNotMineUsedOnceThisFight)
+                {
+                    Debug.Log("Farea current HP: " + currentHP);
+                    Debug.Log("Farea max HP: " + maxHP);
+
+                    skillChanceModifier = 2.0f;
+                }
+            }
         }
         else
         {
-            if (numberOfAttacks <= 0)
+            if (missText != null)
             {
-                uiBTL.EndTurn(); //Only end the turn after the damage has been taken
+                missText.gameObject.SetActive(true);
             }
         }
 
-        if (currentState != EnemyState.waiting)
+    }
+
+    public override void TakeDamage(float playerAttack, int numberOfAttacks, int debuffIndex, float debuffValuePercent, int debuffTimer, string debuffSubIndex, EnemyStatusAilment ailment)
+    {
+        if (playerAttack > 0.0f) //Don't need to calcualte damage if the incoming attack is debuff only
         {
+            //Didn't recall the original function cause the "Hit" animation ends the turn
+            Debug.Log("Received player attack: " + playerAttack);
+            float damage = playerAttack - ((actualDEF / (20.0f + actualDEF)) * playerAttack);
+            damage *= ralliedDamageModifier; //Increase damage if rallied;
+            currentHP -= damage;
+            damageText.gameObject.SetActive(true);
+            damageText.text = Mathf.RoundToInt(damage).ToString();
+            battleManager.enemies[enemyIndexInBattleManager].currentHP = currentHP; //Update the BTL manager with the new health
+            HP.fillAmount = currentHP / maxHP;
+        }
+        if (playerAttack >= 0.0f) //if incoming damage is negative, then it was a miss
+        {
+            switch (debuffIndex)
+            {
+                case 0: // Ailment
+
+                    switch (ailment)
+                    {
+                        case EnemyStatusAilment.chained:
+                            break;
+                        case EnemyStatusAilment.rallied:
+                            if (currentStatusAilment0 != EnemyStatusAilment.rallied && currentStatusAilment1 != EnemyStatusAilment.rallied) //Cannot rally an enemy that's already been rallied against
+                            {
+                                ralliedWaitTime = debuffTimer;
+                                ralliedDamageModifier = 2.0f;
+                                ralliedSymbol.gameObject.SetActive(true);
+                                uiBTL.EndTurn(); //Rally doesn't do any damage
+                            }
+                            break;
+                        case EnemyStatusAilment.burn:
+                            if (currentStatusAilment0 != EnemyStatusAilment.burn && currentStatusAilment1 != EnemyStatusAilment.burn) //Cannot burn an enemy that's already been burned
+                            {
+                                burnedWaitTime = debuffTimer;
+                                burnSymbol.gameObject.SetActive(true);
+                                uiBTL.EndTurn(); //Rally doesn't do any damage
+                            }
+                            break;
+                    }
+                    //Check which of the two ailments is set to none.
+                    // If both of them are filled, overwrite the 0 spot
+                    if (currentStatusAilment0 == EnemyStatusAilment.none)
+                    {
+                        currentStatusAilment0 = ailment;
+                    }
+                    else if (currentStatusAilment1 == EnemyStatusAilment.none)
+                    {
+                        currentStatusAilment1 = ailment;
+                    }
+                    else if (currentStatusAilment0 == EnemyStatusAilment.rallied)
+                    {
+                        NoLongerRallied();
+                        currentStatusAilment0 = ailment;
+                    }
+                    break;
+                case 1: //Debuff
+                    BuffStats(debuffSubIndex, -debuffValuePercent, debuffTimer);
+                    break;
+            }
+
             animator.SetBool("Hit", true);
-        }
 
-        if (currentHP < 0.5f * maxHP)
-        {
-            //If the current health is less than half the max health, then make it more probable to use You Are Not Mine
-            //If you have not used it yet
-            if (!youAreNotMineUsedOnceThisFight)
+            if (currentHP < 1.0f) //Avoid near zero
             {
-                Debug.Log("Farea current HP: " + currentHP);
-                Debug.Log("Farea max HP: " + maxHP);
+                if (bossPhase == 1)
+                {
+                    //Reset and get ready for phase 2
+                    animator.SetBool("Phase2", true);
+                    currentState = EnemyState.idle;
+                    waitTime = 0;
+                    waitTurnsText.text = "0";
+                    chosenSkill = fareaSkills.none;
+                    lullWait.gameObject.SetActive(false);
+                    wailWait.gameObject.SetActive(false);
 
-                skillChanceModifier = 2.0f;
+                }
+                animator.SetBool("Death", true);
+            }
+            else
+            {
+                if (numberOfAttacks <= 0)
+                {
+                   uiBTL.EndTurn();
+                }
             }
         }
-
+        else
+        {
+            if (missText != null)
+            {
+                missText.gameObject.SetActive(true);
+            }
+        }
     }
 
     private void StartPhase2()
@@ -236,7 +343,10 @@ public class Farea : Enemy
 
     public override void EnemyTurn()
     {
-        Debug.Log("Enemy turn state: " + currentState);
+        uiBTL.backdropHighlighter.gameObject.SetActive(true);
+        uiBTL.DisableActivtyText();
+        CheckForAilments();
+        CheckForBuffs();
         //Check if we're waiting on a skill first
         if (currentState == EnemyState.waiting)
         {

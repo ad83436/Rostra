@@ -644,10 +644,18 @@ public class Player : MonoBehaviour
 
                 if (currentHP < 1.0f) //Avoid near zero
                 {
-                    if (lionsPrideIsActive && playerIndex == 1)
+                    if (playerIndex == 1)
                     {
-                        lionsPrideIsActive = false; //If Oberon is dead, Lion's Pride should be deactivated
-                        lionsPrideSymbolOberonOnly.gameObject.SetActive(false);
+                        if (lionsPrideIsActive)
+                        {
+                            lionsPrideIsActive = false; //If Oberon is dead, Lion's Pride should be deactivated
+                            lionsPrideSymbolOberonOnly.gameObject.SetActive(false);
+                        }
+                        if(sustainedDamageText.gameObject.activeSelf)
+                        {
+                            sustainedDamage = 0; //If Oberon dies, he loses his charge
+                            sustainedDamageText.text = "0";
+                        }
                     }
                     currentHP = 0.0f;
                     battleManager.players[playerIndex].currentHP = currentHP; //Update the BTL manager with the new health
@@ -862,6 +870,7 @@ public class Player : MonoBehaviour
             lionsPrideSkillQCounter = 3; //Lions pride counter is different than the defense buff/debuff counter as the defense can be buffed or debuff further on but lion's pride will always only last for three turns
             skillTarget = 8; //Single player buff
             BuffStats("Defense", skills.SkillStats(chosenSkill)[0], 3);
+            playerAnimator.SetBool("BuffDef", false);
             chosenSkill = (int)SKILLS.NO_SKILL;
             currentMP -= mpCost;
             mpImage.fillAmount = currentMP / maxMP;

@@ -1698,7 +1698,7 @@ public class Enemy : MonoBehaviour
 
     #region Status Ailments
 
-    private void CheckForAilments()
+    protected void CheckForAilments()
     {
         switch(currentStatusAilment0)
         {
@@ -1991,7 +1991,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void CheckForBuffs()
+    protected void CheckForBuffs()
     {
         if (defenseBuffed && defenseBuffSkillQCounter > 0)
         {
