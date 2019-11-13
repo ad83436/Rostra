@@ -131,7 +131,7 @@ MonoBehaviour:
     names:
     - 
     sentences:
-    - <i> The door shut tight. It seems to be locked with a key you don't have.
+    - <i> The door is shut tight. It seems to be locked with a key you don't have.
     portrait:
     - {fileID: 21300000, guid: dd3d4b940a009d14dbfe8b78c3b4f6ca, type: 3}
     povChange: []
@@ -172,7 +172,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.006408453, y: 0}
+  m_Offset: {x: -0.006408453, y: -0.013523102}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -183,7 +183,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.0794835, y: 1.1333333}
+  m_Size: {x: 1.0794835, y: 1.1333351}
   m_EdgeRadius: 0
 --- !u!61 &408660828955818628
 BoxCollider2D:
@@ -198,7 +198,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.03590393, y: -0.02056408}
+  m_Offset: {x: -0.03590393, y: 0.07410431}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -209,5 +209,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.714447, y: 2.4494495}
+  m_Size: {x: 2.714447, y: 2.9904099}
   m_EdgeRadius: 0
