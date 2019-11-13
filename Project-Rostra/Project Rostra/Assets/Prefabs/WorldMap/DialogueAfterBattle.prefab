@@ -62,11 +62,11 @@ MonoBehaviour:
     - 1
     typingSpeed: 0.001
     isChoice: 1
-    choiceLine: 1
+    choiceLine: 2
     choice1: {fileID: 6956292027799549242}
     choice2: {fileID: 6956292027799549241}
-    willRemember: 0
-    choiceSet: 0
+    willRemember: 1
+    choiceSet: 2
     choiceCare1: {fileID: 0}
     choiceCare2: {fileID: 0}
     choiceText1: Kill
@@ -84,6 +84,7 @@ MonoBehaviour:
     itemNum: 0
   ce: 12
   fade: {fileID: 0}
+  played: 0
 --- !u!61 &6956292027799549236
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -97,7 +98,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.046531677, y: -0.04964733}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -108,7 +109,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.3734283, y: 1.6258488}
   m_EdgeRadius: 0
 --- !u!114 &6956292027799549242
 MonoBehaviour:
@@ -126,7 +127,7 @@ MonoBehaviour:
     names:
     - 
     sentences:
-    - Just for test you picked kill
+    - <i>Fargas ponders his decision for a moment.
     portrait:
     - {fileID: 21300000, guid: dd3d4b940a009d14dbfe8b78c3b4f6ca, type: 3}
     povChange: []
@@ -173,7 +174,7 @@ MonoBehaviour:
     names:
     - 
     sentences:
-    - spare
+    - <i>Fargas ponders his decision for a moment.
     portrait:
     - {fileID: 21300000, guid: dd3d4b940a009d14dbfe8b78c3b4f6ca, type: 3}
     povChange: []
