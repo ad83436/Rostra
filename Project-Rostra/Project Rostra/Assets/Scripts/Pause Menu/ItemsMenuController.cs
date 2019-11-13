@@ -283,11 +283,9 @@ public class ItemsMenuController : SubMenu {
 					mainUItemsList[selectedIndex - topofListIndex].HighlightItem(SwappingColor);
 
 				if (Confirm) {
-					print(selectedIndex + ", " + itemindex);
-					invinst.SwapItems(selectedIndex, itemindex);
+					invinst.SwapItems(selectedIndex, itemindex); // swap in the inventory
 					itemDeque[RelativeIndex] = GenerateItem(itemindex);
-					if (selectedIndex - topofListIndex > -1 && selectedIndex - topofListIndex < ITEMS_PER_PAGE)
-						itemDeque[selectedIndex - topofListIndex] = GenerateItem(selectedIndex - topofListIndex);
+					itemDeque[selectedIndex - topofListIndex] = GenerateItem(selectedIndex);
 					UpdateListUI();
 					state = 0;
 					if (selectedIndex - topofListIndex > -1 && selectedIndex - topofListIndex < ITEMS_PER_PAGE)
