@@ -157,10 +157,7 @@ public class Farea : Enemy
                 tiedTimer--;
                 if (tiedTimer <= 0)
                 {
-                    tiedTimer = 0;
-                    tieThisPlayer.Untie();
-                    chain.gameObject.SetActive(false);
-                    tieThisPlayer = null;
+                    Untie();
                 }
             }
             float damage = playerAttack - ((eDefence / (20.0f + eDefence)) * playerAttack);

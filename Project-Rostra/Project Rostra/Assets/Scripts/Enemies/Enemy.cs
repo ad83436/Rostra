@@ -1866,8 +1866,18 @@ public class Enemy : MonoBehaviour
 
     #endregion
 
-    #endregion
+    #region Tied
 
+    public void Untie()
+    {
+        tiedTimer = 0;
+        deadlyTiesObject.gameObject.SetActive(false);
+        chain.gameObject.SetActive(false);
+        tieThisPlayer = null;
+    }
+
+    #endregion
+    #endregion //Ailments region
     #region buffs and debuffs
 
     public void BuffStats(string statToBuff, float precentage, float lastsNumberOfTurns)
