@@ -54,6 +54,7 @@ public class ItemsMenuController : SubMenu {
 	public UnityEngine.UI.Image[] UseOptionsImages;
 	public UnityEngine.UI.Text description;
 	public UItemController[] peekItems;
+	public UnityEngine.UI.Text GoldText;
 
 	//reference to invetory
 	private ref MainInventory invinst {
@@ -115,6 +116,7 @@ public class ItemsMenuController : SubMenu {
 	#region Submenu Functions
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//
 
 	public override void MenuUpdate() {
 		//if this breaks i throw an error
@@ -175,7 +177,7 @@ public class ItemsMenuController : SubMenu {
 					if (optionsIndex == 3) { /// Swap
 						state = 4;
 						selectedIndex = itemindex;
-					Options[optionsIndex].color = HighlightColor;
+						Options[optionsIndex].color = HighlightColor;
 						break;
 					}
 					if (optionsIndex == 1) { /// Unequip
@@ -346,6 +348,7 @@ public class ItemsMenuController : SubMenu {
 	}
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//
 
 	public override void OnVisible() {
 		peekPanelGroup.alpha = 1f;
@@ -358,6 +361,7 @@ public class ItemsMenuController : SubMenu {
 	}
 
 	public override void OnActive() {
+		UpdateGold();
 		itemindex = 0;
 		topofListIndex = 0;
 		InitializeDeque();
@@ -373,10 +377,15 @@ public class ItemsMenuController : SubMenu {
 	}
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//
 
 	#endregion
 
 	#region UI Updating
+		
+	public void UpdateGold() {
+		GoldText.text = "Gold: " + MainInventory.totalMoney;
+	}
 
 	private void UpdateUItem(int relativeindex) {
 		string charaname = "";
@@ -399,33 +408,29 @@ public class ItemsMenuController : SubMenu {
 									 itemDeque[relativeindex].count > 1 ? "" + itemDeque[relativeindex].count : "");
 	}
 
-    private void UpdateListUI()
-    {
-        for (int i = 0; i < mainUItemsList.Length; i++)
-        {
-            string charaname = "";
-            if (itemDeque[i].isequipable != 0)
-            {
-                switch (itemDeque[i].equippedBy)
-                {
-                    case 0:
-                        charaname += "Fargas";
-                        break;
-                    case 1:
-                        charaname += "Oberon";
-                        break;
-                    case 2:
-                        charaname += "Frea";
-                        break;
-                    case 3:
-                        charaname += "Arcelus";
-                        break;
-                    default: break;
-                }
-            }
-            mainUItemsList[i].SetNormalItem(invinst.ItemIcon(itemDeque[i].itemID), itemDeque[i].name, charaname, itemDeque[i].count > 1 ? "" + itemDeque[i].count : "");
-        }
-    }
+	private void UpdateListUI() {
+		for (int i = 0; i < mainUItemsList.Length; i++) {
+			string charaname = "";
+			if (itemDeque[i].isequipable != 0) {
+				switch (itemDeque[i].equippedBy) {
+					case 0:
+						charaname += "Fargas";
+						break;
+					case 1:
+						charaname += "Oberon";
+						break;
+					case 2:
+						charaname += "Frea";
+						break;
+					case 3:
+						charaname += "Arcelus";
+						break;
+					default: break;
+				}
+			}
+			mainUItemsList[i].SetNormalItem(invinst.ItemIcon(itemDeque[i].itemID), itemDeque[i].name, charaname, itemDeque[i].count > 1 ? "" + itemDeque[i].count : "");
+		}
+	}
 
 	private void ScrollDownMain() {
 		if (Up && itemindex > 0) --itemindex;
