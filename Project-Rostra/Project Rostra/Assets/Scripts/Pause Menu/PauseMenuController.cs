@@ -95,9 +95,9 @@ public class PauseMenuController : MonoBehaviour {
 			}
 		}
 
-		if (!isPaused) return;
-
 		HandleInDir();
+
+		if (!isPaused) return;
 
 		Confirm = Input.GetButtonDown("Confirm");
 
