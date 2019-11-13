@@ -304,6 +304,7 @@ public class DialogueManager : MonoBehaviour
 	// go home you done
 	public void End()
 	{
+		Debug.Log("End");
 		if (dia.triggerBool > 0)
 		{
 			Debug.Log(dia.triggerBool);
@@ -372,6 +373,7 @@ public class DialogueManager : MonoBehaviour
 		startUpdating = false;
 		nextDialogue = false;
 		isActive = false;
+		choiceCount = 0;
 		if (willCount == dia.maxWillCount && hasCountTriggered == true)
 		{
 			willCount = 0;
@@ -419,6 +421,7 @@ public class DialogueManager : MonoBehaviour
 			// diable the continue and show our choices
 			if (boxCount == choiceCount)
 			{
+				Debug.Log("Choice reached");
 				continueButton.SetActive(false);
 				choice1.gameObject.SetActive(true);
 				choice2.gameObject.SetActive(true);
@@ -457,6 +460,7 @@ public class DialogueManager : MonoBehaviour
 			End();
 			if (dia.choice1 != null && dia.choice1.dialogue != null)
 			{
+				End();
 				nextDialogue = true;
 				StartConversation(dia.choice1.dialogue);
 
@@ -494,6 +498,7 @@ public class DialogueManager : MonoBehaviour
 			End();
 			if  (dia.choice2 != null && dia.choice2.dialogue != null)
 			{
+				End();
 				nextDialogue = true;
 				StartConversation(dia.choice2.dialogue);
 			}
@@ -548,8 +553,8 @@ public class DialogueManager : MonoBehaviour
 			// init dialogue 1
 			else if (normalChoices[(int)choice] == true)
 			{
-				dia.choiceCare1.dialogue.hasPlayed = true;
 				StartConversation(dia.choiceCare1.dialogue);
+				dia.choiceCare1.dialogue.hasPlayed = true;
 				if (dia.choiceCare1.dialogue != null && dia.choiceCare1.dialogue.addItem == true && dia.choiceCare1.dialogue.itemId > 0)
 				{
 					AddItem(dia.choiceCare1.dialogue.itemId, dia.choiceCare1.dialogue.itemNum);
@@ -563,6 +568,7 @@ public class DialogueManager : MonoBehaviour
 			else if (normalChoices[(int)choice] == false)
 			{
 				StartConversation(dia.choiceCare2.dialogue);
+				dia.choiceCare1.dialogue.hasPlayed = true;
 			}
 
 		}
