@@ -1340,8 +1340,6 @@ public class Player : MonoBehaviour
                             }
                         }
                     }
-                    playerAnimator.SetBool(skillAnimatorName, false);
-                    playerAnimator.SetInteger("WaitingIndex", 0);
                 }
                 else if (enemyRowIndicator == 1) //Ranged row
                 {

@@ -42,6 +42,11 @@ public class MainMenu : MonoBehaviour
 	private bool InDW_Confirm => Input.GetButtonDown("Confirm");
 	private bool InDW_Cancel => Input.GetButtonDown("Cancel");
 
+
+    private void Awake()
+    {
+        Instantiate(gameManager, gameManager.transform.position, gameManager.transform.rotation);
+    }
     void Start()
     {
         Cursor.visible = false;
@@ -60,8 +65,6 @@ public class MainMenu : MonoBehaviour
 
         howToPlayPanel.gameObject.SetActive(false);
         controlsPanel.gameObject.SetActive(false);
-
-        Instantiate(gameManager, gameManager.transform.position, gameManager.transform.rotation);
     }
 
     void Update()
@@ -100,6 +103,7 @@ public class MainMenu : MonoBehaviour
                 }
                 else if (InDW_Confirm) //Player has chosen start game
                 {
+                    AudioManager.instance.PlayThisClip("WorldMapMusic1");
                     UIBTL.conversationAfterBattle = false;
                     BattleManager.battleInProgress = false;
                     startFading = true;
