@@ -23801,29 +23801,29 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 41be979451e14f444959fe205e6478f6,
         type: 3}
+    - target: {fileID: 2653198307189550252, guid: c76d5dd8dc485bd479c1a80c1fc0afec,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 0.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 2653198307189550252, guid: c76d5dd8dc485bd479c1a80c1fc0afec,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 0.43
+      objectReference: {fileID: 0}
+    - target: {fileID: 2653198307189550253, guid: c76d5dd8dc485bd479c1a80c1fc0afec,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 0.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 2653198307189550253, guid: c76d5dd8dc485bd479c1a80c1fc0afec,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 0.43
+      objectReference: {fileID: 0}
     - target: {fileID: 1840892473, guid: c76d5dd8dc485bd479c1a80c1fc0afec, type: 3}
       propertyPath: m_Text
       value: Press Z To Interact
-      objectReference: {fileID: 0}
-    - target: {fileID: 2653198307189550252, guid: c76d5dd8dc485bd479c1a80c1fc0afec,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 0.33
-      objectReference: {fileID: 0}
-    - target: {fileID: 2653198307189550252, guid: c76d5dd8dc485bd479c1a80c1fc0afec,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 0.43
-      objectReference: {fileID: 0}
-    - target: {fileID: 2653198307189550253, guid: c76d5dd8dc485bd479c1a80c1fc0afec,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 0.33
-      objectReference: {fileID: 0}
-    - target: {fileID: 2653198307189550253, guid: c76d5dd8dc485bd479c1a80c1fc0afec,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 0.43
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c76d5dd8dc485bd479c1a80c1fc0afec, type: 3}

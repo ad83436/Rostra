@@ -86,6 +86,7 @@ public class DialogueManager : MonoBehaviour
 	// stores a local copy of which choice set we will be using
 	private float choiceSet;
 	public bool[] choices;
+	public bool[] normalChoices; // determines if this will fire a normal convo or not
 	// determines weather the player can walk or not
 	public bool canWalk;
 	// tells the DM if we should be checking for input
@@ -149,6 +150,7 @@ public class DialogueManager : MonoBehaviour
         // set everything to its default 
         textElements = new Queue<string>();
 		choices = new bool[14]; // was 7
+		normalChoices = new bool[7];
 		change = 0;
 		currentChange = 0;
 		boxCount = 0;
@@ -193,7 +195,7 @@ public class DialogueManager : MonoBehaviour
 			d.hasPlayed = true;
 		}
 
-		if (nextDialogue == true)
+		if (nextDialogue == true && isActive == false)
 		{
 			if (d.addMilestone > 0)
 			{
@@ -254,6 +256,7 @@ public class DialogueManager : MonoBehaviour
 			startUpdating = true;
 			isActive = true;
 			// trigger bool was right here in case it breaks
+			
 			d.hasPlayed = true;
 			
 		}
@@ -385,6 +388,7 @@ public class DialogueManager : MonoBehaviour
 	// this is a coroutine that will take our chars from the string and print one at a time 
 	IEnumerator TypeLetters(string s)
 	{
+		canEnter = false;
 		text.text = "";
 		if (s.Contains("<i>") == true)
 		{
@@ -399,7 +403,7 @@ public class DialogueManager : MonoBehaviour
 		continueCountTotal = s.ToCharArray().Length;
 		foreach (char l in s.ToCharArray())
 		{
-			canEnter = false;
+			//canEnter = false;
 			text.text += l;
 			continueCount++;
 			// if the string has stopped printing then you can continue
@@ -409,6 +413,7 @@ public class DialogueManager : MonoBehaviour
 				canEnter = true;
 				continueCountTotal = 0;
 				continueCount = 0;
+				Debug.Log("DoneTyping");
 			}
 			
 			// diable the continue and show our choices
@@ -432,15 +437,18 @@ public class DialogueManager : MonoBehaviour
 			{
 				case 1:
 					dwarf = true;
-					choices[1] = true;
+					normalChoices[1] = true;
+					SetChoice(ChoiceEnum.dwarf, true);
 					break;
 				case 2:
 					kill = true;
-					choices[2] = true;
+					normalChoices[2] = true;
+					SetChoice(ChoiceEnum.kill, true);
 					break;
 				case 3:
 					tell = true;
-					choices[3] = true;
+					normalChoices[3] = true;
+					SetChoice(ChoiceEnum.tell, true);
 					break;
 				default:
 					Debug.LogError("You wanted a story choice but passed no choice set, fix it you idiot");
@@ -466,15 +474,18 @@ public class DialogueManager : MonoBehaviour
 			{
 				case 1:
 					guild = true;
-					choices[4] = true;
+					normalChoices[4] = true;
+					SetChoice(ChoiceEnum.guild, true);
 					break;
 				case 2:
 					spare = true;
-					choices[5] = true;
+					normalChoices[5] = true;
+					SetChoice(ChoiceEnum.spare, true);
 					break;
 				case 3:
 					lie = true;
-					choices[6] = true;
+					normalChoices[6] = true;
+					SetChoice(ChoiceEnum.lie, true);
 					break;
 				default:
 					Debug.LogError("You wanted a story choice but passed no choice set");
@@ -510,7 +521,7 @@ public class DialogueManager : MonoBehaviour
 		}
 		else
 		{
-			if (choice > choices.Length / 2 && (choices[(int)choice] == false && choices[(int)choice - choices.Length / 2] == false))
+			if (choice > normalChoices.Length / 2 && (normalChoices[(int)choice] == false && normalChoices[(int)choice - normalChoices.Length / 2] == false))
 			{
 				StartConversation(dia.normal.dialogue);
 				if (dia.normal.dialogue.addMilestone > 0)
@@ -521,10 +532,10 @@ public class DialogueManager : MonoBehaviour
 				{
 					AddItem(dia.normal.dialogue.itemId, dia.normal.dialogue.itemNum);
 				}
-				Debug.Log((int)choice - choices.Length / 2);
+				Debug.Log((int)choice - normalChoices.Length / 2);
 			}
 			// if it's less than half add half
-			else if (choice <= choices.Length / 2 && (choices[(int)choice] == false && choices[(int)choice + choices.Length / 2] == false))
+			else if (choice <= normalChoices.Length / 2 && (normalChoices[(int)choice] == false && normalChoices[(int)choice + normalChoices.Length / 2] == false))
 			{
 				StartConversation(dia.normal.dialogue);
 				if (dia.normal.dialogue.addItem == true && dia.normal.dialogue.itemId > 0)
@@ -532,10 +543,10 @@ public class DialogueManager : MonoBehaviour
 					AddItem(dia.normal.dialogue.itemId, dia.normal.dialogue.itemNum);
 				}
 
-				Debug.Log((int)choice + choices.Length / 2);
+				Debug.Log((int)choice + normalChoices.Length / 2);
 			}
 			// init dialogue 1
-			else if (choices[(int)choice] == true)
+			else if (normalChoices[(int)choice] == true)
 			{
 				dia.choiceCare1.dialogue.hasPlayed = true;
 				StartConversation(dia.choiceCare1.dialogue);
@@ -549,7 +560,7 @@ public class DialogueManager : MonoBehaviour
 				}
 			}
 			// init dialogue 2
-			else if (choices[(int)choice] == false)
+			else if (normalChoices[(int)choice] == false)
 			{
 				StartConversation(dia.choiceCare2.dialogue);
 			}

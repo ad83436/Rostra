@@ -115,7 +115,6 @@ public class CutsceneManager : MonoBehaviour
 
 	public void NextAction()
 	{
-		Debug.Log("Next");
         // if our current step is less than the amount of moves that means we can go ahead with the cutscene
         if (current <= moveLenghtInitial)
         {

@@ -55,6 +55,11 @@ public class PlayerMove : MonoBehaviour
 			DialogueManager.instance.battleFarea = true;
 			DialogueManager.instance.SetChoice(ChoiceEnum.battleFarea, true);
 		}
+		if (Input.GetKeyDown(KeyCode.U))
+		{
+			DialogueManager.instance.kill = true;
+			DialogueManager.instance.SetChoice(ChoiceEnum.kill, true);
+		}
 	}
 
 
