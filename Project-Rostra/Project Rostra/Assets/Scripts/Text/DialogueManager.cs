@@ -26,6 +26,7 @@ public enum ChoiceEnum : byte
 	sawJournal = 9,
 	dwarf = 10,
 	talkToContact = 11,
+	battleFarea = 12,
 }
 
 
@@ -80,7 +81,8 @@ public class DialogueManager : MonoBehaviour
 	public bool talkedToCo; // 7
 	public bool metAllChars; // 8 
 	public bool sawJournal; // 9
-	public bool talkedToContact;
+	public bool battleFarea; // 12
+	public bool talkedToContact;//11
 	// stores a local copy of which choice set we will be using
 	private float choiceSet;
 	public bool[] choices;
@@ -142,7 +144,7 @@ public class DialogueManager : MonoBehaviour
 
     void Start()
     {
-		
+		Debug.Log("Talking");
 		DontDestroyOnLoad(this.gameObject);
         // set everything to its default 
         textElements = new Queue<string>();
@@ -174,6 +176,7 @@ public class DialogueManager : MonoBehaviour
 		sawJournal = false;
 		talkedToContact = false;
 		metAllChars = false;
+		battleFarea = false;
 	}
 
 	public void StartConversation(Dialogue d)
@@ -250,43 +253,7 @@ public class DialogueManager : MonoBehaviour
 			canWalk = false;
 			startUpdating = true;
 			isActive = true;
-			if (d.triggerBool > 0)
-			{
-				Debug.Log(d.triggerBool);
-				switch (d.triggerBool)
-				{
-					case 1:
-						guild = true;
-						SetChoice(ChoiceEnum.guild, true);
-						talkedToContact = true;
-						SetChoice(ChoiceEnum.talkToContact, true);
-						Debug.Log("Chose the Guild");
-						break;
-					case 6:
-						demo = true;
-						SetChoice(ChoiceEnum.demo, true);
-						Debug.Log("We can leave the tavern");
-						break;
-					case 7:
-						talkedToCo = true;
-						SetChoice(ChoiceEnum.talkToCo, true);
-						Debug.Log("We talked to the commander!");
-						break;
-					case 9:
-						sawJournal = true;
-						SetChoice(ChoiceEnum.sawJournal, true);
-						Debug.Log("Saw the journal");
-						break;
-					case 10:
-						dwarf = true;
-						SetChoice(ChoiceEnum.dwarf, true);
-						talkedToContact = true;
-						SetChoice(ChoiceEnum.talkToContact, true);
-						Debug.Log("Chose the Dwarves");
-						break;
-
-				}
-			}
+			// trigger bool was right here in case it breaks
 			d.hasPlayed = true;
 			
 		}
@@ -334,6 +301,58 @@ public class DialogueManager : MonoBehaviour
 	// go home you done
 	public void End()
 	{
+		if (dia.triggerBool > 0)
+		{
+			Debug.Log(dia.triggerBool);
+			switch (dia.triggerBool)
+			{
+				case 1:
+					guild = true;
+					SetChoice(ChoiceEnum.guild, true);
+					talkedToContact = true;
+					SetChoice(ChoiceEnum.talkToContact, true);
+					Debug.Log("Chose the Guild");
+					break;
+				case 2:
+					kill = true;
+					SetChoice(ChoiceEnum.kill, true);
+					Debug.Log("Killed Farya");
+					break;
+				case 3:
+					spare = true;
+					SetChoice(ChoiceEnum.spare, true);
+					Debug.Log("Spared Farya");
+					break;
+				case 6:
+					demo = true;
+					SetChoice(ChoiceEnum.demo, true);
+					Debug.Log("We can leave the tavern");
+					break;
+				case 7:
+					talkedToCo = true;
+					SetChoice(ChoiceEnum.talkToCo, true);
+					Debug.Log("We talked to the commander!");
+					break;
+				case 9:
+					sawJournal = true;
+					SetChoice(ChoiceEnum.sawJournal, true);
+					Debug.Log("Saw the journal");
+					break;
+				case 10:
+					dwarf = true;
+					SetChoice(ChoiceEnum.dwarf, true);
+					talkedToContact = true;
+					SetChoice(ChoiceEnum.talkToContact, true);
+					Debug.Log("Chose the Dwarves");
+					break;
+				case 12:
+					battleFarea = true;
+					SetChoice(ChoiceEnum.battleFarea, true);
+					Debug.Log("Battled the Farea");
+					break;
+
+			}
+		}
 		charName.text = "";
 		text.text = "";
 		portrait.sprite = null;
@@ -436,6 +455,7 @@ public class DialogueManager : MonoBehaviour
 			}
 		}
 		
+
 	}
 	// or door two
 	public void SelectSecondChoice()

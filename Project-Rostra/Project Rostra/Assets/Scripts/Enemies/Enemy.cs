@@ -145,6 +145,8 @@ public class Enemy : MonoBehaviour
         IncreaseStatsBasedOnLevel(eCurrentLevel);
         AssingClassSkills(this);
         GiveNamesAndSkills();
+       
+
     }
 
     protected virtual void Start()
@@ -155,7 +157,20 @@ public class Enemy : MonoBehaviour
         timeAttacking = 1;
         timeAttackingForSlice = 1;
         waitTimeAtStart = waitTime;
-        countDownToBlow = Random.Range(5, 10);
+        countDownToBlow = Random.Range(3, 5);
+
+        if (enemyName == EnemyName.Mimic)
+        {
+            waitTurnsText.gameObject.SetActive(true);
+            waitTurnsText.text = countDownToBlow.ToString();
+            blowSelfObject.SetActive(false);
+        }
+
+        else
+        {
+            blowSelfObject = null;
+        }
+
 
         battleManager = BattleManager.instance;
         objPooler = ObjectPooler.instance;
@@ -171,14 +186,7 @@ public class Enemy : MonoBehaviour
             missText.gameObject.SetActive(false);
         }
 
-        if (enemyName == EnemyName.Mimic) { blowSelfObject.SetActive(false); }
 
-        else
-        {
-            blowSelfObject = null;
-        }
-
-    
         haveAddedMyself = false;
         hit = false;
         dead = false;
@@ -201,58 +209,72 @@ public class Enemy : MonoBehaviour
         {
             chainedSymbol.gameObject.SetActive(false);
         }
+
         if(primaryChainedSymbol)
         {
             primaryChainedSymbol.gameObject.SetActive(false);
         }
+
         if(ralliedSymbol)
         {
             ralliedSymbol.gameObject.SetActive(false);
         }
+
         if(burnSymbol)
         {
             burnSymbol.gameObject.SetActive(false);
         }
+
         if(debuffArrow)
         {
             debuffArrow.gameObject.SetActive(false);
         }
+
         if(atkBuffArrowIndicator)
         {
             atkBuffArrowIndicator.gameObject.SetActive(false);
         }
+
         if (strBuffArrowIndicator)
         {
             strBuffArrowIndicator.gameObject.SetActive(false);
         }
+
         if (defBuffArrowIndicator)
         {
             defBuffArrowIndicator.gameObject.SetActive(false);
         }
+
         if (agiBuffArrowIndicator)
         {
             agiBuffArrowIndicator.gameObject.SetActive(false);
         }
+
         if(healthObject)
         {
             healthObject.gameObject.SetActive(false);
         }
-        if(waitTurnsText)
+
+        if(waitTurnsText && enemyName != EnemyName.Mimic)
         {
             waitTurnsText.gameObject.SetActive(false);
         }
+
         if(atkBuffEffect)
         {
             atkBuffEffect.gameObject.SetActive(false);
         }
+
         if (defBuffEffect)
         {
             defBuffEffect.gameObject.SetActive(false);
         }
+
         if (agiBuffEffect)
         {
             agiBuffEffect.gameObject.SetActive(false);
         }
+
         if (strBuffEffect)
         {
             strBuffEffect.gameObject.SetActive(false);
@@ -917,8 +939,9 @@ public class Enemy : MonoBehaviour
 
                             else
                             {
-                                BlowSelfCountDown();
                                 countDownToBlow--;
+                                BlowSelfCountDown();
+                                waitTurnsText.text = countDownToBlow.ToString();
                             }
                             break;
                             #endregion
@@ -1157,12 +1180,7 @@ public class Enemy : MonoBehaviour
 
     void BlowSelfCountDown()
     {
-
-        if(countDownToBlow == 1)
-        {
-            countDownToBlow--;
-        }
-
+        
         blowStrength += Random.Range(10, 15);
 
         if (countDownToBlow > 0)
