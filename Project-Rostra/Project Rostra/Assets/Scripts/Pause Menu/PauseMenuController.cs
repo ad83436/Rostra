@@ -38,6 +38,13 @@ public class PauseMenuController : MonoBehaviour {
 	public bool Confirm { get; private set; }
 	public bool Cancel { get; private set; }
 
+	private const float REP_LENGTH = 0.12f;
+	private const float REP_DELAY = 0.35f;
+	private float UpTimer = 0f;
+	private float DownTimer = 0f;
+	private float LeftTimer = 0f;
+	private float RightTimer = 0f;
+
 	private bool pause = false;
 
 	#endregion
@@ -90,10 +97,7 @@ public class PauseMenuController : MonoBehaviour {
 
 		if (!isPaused) return;
 
-		Up = Input.GetButtonDown("Up");
-		Down = Input.GetButtonDown("Down");
-		Left = Input.GetButtonDown("Left");
-		Right = Input.GetButtonDown("Right");
+		HandleInDir();
 
 		Confirm = Input.GetButtonDown("Confirm");
 
@@ -131,4 +135,60 @@ public class PauseMenuController : MonoBehaviour {
 
 	#endregion
 
+	private void HandleInDir() {
+		
+		Up = Input.GetButtonDown("Up");
+		if (Up) UpTimer = -REP_DELAY;
+
+		if (!Up && Input.GetButton("Up")) {
+			UpTimer += Time.deltaTime;
+			if (UpTimer > REP_LENGTH) {
+				UpTimer -= REP_LENGTH;
+				Up = true;
+			} else {
+				Up = false;
+			}
+		}
+		
+		Down = Input.GetButtonDown("Down");
+		if (Down) DownTimer = -REP_DELAY;
+
+		if (!Down && Input.GetButton("Down")) {
+			DownTimer += Time.deltaTime;
+			if (DownTimer > REP_LENGTH) {
+				DownTimer -= REP_LENGTH;
+				Down = true;
+			} else {
+				Down = false;
+			}
+		}
+		
+		Left = Input.GetButtonDown("Left");
+		if (Left) LeftTimer = -REP_DELAY;
+
+		if (!Left && Input.GetButton("Left")) {
+			LeftTimer += Time.deltaTime;
+			if (LeftTimer > REP_LENGTH) {
+				LeftTimer -= REP_LENGTH;
+				Left = true;
+			} else {
+				Left = false;
+			}
+		}
+		
+		Right = Input.GetButtonDown("Right");
+		if (Right) RightTimer = -REP_DELAY;
+
+		if (!Right && Input.GetButton("Right")) {
+			RightTimer += Time.deltaTime;
+			if (RightTimer > REP_LENGTH) {
+				RightTimer -= REP_LENGTH;
+				Right = true;
+			} else {
+				Right = false;
+			}
+		}
+
+
+	}
 }
