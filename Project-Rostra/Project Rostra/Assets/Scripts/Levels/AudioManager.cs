@@ -55,7 +55,6 @@ public class AudioManager : MonoBehaviour
     {
         musicAudioSource = gameObject.GetComponent<AudioSource>();
         musicAudioSource.volume = 0.0f; //Start at volume zero
-        PlayThisClip("TitleTheme");
         GameManager.instance.listOfUndestroyables.Add(this.gameObject); //On start cause AM and GM start out in the same scene
     }
 

@@ -65,6 +65,9 @@ public class MainMenu : MonoBehaviour
 
         howToPlayPanel.gameObject.SetActive(false);
         controlsPanel.gameObject.SetActive(false);
+
+        AudioListener.volume = 1.0f;
+        AudioManager.instance.PlayThisClip("TitleTheme");
     }
 
     void Update()
