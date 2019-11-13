@@ -748,6 +748,8 @@ public class MainInventory : MonoBehaviour {
         // Search for the item's type based on its ID
         switch (itemID)
         {
+			case (int)ITEM_ID.NO_ITEM:
+				return null;
             case (int)ITEM_ID.TEST_POTION_HP:
             case (int)ITEM_ID.HP_POTION:
                 return itemIcons[1]; //Potion is 1
@@ -775,6 +777,7 @@ public class MainInventory : MonoBehaviour {
     }
 
     #endregion
+
     #region Stack Limit of Items in a Single Inventory Space
 
     // Returns the maximum stack limit for an item given the itemID

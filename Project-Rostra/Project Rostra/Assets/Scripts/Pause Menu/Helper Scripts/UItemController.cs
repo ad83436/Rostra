@@ -13,7 +13,7 @@ public class UItemController : MonoBehaviour {
 	public Text itemName;
 	public Text eqippedBy;
 	public Text count;
-	
+
 	public void HighlightItem(Color color) {
 		panel.color = color;
 	}
@@ -24,6 +24,8 @@ public class UItemController : MonoBehaviour {
 
 	public void SetNormalItem(Sprite itemIcon_, string itemName_, string eqippedBy_, string count_) {
 		itemIcon.sprite = itemIcon_;
+		if (itemIcon_ == null) itemIcon.color = Color.clear;
+		else itemIcon.color = Color.white;
 		itemName.text = itemName_;
 		eqippedBy.text = eqippedBy_;
 		count.text = count_;
