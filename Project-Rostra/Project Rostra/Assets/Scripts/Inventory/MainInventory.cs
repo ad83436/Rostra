@@ -775,6 +775,7 @@ public class MainInventory : MonoBehaviour {
     }
 
     #endregion
+
     #region Stack Limit of Items in a Single Inventory Space
 
     // Returns the maximum stack limit for an item given the itemID

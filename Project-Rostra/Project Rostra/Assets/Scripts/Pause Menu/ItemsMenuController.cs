@@ -26,6 +26,7 @@ public class UInvItem {
 	public string subtext;
 	public int equippedBy;
 	public string description;
+	public string stats;
 	//uses
 	public int isequipable; /* 0 is not equipable; 1 is equipable; 2 is unequipable; */
 	public bool isconsumeable;
@@ -380,7 +381,7 @@ public class ItemsMenuController : SubMenu {
 	#endregion
 
 	#region UI Updating
-		
+
 	public void UpdateGold() {
 		GoldText.text = "Gold: " + MainInventory.totalMoney;
 	}
@@ -499,7 +500,10 @@ public class ItemsMenuController : SubMenu {
 	}
 
 	private void UpdateDescription() {
-		description.text = itemDeque[RelativeIndex].name + "\n\n" + itemDeque[RelativeIndex].description;
+		description.text = "<b>" + itemDeque[RelativeIndex].name + "</b>\n<i>"
+			+ itemDeque[RelativeIndex].description + "</i>\n\n";
+		if (itemDeque[RelativeIndex].subtext.Length > 0)
+			description.text = description.text + "<b>Buffs</b>\n<i>" + itemDeque[RelativeIndex].subtext + "</i>";
 	}
 
 	private void UpdatePeekUI() {
@@ -543,9 +547,21 @@ public class ItemsMenuController : SubMenu {
 		item.itemtype = invinst.ItemType(item.itemID);
 		item.name = invinst.ItemName(item.itemID);
 		item.count = invinst.invItem[index, 1];
-		item.subtext = invinst.ItemDescription(item.itemID);
 		item.equippedBy = invinst.invItem[index, 2];
+
+		// generate decription
 		item.description = invinst.ItemDescription(item.itemID);
+		item.subtext = "";
+
+		float[] stats = invinst.ItemStats(item.itemID);
+
+		if (stats[0] > 0f) item.subtext += "Attack: " + stats[0] + "\n";
+		if (stats[1] > 0f) item.subtext += "Defence: " + stats[1] + "\n";
+		if (stats[2] > 0f) item.subtext += "Strength: " + stats[2] + "\n";
+		if (stats[3] > 0f) item.subtext += "Agility: " + stats[3] + "\n";
+		if (stats[4] > 0f) item.subtext += "Critical: " + stats[4] + "\n";
+		if (stats[5] > 0f) item.subtext += "Health: " + stats[5] + "\n";
+		if (stats[6] > 0f) item.subtext += "Magic: " + stats[6] + "\n";
 
 		invinst.curOption = index;
 		string[] itemOptions = invinst.ItemOptions(item.itemID, index).ToArray();
