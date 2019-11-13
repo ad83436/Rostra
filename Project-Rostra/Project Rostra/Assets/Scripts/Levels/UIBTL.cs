@@ -1309,6 +1309,7 @@ public class UIBTL : MonoBehaviour
                     {
                         choosePlayerArrow.gameObject.SetActive(false);
                         UpdateActivityText(inventory.ItemName(inventory.invItem[inventory.consumableInv[itemsPanelIndex], 0]));
+                        inventory.ItemUseFunction(inventory.invItem[inventory.consumableInv[itemsPanelIndex], 0], inventory.consumableInv[itemsPanelIndex], playerIndicatorIndex);
                         btlManager.players[playerIndicatorIndex].playerReference.NegateStatusEffect(Player.playerAilments.fear);
                         itemCount[itemHPosIndex].text = inventory.invItem[inventory.consumableInv[0], 1].ToString();
                         itemsPanelIndex = 0; //Reset the itemsPanelIndex
@@ -1322,6 +1323,7 @@ public class UIBTL : MonoBehaviour
                     {
                         choosePlayerArrow.gameObject.SetActive(false);
                         UpdateActivityText(inventory.ItemName(inventory.invItem[inventory.consumableInv[itemsPanelIndex], 0]));
+                        inventory.ItemUseFunction(inventory.invItem[inventory.consumableInv[itemsPanelIndex], 0], inventory.consumableInv[itemsPanelIndex], playerIndicatorIndex);
                         btlManager.players[playerIndicatorIndex].playerReference.NegateStatusEffect(Player.playerAilments.tied);
                         itemCount[itemHPosIndex].text = inventory.invItem[inventory.consumableInv[0], 1].ToString();
                         itemsPanelIndex = 0; //Reset the itemsPanelIndex
@@ -1842,6 +1844,7 @@ public class UIBTL : MonoBehaviour
         if (numberOfDeadEnemies >= numberOfEnemies)
         {
             battleHasEnded = true;
+            Player.lionsPrideIsActive = false;
             btlManager.EndOfBattle(true);
             fadePanel.FlipFadeToVictory();
             MainInventory.totalMoney += btlManager.goldGain; //Increase the gold the player has
@@ -1878,6 +1881,7 @@ public class UIBTL : MonoBehaviour
         if(numberOfDeadPlayers>=numberOfPlayers)
         {
             battleHasEnded = true;
+            Player.lionsPrideIsActive = false;
             btlManager.EndOfBattle(false);
             fadePanel.FlipFadeToDefeat();
             currentState = btlUIState.battleEnd;

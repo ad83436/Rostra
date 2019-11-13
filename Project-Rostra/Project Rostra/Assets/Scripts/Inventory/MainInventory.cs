@@ -690,6 +690,8 @@ public class MainInventory : MonoBehaviour {
 			case (int)ITEM_ID.TEST_WEAPON1:
 				UpdatePlayerStats(playerID, itemID, isEquipped);
 				break;
+            default:
+                break;
 		}
 
 		// Remove the item (Or one from the stack) if it was consumed by the player

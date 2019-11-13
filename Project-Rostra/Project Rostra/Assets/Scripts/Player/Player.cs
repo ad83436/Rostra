@@ -311,9 +311,6 @@ public class Player : MonoBehaviour
             statToAffect[2] = "Agility";
             statToAffect[3] = "Strength";
         }
-        
-
-
     }
 
     private void Update()
@@ -667,7 +664,6 @@ public class Player : MonoBehaviour
                     //If you die, you lose your RAGE
                     if (currentState == playerState.Waiting) //If the player is waiting on a skill, reset everything and die
                     {
-                        Debug.Log("Huh?");
                         chosenSkill = (int)SKILLS.NO_SKILL;
                         skillWaitTime = 0;
                         skillWaitingIndex = 0;
@@ -860,8 +856,8 @@ public class Player : MonoBehaviour
         else if (skillID == (int)SKILLS.Ob_ShieldAlly) //Buff defense skill
         {
             skillTarget = 8; //Single player buff
-            skillAnimatorName = "BuffDef";
-            skillWaitingIndex = 1;
+            skillAnimatorName = "BuffDef2";
+            skillWaitingIndex = 0;
         }
         else if (skillID == (int)SKILLS.Ob_LionsPride) //Lion's Pride special skill
         {
@@ -1533,7 +1529,7 @@ public class Player : MonoBehaviour
                 if (chosenSkill == (int)SKILLS.Ob_ShieldAlly)//Defense Buff
                 {
                     healThisPlayer.BuffStats("Defense", skills.SkillStats(chosenSkill)[0], 3);
-                    playerAnimator.SetBool("BuffDef", false);
+                    playerAnimator.SetBool("BuffDef2", false);
                 }
                 else if (chosenSkill == (int)SKILLS.Ar_DrainEye)
                 {
@@ -2133,12 +2129,9 @@ public class Player : MonoBehaviour
                 uiBTL.UpdateActivityText(nameOfCharacter + " is no longer afraid");
                 break;
             case playerAilments.tied:
-                tiedToThisEnemy.deadlyTiesObject.gameObject.SetActive(false);
-                tiedToThisEnemy.chain.gameObject.SetActive(false);
                 statusPotionEffect.gameObject.SetActive(true);
-                tiedSymbol.gameObject.SetActive(false);
-                currentAilment = playerAilments.none;
-                uiBTL.UpdateActivityText(nameOfCharacter + " is no longer tied");
+                tiedToThisEnemy.Untie();
+                Untie();
                 break;
         }
     }
