@@ -99,7 +99,7 @@ public class Fade : MonoBehaviour
                 }
                 else if (transitionToWorldMap)
                 {
-                    Debug.Log("Transition is now falseee");
+                    //Debug.Log("Transition is now falseee");
                     transitionToWorldMap = false;
                     if (enemyHolder != null) //enemyHolder will only exist in sublocations, not in the world map
                     {
@@ -154,7 +154,7 @@ public class Fade : MonoBehaviour
     //Two version of flip fade, one for controlled situations where the WM is assigned from the editor and one for the world map
     public void FlipFadeToBattle()
     {
-		Debug.Log("Flipped To Battle");
+		//Debug.Log("Flipped To Battle");
 		fadeOut = !fadeOut;
         transitionToBattle = true;
         audioManager.PlayThisClip("BattleMusic1");

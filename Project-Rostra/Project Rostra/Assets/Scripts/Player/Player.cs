@@ -408,7 +408,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            Debug.Log("Somehow I'm dead and called End Turn");
+            //Debug.Log("Somehow I'm dead and called End Turn");
             uiBTL.EndTurn();
         }
     }
@@ -541,7 +541,7 @@ public class Player : MonoBehaviour
             hit = true;
         }
 
-        Debug.Log("Hit is " + hit);
+        //Debug.Log("Hit is " + hit);
     }
 
     private void CalculateHitForSkill()
@@ -556,7 +556,7 @@ public class Player : MonoBehaviour
             hit = true;
         }
 
-        Debug.Log("Hit is " + hit);
+        //Debug.Log("Hit is " + hit);
     }
 
     //Overloaded function called when targeting all enemies
@@ -572,7 +572,7 @@ public class Player : MonoBehaviour
             hit = true;
         }
 
-        Debug.Log("Hit is " + hit);
+        //Debug.Log("Hit is " + hit);
     }
 
     private float CalculateCrit()
@@ -631,7 +631,7 @@ public class Player : MonoBehaviour
                 {
                     sustainedDamage += 0.8f * damage;
                     sustainedDamageText.text = Mathf.RoundToInt(sustainedDamage).ToString();
-                    Debug.Log("Oberon Sustained damage is:" + sustainedDamage);
+                    //Debug.Log("Oberon Sustained damage is:" + sustainedDamage);
                 }
 
                 damageText.gameObject.SetActive(true);
@@ -726,7 +726,7 @@ public class Player : MonoBehaviour
                             //Get the fear timer and activate the object
                             currentAilment = playerAilments.fear;
                             fearTimer = debuffTimer;
-                            Debug.Log(nameOfCharacter + "IS SPOOKED");
+                            //Debug.Log(nameOfCharacter + "IS SPOOKED");
                             fearSymbol.gameObject.SetActive(true);
                             break;
                         case playerAilments.tied:
@@ -769,7 +769,7 @@ public class Player : MonoBehaviour
 
     public void ResetPlayerRage()
     {
-        Debug.Log("Rage has cooled down");
+        //Debug.Log("Rage has cooled down");
         currentRage = 0.0f;
         PartyStats.chara[playerIndex].rage = currentRage;
         actualATK = atk;
@@ -953,7 +953,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            Debug.Log("Now");
+            //Debug.Log("Now");
             waitTimeText.gameObject.SetActive(true);
             waitTimeText.text = skillWaitTime.ToString();
             playerAnimator.SetInteger("WaitingIndex", skillWaitingIndex);
@@ -965,7 +965,7 @@ public class Player : MonoBehaviour
 
     public void UseSkillOnOneEnemy(int skillID, float manaCost, float waitTime, Enemy enemyReference)
     {
-        Debug.Log("Skill ID is: " + skillID);
+        //Debug.Log("Skill ID is: " + skillID);
         skillWaitTime = waitTime;
         skillTarget = 0;
         chosenSkill = skillID;
@@ -1189,14 +1189,14 @@ public class Player : MonoBehaviour
                     {
                         objPooler.SpawnFromPool(skillNameForObjPooler, attackingThisEnemy.gameObject.transform.position, gameObject.transform.rotation);
                     }
-                    Debug.Log("Skill hit");
+                    //Debug.Log("Skill hit");
                     //Summon effect here
                     btlCam.CameraShake();
                     if (CalculateCrit() <= actualCRIT) //Critical
                     {
                         if (chosenSkill == (int)SKILLS.Fa_Sunguard) //Sunguard
                         {
-                            Debug.Log("Skill Crit");
+                            //Debug.Log("Skill Crit");
                             attackingThisEnemy.TakeDamage(0.7f * actualATK + skills.SkillStats(chosenSkill)[0], numberOfAttacks, 0, 0.0f, 3, "", EnemyStatusAilment.chained); //Damage is the half the player's attack stat and the skill's attack stat
                             if (drainEye) //Check if Drain Eye is active
                             {
@@ -1216,7 +1216,7 @@ public class Player : MonoBehaviour
                         else
                         {
                             //Not sunguard or Rally
-                            Debug.Log("Skill Crit");
+                            //Debug.Log("Skill Crit");
                             attackingThisEnemy.TakeDamage(0.7f * actualATK + skills.SkillStats(chosenSkill)[0], numberOfAttacks); //Damage is the half the player's attack stat and the skill's attack stat
                             if (drainEye) //Check if Drain Eye is active
                             {
@@ -1295,12 +1295,12 @@ public class Player : MonoBehaviour
                                 if (hit)
                                 {
                                     objPooler.SpawnFromPool(skillNameForObjPooler, battleManager.enemies[i].enemyReference.gameObject.transform.position, gameObject.transform.rotation);
-                                    Debug.Log("Skill hit");
+                                    //Debug.Log("Skill hit");
                                     //Summon effect here
                                     btlCam.CameraShake();
                                     if (CalculateCrit() <= actualCRIT)
                                     {
-                                        Debug.Log("Skill Crit");
+                                        //Debug.Log("Skill Crit");
 
                                         if (chosenSkill == (int)SKILLS.Ar_IceAge)
                                         {
@@ -1317,7 +1317,7 @@ public class Player : MonoBehaviour
                                     }
                                     else
                                     {
-                                        Debug.Log("No Skill Crit");
+                                        //Debug.Log("No Skill Crit");
                                         if (chosenSkill == (int)SKILLS.Ar_IceAge)
                                         {
                                             battleManager.enemies[i].enemyReference.TakeDamage(0.5f * actualATK + skills.SkillStats(chosenSkill)[0], numberOfAttacks, 1, 0.3f, 3, "Agility", EnemyStatusAilment.none); //Damage is the half the player's attack stat and the skill's attack stat
@@ -1353,12 +1353,12 @@ public class Player : MonoBehaviour
                                 if (hit)
                                 {
                                     objPooler.SpawnFromPool(skillNameForObjPooler, battleManager.enemies[i].enemyReference.gameObject.transform.position, gameObject.transform.rotation);
-                                    Debug.Log("Skill hit");
+                                    //Debug.Log("Skill hit");
                                     //Summon effect here
                                     btlCam.CameraShake();
                                     if (CalculateCrit() <= actualCRIT)
                                     {
-                                        Debug.Log("Skill Crit");
+                                        //Debug.Log("Skill Crit");
                                         battleManager.enemies[i].enemyReference.TakeDamage(0.7f * actualATK + skills.SkillStats(chosenSkill)[0], numberOfAttacks); //Damage is the half the player's attack stat and the skill's attack stat
                                         if (drainEye) //Check if Drain Eye is active
                                         {
@@ -1367,7 +1367,7 @@ public class Player : MonoBehaviour
                                     }
                                     else
                                     {
-                                        Debug.Log("No Skill Crit");
+                                        //Debug.Log("No Skill Crit");
                                         battleManager.enemies[i].enemyReference.TakeDamage(0.5f * actualATK + skills.SkillStats(chosenSkill)[0], numberOfAttacks); //Damage is the half the player's attack stat and the skill's attack stat
                                         if (drainEye) //Check if Drain Eye is active
                                         {
@@ -1401,7 +1401,7 @@ public class Player : MonoBehaviour
                             totalBoFAtkToBeAdded += uiBTL.enemies[i].eAttack; //Add dead enemy attack points to attack passed on
                         }
                     }
-                    Debug.Log("BoF attack to be added is: " + totalBoFAtkToBeAdded);
+                    //Debug.Log("BoF attack to be added is: " + totalBoFAtkToBeAdded);
                 }
 
                 for (int i = 0; i < battleManager.enemies.Length; i++)
@@ -1418,12 +1418,12 @@ public class Player : MonoBehaviour
                                     objPooler.SpawnFromPool(skillObjectForObjPooler, battleManager.enemies[i].enemyReference.gameObject.transform.position, gameObject.transform.rotation);
                                 }
                                 objPooler.SpawnFromPool(skillNameForObjPooler, battleManager.enemies[i].enemyReference.gameObject.transform.position, gameObject.transform.rotation);
-                                Debug.Log("Skill hit");
+                                //Debug.Log("Skill hit");
                                 //Summon effect here
                                 btlCam.CameraShake();
                                 if (CalculateCrit() <= actualCRIT)
                                 {
-                                    Debug.Log("Skill Crit");
+                                    //Debug.Log("Skill Crit");
                                     if (chosenSkill == (int)SKILLS.Ar_Armageddon) //Armageddon burns
                                     {
                                         battleManager.enemies[i].enemyReference.TakeDamage(0.7f * actualATK + skills.SkillStats(chosenSkill)[0] + totalBoFAtkToBeAdded, numberOfAttacks, 0, 0, 3, "", EnemyStatusAilment.burn); //Damage is half the player's attack stat and the skill's attack stat
@@ -1448,7 +1448,7 @@ public class Player : MonoBehaviour
                                 }
                                 else
                                 {
-                                    Debug.Log("No Skill Crit");
+                                    //Debug.Log("No Skill Crit");
                                     if (chosenSkill == (int)SKILLS.Ar_Armageddon)
                                     {
                                         battleManager.enemies[i].enemyReference.TakeDamage(0.5f * actualATK + skills.SkillStats(chosenSkill)[0] + totalBoFAtkToBeAdded, numberOfAttacks, 0, 0, 3, "", EnemyStatusAilment.burn); //Damage is half the player's attack stat and the skill's attack stat
@@ -1621,9 +1621,9 @@ public class Player : MonoBehaviour
     public void Heal(float percentage)
     {
         EnableEffect("Heal", 0);
-        Debug.Log("Percentageeeee " + percentage);
+        //Debug.Log("Percentageeeee " + percentage);
         float healAmount = percentage * maxHP;
-        Debug.Log("Heal amountttt +++ " + healAmount);
+        //Debug.Log("Heal amountttt +++ " + healAmount);
         currentHP += healAmount;
         healText.gameObject.SetActive(true);
         healText.text = Mathf.RoundToInt(healAmount).ToString();
@@ -1701,7 +1701,7 @@ public class Player : MonoBehaviour
 
     public void BuffStats(string statToBuff, float precentage, float lastsNumberOfTurns)
     {
-        Debug.Log("Stat to buff: " + statToBuff);
+        //Debug.Log("Stat to buff: " + statToBuff);
         lastsNumberOfTurns++; //Add one more turn since the system should count the number of turns based on the caster not the receiver. This way ensures that the queue goes around equal to the number of turns it the buff/debuff is supposed to last
         switch (statToBuff)
         {
@@ -1727,13 +1727,13 @@ public class Player : MonoBehaviour
                 }
                 else if (!defenseBuffed) //No buffs or debuffs have occurred so far
                 {
-                    Debug.Log("Actual defense before for " + nameOfCharacter + " is: " + actualDEF);
+                    //Debug.Log("Actual defense before for " + nameOfCharacter + " is: " + actualDEF);
                     defenseBuffed = true;
                     actualDEF = def + def * precentage;
                     defenseBuffSkillQCounter = lastsNumberOfTurns;
 
-                    Debug.Log("Actual defense now for " + nameOfCharacter + " is: " + actualDEF);
-                    Debug.Log("Counter: " + defenseBuffSkillQCounter);
+                    //Debug.Log("Actual defense now for " + nameOfCharacter + " is: " + actualDEF);
+                    //Debug.Log("Counter: " + defenseBuffSkillQCounter);
                 }
                 break;
             case "Attack":
@@ -1819,7 +1819,7 @@ public class Player : MonoBehaviour
                    
                     strBuffed = true;
                     actualSTR = str + str * precentage;
-                    Debug.Log(nameOfCharacter + " Strength is: " + actualSTR);
+                    //Debug.Log(nameOfCharacter + " Strength is: " + actualSTR);
                     strBuffSkillQCounter = lastsNumberOfTurns;
                 }
                 break;
@@ -1849,7 +1849,7 @@ public class Player : MonoBehaviour
                 defenseBuffSkillQCounter = 0;
                 defenseBuffed = false;
                 actualDEF = def;
-                Debug.Log("Buff has ended");
+                //Debug.Log("Buff has ended");
                 uiBTL.UpdateActivityText("DEF is back to normal");
                 defBuffArrowIndicator.gameObject.SetActive(false);
             }
@@ -2076,9 +2076,9 @@ public class Player : MonoBehaviour
             case playerAilments.fear:
                 if(fearTimer > 0)
                 {
-                    Debug.Log("Fear timer is larger than zero");
+                    //Debug.Log("Fear timer is larger than zero");
                     fearChance = Random.Range(0, 10);
-                    Debug.Log("Fear chance is: " + fearChance);
+                    //Debug.Log("Fear chance is: " + fearChance);
 
                     if(fearChance>=0 && fearChance <=3)
                     {
@@ -2086,7 +2086,7 @@ public class Player : MonoBehaviour
                     }
                     else
                     {
-                        Debug.Log(nameOfCharacter + " is scared and ended the turn");
+                        //Debug.Log(nameOfCharacter + " is scared and ended the turn");
                         affectedByFear = true;
                         fearTimer--; //Only decrease the timer if affected by fear ends up being true
                         uiBTL.UpdateActivityText(nameOfCharacter + " is too afraid...");
