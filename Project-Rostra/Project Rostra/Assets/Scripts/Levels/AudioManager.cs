@@ -196,7 +196,7 @@ public class AudioManager : MonoBehaviour
             case "iceAge":
                 effectAudioSource.PlayOneShot(iceAge);
                 break;
-            case "armegaddon":
+            case "armageddon":
                 effectAudioSource.PlayOneShot(armageddon);
                 break;
             case "drainEye":
