@@ -22,7 +22,7 @@ public class DialogueToBattle : MonoBehaviour
 	{
 		if (col.CompareTag("Player") && DialogueManager.instance.GetChoice(ce) == true)
 		{
-			Debug.Log("Entered Dialogue");
+			
 			DialogueManager.instance.StartConversation(ct.dialogue);
 		}
 	}

@@ -31,19 +31,47 @@ public static class QuestManager
 		{
 			case 1:
 				questName = "Find Brenna";
+				location = 1;
+				description = "Well, I should go and talk to the commander. ";
+				milestone = m;
+				milestoneName = "Talk to the Commander";
+				break;
+			case 2:
+				questName = "Find Brenna";
+				location = 1;
+				description = "I need to go find the others, they should be somewhere around the camp.";
+				milestone = m;
+				milestoneName = "Find the others";
+				break;
+			case 3:
+				questName = "Find Brenna";
+				location = 1;
+				description = "We should go to the south entrance it's the least guarded";
+				milestone = m;
+				milestoneName = "Leave Camp";
+				break;
+			case 4:
+				questName = "Find Brenna";
+				location = 1;
+				description = "We've escaped from the camp, now we should go to Hadria";
+				milestone = m;
+				milestoneName = "Go to Hadria";
+				break;
+			case 5:
+				questName = "Find Brenna";
 				location = 3;
 				description = "Well, we've arrived in Hadria. We should go and see if the local barkeep can tell us anything";
 				milestone = m;
 				milestoneName = "Find the Barkeep";
 				break;
-			case 2:
+			case 6:
 				questName = "Find Brenna";
 				location = 3;
 				description = "I've spoken to the Barkeep, now we just need to find out where our contact is";
 				milestone = m;
 				milestoneName = "Find the contact";
 				break;
-			case 3:
+			case 7:
 				questName = "Find Brenna";
 				location = 3;
 				description = "We have all the info we need, we should leave the tavern";

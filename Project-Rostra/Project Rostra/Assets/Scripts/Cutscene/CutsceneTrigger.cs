@@ -42,7 +42,7 @@ public class CutsceneTrigger : MonoBehaviour
 	{
 		if (col.CompareTag("Player") && hasActivated == false && isInteractable == false && isChoiceDependant == false && directTrigger == false)
 		{
-			Debug.Log("CutsceneInitiated");
+			
 			fade.TransitionIntoACutscene(this);
             DialogueManager.instance.canWalk = false;
             col.gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);
@@ -55,7 +55,7 @@ public class CutsceneTrigger : MonoBehaviour
 		}
 		if (col.CompareTag("Player") && hasActivated == false && DialogueManager.instance.GetChoice(ce) == true && isChoiceDependant == true && stay == false && directTrigger == false)
 		{
-			Debug.Log("We are in a choice dependant cutscene");
+			
 			fade.TransitionIntoACutscene(this);
 			DialogueManager.instance.canWalk = false;
 			col.gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);
@@ -73,7 +73,7 @@ public class CutsceneTrigger : MonoBehaviour
 	{
 		if (col.CompareTag("Player") && hasActivated == false && isInteractable == true && Input.GetButtonDown("Confirm") && directTrigger == false)
 		{
-			Debug.Log("CutsceneInitiated");
+			
 			fade.TransitionIntoACutscene(this);
 			col.gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);
 			DialogueManager.instance.canWalk = false;
@@ -82,7 +82,7 @@ public class CutsceneTrigger : MonoBehaviour
 		}
 		if (col.CompareTag("Player") && hasActivated == false && DialogueManager.instance.GetChoice(ce) == true && stay == true && DialogueManager.instance.isActive == false && directTrigger == false)
 		{
-			Debug.Log("CutsceneInitiated");
+			
 			fade.TransitionIntoACutscene(this);
 			col.gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);
 			DialogueManager.instance.canWalk = false;
