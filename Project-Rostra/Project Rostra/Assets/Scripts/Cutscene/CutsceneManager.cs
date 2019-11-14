@@ -211,6 +211,7 @@ public class CutsceneManager : MonoBehaviour
 			// this will set our story choice to be equal
 			DialogueManager.instance.metAllChars = true;
 			DialogueManager.instance.SetChoice(ChoiceEnum.metAllChars, true);
+			QuestManager.AddMilestone(3);
 		}
 	}
 }
