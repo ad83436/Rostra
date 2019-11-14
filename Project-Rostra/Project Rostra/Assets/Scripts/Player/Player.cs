@@ -43,6 +43,7 @@ public class Player : MonoBehaviour
         none,
         fear,
         tied,
+		frozen,
     }
     public playerAilments currentAilment = playerAilments.none; //You an only be affected by one ailment at a time
 
@@ -720,22 +721,26 @@ public class Player : MonoBehaviour
             switch (debuffIndex) //Is it a regular debuff or an ailment?
             {
                 case 0: //Ailment
-                    switch (ailment)
-                    {
-                        case playerAilments.fear:
-                            //Get the fear timer and activate the object
-                            currentAilment = playerAilments.fear;
-                            fearTimer = debuffTimer;
-                            //Debug.Log(nameOfCharacter + "IS SPOOKED");
-                            fearSymbol.gameObject.SetActive(true);
-                            break;
-                        case playerAilments.tied:
-                            currentAilment = playerAilments.tied;
-                            tiedToThisEnemy = enemyReference;
-                            tiedSymbol.gameObject.SetActive(true);
-                            break;
-                    }
-                    break;
+					switch (ailment) 
+					{
+						case playerAilments.fear:
+							//Get the fear timer and activate the object
+							currentAilment = playerAilments.fear;
+							fearTimer = debuffTimer;
+							//Debug.Log(nameOfCharacter + "IS SPOOKED");
+							fearSymbol.gameObject.SetActive(true);
+							break;
+						case playerAilments.tied:
+							currentAilment = playerAilments.tied;
+							tiedToThisEnemy = enemyReference;
+							tiedSymbol.gameObject.SetActive(true);
+							break;
+						case playerAilments.none:
+							break;
+						case playerAilments.frozen:
+							break;
+					}
+					break;
                 case 1: //Regular
                     if (affectNonGuardOnly) //If this boolean is true, make sure to only affect characters in a non-guard state
                     {
@@ -749,15 +754,15 @@ public class Player : MonoBehaviour
                         BuffStats(debuffSubIndex, -debuffValuePercent, debuffTimer);
                     }
                     break;
-            }
-        }
-    }
+			}
+		}
+	}
 
-    #endregion
+	#endregion
 
-    #region RAGE
-    //Called by the UIBTl when the player chooses to go into rage mode
-    public void Rage()
+	#region RAGE
+	//Called by the UIBTl when the player chooses to go into rage mode
+	public void Rage()
     {
         actualATK = atk * 2.0f;
         actualDEF = def / 2.0f;
