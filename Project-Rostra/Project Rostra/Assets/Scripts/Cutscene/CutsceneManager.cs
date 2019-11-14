@@ -82,6 +82,7 @@ public class CutsceneManager : MonoBehaviour
 
 	public void StartCutscene(Cutscene cs, Vector2 returnPos, Fade f)
 	{
+		Debug.Log("Start");
 		// call the copy constructor and save a local copy of what cutscene we passed in
 		// set up the current cutscene info
 		copy = new Cutscene(cs);

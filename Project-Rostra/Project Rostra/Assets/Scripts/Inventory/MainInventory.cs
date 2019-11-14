@@ -67,6 +67,7 @@ public class MainInventory : MonoBehaviour {
     // FOR TESTING
     private void Start() {
 
+        Debug.Log(itemIcons.Length);
 
 		invItem[0, 0] = (int)ITEM_ID.HP_POTION;
         invItem[0, 1] = 5;
@@ -689,6 +690,8 @@ public class MainInventory : MonoBehaviour {
 			case (int)ITEM_ID.TEST_WEAPON1:
 				UpdatePlayerStats(playerID, itemID, isEquipped);
 				break;
+            default:
+                break;
 		}
 
 		// Remove the item (Or one from the stack) if it was consumed by the player
@@ -745,6 +748,8 @@ public class MainInventory : MonoBehaviour {
         // Search for the item's type based on its ID
         switch (itemID)
         {
+			case (int)ITEM_ID.NO_ITEM:
+				return null;
             case (int)ITEM_ID.TEST_POTION_HP:
             case (int)ITEM_ID.HP_POTION:
                 return itemIcons[1]; //Potion is 1
@@ -772,6 +777,7 @@ public class MainInventory : MonoBehaviour {
     }
 
     #endregion
+
     #region Stack Limit of Items in a Single Inventory Space
 
     // Returns the maximum stack limit for an item given the itemID

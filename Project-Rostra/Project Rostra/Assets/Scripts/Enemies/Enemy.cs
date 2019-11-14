@@ -1655,7 +1655,7 @@ public class Enemy : MonoBehaviour
 
     #region Status Ailments
 
-    private void CheckForAilments()
+    protected void CheckForAilments()
     {
         switch(currentStatusAilment0)
         {
@@ -1823,8 +1823,18 @@ public class Enemy : MonoBehaviour
 
     #endregion
 
-    #endregion
+    #region Tied
 
+    public void Untie()
+    {
+        tiedTimer = 0;
+        deadlyTiesObject.gameObject.SetActive(false);
+        chain.gameObject.SetActive(false);
+        tieThisPlayer = null;
+    }
+
+    #endregion
+    #endregion //Ailments region
     #region buffs and debuffs
 
     public void BuffStats(string statToBuff, float precentage, float lastsNumberOfTurns)
@@ -1948,7 +1958,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void CheckForBuffs()
+    protected void CheckForBuffs()
     {
         if (defenseBuffed && defenseBuffSkillQCounter > 0)
         {
@@ -3460,7 +3470,6 @@ public class Enemy : MonoBehaviour
             tiedTimer = 0; 
             tieThisPlayer.Untie(); 
             chain.gameObject.SetActive(false); 
-            tieThisPlayer = null; 
         } 
     }
 

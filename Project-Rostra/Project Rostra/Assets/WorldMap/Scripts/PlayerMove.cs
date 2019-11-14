@@ -24,33 +24,45 @@ public class PlayerMove : MonoBehaviour
 
     void LateUpdate()
     {
-		if (dm.canWalk && !BattleManager.battleInProgress && !PauseMenuController.isPaused && !ItemShopUI.IsOpen && CutsceneManager.instance.isActive == false)
-		{
-			moveInput.x = Input.GetAxisRaw("Horizontal");
-			moveInput.y = Input.GetAxisRaw("Vertical");
-			moveVelocity = moveInput.normalized * Speed;
-			horizontalMove = Input.GetAxisRaw("Horizontal") * Speed;
-			verticalMove = Input.GetAxisRaw("Vertical") * Speed;
+        if (gameObject.activeSelf)
+        {
+            if (dm.canWalk && !BattleManager.battleInProgress && !PauseMenuController.isPaused && !ItemShopUI.IsOpen && CutsceneManager.instance.isActive == false)
+            {
+                moveInput.x = Input.GetAxisRaw("Horizontal");
+                moveInput.y = Input.GetAxisRaw("Vertical");
+                moveVelocity = moveInput.normalized * Speed;
+                horizontalMove = Input.GetAxisRaw("Horizontal") * Speed;
+                verticalMove = Input.GetAxisRaw("Vertical") * Speed;
 
-			animator.SetFloat("Horizontal", horizontalMove);
-			animator.SetFloat("Vertical", verticalMove);
-			animator.SetFloat("Speed", moveVelocity.sqrMagnitude);
-			TalkToNPC();
-		}
-		else if(dm.canWalk == false)
-		{
-			moveVelocity = Vector2.zero;
-			animator.SetFloat("Horizontal", 0);
-			animator.SetFloat("Vertical", 0);
-			animator.SetFloat("Speed", 0);
-		}
-		if (Input.GetKeyDown(KeyCode.K))
-		{
-			DialogueManager.instance.metAllChars = true;
-			DialogueManager.instance.SetChoice(ChoiceEnum.metAllChars, true);
-			DialogueManager.instance.dwarf = true;
-			DialogueManager.instance.SetChoice(ChoiceEnum.dwarf, true);
-		}
+                animator.SetFloat("Horizontal", horizontalMove);
+                animator.SetFloat("Vertical", verticalMove);
+                animator.SetFloat("Speed", moveVelocity.sqrMagnitude);
+                TalkToNPC();
+            }
+            else if (dm.canWalk == false)
+            {
+                moveVelocity = Vector2.zero;
+                animator.SetFloat("Horizontal", 0);
+                animator.SetFloat("Vertical", 0);
+                animator.SetFloat("Speed", 0);
+            }
+            // these are debug commands, please please please remove once done testing
+
+            if (Input.GetKeyDown(KeyCode.G))
+            {
+                DialogueManager.instance.metAllChars = true;
+                DialogueManager.instance.SetChoice(ChoiceEnum.metAllChars, true);
+                DialogueManager.instance.dwarf = true;
+                DialogueManager.instance.SetChoice(ChoiceEnum.dwarf, true);
+                DialogueManager.instance.battleFarea = true;
+                DialogueManager.instance.SetChoice(ChoiceEnum.battleFarea, true);
+            }
+            if (Input.GetKeyDown(KeyCode.U))
+            {
+                DialogueManager.instance.kill = true;
+                DialogueManager.instance.SetChoice(ChoiceEnum.kill, true);
+            }
+        }
 	}
 
 

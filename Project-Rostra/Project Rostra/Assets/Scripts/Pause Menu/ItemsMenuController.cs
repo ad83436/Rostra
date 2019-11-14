@@ -26,6 +26,7 @@ public class UInvItem {
 	public string subtext;
 	public int equippedBy;
 	public string description;
+	public string stats;
 	//uses
 	public int isequipable; /* 0 is not equipable; 1 is equipable; 2 is unequipable; */
 	public bool isconsumeable;
@@ -54,6 +55,7 @@ public class ItemsMenuController : SubMenu {
 	public UnityEngine.UI.Image[] UseOptionsImages;
 	public UnityEngine.UI.Text description;
 	public UItemController[] peekItems;
+	public UnityEngine.UI.Text GoldText;
 
 	//reference to invetory
 	private ref MainInventory invinst {
@@ -115,6 +117,7 @@ public class ItemsMenuController : SubMenu {
 	#region Submenu Functions
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//
 
 	public override void MenuUpdate() {
 		//if this breaks i throw an error
@@ -175,7 +178,7 @@ public class ItemsMenuController : SubMenu {
 					if (optionsIndex == 3) { /// Swap
 						state = 4;
 						selectedIndex = itemindex;
-					Options[optionsIndex].color = HighlightColor;
+						Options[optionsIndex].color = HighlightColor;
 						break;
 					}
 					if (optionsIndex == 1) { /// Unequip
@@ -281,11 +284,9 @@ public class ItemsMenuController : SubMenu {
 					mainUItemsList[selectedIndex - topofListIndex].HighlightItem(SwappingColor);
 
 				if (Confirm) {
-					print(selectedIndex + ", " + itemindex);
-					invinst.SwapItems(selectedIndex, itemindex);
+					invinst.SwapItems(selectedIndex, itemindex); // swap in the inventory
 					itemDeque[RelativeIndex] = GenerateItem(itemindex);
-					if (selectedIndex - topofListIndex > -1 && selectedIndex - topofListIndex < ITEMS_PER_PAGE)
-						itemDeque[selectedIndex - topofListIndex] = GenerateItem(selectedIndex - topofListIndex);
+					itemDeque[selectedIndex - topofListIndex] = GenerateItem(selectedIndex);
 					UpdateListUI();
 					state = 0;
 					if (selectedIndex - topofListIndex > -1 && selectedIndex - topofListIndex < ITEMS_PER_PAGE)
@@ -346,6 +347,7 @@ public class ItemsMenuController : SubMenu {
 	}
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//
 
 	public override void OnVisible() {
 		peekPanelGroup.alpha = 1f;
@@ -358,6 +360,7 @@ public class ItemsMenuController : SubMenu {
 	}
 
 	public override void OnActive() {
+		UpdateGold();
 		itemindex = 0;
 		topofListIndex = 0;
 		InitializeDeque();
@@ -373,10 +376,15 @@ public class ItemsMenuController : SubMenu {
 	}
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//
 
 	#endregion
 
 	#region UI Updating
+
+	public void UpdateGold() {
+		GoldText.text = "Gold: " + MainInventory.totalMoney;
+	}
 
 	private void UpdateUItem(int relativeindex) {
 		string charaname = "";
@@ -399,33 +407,29 @@ public class ItemsMenuController : SubMenu {
 									 itemDeque[relativeindex].count > 1 ? "" + itemDeque[relativeindex].count : "");
 	}
 
-    private void UpdateListUI()
-    {
-        for (int i = 0; i < mainUItemsList.Length; i++)
-        {
-            string charaname = "";
-            if (itemDeque[i].isequipable != 0)
-            {
-                switch (itemDeque[i].equippedBy)
-                {
-                    case 0:
-                        charaname += "Fargas";
-                        break;
-                    case 1:
-                        charaname += "Oberon";
-                        break;
-                    case 2:
-                        charaname += "Frea";
-                        break;
-                    case 3:
-                        charaname += "Arcelus";
-                        break;
-                    default: break;
-                }
-            }
-            mainUItemsList[i].SetNormalItem(invinst.ItemIcon(itemDeque[i].itemID), itemDeque[i].name, charaname, itemDeque[i].count > 1 ? "" + itemDeque[i].count : "");
-        }
-    }
+	private void UpdateListUI() {
+		for (int i = 0; i < mainUItemsList.Length; i++) {
+			string charaname = "";
+			if (itemDeque[i].isequipable != 0) {
+				switch (itemDeque[i].equippedBy) {
+					case 0:
+						charaname += "Fargas";
+						break;
+					case 1:
+						charaname += "Oberon";
+						break;
+					case 2:
+						charaname += "Frea";
+						break;
+					case 3:
+						charaname += "Arcelus";
+						break;
+					default: break;
+				}
+			}
+			mainUItemsList[i].SetNormalItem(invinst.ItemIcon(itemDeque[i].itemID), itemDeque[i].name, charaname, itemDeque[i].count > 1 ? "" + itemDeque[i].count : "");
+		}
+	}
 
 	private void ScrollDownMain() {
 		if (Up && itemindex > 0) --itemindex;
@@ -496,7 +500,10 @@ public class ItemsMenuController : SubMenu {
 	}
 
 	private void UpdateDescription() {
-		description.text = itemDeque[RelativeIndex].name + "\n\n" + itemDeque[RelativeIndex].description;
+		description.text = "<b>" + itemDeque[RelativeIndex].name + "</b>\n<i>"
+			+ itemDeque[RelativeIndex].description + "</i>\n\n";
+		if (itemDeque[RelativeIndex].subtext.Length > 0)
+			description.text = description.text + "<b>Buffs</b>\n<i>" + itemDeque[RelativeIndex].subtext + "</i>";
 	}
 
 	private void UpdatePeekUI() {
@@ -540,9 +547,21 @@ public class ItemsMenuController : SubMenu {
 		item.itemtype = invinst.ItemType(item.itemID);
 		item.name = invinst.ItemName(item.itemID);
 		item.count = invinst.invItem[index, 1];
-		item.subtext = invinst.ItemDescription(item.itemID);
 		item.equippedBy = invinst.invItem[index, 2];
+
+		// generate decription
 		item.description = invinst.ItemDescription(item.itemID);
+		item.subtext = "";
+
+		float[] stats = invinst.ItemStats(item.itemID);
+
+		if (stats[0] > 0f) item.subtext += "Attack: " + stats[0] + "\n";
+		if (stats[1] > 0f) item.subtext += "Defence: " + stats[1] + "\n";
+		if (stats[2] > 0f) item.subtext += "Strength: " + stats[2] + "\n";
+		if (stats[3] > 0f) item.subtext += "Agility: " + stats[3] + "\n";
+		if (stats[4] > 0f) item.subtext += "Critical: " + stats[4] + "\n";
+		if (stats[5] > 0f) item.subtext += "Health: " + stats[5] + "\n";
+		if (stats[6] > 0f) item.subtext += "Magic: " + stats[6] + "\n";
 
 		invinst.curOption = index;
 		string[] itemOptions = invinst.ItemOptions(item.itemID, index).ToArray();

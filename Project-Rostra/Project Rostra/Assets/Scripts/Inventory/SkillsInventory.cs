@@ -38,8 +38,8 @@ public class SkillsInventory : MonoBehaviour {
         EquipSkill((int)SKILLS.Fa_SwordOfFury, 1, 0);
         AddToUnlockedSkills((int)SKILLS.Fa_BladeOfTheFallen, 0);
         EquipSkill((int)SKILLS.Fa_BladeOfTheFallen, 2, 0);
-        AddToUnlockedSkills((int)SKILLS.Fa_SwiftStrike, 0);
-        EquipSkill((int)SKILLS.Fa_SwiftStrike, 3, 0);
+        AddToUnlockedSkills((int)SKILLS.Fa_Sunguard, 0);
+        EquipSkill((int)SKILLS.Fa_Sunguard, 3, 0);
 
         AddToUnlockedSkills((int)SKILLS.Ob_FierceStrike, 1);
         EquipSkill((int)SKILLS.Ob_FierceStrike, 0, 1);

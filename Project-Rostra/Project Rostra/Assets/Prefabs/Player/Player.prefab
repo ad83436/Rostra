@@ -73,7 +73,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1927818603
   m_SortingLayer: 1
-  m_SortingOrder: 0
+  m_SortingOrder: 200
   m_Sprite: {fileID: 5239984519489884028, guid: f26b7a521e024fd4b81372091a12d134,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -105,7 +105,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &3029439829066752907
 MonoBehaviour:
