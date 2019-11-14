@@ -1888,7 +1888,7 @@ public class UIBTL : MonoBehaviour
         numberOfDeadPlayers++;
         Debug.Log(numberOfDeadPlayers);
 
-        if(numberOfDeadPlayers > numberOfPlayers)
+        if(numberOfDeadPlayers >= numberOfPlayers)
         {
             battleHasEnded = true;
             Player.lionsPrideIsActive = false;
