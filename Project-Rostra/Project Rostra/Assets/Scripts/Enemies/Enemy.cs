@@ -3314,7 +3314,6 @@ public class Enemy : MonoBehaviour
             tiedTimer = 0; 
             tieThisPlayer.Untie(); 
             chain.gameObject.SetActive(false); 
-            tieThisPlayer = null; 
         } 
     }
 

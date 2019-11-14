@@ -629,6 +629,7 @@ public class Farea : Enemy
                 }
                 else
                 {
+                    youAreNotMineObject.gameObject.SetActive(false);
                     thisPlayerIsDead.TakeDamage(eAttack * 1.5f);
                 }
                 break;
