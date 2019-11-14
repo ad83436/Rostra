@@ -10,6 +10,7 @@ public class UIBTL : MonoBehaviour
     private BattleManager btlManager;
     private MainInventory inventory;
     private SkillsInventory skills;
+    private AudioManager audioManager;
 
     public GameObject playerTurnIndicator;
     public GameObject chooseEnemyArrow;
@@ -171,6 +172,7 @@ public class UIBTL : MonoBehaviour
         btlManager = BattleManager.instance;
         inventory = MainInventory.invInstance;
         skills = SkillsInventory.invInstance;
+        audioManager = AudioManager.instance;
 
         enemies = new Enemy[5]; //Filled by the BTL Manager in Add Enemy
         enemiesDead = new bool[5]; //Every entry is turned to true by the enemy that dies
@@ -649,6 +651,7 @@ public class UIBTL : MonoBehaviour
                 case 0://Highlighter is at attack
                     if (Input.GetKeyDown(KeyCode.DownArrow) && playerInControl.currentState != Player.playerState.Rage)
                     {
+                        audioManager.playThisEffect("uiScroll");
                         controlsIndicator = 1;
                         highlighter.transform.position = highlighiterPos[1].transform.localPosition;
 
@@ -659,6 +662,7 @@ public class UIBTL : MonoBehaviour
                     }
                     else if (Input.GetKeyDown(KeyCode.RightArrow)) //Go to skills
                     {
+                        audioManager.playThisEffect("uiScroll");
                         controlsIndicator = 2;
                         highlighter.transform.position = highlighiterPos[2].transform.localPosition;
 
@@ -669,6 +673,7 @@ public class UIBTL : MonoBehaviour
                     }
                     else if (Input.GetKeyDown(KeyCode.LeftArrow) && playerInControl.canRage && playerInControl.currentState != Player.playerState.Rage) //Go to Rage
                     {
+                        audioManager.playThisEffect("uiScroll");
                         controlsIndicator = 4;
                         highlighter.transform.position = highlighiterPos[4].transform.localPosition;
 
@@ -679,6 +684,7 @@ public class UIBTL : MonoBehaviour
                     }
                     else if(Input.GetKeyDown(KeyCode.LeftArrow) && !playerInControl.canRage) // Go to skills
                     {
+                        audioManager.playThisEffect("uiScroll");
                         controlsIndicator = 2;
                         highlighter.transform.position = highlighiterPos[2].transform.localPosition;
 
@@ -689,6 +695,7 @@ public class UIBTL : MonoBehaviour
                     }
                     else if (Input.GetButtonDown("Confirm")) //Player has chosen attack
                     {
+                        audioManager.playThisEffect("uiConfirm");
                         if (activityText.text != "") //If there's an active text, disable it once the player moves the indicator
                         {
                             DisableActivtyText();
@@ -708,16 +715,19 @@ public class UIBTL : MonoBehaviour
                 case 1://Highlighter is at Guard
                     if (Input.GetKeyDown(KeyCode.UpArrow))
                     {
+                        audioManager.playThisEffect("uiScroll");
                         controlsIndicator = 0;
                         highlighter.transform.position = highlighiterPos[0].transform.localPosition;
                     }
                     else if (Input.GetKeyDown(KeyCode.RightArrow))
                     {
+                        audioManager.playThisEffect("uiScroll");
                         controlsIndicator = 3;
                         highlighter.transform.position = highlighiterPos[3].transform.localPosition;
                     }
                     else if (Input.GetButtonDown("Confirm")) //Player has chosen Guard
                     {
+                        audioManager.playThisEffect("uiConfirm");
                         UpdateActivityText("Guard");
                         playerInControl.Guard();
                     }
@@ -727,11 +737,13 @@ public class UIBTL : MonoBehaviour
                     //Highlighter is at Skills
                     if ((Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.UpArrow)) && playerInControl.currentState != Player.playerState.Rage)
                     {
+                        audioManager.playThisEffect("uiScroll");
                         controlsIndicator = 3;
                         highlighter.transform.position = highlighiterPos[3].transform.localPosition;
                     }
                     else if (Input.GetKeyDown(KeyCode.LeftArrow))
                     {
+                        audioManager.playThisEffect("uiScroll");
                         controlsIndicator = 0;
                         highlighter.transform.position = highlighiterPos[0].transform.position;
                     }
@@ -742,6 +754,7 @@ public class UIBTL : MonoBehaviour
                     }
                     else if (Input.GetButtonDown("Confirm")) //Player has chosen Skills
                     {
+                        audioManager.playThisEffect("uiConfirm");
                         previousState = btlUIState.choosingBasicCommand;
                         if (!firstTimeOpenedSkillsPanel)
                         {
@@ -767,21 +780,25 @@ public class UIBTL : MonoBehaviour
                     //Highlighter is at Items
                     if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.UpArrow))
                     {
+                        audioManager.playThisEffect("uiScroll");
                         controlsIndicator = 2;
                         highlighter.transform.position = highlighiterPos[2].transform.localPosition;
                     }
                     else if (Input.GetKeyDown(KeyCode.LeftArrow))
                     {
+                        audioManager.playThisEffect("uiScroll");
                         controlsIndicator = 1;
                         highlighter.transform.position = highlighiterPos[1].transform.localPosition;
                     }
                     else if (Input.GetKeyDown(KeyCode.RightArrow) && playerInControl.canRage)
                     {
+                        audioManager.playThisEffect("uiScroll");
                         controlsIndicator = 4;
                         highlighter.transform.position = highlighiterPos[4].transform.localPosition;
                     }
                     else if (Input.GetButtonDown("Confirm")) //Player has chosen Items
                     {
+                        audioManager.playThisEffect("uiConfirm");
                         previousState = btlUIState.choosingBasicCommand;
                         //Reset the items panel
                         itemsPanel.gameObject.SetActive(true);
@@ -806,21 +823,25 @@ public class UIBTL : MonoBehaviour
                 case 4://Hilighter is at RAGE
                     if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.UpArrow))
                     {
+                        audioManager.playThisEffect("uiScroll");
                         controlsIndicator = 3;
                         highlighter.transform.position = highlighiterPos[3].transform.localPosition;
                     }
                     else if (Input.GetKeyDown(KeyCode.LeftArrow))
                     {
+                        audioManager.playThisEffect("uiScroll");
                         controlsIndicator = 2;
                         highlighter.transform.position = highlighiterPos[2].transform.localPosition;
                     }
                     else if (Input.GetKeyDown(KeyCode.RightArrow))
                     {
+                        audioManager.playThisEffect("uiScroll");
                         controlsIndicator = 0;
                         highlighter.transform.position = highlighiterPos[0].transform.localPosition;
                     }
                     else if (Input.GetButtonDown("Confirm")) //Player has chosen Rage
                     {
+                        audioManager.playThisEffect("uiConfirm");
                         rageText.color = Color.yellow;
                         itemsText.color = Color.gray;
                         guardText.color = Color.gray;
@@ -839,6 +860,7 @@ public class UIBTL : MonoBehaviour
     {
         if (Input.GetButtonDown("Cancel"))
         {
+            audioManager.playThisEffect("uiCancel");
             skillsPanel.gameObject.SetActive(false);
             controlsPanel.gameObject.SetActive(true);
             controlsIndicator = 2; //Back to skills in the choosingbasicommands
@@ -847,6 +869,7 @@ public class UIBTL : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.DownArrow) && controlsIndicator < 3)
         {
+            audioManager.playThisEffect("uiScroll");
             //Make sure there's a skill below the one highlighted right now
             if (PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator + 1] != (int)SKILLS.NO_SKILL)
             {
@@ -855,14 +878,17 @@ public class UIBTL : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.DownArrow) && controlsIndicator >= 3)
         {
+            audioManager.playThisEffect("uiScroll");
             controlsIndicator = 0;
         }
         else if (Input.GetKeyDown(KeyCode.UpArrow) && controlsIndicator > 0)
         {
+            audioManager.playThisEffect("uiScroll");
             controlsIndicator--;
         }
         else if (Input.GetKeyDown(KeyCode.UpArrow) && controlsIndicator <= 0)
         {
+            audioManager.playThisEffect("uiScroll");
             //Make sure the player goes to the last equipped skills, not necessarily number 3
             for (int i = 3; i > 0; i--)
             {
@@ -875,6 +901,7 @@ public class UIBTL : MonoBehaviour
         }
         else if (Input.GetButtonDown("Confirm"))
         {
+            audioManager.playThisEffect("uiConfirm");
             if (PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator] != (int)SKILLS.NO_SKILL)
             {
                 //Choose skill, make sure you have enough MP to use it, then check if it targets players or enemies       
@@ -1036,6 +1063,7 @@ public class UIBTL : MonoBehaviour
     {
         if (Input.GetButtonDown("Cancel"))
         {
+            audioManager.playThisEffect("uiCancel");
             itemsPanel.gameObject.SetActive(false);
             controlsPanel.gameObject.SetActive(true);
             controlsIndicator = 3; //Back to items in the choosingbasicommands
@@ -1044,6 +1072,7 @@ public class UIBTL : MonoBehaviour
         }
         else if (Input.GetButtonDown("Confirm") && inventory.invItem[inventory.consumableInv[itemsPanelIndex], 1] > 0)//Player has chosen an item
         {
+            audioManager.playThisEffect("uiConfirm");
             //Make sure you choose an item that is usable and not equipable
             previousState = btlUIState.choosingItemsCommand; //Needed to know what to reference when choosing the player
             choosePlayerArrow.transform.position = choosePlayerPos[0].transform.position; //Move the player indicator on top of Fargas for now
@@ -1055,7 +1084,7 @@ public class UIBTL : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.DownArrow) && itemsPanelIndex < inventory.consumableInv.Count)
         {
-
+            audioManager.playThisEffect("uiScroll");
             //Keep track of where the highlighter is
             if (itemsPanelIndex + 1 < inventory.consumableInv.Count)
             {
@@ -1118,6 +1147,7 @@ public class UIBTL : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.UpArrow) && itemsPanelIndex > 0)
         {
+            audioManager.playThisEffect("uiScroll");
             if (itemsPanelIndex - 1 >= 0)
             {
                 itemHPosIndex--;
@@ -1175,6 +1205,7 @@ public class UIBTL : MonoBehaviour
     {
         if (Input.GetButtonDown("Cancel"))
         {
+            audioManager.playThisEffect("uiCancel");
             choosePlayerArrow.gameObject.SetActive(false);
             switch (playerInControl.playerIndex)
             {
@@ -1208,12 +1239,14 @@ public class UIBTL : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.UpArrow))
             {
+                audioManager.playThisEffect("uiScroll");
                 playerIndicatorIndex = 1;//Go to Oberon
                 choosePlayerArrow.transform.position = choosePlayerPos[1].transform.position;
 
             }
             else if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow))
             {
+                audioManager.playThisEffect("uiScroll");
                 playerIndicatorIndex = 3;//Go to Arcelus
                 choosePlayerArrow.transform.position = choosePlayerPos[3].transform.position;
             }
@@ -1223,12 +1256,14 @@ public class UIBTL : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.UpArrow))
             {
+                audioManager.playThisEffect("uiScroll");
                 playerIndicatorIndex = 0;//Go to Fargas
                 choosePlayerArrow.transform.position = choosePlayerPos[0].transform.position;
 
             }
             else if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow))
             {
+                audioManager.playThisEffect("uiScroll");
                 playerIndicatorIndex = 2;//Go to Frea
                 choosePlayerArrow.transform.position = choosePlayerPos[2].transform.position;
             }
@@ -1237,12 +1272,14 @@ public class UIBTL : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.UpArrow))
             {
+                audioManager.playThisEffect("uiScroll");
                 playerIndicatorIndex = 3;//Go to Arcelus
                 choosePlayerArrow.transform.position = choosePlayerPos[3].transform.position;
 
             }
             else if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow))
             {
+                audioManager.playThisEffect("uiScroll");
                 playerIndicatorIndex = 1;//Go to Oberon
                 choosePlayerArrow.transform.position = choosePlayerPos[1].transform.position;
             }
@@ -1251,12 +1288,14 @@ public class UIBTL : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.UpArrow))
             {
+                audioManager.playThisEffect("uiScroll");
                 playerIndicatorIndex = 2;//Go to Frea
                 choosePlayerArrow.transform.position = choosePlayerPos[2].transform.position;
 
             }
             else if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow))
             {
+                audioManager.playThisEffect("uiScroll");
                 playerIndicatorIndex = 0;//Go to Fargas
                 choosePlayerArrow.transform.position = choosePlayerPos[0].transform.position;
             }
@@ -1264,7 +1303,7 @@ public class UIBTL : MonoBehaviour
 
         if (Input.GetButtonDown("Confirm"))
         {
-
+            audioManager.playThisEffect("uiConfirm");
             if (previousState == btlUIState.choosingItemsCommand)
             {
                 //Make sure you're not using the hope potion, the player you're targeting is not dead and is not in RAGE
@@ -1383,6 +1422,7 @@ public class UIBTL : MonoBehaviour
     {
         if (Input.GetButtonDown("Cancel"))
         {
+            audioManager.playThisEffect("uiCancel");
             if (previousState == btlUIState.choosingBasicCommand)
             {
                 controlsPanel.gameObject.SetActive(true);
@@ -1402,6 +1442,7 @@ public class UIBTL : MonoBehaviour
         }
         else if (Input.GetButtonDown("Confirm"))
         {
+            audioManager.playThisEffect("uiConfirm");
             UpdateActivityText(skills.SkillName(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator]));
             playerInControl.UseSkillOnAllPlayers(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator],
                                     skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[5],
@@ -1419,6 +1460,7 @@ public class UIBTL : MonoBehaviour
         //Leave choosing enemy
         if (Input.GetButtonDown("Cancel"))
         {
+            audioManager.playThisEffect("uiCancel");
             chooseEnemyArrow.gameObject.SetActive(false);
             if (previousState == btlUIState.choosingBasicCommand)
             {
@@ -1439,6 +1481,7 @@ public class UIBTL : MonoBehaviour
             case 0:
                 if (Input.GetKeyDown(KeyCode.DownArrow))
                 {
+                    audioManager.playThisEffect("uiScroll");
                     if (enemies[1] != null && enemiesDead[1] == false)
                     {
                         enemyIndicatorIndex = 1;
@@ -1447,6 +1490,7 @@ public class UIBTL : MonoBehaviour
                 }
                 else if ((Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow)) && (activeRange + playerInControl.initialPos >= 2))
                 {
+                    audioManager.playThisEffect("uiScroll");
                     if (enemies[3] != null && enemiesDead[3] == false)
                     {
                         enemyIndicatorIndex = 3;
@@ -1460,6 +1504,7 @@ public class UIBTL : MonoBehaviour
                 }
                 else if (Input.GetKeyDown(KeyCode.UpArrow))
                 {
+                    audioManager.playThisEffect("uiScroll");
                     if (enemies[2] != null && enemiesDead[2] == false)
                     {
                         enemyIndicatorIndex = 2;
@@ -1470,6 +1515,7 @@ public class UIBTL : MonoBehaviour
             case 1:
                 if (Input.GetKeyDown(KeyCode.DownArrow))
                 {
+                    audioManager.playThisEffect("uiScroll");
                     if (enemies[2] != null && enemiesDead[2] == false)
                     {
                         enemyIndicatorIndex = 2;
@@ -1478,6 +1524,7 @@ public class UIBTL : MonoBehaviour
                 }
                 else if ((Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow)) && (activeRange + playerInControl.initialPos >= 2))
                 {
+                    audioManager.playThisEffect("uiScroll");
                     if (enemies[3] != null && enemiesDead[3] == false)
                     {
                         enemyIndicatorIndex = 3;
@@ -1491,6 +1538,7 @@ public class UIBTL : MonoBehaviour
                 }
                 else if (Input.GetKeyDown(KeyCode.UpArrow))
                 {
+                    audioManager.playThisEffect("uiScroll");
                     if (enemies[0] != null && enemiesDead[0] == false)
                     {
                         enemyIndicatorIndex = 0;
@@ -1501,6 +1549,7 @@ public class UIBTL : MonoBehaviour
             case 2:
                 if (Input.GetKeyDown(KeyCode.DownArrow))
                 {
+                    audioManager.playThisEffect("uiScroll");
                     if (enemies[0] != null && enemiesDead[0] == false)
                     {
                         enemyIndicatorIndex = 0;
@@ -1509,6 +1558,7 @@ public class UIBTL : MonoBehaviour
                 }
                 else if ((Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow)) && (activeRange + playerInControl.initialPos >= 2))
                 {
+                    audioManager.playThisEffect("uiScroll");
                     if (enemies[3] != null && enemiesDead[3] == false)
                     {
                         enemyIndicatorIndex = 3;
@@ -1522,6 +1572,7 @@ public class UIBTL : MonoBehaviour
                 }
                 else if (Input.GetKeyDown(KeyCode.UpArrow))
                 {
+                    audioManager.playThisEffect("uiScroll");
                     if (enemies[1] != null && enemiesDead[1] == false)
                     {
                         enemyIndicatorIndex = 1;
@@ -1532,6 +1583,7 @@ public class UIBTL : MonoBehaviour
             case 3:
                 if (Input.GetKeyDown(KeyCode.DownArrow))
                 {
+                    audioManager.playThisEffect("uiScroll");
                     if (enemies[4] != null && enemiesDead[4] == false)
                     {
                         enemyIndicatorIndex = 4;
@@ -1540,6 +1592,7 @@ public class UIBTL : MonoBehaviour
                 }
                 else if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow))
                 {
+                    audioManager.playThisEffect("uiScroll");
                     if (enemies[0] != null && enemiesDead[0] == false)
                     {
                         enemyIndicatorIndex = 0;
@@ -1548,6 +1601,7 @@ public class UIBTL : MonoBehaviour
                 }
                 else if (Input.GetKeyDown(KeyCode.UpArrow))
                 {
+                    audioManager.playThisEffect("uiScroll");
                     if (enemies[4] != null && enemiesDead[4] == false)
                     {
                         enemyIndicatorIndex = 4;
@@ -1558,6 +1612,7 @@ public class UIBTL : MonoBehaviour
             case 4:
                 if (Input.GetKeyDown(KeyCode.DownArrow))
                 {
+                    audioManager.playThisEffect("uiScroll");
                     if (enemies[3] != null && enemiesDead[3] == false)
                     {
                         enemyIndicatorIndex = 3;
@@ -1566,6 +1621,7 @@ public class UIBTL : MonoBehaviour
                 }
                 else if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow))
                 {
+                    audioManager.playThisEffect("uiScroll");
                     if (enemies[0] != null && enemiesDead[0] == false)
                     {
                         enemyIndicatorIndex = 0;
@@ -1584,6 +1640,7 @@ public class UIBTL : MonoBehaviour
                 }
                 else if (Input.GetKeyDown(KeyCode.UpArrow))
                 {
+                    audioManager.playThisEffect("uiScroll");
                     if (enemies[3] != null && enemiesDead[3] == false)
                     {
                         enemyIndicatorIndex = 3;
@@ -1595,6 +1652,7 @@ public class UIBTL : MonoBehaviour
 
         if (Input.GetButtonDown("Confirm"))
         {
+            audioManager.playThisEffect("uiConfirm");
             chooseEnemyArrow.gameObject.SetActive(false);
             if (previousState == btlUIState.choosingBasicCommand)
             {
@@ -1637,6 +1695,7 @@ public class UIBTL : MonoBehaviour
     {
         if (Input.GetButtonDown("Cancel"))
         {
+            audioManager.playThisEffect("uiCancel");
             DisableActivtyText();
             if (previousState == btlUIState.choosingBasicCommand)
             {
@@ -1657,6 +1716,7 @@ public class UIBTL : MonoBehaviour
         }
         else if (Input.GetButtonDown("Confirm"))
         {
+            audioManager.playThisEffect("uiConfirm");
             UpdateActivityText(skills.SkillName(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator]));
             playerInControl.UseSkillOnAllEnemies(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator],
                                                skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[5],
@@ -1673,6 +1733,7 @@ public class UIBTL : MonoBehaviour
     {
         if (Input.GetButtonDown("Cancel"))
         {
+            audioManager.playThisEffect("uiCancel");
             DisableActivtyText();
             if (previousState == btlUIState.choosingBasicCommand)
             {
@@ -1697,6 +1758,7 @@ public class UIBTL : MonoBehaviour
             case 0:
                 if ((Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow)) && (numberOfEnemies >= 4 && (!enemiesDead[3] || !enemiesDead[4])))
                 {
+                    audioManager.playThisEffect("uiScroll");
                     chooseEnemyRowIndicator++; //Move row indicator to the ranged row
 
                     for (int i = 0; i < 3; i++)  //Turn off the indicators for the front row
@@ -1717,6 +1779,7 @@ public class UIBTL : MonoBehaviour
             case 1:
                 if ((Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow)) && (!enemiesDead[0] || !enemiesDead[1] || !enemiesDead[2]))
                 {
+                    audioManager.playThisEffect("uiScroll");
                     chooseEnemyRowIndicator--; //Move row indicator to the front row
 
                     for (int i = 3; i < 5; i++)  //Turn off the indicators for the ranged row
@@ -1738,6 +1801,7 @@ public class UIBTL : MonoBehaviour
 
         if (Input.GetButtonDown("Confirm"))
         {
+            audioManager.playThisEffect("uiConfirm");
             //Call the row function
             playerInControl.UseSkillOnEnemyRow(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator],
                                     skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[5],

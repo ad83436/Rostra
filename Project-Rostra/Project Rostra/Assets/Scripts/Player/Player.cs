@@ -18,6 +18,10 @@ public class Player : MonoBehaviour
     private UIBTL uiBTL;
     private ObjectPooler objPooler;
     private SkillsInventory skills;
+    private AudioManager audioManager;
+
+    //Audio
+    private string audioForSkillEffectName = ""; //Used to know what sound to play for each skill
 
     //Player stats
     public float atk;
@@ -214,6 +218,7 @@ public class Player : MonoBehaviour
         uiBTL = UIBTL.instance;
         objPooler = ObjectPooler.instance;
         skills = SkillsInventory.invInstance;
+        audioManager = AudioManager.instance;
 
         //States
         currentState = playerState.Idle;
@@ -856,18 +861,21 @@ public class Player : MonoBehaviour
         //Check if the skill is immediate or if the player needs to wait a number of turns
         if (skillID == (int)SKILLS.Ar_Heal) //Heal
         {
+            audioForSkillEffectName = "heal";
             skillTarget = 6;//Single player heal
             skillAnimatorName = "Heal";
             skillWaitingIndex = 1;
         }
         else if(skillID == (int)SKILLS.Ar_ManaCharge)
         {
+            audioForSkillEffectName = "manaCharge";
             skillTarget = 6;//Single player heal
             skillAnimatorName = "Heal";
             skillWaitingIndex = 2; //Mana heal wait is 2 per the animator
         }
         else if(skillID == (int)SKILLS.Ar_LullabyOfHope)
         {
+            audioForSkillEffectName = "hope";
             skillTarget = 6;//Single player heal
             skillAnimatorName = "Heal";
             skillWaitingIndex = 3; //Lullaby of Hope wait is 3 per the animator
@@ -875,6 +883,7 @@ public class Player : MonoBehaviour
         }
         else if(skillID == (int)SKILLS.Ar_DrainEye)
         {
+            audioForSkillEffectName = "drainEye";
             skillTarget = 8; //Single player buff
             skillAnimatorName = "DrainEye";
             skillWaitingIndex = 1; //No wait for draineye
@@ -927,6 +936,23 @@ public class Player : MonoBehaviour
         }
         else
         {
+            if (playerIndex == 0)
+            {
+
+            }
+            else if (playerIndex == 1)
+            {
+
+            }
+            else if (playerIndex == 2)
+            {
+
+            }
+            else if (playerIndex == 3)
+            {
+                audioManager.playThisEffect("arWait");
+            }
+
             waitTimeText.gameObject.SetActive(true);
             waitTimeText.text = skillWaitTime.ToString();
             playerAnimator.SetInteger("WaitingIndex", skillWaitingIndex);
@@ -945,6 +971,7 @@ public class Player : MonoBehaviour
         //Check if the skill is immediate or if the player needs to wait a number of turns
         if (skillID == (int)SKILLS.Ar_HealingAura) //Heal 
         {
+            audioForSkillEffectName = "heal";
             skillTarget = 7;//All player heal
             skillAnimatorName = "Heal";
             skillWaitingIndex = 1;
@@ -979,7 +1006,22 @@ public class Player : MonoBehaviour
         }
         else
         {
-            //Debug.Log("Now");
+            if (playerIndex == 0)
+            {
+
+            }
+            else if (playerIndex == 1)
+            {
+
+            }
+            else if (playerIndex == 2)
+            {
+
+            }
+            else if (playerIndex == 3)
+            {
+                audioManager.playThisEffect("arWait");
+            }
             waitTimeText.gameObject.SetActive(true);
             waitTimeText.text = skillWaitTime.ToString();
             playerAnimator.SetInteger("WaitingIndex", skillWaitingIndex);
@@ -1055,6 +1097,23 @@ public class Player : MonoBehaviour
         }
         else
         {
+            if (playerIndex == 0)
+            {
+
+            }
+            else if (playerIndex == 1)
+            {
+
+            }
+            else if (playerIndex == 2)
+            {
+
+            }
+            else if (playerIndex == 3)
+            {
+                audioManager.playThisEffect("arWait");
+            }
+
             //If there's waiting time, go to wait state and end the turn 
             waitTimeText.gameObject.SetActive(true);
             waitTimeText.text = skillWaitTime.ToString();
@@ -1090,6 +1149,7 @@ public class Player : MonoBehaviour
                 skillWaitingIndex = -2;
                 break;
             case (int)SKILLS.Ar_Armageddon:
+                audioForSkillEffectName = "armageddon";
                 skillObjectForObjPooler = "ArmFire";
                 skillNameForObjPooler = "ArmImpact";
                 skillAnimatorName = "Heal";
@@ -1120,6 +1180,23 @@ public class Player : MonoBehaviour
         }
         else
         {
+            if(playerIndex == 0)
+            {
+
+            }
+            else if (playerIndex == 1)
+            {
+
+            }
+            else if (playerIndex == 2)
+            {
+
+            }
+            else if (playerIndex == 3)
+            {
+                audioManager.playThisEffect("arWait");
+            }
+
             //If there's waiting time, go to wait state and end the turn 
             waitTimeText.gameObject.SetActive(true);
             waitTimeText.text = skillWaitTime.ToString();
@@ -1154,6 +1231,7 @@ public class Player : MonoBehaviour
 
         else if(skillID == (int)SKILLS.Ar_IceAge)
         {
+            audioForSkillEffectName = "iceAge";
             skillNameForObjPooler = "IceAge";
             skillAnimatorName = "Heal";
             skillWaitingIndex = 2; //Same animation as mana heal
@@ -1167,6 +1245,23 @@ public class Player : MonoBehaviour
         }
         else
         {
+            if (playerIndex == 0)
+            {
+
+            }
+            else if (playerIndex == 1)
+            {
+
+            }
+            else if (playerIndex == 2)
+            {
+
+            }
+            else if (playerIndex == 3)
+            {
+                audioManager.playThisEffect("arWait");
+            }
+
             //If there's waiting time, go to wait state and end the turn 
             waitTimeText.gameObject.SetActive(true);
             waitTimeText.text = skillWaitTime.ToString();
@@ -1532,16 +1627,19 @@ public class Player : MonoBehaviour
             {
                 if (chosenSkill == (int)SKILLS.Ar_Heal)
                 {
+                    
                     healThisPlayer.Heal(0.01f * (0.5f * actualATK + skills.SkillStats(chosenSkill)[0])); //Passing in a percentage
                     playerAnimator.SetBool("Heal", false);
                 }
                 else if (chosenSkill == (int)SKILLS.Ar_ManaCharge)
                 {
+                    
                     healThisPlayer.ManaCharge(0.01f * (0.5f * actualATK + skills.SkillStats(chosenSkill)[0]));
                     playerAnimator.SetBool("Heal", false);
                 }
                 else if (chosenSkill == (int)SKILLS.Ar_LullabyOfHope)
                 {
+                    
                     healThisPlayer.RevivePlayer(0.5f); //Revive a player with half their HP
                     playerAnimator.SetBool("Heal", false);
                 }
@@ -1550,6 +1648,7 @@ public class Player : MonoBehaviour
             {
                 if (chosenSkill == (int)SKILLS.Ar_HealingAura)
                 {
+                    
                     for (int i = 0; i < battleManager.players.Length; i++)
                     {
                         if (battleManager.players[i].playerReference != null)
@@ -1573,6 +1672,7 @@ public class Player : MonoBehaviour
                 }
                 else if (chosenSkill == (int)SKILLS.Ar_DrainEye)
                 {
+                    
                     healThisPlayer.BuffStats("DrainEye", skills.SkillStats(chosenSkill)[0], 3);
                     playerAnimator.SetBool("DrainEye", false);
                 }
@@ -1642,7 +1742,7 @@ public class Player : MonoBehaviour
             }
 
             // ----- End of Skill Effect -----  //
-
+            audioManager.playThisEffect(audioForSkillEffectName);
             if (chosenSkill == (int)SKILLS.Ob_SpearDance)
             {
                 actualCRIT = critBeforeDance; //Return the crit to what it was before using the skill
