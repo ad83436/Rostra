@@ -106,6 +106,9 @@ public class Player : MonoBehaviour
     private float strBuffSkillQCounter = 0;
     private float drainEyeSkillQCounter = 0;
 
+    //Need to keep track of the actual attack before raging and buffing so that you can stack them
+    private float actualAttackBeforeRage;
+
     //Rage
     public float currentRage;
     public float maxRage;
@@ -183,7 +186,6 @@ public class Player : MonoBehaviour
     public float actualAgi;
     private float actualCRIT;
     private float actualSTR;
-    public bool healable; //False when dead or in rage mode
 
     //Targeted enemy info
     private Enemy attackingThisEnemy;
@@ -266,7 +268,6 @@ public class Player : MonoBehaviour
         actualAgi = agi;
         actualCRIT = crit;
         actualSTR = str;
-        healable = false;
         dead = false;
 
         //UI
@@ -764,12 +765,33 @@ public class Player : MonoBehaviour
 	//Called by the UIBTl when the player chooses to go into rage mode
 	public void Rage()
     {
-        actualATK = atk * 2.0f;
+        currentState = playerState.Rage;
+        actualAttackBeforeRage = actualATK; //In case the player's attack was buffed before going into RAGE
+        actualATK = actualATK * 2.0f;
+
+        if (defenseBuffed && actualDEF > def) //Check fo buffs
+        {
+            BuffStats("Defense", -0.3f, 0); //Disable the defense buff
+        }
+
+        if (agilityBuffed && actualAgi > agi) //Check fo buffs
+        {
+            BuffStats("Agility", -0.3f, 0); //Disable the agility buff
+        }
+
+        if(drainEye)
+        {
+            //Turn off drain eye
+            drainEyeSkillQCounter = 0;
+            drainEye = false;
+            uiBTL.UpdateActivityText("Drain Eye has shut");
+            drainEyeBuffEffect.gameObject.SetActive(false);
+        }
+
         actualDEF = def / 2.0f;
-        healable = false;
+
         QCounter = 0; //Reset the QCounter
         rageModeIndicator.gameObject.SetActive(true);
-        currentState = playerState.Rage;
     }
 
     public void ResetPlayerRage()
@@ -777,9 +799,8 @@ public class Player : MonoBehaviour
         //Debug.Log("Rage has cooled down");
         currentRage = 0.0f;
         PartyStats.chara[playerIndex].rage = currentRage;
-        actualATK = atk;
+        actualATK = actualAttackBeforeRage;
         actualDEF = def;
-        healable = true;
         canRage = false;
         QCounter = 0;
         rageModeIndicator.gameObject.SetActive(false);
@@ -1363,8 +1384,15 @@ public class Player : MonoBehaviour
                                     btlCam.CameraShake();
                                     if (CalculateCrit() <= actualCRIT)
                                     {
-                                        //Debug.Log("Skill Crit");
-                                        battleManager.enemies[i].enemyReference.TakeDamage(0.7f * actualATK + skills.SkillStats(chosenSkill)[0], numberOfAttacks); //Damage is the half the player's attack stat and the skill's attack stat
+                                        if (chosenSkill == (int)SKILLS.Ar_IceAge)
+                                        {
+                                            battleManager.enemies[i].enemyReference.TakeDamage(0.7f * actualATK + skills.SkillStats(chosenSkill)[0], numberOfAttacks, 1, 0.3f, 3, "Agility", EnemyStatusAilment.none); //Damage is the half the player's attack stat and the skill's attack stat
+                                        }
+                                        else
+                                        {
+                                            battleManager.enemies[i].enemyReference.TakeDamage(0.7f * actualATK + skills.SkillStats(chosenSkill)[0], numberOfAttacks); //Damage is the half the player's attack stat and the skill's attack stat
+                                        }
+
                                         if (drainEye) //Check if Drain Eye is active
                                         {
                                             Heal(0.01f * (drainEyeModifier * (0.7f * actualATK + skills.SkillStats(chosenSkill)[0])));
@@ -1373,7 +1401,14 @@ public class Player : MonoBehaviour
                                     else
                                     {
                                         //Debug.Log("No Skill Crit");
-                                        battleManager.enemies[i].enemyReference.TakeDamage(0.5f * actualATK + skills.SkillStats(chosenSkill)[0], numberOfAttacks); //Damage is the half the player's attack stat and the skill's attack stat
+                                        if (chosenSkill == (int)SKILLS.Ar_IceAge)
+                                        {
+                                            battleManager.enemies[i].enemyReference.TakeDamage(0.5f * actualATK + skills.SkillStats(chosenSkill)[0], numberOfAttacks, 1, 0.3f, 3, "Agility", EnemyStatusAilment.none); //Damage is the half the player's attack stat and the skill's attack stat
+                                        }
+                                        else
+                                        {
+                                            battleManager.enemies[i].enemyReference.TakeDamage(0.5f * actualATK + skills.SkillStats(chosenSkill)[0], numberOfAttacks); //Damage is the half the player's attack stat and the skill's attack stat
+                                        }
                                         if (drainEye) //Check if Drain Eye is active
                                         {
                                             Heal(0.01f * (drainEyeModifier * (0.5f * actualATK + skills.SkillStats(chosenSkill)[0])));
@@ -1526,6 +1561,8 @@ public class Player : MonoBehaviour
                         }
                     }
                 }
+                playerAnimator.SetBool(skillAnimatorName, false);
+                playerAnimator.SetInteger("WaitingIndex", 0);
             }
             else if (skillTarget == 8) //Buff single player
             {
@@ -1877,7 +1914,7 @@ public class Player : MonoBehaviour
             {
                 attackBuffSkillQCounter = 0;
                 attackBuffed = false;
-                actualATK = atk;
+                actualAttackBeforeRage = actualATK = atk; //Should the atk buff end before the RAGE, the player should return to their regular atk once RAGE is over
                 uiBTL.UpdateActivityText("ATK is back to normal");
                 atkBuffArrowIndicator.gameObject.SetActive(false);
             }
@@ -2030,7 +2067,7 @@ public class Player : MonoBehaviour
                 break;
         }
 
-        if (chosenSkill != (int)SKILLS.Ob_Lutenist) //When using Lutenist, the turn is ended by the enemies
+        if (chosenSkill != (int)SKILLS.Ob_Lutenist && currentState != playerState.Rage) //When using Lutenist, the turn is ended by the enemies
         {
             uiBTL.EndTurn(); //End the turn of the current player (i.e. the buffer) when the buffing is done
         }

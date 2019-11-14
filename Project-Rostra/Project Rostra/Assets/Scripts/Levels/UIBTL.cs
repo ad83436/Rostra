@@ -175,7 +175,7 @@ public class UIBTL : MonoBehaviour
         enemies = new Enemy[5]; //Filled by the BTL Manager in Add Enemy
         enemiesDead = new bool[5]; //Every entry is turned to true by the enemy that dies
         controlsIndicator = 0; //Start at Attack
-        highlighter.transform.position = highlighiterPos[0].transform.position;
+        highlighter.transform.position = highlighiterPos[0].transform.localPosition;
         previousState = currentState = btlUIState.choosingBasicCommand;
         playerName.text = "";
         chooseEnemyArrow.gameObject.SetActive(false);
@@ -186,7 +186,7 @@ public class UIBTL : MonoBehaviour
 
         imagesQ = new List<Sprite>();
         imageRecyclePos = images[8].gameObject.transform.localPosition;
-        //Debug.Log("At the beginning " + imageRecyclePos.x);
+        ////Debug.Log("At the beginning " + imageRecyclePos.x);
         targetPos = images[0].transform.localPosition;
         imagesOriginalSize = images[0].rectTransform.sizeDelta;
         imagesHilightedSize = new Vector2(144.32f, 64.97f);
@@ -416,7 +416,6 @@ public class UIBTL : MonoBehaviour
             {
                 rageModeIndicator1.gameObject.SetActive(false);
                 rageModeIndicator2.gameObject.SetActive(false);
-                skillsText.color = Color.white;
                 itemsText.color = Color.white;
                 guardText.color = Color.white;
             }
@@ -437,11 +436,12 @@ public class UIBTL : MonoBehaviour
 
     public virtual void ReArrangeQ() //Called when an enemy has died, we need to move all the images before the dead image
     {
-       // //Debug.Log("We are rearranging " + enemyHasDied);
-       // //Debug.Log("Dead deadEnemyImagePos count " + deadEnemyImagePos.Count);
+        //Debug.Log(enemyHasDied);
+       // ////Debug.Log("We are rearranging " + enemyHasDied);
+       // ////Debug.Log("Dead deadEnemyImagePos count " + deadEnemyImagePos.Count);
         if (enemyHasDied)
         {
-            //Debug.Log("Dead positions count is : " + deadEnemyImagePos.Count);
+            ////Debug.Log("Dead positions count is : " + deadEnemyImagePos.Count);
             if (deadEnemyImagePos.Count > 0)
             {
                 for(int i = 0; i<deadEnemyImageIndex.Count; i++)
@@ -454,7 +454,7 @@ public class UIBTL : MonoBehaviour
                     if (images[i].transform.localPosition.x < FindMaxImagePosition(deadEnemyImagePos) && images[i].gameObject.activeSelf)
                     {
                         allTheImagesBeforeTheDeadOne[i] = images[i];
-                        ////Debug.Log("Before dead one: " + allTheImagesBeforeTheDeadOne[i].name);
+                        //////Debug.Log("Before dead one: " + allTheImagesBeforeTheDeadOne[i].name);
                     }
                 }
                 
@@ -462,13 +462,13 @@ public class UIBTL : MonoBehaviour
                     {
                         if (allTheImagesBeforeTheDeadOne[i] != null && allTheImagesBeforeTheDeadOne[i].gameObject.activeSelf) //Move the images...
                         {
-                            //Debug.Log("We're comparing to this: " + images[deadEnemyImageIndex[0]]);
+                            ////Debug.Log("We're comparing to this: " + images[deadEnemyImageIndex[0]]);
                             targetPos.x = allTheImagesBeforeTheDeadOne[i].transform.localPosition.x + imageMaxDistance;
                             allTheImagesBeforeTheDeadOne[i].transform.localPosition = Vector2.MoveTowards(images[i].transform.localPosition, targetPos, imageMovementSpeed * Time.deltaTime);
                             if (allTheImagesBeforeTheDeadOne[i].transform.localPosition.x >= images[deadEnemyImageIndex[0]].transform.localPosition.x) //...Until they're in the same position as the dead one
                             {
-                                //Debug.Log("Name of dead image: " + images[deadEnemyImageIndex[0]].name + "Position: " + images[deadEnemyImageIndex[0]].transform.localPosition.x);
-                                //Debug.Log("Name Of exceeding image " + allTheImagesBeforeTheDeadOne[i].name + "Position: " + allTheImagesBeforeTheDeadOne[i].transform.localPosition.x);
+                                ////Debug.Log("Name of dead image: " + images[deadEnemyImageIndex[0]].name + "Position: " + images[deadEnemyImageIndex[0]].transform.localPosition.x);
+                                ////Debug.Log("Name Of exceeding image " + allTheImagesBeforeTheDeadOne[i].name + "Position: " + allTheImagesBeforeTheDeadOne[i].transform.localPosition.x);
 
                                 images[deadEnemyImageIndex[0]].gameObject.SetActive(false);
                             //If there are still more positions, remove the zero index, and go agane                                                            
@@ -486,6 +486,7 @@ public class UIBTL : MonoBehaviour
         }
         else
         {
+            //Debug.Log("Move images now baby");
             for(int i =0;i<allTheImagesBeforeTheDeadOne.Length;i++)
             {
                 allTheImagesBeforeTheDeadOne[i] = null; //Reset the array
@@ -494,7 +495,7 @@ public class UIBTL : MonoBehaviour
             currentState = btlUIState.updateQ;
             deadEnemyImageIndex.Clear(); //Reset
             deadEnemyImagePos.Clear();
-            //Debug.Log("We have moved to Update Q");
+            ////Debug.Log("We have moved to Update Q");
         }
     }
 
@@ -608,7 +609,6 @@ public class UIBTL : MonoBehaviour
         {
             rageModeIndicator1.gameObject.SetActive(true);
             rageModeIndicator2.gameObject.SetActive(true);
-            skillsText.color = Color.grey;
             itemsText.color = Color.grey;
             guardText.color = Color.grey;
             rageText.color = Color.yellow;
@@ -617,7 +617,6 @@ public class UIBTL : MonoBehaviour
         {
             rageModeIndicator1.gameObject.SetActive(false);
             rageModeIndicator2.gameObject.SetActive(false);
-            skillsText.color = Color.white;
             itemsText.color = Color.white;
             guardText.color = Color.white;
             RageOptionTextColor();
@@ -646,32 +645,42 @@ public class UIBTL : MonoBehaviour
         {
             switch (controlsIndicator)
             {
-                //If the player is in rage mode, only "Attack" can be chosen
+                //If the player is in rage mode, only "Attack" and "Skills" can be chosen
                 case 0://Highlighter is at attack
                     if (Input.GetKeyDown(KeyCode.DownArrow) && playerInControl.currentState != Player.playerState.Rage)
                     {
                         controlsIndicator = 1;
-                        highlighter.transform.position = highlighiterPos[1].transform.position;
+                        highlighter.transform.position = highlighiterPos[1].transform.localPosition;
 
                         if(activityText.text!="") //If there's an active text, disable it once the player moves the indicator
                         {
                             DisableActivtyText();
                         }
                     }
-                    else if (Input.GetKeyDown(KeyCode.RightArrow) && playerInControl.currentState != Player.playerState.Rage)
+                    else if (Input.GetKeyDown(KeyCode.RightArrow)) //Go to skills
                     {
                         controlsIndicator = 2;
-                        highlighter.transform.position = highlighiterPos[2].transform.position;
+                        highlighter.transform.position = highlighiterPos[2].transform.localPosition;
 
                         if (activityText.text != "") //If there's an active text, disable it once the player moves the indicator
                         {
                             DisableActivtyText();
                         }
                     }
-                    else if (Input.GetKeyDown(KeyCode.LeftArrow) && playerInControl.canRage && playerInControl.currentState != Player.playerState.Rage)
+                    else if (Input.GetKeyDown(KeyCode.LeftArrow) && playerInControl.canRage && playerInControl.currentState != Player.playerState.Rage) //Go to Rage
                     {
                         controlsIndicator = 4;
-                        highlighter.transform.position = highlighiterPos[4].transform.position;
+                        highlighter.transform.position = highlighiterPos[4].transform.localPosition;
+
+                        if (activityText.text != "") //If there's an active text, disable it once the player moves the indicator
+                        {
+                            DisableActivtyText();
+                        }
+                    }
+                    else if(Input.GetKeyDown(KeyCode.LeftArrow) && !playerInControl.canRage) // Go to skills
+                    {
+                        controlsIndicator = 2;
+                        highlighter.transform.position = highlighiterPos[2].transform.localPosition;
 
                         if (activityText.text != "") //If there's an active text, disable it once the player moves the indicator
                         {
@@ -700,12 +709,12 @@ public class UIBTL : MonoBehaviour
                     if (Input.GetKeyDown(KeyCode.UpArrow))
                     {
                         controlsIndicator = 0;
-                        highlighter.transform.position = highlighiterPos[0].transform.position;
+                        highlighter.transform.position = highlighiterPos[0].transform.localPosition;
                     }
                     else if (Input.GetKeyDown(KeyCode.RightArrow))
                     {
                         controlsIndicator = 3;
-                        highlighter.transform.position = highlighiterPos[3].transform.position;
+                        highlighter.transform.position = highlighiterPos[3].transform.localPosition;
                     }
                     else if (Input.GetButtonDown("Confirm")) //Player has chosen Guard
                     {
@@ -716,20 +725,20 @@ public class UIBTL : MonoBehaviour
 
                 case 2:
                     //Highlighter is at Skills
-                    if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.UpArrow))
+                    if ((Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.UpArrow)) && playerInControl.currentState != Player.playerState.Rage)
                     {
                         controlsIndicator = 3;
-                        highlighter.transform.position = highlighiterPos[3].transform.position;
+                        highlighter.transform.position = highlighiterPos[3].transform.localPosition;
                     }
                     else if (Input.GetKeyDown(KeyCode.LeftArrow))
                     {
                         controlsIndicator = 0;
                         highlighter.transform.position = highlighiterPos[0].transform.position;
                     }
-                    else if (Input.GetKeyDown(KeyCode.RightArrow) && playerInControl.canRage)
+                    else if (Input.GetKeyDown(KeyCode.RightArrow) && playerInControl.canRage && playerInControl.currentState != Player.playerState.Rage)
                     {
                         controlsIndicator = 4;
-                        highlighter.transform.position = highlighiterPos[4].transform.position;
+                        highlighter.transform.position = highlighiterPos[4].transform.localPosition;
                     }
                     else if (Input.GetButtonDown("Confirm")) //Player has chosen Skills
                     {
@@ -759,17 +768,17 @@ public class UIBTL : MonoBehaviour
                     if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.UpArrow))
                     {
                         controlsIndicator = 2;
-                        highlighter.transform.position = highlighiterPos[2].transform.position;
+                        highlighter.transform.position = highlighiterPos[2].transform.localPosition;
                     }
                     else if (Input.GetKeyDown(KeyCode.LeftArrow))
                     {
                         controlsIndicator = 1;
-                        highlighter.transform.position = highlighiterPos[1].transform.position;
+                        highlighter.transform.position = highlighiterPos[1].transform.localPosition;
                     }
                     else if (Input.GetKeyDown(KeyCode.RightArrow) && playerInControl.canRage)
                     {
                         controlsIndicator = 4;
-                        highlighter.transform.position = highlighiterPos[4].transform.position;
+                        highlighter.transform.position = highlighiterPos[4].transform.localPosition;
                     }
                     else if (Input.GetButtonDown("Confirm")) //Player has chosen Items
                     {
@@ -798,28 +807,27 @@ public class UIBTL : MonoBehaviour
                     if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.UpArrow))
                     {
                         controlsIndicator = 3;
-                        highlighter.transform.position = highlighiterPos[3].transform.position;
+                        highlighter.transform.position = highlighiterPos[3].transform.localPosition;
                     }
                     else if (Input.GetKeyDown(KeyCode.LeftArrow))
                     {
                         controlsIndicator = 2;
-                        highlighter.transform.position = highlighiterPos[2].transform.position;
+                        highlighter.transform.position = highlighiterPos[2].transform.localPosition;
                     }
                     else if (Input.GetKeyDown(KeyCode.RightArrow))
                     {
                         controlsIndicator = 0;
-                        highlighter.transform.position = highlighiterPos[0].transform.position;
+                        highlighter.transform.position = highlighiterPos[0].transform.localPosition;
                     }
                     else if (Input.GetButtonDown("Confirm")) //Player has chosen Rage
                     {
                         rageText.color = Color.yellow;
-                        skillsText.color = Color.gray;
                         itemsText.color = Color.gray;
                         guardText.color = Color.gray;
                         playerInControl.Rage(); //Go into rage mode
                         rageModeIndicator1.gameObject.SetActive(true);
                         rageModeIndicator2.gameObject.SetActive(true);
-                        highlighter.transform.position = highlighiterPos[0].transform.position;
+                        highlighter.transform.position = highlighiterPos[0].transform.localPosition;
                         controlsIndicator = 0;
                     }
                     break;
@@ -1598,7 +1606,7 @@ public class UIBTL : MonoBehaviour
                 //If the player is using something other than Rally, then choose normally...
                 if(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator] != (int)SKILLS.Fa_Rally)
                 { 
-                //Debug.Log("Enemy has been chosen");
+                ////Debug.Log("Enemy has been chosen");
                 UpdateActivityText(skills.SkillName(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator]));
                 playerInControl.UseSkillOnOneEnemy(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator],
                                                    skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[5],
@@ -1614,7 +1622,7 @@ public class UIBTL : MonoBehaviour
                 //..Otherwise, make sure the enemy chosen has not been rallied against already
                 else if (PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator] == (int)SKILLS.Fa_Rally && enemies[enemyIndicatorIndex].currentStatusAilment0 != EnemyStatusAilment.rallied && enemies[enemyIndicatorIndex].currentStatusAilment1 != EnemyStatusAilment.rallied)
                 {
-                    //Debug.Log("Enemy has been chosen");
+                    ////Debug.Log("Enemy has been chosen");
                     UpdateActivityText(skills.SkillName(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator]));
                     playerInControl.UseSkillOnOneEnemy(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator],
                                                        skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[5],
@@ -1774,6 +1782,7 @@ public class UIBTL : MonoBehaviour
     public virtual void EndTurn()
     {
         //Debug.Log("End turn has been called");
+        //Debug.Log("#of end calls " + numberOfEndTurnCalls);
         if (numberOfEndTurnCalls > 0)
         {
             numberOfEndTurnCalls--;
@@ -1797,9 +1806,9 @@ public class UIBTL : MonoBehaviour
                 highlighter.gameObject.transform.position = highlighiterPos[0].transform.position;
                 numberOfEndTurnCalls = 0;
                 playerInControl.ForcePlayerTurnAnimationOff();
-                currentState = btlUIState.rearrangingQ;
+                //Debug.Log("Go to rearranging byby");
             }
-
+            currentState = btlUIState.rearrangingQ;
         }
     }
 
@@ -1813,7 +1822,7 @@ public class UIBTL : MonoBehaviour
           {
               if(enemyImageReferences[enemyIndex] == images[i]) //Get the dead image
               {
-                  ////Debug.Log("new index is " + enemyIndex);
+                  //////Debug.Log("new index is " + enemyIndex);
                       deadEnemyImageIndex.Add(i); //Find the image index inside images[] of the dead enemy so you can re-arrange the Q
                       deadEnemyImagePos.Add(images[i].gameObject.transform.localPosition.x);
                   break;
@@ -1823,11 +1832,11 @@ public class UIBTL : MonoBehaviour
 
         /*  if (imageRecyclePos.x < imageXPositions[lastImageIndex - numberOfDeadEnemies]) //Check if the recycle position is to the left of the dead image
           {
-              //Debug.Log("We have obtained a new recylce position");
+              ////Debug.Log("We have obtained a new recylce position");
               imageRecyclePos.x = imageXPositions[lastImageIndex - numberOfDeadEnemies]; //Get the new recylce position
           }
 
-          //Debug.Log("RECYCLE POSITION " + imageRecyclePos.x + "OF IMAGE " + (8 - numberOfDeadEnemies));
+          ////Debug.Log("RECYCLE POSITION " + imageRecyclePos.x + "OF IMAGE " + (8 - numberOfDeadEnemies));
 
           //If the dead enemy was the last image on the Q, we don't need to rearrange it
           //We need to find the max position so that if multiple enemies die at the same time, we make sure to move the images as one of them could have thier image positione lower than the recycle position
@@ -1837,7 +1846,7 @@ public class UIBTL : MonoBehaviour
           }
           else
           {
-              //Debug.Log("YEAH AS I EXPECTED " + FindMaxImagePosition(deadEnemyImagePos) + " AND RECYLCE POS " + imageRecyclePos.x);
+              ////Debug.Log("YEAH AS I EXPECTED " + FindMaxImagePosition(deadEnemyImagePos) + " AND RECYLCE POS " + imageRecyclePos.x);
               enemyImageReferences[enemyIndex].gameObject.SetActive(false);
           }
           */
@@ -1877,8 +1886,9 @@ public class UIBTL : MonoBehaviour
         playerImageReferences[playerIndex].color = colorAfterDeath;
         playerImageReferences[playerIndex].GetComponent<QImage>().EnableSkull();
         numberOfDeadPlayers++;
+        Debug.Log(numberOfDeadPlayers);
 
-        if(numberOfDeadPlayers>=numberOfPlayers)
+        if(numberOfDeadPlayers >= numberOfPlayers)
         {
             battleHasEnded = true;
             Player.lionsPrideIsActive = false;
@@ -1948,7 +1958,7 @@ public class UIBTL : MonoBehaviour
     //Update the activity text
     public virtual void UpdateActivityText(string activity)
     {
-        //Debug.Log("Update Text : " + activity);
+        ////Debug.Log("Update Text : " + activity);
         activtyTextBack.gameObject.SetActive(true);
         activityText.text = activity;
     }
@@ -2027,7 +2037,7 @@ public class UIBTL : MonoBehaviour
             }
         }
         numberOfEndTurnCalls--; //Number of end turn calls should be less by one since the last enemy to call it should actually end the turn
-        //Debug.Log("Number of End Turn Calls = " + numberOfEndTurnCalls);
+        ////Debug.Log("Number of End Turn Calls = " + numberOfEndTurnCalls);
     }
 
 }
