@@ -141,7 +141,6 @@ public class Enemy : MonoBehaviour
 
     protected void Awake()
     {
-        print("Very First  " + currentHP);
         IncreaseStatsBasedOnLevel(eCurrentLevel);
         AssingClassSkills(this);
         GiveNamesAndSkills();
@@ -200,7 +199,6 @@ public class Enemy : MonoBehaviour
         print(currentHP);
 
         currentState = EnemyState.idle;
-        //waitTurnsText.gameObject.SetActive(false);
 
         chainedEnemy = new Enemy[2]; //2 enemies can be chained
 
@@ -377,6 +375,8 @@ public class Enemy : MonoBehaviour
                                 {
                                     currentState = EnemyState.skilling;
                                     waitQTurns = waitTime;
+                                    waitTurnsText.text = waitQTurns.ToString(); //Update the UI
+                                    waitTurnsText.gameObject.SetActive(true);
                                     animator.SetBool("SkillInUse", true);
                                     MakeSkillsWork(canUseSkill);
                                     EndTurn();
@@ -412,6 +412,8 @@ public class Enemy : MonoBehaviour
                                     {
                                         currentState = EnemyState.skilling;
                                         waitQTurns = waitTime;
+                                        waitTurnsText.text = waitQTurns.ToString(); //Update the UI
+                                        waitTurnsText.gameObject.SetActive(true);
                                         animator.SetBool("SkillInUse", true);
                                         MakeSkillsWork(canUseSkill);
                                         EndTurn();
@@ -443,6 +445,8 @@ public class Enemy : MonoBehaviour
                                     {
                                         currentState = EnemyState.skilling;
                                         waitQTurns = waitTime;
+                                        waitTurnsText.text = waitQTurns.ToString(); //Update the UI
+                                        waitTurnsText.gameObject.SetActive(true);
                                         animator.SetBool("SkillInUse", true);
                                         MakeSkillsWork(canUseSkill);
                                         EndTurn();
@@ -463,7 +467,7 @@ public class Enemy : MonoBehaviour
 
                             if (attackChance > 30)
                             {
-                                if (skillChance >= 47)
+                                if (skillChance >= 30)
                                 {
                                     if (skillNeedsCharge)
                                     {
@@ -479,6 +483,8 @@ public class Enemy : MonoBehaviour
                                     {
                                         currentState = EnemyState.skilling;
                                         waitQTurns = waitTime;
+                                        waitTurnsText.text = waitQTurns.ToString(); //Update the UI
+                                        waitTurnsText.gameObject.SetActive(true);
                                         animator.SetBool("SkillInUse", true);
                                         MakeSkillsWork(canUseSkill);
                                         EndTurn();
@@ -511,6 +517,8 @@ public class Enemy : MonoBehaviour
                                     {
                                         currentState = EnemyState.skilling;
                                         waitQTurns = waitTime;
+                                        waitTurnsText.text = waitQTurns.ToString(); //Update the UI
+                                        waitTurnsText.gameObject.SetActive(true);
                                         animator.SetBool("SkillInUse", true);
                                         MakeSkillsWork(canUseSkill);
                                         EndTurn();
@@ -530,7 +538,7 @@ public class Enemy : MonoBehaviour
 
                             if (attackChance > 30)
                             {
-                                if (skillChance >= 47)
+                                if (skillChance >= 45)
                                 {
                                     if (skillNeedsCharge)
                                     {
@@ -546,6 +554,8 @@ public class Enemy : MonoBehaviour
                                     {
                                         currentState = EnemyState.skilling;
                                         waitQTurns = waitTime;
+                                        waitTurnsText.text = waitQTurns.ToString(); //Update the UI
+                                        waitTurnsText.gameObject.SetActive(true);
                                         animator.SetBool("SkillInUse", true);
                                         MakeSkillsWork(canUseSkill);
                                         EndTurn();
@@ -576,6 +586,8 @@ public class Enemy : MonoBehaviour
                                     {
                                         currentState = EnemyState.skilling;
                                         waitQTurns = waitTime;
+                                        waitTurnsText.text = waitQTurns.ToString(); //Update the UI
+                                        waitTurnsText.gameObject.SetActive(true);
                                         animator.SetBool("SkillInUse", true);
                                         MakeSkillsWork(canUseSkill);
                                         EndTurn();
@@ -594,7 +606,7 @@ public class Enemy : MonoBehaviour
                         case EnemyAttackType.Healer:
 
                             float chanceOfHealth = Random.Range(0.2f, 0.9f); //  how low should  the health be before it is healed //CHANGE THIS FUCKING VARIABLE NAME ANDRE!!
-                            if (skillChance >= 20)
+                            if (skillChance >= 49)
                             {
                                 if (skillNeedsCharge)
                                 {
@@ -610,6 +622,8 @@ public class Enemy : MonoBehaviour
                                 {
                                     currentState = EnemyState.skilling;
                                     waitQTurns = waitTime;
+                                    waitTurnsText.text = waitQTurns.ToString(); //Update the UI
+                                    waitTurnsText.gameObject.SetActive(true);
                                     animator.SetBool("SkillInUse", true);
                                     MakeSkillsWork(canUseSkill);
                                     EndTurn();
@@ -664,6 +678,8 @@ public class Enemy : MonoBehaviour
                                 {
                                     currentState = EnemyState.skilling;
                                     waitQTurns = waitTime;
+                                    waitTurnsText.text = waitQTurns.ToString(); //Update the UI
+                                    waitTurnsText.gameObject.SetActive(true);
                                     animator.SetBool("SkillInUse", true);
                                     MakeSkillsWork(canUseSkill);
                                     EndTurn();
@@ -674,6 +690,7 @@ public class Enemy : MonoBehaviour
                             {
                                 EnemyToMod();
                                 int randomStat = Random.Range(0, 2); //pick a random stat to add to 
+                                float toBuffrNoBuff = Random.value;
 
                                 if(enemyToHeal == null || enemyToHeal.dead)
                                 {
@@ -693,8 +710,9 @@ public class Enemy : MonoBehaviour
                                     }
                                 }
 
-                                if (enemyToHeal.isStatModed)
+                                if (toBuffrNoBuff <=.3f)
                                 {
+                                    print("0");
                                     if (randomStat == 0)
                                     {
                                         AttackHighAtk();
@@ -711,83 +729,26 @@ public class Enemy : MonoBehaviour
                                     }
                                 }
 
-                                else if (!enemyToHeal.isStatModed)
+                                else 
                                 {
-                                    if (randomStat == 0 && eAttack > enemyToHeal.eAttack)
+                                    print("1");
+                                    if (randomStat == 0)
                                     {
                                         animator.SetBool("ModAtk", true);
                                     }
 
-                                    else  if (randomStat == 0 && eAttack <= enemyToHeal.eAttack)
-                                    {
-                                        randomStat = Random.Range(0, 2);
-
-                                        if(randomStat == 0)
-                                        {
-                                            AttackHighAtk();
-                                        }
-
-                                        else if(randomStat == 1)
-                                        {
-                                            AttackLowDef();
-                                        }
-
-                                        else
-                                        {
-                                            AttackLowHp();
-                                        }
-                                    }
-
-                                    if (randomStat == 1 && eDefence > enemyToHeal.eDefence)
+                                   else if (randomStat == 1)
                                     {
                                         animator.SetBool("ModDef", true);
                                     }
 
-                                    else if (randomStat == 1 && eDefence <= enemyToHeal.eDefence)
-                                    {
-                                        randomStat = Random.Range(0, 2);
-
-                                        if (randomStat == 0)
-                                        {
-                                            AttackHighAtk();
-                                        }
-
-                                        else if (randomStat == 1)
-                                        {
-                                            AttackLowDef();
-                                        }
-
-                                        else
-                                        {
-                                            AttackLowHp();
-                                        }
-                                    }
-
-                                    if (randomStat == 2 && eAgility > enemyToHeal.eAgility)
+                                   
+                                    else if (randomStat == 2)
                                     {
                                         animator.SetBool("ModAgi", true);
 
                                     }
 
-                                    else if (randomStat == 2 && eAgility <= enemyToHeal.eAgility)
-                                    {
-                                        randomStat = Random.Range(0, 2);
-
-                                        if (randomStat == 0)
-                                        {
-                                            AttackHighAtk();
-                                        }
-
-                                        else if (randomStat == 1)
-                                        {
-                                            AttackLowDef();
-                                        }
-
-                                        else
-                                        {
-                                            AttackLowHp();
-                                        }
-                                    }
                                 }
                             }
                             break;
@@ -814,6 +775,8 @@ public class Enemy : MonoBehaviour
                                     {
                                         currentState = EnemyState.skilling;
                                         waitQTurns = waitTime;
+                                        waitTurnsText.text = waitQTurns.ToString(); //Update the UI
+                                        waitTurnsText.gameObject.SetActive(true);
                                         animator.SetBool("SkillInUse", true);
                                         MakeSkillsWork(canUseSkill);
                                         EndTurn();
@@ -844,6 +807,8 @@ public class Enemy : MonoBehaviour
                                     {
                                         currentState = EnemyState.skilling;
                                         waitQTurns = waitTime;
+                                        waitTurnsText.text = waitQTurns.ToString(); //Update the UI
+                                        waitTurnsText.gameObject.SetActive(true);
                                         animator.SetBool("SkillInUse", true);
                                         MakeSkillsWork(canUseSkill);
                                         EndTurn();
@@ -885,6 +850,8 @@ public class Enemy : MonoBehaviour
                                     {
                                         currentState = EnemyState.skilling;
                                         waitQTurns = waitTime;
+                                        waitTurnsText.text = waitQTurns.ToString(); //Update the UI
+                                        waitTurnsText.gameObject.SetActive(true);
                                         animator.SetBool("SkillInUse", true);
                                         MakeSkillsWork(canUseSkill);
                                         EndTurn();
@@ -915,6 +882,8 @@ public class Enemy : MonoBehaviour
                                     {
                                         currentState = EnemyState.skilling;
                                         waitQTurns = waitTime;
+                                        waitTurnsText.text = waitQTurns.ToString(); //Update the UI
+                                        waitTurnsText.gameObject.SetActive(true);
                                         animator.SetBool("SkillInUse", true);
                                         MakeSkillsWork(canUseSkill);
                                         EndTurn();
@@ -1180,7 +1149,6 @@ public class Enemy : MonoBehaviour
 
     void BlowSelfCountDown()
     {
-        
         blowStrength += Random.Range(10, 15);
 
         if (countDownToBlow > 0)
@@ -1188,8 +1156,6 @@ public class Enemy : MonoBehaviour
             blowSelfObject.SetActive(true);
             animator.SetBool("Collect", true);
         }
-
-        
 
         else if (countDownToBlow <= 0)
         {
@@ -1239,35 +1205,26 @@ public class Enemy : MonoBehaviour
 
     void ModAttack()
     {
-        int modAmount = Random.Range(5, 20);
-        enemyToHeal.amountModed++;
-        enemyToHeal.eAttack += modAmount;
+        int modAmount = Random.Range(5, 15);
+        enemyToHeal.BuffStats("Attack", modAmount, 3);
         animator.SetBool("ModAtk", false);
         EndTurn();
-        print(enemyToHeal.eName + " At index " + enemyToHeal.enemyIndexInBattleManager + " had " + modAmount + " Added to it's Attack");
-        print("enemy at index " + enemyToHeal.enemyIndexInBattleManager + " Had stats moded " + enemyToHeal.amountModed + " time(s) ");
     }
 
     void ModDefence()
     {
         int modAmount = Random.Range(5, 20);
-        enemyToHeal.amountModed++;
-        enemyToHeal.eDefence += modAmount;
+        enemyToHeal.BuffStats("Defence", modAmount, 3);
         animator.SetBool("ModDef", false);
         EndTurn();
-        print(enemyToHeal.eName + " At index " + enemyToHeal.enemyIndexInBattleManager + "had " + modAmount + " Added to it's Defence");
-        print("enemy at index " + enemyToHeal.enemyIndexInBattleManager + " Had stats moded " + enemyToHeal.amountModed + " time(s) ");
     }
 
     void ModAgility()
     {
         int modAmount = Random.Range(5, 20);
-        enemyToHeal.amountModed++;
-        enemyToHeal.eAgility += modAmount;
+        enemyToHeal.BuffStats("Agility", modAmount, 3);
         animator.SetBool("ModAgi", false);
         EndTurn();
-        print(enemyToHeal.eName + " At index " + enemyToHeal.enemyIndexInBattleManager + " had " + modAmount + " Added to it's Agailty");
-        print("enemy at index " + enemyToHeal.enemyIndexInBattleManager + " Had stats moded " + enemyToHeal.amountModed + " time(s) ");
     }
 
     void EnemyToMod()
@@ -2725,57 +2682,25 @@ public class Enemy : MonoBehaviour
     void AttackFargas()
     {
         attackThisPlayer = battleManager.players[0].playerReference;
-        CalculateHit();
-        if (hit)
-        {
-            attackThisPlayer.TakeDamage(eAttack);
-        }
-        else
-        {
-            attackThisPlayer.TakeDamage(0.0f);
-        }
+        attackThisPlayer.TakeDamage(eAttack);
     }
 
     void AttackOberon()
     {
         attackThisPlayer = battleManager.players[1].playerReference;
-        CalculateHit();
-        if (hit)
-        {
-            attackThisPlayer.TakeDamage(eAttack);
-        }
-        else
-        {
-            attackThisPlayer.TakeDamage(0.0f);
-        }
+        attackThisPlayer.TakeDamage(eAttack);
     }
 
     void AttackFrea()
     {
         attackThisPlayer = battleManager.players[2].playerReference;
-        CalculateHit();
-        if (hit)
-        {
-            attackThisPlayer.TakeDamage(eAttack);
-        }
-        else
-        {
-            attackThisPlayer.TakeDamage(0.0f);
-        }
+        attackThisPlayer.TakeDamage(eAttack);
     }
 
     void AttackArcelus()
     {
         attackThisPlayer = battleManager.players[3].playerReference;
-        CalculateHit();
-        if (hit)
-        {
-            attackThisPlayer.TakeDamage(eAttack);
-        }
-        else
-        {
-            attackThisPlayer.TakeDamage(0.0f);
-        }
+        attackThisPlayer.TakeDamage(eAttack);
     }
 
     //these ones above
@@ -2827,38 +2752,147 @@ public class Enemy : MonoBehaviour
         EndTurn();
     }
 
+    bool OberonHit()
+    {
+        attackThisPlayer = battleManager.players[1].playerReference;
+
+        CalculateHit();
+
+        if (hit)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    bool FargasHit()
+    {
+        attackThisPlayer = battleManager.players[0].playerReference;
+
+        CalculateHit();
+
+        if (hit)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    bool ArcelusHit()
+    {
+        attackThisPlayer = battleManager.players[3].playerReference;
+
+        CalculateHit();
+
+        if (hit)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    bool FreaHit()
+    {
+        attackThisPlayer = battleManager.players[2].playerReference;
+
+        CalculateHit();
+
+        if (hit)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     void GroundSmashSkill()
     {
         int randomRow = Random.Range(0, 1);
         
         if (randomRow == 0)
         {
+            CalculateHit();
             print("Picked Back Row");
+            if (OberonHit())
+            {
+                AttackOberon(eAttack * 1.5f);
+                objPooler.SpawnFromPool("LightingBolt", battleManager.players[1].playerReference.gameObject.transform.position, battleManager.players[1].playerReference.gameObject.transform.rotation);
+            }
+            else
+            {
 
-            AttackOberon(eAttack * 1.5f);
+            }
+
+            if (FreaHit()) 
+            {
+                AttackFrea(eAttack * 1.5f);
+                objPooler.SpawnFromPool("LightingBolt", battleManager.players[2].playerReference.gameObject.transform.position, battleManager.players[2].playerReference.gameObject.transform.rotation);
+            }
+            else
+            {
+
+            }
             
-
-            AttackFrea(eAttack * 1.5f);
-            objPooler.SpawnFromPool("LightingBolt", battleManager.players[2].playerReference.gameObject.transform.position, battleManager.players[2].playerReference.gameObject.transform.rotation);
-            objPooler.SpawnFromPool("LightingBolt", battleManager.players[1].playerReference.gameObject.transform.position, battleManager.players[1].playerReference.gameObject.transform.rotation);
         }
 
         else if (randomRow == 1)
         {
             print("Picked Back Row");
 
-            AttackFargas(eAttack * 1.5f);
+            if (FargasHit())
+            {
+                AttackFargas(eAttack * 1.5f);
+                objPooler.SpawnFromPool("LightingBolt", battleManager.players[0].playerReference.gameObject.transform.position, battleManager.players[0].playerReference.gameObject.transform.rotation);
+            }
+            else
+            {
 
+            }
 
-            AttackArcelus(eAttack * 1.5f);
-            objPooler.SpawnFromPool("LightingBolt", battleManager.players[3].playerReference.gameObject.transform.position, battleManager.players[3].playerReference.gameObject.transform.rotation);
-            objPooler.SpawnFromPool("LightingBolt", battleManager.players[0].playerReference.gameObject.transform.position, battleManager.players[0].enemyReference.gameObject.transform.rotation);
+            if (ArcelusHit()) 
+            {
+                AttackArcelus(eAttack * 1.5f);
+                objPooler.SpawnFromPool("LightingBolt", battleManager.players[3].playerReference.gameObject.transform.position, battleManager.players[3].playerReference.gameObject.transform.rotation);
+            }
+            else
+            {
+
+            }
+
         }
     }
 
     void BlowSelf()
     {
         AttackWholeField(blowStrength);
+
+        for (int i = 0; i < battleManager.players.Length; ++i)
+        {
+            if (battleManager.players[i].playerReference != null && !battleManager.players[i].playerReference.dead)
+            {
+                objPooler.SpawnFromPool("BlowEffect", battleManager.players[i].playerReference.gameObject.transform.position, battleManager.players[i].playerReference.gameObject.transform.rotation);
+            }
+        }
+
+        for (int i = 0; i < battleManager.enemies.Length; ++i)
+        {
+            if (battleManager.enemies[i].enemyReference != null && !battleManager.enemies[i].enemyReference.dead)
+            {
+                objPooler.SpawnFromPool("BlowEffect", battleManager.enemies[i].enemyReference.gameObject.transform.position, battleManager.enemies[i].enemyReference.gameObject.transform.rotation);
+            }
+        }
+
         blow = false;
         countDownToBlow = 0;
     }
@@ -2873,18 +2907,16 @@ public class Enemy : MonoBehaviour
         }
 
         Mathf.CeilToInt(attackMod = (eAttack * .5f));
-        eAttack += attackMod;
         CalculateHit();
         if(hit)
         {
-            attackThisPlayer.TakeDamage(eAttack);
+            attackThisPlayer.TakeDamage(eAttack + attackMod);
+            objPooler.SpawnFromPool("BoarBite", attackThisPlayer.gameObject.transform.position, attackThisPlayer.gameObject.transform.rotation);
         }
         else
         {
-            attackThisPlayer.TakeDamage(0.0f);
-        }
-        
-        eAttack = enemyStartingAtk;
+    
+        } 
     }
 
     void RaiseDefSkill()
@@ -2943,40 +2975,134 @@ public class Enemy : MonoBehaviour
     void EarthSmashSkill()
     {
         eAttack += Random.Range(5, 10);
+
+        objPooler.SpawnFromPool("EarthSmashRocks", battleManager.players[0].playerReference.gameObject.transform.position, battleManager.players[0].playerReference.gameObject.transform.rotation);
+        objPooler.SpawnFromPool("EarthSmashRocks", battleManager.players[1].playerReference.gameObject.transform.position, battleManager.players[1].playerReference.gameObject.transform.rotation);
         AttackFargas();
         AttackOberon();
+
+        Invoke("EarthSmashBackEffect", .4f);
         Invoke("AttackFrea", .5f);
         Invoke("AttackArcelus", .5f);
+        
         eAttack = enemyStartingAtk;
     }
 
+    //change to wind debuff in the future 
     void BallRollSkill()
     {
-        int randomRow = Random.Range(0, 1);
 
-        if (randomRow == 0)
-        {
-            AttackOberon();
-            eAttack += 2;
-            Invoke("AttackFrea", 0.4f);
-            eAttack += 3;
-            Invoke("AttackArcelus", 0.6f);
-            eAttack += 4;
-            Invoke("AttackFargas", 0.8f);
+        bool obHit = OberonHit();
+        bool freaHit = FreaHit();
+        bool arcHit = ArcelusHit();
+        bool farHit = FargasHit();
 
-        }
+        
+            if (obHit)
+            {
+                AttackOberon();
+                OBatWindFx();
+            }
+            else
+            {
 
-        else if (randomRow == 1)
-        {
-            AttackFargas();
-            eAttack += 2;
-            Invoke("AttackFargas", 0.4f);
-            eAttack += 3;
-            Invoke("AttackFrea", 0.6f);
-            eAttack += 4;
-            Invoke("AttackArcelus", 0.8f);
+            }
 
-        }
+            if (freaHit && obHit)
+            {
+                eAttack += 2;
+                Invoke("AttackFrea", 0.4f);
+                Invoke("FeaBatWindFx", 0.4f);
+            }
+
+            else if(freaHit && !obHit)
+            {
+                AttackFrea();
+                FeaBatWindFx();
+            }
+
+            else
+            {
+
+            }
+           
+            if(arcHit && freaHit && obHit)
+            {
+                eAttack += 3;
+                Invoke("AttackArcelus", 0.6f);
+                Invoke("ArcBatWindFx", 0.6f);
+            }
+
+            else if(arcHit && freaHit && !obHit)
+            {
+                eAttack += 2;
+                Invoke("AttackArcelus", 0.4f);
+                Invoke("ArcBatWindFx", 0.4f);
+            }
+
+            else if(arcHit && !freaHit && obHit)
+            {
+                eAttack += 2;
+                Invoke("AttackArcelus", 0.4f);
+                Invoke("ArcBatWindFx", 0.4f);
+            }
+            else if(arcHit && !freaHit && !obHit)
+            {
+                AttackArcelus();
+                ArcBatWindFx();
+            }
+            else
+            {
+
+            }
+
+            if (farHit && arcHit && freaHit && obHit)
+            {
+                eAttack += 4;
+                Invoke("AttackFargas", 0.8f);
+                Invoke(" FarBatWindFx", 0.8f);
+            }
+
+            else if (farHit && arcHit && freaHit && !obHit)
+            {
+                Invoke("AttackFargas", 0.6f);
+                Invoke(" FarBatWindFx", 0.6f);
+            }
+            else if (farHit && arcHit && !freaHit && !obHit)
+            {
+                Invoke("AttackFargas", 0.4f);
+                Invoke("FarBatWindFx", 0.4f);
+            }
+            else if (farHit && !arcHit && !freaHit && !obHit)
+            {
+                AttackFargas();
+                FarBatWindFx();
+            }
+            else if(farHit && !arcHit && !freaHit && obHit)
+            {
+                Invoke("AttackFargas", 0.4f);
+                Invoke("FarBatWindFx", 0.4f);
+            }
+            else if(farHit && !arcHit && freaHit && obHit)
+            {
+                Invoke("AttackFargas", 0.6f);
+                Invoke("FarBatWindFx", 0.6f);
+            }
+            else if(farHit && arcHit && !freaHit && obHit)
+            {
+                Invoke("AttackFargas", 0.6f);
+                Invoke("FarBatWindFx", 0.6f);
+            }
+            else
+            {
+             
+            }
+
+            
+
+        
+
+       
         eAttack = enemyStartingAtk;
     }
 
@@ -2986,14 +3112,14 @@ public class Enemy : MonoBehaviour
 
         if (hitAmount == 1)
         {
-            eAttack += (eAttack * 0.1f);
             if (hit)
             {
-                attackThisPlayer.TakeDamage(eAttack);
+                attackThisPlayer.TakeDamage(eAttack + (eAttack * .1f));
+                objPooler.SpawnFromPool("SliceAndDice", attackThisPlayer.gameObject.transform.position, attackThisPlayer.gameObject.transform.rotation);
             }
             else
             {
-                attackThisPlayer.TakeDamage(0.0f);
+                
             }
             EndSkill();
         }
@@ -3001,29 +3127,29 @@ public class Enemy : MonoBehaviour
         else if(hitAmount == 2)
         {
             if (timeAttackingForSlice == 1)
-            {
-                eAttack += (eAttack * 0.1f);
+            { 
                 if (hit)
                 {
-                    attackThisPlayer.TakeDamage(eAttack);
+                    attackThisPlayer.TakeDamage(eAttack + (eAttack * .1f));
+                    objPooler.SpawnFromPool("SliceAndDice", attackThisPlayer.gameObject.transform.position, attackThisPlayer.gameObject.transform.rotation);
                 }
                 else
                 {
-                    attackThisPlayer.TakeDamage(0.0f);
+                    
                 }
                 timeAttackingForSlice++;
             }
 
             else if(timeAttackingForSlice == 2)
             {
-                eAttack += (eAttack * 0.2f);
                 if (hit)
                 {
-                    attackThisPlayer.TakeDamage(eAttack);
+                    attackThisPlayer.TakeDamage(eAttack + (eAttack * .2f));
+                    objPooler.SpawnFromPool("SliceAndDice", attackThisPlayer.gameObject.transform.position, attackThisPlayer.gameObject.transform.rotation);
                 }
                 else
                 {
-                    attackThisPlayer.TakeDamage(0.0f);
+                    
                 }
                 EndSkill();
                 timeAttackingForSlice = 1;
@@ -3035,46 +3161,45 @@ public class Enemy : MonoBehaviour
         {
             if (timeAttackingForSlice == 1)
             {
-                eAttack += (eAttack * 0.1f);
                 if (hit)
                 {
-                    attackThisPlayer.TakeDamage(eAttack);
+                    attackThisPlayer.TakeDamage(eAttack + (eAttack * .1f));
+                    objPooler.SpawnFromPool("SliceAndDice", attackThisPlayer.gameObject.transform.position, attackThisPlayer.gameObject.transform.rotation);
                 }
                 else
                 {
-                    attackThisPlayer.TakeDamage(0.0f);
+                    
                 }
                 timeAttackingForSlice++;
             }
 
             else if (timeAttackingForSlice == 2)
             {
-                eAttack += (eAttack * 0.2f);
                 if (hit)
                 {
-                    attackThisPlayer.TakeDamage(eAttack);
+                    attackThisPlayer.TakeDamage(eAttack + (eAttack * .2f));
+                    objPooler.SpawnFromPool("SliceAndDice", attackThisPlayer.gameObject.transform.position, attackThisPlayer.gameObject.transform.rotation);
                 }
                 else
                 {
-                    attackThisPlayer.TakeDamage(0.0f);
+                    
                 }
                 timeAttackingForSlice++;
             }
 
             else if (timeAttacking == 3)
             {
-                eAttack += (eAttack * 0.3f);
                 if (hit)
                 {
-                    attackThisPlayer.TakeDamage(eAttack);
+                    attackThisPlayer.TakeDamage(eAttack + (eAttack * .3f));
+                    objPooler.SpawnFromPool("SliceAndDice", attackThisPlayer.gameObject.transform.position, attackThisPlayer.gameObject.transform.rotation);
                 }
                 else
                 {
-                    attackThisPlayer.TakeDamage(0.0f);
+                    
                 }
                 EndSkill();
                 timeAttackingForSlice = 1;
-                eAttack = enemyStartingAtk;
             }
         }
 
@@ -3082,60 +3207,59 @@ public class Enemy : MonoBehaviour
         {
             if (timeAttackingForSlice == 1)
             {
-                eAttack += (eAttack * 0.1f);
                 if (hit)
                 {
-                    attackThisPlayer.TakeDamage(eAttack);
+                    attackThisPlayer.TakeDamage(eAttack + (eAttack * .1f));
+                    objPooler.SpawnFromPool("SliceAndDice", attackThisPlayer.gameObject.transform.position, attackThisPlayer.gameObject.transform.rotation);
                 }
                 else
                 {
-                    attackThisPlayer.TakeDamage(0.0f);
+                    
                 }
                 timeAttackingForSlice++;
             }
 
             else if (timeAttackingForSlice == 2)
             {
-                eAttack += (eAttack * 0.2f);
                 if (hit)
                 {
-                    attackThisPlayer.TakeDamage(eAttack);
+                    attackThisPlayer.TakeDamage(eAttack + (eAttack * .2f));
+                    objPooler.SpawnFromPool("SliceAndDice", attackThisPlayer.gameObject.transform.position, attackThisPlayer.gameObject.transform.rotation);
                 }
                 else
                 {
-                    attackThisPlayer.TakeDamage(0.0f);
+                    
                 }
                 timeAttackingForSlice++;
             }
 
             else if (timeAttackingForSlice == 3)
             {
-                eAttack += (eAttack * 0.3f);
                 if (hit)
                 {
-                    attackThisPlayer.TakeDamage(eAttack);
+                    attackThisPlayer.TakeDamage(eAttack + (eAttack * .3f));
+                    objPooler.SpawnFromPool("SliceAndDice", attackThisPlayer.gameObject.transform.position, attackThisPlayer.gameObject.transform.rotation);
                 }
                 else
                 {
-                    attackThisPlayer.TakeDamage(0.0f);
+                    
                 }
                 timeAttackingForSlice++;
             }
 
             else if (timeAttackingForSlice == 4)
             {
-                eAttack += (eAttack * 0.4f);
                 if (hit)
                 {
-                    attackThisPlayer.TakeDamage(eAttack);
+                    attackThisPlayer.TakeDamage(eAttack + (eAttack * .4f));
+                    objPooler.SpawnFromPool("SliceAndDice", attackThisPlayer.gameObject.transform.position, attackThisPlayer.gameObject.transform.rotation);
                 }
                 else
                 {
-                    attackThisPlayer.TakeDamage(0.0f);
+                    
                 }
                 EndSkill();
                 timeAttackingForSlice = 1;
-                eAttack = enemyStartingAtk;
             }
         }
 
@@ -3143,76 +3267,79 @@ public class Enemy : MonoBehaviour
         {
             if (timeAttackingForSlice == 1)
             {
-                eAttack += (eAttack * 0.1f);
                 if (hit)
                 {
-                    attackThisPlayer.TakeDamage(eAttack);
+                    attackThisPlayer.TakeDamage(eAttack + (eAttack * .1f));
+                    objPooler.SpawnFromPool("SliceAndDice", attackThisPlayer.gameObject.transform.position, attackThisPlayer.gameObject.transform.rotation);
                 }
                 else
                 {
-                    attackThisPlayer.TakeDamage(0.0f);
+                    
                 }
                 timeAttackingForSlice++;
             }
 
             else if (timeAttackingForSlice == 2)
             {
-                eAttack += (eAttack * 0.2f);
                 if (hit)
                 {
-                    attackThisPlayer.TakeDamage(eAttack);
+                    attackThisPlayer.TakeDamage(eAttack + (eAttack * .2f));
+                    objPooler.SpawnFromPool("SliceAndDice", attackThisPlayer.gameObject.transform.position, attackThisPlayer.gameObject.transform.rotation);
                 }
                 else
                 {
-                    attackThisPlayer.TakeDamage(0.0f);
+                    
                 }
                 timeAttackingForSlice++;
             }
 
             else if (timeAttackingForSlice == 3)
             {
-                eAttack += (eAttack * 0.3f);
+                
                 if (hit)
                 {
-                    attackThisPlayer.TakeDamage(eAttack);
+                    attackThisPlayer.TakeDamage(eAttack + (eAttack*.3f));
+                    objPooler.SpawnFromPool("SliceAndDice", attackThisPlayer.gameObject.transform.position, attackThisPlayer.gameObject.transform.rotation);
                 }
                 else
                 {
-                    attackThisPlayer.TakeDamage(0.0f);
+                    
                 }
                 timeAttackingForSlice++;
             }
 
             else if (timeAttackingForSlice == 4)
             {
-                eAttack += (eAttack * 0.4f);
+                
                 if (hit)
                 {
-                    attackThisPlayer.TakeDamage(eAttack);
+                    attackThisPlayer.TakeDamage(eAttack + (eAttack * .4f));
+                    objPooler.SpawnFromPool("SliceAndDice", attackThisPlayer.gameObject.transform.position, attackThisPlayer.gameObject.transform.rotation);
                 }
                 else
                 {
-                    attackThisPlayer.TakeDamage(0.0f);
+                    
                 }
                 timeAttackingForSlice++;
             }
 
             else if(timeAttackingForSlice == 5)
             {
-                eAttack += (eAttack * 0.5f);
+               
                 if (hit)
                 {
-                    attackThisPlayer.TakeDamage(eAttack);
+                    attackThisPlayer.TakeDamage(+(eAttack * .5f));
+                    objPooler.SpawnFromPool("SliceAndDice", attackThisPlayer.gameObject.transform.position, attackThisPlayer.gameObject.transform.rotation);
                 }
                 else
                 {
-                    attackThisPlayer.TakeDamage(0.0f);
+                    
                 }
                 EndSkill();
                 timeAttackingForSlice = 1;
             }
         }
-        eAttack = enemyStartingAtk;
+        
     }
 
     void MultipleStatSkill()
@@ -3242,7 +3369,36 @@ public class Enemy : MonoBehaviour
 
         EndSkill();
     }
-    
+
+    void EarthSmashBackEffect()
+    {
+        objPooler.SpawnFromPool("EarthSmashRocks", battleManager.players[2].playerReference.gameObject.transform.position, battleManager.players[2].playerReference.gameObject.transform.rotation);
+        objPooler.SpawnFromPool("EarthSmashRocks", battleManager.players[3].playerReference.gameObject.transform.position, battleManager.players[3].playerReference.gameObject.transform.rotation);
+    }
+
+    void OBatWindFx()
+    {
+        objPooler.SpawnFromPool("BatWind", battleManager.players[1].playerReference.gameObject.transform.position, battleManager.players[1].playerReference.gameObject.transform.rotation);
+
+    }
+
+    void FarBatWindFx()
+    {
+        objPooler.SpawnFromPool("BatWind", battleManager.players[0].playerReference.gameObject.transform.position, battleManager.players[0].playerReference.gameObject.transform.rotation);
+
+    }
+    void FeaBatWindFx()
+    {
+        objPooler.SpawnFromPool("BatWind", battleManager.players[2].playerReference.gameObject.transform.position, battleManager.players[2].playerReference.gameObject.transform.rotation);
+
+    }
+    void ArcBatWindFx()
+    {
+        objPooler.SpawnFromPool("BatWind", battleManager.players[3].playerReference.gameObject.transform.position, battleManager.players[3].playerReference.gameObject.transform.rotation);
+
+    }
+
+
     protected void Death()
     {
         if (!dead)
