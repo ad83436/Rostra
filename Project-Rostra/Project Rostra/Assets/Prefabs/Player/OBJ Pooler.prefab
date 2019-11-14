@@ -144,3 +144,22 @@ MonoBehaviour:
     prefab: {fileID: 7977375129470454462, guid: e57efee4367b2f84ab5f3f2342d78ad8,
       type: 3}
     poolSize: 2
+  - tag: BlowEffect
+    prefab: {fileID: 2338324763788160988, guid: 81b6e3d17421f5d4baa65c984d827fe5,
+      type: 3}
+    poolSize: 9
+  - tag: EarthSmashRocks
+    prefab: {fileID: 21369227429043142, guid: d1754153ccd41e545a82346db8db8a64, type: 3}
+    poolSize: 4
+  - tag: BoarBite
+    prefab: {fileID: 6138812186572825609, guid: 9563e22c22706a649b71f7336ac06398,
+      type: 3}
+    poolSize: 1
+  - tag: BatWind
+    prefab: {fileID: 3557581016999443782, guid: 68dcba28e83e03a4b9d95fd475576686,
+      type: 3}
+    poolSize: 1
+  - tag: SliceAndDice
+    prefab: {fileID: 5126883987506759639, guid: 116e82ad69cefb0439ca5d6e76d4e909,
+      type: 3}
+    poolSize: 1

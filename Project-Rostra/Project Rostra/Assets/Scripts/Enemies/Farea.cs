@@ -203,8 +203,8 @@ public class Farea : Enemy
                 //If you have not used it yet
                 if (!youAreNotMineUsedOnceThisFight)
                 {
-                    Debug.Log("Farea current HP: " + currentHP);
-                    Debug.Log("Farea max HP: " + maxHP);
+                    //Debug.Log("Farea current HP: " + currentHP);
+                    //Debug.Log("Farea max HP: " + maxHP);
 
                     skillChanceModifier = 2.0f;
                 }
@@ -225,7 +225,7 @@ public class Farea : Enemy
         if (playerAttack > 0.0f) //Don't need to calcualte damage if the incoming attack is debuff only
         {
             //Didn't recall the original function cause the "Hit" animation ends the turn
-            Debug.Log("Received player attack: " + playerAttack);
+            //Debug.Log("Received player attack: " + playerAttack);
             float damage = playerAttack - ((actualDEF / (20.0f + actualDEF)) * playerAttack);
             damage *= ralliedDamageModifier; //Increase damage if rallied;
             currentHP -= damage;
@@ -320,7 +320,7 @@ public class Farea : Enemy
 
     private void StartPhase2()
     {
-        Debug.Log("Start Phase 2");
+        //Debug.Log("Start Phase 2");
         currentState = EnemyState.idle;
         uiBTL.EndTurn(); //End the player's turn
         bossPhase = 2;
@@ -399,7 +399,7 @@ public class Farea : Enemy
             }
             else if (bossPhase == 2)
             {
-                Debug.Log("Boss is in fact in phase 2");
+                //Debug.Log("Boss is in fact in phase 2");
                 if (totalDamageSustained >= totalDamageThreshold)
                 {
                     //If the total damage sustained is over the threshold, Mother's Pain must be done in 2 turns rathe than 3
@@ -426,7 +426,7 @@ public class Farea : Enemy
                         }
                     }
                     attackChance = Random.Range(0.0f, 100.0f * skillChanceModifier);
-                    Debug.Log("Attack chance is: " + attackChance);
+                    //Debug.Log("Attack chance is: " + attackChance);
                     //attackChance = 50; //Testing
                     if (attackChance >= 0.0f && attackChance < 20.0f * skillChanceModifier && isThereADeadPlayer)
                     {
@@ -629,6 +629,7 @@ public class Farea : Enemy
                 }
                 else
                 {
+                    youAreNotMineObject.gameObject.SetActive(false);
                     thisPlayerIsDead.TakeDamage(eAttack * 1.5f);
                 }
                 break;
