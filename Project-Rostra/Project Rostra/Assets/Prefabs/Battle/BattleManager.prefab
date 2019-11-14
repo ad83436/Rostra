@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 242658909}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.77, y: -1.25, z: -10}
+  m_LocalPosition: {x: 0.028378189, y: -1.6287584, z: -64.14458}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2794915159861226931}
@@ -196,6 +196,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2794915159861226931}
   - component: {fileID: 2794915159861226930}
+  - component: {fileID: 2794915159868658333}
   m_Layer: 0
   m_Name: BattleManager
   m_TagString: Untagged
@@ -315,7 +316,16 @@ MonoBehaviour:
   - {fileID: 2794915159689108608}
   addEnemies: 0
   expGain: 0
+  goldGain: 0
   battleHasEnded: 0
+--- !u!81 &2794915159868658333
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2794915159861226941}
+  m_Enabled: 0
 --- !u!1 &2794915159949905070
 GameObject:
   m_ObjectHideFlags: 0
