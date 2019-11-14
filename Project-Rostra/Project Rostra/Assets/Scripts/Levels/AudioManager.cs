@@ -5,9 +5,9 @@ using UnityEngine;
 public class AudioManager : MonoBehaviour
 {
     //Play the music from the Audio Manager
-    //The AM still stores the effect sounds, but those will be played by each object individually
     public static AudioManager instance;
-    private AudioSource musicAudioSource;
+    public AudioSource musicAudioSource;
+    public AudioSource effectAudioSource;
     public AudioClip titleTheme1;
     public AudioClip worldMapMusic1;
     public AudioClip battleMusic1;
@@ -16,6 +16,29 @@ public class AudioManager : MonoBehaviour
     public AudioClip defeatMusic1;
     public AudioClip cutscene1;
     private AudioClip playThisNext;
+
+    //UI
+    public AudioClip uiScroll;
+    public AudioClip uiConfirm;
+    public AudioClip uiCancel;
+
+    //Player
+    public AudioClip attack;
+    //Fargas
+
+    //Oberon
+
+    //Frea
+
+    //Arcelus
+    public AudioClip heal;
+    public AudioClip iceAge;
+    public AudioClip drainEye;
+    public AudioClip armageddon;
+    public AudioClip hope;
+    public AudioClip manaCharge;
+    public AudioClip arWait;
+
 
     private bool thisHasStartedPlaying = false;//Used to raise the volume steadily for a new piece
     private float musicMaxVolume = 0.5f; //Updated from the playerprefs
@@ -53,7 +76,6 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        musicAudioSource = gameObject.GetComponent<AudioSource>();
         musicAudioSource.volume = 0.0f; //Start at volume zero
         GameManager.instance.listOfUndestroyables.Add(this.gameObject); //On start cause AM and GM start out in the same scene
     }
@@ -149,5 +171,47 @@ public class AudioManager : MonoBehaviour
             thisHasStartedPlaying = false;
         }
 
+    }
+
+    //Play effects. Play one shot
+    public void playThisEffect(string effect)
+    {
+        switch(effect)
+        {
+            //UI
+            case "uiScroll":
+                effectAudioSource.PlayOneShot(uiScroll);
+                break;
+            case "uiConfirm":
+                effectAudioSource.PlayOneShot(uiConfirm);
+                break;
+            case "uiCancel":
+                effectAudioSource.PlayOneShot(uiCancel);
+                break;
+
+            //Arcelus
+            case "heal":
+                effectAudioSource.PlayOneShot(heal);
+                break;
+            case "iceAge":
+                effectAudioSource.PlayOneShot(iceAge);
+                break;
+            case "armegaddon":
+                effectAudioSource.PlayOneShot(armageddon);
+                break;
+            case "drainEye":
+                effectAudioSource.PlayOneShot(drainEye);
+                break;
+            case "hope":
+                effectAudioSource.PlayOneShot(hope);
+                break;
+            case "manaCharge":
+                effectAudioSource.PlayOneShot(manaCharge);
+                break;
+            case "arWait":
+                effectAudioSource.PlayOneShot(arWait);
+                break;
+
+        }
     }
 }
