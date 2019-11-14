@@ -350,7 +350,7 @@ PrefabInstance:
     - target: {fileID: 430210745630348945, guid: 1916108d2e633f94f89ca988fced3113,
         type: 3}
       propertyPath: SceneToLoad
-      value: WorldMap
+      value: PlayTest2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1916108d2e633f94f89ca988fced3113, type: 3}
@@ -421,35 +421,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6954618973376743998, guid: 570e370c97f1ff047a2f361b787d9287,
-        type: 3}
-      propertyPath: heal
-      value: 
-      objectReference: {fileID: 8300000, guid: 3091a70aefc43914ebbd7c05a8c06d67, type: 3}
-    - target: {fileID: 6954618973376743998, guid: 570e370c97f1ff047a2f361b787d9287,
-        type: 3}
-      propertyPath: armageddon
-      value: 
-      objectReference: {fileID: 8300000, guid: 04b2af7fa7abdad4191866ddc3fcdd90, type: 3}
-    - target: {fileID: 6954618973376743998, guid: 570e370c97f1ff047a2f361b787d9287,
-        type: 3}
-      propertyPath: iceAge
-      value: 
-      objectReference: {fileID: 8300000, guid: 46c7b5df7e15c394c8a55de729697625, type: 3}
-    - target: {fileID: 6954618973376743998, guid: 570e370c97f1ff047a2f361b787d9287,
-        type: 3}
-      propertyPath: drainEye
-      value: 
-      objectReference: {fileID: 8300000, guid: 9e34b5349d7f4c3479e9b81c6d653bca, type: 3}
-    - target: {fileID: 6954618973376743998, guid: 570e370c97f1ff047a2f361b787d9287,
-        type: 3}
-      propertyPath: hope
-      value: 
-      objectReference: {fileID: 8300000, guid: 76aca18b64705654983da6205baafb44, type: 3}
-    - target: {fileID: 6954618973376743998, guid: 570e370c97f1ff047a2f361b787d9287,
-        type: 3}
-      propertyPath: arWait
-      value: 
-      objectReference: {fileID: 8300000, guid: f9665b7b757735a428e80b7f10990035, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 570e370c97f1ff047a2f361b787d9287, type: 3}
