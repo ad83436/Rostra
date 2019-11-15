@@ -100,7 +100,7 @@ public class Grendol : Enemy {
 				CompleteAttack();
 			}
 		} else {
-			//  is raining
+			// is raining
 			// roll attack
 			float roll = Random.Range(0f, 100f);
 
