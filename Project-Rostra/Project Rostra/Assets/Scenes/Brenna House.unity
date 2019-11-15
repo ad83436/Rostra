@@ -508,8 +508,8 @@ PrefabInstance:
     - target: {fileID: 2653198307189550255, guid: c76d5dd8dc485bd479c1a80c1fc0afec,
         type: 3}
       propertyPath: dialogue.sentences.Array.data[0]
-      value: <i> A small ring is on the floor. You can a black substance caked on
-        the outside of it.
+      value: <i> A small ring is on the floor. You can see a black substance caked
+        on the outside of it.
       objectReference: {fileID: 0}
     - target: {fileID: 2653198307189550251, guid: c76d5dd8dc485bd479c1a80c1fc0afec,
         type: 3}
@@ -3621,12 +3621,12 @@ PrefabInstance:
     - target: {fileID: 868221953544098666, guid: 461ff7b82d54a2a4d9a56db412a5459f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -82.1
+      value: -80.77
       objectReference: {fileID: 0}
     - target: {fileID: 868221953544098666, guid: 461ff7b82d54a2a4d9a56db412a5459f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.98
+      value: 14.64
       objectReference: {fileID: 0}
     - target: {fileID: 868221953544098666, guid: 461ff7b82d54a2a4d9a56db412a5459f,
         type: 3}
@@ -4159,12 +4159,22 @@ PrefabInstance:
     - target: {fileID: 2653198307189550253, guid: c76d5dd8dc485bd479c1a80c1fc0afec,
         type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 0.2
+      value: 0.21333334
       objectReference: {fileID: 0}
     - target: {fileID: 2653198307189550253, guid: c76d5dd8dc485bd479c1a80c1fc0afec,
         type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 0.22
+      value: 0.12666667
+      objectReference: {fileID: 0}
+    - target: {fileID: 2653198307189550253, guid: c76d5dd8dc485bd479c1a80c1fc0afec,
+        type: 3}
+      propertyPath: m_Offset.x
+      value: -0.18283433
+      objectReference: {fileID: 0}
+    - target: {fileID: 2653198307189550253, guid: c76d5dd8dc485bd479c1a80c1fc0afec,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.9066342
       objectReference: {fileID: 0}
     - target: {fileID: 1840892473, guid: c76d5dd8dc485bd479c1a80c1fc0afec, type: 3}
       propertyPath: m_Text
