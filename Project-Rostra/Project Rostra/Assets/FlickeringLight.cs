@@ -34,7 +34,6 @@ public class FlickeringLight : MonoBehaviour
 
 		if (light.intensity <= lightIntensity1 && lightUp == true)
 		{
-			Debug.Log("LightUp");
 			light.intensity += 0.2f;
 			StartCoroutine(Flicker());
 			if (light.intensity >= lightIntensity2)
@@ -44,7 +43,6 @@ public class FlickeringLight : MonoBehaviour
 		}
 		else if(light.intensity >= lightIntensity2 && lightUp == false)
 		{
-			Debug.Log("Lightdown");
 			light.intensity -= 0.2f;
 			if (light.intensity <= lightIntensity2)
 			{
