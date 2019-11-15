@@ -413,7 +413,6 @@ public class BattleManager : MonoBehaviour
     public virtual void EndOfBattle(bool victory)
     {
         battleHasEnded = true;
-        battleInProgress = false;
         if (victory)
         { //Only if it's a victory, update the party stats
             for (int i = 0; i < 4; i++)

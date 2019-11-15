@@ -90,6 +90,7 @@ public class DefeatScreen : MonoBehaviour
                         }
                         else if(Input.GetButtonDown("Confirm"))
                         {
+                            BattleManager.battleInProgress = false;
                             quoteIndex = 1; //Show life text
                             panelItemsColor.r = 0.9630859f;
                             panelItemsColor.g = 1.0f;
@@ -110,6 +111,7 @@ public class DefeatScreen : MonoBehaviour
                         }
                         else if (Input.GetButtonDown("Confirm"))
                         {
+                            BattleManager.battleInProgress = false;
                             choiceMade = true;
                             fade.TransitionBackToMainMenu();
                         }

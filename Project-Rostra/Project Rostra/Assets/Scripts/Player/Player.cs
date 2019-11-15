@@ -2180,24 +2180,28 @@ public class Player : MonoBehaviour
             actualATK = atk;
             attackBuffed = false;
             attackBuffSkillQCounter = 0;
+            atkBuffArrowIndicator.gameObject.SetActive(false);
         }
         if (defenseBuffed)
         {
             actualDEF = def;
             defenseBuffed = false;
             defenseBuffSkillQCounter = 0;
+            defBuffArrowIndicator.gameObject.SetActive(false);
         }
         if (agilityBuffed)
         {
             actualAgi = agi;
             agilityBuffed = false;
             agilityBuffSkillQCounter = 0;
+            agiBuffArrowIndicator.gameObject.SetActive(false);
         }
         if(strBuffed)
         {
             actualSTR = str;
             strBuffed = false;
             strBuffSkillQCounter = 0;
+            strBuffArrowIndicator.gameObject.SetActive(false);
         }
         if(drainEye)
         {
