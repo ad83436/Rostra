@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class WMEnemy : MonoBehaviour
 {
+    public static bool startTutorial = false;
 	public bool tutorial = false;
     public Enemy[] enemies;
     public int[] enemyLevels;
@@ -16,6 +17,7 @@ public class WMEnemy : MonoBehaviour
     private SpriteRenderer enemySpriteRenderer;
     private float reActivateTime = 30.0f;
     private Vector2 startingPosition; //Used to reset the enemy should it not collide with the player in time
+    private UIBTL uiBtl;
 
     private void Start()
     {
@@ -28,6 +30,13 @@ public class WMEnemy : MonoBehaviour
         enemyCollider = gameObject.GetComponent<Collider2D>();
         enemySpriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         startingPosition = gameObject.transform.position;
+
+        if(fadePanel)
+        {
+            fadePanel.tutorial = tutorial;
+        }
+
+        uiBtl = UIBTL.instance;
     }
 
     private void Update()
@@ -69,6 +78,8 @@ public class WMEnemy : MonoBehaviour
         {
             enemySpwn.AddEnemyToSpawn(enemies[i], i, enemyLevels[i]);
         }
+        if (tutorial)
+            startTutorial = tutorial;
         SceneManager.LoadScene(tutorial ? "Queue Scene 2" : "Queue Scene", LoadSceneMode.Additive);
         if (endTestPanel)
         {

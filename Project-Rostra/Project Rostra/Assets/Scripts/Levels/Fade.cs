@@ -8,6 +8,7 @@ public class Fade : MonoBehaviour
 {
     private Image thisImage;
     public WMEnemy enemyHolder;
+    public bool tutorial;
     private bool fadeOut;
     private bool transitionToBattle;
     private bool transitionToVictory;
@@ -101,9 +102,10 @@ public class Fade : MonoBehaviour
                 {
                     //Debug.Log("Transition is now falseee");
                     transitionToWorldMap = false;
-                    if (enemyHolder != null) //enemyHolder will only exist in sublocations, not in the world map
+                    if (WMEnemy.startTutorial) //Is the fight we're in a tutorial?
                     {
-                        SceneManager.UnloadSceneAsync(SceneManager.GetSceneByName(enemyHolder.tutorial ? "Queue Scene 2" : "Queue Scene"));
+                        SceneManager.UnloadSceneAsync(SceneManager.GetSceneByName("Queue Scene 2"));
+                        WMEnemy.startTutorial = false;
                     }
                     else
                     {
