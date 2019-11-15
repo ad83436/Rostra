@@ -146,7 +146,6 @@ public class DialogueManager : MonoBehaviour
 
     void Start()
     {
-		Debug.Log("Talking");
 		DontDestroyOnLoad(this.gameObject);
         // set everything to its default 
         textElements = new Queue<string>();
@@ -184,6 +183,7 @@ public class DialogueManager : MonoBehaviour
 
 	public void StartConversation(Dialogue d)
 	{
+		Debug.Log("Start Convo");
 		canEnter = false;
 		if (d.willCount == true)
 		{
@@ -266,6 +266,7 @@ public class DialogueManager : MonoBehaviour
 
 	public void NextSentence()
 	{
+		print("talking");
 		// wipe the previous text
 		text.text = "";
 		continueButton.SetActive(false);
@@ -420,7 +421,8 @@ public class DialogueManager : MonoBehaviour
 			}
 			
 			// diable the continue and show our choices
-			if (boxCount == choiceCount)
+			// added the check for is choice
+			if (boxCount == choiceCount && dia.isChoice == true)
 			{
 				Debug.Log("Choice reached");
 				continueButton.SetActive(false);
