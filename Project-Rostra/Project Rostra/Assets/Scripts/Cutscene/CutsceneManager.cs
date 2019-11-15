@@ -118,7 +118,6 @@ public class CutsceneManager : MonoBehaviour
         // if our current step is less than the amount of moves that means we can go ahead with the cutscene
         if (current <= moveLenghtInitial)
         {
-			Debug.Log("Next");
             // vector that checks if the current move is outside the view of the camera
             if (actorsCM[actorCount] != null)
             {
@@ -150,8 +149,8 @@ public class CutsceneManager : MonoBehaviour
                 // if our timings is less than zero move onto next move and count up the timers
                 if (isActive == true && timingsCM[current] <= 0 && moveLenght >= 0)
                 {
-                    
-                    if (current + 1 < movesCM.Length)
+					Debug.Log("Next");
+					if (current + 1 < movesCM.Length)
                     {
                         current++;
                     }
@@ -186,6 +185,7 @@ public class CutsceneManager : MonoBehaviour
 
 	public void End()
 	{
+		Debug.Log("end");
 		current = 0;
 		entranceCount = 0;
 		moveCount = 0;
@@ -195,6 +195,7 @@ public class CutsceneManager : MonoBehaviour
 		pl.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
 		pl.transform.position = returnPosition;
 		DialogueManager.instance.canWalk = true;
+		DialogueManager.instance.End();
 		foreach (Actor g in actorsCM)
 		{
 			if (g != null)
