@@ -260,6 +260,7 @@ public class VictoryScreen : MonoBehaviour
             }
             else if (Input.GetButtonDown("Confirm") && !fargasAddinExp && !startFadingFargasIn && !freaAddinExp && !startFadingFreaIn && !oberonAddinExp && !startFadingOberonIn && !arcelusAddinExp && !startFadingArcelusIn && !initiatedFadeOut)
             {
+                BattleManager.battleInProgress = false; //Only flip the variable when the victory/defeat screen is over.
                 initiatedFadeOut = true;
                 fadePanelToWorldMap.TransitionBackToWorldMapFromBattle();
             }

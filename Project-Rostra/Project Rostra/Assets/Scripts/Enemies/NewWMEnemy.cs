@@ -4,6 +4,7 @@ using UnityEngine;
 //oo oo ah ah
 public class NewWMEnemy : MonoBehaviour
 {
+    public static bool isActive = true; //Changed by WM script after colliding with player. All enemies should stop when engaged in a battle
     public float speed;
     public float rSpeed;
     public float radius;
@@ -17,6 +18,7 @@ public class NewWMEnemy : MonoBehaviour
     private bool isRotatingR = false;
     private bool isMoving = false;
     private bool isChasing = false;
+  
 
     void Start()
     {
@@ -25,29 +27,33 @@ public class NewWMEnemy : MonoBehaviour
 
     void Update()
     {
-        if (isPatrolling == false && isChasing == false)
+        if (isActive && !PauseMenuController.isPaused) //If we open the pause menu, the enemies should stop
         {
-            StartCoroutine(Patrol());
-        }
+            if (isPatrolling == false && isChasing == false)
+            {
+                StartCoroutine(Patrol());
+            }
 
-        if ((target.position - enemy.position).magnitude <= radius)
-        {
-            Chase();
-        }
+            if ((target.position - enemy.position).magnitude <= radius)
+            {
+                Chase();
+            }
 
-       if(isRotatingR == true)
-        {
-            transform.Rotate(0, 0, rSpeed * Time.deltaTime);
-        }
+            if (isRotatingR == true)
+            {
+                transform.Rotate(0, 0, rSpeed * Time.deltaTime);
+            }
 
-        if (isRotatingL == true)
-        {
-            transform.Rotate(0, 0, -rSpeed *Time.deltaTime);
-        }
+            if (isRotatingL == true)
+            {
+                transform.Rotate(0, 0, -rSpeed * Time.deltaTime);
+            }
 
-        if (isMoving == true)
-        {
-            transform.position += (transform.up * speed * Time.deltaTime);
+            if (isMoving == true)
+            {
+                transform.position += (transform.up * speed * Time.deltaTime);
+            }
+
         }
 
     }
