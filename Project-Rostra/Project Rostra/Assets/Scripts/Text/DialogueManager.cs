@@ -27,6 +27,7 @@ public enum ChoiceEnum : byte
 	dwarf = 10,
 	talkToContact = 11,
 	battleFarea = 12,
+	unTriggerable = 15, // this is a bool that will literally never be set to true
 }
 
 
@@ -149,7 +150,7 @@ public class DialogueManager : MonoBehaviour
 		DontDestroyOnLoad(this.gameObject);
         // set everything to its default 
         textElements = new Queue<string>();
-		choices = new bool[14]; // was 7
+		choices = new bool[18]; // was 7
 		normalChoices = new bool[7];
 		change = 0;
 		currentChange = 0;

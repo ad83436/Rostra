@@ -14737,6 +14737,11 @@ PrefabInstance:
       propertyPath: fade
       value: 
       objectReference: {fileID: 212276441}
+    - target: {fileID: 8123089090278092117, guid: 1049f6c024b4f5a49919bf0bc201bbde,
+        type: 3}
+      propertyPath: cs.dialogues.Array.data[0].isBattle
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1049f6c024b4f5a49919bf0bc201bbde, type: 3}
 --- !u!1001 &826816069
