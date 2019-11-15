@@ -82,7 +82,7 @@ public class CutsceneManager : MonoBehaviour
 
 	public void StartCutscene(Cutscene cs, Vector2 returnPos, Fade f)
 	{
-		
+		Debug.Log("Start");
 		// call the copy constructor and save a local copy of what cutscene we passed in
 		// set up the current cutscene info
 		copy = new Cutscene(cs);
@@ -118,6 +118,7 @@ public class CutsceneManager : MonoBehaviour
         // if our current step is less than the amount of moves that means we can go ahead with the cutscene
         if (current <= moveLenghtInitial)
         {
+			Debug.Log("Next");
             // vector that checks if the current move is outside the view of the camera
             if (actorsCM[actorCount] != null)
             {

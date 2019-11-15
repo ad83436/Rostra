@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class CutsceneTrigger : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class CutsceneTrigger : MonoBehaviour
 	public int maxCount; // count how many cutscenes have passed by
 	public bool stay; // if you stay in the cutscene and have it be triggered
 	public bool directTrigger; // set to true if you don't wanna collide with the trigger
+	public Text canTrigger;
 	//public GameObject pl;
 
 	private void Update()
@@ -35,6 +37,7 @@ public class CutsceneTrigger : MonoBehaviour
 	}
 	public void TriggerCutscene()
 	{
+		Debug.Log("Trigger Cutscene");
 		returnPositon = transform.position;
 		CutsceneManager.instance.StartCutscene(cs, returnPositon, fade);
 	}
@@ -71,9 +74,12 @@ public class CutsceneTrigger : MonoBehaviour
 
 	private void OnTriggerStay2D(Collider2D col)
 	{
-		if (col.CompareTag("Player") && hasActivated == false && isInteractable == true && Input.GetButtonDown("Confirm") && directTrigger == false)
+		if (col.CompareTag("Player") && isInteractable == true)
 		{
-			
+			canTrigger.enabled = true;
+		}
+		if (col.CompareTag("Player") && hasActivated == false && isInteractable == true && Input.GetButtonDown("Confirm"))
+		{
 			fade.TransitionIntoACutscene(this);
 			col.gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);
 			DialogueManager.instance.canWalk = false;
@@ -88,6 +94,14 @@ public class CutsceneTrigger : MonoBehaviour
 			DialogueManager.instance.canWalk = false;
 			hasActivated = true;
 			CutsceneManager.instance.pl = col.gameObject;
+		}
+	}
+
+	private void OnTriggerExit2D(Collider2D col)
+	{
+		if (col.CompareTag("Player") && isInteractable == true)
+		{
+			canTrigger.enabled = false;
 		}
 	}
 
