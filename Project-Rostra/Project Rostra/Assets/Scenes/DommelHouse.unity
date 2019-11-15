@@ -14036,6 +14036,11 @@ PrefabInstance:
       propertyPath: enemyHolder
       value: 
       objectReference: {fileID: 1812408186}
+    - target: {fileID: 311607092273751674, guid: 2d9d923676cf43546bc0ccb49a73d753,
+        type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1374373283}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d9d923676cf43546bc0ccb49a73d753, type: 3}
 --- !u!114 &212276441 stripped
@@ -23571,6 +23576,12 @@ PrefabInstance:
 --- !u!1 &1374373282 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3029439829066752908, guid: 5f8e4d9700e139945944c1d4e8577c67,
+    type: 3}
+  m_PrefabInstance: {fileID: 1374373281}
+  m_PrefabAsset: {fileID: 0}
+--- !u!20 &1374373283 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 3029439829191403553, guid: 5f8e4d9700e139945944c1d4e8577c67,
     type: 3}
   m_PrefabInstance: {fileID: 1374373281}
   m_PrefabAsset: {fileID: 0}
