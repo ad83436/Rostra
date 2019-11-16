@@ -1066,6 +1066,7 @@ public class Player : MonoBehaviour
                 skillNameForObjPooler = "FFSkill1";
                 skillAnimatorName = "ASkill";
                 skillWaitingIndex = 1; //Should there be waiting time, this index is used to know which waiting animation to go to
+                Debug.Log("Wait time is: " + skillWaitTime);
                 break;
             case (int)SKILLS.Fa_SwordOfFury:
                 skillTarget = 0;
@@ -1565,6 +1566,10 @@ public class Player : MonoBehaviour
                                     }
                                     else if (chosenSkill == (int)SKILLS.Ob_FierceStrike) //Fierce Strike is a revenge attack
                                     {
+                                        if(sustainedDamage<=0.0f)
+                                        {
+                                            sustainedDamage = -1.0f; //Force a miss in case sustained Damage is zero otherwise the enemy will never end the turn. Bad code I know, build is due in two days, can't change much now
+                                        }
                                         battleManager.enemies[i].enemyReference.TakeDamage(0.7f * sustainedDamage, numberOfAttacks); //Fierce strike returns all damage sustained
 
                                         if (drainEye) //Check if Drain Eye is active
@@ -1590,6 +1595,11 @@ public class Player : MonoBehaviour
                                     }
                                     else if (chosenSkill == (int)SKILLS.Ob_FierceStrike) //Fierce Strike is a revenge attack
                                     {
+                                        if (sustainedDamage <= 0.0f)
+                                        {
+                                            sustainedDamage = -1.0f; //Force a miss in case sustained Damage is zero otherwise the enemy will never end the turn. Bad code I know, build is due in two days, can't change much now
+                                        }
+
                                         battleManager.enemies[i].enemyReference.TakeDamage(0.5f * sustainedDamage, numberOfAttacks); //Fierce strike returns all damage sustained
 
                                         if (drainEye) //Check if Drain Eye is active

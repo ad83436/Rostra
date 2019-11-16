@@ -469,11 +469,11 @@ public class SkillsInventory : MonoBehaviour {
                 skillStat[5] = 25;
                 break;
             case (int)SKILLS.Fr_PiercingShot:
-                skillStat[0] = 60;
+                skillStat[0] = 70;
                 skillStat[1] = 18;
                 skillStat[2] = 1;
                 skillStat[4] = (float)SKILL_TYPE.SINGLE_TARGET_ATK;
-                skillStat[5] = 40;
+                skillStat[5] = 50;
                 break;
             case (int)SKILLS.Fr_ArrowRain:
                 skillStat[0] = 50;
@@ -550,7 +550,7 @@ public class SkillsInventory : MonoBehaviour {
                 skillStat[1] = 100;
                 skillStat[2] = 0;
                 skillStat[4] = (float)SKILL_TYPE.SINGLE_PLAYER_HEAL;
-                skillStat[5] = 60;
+                skillStat[5] = 40;
                 break;
             case (int)SKILLS.Ar_HealingAura:
                 skillStat[0] = 30;
