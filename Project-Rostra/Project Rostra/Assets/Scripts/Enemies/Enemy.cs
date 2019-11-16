@@ -333,7 +333,8 @@ public class Enemy : MonoBehaviour
             {
                 waitQTurns--;
                 waitTime--;
-                if (waitQTurns <= 0) { MakeSkillsWork(canUseSkill); }
+                waitTurnsText.text = waitQTurns.ToString(); //Update the UI
+                //if (waitQTurns <= 0) { MakeSkillsWork(canUseSkill); }
                 EndTurn();
             }
 
@@ -372,13 +373,14 @@ public class Enemy : MonoBehaviour
                                 }
 
                                 else
-                                {
+                                { 
                                     currentState = EnemyState.skilling;
                                     waitQTurns = waitTime;
-                                    waitTurnsText.text = waitQTurns.ToString(); //Update the UI
-                                    waitTurnsText.gameObject.SetActive(true);
+                                    
                                     animator.SetBool("SkillInUse", true);
                                     MakeSkillsWork(canUseSkill);
+                                    waitTurnsText.text = waitQTurns.ToString(); //Update the UI
+                                    waitTurnsText.gameObject.SetActive(true);
                                     EndTurn();
                                 }
                             }
@@ -412,10 +414,11 @@ public class Enemy : MonoBehaviour
                                     {
                                         currentState = EnemyState.skilling;
                                         waitQTurns = waitTime;
-                                        waitTurnsText.text = waitQTurns.ToString(); //Update the UI
-                                        waitTurnsText.gameObject.SetActive(true);
+                                       
                                         animator.SetBool("SkillInUse", true);
                                         MakeSkillsWork(canUseSkill);
+                                        waitTurnsText.text = waitQTurns.ToString(); //Update the UI
+                                        waitTurnsText.gameObject.SetActive(true);
                                         EndTurn();
                                     }
                                 }
@@ -445,10 +448,11 @@ public class Enemy : MonoBehaviour
                                     {
                                         currentState = EnemyState.skilling;
                                         waitQTurns = waitTime;
-                                        waitTurnsText.text = waitQTurns.ToString(); //Update the UI
-                                        waitTurnsText.gameObject.SetActive(true);
+                                     
                                         animator.SetBool("SkillInUse", true);
                                         MakeSkillsWork(canUseSkill);
+                                        waitTurnsText.text = waitQTurns.ToString(); //Update the UI
+                                        waitTurnsText.gameObject.SetActive(true);
                                         EndTurn();
                                     }
                                 }
@@ -483,10 +487,11 @@ public class Enemy : MonoBehaviour
                                     {
                                         currentState = EnemyState.skilling;
                                         waitQTurns = waitTime;
-                                        waitTurnsText.text = waitQTurns.ToString(); //Update the UI
-                                        waitTurnsText.gameObject.SetActive(true);
+                                  
                                         animator.SetBool("SkillInUse", true);
                                         MakeSkillsWork(canUseSkill);
+                                        waitTurnsText.text = waitQTurns.ToString(); //Update the UI
+                                        waitTurnsText.gameObject.SetActive(true);
                                         EndTurn();
                                     }
                                 }
@@ -517,10 +522,11 @@ public class Enemy : MonoBehaviour
                                     {
                                         currentState = EnemyState.skilling;
                                         waitQTurns = waitTime;
-                                        waitTurnsText.text = waitQTurns.ToString(); //Update the UI
-                                        waitTurnsText.gameObject.SetActive(true);
+                                  
                                         animator.SetBool("SkillInUse", true);
                                         MakeSkillsWork(canUseSkill);
+                                        waitTurnsText.text = waitQTurns.ToString(); //Update the UI
+                                        waitTurnsText.gameObject.SetActive(true);
                                         EndTurn();
                                     }
                                 }
@@ -554,10 +560,11 @@ public class Enemy : MonoBehaviour
                                     {
                                         currentState = EnemyState.skilling;
                                         waitQTurns = waitTime;
-                                        waitTurnsText.text = waitQTurns.ToString(); //Update the UI
-                                        waitTurnsText.gameObject.SetActive(true);
+                                
                                         animator.SetBool("SkillInUse", true);
                                         MakeSkillsWork(canUseSkill);
+                                        waitTurnsText.text = waitQTurns.ToString(); //Update the UI
+                                        waitTurnsText.gameObject.SetActive(true);
                                         EndTurn();
                                     }
                                 }
@@ -586,10 +593,11 @@ public class Enemy : MonoBehaviour
                                     {
                                         currentState = EnemyState.skilling;
                                         waitQTurns = waitTime;
-                                        waitTurnsText.text = waitQTurns.ToString(); //Update the UI
-                                        waitTurnsText.gameObject.SetActive(true);
+                                    
                                         animator.SetBool("SkillInUse", true);
                                         MakeSkillsWork(canUseSkill);
+                                        waitTurnsText.text = waitQTurns.ToString(); //Update the UI
+                                        waitTurnsText.gameObject.SetActive(true);
                                         EndTurn();
                                     }
                                 }
@@ -622,10 +630,11 @@ public class Enemy : MonoBehaviour
                                 {
                                     currentState = EnemyState.skilling;
                                     waitQTurns = waitTime;
-                                    waitTurnsText.text = waitQTurns.ToString(); //Update the UI
-                                    waitTurnsText.gameObject.SetActive(true);
+                                    
                                     animator.SetBool("SkillInUse", true);
                                     MakeSkillsWork(canUseSkill);
+                                    waitTurnsText.text = waitQTurns.ToString(); //Update the UI
+                                    waitTurnsText.gameObject.SetActive(true);
                                     EndTurn();
                                 }
                             }
@@ -678,10 +687,11 @@ public class Enemy : MonoBehaviour
                                 {
                                     currentState = EnemyState.skilling;
                                     waitQTurns = waitTime;
-                                    waitTurnsText.text = waitQTurns.ToString(); //Update the UI
-                                    waitTurnsText.gameObject.SetActive(true);
+                                    
                                     animator.SetBool("SkillInUse", true);
                                     MakeSkillsWork(canUseSkill);
+                                    waitTurnsText.text = waitQTurns.ToString(); //Update the UI
+                                    waitTurnsText.gameObject.SetActive(true);
                                     EndTurn();
                                 }
                             }
@@ -712,7 +722,6 @@ public class Enemy : MonoBehaviour
 
                                 if (toBuffrNoBuff <=.3f)
                                 {
-                                    print("0");
                                     if (randomStat == 0)
                                     {
                                         AttackHighAtk();
@@ -731,16 +740,15 @@ public class Enemy : MonoBehaviour
 
                                 else 
                                 {
-                                    print("1");
                                     if (randomStat == 0)
                                     {
                                         animator.SetBool("ModAtk", true);
                                     }
 
                                    else if (randomStat == 1)
-                                    {
+                                   {
                                         animator.SetBool("ModDef", true);
-                                    }
+                                   }
 
                                    
                                     else if (randomStat == 2)
@@ -775,10 +783,11 @@ public class Enemy : MonoBehaviour
                                     {
                                         currentState = EnemyState.skilling;
                                         waitQTurns = waitTime;
-                                        waitTurnsText.text = waitQTurns.ToString(); //Update the UI
-                                        waitTurnsText.gameObject.SetActive(true);
+                                       
                                         animator.SetBool("SkillInUse", true);
                                         MakeSkillsWork(canUseSkill);
+                                        waitTurnsText.text = waitQTurns.ToString(); //Update the UI
+                                        waitTurnsText.gameObject.SetActive(true);
                                         EndTurn();
                                     }
                                 }
@@ -807,10 +816,11 @@ public class Enemy : MonoBehaviour
                                     {
                                         currentState = EnemyState.skilling;
                                         waitQTurns = waitTime;
-                                        waitTurnsText.text = waitQTurns.ToString(); //Update the UI
-                                        waitTurnsText.gameObject.SetActive(true);
+                                        
                                         animator.SetBool("SkillInUse", true);
                                         MakeSkillsWork(canUseSkill);
+                                        waitTurnsText.text = waitQTurns.ToString(); //Update the UI
+                                        waitTurnsText.gameObject.SetActive(true);
                                         EndTurn();
                                     }
                                 }
@@ -839,10 +849,11 @@ public class Enemy : MonoBehaviour
                                     {
                                         currentState = EnemyState.waiting;
                                         waitQTurns = waitTime;
-                                        waitTurnsText.text = waitQTurns.ToString(); //Update the UI
-                                        waitTurnsText.gameObject.SetActive(true);
+                                        
                                         animator.SetBool("isWaiting", true);
                                         hitAmount = Random.Range(1, 5);
+                                        waitTurnsText.text = waitQTurns.ToString(); //Update the UI
+                                        waitTurnsText.gameObject.SetActive(true);
                                         EndTurn();
                                     }
 
@@ -850,10 +861,11 @@ public class Enemy : MonoBehaviour
                                     {
                                         currentState = EnemyState.skilling;
                                         waitQTurns = waitTime;
-                                        waitTurnsText.text = waitQTurns.ToString(); //Update the UI
-                                        waitTurnsText.gameObject.SetActive(true);
+                                       
                                         animator.SetBool("SkillInUse", true);
                                         MakeSkillsWork(canUseSkill);
+                                        waitTurnsText.text = waitQTurns.ToString(); //Update the UI
+                                        waitTurnsText.gameObject.SetActive(true);
                                         EndTurn();
                                     }
                                 }
@@ -872,9 +884,10 @@ public class Enemy : MonoBehaviour
                                     {
                                         currentState = EnemyState.waiting;
                                         waitQTurns = waitTime;
+                                        
+                                        animator.SetBool("isWaiting", true);
                                         waitTurnsText.text = waitQTurns.ToString(); //Update the UI
                                         waitTurnsText.gameObject.SetActive(true);
-                                        animator.SetBool("isWaiting", true);
                                         EndTurn();
                                     }
 
@@ -882,10 +895,11 @@ public class Enemy : MonoBehaviour
                                     {
                                         currentState = EnemyState.skilling;
                                         waitQTurns = waitTime;
-                                        waitTurnsText.text = waitQTurns.ToString(); //Update the UI
-                                        waitTurnsText.gameObject.SetActive(true);
+                                        
                                         animator.SetBool("SkillInUse", true);
                                         MakeSkillsWork(canUseSkill);
+                                        waitTurnsText.text = waitQTurns.ToString(); //Update the UI
+                                        waitTurnsText.gameObject.SetActive(true);
                                         EndTurn();
                                     }
                                 }
@@ -921,7 +935,6 @@ public class Enemy : MonoBehaviour
                     Debug.Log("Enemy has Just called end turn");
                     uiBTL.EndTurn();
                 }
-
             }
         }
     }
@@ -1214,7 +1227,7 @@ public class Enemy : MonoBehaviour
     void ModDefence()
     {
         int modAmount = Random.Range(5, 20);
-        enemyToHeal.BuffStats("Defence", modAmount, 3);
+        enemyToHeal.BuffStats("Defense", modAmount, 3);
         animator.SetBool("ModDef", false);
         EndTurn();
     }
@@ -2931,13 +2944,14 @@ public class Enemy : MonoBehaviour
 
     void RaiseDefSkill()
     {
+        float dMod;
         if (waitTime == waitTimeAtStart)
         {
-            defenceMod = Mathf.CeilToInt(Random.Range((eDefence * .2f), (eDefence * .5f)));
-            eDefence += defenceMod;
+            dMod = Random.value;
+            BuffStats("Defense", dMod, waitTime);
         }
 
-        if(waitTime <= 0)
+        if (waitTime <= 0)
         {
             animator.SetBool("SkillInUse", false);
             eDefence = enemyStartingDefence;
@@ -3118,10 +3132,11 @@ public class Enemy : MonoBehaviour
 
     void SliceAndDiceSkill()
     {
-        CalculateHit();
+        
 
         if (hitAmount == 1)
         {
+            CalculateHit();
             if (hit)
             {
                 attackThisPlayer.TakeDamage(eAttack + (eAttack * .1f));
@@ -3137,7 +3152,8 @@ public class Enemy : MonoBehaviour
         else if(hitAmount == 2)
         {
             if (timeAttackingForSlice == 1)
-            { 
+            {
+                CalculateHit();
                 if (hit)
                 {
                     attackThisPlayer.TakeDamage(eAttack + (eAttack * .1f));
@@ -3152,6 +3168,7 @@ public class Enemy : MonoBehaviour
 
             else if(timeAttackingForSlice == 2)
             {
+                CalculateHit();
                 if (hit)
                 {
                     attackThisPlayer.TakeDamage(eAttack + (eAttack * .2f));
@@ -3171,6 +3188,7 @@ public class Enemy : MonoBehaviour
         {
             if (timeAttackingForSlice == 1)
             {
+                CalculateHit();
                 if (hit)
                 {
                     attackThisPlayer.TakeDamage(eAttack + (eAttack * .1f));
@@ -3185,6 +3203,7 @@ public class Enemy : MonoBehaviour
 
             else if (timeAttackingForSlice == 2)
             {
+                CalculateHit();
                 if (hit)
                 {
                     attackThisPlayer.TakeDamage(eAttack + (eAttack * .2f));
@@ -3194,11 +3213,13 @@ public class Enemy : MonoBehaviour
                 {
                     
                 }
+                
                 timeAttackingForSlice++;
             }
 
-            else if (timeAttacking == 3)
+            else if (timeAttackingForSlice == 3)
             {
+                CalculateHit();
                 if (hit)
                 {
                     attackThisPlayer.TakeDamage(eAttack + (eAttack * .3f));
@@ -3217,6 +3238,7 @@ public class Enemy : MonoBehaviour
         {
             if (timeAttackingForSlice == 1)
             {
+                CalculateHit();
                 if (hit)
                 {
                     attackThisPlayer.TakeDamage(eAttack + (eAttack * .1f));
@@ -3231,6 +3253,7 @@ public class Enemy : MonoBehaviour
 
             else if (timeAttackingForSlice == 2)
             {
+                CalculateHit();
                 if (hit)
                 {
                     attackThisPlayer.TakeDamage(eAttack + (eAttack * .2f));
@@ -3245,6 +3268,7 @@ public class Enemy : MonoBehaviour
 
             else if (timeAttackingForSlice == 3)
             {
+                CalculateHit();
                 if (hit)
                 {
                     attackThisPlayer.TakeDamage(eAttack + (eAttack * .3f));
@@ -3259,6 +3283,7 @@ public class Enemy : MonoBehaviour
 
             else if (timeAttackingForSlice == 4)
             {
+                CalculateHit();
                 if (hit)
                 {
                     attackThisPlayer.TakeDamage(eAttack + (eAttack * .4f));
@@ -3275,6 +3300,7 @@ public class Enemy : MonoBehaviour
 
         else if (hitAmount == 4)
         {
+            CalculateHit();
             if (timeAttackingForSlice == 1)
             {
                 if (hit)
@@ -3291,6 +3317,7 @@ public class Enemy : MonoBehaviour
 
             else if (timeAttackingForSlice == 2)
             {
+                CalculateHit();
                 if (hit)
                 {
                     attackThisPlayer.TakeDamage(eAttack + (eAttack * .2f));
@@ -3305,7 +3332,7 @@ public class Enemy : MonoBehaviour
 
             else if (timeAttackingForSlice == 3)
             {
-                
+                CalculateHit();
                 if (hit)
                 {
                     attackThisPlayer.TakeDamage(eAttack + (eAttack*.3f));
@@ -3320,7 +3347,7 @@ public class Enemy : MonoBehaviour
 
             else if (timeAttackingForSlice == 4)
             {
-                
+                CalculateHit();
                 if (hit)
                 {
                     attackThisPlayer.TakeDamage(eAttack + (eAttack * .4f));
@@ -3335,7 +3362,7 @@ public class Enemy : MonoBehaviour
 
             else if(timeAttackingForSlice == 5)
             {
-               
+                CalculateHit();
                 if (hit)
                 {
                     attackThisPlayer.TakeDamage(+(eAttack * .5f));
@@ -3358,23 +3385,20 @@ public class Enemy : MonoBehaviour
 
         if (enemyToHeal.enemyClass == EnemyClassType.DPS)
         {
-            enemyToHeal.eAttack += statIncrease * 0.6f;
-            enemyToHeal.eAgility += statIncrease * 0.4f;
-            enemyToHeal.isStatModed = true;
+            enemyToHeal.BuffStats("Attack", statIncrease * .6f, 4);
+            enemyToHeal.BuffStats("Agility", statIncrease * .4f, 4);
         }
 
         else if (enemyToHeal.enemyClass == EnemyClassType.Tank)
         {
-            enemyToHeal.eAttack += statIncrease * 0.3f;
-            enemyToHeal.eDefence += statIncrease * 0.7f;
-            enemyToHeal.isStatModed = true;
+            enemyToHeal.BuffStats("Attack", statIncrease * .3f, 4);
+            enemyToHeal.BuffStats("Defense", statIncrease * .7f, 4);
         }
 
         else if (enemyToHeal.enemyClass == EnemyClassType.Support)
         {
-            enemyToHeal.eAttack += statIncrease * 0.4f;
-            enemyToHeal.eAgility += statIncrease * 0.6f;
-            enemyToHeal.isStatModed = true;
+            enemyToHeal.BuffStats("Attack", statIncrease * .4f, 4);
+            enemyToHeal.BuffStats("Agility", statIncrease * .6f, 4);
         }
 
         EndSkill();
@@ -3397,17 +3421,18 @@ public class Enemy : MonoBehaviour
         objPooler.SpawnFromPool("BatWind", battleManager.players[0].playerReference.gameObject.transform.position, battleManager.players[0].playerReference.gameObject.transform.rotation);
 
     }
+
     void FeaBatWindFx()
     {
         objPooler.SpawnFromPool("BatWind", battleManager.players[2].playerReference.gameObject.transform.position, battleManager.players[2].playerReference.gameObject.transform.rotation);
 
     }
+
     void ArcBatWindFx()
     {
         objPooler.SpawnFromPool("BatWind", battleManager.players[3].playerReference.gameObject.transform.position, battleManager.players[3].playerReference.gameObject.transform.rotation);
 
     }
-
 
     protected void Death()
     {

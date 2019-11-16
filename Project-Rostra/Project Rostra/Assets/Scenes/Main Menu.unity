@@ -350,7 +350,7 @@ PrefabInstance:
     - target: {fileID: 430210745630348945, guid: 1916108d2e633f94f89ca988fced3113,
         type: 3}
       propertyPath: SceneToLoad
-      value: PlayTest2
+      value: WorldMap
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1916108d2e633f94f89ca988fced3113, type: 3}
@@ -420,6 +420,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6954618973376743985, guid: 570e370c97f1ff047a2f361b787d9287,
+        type: 3}
+      propertyPath: m_Volume
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6954618973376743985, guid: 570e370c97f1ff047a2f361b787d9287,
+        type: 3}
+      propertyPath: BypassReverbZones
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 570e370c97f1ff047a2f361b787d9287, type: 3}
