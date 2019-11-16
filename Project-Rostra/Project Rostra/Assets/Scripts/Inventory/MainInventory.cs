@@ -67,8 +67,6 @@ public class MainInventory : MonoBehaviour {
     // FOR TESTING
     private void Start() {
 
-        Debug.Log(itemIcons.Length);
-
 		invItem[0, 0] = (int)ITEM_ID.HP_POTION;
         invItem[0, 1] = 5;
 

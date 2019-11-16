@@ -209,8 +209,9 @@ public class DialogueManager : MonoBehaviour
 			highlight2.SetActive(false);
 			canEnter = false;
 			choiceNum = 0;
-			// save a local copy of the dialogue we pass in
-			dia = d;
+            // save a local copy of the dialogue we pass in
+            anim.SetBool("isOpen", true);
+            dia = d;
 			// if we need to add an item do it now so won't have to worry about it later 
 			if (dia.addItem == true && dia.itemId > 0)
 			{
