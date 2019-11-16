@@ -78,20 +78,6 @@ public class MainInventory : MonoBehaviour {
         invItem[2, 0] = (int)ITEM_ID.HOPE_POTION;
         invItem[2, 1] = 1;
 
-        invItem[3, 0] = (int)ITEM_ID.TEST_WEAPON1;
-        invItem[3, 1] = 1;
-
-        invItem[4, 0] = (int)ITEM_ID.TEST_ARMOR1;
-		invItem[4, 1] = 1;
-
-
-        invItem[5, 0] = (int)ITEM_ID.COURAGE_POTION;
-        invItem[5, 1] = 5;
-
-
-        invItem[6, 0] = (int)ITEM_ID.SEVERANCE_POTION;
-        invItem[6, 1] = 5;
-
     }
 
 	// Handling keyboard functionality
@@ -379,7 +365,8 @@ public class MainInventory : MonoBehaviour {
 
 		// Find the item's name based on its ID value
 		switch (itemID) {
-			case (int)ITEM_ID.TEST_POTION_HP:
+            //----------------Test----------------//
+            case (int)ITEM_ID.TEST_POTION_HP:
 				name = "Test Potion (HP)";
 				break;
 			case (int)ITEM_ID.TEST_POTION_MP:
@@ -394,6 +381,7 @@ public class MainInventory : MonoBehaviour {
 			case (int)ITEM_ID.TEST_WEAPON1:
 				name = "Test Iron Sword";
 				break;
+            //----------------Potions----------------//
             case (int)ITEM_ID.HP_POTION:
                 name = "Potion";
                 break;
@@ -415,9 +403,36 @@ public class MainInventory : MonoBehaviour {
             case (int)ITEM_ID.SEVERANCE_POTION:
                 name = "Severance Potion";
                 break;
+            //----------------Weapons----------------//
+
+            case (int)ITEM_ID.STEEL_LANCE:
+                name = "Steel Lance";
+                break;
+            case (int)ITEM_ID.STEEL_SWORD:
+                name = "Steel Sword";
+                break;
+            case (int)ITEM_ID.LONGBOW:
+                name = "Longbow";
+                break;
+            case (int)ITEM_ID.WOODEN_STAFF:
+                name = "Wooden Staff";
+                break;
+            //----------------Armor---------------//
+            case (int)ITEM_ID.LEATHER_JACKET:
+                name = "Leather Jacket";
+                break;
+            case (int)ITEM_ID.CHAINMAIL:
+                name = "Chainmail";
+                break;
+            case (int)ITEM_ID.PLATED_ARMOR:
+                name = "Plated Armor";
+                break;
+            case (int)ITEM_ID.ROBE:
+                name = "Magic Robe";
+                break;
 
         }
-		return name;
+        return name;
 	}
 
 	#endregion
@@ -430,7 +445,8 @@ public class MainInventory : MonoBehaviour {
 
 		// Find an item's description based on its ID
 		switch (itemID) {
-			case (int)ITEM_ID.TEST_POTION_HP:
+            //----------------Test----------------//
+            case (int)ITEM_ID.TEST_POTION_HP:
 				description = "There's like a 50% chance this will restore the player's HP.";
 				break;
 			case (int)ITEM_ID.TEST_POTION_MP:
@@ -445,6 +461,7 @@ public class MainInventory : MonoBehaviour {
 			case (int)ITEM_ID.TEST_WEAPON1:
 				description = "An Iron Sword used for testing the game's inventory.";
 				break;
+            //----------------Potions----------------//
             case (int)ITEM_ID.HP_POTION:
                 description = "A potion that restores 50 hit points for one ally.";
                 break;
@@ -465,6 +482,32 @@ public class MainInventory : MonoBehaviour {
                 break;
             case (int)ITEM_ID.SEVERANCE_POTION: //Cures Tied
                 description = "Frees a soul from the chains that bind it. Cures Tied status.";
+                break;
+            //----------------Weapons---------------//
+            case (int)ITEM_ID.STEEL_LANCE:
+                description = "A long lance with a steel tip. Can be devastating in the hands of a master!";
+                break;
+            case (int)ITEM_ID.STEEL_SWORD:
+                description = "The preferred weapon for Ocrest soldiers. Strong and reliable!";
+                break;
+            case (int)ITEM_ID.LONGBOW:
+                description = "A long bow masterfully crafted so you don't miss any shots!";
+                break;
+            case (int)ITEM_ID.WOODEN_STAFF:
+                description = "A staff used by magicians. Enhances the senses and improves magic!";
+                break;
+            //----------------Armor---------------//
+            case (int)ITEM_ID.LEATHER_JACKET:
+                description = "Commonly worn by travelers and assassins. This leather jacket is more durable than it looks!";
+                break;
+            case (int)ITEM_ID.CHAINMAIL:
+                description = "Nothing protects the body like a chainmail! Might make you a little slow, though...";
+                break;
+            case (int)ITEM_ID.PLATED_ARMOR:
+                description = "Crafted by a master blacksmith to ensure you survive every battle!";
+                break;
+            case (int)ITEM_ID.ROBE:
+                description = "Surrounded by a magical aura, this Robe enhances your senses and offers protection!";
                 break;
         }
 
@@ -513,13 +556,35 @@ public class MainInventory : MonoBehaviour {
                 price = 200;
                 break;
             case (int)ITEM_ID.COURAGE_POTION:
-                price = 100;
+                price = 150;
                 break;
             case (int)ITEM_ID.SEVERANCE_POTION:
-                price = 100;
+                price = 150;
                 break;
-
-
+            case (int)ITEM_ID.STEEL_LANCE:
+                price = 150;
+                break;
+            case (int)ITEM_ID.STEEL_SWORD:
+                price = 150;
+                break;
+            case (int)ITEM_ID.LONGBOW:
+                price = 150;
+                break;
+            case (int)ITEM_ID.WOODEN_STAFF:
+                price = 150;
+                break;
+            case (int)ITEM_ID.LEATHER_JACKET:
+                price = 150;
+                break;
+            case (int)ITEM_ID.CHAINMAIL:
+                price = 150;
+                break;
+            case (int)ITEM_ID.PLATED_ARMOR:
+                price = 150;
+                break;
+            case (int)ITEM_ID.ROBE:
+                price = 150;
+                break;
         }
 
 		return price;
@@ -547,10 +612,18 @@ public class MainInventory : MonoBehaviour {
 				itemClass = (int)ITEM_CLASS.UNSELLABLE;
 				break;
 			case (int)ITEM_ID.TEST_ARMOR1:
-				itemClass = (int)ITEM_CLASS.ARMOR;
+            case (int)ITEM_ID.LEATHER_JACKET:
+            case (int)ITEM_ID.CHAINMAIL:
+            case (int)ITEM_ID.PLATED_ARMOR:
+            case (int)ITEM_ID.ROBE:
+                itemClass = (int)ITEM_CLASS.ARMOR;
 				break;
 			case (int)ITEM_ID.TEST_WEAPON1:
-				itemClass = (int)ITEM_CLASS.WEAPON;
+            case (int)ITEM_ID.STEEL_LANCE:
+            case (int)ITEM_ID.STEEL_SWORD:
+            case (int)ITEM_ID.LONGBOW:
+            case (int)ITEM_ID.WOODEN_STAFF:
+                itemClass = (int)ITEM_CLASS.WEAPON;
 				break;
 			case (int)ITEM_ID.SMALL_KEY:
 				itemClass = (int)ITEM_CLASS.UNSELLABLE;
@@ -724,7 +797,15 @@ public class MainInventory : MonoBehaviour {
 				break;
 			case (int)ITEM_ID.TEST_WEAPON1:
 			case (int)ITEM_ID.TEST_ARMOR1:
-				itemType = (int)ITEM_TYPE.EQUIPABLE;
+            case (int)ITEM_ID.STEEL_LANCE:
+            case (int)ITEM_ID.STEEL_SWORD:
+            case (int)ITEM_ID.LONGBOW:
+            case (int)ITEM_ID.WOODEN_STAFF:
+            case (int)ITEM_ID.LEATHER_JACKET:
+            case (int)ITEM_ID.CHAINMAIL:
+            case (int)ITEM_ID.PLATED_ARMOR:
+            case (int)ITEM_ID.ROBE:
+                itemType = (int)ITEM_TYPE.EQUIPABLE;
 				break;
 			case (int)ITEM_ID.SMALL_KEY:
 				itemType = (int)ITEM_TYPE.KEY_ITEM;
@@ -770,6 +851,22 @@ public class MainInventory : MonoBehaviour {
                 return itemIcons[8];
             case (int)ITEM_ID.SEVERANCE_POTION:
                 return itemIcons[9];
+            case (int)ITEM_ID.STEEL_LANCE:
+                return itemIcons[10];
+            case (int)ITEM_ID.STEEL_SWORD:
+                return itemIcons[11];
+            case (int)ITEM_ID.LONGBOW:
+                return itemIcons[12];
+            case (int)ITEM_ID.WOODEN_STAFF:
+                return itemIcons[13];
+            case (int)ITEM_ID.LEATHER_JACKET:
+                return itemIcons[14];
+            case (int)ITEM_ID.CHAINMAIL:
+                return itemIcons[15];
+            case (int)ITEM_ID.PLATED_ARMOR:
+                return itemIcons[16];
+            case (int)ITEM_ID.ROBE:
+                return itemIcons[17];
             default:
                 return itemIcons[0];
         }
@@ -793,10 +890,12 @@ public class MainInventory : MonoBehaviour {
 			case (int)ITEM_ID.TEST_POTION_MP:
             case (int)ITEM_ID.MP_ELIXIR:
             case (int)ITEM_ID.HOPE_POTION:
-            case (int)ITEM_ID.COURAGE_POTION:
-            case (int)ITEM_ID.SEVERANCE_POTION:
                 stackSize = 10;
 				break;
+            case (int)ITEM_ID.COURAGE_POTION:
+            case (int)ITEM_ID.SEVERANCE_POTION:
+                stackSize = 5;
+                break;
         }
 
 		return stackSize;
@@ -810,18 +909,19 @@ public class MainInventory : MonoBehaviour {
 	// If no values have been set, the item's stats will be defaulted to 0
 	public float[] ItemStats(int itemID) {
 		float[] stat = { 0, 0, 0, 0, 0, 0, 0, 0 };
-		// NOTE -- Element 0 is the item's attack-buff property
-		//         Element 1 is the item's defense-buff property
-		//         Element 2 is the item's strength-buff property
-		//         Element 3 is the item's agility-buff property
-		//         Element 4 is the item's critical-buff property
-		//         Element 5 is the item's hitpoint-buff property
-		//         Element 6 is the item's magicpoint-buff property
-		//		   Element 7 is the item's class property
+        // NOTE -- Element 0 is the item's attack-buff property
+        //         Element 1 is the item's defense-buff property
+        //         Element 2 is the item's strength-buff property
+        //         Element 3 is the item's agility-buff property
+        //         Element 4 is the item's critical-buff property
+        //         Element 5 is the item's hitpoint-buff property
+        //         Element 6 is the item's magicpoint-buff property
+        //		   Element 7 is the item's class property
 
-		// Find out an item's stats based on its ID
-		switch (itemID) {
-			case (int)ITEM_ID.TEST_ARMOR1:
+        // Find out an item's stats based on its ID
+        switch (itemID) {
+            //----------------Test---------------//
+            case (int)ITEM_ID.TEST_ARMOR1:
 				stat[1] = 5;
 				stat[5] = 10;
 				stat[6] = 2;
@@ -832,7 +932,57 @@ public class MainInventory : MonoBehaviour {
 				stat[4] = 2;
 				stat[7] = (float)WEAPON_TYPE.SWORD;
 				break;
-		}
+            //----------------Weapons---------------//
+            case (int)ITEM_ID.STEEL_LANCE:
+                stat[0] = 6;
+                stat[1] = -2;
+                stat[7] = (float)WEAPON_TYPE.SPEAR;
+                break;
+            case (int)ITEM_ID.STEEL_SWORD:
+                stat[0] = 8;
+                stat[3] = -3;
+                stat[4] = 2;
+                stat[7] = (float)WEAPON_TYPE.SWORD;
+                break;
+            case (int)ITEM_ID.LONGBOW:
+                stat[0] = 6;
+                stat[2] = 3;
+                stat[5] = -10;
+                stat[7] = (float)WEAPON_TYPE.BOW;
+                break;
+            case (int)ITEM_ID.WOODEN_STAFF:
+                stat[0] = 4;
+                stat[6] = 30;
+                stat[7] = (float)WEAPON_TYPE.STAFF;
+                break;
+                //----------------Armor---------------//
+            case (int)ITEM_ID.LEATHER_JACKET:
+                stat[1] = 5;
+                stat[3] = 2;
+                stat[5] = 10;
+                stat[6] = -10;
+                stat[7] = (float)ARMOR_TYPE.LEATHER;
+                break;
+            case (int)ITEM_ID.CHAINMAIL:
+                stat[1] = 12;
+                stat[3] = -5;
+                stat[4] = 2;
+                stat[7] = (float)ARMOR_TYPE.CHAINMAIL;
+                break;
+            case (int)ITEM_ID.PLATED_ARMOR:
+                stat[1] = 6;
+                stat[3] = -2;
+                stat[4] = 2;
+                stat[7] = (float)ARMOR_TYPE.PLATED_STEEL;
+                break;
+            case (int)ITEM_ID.ROBE:
+                stat[1] = 6;
+                stat[3] = -4;
+                stat[6] = 40;
+                stat[5] = -30;
+                stat[7] = (float)WEAPON_TYPE.SWORD;
+                break;
+        }
 
 		return stat;
 	}

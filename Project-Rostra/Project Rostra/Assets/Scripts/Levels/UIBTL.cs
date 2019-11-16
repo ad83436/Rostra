@@ -1452,6 +1452,7 @@ public class UIBTL : MonoBehaviour
             {
                 choosePlayerArrowForSelectAll[i].gameObject.SetActive(false);
             }
+            currentState = btlUIState.idle;
         }
     }
 
@@ -1671,11 +1672,11 @@ public class UIBTL : MonoBehaviour
                                                    skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[2],
                                                    enemies[enemyIndicatorIndex]);
 
-                    if(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator] == (int)SKILLS.Fr_DoubleShot || //Ignore input from the player after choosing an enemy for these two skills to avoid the machine gun bug
-                        PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator] == (int)SKILLS.Fr_BleedingEdge)
-                    {
-                        currentState = btlUIState.idle;
-                    }
+                  //  if(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator] == (int)SKILLS.Fr_DoubleShot || //Ignore input from the player after choosing an enemy for these two skills to avoid the machine gun bug
+                 //   //    PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator] == (int)SKILLS.Fr_BleedingEdge)
+                 //   {
+                 //       currentState = btlUIState.idle;
+                 //   }
                 }
                 //..Otherwise, make sure the enemy chosen has not been rallied against already
                 else if (PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator] == (int)SKILLS.Fa_Rally && enemies[enemyIndicatorIndex].currentStatusAilment0 != EnemyStatusAilment.rallied && enemies[enemyIndicatorIndex].currentStatusAilment1 != EnemyStatusAilment.rallied)
@@ -1688,6 +1689,7 @@ public class UIBTL : MonoBehaviour
                                                        enemies[enemyIndicatorIndex]);
                 }
             }
+            currentState = btlUIState.idle;
         }
     }
 
@@ -1726,6 +1728,7 @@ public class UIBTL : MonoBehaviour
             {
                 chooseEnemyArrowForSelectAll[i].gameObject.SetActive(false);
             }
+            currentState = btlUIState.idle;
         }
     }
 
@@ -1813,6 +1816,7 @@ public class UIBTL : MonoBehaviour
             {
                 chooseEnemyArrowForSelectAll[i].gameObject.SetActive(false);
             }
+            currentState = btlUIState.idle;
         }
     }
 

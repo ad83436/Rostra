@@ -29,7 +29,7 @@ public class ExpManager : MonoBehaviour {
 		//Will be changed to use a load file instead
 
 		//Fargas
-		PartyStats.chara[0].hitpoints = 10.0f;
+		PartyStats.chara[0].hitpoints = 200.0f;
 		PartyStats.chara[0].maxHealth = 200.0f;
 		PartyStats.chara[0].magicpoints = 200.0f;
 		PartyStats.chara[0].maxMana = 200.0f;
@@ -231,11 +231,11 @@ public class ExpManager : MonoBehaviour {
 			case 1: //Oberon
 				switch (skill) {
 					case SKILLS.Ob_ShieldAlly:	    return new int[] { 15, 30, 250, 150, 14, 10, 9 };
-                    case SKILLS.Ob_ShieldAllAllies: return new int[] { 15, 31, 250, 150, 14, 10, 9 };
-                    case SKILLS.Ob_SpearDance: return new int[] { 15, 30, 250, 150, 14, 10, 9 };
-                    case SKILLS.Ob_LionsPride: return new int[] { 15, 31, 250, 150, 14, 10, 9 };
-                    case SKILLS.Ob_FierceStrike: return new int[] { 15, 30, 250, 150, 14, 10, 9 };
-                    case SKILLS.Ob_Lutenist: return new int[] { 15, 31, 250, 150, 14, 10, 9 };
+                    case SKILLS.Ob_ShieldAllAllies: return new int[] { 15, 33, 250, 150, 14, 10, 9 };
+                    case SKILLS.Ob_SpearDance: return new int[] { 16, 30, 250, 225, 14, 10, 9 };
+                    case SKILLS.Ob_LionsPride: return new int[] { 15, 33, 325, 150, 14, 10, 11 };
+                    case SKILLS.Ob_Lutenist: return new int[] { 17, 31, 325, 300, 15, 10, 9 };
+                    case SKILLS.Ob_FierceStrike: return new int[] { 20, 33, 325, 375, 16, 10, 12 };
                     default: return null;
                 }
 			case 2: //Frea
