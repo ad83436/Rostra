@@ -136,7 +136,7 @@ public class Enemy : MonoBehaviour
 
     //+Burn
     protected int burnedWaitTime = 0;
-    protected float burnDamage = 10.0f; //Damages the enemy at the start of every turn
+    protected float burnDamage = 20.0f; //Damages the enemy at the start of every turn
     public GameObject burnSymbol;
 
     protected void Awake()
