@@ -88,6 +88,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 6
     m_ConditionEvent: WaitingIndex
     m_EventTreshold: -1
+  - m_ConditionMode: 2
+    m_ConditionEvent: Dead
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -467193560157854156}
   m_Solo: 0
@@ -221,6 +224,9 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 6
     m_ConditionEvent: WaitingIndex
+    m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: Dead
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -423015566256732270}

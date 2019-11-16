@@ -127,9 +127,9 @@ MonoBehaviour:
   eAttack: 12
   eAgility: 7
   eDefence: 15
-  eStrength: 15
+  eStrength: 17
   eSpeed: 10
-  eBaseLevel: 5
+  eBaseLevel: 1
   eCurrentLevel: 13
   eName: 
   eRange: 0
@@ -1063,15 +1063,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemySymbols
       objectReference: {fileID: 0}
-    - target: {fileID: 5902366916643307587, guid: 9b55465ff82f04b429c1403fd10c00c3,
+    - target: {fileID: 2245281221146130406, guid: 9b55465ff82f04b429c1403fd10c00c3,
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.88
       objectReference: {fileID: 0}
-    - target: {fileID: 5902366916643307587, guid: 9b55465ff82f04b429c1403fd10c00c3,
+    - target: {fileID: 2245281221146130406, guid: 9b55465ff82f04b429c1403fd10c00c3,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.29
+      value: -1.11
       objectReference: {fileID: 0}
     - target: {fileID: 2245281221146130406, guid: 9b55465ff82f04b429c1403fd10c00c3,
         type: 3}

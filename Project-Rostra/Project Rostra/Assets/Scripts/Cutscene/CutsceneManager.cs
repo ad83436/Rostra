@@ -82,7 +82,6 @@ public class CutsceneManager : MonoBehaviour
 
 	public void StartCutscene(Cutscene cs, Vector2 returnPos, Fade f)
 	{
-		Debug.Log("Start");
 		// call the copy constructor and save a local copy of what cutscene we passed in
 		// set up the current cutscene info
 		copy = new Cutscene(cs);
@@ -149,7 +148,6 @@ public class CutsceneManager : MonoBehaviour
                 // if our timings is less than zero move onto next move and count up the timers
                 if (isActive == true && timingsCM[current] <= 0 && moveLenght >= 0)
                 {
-					Debug.Log("Next");
 					if (current + 1 < movesCM.Length)
                     {
                         current++;
@@ -185,7 +183,6 @@ public class CutsceneManager : MonoBehaviour
 
 	public void End()
 	{
-		Debug.Log("end");
 		current = 0;
 		entranceCount = 0;
 		moveCount = 0;

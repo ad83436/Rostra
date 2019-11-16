@@ -618,7 +618,7 @@ MonoBehaviour:
   eAttack: 22
   eAgility: 12
   eDefence: 10
-  eStrength: 18
+  eStrength: 16
   eSpeed: 13
   eBaseLevel: 1
   eCurrentLevel: 3
@@ -655,6 +655,8 @@ MonoBehaviour:
   waitTurnsText: {fileID: 8333961487008235832}
   healthObject: {fileID: 2518192817323371047}
   chain: {fileID: 0}
+  lightingObject: {fileID: 0}
+  deadlyTiesObject: {fileID: 0}
   blowSelfObject: {fileID: 0}
   defBuffEffect: {fileID: 3583827907936939286}
   atkBuffEffect: {fileID: 9115911701463411258}
@@ -982,6 +984,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemySymbols
       objectReference: {fileID: 0}
+    - target: {fileID: 6219219482838606354, guid: 9b55465ff82f04b429c1403fd10c00c3,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.34
+      objectReference: {fileID: 0}
     - target: {fileID: 2181335522293218536, guid: 9b55465ff82f04b429c1403fd10c00c3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1036,11 +1043,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6219219482838606354, guid: 9b55465ff82f04b429c1403fd10c00c3,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.34
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9b55465ff82f04b429c1403fd10c00c3, type: 3}

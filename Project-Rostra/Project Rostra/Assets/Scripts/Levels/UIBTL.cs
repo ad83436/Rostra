@@ -438,7 +438,7 @@ public class UIBTL : MonoBehaviour
 
     public virtual void ReArrangeQ() //Called when an enemy has died, we need to move all the images before the dead image
     {
-        //Debug.Log(enemyHasDied);
+       // Debug.Log(enemyHasDied);
        // ////Debug.Log("We are rearranging " + enemyHasDied);
        // ////Debug.Log("Dead deadEnemyImagePos count " + deadEnemyImagePos.Count);
         if (enemyHasDied)
@@ -488,16 +488,17 @@ public class UIBTL : MonoBehaviour
         }
         else
         {
-            //Debug.Log("Move images now baby");
+           // Debug.Log("Move images now baby");
             for(int i =0;i<allTheImagesBeforeTheDeadOne.Length;i++)
             {
                 allTheImagesBeforeTheDeadOne[i] = null; //Reset the array
             }
             moveImagesNow = true;
+            controlsIndicator = 0; //Reset the player control indicator
             currentState = btlUIState.updateQ;
             deadEnemyImageIndex.Clear(); //Reset
             deadEnemyImagePos.Clear();
-            ////Debug.Log("We have moved to Update Q");
+            //Debug.Log("We have moved to Update Q");
         }
     }
 
@@ -1397,7 +1398,8 @@ public class UIBTL : MonoBehaviour
                                                                     skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[5],
                                                                     skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[2],
                                                                     btlManager.players[playerIndicatorIndex].playerReference);
-                                 }
+                                currentState = btlUIState.idle; //Prevent sound from repeating
+                            }
                             }
                         }
                         else //If the skill is indeed Lullaby Of Hope, then make sure you target a dead ally
@@ -1414,6 +1416,7 @@ public class UIBTL : MonoBehaviour
                         }
                     }
 
+                
             }
         }
     }
@@ -1656,6 +1659,7 @@ public class UIBTL : MonoBehaviour
             chooseEnemyArrow.gameObject.SetActive(false);
             if (previousState == btlUIState.choosingBasicCommand)
             {
+                currentState = btlUIState.idle;
                 UpdateActivityText("Attack");
                 playerInControl.Attack(enemies[enemyIndicatorIndex]);
             }
@@ -1671,9 +1675,12 @@ public class UIBTL : MonoBehaviour
                                                    skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[2],
                                                    enemies[enemyIndicatorIndex]);
 
+                    //Debug.Log("WWWHHHHAAAAAAAAAAAAAAAAAAAAAA " + controlsIndicator);
                     if(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator] == (int)SKILLS.Fr_DoubleShot || //Ignore input from the player after choosing an enemy for these two skills to avoid the machine gun bug
-                        PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator] == (int)SKILLS.Fr_BleedingEdge)
+                        PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator] == (int)SKILLS.Fr_BleedingEdge ||
+                        PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator] == (int)SKILLS.Fa_SwordOfFury) //Also prevents sound from repeating
                     {
+                        Debug.Log("This happened");
                         currentState = btlUIState.idle;
                     }
                 }
@@ -1866,7 +1873,6 @@ public class UIBTL : MonoBehaviour
                 controlsPanel.gameObject.SetActive(false);
                 itemsPanel.gameObject.SetActive(false);
                 firstTimeOpenedSkillsPanel = false; //Get ready for the next player in case they want to use thier skills
-                controlsIndicator = 0;
                 highlighter.gameObject.transform.position = highlighiterPos[0].transform.position;
                 numberOfEndTurnCalls = 0;
                 playerInControl.ForcePlayerTurnAnimationOff();

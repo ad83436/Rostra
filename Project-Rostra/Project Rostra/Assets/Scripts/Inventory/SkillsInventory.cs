@@ -32,46 +32,14 @@ public class SkillsInventory : MonoBehaviour {
             Destroy(gameObject);
         }
 
-        AddToUnlockedSkills((int)SKILLS.Fa_Rally, 0);
-        EquipSkill((int)SKILLS.Fa_Rally, 0, 0);
         AddToUnlockedSkills((int)SKILLS.Fa_SwordOfFury, 0);
-        EquipSkill((int)SKILLS.Fa_SwordOfFury, 1, 0);
-        AddToUnlockedSkills((int)SKILLS.Fa_BladeOfTheFallen, 0);
-        EquipSkill((int)SKILLS.Fa_BladeOfTheFallen, 2, 0);
-        AddToUnlockedSkills((int)SKILLS.Fa_WarCry, 0);
-        EquipSkill((int)SKILLS.Fa_WarCry, 3, 0);
-
-        AddToUnlockedSkills((int)SKILLS.Ob_ShieldAllAllies, 1);
-        EquipSkill((int)SKILLS.Ob_ShieldAllAllies, 0, 1);
-        AddToUnlockedSkills((int)SKILLS.Ob_Lutenist, 1);
-        EquipSkill((int)SKILLS.Ob_Lutenist, 1, 1);
+        EquipSkill((int)SKILLS.Fa_SwordOfFury, 0, 0);
         AddToUnlockedSkills((int)SKILLS.Ob_ShieldAlly, 1);
-        EquipSkill((int)SKILLS.Ob_ShieldAlly, 2, 1);
-        AddToUnlockedSkills((int)SKILLS.Ob_LionsPride, 1);
-        EquipSkill((int)SKILLS.Ob_LionsPride, 3, 1);
-
+        EquipSkill((int)SKILLS.Ob_ShieldAlly, 0, 1);
         AddToUnlockedSkills((int)SKILLS.Fr_DoubleShot, 2);
         EquipSkill((int)SKILLS.Fr_DoubleShot, 0, 2);
-        AddToUnlockedSkills((int)SKILLS.Fr_BleedingEdge, 2);
-        EquipSkill((int)SKILLS.Fr_BleedingEdge, 1, 2);
-        AddToUnlockedSkills((int)SKILLS.Fr_IDontMiss, 2);
-        EquipSkill((int)SKILLS.Fr_IDontMiss, 2, 2);
-        AddToUnlockedSkills((int)SKILLS.Fr_NeverAgain, 2);
-        EquipSkill((int)SKILLS.Fr_NeverAgain, 3, 2);
-
-        AddToUnlockedSkills((int)SKILLS.Ar_Armageddon, 3);
-        EquipSkill((int)SKILLS.Ar_Armageddon, 0, 3);
-        AddToUnlockedSkills((int)SKILLS.Ar_IceAge, 3);
-        EquipSkill((int)SKILLS.Ar_IceAge, 1, 3);
-        AddToUnlockedSkills((int)SKILLS.Ar_Armageddon, 3);
-        EquipSkill((int)SKILLS.Ar_Armageddon, 2, 3);
-        AddToUnlockedSkills((int)SKILLS.Ar_LullabyOfHope, 3);
-        EquipSkill((int)SKILLS.Ar_LullabyOfHope, 3, 3);
-
-        AddToUnlockedSkills((int)SKILLS.Ar_DrainEye, 3);
-        AddToUnlockedSkills((int)SKILLS.Ar_HealingAura, 3);
-        AddToUnlockedSkills((int)SKILLS.Ar_ManaCharge, 3);
-
+        AddToUnlockedSkills((int)SKILLS.Ar_Heal, 3);
+        EquipSkill((int)SKILLS.Ar_Heal, 0, 3);
     }
 
     private void OnDestroy()
@@ -463,7 +431,7 @@ public class SkillsInventory : MonoBehaviour {
                 skillStat[1] = 16;
                 skillStat[2] = 0;
                 skillStat[4] = (float)SKILL_TYPE.SINGLE_TARGET_ATK;
-                skillStat[5] = 50;
+                skillStat[5] = 25;
                 break;
             case (int)SKILLS.Fa_WarCry:
                 skillStat[0] = 0.3f;
@@ -501,11 +469,11 @@ public class SkillsInventory : MonoBehaviour {
                 skillStat[5] = 25;
                 break;
             case (int)SKILLS.Fr_PiercingShot:
-                skillStat[0] = 60;
+                skillStat[0] = 70;
                 skillStat[1] = 18;
                 skillStat[2] = 1;
                 skillStat[4] = (float)SKILL_TYPE.SINGLE_TARGET_ATK;
-                skillStat[5] = 40;
+                skillStat[5] = 50;
                 break;
             case (int)SKILLS.Fr_ArrowRain:
                 skillStat[0] = 50;
@@ -582,7 +550,7 @@ public class SkillsInventory : MonoBehaviour {
                 skillStat[1] = 100;
                 skillStat[2] = 0;
                 skillStat[4] = (float)SKILL_TYPE.SINGLE_PLAYER_HEAL;
-                skillStat[5] = 60;
+                skillStat[5] = 40;
                 break;
             case (int)SKILLS.Ar_HealingAura:
                 skillStat[0] = 30;
