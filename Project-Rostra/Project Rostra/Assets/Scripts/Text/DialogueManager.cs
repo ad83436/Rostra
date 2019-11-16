@@ -185,7 +185,6 @@ public class DialogueManager : MonoBehaviour
 
 	public void StartConversation(Dialogue d)
 	{
-		Debug.Log("Start Convo");
 		canEnter = false;
 		if (d.willCount == true)
 		{
@@ -210,7 +209,6 @@ public class DialogueManager : MonoBehaviour
 			highlight2.SetActive(false);
 			canEnter = false;
 			choiceNum = 0;
-			anim.SetBool("isOpen", true);
 			// save a local copy of the dialogue we pass in
 			dia = d;
 			// if we need to add an item do it now so won't have to worry about it later 
@@ -268,7 +266,6 @@ public class DialogueManager : MonoBehaviour
 
 	public void NextSentence()
 	{
-		print("talking");
 		// wipe the previous text
 		text.text = "";
 		continueButton.SetActive(false);
@@ -308,7 +305,6 @@ public class DialogueManager : MonoBehaviour
 	// go home you done
 	public void End()
 	{
-		Debug.Log("End");
 		if (dia.triggerBool > 0)
 		{
 			Debug.Log(dia.triggerBool);
@@ -419,14 +415,12 @@ public class DialogueManager : MonoBehaviour
 				canEnter = true;
 				continueCountTotal = 0;
 				continueCount = 0;
-				Debug.Log("DoneTyping");
 			}
 			
 			// diable the continue and show our choices
 			// added the check for is choice
 			if (boxCount == choiceCount && dia.isChoice == true)
 			{
-				Debug.Log("Choice reached");
 				continueButton.SetActive(false);
 				choice1.gameObject.SetActive(true);
 				choice2.gameObject.SetActive(true);
