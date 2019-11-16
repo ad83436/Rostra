@@ -27,7 +27,7 @@ public class NewWMEnemy : MonoBehaviour
 
     void Update()
     {
-        if (isActive && !PauseMenuController.isPaused) //If we open the pause menu, the enemies should stop
+        if (isActive && !PauseMenuController.isPaused && !BattleManager.battleInProgress) //If we open the pause menu, the enemies should stop
         {
             if (isPatrolling == false && isChasing == false)
             {

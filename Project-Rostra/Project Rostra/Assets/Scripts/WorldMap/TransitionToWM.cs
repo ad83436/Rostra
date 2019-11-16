@@ -50,6 +50,7 @@ public class TransitionToWM : MonoBehaviour
 			{
 				EnemySpawner.instance.isBoss = false;
 			}
+            NewWMEnemy.isActive = true; //If the player teleports to a new location, the enemies should wake up
 		}
 		else if (col.CompareTag("Player") && needsBool == true && DialogueManager.instance.GetChoice(ce) == true && transitionToWM == false && stopsPlayer == false)
 		{
@@ -63,7 +64,8 @@ public class TransitionToWM : MonoBehaviour
 			{
 				EnemySpawner.instance.isBoss = false;
 			}
-		}
+            NewWMEnemy.isActive = true; //If the player teleports to a new location, the enemies should wake up
+        }
 		else if (col.CompareTag("Player") && needsBool == false && transitionToWM == true && stopsPlayer == false)
 		{
 			player.transform.position = loadPosition;
@@ -76,7 +78,8 @@ public class TransitionToWM : MonoBehaviour
 			{
 				EnemySpawner.instance.isBoss = false;
 			}
-		}
+            NewWMEnemy.isActive = true; //If the player teleports to a new location, the enemies should wake up
+        }
 		else if (col.CompareTag("Player") && needsBool == false && transitionToWM == false && stopsPlayer == false)
 		{
 			player.transform.position = loadPosition;
@@ -89,7 +92,8 @@ public class TransitionToWM : MonoBehaviour
 			{
 				EnemySpawner.instance.isBoss = false;
 			}
-		}
+            NewWMEnemy.isActive = true; //If the player teleports to a new location, the enemies should wake up
+        }
 	}
 	// start a conversation if your being blocked by a real collider... We'll need this for Hadria Domel's house
 	private void OnCollisionEnter2D(Collision2D col)

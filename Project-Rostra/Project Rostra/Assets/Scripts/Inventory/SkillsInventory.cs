@@ -431,7 +431,7 @@ public class SkillsInventory : MonoBehaviour {
                 skillStat[1] = 16;
                 skillStat[2] = 0;
                 skillStat[4] = (float)SKILL_TYPE.SINGLE_TARGET_ATK;
-                skillStat[5] = 50;
+                skillStat[5] = 25;
                 break;
             case (int)SKILLS.Fa_WarCry:
                 skillStat[0] = 0.3f;
