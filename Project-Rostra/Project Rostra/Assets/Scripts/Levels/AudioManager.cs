@@ -47,6 +47,16 @@ public class AudioManager : MonoBehaviour
     public AudioClip manaCharge;
     public AudioClip arWait;
 
+    //Enemy shared Effects
+
+
+    //Dragon
+    public AudioClip earthSmash;
+    //BlowSelf
+    public AudioClip blowSelf;
+
+
+
 
     private bool thisHasStartedPlaying = false;//Used to raise the volume steadily for a new piece
     private float musicMaxVolume = 0.5f; //Updated from the playerprefs
@@ -250,6 +260,21 @@ public class AudioManager : MonoBehaviour
             case "arWait":
                 effectAudioSource.PlayOneShot(arWait);
                 break;
+
+            //Enemy
+
+            //Dragon
+            case "EarthSmash":
+                effectAudioSource.PlayOneShot(earthSmash);
+                break;
+
+            //BlowSelf
+            case "Blow":
+                effectAudioSource.PlayOneShot(blowSelf);
+                break;
+
+
+                
 
         }
     }
