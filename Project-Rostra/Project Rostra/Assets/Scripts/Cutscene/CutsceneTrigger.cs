@@ -37,7 +37,6 @@ public class CutsceneTrigger : MonoBehaviour
 	}
 	public void TriggerCutscene()
 	{
-		Debug.Log("Trigger Cutscene");
 		returnPositon = transform.position;
 		CutsceneManager.instance.StartCutscene(cs, returnPositon, fade);
 	}
@@ -45,7 +44,6 @@ public class CutsceneTrigger : MonoBehaviour
 	{
 		if (col.CompareTag("Player") && hasActivated == false && isInteractable == false && isChoiceDependant == false && directTrigger == false)
 		{
-			Debug.Log("Activated");
 			fade.TransitionIntoACutscene(this);
             DialogueManager.instance.canWalk = false;
             col.gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);
@@ -58,7 +56,6 @@ public class CutsceneTrigger : MonoBehaviour
 		}
 		if (col.CompareTag("Player") && hasActivated == false && DialogueManager.instance.GetChoice(ce) == true && isChoiceDependant == true && stay == false && directTrigger == false)
 		{
-			Debug.Log("Activated");
 			fade.TransitionIntoACutscene(this);
 			DialogueManager.instance.canWalk = false;
 			col.gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);
@@ -80,7 +77,6 @@ public class CutsceneTrigger : MonoBehaviour
 		}
 		if (col.CompareTag("Player") && hasActivated == false && isInteractable == true && Input.GetButtonDown("Confirm"))
 		{
-			Debug.Log("Activated");
 			fade.TransitionIntoACutscene(this);
 			col.gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);
 			DialogueManager.instance.canWalk = false;
@@ -89,7 +85,6 @@ public class CutsceneTrigger : MonoBehaviour
 		}
 		if (col.CompareTag("Player") && hasActivated == false && DialogueManager.instance.GetChoice(ce) == true && stay == true && DialogueManager.instance.isActive == false && directTrigger == false)
 		{
-			Debug.Log("Activated");
 			fade.TransitionIntoACutscene(this);
 			col.gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);
 			DialogueManager.instance.canWalk = false;
