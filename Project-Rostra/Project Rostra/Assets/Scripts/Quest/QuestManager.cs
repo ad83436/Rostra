@@ -12,6 +12,7 @@ public static class QuestManager
 	public static int location { get; private set; }
 	public static string milestoneName { get; private set; }
 	public static Dictionary<string, bool> visitedLocals;
+	public static GameObject enable;
 	/// <summary>
 	/// Okay so let's run through all the locations
 	/// 1 = Military camp
@@ -77,6 +78,7 @@ public static class QuestManager
 				description = "We have all the info we need, we should leave the tavern";
 				milestone = m;
 				milestoneName = "Leave the Inn";
+				enable.SetActive(true);
 				break;
 		}
 
@@ -107,6 +109,7 @@ public static class QuestManager
 		description = "";
 		milestone = 0;
 		milestoneName = "";
+		enable = GameObject.FindGameObjectWithTag("NewQuest");
 	}
 
 }

@@ -151,7 +151,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -2.8812585, y: 6.884847}
+  m_Offset: {x: -2.8812585, y: 1.3062234}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -162,7 +162,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 14.853324, y: 14.769694}
+  m_Size: {x: 14.853324, y: 3.6124468}
   m_EdgeRadius: 0
 --- !u!114 &22339140
 MonoBehaviour:
@@ -2578,6 +2578,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyHolder: {fileID: 1830220262}
+  tutorial: 0
   victoryPanel: {fileID: 0}
   defeatPanel: {fileID: 0}
   endTestPanel: {fileID: 416931331}
@@ -6893,6 +6894,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemySpawner
       objectReference: {fileID: 0}
+    - target: {fileID: 5063818996988190477, guid: e39707a10eec55043a689f4f4f23dd65,
+        type: 3}
+      propertyPath: isBoss
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5063818996988190474, guid: e39707a10eec55043a689f4f4f23dd65,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6947,11 +6953,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5063818996988190477, guid: e39707a10eec55043a689f4f4f23dd65,
-        type: 3}
-      propertyPath: isBoss
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e39707a10eec55043a689f4f4f23dd65, type: 3}

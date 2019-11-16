@@ -7,7 +7,7 @@ public class EndDemo : MonoBehaviour
 	public ChoiceEnum ce;
 	public Fade fade;
 
-	private void OnTriggerStay2D(Collider2D collision)
+	private void OnTriggerEnter2D(Collider2D collision)
 	{
 		if (DialogueManager.instance.isActive == false && DialogueManager.instance.GetChoice(ce) == true)
 		{
