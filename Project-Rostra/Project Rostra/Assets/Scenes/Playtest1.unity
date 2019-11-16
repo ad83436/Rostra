@@ -120,78 +120,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &22339138
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 22339141}
-  - component: {fileID: 22339140}
-  - component: {fileID: 22339139}
-  m_Layer: 0
-  m_Name: EndDemo
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!61 &22339139
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 22339138}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -2.8812585, y: 6.884847}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 14.853324, y: 14.769694}
-  m_EdgeRadius: 0
---- !u!114 &22339140
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 22339138}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af1eeff240084cd47808abeb74228bf1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ce: 11
-  fade: {fileID: 343581018}
---- !u!4 &22339141
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 22339138}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.0860858, y: -7.9909134, z: -4.044922}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 27
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &86102350
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2578,6 +2506,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyHolder: {fileID: 1830220262}
+  tutorial: 0
   victoryPanel: {fileID: 0}
   defeatPanel: {fileID: 0}
   endTestPanel: {fileID: 416931331}
@@ -6893,6 +6822,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemySpawner
       objectReference: {fileID: 0}
+    - target: {fileID: 5063818996988190477, guid: e39707a10eec55043a689f4f4f23dd65,
+        type: 3}
+      propertyPath: isBoss
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5063818996988190474, guid: e39707a10eec55043a689f4f4f23dd65,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6947,11 +6881,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5063818996988190477, guid: e39707a10eec55043a689f4f4f23dd65,
-        type: 3}
-      propertyPath: isBoss
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e39707a10eec55043a689f4f4f23dd65, type: 3}

@@ -12,6 +12,7 @@ public static class QuestManager
 	public static int location { get; private set; }
 	public static string milestoneName { get; private set; }
 	public static Dictionary<string, bool> visitedLocals;
+	public static GameObject enable;
 	/// <summary>
 	/// Okay so let's run through all the locations
 	/// 1 = Military camp
@@ -35,6 +36,7 @@ public static class QuestManager
 				description = "Well, I should go and talk to the commander. ";
 				milestone = m;
 				milestoneName = "Talk to the Commander";
+				enable.SetActive(true);
 				break;
 			case 2:
 				questName = "Find Brenna";
@@ -42,6 +44,7 @@ public static class QuestManager
 				description = "I need to go find the others, they should be somewhere around the camp.";
 				milestone = m;
 				milestoneName = "Find the others";
+				enable.SetActive(true);
 				break;
 			case 3:
 				questName = "Find Brenna";
@@ -49,6 +52,7 @@ public static class QuestManager
 				description = "We should go to the south entrance it's the least guarded";
 				milestone = m;
 				milestoneName = "Leave Camp";
+				enable.SetActive(true);
 				break;
 			case 4:
 				questName = "Find Brenna";
@@ -56,6 +60,7 @@ public static class QuestManager
 				description = "We've escaped from the camp, now we should go to Hadria";
 				milestone = m;
 				milestoneName = "Go to Hadria";
+				enable.SetActive(true);
 				break;
 			case 5:
 				questName = "Find Brenna";
@@ -63,6 +68,7 @@ public static class QuestManager
 				description = "Well, we've arrived in Hadria. We should go and see if the local barkeep can tell us anything";
 				milestone = m;
 				milestoneName = "Find the Barkeep";
+				enable.SetActive(true);
 				break;
 			case 6:
 				questName = "Find Brenna";
@@ -70,6 +76,7 @@ public static class QuestManager
 				description = "I've spoken to the Barkeep, now we just need to find out where our contact is";
 				milestone = m;
 				milestoneName = "Find the contact";
+				enable.SetActive(true);
 				break;
 			case 7:
 				questName = "Find Brenna";
@@ -77,6 +84,7 @@ public static class QuestManager
 				description = "We have all the info we need, we should leave the tavern";
 				milestone = m;
 				milestoneName = "Leave the Inn";
+				enable.SetActive(true);
 				break;
 		}
 
@@ -107,6 +115,7 @@ public static class QuestManager
 		description = "";
 		milestone = 0;
 		milestoneName = "";
+		enable = GameObject.FindGameObjectWithTag("NewQuest");
 	}
 
 }

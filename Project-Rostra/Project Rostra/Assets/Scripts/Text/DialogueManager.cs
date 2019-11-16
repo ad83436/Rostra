@@ -112,6 +112,7 @@ public class DialogueManager : MonoBehaviour
 	// a story bool i use only for the demo
 	public bool demo;
 	// returns the story choice that you want
+	private float zTypeSpeed;
 	public bool GetChoice(ChoiceEnum choice)
 	{
 		return choices[(int)choice];
@@ -179,6 +180,7 @@ public class DialogueManager : MonoBehaviour
 		talkedToContact = false;
 		metAllChars = false;
 		battleFarea = false;
+		zTypeSpeed = 1;
 	}
 
 	public void StartConversation(Dialogue d)
@@ -431,7 +433,7 @@ public class DialogueManager : MonoBehaviour
 				choice1.text = dia.choiceText1;
 				choice2.text = dia.choiceText2;
 			}
-			yield return new WaitForSeconds(dia.typingSpeed * (Input.GetButton("Confirm") ? 0.01f : 1f));
+			yield return new WaitForSeconds(dia.typingSpeed * zTypeSpeed /*(Input.GetButton("Confirm") ? 0.01f : 1f)*/);
 		}
 	}
 	// did you pick door 1 
@@ -512,8 +514,6 @@ public class DialogueManager : MonoBehaviour
 	public void ChoiceDependantConvo(float choice, Dialogue d)
 	{
 		dia = d;
-		Debug.Log(d.hasPlayed);
-		Debug.Log(d.isOneShot);
 		// if the choice is more than half of the array take away half the array to get it's counterpart
 		if (d.choiceCare1.dialogue.hasPlayed == true && d.choiceCare1.dialogue.isOneShot == true)
 		{
@@ -621,6 +621,14 @@ public class DialogueManager : MonoBehaviour
 			highlight2.SetActive(true);
 			choice1.color = Color.yellow;
 			choice2.color = Color.white;
+		}
+		if (Input.GetButton("Confirm"))
+		{
+			zTypeSpeed = 0.01f;
+		}
+		else
+		{
+			zTypeSpeed = 1f;
 		}
 	}
 	// Update..... I don't know what to put here
