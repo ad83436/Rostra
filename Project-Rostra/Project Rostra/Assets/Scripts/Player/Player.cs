@@ -448,7 +448,7 @@ public class Player : MonoBehaviour
             if (chosenSkill != (int)SKILLS.Fr_BleedingEdge)
             {
                 objPooler.SpawnFromPool("PlayerNormalAttack", attackingThisEnemy.gameObject.transform.position, gameObject.transform.rotation);
-                if(playerIndex == 1)
+                if(playerIndex == 2) //Frea has a bow sound
                 {
                     audioManager.playThisEffect("doubleShot");
                 }
@@ -952,11 +952,11 @@ public class Player : MonoBehaviour
             }
             else if (playerIndex == 1)
             {
-                audioManager.playThisEffect("frWait");
+                
             }
             else if (playerIndex == 2)
             {
-
+                audioManager.playThisEffect("frWait");
             }
             else if (playerIndex == 3)
             {
@@ -1022,11 +1022,10 @@ public class Player : MonoBehaviour
             }
             else if (playerIndex == 1)
             {
-                audioManager.playThisEffect("frWait");
             }
             else if (playerIndex == 2)
             {
-
+                audioManager.playThisEffect("frWait");
             }
             else if (playerIndex == 3)
             {
@@ -1115,11 +1114,11 @@ public class Player : MonoBehaviour
             }
             else if (playerIndex == 1)
             {
-                audioManager.playThisEffect("frWait");
+
             }
             else if (playerIndex == 2)
             {
-
+                audioManager.playThisEffect("frWait");
             }
             else if (playerIndex == 3)
             {
@@ -1200,11 +1199,11 @@ public class Player : MonoBehaviour
             }
             else if (playerIndex == 1)
             {
-                audioManager.playThisEffect("frWait");
+
             }
             else if (playerIndex == 2)
             {
-
+                audioManager.playThisEffect("frWait");
             }
             else if (playerIndex == 3)
             {
@@ -1265,11 +1264,11 @@ public class Player : MonoBehaviour
             }
             else if (playerIndex == 1)
             {
-                audioManager.playThisEffect("frWait");
+
             }
             else if (playerIndex == 2)
             {
-
+                audioManager.playThisEffect("frWait");
             }
             else if (playerIndex == 3)
             {
