@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
 {
     public int enemyIndexInBattleManager;
     protected BattleManager battleManager;
+    protected AudioManager audioManager;
     protected UIBTL uiBTL;
     public float eMana;
     public float eAttack;
@@ -174,6 +175,7 @@ public class Enemy : MonoBehaviour
         battleManager = BattleManager.instance;
         objPooler = ObjectPooler.instance;
         uiBTL = UIBTL.instance;
+        audioManager = AudioManager.instance;
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         spriteColor = spriteRenderer.color;
         animator = gameObject.GetComponent<Animator>();
@@ -2461,6 +2463,8 @@ public class Enemy : MonoBehaviour
 
             case AllEnemySkills.Blow_Self:
                 blowStrength = 200;
+                currentHP = 0;
+                blow = true;
                 animator.SetBool("SkillInUse", true);
                 
                 break;
@@ -2899,6 +2903,7 @@ public class Enemy : MonoBehaviour
     void BlowSelf()
     {
         AttackWholeField(blowStrength);
+        uiBTL.UpdateActivityText("Explode Self");
 
         for (int i = 0; i < battleManager.players.Length; ++i)
         {
@@ -2915,6 +2920,7 @@ public class Enemy : MonoBehaviour
                 objPooler.SpawnFromPool("BlowEffect", battleManager.enemies[i].enemyReference.gameObject.transform.position, battleManager.enemies[i].enemyReference.gameObject.transform.rotation);
             }
         }
+        audioManager.playThisEffect("Blow");
 
         blow = false;
         countDownToBlow = 0;
@@ -2998,6 +3004,7 @@ public class Enemy : MonoBehaviour
 
     void EarthSmashSkill()
     {
+        audioManager.playThisEffect("EarthSmash");
         eAttack += Random.Range(5, 10);
 
         objPooler.SpawnFromPool("EarthSmashRocks", battleManager.players[0].playerReference.gameObject.transform.position, battleManager.players[0].playerReference.gameObject.transform.rotation);
@@ -3402,6 +3409,11 @@ public class Enemy : MonoBehaviour
         }
 
         EndSkill();
+    }
+
+    void PlayAttackSound()
+    {
+        audioManager.playThisEffect("Attack");
     }
 
     void EarthSmashBackEffect()
