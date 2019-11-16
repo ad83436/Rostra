@@ -448,12 +448,22 @@ public class Player : MonoBehaviour
             if (chosenSkill != (int)SKILLS.Fr_BleedingEdge)
             {
                 objPooler.SpawnFromPool("PlayerNormalAttack", attackingThisEnemy.gameObject.transform.position, gameObject.transform.rotation);
+                if(playerIndex == 1)
+                {
+                    audioManager.playThisEffect("doubleShot");
+                }
+                else
+                {
+                    audioManager.playThisEffect("attack");
+                }
             }
             else
             {
+
                 //Summon the BE effects 
                 objPooler.SpawnFromPool("BleedingEdgeEffect", gameObject.transform.position, gameObject.transform.rotation);
                 objPooler.SpawnFromPool("BleedingEdgeImpact", attackingThisEnemy.gameObject.transform.position, gameObject.transform.rotation);
+                audioManager.playThisEffect("bleedingEdge");
             }
             //Shake the camera
             btlCam.CameraShake();
@@ -942,7 +952,7 @@ public class Player : MonoBehaviour
             }
             else if (playerIndex == 1)
             {
-
+                audioManager.playThisEffect("frWait");
             }
             else if (playerIndex == 2)
             {
@@ -1012,7 +1022,7 @@ public class Player : MonoBehaviour
             }
             else if (playerIndex == 1)
             {
-
+                audioManager.playThisEffect("frWait");
             }
             else if (playerIndex == 2)
             {
@@ -1063,6 +1073,7 @@ public class Player : MonoBehaviour
                 PartyStats.chara[playerIndex].magicpoints = currentMP;
                 break;
             case (int)SKILLS.Fr_PiercingShot:
+                audioForSkillEffectName = "piercingShot";
                 skillNameForObjPooler = "FFSkill1";
                 skillAnimatorName = "ASkill";
                 skillWaitingIndex = 1; //Should there be waiting time, this index is used to know which waiting animation to go to
@@ -1104,7 +1115,7 @@ public class Player : MonoBehaviour
             }
             else if (playerIndex == 1)
             {
-
+                audioManager.playThisEffect("frWait");
             }
             else if (playerIndex == 2)
             {
@@ -1137,12 +1148,14 @@ public class Player : MonoBehaviour
         switch (skillID)
         {
             case (int)SKILLS.Fr_ArrowRain:
+                audioForSkillEffectName = "arrowRain";
                 skillObjectForObjPooler = "ArrowRain";
                 skillNameForObjPooler = "ArrowImpact";
                 skillAnimatorName = "ASkill";
                 skillWaitingIndex = 1;
                 break;
             case (int)SKILLS.Fr_NeverAgain:
+                audioForSkillEffectName = "neverAgain";
                 skillObjectForObjPooler = "NeverAgain";
                 skillNameForObjPooler = "ArrowImpactNG";
                 skillAnimatorName = "ASkill";
@@ -1187,7 +1200,7 @@ public class Player : MonoBehaviour
             }
             else if (playerIndex == 1)
             {
-
+                audioManager.playThisEffect("frWait");
             }
             else if (playerIndex == 2)
             {
@@ -1252,7 +1265,7 @@ public class Player : MonoBehaviour
             }
             else if (playerIndex == 1)
             {
-
+                audioManager.playThisEffect("frWait");
             }
             else if (playerIndex == 2)
             {
@@ -1752,7 +1765,11 @@ public class Player : MonoBehaviour
             }
 
             // ----- End of Skill Effect -----  //
-            audioManager.playThisEffect(audioForSkillEffectName);
+            if (audioForSkillEffectName != "")
+            {
+                audioManager.playThisEffect(audioForSkillEffectName);
+                audioForSkillEffectName = ""; //Reset, ready for the next effect
+            }
             if (chosenSkill == (int)SKILLS.Ob_SpearDance)
             {
                 actualCRIT = critBeforeDance; //Return the crit to what it was before using the skill
@@ -1988,6 +2005,15 @@ public class Player : MonoBehaviour
                     drainEyeSkillQCounter = lastsNumberOfTurns;
                 }
                 break;
+        }
+
+        if(precentage > 0)
+        {
+            audioManager.playThisEffect("buff");
+        }
+        else
+        {
+            audioManager.playThisEffect("debuff");
         }
     }
 

@@ -24,11 +24,19 @@ public class AudioManager : MonoBehaviour
 
     //Player
     public AudioClip attack;
+    public AudioClip buff;
+    public AudioClip deBuff;
     //Fargas
 
     //Oberon
 
     //Frea
+    public AudioClip arrowRain;
+    public AudioClip doubleShot;
+    public AudioClip bleedingEdge;
+    public AudioClip neverAgain;
+    public AudioClip piercingShot;
+    public AudioClip frWait;
 
     //Arcelus
     public AudioClip heal;
@@ -187,6 +195,37 @@ public class AudioManager : MonoBehaviour
                 break;
             case "uiCancel":
                 effectAudioSource.PlayOneShot(uiCancel);
+                break;
+
+            //Generic 
+            case "attack":
+                effectAudioSource.PlayOneShot(attack);
+                break;
+            case "buff":
+                effectAudioSource.PlayOneShot(buff);
+                break;
+            case "debuff":
+                effectAudioSource.PlayOneShot(deBuff);
+                break;
+
+            //Frea
+            case "doubleShot":
+                effectAudioSource.PlayOneShot(doubleShot);
+                break;
+            case "bleedingEdge":
+                effectAudioSource.PlayOneShot(bleedingEdge);
+                break;
+            case "arrowRain":
+                effectAudioSource.PlayOneShot(arrowRain);
+                break;
+            case "neverAgain":
+                effectAudioSource.PlayOneShot(neverAgain);
+                break;
+            case "piercingShot":
+                effectAudioSource.PlayOneShot(piercingShot);
+                break;
+            case "frWait":
+                effectAudioSource.PlayOneShot(frWait);
                 break;
 
             //Arcelus

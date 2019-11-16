@@ -1398,7 +1398,11 @@ public class UIBTL : MonoBehaviour
                                                                     skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[5],
                                                                     skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[2],
                                                                     btlManager.players[playerIndicatorIndex].playerReference);
-                                currentState = btlUIState.idle; //Prevent sound from repeating
+
+                                if (skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[2] <= 0)
+                                {
+                                    currentState = btlUIState.idle; //Prevent sound from repeating // Needed for skills with no waiting time. Those with waiting time end their turns on their own
+                                }
                             }
                             }
                         }

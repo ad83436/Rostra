@@ -45,7 +45,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -59,7 +59,7 @@ AudioSource:
   rolloffMode: 0
   BypassEffects: 0
   BypassListenerEffects: 0
-  BypassReverbZones: 0
+  BypassReverbZones: 1
   rolloffCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -141,7 +141,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.8
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -249,12 +249,20 @@ MonoBehaviour:
   uiScroll: {fileID: 8300000, guid: c6de6d3f92a72674e8d74003a5e56391, type: 3}
   uiConfirm: {fileID: 8300000, guid: aac2f6804f482764590e58304f62628f, type: 3}
   uiCancel: {fileID: 8300000, guid: e5814d9748cc3e740a6141ee7b123bb4, type: 3}
-  attack: {fileID: 0}
+  attack: {fileID: 8300000, guid: 7dc16aabb21df7c4fbcf28758c07c71e, type: 3}
+  buff: {fileID: 8300000, guid: e9c4595e8065d1541adca56bbb5943c5, type: 3}
+  deBuff: {fileID: 8300000, guid: fb38bf0ff63f1024ab988d5900a103fb, type: 3}
+  arrowRain: {fileID: 8300000, guid: 9ef9eb22b0b3603469c969d711ed2c34, type: 3}
+  doubleShot: {fileID: 8300000, guid: ce5df7d84644ded47882d0dac927380f, type: 3}
+  bleedingEdge: {fileID: 8300000, guid: 75887c4b3031480469f299e6b50a1da0, type: 3}
+  neverAgain: {fileID: 8300000, guid: 8ad4409a6f812b544ac2bc6b66bd312d, type: 3}
+  piercingShot: {fileID: 8300000, guid: 840a541d4ae11ae44a6f37b7be5163fc, type: 3}
+  frWait: {fileID: 8300000, guid: 79ce58aa1f7fc16419fdbbe5ae5b37b4, type: 3}
   heal: {fileID: 8300000, guid: 3091a70aefc43914ebbd7c05a8c06d67, type: 3}
   iceAge: {fileID: 8300000, guid: 46c7b5df7e15c394c8a55de729697625, type: 3}
   drainEye: {fileID: 8300000, guid: 9e34b5349d7f4c3479e9b81c6d653bca, type: 3}
   armageddon: {fileID: 8300000, guid: 04b2af7fa7abdad4191866ddc3fcdd90, type: 3}
   hope: {fileID: 8300000, guid: 76aca18b64705654983da6205baafb44, type: 3}
-  manaCharge: {fileID: 0}
+  manaCharge: {fileID: 8300000, guid: 1b5266c5a33743d418795cba54b2fda4, type: 3}
   arWait: {fileID: 8300000, guid: f9665b7b757735a428e80b7f10990035, type: 3}
   currentState: 0
