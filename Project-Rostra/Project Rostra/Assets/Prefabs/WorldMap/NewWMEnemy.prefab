@@ -46,9 +46,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64988179a49408e468be1f5e537748e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  speed: 2
   rSpeed: 100
-  radius: 5
+  radius: 2
   enemy: {fileID: 2804867714409018186}
   player: {fileID: 0}
 --- !u!58 &2804867714409018185
@@ -61,7 +61,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -130,8 +130,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tutorial: 0
-  enemies: []
-  enemyLevels: 
+  enemies:
+  - {fileID: 5379232176687450032, guid: a3c8851da5b580041b22594d7a2c2390, type: 3}
+  - {fileID: 5379232176687450032, guid: a3c8851da5b580041b22594d7a2c2390, type: 3}
+  - {fileID: 5379232176687450032, guid: a3c8851da5b580041b22594d7a2c2390, type: 3}
+  enemyLevels: 030000000400000003000000
   fadePanel: {fileID: 0}
   endTestPanel: {fileID: 0}
   enemySpwn: {fileID: 0}

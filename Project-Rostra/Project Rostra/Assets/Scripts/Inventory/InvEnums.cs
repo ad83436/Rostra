@@ -20,6 +20,14 @@ public enum ITEM_ID { // Minimum Value -- 0x0000, Maximum Value -- 0xFEFF (65280
 	BOOK =              0x000A,
     COURAGE_POTION =    0x000B,
     SEVERANCE_POTION =  0x000C,
+    STEEL_LANCE = 0x000D,
+    STEEL_SWORD = 0x000E,
+    LONGBOW = 0x000F,
+    WOODEN_STAFF = 0x0010,
+    LEATHER_JACKET = 0x0011,
+    CHAINMAIL = 0x0012,
+    PLATED_ARMOR = 0x0013,
+    ROBE = 0x0014,
 };
 
 enum ITEM_TYPE { // Minimum Value -- 0xFF00, Maximum Value -- 0xFF4F (64 possible item types)
