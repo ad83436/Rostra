@@ -542,6 +542,16 @@ PrefabInstance:
       propertyPath: enemyHolder
       value: 
       objectReference: {fileID: 1812408186}
+    - target: {fileID: 311607092131154194, guid: 2d9d923676cf43546bc0ccb49a73d753,
+        type: 3}
+      propertyPath: grendolHolder
+      value: 
+      objectReference: {fileID: 1068205757}
+    - target: {fileID: 311607092131154194, guid: 2d9d923676cf43546bc0ccb49a73d753,
+        type: 3}
+      propertyPath: secondBossHolder
+      value: 
+      objectReference: {fileID: 1068205757}
     - target: {fileID: 311607092273751674, guid: 2d9d923676cf43546bc0ccb49a73d753,
         type: 3}
       propertyPath: m_Camera

@@ -8,11 +8,11 @@ public class Fade : MonoBehaviour
 {
     private Image thisImage;
     public WMEnemy enemyHolder;
-    public WMEnemy grendolHolder; //Bad code, have to. 
+    public WMEnemy secondBossHolder; //Bad code, have to. 
     public bool tutorial;
     private bool fadeOut;
     private bool transitionToBattle;
-    private bool transitionToGrendolFight; //Bad code, have to. 
+    private bool transitionToSecondBossFight; //Bad code, have to. 
     private bool transitionToVictory;
     private bool transitionToDefeat;
     private bool transitionToWorldMap;
@@ -37,7 +37,7 @@ public class Fade : MonoBehaviour
         thisImage = gameObject.GetComponent<Image>();
         fadeOut = false;
         transitionToBattle = false;
-        transitionToGrendolFight = false;
+        transitionToSecondBossFight = false;
         transitionToVictory = false;
         transitionToDefeat = false;
         transitionToWorldMap = false;
@@ -90,10 +90,14 @@ public class Fade : MonoBehaviour
                     TransitionIntoBattle();
                     fadeOut = false;
                 }
-                else if(transitionToGrendolFight)
+                else if(transitionToSecondBossFight)
                 {
-                    transitionToGrendolFight = false;
-                    TransitionToGrendol();
+                    if(transitionOutOfACutscene == true) //If we're transitioning into another boss, chances are we've come from a cutscene
+                    {
+                        transitionOutOfACutscene = false;
+                    }
+                    transitionToSecondBossFight = false;
+                    TransitionToSecondBossFight();
                     fadeOut = false;
                 }
                 else if (transitionToVictory)
@@ -164,19 +168,25 @@ public class Fade : MonoBehaviour
     //Two version of flip fade, one for controlled situations where the WM is assigned from the editor and one for the world map
     public void FlipFadeToBattle()
     {
+        if(!BattleManager.battleInProgress)
+        BattleManager.battleInProgress = true; //A battle has just started
+
         if(EnemySpawner.instance.isBoss)
         {
             bossCounter++;
         }
+        Debug.Log("Flip Fade to battle and counter is " + bossCounter);
 
-        if (bossCounter == 1 && grendolHolder!=null) //Boss counter 0 is Farea, 1 is Grendol
+        if (bossCounter == 1 && enemyHolder!=null) //Boss counter 0 is Farea, 1 is Grendol
         {
-            fadeOut = !fadeOut;
-            transitionToGrendolFight = true;
+            Debug.Log("Hit");
+            fadeOut = true;
+            transitionToSecondBossFight = true;
         }
         else
         {
-            fadeOut = !fadeOut;
+            Debug.Log("miss");
+            fadeOut = true;
             transitionToBattle = true;
         }
     }
@@ -205,7 +215,7 @@ public class Fade : MonoBehaviour
     public void TransitionOutOfACutscene()
     {
         transitionOutOfACutscene = true;
-        fadeOut = !fadeOut;
+        fadeOut = true;
        
     }
     public void TransitionIntoBattle()
@@ -213,9 +223,9 @@ public class Fade : MonoBehaviour
         enemyHolder.TransitionIntoBattle();
     }
 
-    public void TransitionToGrendol() //Bad code. Have to
+    public void TransitionToSecondBossFight() //Bad code. Have to
     {
-        grendolHolder.TransitionIntoBattle();
+        secondBossHolder.TransitionIntoBattle();
     }
 
     public void TransitionIntoVictory()
