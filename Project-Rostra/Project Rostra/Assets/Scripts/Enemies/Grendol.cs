@@ -15,6 +15,8 @@ public class Grendol : Enemy {
 	public float QuakeNormalMultiplier;
 	public float QuakeStrongMultiplier;
 	public int MaxNumberOfHeals;
+	public float PercentChanceIncreaseOfStorm;
+	public float BasePercentChanceIncreaseOfStorm;
 	public Transform FirePillarTransform;
 
 	// rain
@@ -22,6 +24,7 @@ public class Grendol : Enemy {
 	private int rainTurnsLeft = 0;
 	private bool isWaitingForRain = false;
 	private float defaultDefence;
+	private float percentChance = 0f;
 
 	// turn counter
 	private int turnCount = 0;
@@ -32,6 +35,7 @@ public class Grendol : Enemy {
 	protected override void Start() {
 		base.Start();
 		defaultDefence = eDefence;
+		percentChance = BasePercentChanceIncreaseOfStorm;
 	}
 
 	protected override void Update() {
@@ -68,6 +72,7 @@ public class Grendol : Enemy {
 			// not raining
 			// roll attack
 			float roll = Random.Range(0f, 100f);
+			percentChance += PercentChanceIncreaseOfStorm;
 
 			if (roll <= 40f) {
 				// Fire Pillar skill
@@ -75,7 +80,7 @@ public class Grendol : Enemy {
 			} else if (roll <= 60f) {
 				// wind skill
 				Begin_Wind();
-			} else if (roll <= 80f) {
+			} else if (roll <= 60f + percentChance && MaxNumberOfHeals != 0 ? (turnCount % 4) < 2 : true) {
 				// storm skill
 				Charge_Storm();
 			} else {
@@ -86,16 +91,21 @@ public class Grendol : Enemy {
 			// is raining
 			// roll attack
 			float roll = Random.Range(0f, 100f);
+			rainTurnsLeft--;
 
-			if (roll <= 60f) {
+			if (rainTurnsLeft == 0) {
+				Begin_Wind();
+			} else if (roll <= 50f) {
 				// Dumb attack
 				DumbAttack();
+			} else if (roll <= 75f) {
+				// wind skill
+				Begin_Wind();
 			} else {
 				// lightning skill
 				Begin_Lightning();
 			}
 
-			rainTurnsLeft--;
 			if (rainTurnsLeft == 0) {
 				End_Storm();
 			}
@@ -108,6 +118,10 @@ public class Grendol : Enemy {
 	// this can be called from the animation
 	private void EndTurn() {
 		uiBTL.EndTurn();
+	}
+
+	private void AttackSound() {
+		audioManager.playThisEffect("GAttack");
 	}
 
 	#region SKILLS
@@ -124,6 +138,7 @@ public class Grendol : Enemy {
 
 		// set the fire animation
 		animator.SetTrigger("Fire");
+
 	}
 
 	private void Do_FirePillar() {
@@ -136,6 +151,8 @@ public class Grendol : Enemy {
 
 		// play sound
 		audioManager.playThisEffect("GFire");
+
+		uiBTL.UpdateActivityText("HellStorm");
 	}
 	#endregion
 
@@ -152,10 +169,11 @@ public class Grendol : Enemy {
 	}
 
 	private void Do_Lightning() {
-		/// TODO: change to spawn lighting on player
-		//objPooler.SpawnFromPool("EnemyNormalAttack", attackThisPlayer.gameObject.transform.position, gameObject.transform.rotation);
+		objPooler.SpawnFromPool("EnemyNormalAttack", attackThisPlayer.gameObject.transform.position, gameObject.transform.rotation);
 
 		attackThisPlayer.TakeDamage(eAttack * LightningDamageMultiplier);
+
+		uiBTL.UpdateActivityText("Lightning Strike");
 	}
 
 	private void PlaySound_Lightning() {
@@ -168,8 +186,11 @@ public class Grendol : Enemy {
 	// Tornado/Hurricane skill
 
 	#region 
+
 	private void Begin_Wind() {
 		animator.SetTrigger("Wind");
+		audioManager.playThisEffect("GWind");
+
 	}
 
 	private void Do_Wind() {
@@ -192,7 +213,10 @@ public class Grendol : Enemy {
 		attackThisPlayer = battleManager.players[3].playerReference;
 		objPooler.SpawnFromPool("EnemyNormalAttack", attackThisPlayer.gameObject.transform.position, gameObject.transform.rotation);
 		attackThisPlayer.TakeDamage(eAttack * WindDamageMultiplier);
+
+		uiBTL.UpdateActivityText("Hurricane");
 	}
+
 	#endregion
 
 	////////////////////////////////////////////////////////////////////////////////////////////////
@@ -200,6 +224,8 @@ public class Grendol : Enemy {
 
 	#region 
 	private void Charge_Storm() {
+		percentChance = BasePercentChanceIncreaseOfStorm;
+
 		animator.SetTrigger("Storm");
 		animator.SetBool("IsWaiting", true);
 
@@ -208,19 +234,24 @@ public class Grendol : Enemy {
 		waitTurnsText.gameObject.SetActive(true);
 		waitTurnsText.text = waitQTurns.ToString();
 		isWaitingForRain = true;
+
 		EndTurn();
+	}
+
+	private void ShowStormText() {
+		uiBTL.UpdateActivityText("SuperStorm");
 	}
 
 	private void Begin_Storm() {
 		animator.SetBool("IsWaiting", false);
 		animator.SetBool("ShowClouds", true);
-		print("test");
 
 		isRaining = true;
 		rainTurnsLeft = StormLength + Random.Range(-1, 2); // gives a amount that is +1, 0 or -1 of the normal storm length
 
 		// set his defence
 		eDefence = defaultDefence + DefenceIncrease;
+
 	}
 
 	private void End_Storm() {
@@ -238,11 +269,13 @@ public class Grendol : Enemy {
 	private void Begin_Heal() {
 		animator.SetTrigger("Heal");
 		MaxNumberOfHeals--;
+		audioManager.playThisEffect("GHeal");
 	}
 
 	private void Do_Heal() {
 		Heal(Random.Range(MinHealAmount, MaxHealAmount));
 		healthObject.SetActive(true);
+		uiBTL.UpdateActivityText("Heal");
 	}
 	#endregion
 

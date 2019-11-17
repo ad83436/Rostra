@@ -280,9 +280,12 @@ MonoBehaviour:
   arWait: {fileID: 8300000, guid: f9665b7b757735a428e80b7f10990035, type: 3}
   earthSmash: {fileID: 8300000, guid: a056ecf82e3ac6a4a8c8161e0fd84a51, type: 3}
   blowSelf: {fileID: 8300000, guid: 3c911aba26b0e0043b066b18f0fa3eaf, type: 3}
+  batWind: {fileID: 8300000, guid: bb2f8bdb47b4a1844a210af0fa88386b, type: 3}
+  lighting: {fileID: 8300000, guid: d0697ce6bd30cd04881b37f8fb0f9160, type: 3}
+  sliceAndDice: {fileID: 8300000, guid: bfe983dc21200f446941929385609fc6, type: 3}
   Grendol_Lightning: {fileID: 8300000, guid: ae6056d219c611f4b8612cf137164168, type: 3}
   Grendol_Fire: {fileID: 8300000, guid: f004915018c9a7b4aae5104a0e8dfa5c, type: 3}
-  Grendol_Wind: {fileID: 0}
-  Grendol_Heal: {fileID: 0}
-  Grendol_Attack: {fileID: 0}
+  Grendol_Wind: {fileID: 8300000, guid: 4d8f17da304b7ab49a4c1dd9472f3b28, type: 3}
+  Grendol_Heal: {fileID: 8300000, guid: 1f376e0a558d4bf43b11fbb14df40855, type: 3}
+  Grendol_Attack: {fileID: 8300000, guid: 6f7129c748701e3479cd781279da4100, type: 3}
   currentState: 0
