@@ -421,15 +421,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6954618973376743985, guid: 570e370c97f1ff047a2f361b787d9287,
-        type: 3}
-      propertyPath: m_Volume
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6954618973376743985, guid: 570e370c97f1ff047a2f361b787d9287,
-        type: 3}
-      propertyPath: BypassReverbZones
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 570e370c97f1ff047a2f361b787d9287, type: 3}
