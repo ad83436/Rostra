@@ -1128,7 +1128,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyIndexInBattleManager: 0
   eMana: 0
-  eAttack: 30
+  eAttack: 60
   eAgility: 0
   eDefence: 30
   eStrength: 30
@@ -1148,8 +1148,8 @@ MonoBehaviour:
   eCritical: 0
   qImage: {fileID: 0}
   HP: {fileID: 7258485256067680936}
-  maxHP: 800
-  currentHP: 800
+  maxHP: 1200
+  currentHP: 1200
   damageText: {fileID: 5767422145092268946}
   healText: {fileID: 7588495312722109962}
   missText: {fileID: 7466145886938455754}
@@ -1187,15 +1187,15 @@ MonoBehaviour:
   ralliedSymbol: {fileID: 0}
   burnSymbol: {fileID: 0}
   FirePillarDamageMultiplier: 1.6
-  LightningDamageMultiplier: 2.8
-  WindDamageMultiplier: 1.1
+  LightningDamageMultiplier: 2.1
+  WindDamageMultiplier: 1.2
   StormLength: 5
   DefenceIncrease: 50
-  MinHealAmount: 200
-  MaxHealAmount: 750
+  MinHealAmount: 400
+  MaxHealAmount: 950
   QuakeNormalMultiplier: 5
   QuakeStrongMultiplier: 10
-  MaxNumberOfHeals: 10
+  MaxNumberOfHeals: 15
   PercentChanceIncreaseOfStorm: 3
   BasePercentChanceIncreaseOfStorm: 1.5
   FirePillarTransform: {fileID: 779513965320012036}
