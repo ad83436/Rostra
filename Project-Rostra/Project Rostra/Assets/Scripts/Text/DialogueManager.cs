@@ -382,16 +382,17 @@ public class DialogueManager : MonoBehaviour
 		nextDialogue = false;
 		isActive = false;
 		choiceCount = 0;
-		if (dia != null && dia.isBattle == true)
-		{
-			fade = GameObject.Find("Fade").GetComponent<Fade>();
-			battle = true;
-		}
+		
 		if (willCount == dia.maxWillCount && hasCountTriggered == true)
 		{
 			willCount = 0;
 			dia = null;
 			hasCountTriggered = false;
+		}
+		if (dia != null && dia.isBattle == true)
+		{
+			fade = GameObject.Find("Fade").GetComponent<Fade>();
+			battle = true;
 		}
 	}
 	// this is a coroutine that will take our chars from the string and print one at a time 
@@ -660,7 +661,11 @@ public class DialogueManager : MonoBehaviour
 		{
 			fade.FlipFadeToBattle();
 			battle = false;
-			CutsceneManager.instance.End();
+
+            if (CutsceneManager.instance.isActive) //If the CM is active, that means we need to return the player to where he was before the cutscene started
+            {
+                CutsceneManager.instance.End();
+            }
 		}
 	}
 
