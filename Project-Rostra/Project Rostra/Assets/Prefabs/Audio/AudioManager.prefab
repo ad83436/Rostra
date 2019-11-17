@@ -245,11 +245,14 @@ MonoBehaviour:
   bossMusic1: {fileID: 8300000, guid: be38abed4318d4f48a47586c796a7c59, type: 3}
   victoryMusic1: {fileID: 8300000, guid: 44eb8905aec7b9749bad66a41e791777, type: 3}
   defeatMusic1: {fileID: 8300000, guid: 24bfb53bb0eec574696a9adc19adf543, type: 3}
-  cutscene1: {fileID: 8300000, guid: 85b9b7e3362ffef4ea1f1f3f33eb0681, type: 3}
+  cutscene1: {fileID: 8300000, guid: f3c77c247bf7bd742bec35f9507e4218, type: 3}
   townTheme1: {fileID: 8300000, guid: 135e3db6518b83941833337737067b50, type: 3}
+  dommelHouse: {fileID: 8300000, guid: 29e23e36012b9a34a9badede3f489881, type: 3}
+  brennaHouse: {fileID: 8300000, guid: 85b9b7e3362ffef4ea1f1f3f33eb0681, type: 3}
   uiScroll: {fileID: 8300000, guid: c6de6d3f92a72674e8d74003a5e56391, type: 3}
   uiConfirm: {fileID: 8300000, guid: aac2f6804f482764590e58304f62628f, type: 3}
   uiCancel: {fileID: 8300000, guid: e5814d9748cc3e740a6141ee7b123bb4, type: 3}
+  collect: {fileID: 8300000, guid: 78a345ccf8951c142a7bc01bcb5e95cf, type: 3}
   attack: {fileID: 8300000, guid: 7dc16aabb21df7c4fbcf28758c07c71e, type: 3}
   buff: {fileID: 8300000, guid: e9c4595e8065d1541adca56bbb5943c5, type: 3}
   deBuff: {fileID: 8300000, guid: fb38bf0ff63f1024ab988d5900a103fb, type: 3}

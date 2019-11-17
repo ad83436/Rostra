@@ -6,6 +6,7 @@ public class AudioManager : MonoBehaviour
 {
     //Play the music from the Audio Manager
     public static AudioManager instance;
+    private string previousSong;
     public AudioSource musicAudioSource;
     public AudioSource effectAudioSource;
     public AudioClip titleTheme1;
@@ -16,6 +17,8 @@ public class AudioManager : MonoBehaviour
     public AudioClip defeatMusic1;
     public AudioClip cutscene1;
     public AudioClip townTheme1;
+    public AudioClip dommelHouse;
+    public AudioClip brennaHouse;
     private AudioClip playThisNext;
 
     //UI
@@ -128,6 +131,7 @@ public class AudioManager : MonoBehaviour
     {
         musicAudioSource.volume = 0.0f; //Start at volume zero
         GameManager.instance.listOfUndestroyables.Add(this.gameObject); //On start cause AM and GM start out in the same scene
+        previousSong = "WorldMapMusic1";
     }
 
     private void Update()
@@ -182,6 +186,11 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    public void PlayThePreviousSong() // Called from fade when transitioning out of a cutscene to return the music to what it was
+    {
+        PlayThisClip(previousSong);
+    }
+
     public void PlayThisClip(string clipName)
     {
         switch (clipName) //Get the new clip 
@@ -191,6 +200,7 @@ public class AudioManager : MonoBehaviour
                 break;
             case "WorldMapMusic1":
                 playThisNext = worldMapMusic1;
+                previousSong = "WorldMapMusic1";
                 break;
             case "BattleMusic1":
                 playThisNext = battleMusic1;
@@ -209,6 +219,15 @@ public class AudioManager : MonoBehaviour
                 break;
             case "TownTheme":
                 playThisNext = townTheme1;
+                previousSong = "TownTheme";
+                break;
+            case "Dommel":
+                playThisNext = dommelHouse;
+                previousSong = "Dommel";
+                break;
+            case "Brenna":
+                playThisNext = brennaHouse;
+                previousSong = "Brenna";
                 break;
         }
 

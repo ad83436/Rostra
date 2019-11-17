@@ -148,7 +148,7 @@ public class Fade : MonoBehaviour
                     fadeOut = !fadeOut;
                     CutsceneManager.instance.End();
                     transitionOutOfACutscene = false;
-                    audioManager.PlayThisClip("WorldMapMusic1");
+                    audioManager.PlayThePreviousSong();
                 }
                 else if(transitionToMainMenu)
                 {
