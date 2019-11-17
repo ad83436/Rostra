@@ -24,6 +24,7 @@ public class DialogueToBattle : MonoBehaviour
 		{
 			
 			DialogueManager.instance.StartConversation(ct.dialogue);
+            gameObject.SetActive(false); //Disable the trigger, it no longer needs to run now
 		}
 	}
 

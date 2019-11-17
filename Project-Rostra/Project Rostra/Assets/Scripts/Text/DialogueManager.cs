@@ -661,7 +661,11 @@ public class DialogueManager : MonoBehaviour
 		{
 			fade.FlipFadeToBattle();
 			battle = false;
-			CutsceneManager.instance.End();
+
+            if (CutsceneManager.instance.isActive) //If the CM is active, that means we need to return the player to where he was before the cutscene started
+            {
+                CutsceneManager.instance.End();
+            }
 		}
 	}
 
