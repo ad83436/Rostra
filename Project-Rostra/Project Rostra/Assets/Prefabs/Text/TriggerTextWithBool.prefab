@@ -1,0 +1,237 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &480159394715970290
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 480159394715970291}
+  - component: {fileID: 480159394715970301}
+  - component: {fileID: 480159394715970300}
+  - component: {fileID: 480159394715970302}
+  - component: {fileID: 480159394715970303}
+  m_Layer: 0
+  m_Name: TriggerTextWithBool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &480159394715970291
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 480159394715970290}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -144.65, y: -19.21, z: -795.1172}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &480159394715970301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 480159394715970290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86e4d99213fffc049bdc065748c05365, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  d:
+    names:
+    - Arcelus
+    - Fargas
+    - Frea
+    - Arcelus
+    - Oberon
+    - Frea
+    - Arcelus
+    - Oberon
+    sentences:
+    - Fargas, what are we gonna tell the dwarves?
+    - 'I don''t know. '
+    - I think we should tell them the truth.
+    - 'Frea. The dwarves look like they are itching for a fight. I think we should
+      lie. Make up some excuse that we never made it to his house. We got overwhealmed
+      with monsters. '
+    - 'I''m with Arcelus on this one. To me it looks like they''d use any excuse to
+      get on top in this situation. That''s not to say I think the Alchemy Guild is
+      trustworthy. I don''t trust either. '
+    - You're wasting your time what does it matter what we tell them. They have problems
+      they need to work out. We don't solve anything by not intervening. This was
+      going to happen anyways.
+    - We can't just leave them like this. We have the power to save people why shoudn't
+      we?
+    - 'The choice is up to you Fargas. '
+    portrait:
+    - {fileID: 21300000, guid: f40486206916ccc4a9bf37f57f448dee, type: 3}
+    - {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825, type: 3}
+    - {fileID: 21300000, guid: 1f1660c1b92d23a4fb0b75fcca80183d, type: 3}
+    - {fileID: 21300000, guid: f40486206916ccc4a9bf37f57f448dee, type: 3}
+    - {fileID: 21300000, guid: e24a4049526ca704eb781c65db5c188d, type: 3}
+    - {fileID: 21300000, guid: 1f1660c1b92d23a4fb0b75fcca80183d, type: 3}
+    - {fileID: 21300000, guid: f40486206916ccc4a9bf37f57f448dee, type: 3}
+    - {fileID: 21300000, guid: e24a4049526ca704eb781c65db5c188d, type: 3}
+    povChange:
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    - 7
+    - 8
+    - 8
+    typingSpeed: 0.001
+    isChoice: 1
+    choiceLine: 9
+    choice1: {fileID: 480159394715970302}
+    choice2: {fileID: 480159394715970303}
+    willRemember: 1
+    choiceSet: 3
+    choiceCare1: {fileID: 0}
+    choiceCare2: {fileID: 0}
+    choiceText1: Tell
+    choiceText2: Lie
+    normal: {fileID: 0}
+    hasPlayed: 0
+    willCount: 0
+    maxWillCount: 0
+    isBattle: 0
+    triggerBool: 0
+    isOneShot: 0
+    addMilestone: 0
+    addItem: 0
+    itemId: 0
+    itemNum: 0
+  ce: 3
+--- !u!61 &480159394715970300
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 480159394715970290}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -5.2753754, y: -4.680419}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 11.550751, y: 10.360838}
+  m_EdgeRadius: 0
+--- !u!114 &480159394715970302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 480159394715970290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43509005be49f1c4f973fd54f9269559, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogue:
+    names:
+    - Fargas
+    sentences:
+    - 'I think we shoudl tell the truth. The people need to know what really happened. '
+    portrait:
+    - {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825, type: 3}
+    povChange: []
+    typingSpeed: 0.001
+    isChoice: 0
+    choiceLine: 0
+    choice1: {fileID: 0}
+    choice2: {fileID: 0}
+    willRemember: 0
+    choiceSet: 0
+    choiceCare1: {fileID: 0}
+    choiceCare2: {fileID: 0}
+    choiceText1: 
+    choiceText2: 
+    normal: {fileID: 0}
+    hasPlayed: 0
+    willCount: 0
+    maxWillCount: 0
+    isBattle: 0
+    triggerBool: 0
+    isOneShot: 0
+    addMilestone: 0
+    addItem: 0
+    itemId: 0
+    itemNum: 0
+  choiceCare: 0
+  isChoiceDepend: 0
+  pressZ: {fileID: 0}
+  directTriggerText: 0
+  oneShot: 0
+--- !u!114 &480159394715970303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 480159394715970290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43509005be49f1c4f973fd54f9269559, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogue:
+    names:
+    - Fargas
+    sentences:
+    - 'You''re right I don''t trust the dwarves or the Alchemy Guild. It''s best to
+      keep them off each others throats so the people don''t get hurt. '
+    portrait:
+    - {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825, type: 3}
+    povChange: []
+    typingSpeed: 0.001
+    isChoice: 0
+    choiceLine: 0
+    choice1: {fileID: 0}
+    choice2: {fileID: 0}
+    willRemember: 0
+    choiceSet: 0
+    choiceCare1: {fileID: 0}
+    choiceCare2: {fileID: 0}
+    choiceText1: 
+    choiceText2: 
+    normal: {fileID: 0}
+    hasPlayed: 0
+    willCount: 0
+    maxWillCount: 0
+    isBattle: 0
+    triggerBool: 0
+    isOneShot: 0
+    addMilestone: 0
+    addItem: 0
+    itemId: 0
+    itemNum: 0
+  choiceCare: 0
+  isChoiceDepend: 0
+  pressZ: {fileID: 0}
+  directTriggerText: 0
+  oneShot: 0
