@@ -77,6 +77,10 @@ public class AudioManager : MonoBehaviour
 	public AudioClip Grendol_Heal;
 	public AudioClip Grendol_Attack;
 
+	// Pause Menu
+	public AudioClip Bleep;
+	public AudioClip Boop;
+	public AudioClip Poob;
 
     private bool thisHasStartedPlaying = false;//Used to raise the volume steadily for a new piece
     private float musicMaxVolume = 0.5f; //Updated from the playerprefs
@@ -350,8 +354,17 @@ public class AudioManager : MonoBehaviour
 			case "GAttack":
 				effectAudioSource.PlayOneShot(Grendol_Attack);
 				break;
-                
 
+			// Pause Menu
+			case "Bleep":
+				effectAudioSource.PlayOneShot(Bleep);
+				break;
+			case "Boop":
+				effectAudioSource.PlayOneShot(Boop);
+				break;
+			case "Poob":
+				effectAudioSource.PlayOneShot(Poob);
+				break;
         }
     }
 }
