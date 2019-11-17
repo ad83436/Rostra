@@ -111,7 +111,7 @@ public class Enemy : MonoBehaviour
     protected Quaternion arrowRotator;
     protected Color debuffColor;
     //Actual stats --> Stats after they've been modified in battle
-    protected float actualATK;
+    protected float atkBeforeBUff; //Since the code is usin modAttack for certain skills, I will need to buff eAttack directly and use this to return it
     protected float actualDEF;
     protected float actualAgi;
     protected float actualCRIT;
@@ -203,6 +203,11 @@ public class Enemy : MonoBehaviour
         currentState = EnemyState.idle;
 
         chainedEnemy = new Enemy[2]; //2 enemies can be chained
+
+        atkBeforeBUff = eAttack;
+        actualDEF = eDefence;
+        actualAgi = eAgility;
+        actualSTR = eStrength;
 
 
         if(chainedSymbol)
@@ -1246,7 +1251,7 @@ public class Enemy : MonoBehaviour
     void ModAttack()
     {
         audioManager.PlayThisEffect("buff");
-        int modAmount = Random.Range(5, 15);
+        float modAmount = Random.Range(5, 15) * 0.01f;
         enemyToHeal.BuffStats("Attack", modAmount, 3);
         animator.SetBool("ModAtk", false);
         EndTurn();
@@ -1255,7 +1260,7 @@ public class Enemy : MonoBehaviour
     void ModDefence()
     {
         audioManager.PlayThisEffect("buff");
-        int modAmount = Random.Range(5, 20);
+        float modAmount = Random.Range(5, 20) * 0.01f;
         enemyToHeal.BuffStats("Defense", modAmount, 3);
         animator.SetBool("ModDef", false);
         EndTurn();
@@ -1264,7 +1269,7 @@ public class Enemy : MonoBehaviour
     void ModAgility()
     {
         audioManager.PlayThisEffect("buff");
-        int modAmount = Random.Range(5, 20);
+        float modAmount = Random.Range(5, 20) * 0.01f;
         enemyToHeal.BuffStats("Agility", modAmount, 3);
         animator.SetBool("ModAgi", false);
         EndTurn();
@@ -1922,22 +1927,22 @@ public class Enemy : MonoBehaviour
                 {
                     EnableEffect("AtkDebuff", 0);
                 }
-                if (attackBuffed && ((actualATK < eAttack && precentage > 0) || (actualATK > eAttack && precentage < 0))) //Check if we'er being debuffed after being buffed or vice versa, if so, reset the attack
+                if (attackBuffed && ((eAttack < atkBeforeBUff && precentage > 0) || (eAttack > atkBeforeBUff && precentage < 0))) //Check if we'er being debuffed after being buffed or vice versa, if so, reset the attack
                 {
-                    actualATK = eAttack;
+                    eAttack = atkBeforeBUff;
                     attackBuffSkillQCounter = 0; //Negate the debuff completely
                     atkBuffArrowIndicator.gameObject.SetActive(false);
                 }
-                else if (attackBuffed && ((actualATK > eAttack && precentage > 0) || (actualATK < eAttack && precentage < 0))) //Check if the buff or debuff is being extended
+                else if (attackBuffed && ((eAttack > atkBeforeBUff && precentage > 0) || (eAttack < atkBeforeBUff && precentage < 0))) //Check if the buff or debuff is being extended
                 {
-                    actualATK = eAttack + eAttack * precentage;
+                    eAttack = atkBeforeBUff + atkBeforeBUff * precentage;
                     attackBuffSkillQCounter = lastsNumberOfTurns;
 
                 }
                 else if (!attackBuffed) //No buffs or debuffs have occurred so far
                 {
                     attackBuffed = true;
-                    actualATK = eAttack + eAttack * precentage;
+                    eAttack = atkBeforeBUff + atkBeforeBUff * precentage;
                     attackBuffSkillQCounter = lastsNumberOfTurns;
                 }
                 break;
@@ -2024,7 +2029,7 @@ public class Enemy : MonoBehaviour
             {
                 attackBuffSkillQCounter = 0;
                 attackBuffed = false;
-                actualATK = eAttack;
+                eAttack = atkBeforeBUff;
                 uiBTL.UpdateActivityText("Enemy ATK is back to normal");
                 atkBuffArrowIndicator.gameObject.SetActive(false);
             }
@@ -2156,7 +2161,7 @@ public class Enemy : MonoBehaviour
     {
         if (attackBuffed)
         {
-            actualATK = eAttack;
+            eAttack = atkBeforeBUff;
             attackBuffed = false;
             attackBuffSkillQCounter = 0;
         }
@@ -2986,7 +2991,7 @@ public class Enemy : MonoBehaviour
         if (waitTime == waitTimeAtStart)
         {
             audioManager.PlayThisEffect("buff");
-            dMod = Random.value;
+            dMod = Random.value * 0.01f;
             BuffStats("Defense", dMod, waitTime);
         }
 
@@ -3441,20 +3446,20 @@ public class Enemy : MonoBehaviour
 
         if (enemyToHeal.enemyClass == EnemyClassType.DPS)
         {
-            enemyToHeal.BuffStats("Attack", statIncrease * .6f, 4);
-            enemyToHeal.BuffStats("Agility", statIncrease * .4f, 4);
+            enemyToHeal.BuffStats("Attack", statIncrease * .06f, 4);
+            enemyToHeal.BuffStats("Agility", statIncrease * .04f, 4);
         }
 
         else if (enemyToHeal.enemyClass == EnemyClassType.Tank)
         {
-            enemyToHeal.BuffStats("Attack", statIncrease * .3f, 4);
-            enemyToHeal.BuffStats("Defense", statIncrease * .7f, 4);
+            enemyToHeal.BuffStats("Attack", statIncrease * .03f, 4);
+            enemyToHeal.BuffStats("Defense", statIncrease * .07f, 4);
         }
 
         else if (enemyToHeal.enemyClass == EnemyClassType.Support)
         {
-            enemyToHeal.BuffStats("Attack", statIncrease * .4f, 4);
-            enemyToHeal.BuffStats("Agility", statIncrease * .6f, 4);
+            enemyToHeal.BuffStats("Attack", statIncrease * .04f, 4); 
+            enemyToHeal.BuffStats("Agility", statIncrease * .06f, 4);
         }
 
         EndSkill();
