@@ -68,7 +68,7 @@ public class Grendol : Enemy {
 			// not raining
 			// roll attack
 			float roll = Random.Range(0f, 100f);
-			
+
 			if (roll <= 40f) {
 				// Fire Pillar skill
 				Begin_FirePillar();
@@ -129,10 +129,13 @@ public class Grendol : Enemy {
 	private void Do_FirePillar() {
 		//objPooler.SpawnFromPool("EnemyNormalAttack", attackThisPlayer.gameObject.transform.position, gameObject.transform.rotation);
 
-		attackThisPlayer.TakeDamage(eAttack * FirePillarDamageMultiplier);
+		attackThisPlayer.TakeDamage(eAttack * FirePillarDamageMultiplier * 0.5f); // multiply by 0.5 because the attack hits twice
 
 		FirePillarTransform.position = attackThisPlayer.transform.position + Vector3.down * 2f; // set to player position but with an offset
 		animator.SetTrigger("Pillar");
+
+		// play sound
+		audioManager.playThisEffect("GFire");
 	}
 	#endregion
 
@@ -155,6 +158,9 @@ public class Grendol : Enemy {
 		attackThisPlayer.TakeDamage(eAttack * LightningDamageMultiplier);
 	}
 
+	private void PlaySound_Lightning() {
+		audioManager.playThisEffect("GLightning");
+	}
 
 	#endregion
 
@@ -241,7 +247,7 @@ public class Grendol : Enemy {
 	#endregion
 
 	////////////////////////////////////////////////////////////////////////////////////////////////
-	// Earthquake skill
+	// Earthquake skill ( UNUSED )
 
 	#region 
 	private void Begin_Quake() {
