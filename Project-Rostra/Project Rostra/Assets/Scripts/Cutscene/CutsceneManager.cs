@@ -183,6 +183,7 @@ public class CutsceneManager : MonoBehaviour
 
 	public void End()
 	{
+		copy = null;
 		current = 0;
 		entranceCount = 0;
 		moveCount = 0;

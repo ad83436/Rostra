@@ -27,6 +27,7 @@ public enum ChoiceEnum : byte
 	dwarf = 10,
 	talkToContact = 11,
 	battleFarea = 12,
+	battleGrendol = 13,
 	unTriggerable = 15, // this is a bool that will literally never be set to true
 }
 
@@ -84,6 +85,7 @@ public class DialogueManager : MonoBehaviour
 	public bool sawJournal; // 9
 	public bool battleFarea; // 12
 	public bool talkedToContact;//11
+	public bool battleGrendol; //13
 	// stores a local copy of which choice set we will be using
 	private float choiceSet;
 	public bool[] choices;
@@ -199,10 +201,6 @@ public class DialogueManager : MonoBehaviour
 
 		if (nextDialogue == true && isActive == false)
 		{
-			if (d.addMilestone > 0)
-			{
-				AddMilestone(d.addMilestone);
-			}
 			text.text = "";
 			//turn off the highlighting and set everything to default in case it wasn't reset
 			highlight1.SetActive(false);
@@ -355,8 +353,17 @@ public class DialogueManager : MonoBehaviour
 					SetChoice(ChoiceEnum.battleFarea, true);
 					Debug.Log("Battled the Farea");
 					break;
+				case 13:
+					battleGrendol = true;
+					SetChoice(ChoiceEnum.battleGrendol, true);
+					Debug.Log("Battled the Grendol");
+					break;
 
 			}
+		}
+		if (dia.addMilestone > 0)
+		{
+			AddMilestone(dia.addMilestone);
 		}
 		charName.text = "";
 		text.text = "";
@@ -375,18 +382,17 @@ public class DialogueManager : MonoBehaviour
 		nextDialogue = false;
 		isActive = false;
 		choiceCount = 0;
+		if (dia != null && dia.isBattle == true)
+		{
+			fade = GameObject.Find("Fade").GetComponent<Fade>();
+			battle = true;
+		}
 		if (willCount == dia.maxWillCount && hasCountTriggered == true)
 		{
 			willCount = 0;
 			dia = null;
 			hasCountTriggered = false;
 		}
-		if (dia != null && dia.isBattle == true)
-		{
-			fade = GameObject.Find("Fade").GetComponent<Fade>();
-			battle = true;
-		}
-		
 	}
 	// this is a coroutine that will take our chars from the string and print one at a time 
 	IEnumerator TypeLetters(string s)
@@ -654,6 +660,7 @@ public class DialogueManager : MonoBehaviour
 		{
 			fade.FlipFadeToBattle();
 			battle = false;
+			CutsceneManager.instance.End();
 		}
 	}
 

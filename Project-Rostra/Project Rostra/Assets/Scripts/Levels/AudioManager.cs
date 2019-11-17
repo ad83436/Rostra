@@ -15,6 +15,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip victoryMusic1;
     public AudioClip defeatMusic1;
     public AudioClip cutscene1;
+    public AudioClip townTheme1;
     private AudioClip playThisNext;
 
     //UI
@@ -26,7 +27,15 @@ public class AudioManager : MonoBehaviour
     public AudioClip attack;
     public AudioClip buff;
     public AudioClip deBuff;
+    public AudioClip guard;
+
     //Fargas
+    public AudioClip swordOfFury;
+    public AudioClip rally;
+    public AudioClip swiftStrike;
+    public AudioClip sunGuard;
+    public AudioClip bladeOfTheFallen;
+    public AudioClip faWait;
 
     //Oberon
 
@@ -61,7 +70,12 @@ public class AudioManager : MonoBehaviour
     //RedReptile
     public AudioClip sliceAndDice;
 
-
+	// Grendol
+	public AudioClip Grendol_Lightning;
+	public AudioClip Grendol_Fire;
+	public AudioClip Grendol_Wind;
+	public AudioClip Grendol_Heal;
+	public AudioClip Grendol_Attack;
 
 
     private bool thisHasStartedPlaying = false;//Used to raise the volume steadily for a new piece
@@ -181,6 +195,9 @@ public class AudioManager : MonoBehaviour
             case "Cutscene1":
                 playThisNext = cutscene1;
                 break;
+            case "TownTheme":
+                playThisNext = townTheme1;
+                break;
         }
 
         if(currentState == audioManagerState.notPlaying) //The very first call
@@ -222,6 +239,28 @@ public class AudioManager : MonoBehaviour
                 break;
             case "debuff":
                 effectAudioSource.PlayOneShot(deBuff);
+                break;
+            case "guard":
+                effectAudioSource.PlayOneShot(guard);
+                break;
+            //Fargas
+            case "swordOfFury":
+                effectAudioSource.PlayOneShot(swordOfFury);
+                break;
+            case "swiftStrike":
+                effectAudioSource.PlayOneShot(swiftStrike);
+                break;
+            case "rally":
+                effectAudioSource.PlayOneShot(rally);
+                break;
+            case "sunguard":
+                effectAudioSource.PlayOneShot(sunGuard);
+                break;
+            case "bladeOfTheFallen":
+                effectAudioSource.PlayOneShot(bladeOfTheFallen);
+                break;
+            case "faWait":
+                effectAudioSource.PlayOneShot(faWait);
                 break;
 
             //Frea
@@ -295,6 +334,22 @@ public class AudioManager : MonoBehaviour
                 break;
 
 
+			// Grendol
+			case "GLightning":
+				effectAudioSource.PlayOneShot(Grendol_Lightning);
+				break;
+			case "GFire":
+				effectAudioSource.PlayOneShot(Grendol_Fire);
+				break;
+			case "GHeal":
+				effectAudioSource.PlayOneShot(Grendol_Heal);
+				break;
+			case "GWind":
+				effectAudioSource.PlayOneShot(Grendol_Wind);
+				break;
+			case "GAttack":
+				effectAudioSource.PlayOneShot(Grendol_Attack);
+				break;
                 
 
         }
