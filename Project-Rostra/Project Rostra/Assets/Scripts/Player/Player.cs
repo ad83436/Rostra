@@ -613,6 +613,7 @@ public class Player : MonoBehaviour
     //Guard and End Guard are called from the UI. End Guard is called when the player's turn returns
     public void Guard()
     {
+        audioManager.playThisEffect("guard");
         actualDefBeforeGuard = actualDEF; //Store the current defense before multiplying it
         actualDEF = actualDefBeforeGuard * 1.5f;
         currentState = playerState.Guard;
@@ -900,6 +901,7 @@ public class Player : MonoBehaviour
         }
         else if (skillID == (int)SKILLS.Ob_ShieldAlly) //Buff defense skill
         {
+            audioForSkillEffectName = "buff";
             skillTarget = 8; //Single player buff
             skillAnimatorName = "BuffDef2";
             skillWaitingIndex = 0;
@@ -923,6 +925,7 @@ public class Player : MonoBehaviour
         else if (skillID == (int)SKILLS.Fr_IDontMiss) //I Don't Miss special skill
         {
             skillTarget = 8; //Single player buff
+            audioManager.playThisEffect("buff");
             BuffStats("Strength", skills.SkillStats(chosenSkill)[0], 3);
             chosenSkill = (int)SKILLS.NO_SKILL;
             currentMP -= mpCost;
@@ -948,7 +951,7 @@ public class Player : MonoBehaviour
         {
             if (playerIndex == 0)
             {
-
+                audioManager.playThisEffect("faWait");
             }
             else if (playerIndex == 1)
             {
@@ -988,6 +991,7 @@ public class Player : MonoBehaviour
         }
         else if (skillID == (int)SKILLS.Ob_ShieldAllAllies) //Buff defense skill
         {
+            audioForSkillEffectName = "buff";
             skillTarget = 9; //All player buff
             skillAnimatorName = "BuffDef";
             skillWaitingIndex = 1;
@@ -1002,6 +1006,7 @@ public class Player : MonoBehaviour
         }
         else if(skillID == (int)SKILLS.Fa_WarCry)
         {
+            audioForSkillEffectName = "buff";
             skillTarget = 9; //All player buff
             skillAnimatorName = "ASkill";
             skillWaitingIndex = 3;
@@ -1018,7 +1023,7 @@ public class Player : MonoBehaviour
         {
             if (playerIndex == 0)
             {
-
+                audioManager.playThisEffect("faWait");
             }
             else if (playerIndex == 1)
             {
@@ -1079,18 +1084,21 @@ public class Player : MonoBehaviour
                 Debug.Log("Wait time is: " + skillWaitTime);
                 break;
             case (int)SKILLS.Fa_SwordOfFury:
+                audioForSkillEffectName = "swordOfFury";
                 skillTarget = 0;
                 skillNameForObjPooler = "SoFSkill";
                 skillAnimatorName = "Fury";
                 skillWaitingIndex = 0; //Should there be waiting time, this index is used to know which waiting animation to go to
                 break;
             case (int)SKILLS.Fa_Sunguard:
+                audioForSkillEffectName = "sunguard";
                 skillTarget = 0;
                 skillNameForObjPooler = "Sun";
                 skillAnimatorName = "ASkill";
                 skillWaitingIndex = 4; //Should there be waiting time, this index is used to know which waiting animation to go to
                 break;
             case (int)SKILLS.Fa_Rally:
+                audioForSkillEffectName = "rally";
                 skillTextValue = "Rally to me!";
                 skillTarget = 0;
                 skillNameForObjPooler = "Rally";
@@ -1110,7 +1118,7 @@ public class Player : MonoBehaviour
         {
             if (playerIndex == 0)
             {
-
+                audioManager.playThisEffect("faWait");
             }
             else if (playerIndex == 1)
             {
@@ -1170,6 +1178,7 @@ public class Player : MonoBehaviour
                 skillWaitingIndex = 4; //Armageddon is 4
                 break;
             case (int)SKILLS.Fa_BladeOfTheFallen:
+                audioForSkillEffectName = "bladeOfTheFallen";
                 skillObjectForObjPooler = "";
                 skillNameForObjPooler = "BoFImpact";
                 skillAnimatorName = "ASkill";
@@ -1195,7 +1204,7 @@ public class Player : MonoBehaviour
         {
             if(playerIndex == 0)
             {
-
+                audioManager.playThisEffect("faWait");
             }
             else if (playerIndex == 1)
             {
@@ -1230,6 +1239,7 @@ public class Player : MonoBehaviour
         //Check which skill to know which animation to run
         if (skillID == (int)SKILLS.Fa_SwiftStrike) 
         {
+            audioForSkillEffectName = "swiftStrike";
             skillNameForObjPooler = "FFSkill1";
             skillAnimatorName = "ASkill";
             skillWaitingIndex = 1;
@@ -1260,7 +1270,7 @@ public class Player : MonoBehaviour
         {
             if (playerIndex == 0)
             {
-
+                audioManager.playThisEffect("faWait");
             }
             else if (playerIndex == 1)
             {
@@ -1694,7 +1704,6 @@ public class Player : MonoBehaviour
                 }
                 else if (chosenSkill == (int)SKILLS.Ar_DrainEye)
                 {
-                    
                     healThisPlayer.BuffStats("DrainEye", skills.SkillStats(chosenSkill)[0], 3);
                     playerAnimator.SetBool("DrainEye", false);
                 }
@@ -2004,15 +2013,6 @@ public class Player : MonoBehaviour
                     drainEyeSkillQCounter = lastsNumberOfTurns;
                 }
                 break;
-        }
-
-        if(precentage > 0)
-        {
-            audioManager.playThisEffect("buff");
-        }
-        else
-        {
-            audioManager.playThisEffect("debuff");
         }
     }
 
