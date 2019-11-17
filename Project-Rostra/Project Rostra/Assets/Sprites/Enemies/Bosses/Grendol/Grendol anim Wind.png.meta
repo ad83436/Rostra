@@ -1,37 +1,37 @@
 fileFormatVersion: 2
-guid: 1d98cc84945f6af48a989a561e5f33c0
+guid: cdeab663852ba2140988dd034b296212
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3841417130890062568
-    second: Grendol anim Storm_0
+      213: 6642150186764778929
+    second: Grendol anim Wind_0
   - first:
-      213: -9052039140401218979
-    second: Grendol anim Storm_1
+      213: 6144421444047352661
+    second: Grendol anim Wind_1
   - first:
-      213: -2073070633728656526
-    second: Grendol anim Storm_2
+      213: -1698290409837447794
+    second: Grendol anim Wind_2
   - first:
-      213: 3866966781950257629
-    second: Grendol anim Storm_3
+      213: -4882550585367156308
+    second: Grendol anim Wind_3
   - first:
-      213: 8628242583939599804
-    second: Grendol anim Storm_4
+      213: 247986281732856608
+    second: Grendol anim Wind_4
   - first:
-      213: 3172182260642722583
-    second: Grendol anim Storm_5
+      213: -4172393230049300201
+    second: Grendol anim Wind_5
   - first:
-      213: 2323731131544628346
-    second: Grendol anim Storm_6
+      213: -1807319850784307051
+    second: Grendol anim Wind_6
   - first:
-      213: -6676017801784143109
-    second: Grendol anim Storm_7
+      213: -8819994691466124974
+    second: Grendol anim Wind_7
   - first:
-      213: 6674944956548721470
-    second: Grendol anim Storm_8
+      213: 8632889538038188797
+    second: Grendol anim Wind_8
   - first:
-      213: 560415329981114237
-    second: Grendol anim Storm_9
+      213: -3853715803134091422
+    second: Grendol anim Wind_9
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -128,7 +128,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Grendol anim Storm_0
+      name: Grendol anim Wind_0
       rect:
         serializedVersion: 2
         x: 0
@@ -142,14 +142,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dd05742a6e4a727419bfc0ad8254b529
-      internalID: 3841417130890062568
+      spriteID: b9b6cd8f68cd76246be66f6d86e44794
+      internalID: 6642150186764778929
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Grendol anim Storm_1
+      name: Grendol anim Wind_1
       rect:
         serializedVersion: 2
         x: 200
@@ -163,14 +163,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7126bd81ede61ea48bcbec119c42c76d
-      internalID: -9052039140401218979
+      spriteID: 49d4a341c62d68747982b39d259585d7
+      internalID: 6144421444047352661
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Grendol anim Storm_2
+      name: Grendol anim Wind_2
       rect:
         serializedVersion: 2
         x: 400
@@ -184,14 +184,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a5746133528afb944b4e72341ef230c5
-      internalID: -2073070633728656526
+      spriteID: aee2cdb10e7d9614783d83bda576ec66
+      internalID: -1698290409837447794
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Grendol anim Storm_3
+      name: Grendol anim Wind_3
       rect:
         serializedVersion: 2
         x: 600
@@ -205,14 +205,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7661196002a4d3e468a2f449dcc99190
-      internalID: 3866966781950257629
+      spriteID: 8c0a7d78ee72d5b45915a1f401c7a9fa
+      internalID: -4882550585367156308
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Grendol anim Storm_4
+      name: Grendol anim Wind_4
       rect:
         serializedVersion: 2
         x: 800
@@ -226,14 +226,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 687439504d9a44f4880182ab053ef748
-      internalID: 8628242583939599804
+      spriteID: 3436451b9046fb345bf03d53584adf38
+      internalID: 247986281732856608
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Grendol anim Storm_5
+      name: Grendol anim Wind_5
       rect:
         serializedVersion: 2
         x: 1000
@@ -247,14 +247,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0fac49fc1a1112742b8749538111a5f8
-      internalID: 3172182260642722583
+      spriteID: 8fb267ee9f61fcd4a8ae7f06e6a9cca5
+      internalID: -4172393230049300201
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Grendol anim Storm_6
+      name: Grendol anim Wind_6
       rect:
         serializedVersion: 2
         x: 1200
@@ -268,14 +268,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4a74021b266cea742ac45cdef00293fc
-      internalID: 2323731131544628346
+      spriteID: 08cdd096c0efc634bb143d1be28cea45
+      internalID: -1807319850784307051
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Grendol anim Storm_7
+      name: Grendol anim Wind_7
       rect:
         serializedVersion: 2
         x: 1400
@@ -289,14 +289,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f4fbf7e11175c8c45ae5351289a8f7ac
-      internalID: -6676017801784143109
+      spriteID: c2230e845f59c6747ac2420c8251897d
+      internalID: -8819994691466124974
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Grendol anim Storm_8
+      name: Grendol anim Wind_8
       rect:
         serializedVersion: 2
         x: 1600
@@ -310,14 +310,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6c17109f1cbad1647a1f1fd43d3537fb
-      internalID: 6674944956548721470
+      spriteID: 5ee20bff1ece7814abe367c951700bdd
+      internalID: 8632889538038188797
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Grendol anim Storm_9
+      name: Grendol anim Wind_9
       rect:
         serializedVersion: 2
         x: 1800
@@ -331,8 +331,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 95e025022058c834c8f9e349c5abe1e8
-      internalID: 560415329981114237
+      spriteID: 8c91ac88c292256408fcb65824705c75
+      internalID: -3853715803134091422
       vertices: []
       indices: 
       edges: []
