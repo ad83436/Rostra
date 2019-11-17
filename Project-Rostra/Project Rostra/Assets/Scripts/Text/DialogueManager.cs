@@ -393,7 +393,7 @@ public class DialogueManager : MonoBehaviour
 		{
 			fade = GameObject.Find("Fade").GetComponent<Fade>();
 			battle = true;
-		}
+        }
 	}
 	// this is a coroutine that will take our chars from the string and print one at a time 
 	IEnumerator TypeLetters(string s)
@@ -659,8 +659,11 @@ public class DialogueManager : MonoBehaviour
 		}
 		if (battle == true && isActive == false)
 		{
-			fade.FlipFadeToBattle();
-			battle = false;
+            if (!BattleManager.battleInProgress)
+            {
+                fade.FlipFadeToBattle();
+                battle = false;
+            }
 
             if (CutsceneManager.instance.isActive) //If the CM is active, that means we need to return the player to where he was before the cutscene started
             {

@@ -164,19 +164,25 @@ public class Fade : MonoBehaviour
     //Two version of flip fade, one for controlled situations where the WM is assigned from the editor and one for the world map
     public void FlipFadeToBattle()
     {
+        if(!BattleManager.battleInProgress)
+        BattleManager.battleInProgress = true; //A battle has just started
+
         if(EnemySpawner.instance.isBoss)
         {
             bossCounter++;
         }
+        Debug.Log("Flip Fade to battle and counter is " + bossCounter);
 
-        if (bossCounter == 1 && grendolHolder!=null) //Boss counter 0 is Farea, 1 is Grendol
+        if (bossCounter == 1 && enemyHolder!=null) //Boss counter 0 is Farea, 1 is Grendol
         {
-            fadeOut = !fadeOut;
+            Debug.Log("Hit");
+            fadeOut = true;
             transitionToGrendolFight = true;
         }
         else
         {
-            fadeOut = !fadeOut;
+            Debug.Log("miss");
+            fadeOut = true;
             transitionToBattle = true;
         }
     }

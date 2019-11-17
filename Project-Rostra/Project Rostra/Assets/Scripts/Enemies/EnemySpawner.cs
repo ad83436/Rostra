@@ -61,7 +61,7 @@ public class EnemySpawner : MonoBehaviour
             enemySpawned = Instantiate(enemiesToSpawn[0], enemyPos[1].transform.position, gameObject.transform.rotation);
             enemySpawned.enemyIndexInBattleManager = 1;
             enemySpawned.IncreaseStatsBasedOnLevel(enemyLevels[0]);
-            isBoss = false; //After you leave the trigger, go false
+            //isBoss = false; //After you leave the trigger, go false
         }
         else
         {
