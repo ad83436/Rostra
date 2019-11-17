@@ -2317,28 +2317,31 @@ public class Enemy : MonoBehaviour
         //eHP increase is still temporary until we agree how much each class'es HP increases with leveling up
         float skillPoints = enemyCurrentLevel - eBaseLevel;
 
-        switch (enemyClass)
+        if (skillPoints > 0)
         {
-            case EnemyClassType.DPS:
-                eAttack = Mathf.CeilToInt(eAttack + (skillPoints * 0.2f));
-                eAgility = Mathf.CeilToInt(eAgility + (skillPoints * 0.1f));
-                currentHP = Mathf.CeilToInt(currentHP + (skillPoints * 3.0f));
-                Debug.Log(eName + " is a " + enemyClass + " Class of enemy");
-                break;
+            switch (enemyClass)
+            {
+                case EnemyClassType.DPS:
+                    eAttack = Mathf.CeilToInt(eAttack + (skillPoints * 0.2f));
+                    eAgility = Mathf.CeilToInt(eAgility + (skillPoints * 0.1f));
+                    currentHP = Mathf.CeilToInt(currentHP + (skillPoints * 3.0f));
+                    Debug.Log(eName + " is a " + enemyClass + " Class of enemy");
+                    break;
 
-            case EnemyClassType.Tank:
-                eAttack = Mathf.CeilToInt(eAttack + (skillPoints * 0.1f));
-                eDefence = Mathf.CeilToInt(eDefence + (skillPoints * 0.2f));
-                currentHP = Mathf.CeilToInt(currentHP + (skillPoints * 4.0f));
-                Debug.Log(eName + " is a " + enemyClass + " Class of enemy");
-                break;
+                case EnemyClassType.Tank:
+                    eAttack = Mathf.CeilToInt(eAttack + (skillPoints * 0.1f));
+                    eDefence = Mathf.CeilToInt(eDefence + (skillPoints * 0.2f));
+                    currentHP = Mathf.CeilToInt(currentHP + (skillPoints * 4.0f));
+                    Debug.Log(eName + " is a " + enemyClass + " Class of enemy");
+                    break;
 
-            case EnemyClassType.Support:
-                eAttack = Mathf.CeilToInt(eAttack + (skillPoints * 0.1f));
-                eAgility = Mathf.CeilToInt(eAgility + (skillPoints * 0.2f));
-                currentHP = Mathf.CeilToInt(currentHP + (skillPoints * 5.0f));
-                Debug.Log(eName + " is a " + enemyClass + " Class of enemy");
-                break;
+                case EnemyClassType.Support:
+                    eAttack = Mathf.CeilToInt(eAttack + (skillPoints * 0.1f));
+                    eAgility = Mathf.CeilToInt(eAgility + (skillPoints * 0.2f));
+                    currentHP = Mathf.CeilToInt(currentHP + (skillPoints * 5.0f));
+                    Debug.Log(eName + " is a " + enemyClass + " Class of enemy");
+                    break;
+            }
         }
 
         maxHP = currentHP;
@@ -2991,7 +2994,7 @@ public class Enemy : MonoBehaviour
         if (waitTime == waitTimeAtStart)
         {
             audioManager.PlayThisEffect("buff");
-            dMod = Random.value * 0.01f;
+            dMod = Random.value;
             BuffStats("Defense", dMod, waitTime);
         }
 

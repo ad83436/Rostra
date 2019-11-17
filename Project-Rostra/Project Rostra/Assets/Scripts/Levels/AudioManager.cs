@@ -81,8 +81,18 @@ public class AudioManager : MonoBehaviour
     //RedReptile
     public AudioClip sliceAndDice;
 
-	// Grendol
-	public AudioClip Grendol_Lightning;
+    //Farya
+    public AudioClip despair;
+    public AudioClip youAreNotMine;
+    public AudioClip mothersPain;
+    public AudioClip ties;
+    public AudioClip judge;
+    public AudioClip wrath;
+    public AudioClip wails;
+    public AudioClip faryaWait;
+
+    // Grendol
+    public AudioClip Grendol_Lightning;
 	public AudioClip Grendol_Fire;
 	public AudioClip Grendol_Wind;
 	public AudioClip Grendol_Heal;
@@ -387,9 +397,34 @@ public class AudioManager : MonoBehaviour
                 effectAudioSource.PlayOneShot(sliceAndDice);
                 break;
 
+            //Fraya
+            case "Despair":
+                effectAudioSource.PlayOneShot(despair);
+                break;
+            case "MothersPain":
+                effectAudioSource.PlayOneShot(mothersPain);
+                break;
+            case "Ties":
+                effectAudioSource.PlayOneShot(ties);
+                break;
+            case "YouAreNotMine":
+                effectAudioSource.PlayOneShot(youAreNotMine);
+                break;
+            case "Judge":
+                effectAudioSource.PlayOneShot(judge);
+                break;
+            case "Wrath":
+                effectAudioSource.PlayOneShot(wrath);
+                break;
+            case "Wails":
+                effectAudioSource.PlayOneShot(wails);
+                break;
+            case "faryaWait":
+                effectAudioSource.PlayOneShot(faryaWait);
+                break;
 
-			// Grendol
-			case "GLightning":
+            // Grendol
+            case "GLightning":
 				effectAudioSource.PlayOneShot(Grendol_Lightning);
 				break;
 			case "GFire":
