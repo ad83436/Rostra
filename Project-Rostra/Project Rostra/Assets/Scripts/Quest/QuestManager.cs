@@ -57,7 +57,7 @@ public static class QuestManager
 			case 4:
 				questName = "Find Brenna";
 				location = 1;
-				description = "We've escaped from the camp, now we should go to Hadria";
+				description = "We've escaped from the camp, now we should go to Brenna's house";
 				milestone = m;
 				milestoneName = "Go to Hadria";
 				enable.SetActive(true);
