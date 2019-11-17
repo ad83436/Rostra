@@ -12,7 +12,7 @@ public class DialogueAfterBattle : MonoBehaviour
 	public Fade fade;
 	public bool played = false;
 
-	private void OnTriggerStay2D(Collider2D col)
+	private void OnTriggerExit2D(Collider2D col)
 	{
 		if (col.CompareTag("Player") && DialogueManager.instance.GetChoice(ce) == true && played == false && SceneManager.GetActiveScene().name != "Queue Scene" && DialogueManager.instance.isActive == false && BattleManager.battleInProgress == false)
 		{
