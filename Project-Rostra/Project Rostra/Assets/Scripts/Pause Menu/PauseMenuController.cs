@@ -52,8 +52,8 @@ public class PauseMenuController : MonoBehaviour {
 	#region Initialization
 
 	private void Awake() {
-        if (instance == null) instance = this;
-        else Destroy(this.gameObject);
+		if (instance == null) instance = this;
+		else Destroy(this.gameObject);
 		group = GetComponent<CanvasGroup>();
 		group.alpha = 0f;
 
@@ -100,8 +100,8 @@ public class PauseMenuController : MonoBehaviour {
 		if (!isPaused) return;
 
 		Confirm = Input.GetButtonDown("Confirm");
-		
-			DoAudioBlips();
+
+		DoAudioBlips();
 
 		if (activeMenu) {
 
@@ -139,7 +139,7 @@ public class PauseMenuController : MonoBehaviour {
 	#endregion
 
 	private void HandleInDir() {
-		
+
 		Up = Input.GetButtonDown("Up");
 		if (Up) UpTimer = -REP_DELAY;
 
@@ -152,7 +152,7 @@ public class PauseMenuController : MonoBehaviour {
 				Up = false;
 			}
 		}
-		
+
 		Down = Input.GetButtonDown("Down");
 		if (Down) DownTimer = -REP_DELAY;
 
@@ -165,7 +165,7 @@ public class PauseMenuController : MonoBehaviour {
 				Down = false;
 			}
 		}
-		
+
 		Left = Input.GetButtonDown("Left");
 		if (Left) LeftTimer = -REP_DELAY;
 
@@ -178,7 +178,7 @@ public class PauseMenuController : MonoBehaviour {
 				Left = false;
 			}
 		}
-		
+
 		Right = Input.GetButtonDown("Right");
 		if (Right) RightTimer = -REP_DELAY;
 
@@ -201,6 +201,6 @@ public class PauseMenuController : MonoBehaviour {
 			if (Cancel) AudioManager.instance.playThisEffect("Poob");
 		} else if (Up || Down || Left || Right) {
 			AudioManager.instance.playThisEffect("Bleep");
-		}		
+		}
 	}
 }
