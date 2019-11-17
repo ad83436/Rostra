@@ -399,6 +399,11 @@ public class AudioManager : MonoBehaviour
                 effectAudioSource.PlayOneShot(sliceAndDice);
                 break;
 
+            //Boar
+            case "Iron Tusk":
+                effectAudioSource.PlayOneShot(ironTusk);
+                break;
+
             //Fraya
             case "Despair":
                 effectAudioSource.PlayOneShot(despair);
