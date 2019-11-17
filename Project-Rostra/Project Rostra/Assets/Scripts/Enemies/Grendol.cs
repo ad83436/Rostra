@@ -75,7 +75,7 @@ public class Grendol : Enemy {
 			} else if (roll <= 60f) {
 				// wind skill
 				Begin_Wind();
-			} else if (roll <= 80f) {
+			} else if (roll <= 67f) {
 				// storm skill
 				Charge_Storm();
 			} else {
@@ -87,9 +87,12 @@ public class Grendol : Enemy {
 			// roll attack
 			float roll = Random.Range(0f, 100f);
 
-			if (roll <= 60f) {
+			if (roll <= 50f) {
 				// Dumb attack
 				DumbAttack();
+			} else if (roll <= 75f) {
+				// wind skill
+				Begin_Wind();
 			} else {
 				// lightning skill
 				Begin_Lightning();
@@ -108,6 +111,10 @@ public class Grendol : Enemy {
 	// this can be called from the animation
 	private void EndTurn() {
 		uiBTL.EndTurn();
+	}
+
+	private void AttackSound() {
+		audioManager.playThisEffect("GAttack");
 	}
 
 	#region SKILLS
@@ -168,8 +175,10 @@ public class Grendol : Enemy {
 	// Tornado/Hurricane skill
 
 	#region 
+
 	private void Begin_Wind() {
 		animator.SetTrigger("Wind");
+		audioManager.playThisEffect("GWind");
 	}
 
 	private void Do_Wind() {
@@ -193,6 +202,7 @@ public class Grendol : Enemy {
 		objPooler.SpawnFromPool("EnemyNormalAttack", attackThisPlayer.gameObject.transform.position, gameObject.transform.rotation);
 		attackThisPlayer.TakeDamage(eAttack * WindDamageMultiplier);
 	}
+
 	#endregion
 
 	////////////////////////////////////////////////////////////////////////////////////////////////
@@ -238,6 +248,7 @@ public class Grendol : Enemy {
 	private void Begin_Heal() {
 		animator.SetTrigger("Heal");
 		MaxNumberOfHeals--;
+		audioManager.playThisEffect("GHeal");
 	}
 
 	private void Do_Heal() {

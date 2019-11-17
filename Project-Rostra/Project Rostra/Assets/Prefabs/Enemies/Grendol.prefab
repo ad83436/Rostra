@@ -1186,13 +1186,13 @@ MonoBehaviour:
   primaryChainedSymbol: {fileID: 0}
   ralliedSymbol: {fileID: 0}
   burnSymbol: {fileID: 0}
-  FirePillarDamageMultiplier: 3
-  LightningDamageMultiplier: 5
-  WindDamageMultiplier: 3
+  FirePillarDamageMultiplier: 1.3
+  LightningDamageMultiplier: 2.2
+  WindDamageMultiplier: 1.1
   StormLength: 5
   DefenceIncrease: 20
-  MinHealAmount: 20
-  MaxHealAmount: 100
+  MinHealAmount: 60
+  MaxHealAmount: 120
   QuakeNormalMultiplier: 5
   QuakeStrongMultiplier: 10
   MaxNumberOfHeals: 10
@@ -2164,17 +2164,17 @@ PrefabInstance:
     - target: {fileID: 4527264768814590209, guid: 9b55465ff82f04b429c1403fd10c00c3,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2181335522293218536, guid: 9b55465ff82f04b429c1403fd10c00c3,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 1.95
       objectReference: {fileID: 0}
     - target: {fileID: 2181335522293218536, guid: 9b55465ff82f04b429c1403fd10c00c3,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 3.1
       objectReference: {fileID: 0}
     - target: {fileID: 2181335522293218536, guid: 9b55465ff82f04b429c1403fd10c00c3,
         type: 3}
