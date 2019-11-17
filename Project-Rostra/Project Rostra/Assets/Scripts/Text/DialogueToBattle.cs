@@ -18,13 +18,13 @@ public class DialogueToBattle : MonoBehaviour
 		ct = GetComponent<ConversationTrigger>();
     }
 
-	private void OnTriggerStay2D(Collider2D col)
+	private void OnTriggerEnter2D(Collider2D col)
 	{
 		if (col.CompareTag("Player") && DialogueManager.instance.GetChoice(ce) == true)
 		{
 			
 			DialogueManager.instance.StartConversation(ct.dialogue);
-            //gameObject.SetActive(false); //Disable the trigger, it no longer needs to run now
+            gameObject.SetActive(false); //Disable the trigger, it no longer needs to run now
 		}
 	}
 
