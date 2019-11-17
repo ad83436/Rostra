@@ -34,8 +34,14 @@ public class SkillsInventory : MonoBehaviour {
 
         AddToUnlockedSkills((int)SKILLS.Fa_SwordOfFury, 0);
         EquipSkill((int)SKILLS.Fa_SwordOfFury, 0, 0);
-        AddToUnlockedSkills((int)SKILLS.Ob_ShieldAlly, 1);
-        EquipSkill((int)SKILLS.Ob_ShieldAlly, 0, 1);
+        AddToUnlockedSkills((int)SKILLS.Ob_FierceStrike, 1);
+        EquipSkill((int)SKILLS.Ob_FierceStrike, 0, 1);
+        AddToUnlockedSkills((int)SKILLS.Ob_LionsPride, 1);
+        EquipSkill((int)SKILLS.Ob_LionsPride, 1, 1);
+        AddToUnlockedSkills((int)SKILLS.Ob_Lutenist, 1);
+        EquipSkill((int)SKILLS.Ob_Lutenist, 2, 1);
+        AddToUnlockedSkills((int)SKILLS.Ob_SpearDance, 1);
+        EquipSkill((int)SKILLS.Ob_SpearDance, 3, 1);
         AddToUnlockedSkills((int)SKILLS.Fr_DoubleShot, 2);
         EquipSkill((int)SKILLS.Fr_DoubleShot, 0, 2);
         AddToUnlockedSkills((int)SKILLS.Ar_Heal, 3);

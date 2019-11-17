@@ -38,6 +38,11 @@ public class AudioManager : MonoBehaviour
     public AudioClip faWait;
 
     //Oberon
+    public AudioClip spearDance;
+    public AudioClip lionsPride;
+    public AudioClip fierceStrike;
+    public AudioClip lutenist;
+    public AudioClip obWait;
 
     //Frea
     public AudioClip arrowRain;
@@ -237,6 +242,7 @@ public class AudioManager : MonoBehaviour
             case "guard":
                 effectAudioSource.PlayOneShot(guard);
                 break;
+
             //Fargas
             case "swordOfFury":
                 effectAudioSource.PlayOneShot(swordOfFury);
@@ -255,6 +261,23 @@ public class AudioManager : MonoBehaviour
                 break;
             case "faWait":
                 effectAudioSource.PlayOneShot(faWait);
+                break;
+
+            //Oberon
+            case "spearDance":
+                effectAudioSource.PlayOneShot(spearDance);
+                break;
+            case "lionsPride":
+                effectAudioSource.PlayOneShot(lionsPride);
+                break;
+            case "fierceStrike":
+                effectAudioSource.PlayOneShot(fierceStrike);
+                break;
+            case "lutenist":
+                effectAudioSource.PlayOneShot(lutenist);
+                break;
+            case "obWait":
+                effectAudioSource.PlayOneShot(obWait);
                 break;
 
             //Frea

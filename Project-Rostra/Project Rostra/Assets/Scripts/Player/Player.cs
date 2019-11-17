@@ -908,6 +908,7 @@ public class Player : MonoBehaviour
         }
         else if (skillID == (int)SKILLS.Ob_LionsPride) //Lion's Pride special skill
         {
+            audioManager.playThisEffect("lionsPride");
             lionsPrideIsActive = true;
             lionsPrideSymbolOberonOnly.gameObject.SetActive(true);
             lionsPrideSkillQCounter = 3; //Lions pride counter is different than the defense buff/debuff counter as the defense can be buffed or debuff further on but lion's pride will always only last for three turns
@@ -955,7 +956,7 @@ public class Player : MonoBehaviour
             }
             else if (playerIndex == 1)
             {
-                
+                audioManager.playThisEffect("obWait");
             }
             else if (playerIndex == 2)
             {
@@ -998,6 +999,7 @@ public class Player : MonoBehaviour
         }
         else if(skillID == (int)SKILLS.Ob_Lutenist)
         {
+            audioForSkillEffectName = "lutenist";
             skillTarget = 9;
             skillNameForObjPooler = "LutenistEffect";
             skillAnimatorName = "BuffDef";
@@ -1027,6 +1029,7 @@ public class Player : MonoBehaviour
             }
             else if (playerIndex == 1)
             {
+                audioManager.playThisEffect("obWait");
             }
             else if (playerIndex == 2)
             {
@@ -1122,7 +1125,7 @@ public class Player : MonoBehaviour
             }
             else if (playerIndex == 1)
             {
-
+                audioManager.playThisEffect("obWait");
             }
             else if (playerIndex == 2)
             {
@@ -1186,6 +1189,7 @@ public class Player : MonoBehaviour
                 skillWaitingIndex = 5; //BoF is 5
                 break;
             case (int)SKILLS.Ob_FierceStrike:
+                audioForSkillEffectName = "fierceStrike";
                 skillObjectForObjPooler = "";
                 skillNameForObjPooler = "FierceStrike";
                 skillAnimatorName = "BuffDef";
@@ -1208,7 +1212,7 @@ public class Player : MonoBehaviour
             }
             else if (playerIndex == 1)
             {
-
+                audioManager.playThisEffect("obWait");
             }
             else if (playerIndex == 2)
             {
@@ -1247,6 +1251,7 @@ public class Player : MonoBehaviour
 
         else if (skillID == (int)SKILLS.Ob_SpearDance)
         {
+            audioForSkillEffectName = "spearDance";
             skillNameForObjPooler = "SpearDance";
             skillAnimatorName = "BuffDef";
             skillWaitingIndex = 2; //2 is Spear Dance
@@ -1274,7 +1279,7 @@ public class Player : MonoBehaviour
             }
             else if (playerIndex == 1)
             {
-
+                audioManager.playThisEffect("obWait");
             }
             else if (playerIndex == 2)
             {
