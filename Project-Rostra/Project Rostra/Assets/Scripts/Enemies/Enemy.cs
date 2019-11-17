@@ -999,13 +999,13 @@ public class Enemy : MonoBehaviour
             {
                 Debug.Log("Critical Hit from Enemy");
                 attackThisPlayer.TakeDamage(eAttack * 1.2f);
-                audioManager.playThisEffect("attack");
+                audioManager.PlayThisEffect("attack");
             }
 
             else
             {
                 attackThisPlayer.TakeDamage(eAttack);
-                audioManager.playThisEffect("attack");
+                audioManager.PlayThisEffect("attack");
             }
         }
         else
@@ -1245,7 +1245,7 @@ public class Enemy : MonoBehaviour
 
     void ModAttack()
     {
-        audioManager.playThisEffect("buff");
+        audioManager.PlayThisEffect("buff");
         int modAmount = Random.Range(5, 15);
         enemyToHeal.BuffStats("Attack", modAmount, 3);
         animator.SetBool("ModAtk", false);
@@ -1254,7 +1254,7 @@ public class Enemy : MonoBehaviour
 
     void ModDefence()
     {
-        audioManager.playThisEffect("buff");
+        audioManager.PlayThisEffect("buff");
         int modAmount = Random.Range(5, 20);
         enemyToHeal.BuffStats("Defense", modAmount, 3);
         animator.SetBool("ModDef", false);
@@ -1263,7 +1263,7 @@ public class Enemy : MonoBehaviour
 
     void ModAgility()
     {
-        audioManager.playThisEffect("buff");
+        audioManager.PlayThisEffect("buff");
         int modAmount = Random.Range(5, 20);
         enemyToHeal.BuffStats("Agility", modAmount, 3);
         animator.SetBool("ModAgi", false);
@@ -2929,7 +2929,7 @@ public class Enemy : MonoBehaviour
             }
 
         }
-        audioManager.playThisEffect("Lighting");
+        audioManager.PlayThisEffect("Lighting");
     }
 
     void BlowSelf()
@@ -2952,7 +2952,7 @@ public class Enemy : MonoBehaviour
                 objPooler.SpawnFromPool("BlowEffect", battleManager.enemies[i].enemyReference.gameObject.transform.position, battleManager.enemies[i].enemyReference.gameObject.transform.rotation);
             }
         }
-        audioManager.playThisEffect("Blow");
+        audioManager.PlayThisEffect("Blow");
 
         blow = false;
         countDownToBlow = 0;
@@ -2985,7 +2985,7 @@ public class Enemy : MonoBehaviour
         float dMod;
         if (waitTime == waitTimeAtStart)
         {
-            audioManager.playThisEffect("buff");
+            audioManager.PlayThisEffect("buff");
             dMod = Random.value;
             BuffStats("Defense", dMod, waitTime);
         }
@@ -3007,7 +3007,7 @@ public class Enemy : MonoBehaviour
 
         for (int i = 0; i < battleManager.enemies.Length; ++i)
         {
-            audioManager.playThisEffect("buff");
+            audioManager.PlayThisEffect("buff");
             if (battleManager.enemies[i].enemyReference != null && this != battleManager.enemies[i].enemyReference)
             {
                 if (!battleManager.enemies[i].enemyReference.dead)
@@ -3038,7 +3038,7 @@ public class Enemy : MonoBehaviour
 
     void EarthSmashSkill()
     {
-        audioManager.playThisEffect("EarthSmash");
+        audioManager.PlayThisEffect("EarthSmash");
         eAttack += Random.Range(5, 10);
 
         objPooler.SpawnFromPool("EarthSmashRocks", battleManager.players[0].playerReference.gameObject.transform.position, battleManager.players[0].playerReference.gameObject.transform.rotation);
@@ -3061,7 +3061,7 @@ public class Enemy : MonoBehaviour
         bool freaHit = FreaHit();
         bool arcHit = ArcelusHit();
         bool farHit = FargasHit();
-        audioManager.playThisEffect("BatWind");
+        audioManager.PlayThisEffect("BatWind");
         
             if (obHit)
             {
@@ -3182,7 +3182,7 @@ public class Enemy : MonoBehaviour
             {
                 attackThisPlayer.TakeDamage(eAttack + (eAttack * .1f));
                 objPooler.SpawnFromPool("SliceAndDice", attackThisPlayer.gameObject.transform.position, attackThisPlayer.gameObject.transform.rotation);
-                audioManager.playThisEffect("SliceAndDice");
+                audioManager.PlayThisEffect("SliceAndDice");
             }
             else
             {
@@ -3200,7 +3200,7 @@ public class Enemy : MonoBehaviour
                 {
                     attackThisPlayer.TakeDamage(eAttack + (eAttack * .1f));
                     objPooler.SpawnFromPool("SliceAndDice", attackThisPlayer.gameObject.transform.position, attackThisPlayer.gameObject.transform.rotation);
-                    audioManager.playThisEffect("SliceAndDice");
+                    audioManager.PlayThisEffect("SliceAndDice");
                 }
                 else
                 {
@@ -3216,7 +3216,7 @@ public class Enemy : MonoBehaviour
                 {
                     attackThisPlayer.TakeDamage(eAttack + (eAttack * .2f));
                     objPooler.SpawnFromPool("SliceAndDice", attackThisPlayer.gameObject.transform.position, attackThisPlayer.gameObject.transform.rotation);
-                    audioManager.playThisEffect("SliceAndDice");
+                    audioManager.PlayThisEffect("SliceAndDice");
                 }
                 else
                 {
@@ -3237,7 +3237,7 @@ public class Enemy : MonoBehaviour
                 {
                     attackThisPlayer.TakeDamage(eAttack + (eAttack * .1f));
                     objPooler.SpawnFromPool("SliceAndDice", attackThisPlayer.gameObject.transform.position, attackThisPlayer.gameObject.transform.rotation);
-                    audioManager.playThisEffect("SliceAndDice");
+                    audioManager.PlayThisEffect("SliceAndDice");
                 }
                 else
                 {
@@ -3253,7 +3253,7 @@ public class Enemy : MonoBehaviour
                 {
                     attackThisPlayer.TakeDamage(eAttack + (eAttack * .2f));
                     objPooler.SpawnFromPool("SliceAndDice", attackThisPlayer.gameObject.transform.position, attackThisPlayer.gameObject.transform.rotation);
-                    audioManager.playThisEffect("SliceAndDice");
+                    audioManager.PlayThisEffect("SliceAndDice");
                 }
                 else
                 {
@@ -3270,7 +3270,7 @@ public class Enemy : MonoBehaviour
                 {
                     attackThisPlayer.TakeDamage(eAttack + (eAttack * .3f));
                     objPooler.SpawnFromPool("SliceAndDice", attackThisPlayer.gameObject.transform.position, attackThisPlayer.gameObject.transform.rotation);
-                    audioManager.playThisEffect("SliceAndDice");
+                    audioManager.PlayThisEffect("SliceAndDice");
                 }
                 else
                 {
@@ -3290,7 +3290,7 @@ public class Enemy : MonoBehaviour
                 {
                     attackThisPlayer.TakeDamage(eAttack + (eAttack * .1f));
                     objPooler.SpawnFromPool("SliceAndDice", attackThisPlayer.gameObject.transform.position, attackThisPlayer.gameObject.transform.rotation);
-                    audioManager.playThisEffect("SliceAndDice");
+                    audioManager.PlayThisEffect("SliceAndDice");
                 }
                 else
                 {
@@ -3306,7 +3306,7 @@ public class Enemy : MonoBehaviour
                 {
                     attackThisPlayer.TakeDamage(eAttack + (eAttack * .2f));
                     objPooler.SpawnFromPool("SliceAndDice", attackThisPlayer.gameObject.transform.position, attackThisPlayer.gameObject.transform.rotation);
-                    audioManager.playThisEffect("SliceAndDice");
+                    audioManager.PlayThisEffect("SliceAndDice");
                 }
                 else
                 {
@@ -3322,7 +3322,7 @@ public class Enemy : MonoBehaviour
                 {
                     attackThisPlayer.TakeDamage(eAttack + (eAttack * .3f));
                     objPooler.SpawnFromPool("SliceAndDice", attackThisPlayer.gameObject.transform.position, attackThisPlayer.gameObject.transform.rotation);
-                    audioManager.playThisEffect("SliceAndDice");
+                    audioManager.PlayThisEffect("SliceAndDice");
                 }
                 else
                 {
@@ -3338,7 +3338,7 @@ public class Enemy : MonoBehaviour
                 {
                     attackThisPlayer.TakeDamage(eAttack + (eAttack * .4f));
                     objPooler.SpawnFromPool("SliceAndDice", attackThisPlayer.gameObject.transform.position, attackThisPlayer.gameObject.transform.rotation);
-                    audioManager.playThisEffect("SliceAndDice");
+                    audioManager.PlayThisEffect("SliceAndDice");
                 }
                 else
                 {
@@ -3358,7 +3358,7 @@ public class Enemy : MonoBehaviour
                 {
                     attackThisPlayer.TakeDamage(eAttack + (eAttack * .1f));
                     objPooler.SpawnFromPool("SliceAndDice", attackThisPlayer.gameObject.transform.position, attackThisPlayer.gameObject.transform.rotation);
-                    audioManager.playThisEffect("SliceAndDice");
+                    audioManager.PlayThisEffect("SliceAndDice");
                 }
                 else
                 {
@@ -3374,7 +3374,7 @@ public class Enemy : MonoBehaviour
                 {
                     attackThisPlayer.TakeDamage(eAttack + (eAttack * .2f));
                     objPooler.SpawnFromPool("SliceAndDice", attackThisPlayer.gameObject.transform.position, attackThisPlayer.gameObject.transform.rotation);
-                    audioManager.playThisEffect("SliceAndDice");
+                    audioManager.PlayThisEffect("SliceAndDice");
                 }
                 else
                 {
@@ -3390,7 +3390,7 @@ public class Enemy : MonoBehaviour
                 {
                     attackThisPlayer.TakeDamage(eAttack + (eAttack*.3f));
                     objPooler.SpawnFromPool("SliceAndDice", attackThisPlayer.gameObject.transform.position, attackThisPlayer.gameObject.transform.rotation);
-                    audioManager.playThisEffect("SliceAndDice");
+                    audioManager.PlayThisEffect("SliceAndDice");
                 }
                 else
                 {
@@ -3406,7 +3406,7 @@ public class Enemy : MonoBehaviour
                 {
                     attackThisPlayer.TakeDamage(eAttack + (eAttack * .4f));
                     objPooler.SpawnFromPool("SliceAndDice", attackThisPlayer.gameObject.transform.position, attackThisPlayer.gameObject.transform.rotation);
-                    audioManager.playThisEffect("SliceAndDice");
+                    audioManager.PlayThisEffect("SliceAndDice");
                 }
                 else
                 {
@@ -3422,7 +3422,7 @@ public class Enemy : MonoBehaviour
                 {
                     attackThisPlayer.TakeDamage(+(eAttack * .5f));
                     objPooler.SpawnFromPool("SliceAndDice", attackThisPlayer.gameObject.transform.position, attackThisPlayer.gameObject.transform.rotation);
-                    audioManager.playThisEffect("SliceAndDice");
+                    audioManager.PlayThisEffect("SliceAndDice");
                 }
                 else
                 {
@@ -3518,7 +3518,7 @@ public class Enemy : MonoBehaviour
 
     void HealEnemy()
     {
-        audioManager.playThisEffect("buff");
+        audioManager.PlayThisEffect("buff");
         int healthMod = Random.Range(5, 20);// how much health should be applied to the enemies currentHP
         if (enemyToHeal.currentHP + healthMod >= enemyToHeal.maxHP)
         {

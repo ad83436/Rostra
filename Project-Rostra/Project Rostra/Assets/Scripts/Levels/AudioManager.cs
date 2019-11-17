@@ -23,6 +23,9 @@ public class AudioManager : MonoBehaviour
     public AudioClip uiConfirm;
     public AudioClip uiCancel;
 
+    //Map
+    public AudioClip collect;
+
     //Player
     public AudioClip attack;
     public AudioClip buff;
@@ -224,7 +227,7 @@ public class AudioManager : MonoBehaviour
     }
 
     //Play effects. Play one shot
-    public void playThisEffect(string effect)
+    public void PlayThisEffect(string effect)
     {
         switch(effect)
         {
@@ -237,6 +240,11 @@ public class AudioManager : MonoBehaviour
                 break;
             case "uiCancel":
                 effectAudioSource.PlayOneShot(uiCancel);
+                break;
+
+            //Map
+            case "collect":
+                effectAudioSource.PlayOneShot(collect);
                 break;
 
             //Generic 
