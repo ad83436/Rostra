@@ -100,8 +100,11 @@ public class PauseMenuController : MonoBehaviour {
 		if (!isPaused) return;
 
 		Confirm = Input.GetButtonDown("Confirm");
+		
+			DoAudioBlips();
 
 		if (activeMenu) {
+
 			//do main list
 			if (Down) currentListItem++;
 			else if (Up) currentListItem--;
@@ -190,5 +193,14 @@ public class PauseMenuController : MonoBehaviour {
 		}
 
 
+	}
+
+	private void DoAudioBlips() {
+		if (Confirm != Cancel) {
+			if (Confirm) AudioManager.instance.playThisEffect("Boop");
+			if (Cancel) AudioManager.instance.playThisEffect("Poob");
+		} else if (Up || Down || Left || Right) {
+			AudioManager.instance.playThisEffect("Bleep");
+		}		
 	}
 }

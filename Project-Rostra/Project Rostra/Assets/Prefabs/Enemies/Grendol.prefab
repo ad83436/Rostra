@@ -1130,7 +1130,7 @@ MonoBehaviour:
   eMana: 0
   eAttack: 30
   eAgility: 0
-  eDefence: 0
+  eDefence: 30
   eStrength: 30
   eSpeed: 15
   eBaseLevel: 1
@@ -1148,8 +1148,8 @@ MonoBehaviour:
   eCritical: 0
   qImage: {fileID: 0}
   HP: {fileID: 7258485256067680936}
-  maxHP: 600
-  currentHP: 600
+  maxHP: 800
+  currentHP: 800
   damageText: {fileID: 5767422145092268946}
   healText: {fileID: 7588495312722109962}
   missText: {fileID: 7466145886938455754}
@@ -1186,16 +1186,18 @@ MonoBehaviour:
   primaryChainedSymbol: {fileID: 0}
   ralliedSymbol: {fileID: 0}
   burnSymbol: {fileID: 0}
-  FirePillarDamageMultiplier: 3
-  LightningDamageMultiplier: 5
-  WindDamageMultiplier: 3
+  FirePillarDamageMultiplier: 1.6
+  LightningDamageMultiplier: 2.8
+  WindDamageMultiplier: 1.1
   StormLength: 5
-  DefenceIncrease: 20
-  MinHealAmount: 20
-  MaxHealAmount: 100
+  DefenceIncrease: 50
+  MinHealAmount: 200
+  MaxHealAmount: 750
   QuakeNormalMultiplier: 5
   QuakeStrongMultiplier: 10
   MaxNumberOfHeals: 10
+  PercentChanceIncreaseOfStorm: 3
+  BasePercentChanceIncreaseOfStorm: 1.5
   FirePillarTransform: {fileID: 779513965320012036}
 --- !u!212 &5253552254985947235
 SpriteRenderer:
@@ -2169,12 +2171,12 @@ PrefabInstance:
     - target: {fileID: 2181335522293218536, guid: 9b55465ff82f04b429c1403fd10c00c3,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 1.95
       objectReference: {fileID: 0}
     - target: {fileID: 2181335522293218536, guid: 9b55465ff82f04b429c1403fd10c00c3,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 3.1
       objectReference: {fileID: 0}
     - target: {fileID: 2181335522293218536, guid: 9b55465ff82f04b429c1403fd10c00c3,
         type: 3}

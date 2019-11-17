@@ -242,16 +242,29 @@ MonoBehaviour:
   titleTheme1: {fileID: 8300000, guid: d8c9bfd64e1d35d40bdaf8e3dfbe03a5, type: 3}
   worldMapMusic1: {fileID: 8300000, guid: b70bfe9c6b1e1b740a7537cc0e57ed97, type: 3}
   battleMusic1: {fileID: 8300000, guid: 963d70b2a552eef428fd83e7cd2961b2, type: 3}
-  bossMusic1: {fileID: 0}
+  bossMusic1: {fileID: 8300000, guid: be38abed4318d4f48a47586c796a7c59, type: 3}
   victoryMusic1: {fileID: 8300000, guid: 44eb8905aec7b9749bad66a41e791777, type: 3}
   defeatMusic1: {fileID: 8300000, guid: 24bfb53bb0eec574696a9adc19adf543, type: 3}
   cutscene1: {fileID: 8300000, guid: 85b9b7e3362ffef4ea1f1f3f33eb0681, type: 3}
+  townTheme1: {fileID: 8300000, guid: 135e3db6518b83941833337737067b50, type: 3}
   uiScroll: {fileID: 8300000, guid: c6de6d3f92a72674e8d74003a5e56391, type: 3}
   uiConfirm: {fileID: 8300000, guid: aac2f6804f482764590e58304f62628f, type: 3}
   uiCancel: {fileID: 8300000, guid: e5814d9748cc3e740a6141ee7b123bb4, type: 3}
   attack: {fileID: 8300000, guid: 7dc16aabb21df7c4fbcf28758c07c71e, type: 3}
   buff: {fileID: 8300000, guid: e9c4595e8065d1541adca56bbb5943c5, type: 3}
   deBuff: {fileID: 8300000, guid: fb38bf0ff63f1024ab988d5900a103fb, type: 3}
+  guard: {fileID: 8300000, guid: 250f306dad5b4304f9a890cb154e0f1f, type: 3}
+  swordOfFury: {fileID: 8300000, guid: 9d4f4782f8a771d4a9cea92a56ca4491, type: 3}
+  rally: {fileID: 8300000, guid: 236ee8096d1920e4d8bb06c9c0dc3b2f, type: 3}
+  swiftStrike: {fileID: 8300000, guid: bca096826c526eb45868e3c2535463ae, type: 3}
+  sunGuard: {fileID: 8300000, guid: 3e2c2ebec1772ce4895a7eaaf8e400db, type: 3}
+  bladeOfTheFallen: {fileID: 8300000, guid: c7544909754ce1e45956d0688392f4b5, type: 3}
+  faWait: {fileID: 8300000, guid: 6ed93eb8171494e4e9d883d313218cb6, type: 3}
+  spearDance: {fileID: 8300000, guid: 5427375c74e34b344bc7155eff9b81e5, type: 3}
+  lionsPride: {fileID: 8300000, guid: 874a4de8c0f4c5b4cb75c4f25e7bb2ab, type: 3}
+  fierceStrike: {fileID: 8300000, guid: a45a655b177be28438270093864aea69, type: 3}
+  lutenist: {fileID: 8300000, guid: 87c6aef70c418ff47b5f7b5c5b3b2d7e, type: 3}
+  obWait: {fileID: 8300000, guid: dcae5e09e60292c4bbaf00a6ee767fac, type: 3}
   arrowRain: {fileID: 8300000, guid: 9ef9eb22b0b3603469c969d711ed2c34, type: 3}
   doubleShot: {fileID: 8300000, guid: ce5df7d84644ded47882d0dac927380f, type: 3}
   bleedingEdge: {fileID: 8300000, guid: 75887c4b3031480469f299e6b50a1da0, type: 3}
@@ -267,8 +280,15 @@ MonoBehaviour:
   arWait: {fileID: 8300000, guid: f9665b7b757735a428e80b7f10990035, type: 3}
   earthSmash: {fileID: 8300000, guid: a056ecf82e3ac6a4a8c8161e0fd84a51, type: 3}
   blowSelf: {fileID: 8300000, guid: 3c911aba26b0e0043b066b18f0fa3eaf, type: 3}
+  batWind: {fileID: 8300000, guid: bb2f8bdb47b4a1844a210af0fa88386b, type: 3}
+  lighting: {fileID: 8300000, guid: d0697ce6bd30cd04881b37f8fb0f9160, type: 3}
+  sliceAndDice: {fileID: 8300000, guid: bfe983dc21200f446941929385609fc6, type: 3}
   Grendol_Lightning: {fileID: 8300000, guid: ae6056d219c611f4b8612cf137164168, type: 3}
   Grendol_Fire: {fileID: 8300000, guid: f004915018c9a7b4aae5104a0e8dfa5c, type: 3}
-  Grendol_Wind: {fileID: 0}
-  Grendol_Heal: {fileID: 0}
+  Grendol_Wind: {fileID: 8300000, guid: 4d8f17da304b7ab49a4c1dd9472f3b28, type: 3}
+  Grendol_Heal: {fileID: 8300000, guid: 1f376e0a558d4bf43b11fbb14df40855, type: 3}
+  Grendol_Attack: {fileID: 8300000, guid: 6f7129c748701e3479cd781279da4100, type: 3}
+  Bleep: {fileID: 8300000, guid: 4693e96fb9d14674b9086b84cb9e6753, type: 3}
+  Boop: {fileID: 8300000, guid: f7fbf8cd96666774ab8f1fe73d8dbcbb, type: 3}
+  Poob: {fileID: 8300000, guid: fb8b030280f3c9b4ca81a10340f31cf5, type: 3}
   currentState: 0
