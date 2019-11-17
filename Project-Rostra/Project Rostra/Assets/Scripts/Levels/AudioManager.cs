@@ -54,6 +54,12 @@ public class AudioManager : MonoBehaviour
     public AudioClip earthSmash;
     //BlowSelf
     public AudioClip blowSelf;
+    //Bat
+    public AudioClip batWind;
+    //Giant
+    public AudioClip lighting;
+    //RedReptile
+    public AudioClip sliceAndDice;
 
 
 
@@ -271,6 +277,21 @@ public class AudioManager : MonoBehaviour
             //BlowSelf
             case "Blow":
                 effectAudioSource.PlayOneShot(blowSelf);
+                break;
+
+            //Bat
+            case "BatWind":
+                effectAudioSource.PlayOneShot(batWind);
+                break;
+
+            //Giant
+            case "Lighting":
+                effectAudioSource.PlayOneShot(lighting);
+                break;
+
+            //RedReptile
+            case "SliceAndDice":
+                effectAudioSource.PlayOneShot(sliceAndDice);
                 break;
 
 

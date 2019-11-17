@@ -389,6 +389,7 @@ public class Enemy : MonoBehaviour
 
                             else
                             {
+                                uiBTL.UpdateActivityText("Attack");
                                 DumbAttack();
                             }
                             break;
@@ -427,6 +428,7 @@ public class Enemy : MonoBehaviour
 
                                 else
                                 {
+                                    uiBTL.UpdateActivityText("Attack");
                                     AttackHighAgi();
                                 }
                             }
@@ -461,8 +463,8 @@ public class Enemy : MonoBehaviour
 
                                 else
                                 {
+                                    uiBTL.UpdateActivityText("Attack");
                                     DumbAttack();
-                                    print(eName + " Did not use their skill but used a Dumb attack");
                                 }
                             }
                             break;
@@ -500,7 +502,7 @@ public class Enemy : MonoBehaviour
 
                                 else
                                 {
-
+                                    uiBTL.UpdateActivityText("Attack");
                                     AttackLowHp();
                                 }
                             }
@@ -535,6 +537,7 @@ public class Enemy : MonoBehaviour
 
                                 else
                                 {
+                                    uiBTL.UpdateActivityText("Attack");
                                     DumbAttack();
                                 }
                             }
@@ -573,6 +576,7 @@ public class Enemy : MonoBehaviour
 
                                 else
                                 {
+                                    uiBTL.UpdateActivityText("Attack");
                                     AttackHighAtk();
                                 }
                             }
@@ -606,6 +610,7 @@ public class Enemy : MonoBehaviour
 
                                 else
                                 {
+                                    uiBTL.UpdateActivityText("Attack");
                                     DumbAttack();
                                 }
                             }
@@ -647,6 +652,7 @@ public class Enemy : MonoBehaviour
 
                                 if (enemyToHeal == null)
                                 {
+                                    uiBTL.UpdateActivityText("Attack");
                                     DumbAttack();
                                 }
 
@@ -660,6 +666,7 @@ public class Enemy : MonoBehaviour
 
                                     else
                                     {
+                                        uiBTL.UpdateActivityText("Attack");
                                         DumbAttack();
                                     }
                                 }
@@ -708,16 +715,19 @@ public class Enemy : MonoBehaviour
                                 {
                                     if (randomStat == 0)
                                     {
+                                        uiBTL.UpdateActivityText("Attack");
                                         AttackHighAtk();
                                     }
 
                                     else if (randomStat == 1)
                                     {
+                                        uiBTL.UpdateActivityText("Attack");
                                         AttackLowDef();
                                     }
 
                                     else if (randomStat == 2)
                                     {
+                                        uiBTL.UpdateActivityText("Attack");
                                         AttackLowHp();
                                     }
                                 }
@@ -726,16 +736,19 @@ public class Enemy : MonoBehaviour
                                 {
                                     if (randomStat == 0)
                                     {
+                                        uiBTL.UpdateActivityText("Attack");
                                         AttackHighAtk();
                                     }
 
                                     else if (randomStat == 1 )
                                     {
+                                        uiBTL.UpdateActivityText("Attack");
                                         AttackLowDef();
                                     }
 
                                     else if (randomStat == 2)
                                     {
+                                        uiBTL.UpdateActivityText("Attack");
                                         AttackLowHp();
                                     }
                                 }
@@ -796,6 +809,7 @@ public class Enemy : MonoBehaviour
 
                                 else
                                 {
+                                    uiBTL.UpdateActivityText("Attack");
                                     AttackHighAgi();
                                 }
                             }
@@ -829,6 +843,7 @@ public class Enemy : MonoBehaviour
 
                                 else
                                 {
+                                    uiBTL.UpdateActivityText("Attack");
                                     DumbAttack();
                                 }
                             }
@@ -874,6 +889,7 @@ public class Enemy : MonoBehaviour
 
                                 else
                                 {
+                                    uiBTL.UpdateActivityText("Attack");
                                     RelentlessAttack(playerIndexHolder, timeAttacking);
                                 }
                             }
@@ -908,6 +924,7 @@ public class Enemy : MonoBehaviour
 
                                 else
                                 {
+                                    uiBTL.UpdateActivityText("Attack");
                                     DumbAttack();
                                 }
                             }
@@ -982,11 +999,13 @@ public class Enemy : MonoBehaviour
             {
                 Debug.Log("Critical Hit from Enemy");
                 attackThisPlayer.TakeDamage(eAttack * 1.2f);
+                audioManager.playThisEffect("attack");
             }
 
             else
             {
                 attackThisPlayer.TakeDamage(eAttack);
+                audioManager.playThisEffect("attack");
             }
         }
         else
@@ -1000,6 +1019,7 @@ public class Enemy : MonoBehaviour
 
     protected void DumbAttack()
     {
+        uiBTL.UpdateActivityText("Attack");
         attackThisPlayer = battleManager.players[Random.Range(0, 4)].playerReference;
         //if the player is dead, try again
         if (attackThisPlayer.currentHP <= 0.0f)
@@ -1018,6 +1038,7 @@ public class Enemy : MonoBehaviour
 
     void AttackLowHp()
     {
+        uiBTL.UpdateActivityText("Attack");
         statNeeded = PlayerStatReference.Health;
         StatNeeded(statNeeded);
 
@@ -1037,6 +1058,7 @@ public class Enemy : MonoBehaviour
 
     void AttackLowDef()
     {
+        uiBTL.UpdateActivityText("Attack");
         statNeeded = PlayerStatReference.Defence;
         StatNeeded(statNeeded);
         for (int i = 0; i < 4; i++)
@@ -1056,6 +1078,7 @@ public class Enemy : MonoBehaviour
 
     void AttackHighAgi()
     {
+        uiBTL.UpdateActivityText("Attack");
         statNeeded = PlayerStatReference.Agility;
         StatNeeded(statNeeded);
         for (int i = 0; i < 4; i++)
@@ -1074,6 +1097,7 @@ public class Enemy : MonoBehaviour
 
     void AttackHighAtk()
     {
+        uiBTL.UpdateActivityText("Attack");
         statNeeded = PlayerStatReference.Attack;
         StatNeeded(statNeeded);
         for (int i = 0; i < 4; i++)
@@ -1092,6 +1116,7 @@ public class Enemy : MonoBehaviour
 
     void RelentlessAttack(int playerIndex, int timeAttacking)
     {
+        uiBTL.UpdateActivityText("Attack");
         float attackMod;
         attackThisPlayer = battleManager.players[playerIndex].playerReference;
 
@@ -1220,6 +1245,7 @@ public class Enemy : MonoBehaviour
 
     void ModAttack()
     {
+        audioManager.playThisEffect("buff");
         int modAmount = Random.Range(5, 15);
         enemyToHeal.BuffStats("Attack", modAmount, 3);
         animator.SetBool("ModAtk", false);
@@ -1228,6 +1254,7 @@ public class Enemy : MonoBehaviour
 
     void ModDefence()
     {
+        audioManager.playThisEffect("buff");
         int modAmount = Random.Range(5, 20);
         enemyToHeal.BuffStats("Defense", modAmount, 3);
         animator.SetBool("ModDef", false);
@@ -1236,6 +1263,7 @@ public class Enemy : MonoBehaviour
 
     void ModAgility()
     {
+        audioManager.playThisEffect("buff");
         int modAmount = Random.Range(5, 20);
         enemyToHeal.BuffStats("Agility", modAmount, 3);
         animator.SetBool("ModAgi", false);
@@ -2157,6 +2185,7 @@ public class Enemy : MonoBehaviour
     public void EndHitAnimation()
     {
         animator.SetBool("Hit", false);
+       
     }
 
     public void GiveNamesAndSkills()
@@ -2849,7 +2878,7 @@ public class Enemy : MonoBehaviour
         
         if (randomRow == 0)
         {
-            CalculateHit();
+            
             print("Picked Back Row");
             if (OberonHit())
             {
@@ -2881,6 +2910,7 @@ public class Enemy : MonoBehaviour
             {
                 AttackFargas(eAttack * 1.5f);
                 objPooler.SpawnFromPool("LightingBolt", battleManager.players[0].playerReference.gameObject.transform.position, battleManager.players[0].playerReference.gameObject.transform.rotation);
+                
             }
             else
             {
@@ -2891,6 +2921,7 @@ public class Enemy : MonoBehaviour
             {
                 AttackArcelus(eAttack * 1.5f);
                 objPooler.SpawnFromPool("LightingBolt", battleManager.players[3].playerReference.gameObject.transform.position, battleManager.players[3].playerReference.gameObject.transform.rotation);
+                
             }
             else
             {
@@ -2898,6 +2929,7 @@ public class Enemy : MonoBehaviour
             }
 
         }
+        audioManager.playThisEffect("Lighting");
     }
 
     void BlowSelf()
@@ -2953,6 +2985,7 @@ public class Enemy : MonoBehaviour
         float dMod;
         if (waitTime == waitTimeAtStart)
         {
+            audioManager.playThisEffect("buff");
             dMod = Random.value;
             BuffStats("Defense", dMod, waitTime);
         }
@@ -2974,6 +3007,7 @@ public class Enemy : MonoBehaviour
 
         for (int i = 0; i < battleManager.enemies.Length; ++i)
         {
+            audioManager.playThisEffect("buff");
             if (battleManager.enemies[i].enemyReference != null && this != battleManager.enemies[i].enemyReference)
             {
                 if (!battleManager.enemies[i].enemyReference.dead)
@@ -3027,7 +3061,7 @@ public class Enemy : MonoBehaviour
         bool freaHit = FreaHit();
         bool arcHit = ArcelusHit();
         bool farHit = FargasHit();
-
+        audioManager.playThisEffect("BatWind");
         
             if (obHit)
             {
@@ -3148,6 +3182,7 @@ public class Enemy : MonoBehaviour
             {
                 attackThisPlayer.TakeDamage(eAttack + (eAttack * .1f));
                 objPooler.SpawnFromPool("SliceAndDice", attackThisPlayer.gameObject.transform.position, attackThisPlayer.gameObject.transform.rotation);
+                audioManager.playThisEffect("SliceAndDice");
             }
             else
             {
@@ -3165,6 +3200,7 @@ public class Enemy : MonoBehaviour
                 {
                     attackThisPlayer.TakeDamage(eAttack + (eAttack * .1f));
                     objPooler.SpawnFromPool("SliceAndDice", attackThisPlayer.gameObject.transform.position, attackThisPlayer.gameObject.transform.rotation);
+                    audioManager.playThisEffect("SliceAndDice");
                 }
                 else
                 {
@@ -3180,6 +3216,7 @@ public class Enemy : MonoBehaviour
                 {
                     attackThisPlayer.TakeDamage(eAttack + (eAttack * .2f));
                     objPooler.SpawnFromPool("SliceAndDice", attackThisPlayer.gameObject.transform.position, attackThisPlayer.gameObject.transform.rotation);
+                    audioManager.playThisEffect("SliceAndDice");
                 }
                 else
                 {
@@ -3200,6 +3237,7 @@ public class Enemy : MonoBehaviour
                 {
                     attackThisPlayer.TakeDamage(eAttack + (eAttack * .1f));
                     objPooler.SpawnFromPool("SliceAndDice", attackThisPlayer.gameObject.transform.position, attackThisPlayer.gameObject.transform.rotation);
+                    audioManager.playThisEffect("SliceAndDice");
                 }
                 else
                 {
@@ -3215,6 +3253,7 @@ public class Enemy : MonoBehaviour
                 {
                     attackThisPlayer.TakeDamage(eAttack + (eAttack * .2f));
                     objPooler.SpawnFromPool("SliceAndDice", attackThisPlayer.gameObject.transform.position, attackThisPlayer.gameObject.transform.rotation);
+                    audioManager.playThisEffect("SliceAndDice");
                 }
                 else
                 {
@@ -3231,6 +3270,7 @@ public class Enemy : MonoBehaviour
                 {
                     attackThisPlayer.TakeDamage(eAttack + (eAttack * .3f));
                     objPooler.SpawnFromPool("SliceAndDice", attackThisPlayer.gameObject.transform.position, attackThisPlayer.gameObject.transform.rotation);
+                    audioManager.playThisEffect("SliceAndDice");
                 }
                 else
                 {
@@ -3250,6 +3290,7 @@ public class Enemy : MonoBehaviour
                 {
                     attackThisPlayer.TakeDamage(eAttack + (eAttack * .1f));
                     objPooler.SpawnFromPool("SliceAndDice", attackThisPlayer.gameObject.transform.position, attackThisPlayer.gameObject.transform.rotation);
+                    audioManager.playThisEffect("SliceAndDice");
                 }
                 else
                 {
@@ -3265,6 +3306,7 @@ public class Enemy : MonoBehaviour
                 {
                     attackThisPlayer.TakeDamage(eAttack + (eAttack * .2f));
                     objPooler.SpawnFromPool("SliceAndDice", attackThisPlayer.gameObject.transform.position, attackThisPlayer.gameObject.transform.rotation);
+                    audioManager.playThisEffect("SliceAndDice");
                 }
                 else
                 {
@@ -3280,6 +3322,7 @@ public class Enemy : MonoBehaviour
                 {
                     attackThisPlayer.TakeDamage(eAttack + (eAttack * .3f));
                     objPooler.SpawnFromPool("SliceAndDice", attackThisPlayer.gameObject.transform.position, attackThisPlayer.gameObject.transform.rotation);
+                    audioManager.playThisEffect("SliceAndDice");
                 }
                 else
                 {
@@ -3295,6 +3338,7 @@ public class Enemy : MonoBehaviour
                 {
                     attackThisPlayer.TakeDamage(eAttack + (eAttack * .4f));
                     objPooler.SpawnFromPool("SliceAndDice", attackThisPlayer.gameObject.transform.position, attackThisPlayer.gameObject.transform.rotation);
+                    audioManager.playThisEffect("SliceAndDice");
                 }
                 else
                 {
@@ -3314,6 +3358,7 @@ public class Enemy : MonoBehaviour
                 {
                     attackThisPlayer.TakeDamage(eAttack + (eAttack * .1f));
                     objPooler.SpawnFromPool("SliceAndDice", attackThisPlayer.gameObject.transform.position, attackThisPlayer.gameObject.transform.rotation);
+                    audioManager.playThisEffect("SliceAndDice");
                 }
                 else
                 {
@@ -3329,6 +3374,7 @@ public class Enemy : MonoBehaviour
                 {
                     attackThisPlayer.TakeDamage(eAttack + (eAttack * .2f));
                     objPooler.SpawnFromPool("SliceAndDice", attackThisPlayer.gameObject.transform.position, attackThisPlayer.gameObject.transform.rotation);
+                    audioManager.playThisEffect("SliceAndDice");
                 }
                 else
                 {
@@ -3344,6 +3390,7 @@ public class Enemy : MonoBehaviour
                 {
                     attackThisPlayer.TakeDamage(eAttack + (eAttack*.3f));
                     objPooler.SpawnFromPool("SliceAndDice", attackThisPlayer.gameObject.transform.position, attackThisPlayer.gameObject.transform.rotation);
+                    audioManager.playThisEffect("SliceAndDice");
                 }
                 else
                 {
@@ -3359,6 +3406,7 @@ public class Enemy : MonoBehaviour
                 {
                     attackThisPlayer.TakeDamage(eAttack + (eAttack * .4f));
                     objPooler.SpawnFromPool("SliceAndDice", attackThisPlayer.gameObject.transform.position, attackThisPlayer.gameObject.transform.rotation);
+                    audioManager.playThisEffect("SliceAndDice");
                 }
                 else
                 {
@@ -3374,6 +3422,7 @@ public class Enemy : MonoBehaviour
                 {
                     attackThisPlayer.TakeDamage(+(eAttack * .5f));
                     objPooler.SpawnFromPool("SliceAndDice", attackThisPlayer.gameObject.transform.position, attackThisPlayer.gameObject.transform.rotation);
+                    audioManager.playThisEffect("SliceAndDice");
                 }
                 else
                 {
@@ -3409,11 +3458,6 @@ public class Enemy : MonoBehaviour
         }
 
         EndSkill();
-    }
-
-    void PlayAttackSound()
-    {
-        audioManager.playThisEffect("Attack");
     }
 
     void EarthSmashBackEffect()
@@ -3474,6 +3518,7 @@ public class Enemy : MonoBehaviour
 
     void HealEnemy()
     {
+        audioManager.playThisEffect("buff");
         int healthMod = Random.Range(5, 20);// how much health should be applied to the enemies currentHP
         if (enemyToHeal.currentHP + healthMod >= enemyToHeal.maxHP)
         {
