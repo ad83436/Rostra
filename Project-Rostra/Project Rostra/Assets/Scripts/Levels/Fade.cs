@@ -8,11 +8,11 @@ public class Fade : MonoBehaviour
 {
     private Image thisImage;
     public WMEnemy enemyHolder;
-    public WMEnemy grendolHolder; //Bad code, have to. 
+    public WMEnemy secondBossHolder; //Bad code, have to. 
     public bool tutorial;
     private bool fadeOut;
     private bool transitionToBattle;
-    private bool transitionToGrendolFight; //Bad code, have to. 
+    private bool transitionToSecondBossFight; //Bad code, have to. 
     private bool transitionToVictory;
     private bool transitionToDefeat;
     private bool transitionToWorldMap;
@@ -37,7 +37,7 @@ public class Fade : MonoBehaviour
         thisImage = gameObject.GetComponent<Image>();
         fadeOut = false;
         transitionToBattle = false;
-        transitionToGrendolFight = false;
+        transitionToSecondBossFight = false;
         transitionToVictory = false;
         transitionToDefeat = false;
         transitionToWorldMap = false;
@@ -55,6 +55,7 @@ public class Fade : MonoBehaviour
 
     void Update()
     {
+        Debug.Log("fadeOut is :" + fadeOut);
         if (Input.GetKeyDown(KeyCode.Space) && canGoToSurvey)
         {
             Application.OpenURL("https://docs.google.com/forms/d/1YV2OpAa3DlDGKMnicz97-1V5Shs8iR6eQgThn0fjRzE");
@@ -90,10 +91,14 @@ public class Fade : MonoBehaviour
                     TransitionIntoBattle();
                     fadeOut = false;
                 }
-                else if(transitionToGrendolFight)
+                else if(transitionToSecondBossFight)
                 {
-                    transitionToGrendolFight = false;
-                    TransitionToGrendol();
+                    if(transitionOutOfACutscene == true) //If we're transitioning into another boss, chances are we've come from a cutscene
+                    {
+                        transitionOutOfACutscene = false;
+                    }
+                    transitionToSecondBossFight = false;
+                    TransitionToSecondBossFight();
                     fadeOut = false;
                 }
                 else if (transitionToVictory)
@@ -177,7 +182,7 @@ public class Fade : MonoBehaviour
         {
             Debug.Log("Hit");
             fadeOut = true;
-            transitionToGrendolFight = true;
+            transitionToSecondBossFight = true;
         }
         else
         {
@@ -211,7 +216,7 @@ public class Fade : MonoBehaviour
     public void TransitionOutOfACutscene()
     {
         transitionOutOfACutscene = true;
-        fadeOut = !fadeOut;
+        fadeOut = true;
        
     }
     public void TransitionIntoBattle()
@@ -219,9 +224,9 @@ public class Fade : MonoBehaviour
         enemyHolder.TransitionIntoBattle();
     }
 
-    public void TransitionToGrendol() //Bad code. Have to
+    public void TransitionToSecondBossFight() //Bad code. Have to
     {
-        grendolHolder.TransitionIntoBattle();
+        secondBossHolder.TransitionIntoBattle();
     }
 
     public void TransitionIntoVictory()

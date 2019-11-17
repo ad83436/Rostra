@@ -52,6 +52,7 @@ public class Farea : Enemy
         battleManager = BattleManager.instance;
         objPooler = ObjectPooler.instance;
         uiBTL = UIBTL.instance;
+        audioManager = AudioManager.instance;
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         spriteColor = spriteRenderer.color;
         animator = gameObject.GetComponent<Animator>();
