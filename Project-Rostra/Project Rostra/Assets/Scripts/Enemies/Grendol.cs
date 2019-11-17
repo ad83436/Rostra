@@ -14,6 +14,8 @@ public class Grendol : Enemy {
 	public float MaxHealAmount;
 	public float QuakeNormalMultiplier;
 	public float QuakeStrongMultiplier;
+	public int MaxNumberOfHeals;
+	public Transform FirePillarTransform;
 
 	// rain
 	private bool isRaining = false;
@@ -58,64 +60,39 @@ public class Grendol : Enemy {
 				//End the turn
 				EndTurn();
 			}
-		} else if (turnCount % 4 == 3) { // always heal every 4 turns
+		} else if (MaxNumberOfHeals != 0 && turnCount % 4 == 3) { // always heal every 4 turns and while still under 10 heals
 
 			Begin_Heal();
-			Do_Heal();
-			EndTurn();
-
-			print("I AM HEALING!!");
 
 		} else if (!isRaining) {
 			// not raining
 			// roll attack
 			float roll = Random.Range(0f, 100f);
-			//float roll = 50f;
 
-			if (roll <= 10f) {
-				// Earthquake
-				Begin_Quake();
-				Do_BaseQuake();
-				if (boulder) Do_StrongQuake();
-			} else if (roll <= 20f) {
+			if (roll <= 40f) {
 				// Fire Pillar skill
-				// TODO: Remove Do and end functions after adding animation
 				Begin_FirePillar();
-				Do_FirePillar();
-				EndTurn();
-			} else if (roll <= 30f) {
+			} else if (roll <= 60f) {
 				// wind skill
-				// TODO: Remove Do and end functions after adding animation
 				Begin_Wind();
-				Do_Wind();
-				EndTurn();
-			} else if (roll <= 40f) {
+			} else if (roll <= 80f) {
 				// storm skill
 				Charge_Storm();
-				EndTurn();
 			} else {
 				// Dumb attack
-				// TODO: Add animation and have animation call function
 				DumbAttack();
-				CompleteAttack();
 			}
 		} else {
 			// is raining
 			// roll attack
 			float roll = Random.Range(0f, 100f);
 
-			if (roll <= 0f) {
+			if (roll <= 60f) {
 				// Dumb attack
-				// TODO: Add animation and have animation call function
 				DumbAttack();
-				CompleteAttack();
 			} else {
-				print("Im stuff");
 				// lightning skill
-				// TODO: Remove Do and end functions after adding animation
 				Begin_Lightning();
-				Do_Lightning();
-				EndTurn();
 			}
 
 			rainTurnsLeft--;
@@ -145,14 +122,20 @@ public class Grendol : Enemy {
 		// figure out what player to attack
 		attackThisPlayer = battleManager.players[Random.Range(0, 4)].playerReference;
 
-		// TODO: set pillar location and animation from here
+		// set the fire animation
+		animator.SetTrigger("Fire");
 	}
 
 	private void Do_FirePillar() {
-		// TODO: change to spawn pillar on player
-		objPooler.SpawnFromPool("EnemyNormalAttack", attackThisPlayer.gameObject.transform.position, gameObject.transform.rotation);
+		//objPooler.SpawnFromPool("EnemyNormalAttack", attackThisPlayer.gameObject.transform.position, gameObject.transform.rotation);
 
-		attackThisPlayer.TakeDamage(eAttack * FirePillarDamageMultiplier);
+		attackThisPlayer.TakeDamage(eAttack * FirePillarDamageMultiplier * 0.5f); // multiply by 0.5 because the attack hits twice
+
+		FirePillarTransform.position = attackThisPlayer.transform.position + Vector3.down * 2f; // set to player position but with an offset
+		animator.SetTrigger("Pillar");
+
+		// play sound
+		audioManager.playThisEffect("GFire");
 	}
 	#endregion
 
@@ -164,15 +147,21 @@ public class Grendol : Enemy {
 		// figure out what player to attack
 		attackThisPlayer = battleManager.players[Random.Range(0, 4)].playerReference;
 
+		animator.SetTrigger("Lightning");
 		// TODO: set lightning and animation from here
 	}
 
 	private void Do_Lightning() {
-		// TODO: change to spawn lighting on player
-		objPooler.SpawnFromPool("EnemyNormalAttack", attackThisPlayer.gameObject.transform.position, gameObject.transform.rotation);
+		/// TODO: change to spawn lighting on player
+		//objPooler.SpawnFromPool("EnemyNormalAttack", attackThisPlayer.gameObject.transform.position, gameObject.transform.rotation);
 
 		attackThisPlayer.TakeDamage(eAttack * LightningDamageMultiplier);
 	}
+
+	private void PlaySound_Lightning() {
+		audioManager.playThisEffect("GLightning");
+	}
+
 	#endregion
 
 	////////////////////////////////////////////////////////////////////////////////////////////////
@@ -180,7 +169,7 @@ public class Grendol : Enemy {
 
 	#region 
 	private void Begin_Wind() {
-		// TODO: setup animation
+		animator.SetTrigger("Wind");
 	}
 
 	private void Do_Wind() {
@@ -211,15 +200,21 @@ public class Grendol : Enemy {
 
 	#region 
 	private void Charge_Storm() {
+		animator.SetTrigger("Storm");
+		animator.SetBool("IsWaiting", true);
+
 		currentState = EnemyState.waiting;
-		waitQTurns = 2;
+		waitQTurns = 1;
 		waitTurnsText.gameObject.SetActive(true);
 		waitTurnsText.text = waitQTurns.ToString();
 		isWaitingForRain = true;
+		EndTurn();
 	}
 
 	private void Begin_Storm() {
-		// TODO: add animation
+		animator.SetBool("IsWaiting", false);
+		animator.SetBool("ShowClouds", true);
+		print("test");
 
 		isRaining = true;
 		rainTurnsLeft = StormLength + Random.Range(-1, 2); // gives a amount that is +1, 0 or -1 of the normal storm length
@@ -232,6 +227,7 @@ public class Grendol : Enemy {
 		// TODO: disable animations
 		isRaining = true;
 		eDefence = defaultDefence;
+		animator.SetBool("ShowClouds", false);
 	}
 	#endregion
 
@@ -240,16 +236,18 @@ public class Grendol : Enemy {
 
 	#region 
 	private void Begin_Heal() {
-		// TODO: add animation
+		animator.SetTrigger("Heal");
+		MaxNumberOfHeals--;
 	}
 
 	private void Do_Heal() {
 		Heal(Random.Range(MinHealAmount, MaxHealAmount));
+		healthObject.SetActive(true);
 	}
 	#endregion
 
 	////////////////////////////////////////////////////////////////////////////////////////////////
-	// Earthquake skill
+	// Earthquake skill ( UNUSED )
 
 	#region 
 	private void Begin_Quake() {
@@ -266,29 +264,29 @@ public class Grendol : Enemy {
 
 	private void Do_BaseQuake() {
 		// attack player 0
-		objPooler.SpawnFromPool("EnemyNormalAttack", 
+		objPooler.SpawnFromPool("EnemyNormalAttack",
 			battleManager.players[0].playerReference.gameObject.transform.position, gameObject.transform.rotation);
 		battleManager.players[0].playerReference.TakeDamage(eAttack * QuakeNormalMultiplier);
 
 		// attack player 1
-		objPooler.SpawnFromPool("EnemyNormalAttack", 
+		objPooler.SpawnFromPool("EnemyNormalAttack",
 			battleManager.players[1].playerReference.gameObject.transform.position, gameObject.transform.rotation);
 		attackThisPlayer.TakeDamage(eAttack * QuakeNormalMultiplier);
 
 		// attack player 2
-		objPooler.SpawnFromPool("EnemyNormalAttack", 
+		objPooler.SpawnFromPool("EnemyNormalAttack",
 			battleManager.players[2].playerReference.gameObject.transform.position, gameObject.transform.rotation);
 		battleManager.players[2].playerReference.TakeDamage(eAttack * QuakeNormalMultiplier);
 
 		// attack player 3
-		objPooler.SpawnFromPool("EnemyNormalAttack", 
+		objPooler.SpawnFromPool("EnemyNormalAttack",
 			battleManager.players[3].playerReference.gameObject.transform.position, gameObject.transform.rotation);
 		battleManager.players[3].playerReference.TakeDamage(eAttack * QuakeNormalMultiplier);
 	}
 
 	private void Do_StrongQuake() {
 		// strong attack
-		objPooler.SpawnFromPool("EnemyNormalAttack", 
+		objPooler.SpawnFromPool("EnemyNormalAttack",
 			battleManager.players[2].playerReference.gameObject.transform.position, gameObject.transform.rotation);
 		battleManager.players[2].playerReference.TakeDamage(eAttack * QuakeStrongMultiplier);
 	}
@@ -307,12 +305,8 @@ public class Grendol : Enemy {
 	//		- All players are damaged slightly and a there's chance of a boulder falling on top
 
 
-	//
-	// 'n0' = larger than both 'n1' and 'n2'
-	// 'n1' = more than 'n2'
-	// 'n2' = often enough to make it hard to kill Grendol. 
-	//
 	// completed skills:
+	//
 	// Storm:
 	//		- Creates a storm after waiting 1 turn. Increases defence.
 	//			Only usable after 'n1' turns. And lasts a couple turns.

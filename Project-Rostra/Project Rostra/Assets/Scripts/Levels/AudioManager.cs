@@ -64,7 +64,12 @@ public class AudioManager : MonoBehaviour
     //BlowSelf
     public AudioClip blowSelf;
 
-
+	// Grendol
+	public AudioClip Grendol_Lightning;
+	public AudioClip Grendol_Fire;
+	public AudioClip Grendol_Wind;
+	public AudioClip Grendol_Heal;
+	public AudioClip Grendol_Attack;
 
 
     private bool thisHasStartedPlaying = false;//Used to raise the volume steadily for a new piece
@@ -307,11 +312,22 @@ public class AudioManager : MonoBehaviour
                 effectAudioSource.PlayOneShot(blowSelf);
                 break;
 
-            default:
-                Debug.Log("Audio clip not found");
-                break;
-
-
+			// Grendol
+			case "GLightning":
+				effectAudioSource.PlayOneShot(Grendol_Lightning);
+				break;
+			case "GFire":
+				effectAudioSource.PlayOneShot(Grendol_Fire);
+				break;
+			case "GHeal":
+				effectAudioSource.PlayOneShot(Grendol_Heal);
+				break;
+			case "GWind":
+				effectAudioSource.PlayOneShot(Grendol_Wind);
+				break;
+			case "GAttack":
+				effectAudioSource.PlayOneShot(Grendol_Attack);
+				break;
                 
 
         }

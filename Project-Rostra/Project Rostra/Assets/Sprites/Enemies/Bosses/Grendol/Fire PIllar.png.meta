@@ -1,37 +1,25 @@
 fileFormatVersion: 2
-guid: 1d98cc84945f6af48a989a561e5f33c0
+guid: f2b9b955ecaada54496601cc9e578fad
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3841417130890062568
-    second: Grendol anim Storm_0
+      213: 319395871501624211
+    second: Fire PIllar_0
   - first:
-      213: -9052039140401218979
-    second: Grendol anim Storm_1
+      213: -2843467185298337379
+    second: Fire PIllar_1
   - first:
-      213: -2073070633728656526
-    second: Grendol anim Storm_2
+      213: 795985850238611710
+    second: Fire PIllar_2
   - first:
-      213: 3866966781950257629
-    second: Grendol anim Storm_3
+      213: 8017516152636581905
+    second: Fire PIllar_3
   - first:
-      213: 8628242583939599804
-    second: Grendol anim Storm_4
+      213: -1458908034243737932
+    second: Fire PIllar_4
   - first:
-      213: 3172182260642722583
-    second: Grendol anim Storm_5
-  - first:
-      213: 2323731131544628346
-    second: Grendol anim Storm_6
-  - first:
-      213: -6676017801784143109
-    second: Grendol anim Storm_7
-  - first:
-      213: 6674944956548721470
-    second: Grendol anim Storm_8
-  - first:
-      213: 560415329981114237
-    second: Grendol anim Storm_9
+      213: -617675906078578454
+    second: Fire PIllar_5
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -75,7 +63,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 40
+  spritePixelsToUnits: 13
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -128,211 +116,127 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Grendol anim Storm_0
+      name: Fire PIllar_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 200
-        height: 200
-      alignment: 9
-      pivot: {x: 0.45, y: 0.2}
+        width: 74
+        height: 160
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dd05742a6e4a727419bfc0ad8254b529
-      internalID: 3841417130890062568
+      spriteID: cf93797c9bb4de9468ba4b2b97288c25
+      internalID: 319395871501624211
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Grendol anim Storm_1
+      name: Fire PIllar_1
       rect:
         serializedVersion: 2
-        x: 200
+        x: 74
         y: 0
-        width: 200
-        height: 200
-      alignment: 9
-      pivot: {x: 0.45, y: 0.2}
+        width: 74
+        height: 160
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7126bd81ede61ea48bcbec119c42c76d
-      internalID: -9052039140401218979
+      spriteID: 14af4b4bd8b4eb34eb518e9c2ba4b3ea
+      internalID: -2843467185298337379
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Grendol anim Storm_2
+      name: Fire PIllar_2
       rect:
         serializedVersion: 2
-        x: 400
+        x: 148
         y: 0
-        width: 200
-        height: 200
-      alignment: 9
-      pivot: {x: 0.45, y: 0.2}
+        width: 74
+        height: 160
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a5746133528afb944b4e72341ef230c5
-      internalID: -2073070633728656526
+      spriteID: 7e7a20239f8eac7429411e20190abe5f
+      internalID: 795985850238611710
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Grendol anim Storm_3
+      name: Fire PIllar_3
       rect:
         serializedVersion: 2
-        x: 600
+        x: 222
         y: 0
-        width: 200
-        height: 200
-      alignment: 9
-      pivot: {x: 0.45, y: 0.2}
+        width: 74
+        height: 160
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7661196002a4d3e468a2f449dcc99190
-      internalID: 3866966781950257629
+      spriteID: 8aca3987cf7cbd1428877bab2f180aab
+      internalID: 8017516152636581905
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Grendol anim Storm_4
+      name: Fire PIllar_4
       rect:
         serializedVersion: 2
-        x: 800
+        x: 296
         y: 0
-        width: 200
-        height: 200
-      alignment: 9
-      pivot: {x: 0.45, y: 0.2}
+        width: 74
+        height: 160
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 687439504d9a44f4880182ab053ef748
-      internalID: 8628242583939599804
+      spriteID: 50af6d5eccd8e174d9b9f71e300444e7
+      internalID: -1458908034243737932
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Grendol anim Storm_5
+      name: Fire PIllar_5
       rect:
         serializedVersion: 2
-        x: 1000
+        x: 370
         y: 0
-        width: 200
-        height: 200
-      alignment: 9
-      pivot: {x: 0.45, y: 0.2}
+        width: 74
+        height: 160
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0fac49fc1a1112742b8749538111a5f8
-      internalID: 3172182260642722583
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Grendol anim Storm_6
-      rect:
-        serializedVersion: 2
-        x: 1200
-        y: 0
-        width: 200
-        height: 200
-      alignment: 9
-      pivot: {x: 0.45, y: 0.2}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4a74021b266cea742ac45cdef00293fc
-      internalID: 2323731131544628346
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Grendol anim Storm_7
-      rect:
-        serializedVersion: 2
-        x: 1400
-        y: 0
-        width: 200
-        height: 200
-      alignment: 9
-      pivot: {x: 0.45, y: 0.2}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f4fbf7e11175c8c45ae5351289a8f7ac
-      internalID: -6676017801784143109
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Grendol anim Storm_8
-      rect:
-        serializedVersion: 2
-        x: 1600
-        y: 0
-        width: 200
-        height: 200
-      alignment: 9
-      pivot: {x: 0.45, y: 0.2}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6c17109f1cbad1647a1f1fd43d3537fb
-      internalID: 6674944956548721470
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Grendol anim Storm_9
-      rect:
-        serializedVersion: 2
-        x: 1800
-        y: 0
-        width: 200
-        height: 200
-      alignment: 9
-      pivot: {x: 0.45, y: 0.2}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 95e025022058c834c8f9e349c5abe1e8
-      internalID: 560415329981114237
+      spriteID: 16497117ea800d9448b5d5511f53fbf1
+      internalID: -617675906078578454
       vertices: []
       indices: 
       edges: []
