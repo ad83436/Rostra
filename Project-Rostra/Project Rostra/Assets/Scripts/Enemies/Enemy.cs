@@ -61,6 +61,7 @@ public class Enemy : MonoBehaviour
     protected bool skillPointAdded;
     public bool hit;
     public bool blow;
+    private bool playedWaitingText;
     public bool isStatModed;
     public bool test;
     [SerializeField] bool skillNeedsCharge; // check if the skill in use uses a charge time or the skill is instantly activated 
@@ -191,6 +192,7 @@ public class Enemy : MonoBehaviour
         haveAddedMyself = false;
         hit = false;
         dead = false;
+        playedWaitingText = false;
         isStatModed = false;
         blow = false;
 
@@ -375,6 +377,7 @@ public class Enemy : MonoBehaviour
                                     waitQTurns = waitTime;
                                     waitTurnsText.text = waitQTurns.ToString(); //Update the UI
                                     waitTurnsText.gameObject.SetActive(true);
+                                    playedWaitingText = true;
                                     animator.SetBool("isWaiting", true);
                                     EndTurn();
                                 }
@@ -414,7 +417,7 @@ public class Enemy : MonoBehaviour
                                         waitTurnsText.text = waitQTurns.ToString(); //Update the UI
                                         waitTurnsText.gameObject.SetActive(true);
                                         animator.SetBool("isWaiting", true);
-
+                                        playedWaitingText = true;
                                         EndTurn();
                                     }
 
@@ -449,7 +452,7 @@ public class Enemy : MonoBehaviour
                                         waitTurnsText.text = waitQTurns.ToString(); //Update the UI
                                         waitTurnsText.gameObject.SetActive(true);
                                         animator.SetBool("isWaiting", true);
-
+                                        playedWaitingText = true;
                                         EndTurn();
                                     }
 
@@ -489,6 +492,7 @@ public class Enemy : MonoBehaviour
                                         waitTurnsText.text = waitQTurns.ToString(); //Update the UI
                                         waitTurnsText.gameObject.SetActive(true);
                                         animator.SetBool("isWaiting", true);
+                                        playedWaitingText = true;
                                         EndTurn();
                                     }
 
@@ -523,7 +527,8 @@ public class Enemy : MonoBehaviour
                                         waitQTurns = waitTime;
                                         waitTurnsText.text = waitQTurns.ToString(); //Update the UI
                                         waitTurnsText.gameObject.SetActive(true);
-                                        animator.SetBool("isWaiting", true);
+                                        animator.SetBool("isWaiting", true); 
+                                        playedWaitingText = true;
                                         EndTurn();
                                     }
 
@@ -563,6 +568,7 @@ public class Enemy : MonoBehaviour
                                         waitTurnsText.gameObject.SetActive(true);
                                         waitTurnsText.text = waitQTurns.ToString(); //Update the UI
                                         animator.SetBool("isWaiting", true);
+                                        playedWaitingText = true;
                                         EndTurn();
                                     }
 
@@ -597,6 +603,7 @@ public class Enemy : MonoBehaviour
                                         waitTurnsText.gameObject.SetActive(true);
                                         waitTurnsText.text = waitQTurns.ToString(); //Update the UI
                                         animator.SetBool("isWaiting", true);
+                                        playedWaitingText = true;
                                         EndTurn();
                                     }
 
@@ -635,6 +642,7 @@ public class Enemy : MonoBehaviour
                                     waitTurnsText.gameObject.SetActive(true);
                                     waitTurnsText.text = waitQTurns.ToString(); //Update the UI
                                     animator.SetBool("isWaiting", true);
+                                    playedWaitingText = true;
                                     EndTurn();
                                 }
 
@@ -694,6 +702,7 @@ public class Enemy : MonoBehaviour
                                     waitTurnsText.gameObject.SetActive(true);
                                     waitTurnsText.text = waitQTurns.ToString(); //Update the UI
                                     animator.SetBool("isWaiting", true);
+                                    playedWaitingText = true;
                                     EndTurn();
                                 }
 
@@ -796,6 +805,7 @@ public class Enemy : MonoBehaviour
                                         waitTurnsText.text = waitQTurns.ToString(); //Update the UI
                                         waitTurnsText.gameObject.SetActive(true);                                   
                                         animator.SetBool("isWaiting", true);
+                                        playedWaitingText = true;
                                         EndTurn();
                                     }
 
@@ -830,6 +840,7 @@ public class Enemy : MonoBehaviour
                                         waitTurnsText.text = waitQTurns.ToString(); //Update the UI
                                         waitTurnsText.gameObject.SetActive(true);
                                         animator.SetBool("isWaiting", true);
+                                        playedWaitingText = true;
                                         EndTurn();
                                     }
 
@@ -876,6 +887,7 @@ public class Enemy : MonoBehaviour
                                         hitAmount = Random.Range(1, 5);
                                         waitTurnsText.text = waitQTurns.ToString(); //Update the UI
                                         waitTurnsText.gameObject.SetActive(true);
+                                        playedWaitingText = true;
                                         EndTurn();
                                     }
 
@@ -911,6 +923,7 @@ public class Enemy : MonoBehaviour
                                         animator.SetBool("isWaiting", true);
                                         waitTurnsText.text = waitQTurns.ToString(); //Update the UI
                                         waitTurnsText.gameObject.SetActive(true);
+                                        playedWaitingText = true;
                                         EndTurn();
                                     }
 
@@ -994,10 +1007,10 @@ public class Enemy : MonoBehaviour
     //Called from the animator once the attack anaimation ends
     protected virtual void CompleteAttack()
     {
-        //  float critMod = 1.2f;
 
         if (hit)
         {
+            uiBTL.UpdateActivityText("Attack");
             objPooler.SpawnFromPool("EnemyNormalAttack", attackThisPlayer.gameObject.transform.position, gameObject.transform.rotation);
 
             if (CalculateCrit() <= eCritical)
@@ -1015,6 +1028,7 @@ public class Enemy : MonoBehaviour
         }
         else
         {
+            uiBTL.UpdateActivityText("Attack Missed");
             Debug.Log("Enemy has missed");
             attackThisPlayer.TakeDamage(0.0f); //Pass in zero, i.e miss
         }
@@ -1043,7 +1057,6 @@ public class Enemy : MonoBehaviour
 
     void AttackLowHp()
     {
-        uiBTL.UpdateActivityText("Attack");
         statNeeded = PlayerStatReference.Health;
         StatNeeded(statNeeded);
 
@@ -1063,7 +1076,6 @@ public class Enemy : MonoBehaviour
 
     void AttackLowDef()
     {
-        uiBTL.UpdateActivityText("Attack");
         statNeeded = PlayerStatReference.Defence;
         StatNeeded(statNeeded);
         for (int i = 0; i < 4; i++)
@@ -1083,7 +1095,6 @@ public class Enemy : MonoBehaviour
 
     void AttackHighAgi()
     {
-        uiBTL.UpdateActivityText("Attack");
         statNeeded = PlayerStatReference.Agility;
         StatNeeded(statNeeded);
         for (int i = 0; i < 4; i++)
@@ -1102,7 +1113,6 @@ public class Enemy : MonoBehaviour
 
     void AttackHighAtk()
     {
-        uiBTL.UpdateActivityText("Attack");
         statNeeded = PlayerStatReference.Attack;
         StatNeeded(statNeeded);
         for (int i = 0; i < 4; i++)
@@ -1121,7 +1131,6 @@ public class Enemy : MonoBehaviour
 
     void RelentlessAttack(int playerIndex, int timeAttacking)
     {
-        uiBTL.UpdateActivityText("Attack");
         float attackMod;
         attackThisPlayer = battleManager.players[playerIndex].playerReference;
 
@@ -1188,7 +1197,6 @@ public class Enemy : MonoBehaviour
             CalculateHit();
             animator.SetBool("Attack", true);
         }
-
         eAttack = enemyStartingAtk;
     }
 
@@ -2482,6 +2490,7 @@ public class Enemy : MonoBehaviour
 
 
             case AllEnemySkills.Bite:
+
                 animator.SetBool("isWaiting", false);
                 animator.SetBool("SkillInUse", true);
 
@@ -2880,7 +2889,7 @@ public class Enemy : MonoBehaviour
     void GroundSmashSkill()
     {
         int randomRow = Random.Range(0, 1);
-        
+        uiBTL.UpdateActivityText("Thunder Struck");
         if (randomRow == 0)
         {
             
@@ -2965,6 +2974,8 @@ public class Enemy : MonoBehaviour
 
     void BiteSkill()
     {
+        uiBTL.UpdateActivityText("Iron Tusk");
+        audioManager.PlayThisEffect("Iron Tusk");
         float attackMod;
         attackThisPlayer = battleManager.players[PickRandomNumber(battleManager.players[0].playerReference.playerIndex, battleManager.players[1].playerReference.playerIndex, battleManager.players[2].playerReference.playerIndex, battleManager.players[3].playerReference.playerIndex)].playerReference;
         if (attackThisPlayer.currentHP <= 0)
@@ -2987,6 +2998,7 @@ public class Enemy : MonoBehaviour
 
     void RaiseDefSkill()
     {
+        uiBTL.UpdateActivityText("Shields Up");
         float dMod;
         if (waitTime == waitTimeAtStart)
         {
@@ -3007,6 +3019,7 @@ public class Enemy : MonoBehaviour
 
     void HealAllSkill()
     {
+        uiBTL.UpdateActivityText("Heal All");
         int healthMod = 100;
         print("Used The Heal All Skill");
 
@@ -3043,6 +3056,7 @@ public class Enemy : MonoBehaviour
 
     void EarthSmashSkill()
     {
+        uiBTL.UpdateActivityText("Earthquake");
         audioManager.PlayThisEffect("EarthSmash");
         eAttack += Random.Range(5, 10);
 
@@ -3061,7 +3075,7 @@ public class Enemy : MonoBehaviour
     //change to wind debuff in the future 
     void BallRollSkill()
     {
-
+        uiBTL.UpdateActivityText("Cave Winds");
         bool obHit = OberonHit();
         bool freaHit = FreaHit();
         bool arcHit = ArcelusHit();
@@ -3178,7 +3192,7 @@ public class Enemy : MonoBehaviour
 
     void SliceAndDiceSkill()
     {
-        
+        uiBTL.UpdateActivityText("Slice and Dice");
 
         if (hitAmount == 1)
         {
@@ -3442,6 +3456,7 @@ public class Enemy : MonoBehaviour
 
     void MultipleStatSkill()
     {
+        uiBTL.UpdateActivityText("Spore Spray");
         int statIncrease = PickRandomNumber(10, 15);
 
         if (enemyToHeal.enemyClass == EnemyClassType.DPS)
@@ -3499,6 +3514,7 @@ public class Enemy : MonoBehaviour
     {
         if (!dead)
         {
+            uiBTL.UpdateActivityText("Dead");
             currentState = EnemyState.idle;
             spriteRenderer.enabled = false;
             enemyCanvas.SetActive(false);
@@ -3518,6 +3534,15 @@ public class Enemy : MonoBehaviour
             {
                 uiBTL.EndTurn();
             }
+        }
+    }
+
+    void Waiting()
+    {
+        if (waitTime == waitTimeAtStart && playedWaitingText)
+        {
+            uiBTL.UpdateActivityText("Waiting " + waitTime + " Turns");
+            playedWaitingText = false;
         }
     }
 

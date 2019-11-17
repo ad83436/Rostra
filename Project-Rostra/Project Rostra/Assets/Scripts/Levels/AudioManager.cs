@@ -80,6 +80,8 @@ public class AudioManager : MonoBehaviour
     public AudioClip lighting;
     //RedReptile
     public AudioClip sliceAndDice;
+    //Boar
+    public AudioClip ironTusk;
 
 	// Grendol
 	public AudioClip Grendol_Lightning;
@@ -385,6 +387,11 @@ public class AudioManager : MonoBehaviour
             //RedReptile
             case "SliceAndDice":
                 effectAudioSource.PlayOneShot(sliceAndDice);
+                break;
+
+            //Boar
+            case "Iron Tusk":
+                effectAudioSource.PlayOneShot(ironTusk);
                 break;
 
 
