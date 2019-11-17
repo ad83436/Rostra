@@ -80,6 +80,8 @@ public class AudioManager : MonoBehaviour
     public AudioClip lighting;
     //RedReptile
     public AudioClip sliceAndDice;
+    //Boar
+    public AudioClip ironTusk;
 
     //Farya
     public AudioClip despair;
