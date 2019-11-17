@@ -121,7 +121,7 @@ public class Grendol : Enemy {
 	}
 
 	private void AttackSound() {
-		audioManager.playThisEffect("GAttack");
+		audioManager.PlayThisEffect("GAttack");
 	}
 
 	#region SKILLS
@@ -150,7 +150,7 @@ public class Grendol : Enemy {
 		animator.SetTrigger("Pillar");
 
 		// play sound
-		audioManager.playThisEffect("GFire");
+		audioManager.PlayThisEffect("GFire");
 
 		uiBTL.UpdateActivityText("HellStorm");
 	}
@@ -177,7 +177,7 @@ public class Grendol : Enemy {
 	}
 
 	private void PlaySound_Lightning() {
-		audioManager.playThisEffect("GLightning");
+		audioManager.PlayThisEffect("GLightning");
 	}
 
 	#endregion
@@ -189,7 +189,7 @@ public class Grendol : Enemy {
 
 	private void Begin_Wind() {
 		animator.SetTrigger("Wind");
-		audioManager.playThisEffect("GWind");
+		audioManager.PlayThisEffect("GWind");
 
 	}
 
@@ -269,7 +269,7 @@ public class Grendol : Enemy {
 	private void Begin_Heal() {
 		animator.SetTrigger("Heal");
 		MaxNumberOfHeals--;
-		audioManager.playThisEffect("GHeal");
+		audioManager.PlayThisEffect("GHeal");
 	}
 
 	private void Do_Heal() {

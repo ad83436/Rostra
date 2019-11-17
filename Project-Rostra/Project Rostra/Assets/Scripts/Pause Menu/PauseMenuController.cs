@@ -197,10 +197,10 @@ public class PauseMenuController : MonoBehaviour {
 
 	private void DoAudioBlips() {
 		if (Confirm != Cancel) {
-			if (Confirm) AudioManager.instance.playThisEffect("Boop");
-			if (Cancel) AudioManager.instance.playThisEffect("Poob");
+			if (Confirm) AudioManager.instance.PlayThisEffect("Boop");
+			if (Cancel) AudioManager.instance.PlayThisEffect("Poob");
 		} else if (Up || Down || Left || Right) {
-			AudioManager.instance.playThisEffect("Bleep");
+			AudioManager.instance.PlayThisEffect("Bleep");
 		}
 	}
 }

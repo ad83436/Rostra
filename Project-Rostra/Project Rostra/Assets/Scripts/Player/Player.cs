@@ -450,11 +450,11 @@ public class Player : MonoBehaviour
                 objPooler.SpawnFromPool("PlayerNormalAttack", attackingThisEnemy.gameObject.transform.position, gameObject.transform.rotation);
                 if(playerIndex == 2) //Frea has a bow sound
                 {
-                    audioManager.playThisEffect("doubleShot");
+                    audioManager.PlayThisEffect("doubleShot");
                 }
                 else
                 {
-                    audioManager.playThisEffect("attack");
+                    audioManager.PlayThisEffect("attack");
                 }
             }
             else
@@ -463,7 +463,7 @@ public class Player : MonoBehaviour
                 //Summon the BE effects 
                 objPooler.SpawnFromPool("BleedingEdgeEffect", gameObject.transform.position, gameObject.transform.rotation);
                 objPooler.SpawnFromPool("BleedingEdgeImpact", attackingThisEnemy.gameObject.transform.position, gameObject.transform.rotation);
-                audioManager.playThisEffect("bleedingEdge");
+                audioManager.PlayThisEffect("bleedingEdge");
             }
             //Shake the camera
             btlCam.CameraShake();
@@ -613,7 +613,7 @@ public class Player : MonoBehaviour
     //Guard and End Guard are called from the UI. End Guard is called when the player's turn returns
     public void Guard()
     {
-        audioManager.playThisEffect("guard");
+        audioManager.PlayThisEffect("guard");
         actualDefBeforeGuard = actualDEF; //Store the current defense before multiplying it
         actualDEF = actualDefBeforeGuard * 1.5f;
         currentState = playerState.Guard;
@@ -908,7 +908,7 @@ public class Player : MonoBehaviour
         }
         else if (skillID == (int)SKILLS.Ob_LionsPride) //Lion's Pride special skill
         {
-            audioManager.playThisEffect("lionsPride");
+            audioManager.PlayThisEffect("lionsPride");
             lionsPrideIsActive = true;
             lionsPrideSymbolOberonOnly.gameObject.SetActive(true);
             lionsPrideSkillQCounter = 3; //Lions pride counter is different than the defense buff/debuff counter as the defense can be buffed or debuff further on but lion's pride will always only last for three turns
@@ -926,7 +926,7 @@ public class Player : MonoBehaviour
         else if (skillID == (int)SKILLS.Fr_IDontMiss) //I Don't Miss special skill
         {
             skillTarget = 8; //Single player buff
-            audioManager.playThisEffect("buff");
+            audioManager.PlayThisEffect("buff");
             BuffStats("Strength", skills.SkillStats(chosenSkill)[0], 3);
             chosenSkill = (int)SKILLS.NO_SKILL;
             currentMP -= mpCost;
@@ -952,19 +952,19 @@ public class Player : MonoBehaviour
         {
             if (playerIndex == 0)
             {
-                audioManager.playThisEffect("faWait");
+                audioManager.PlayThisEffect("faWait");
             }
             else if (playerIndex == 1)
             {
-                audioManager.playThisEffect("obWait");
+                audioManager.PlayThisEffect("obWait");
             }
             else if (playerIndex == 2)
             {
-                audioManager.playThisEffect("frWait");
+                audioManager.PlayThisEffect("frWait");
             }
             else if (playerIndex == 3)
             {
-                audioManager.playThisEffect("arWait");
+                audioManager.PlayThisEffect("arWait");
             }
 
             waitTimeText.gameObject.SetActive(true);
@@ -1025,19 +1025,19 @@ public class Player : MonoBehaviour
         {
             if (playerIndex == 0)
             {
-                audioManager.playThisEffect("faWait");
+                audioManager.PlayThisEffect("faWait");
             }
             else if (playerIndex == 1)
             {
-                audioManager.playThisEffect("obWait");
+                audioManager.PlayThisEffect("obWait");
             }
             else if (playerIndex == 2)
             {
-                audioManager.playThisEffect("frWait");
+                audioManager.PlayThisEffect("frWait");
             }
             else if (playerIndex == 3)
             {
-                audioManager.playThisEffect("arWait");
+                audioManager.PlayThisEffect("arWait");
             }
             waitTimeText.gameObject.SetActive(true);
             waitTimeText.text = skillWaitTime.ToString();
@@ -1121,19 +1121,19 @@ public class Player : MonoBehaviour
         {
             if (playerIndex == 0)
             {
-                audioManager.playThisEffect("faWait");
+                audioManager.PlayThisEffect("faWait");
             }
             else if (playerIndex == 1)
             {
-                audioManager.playThisEffect("obWait");
+                audioManager.PlayThisEffect("obWait");
             }
             else if (playerIndex == 2)
             {
-                audioManager.playThisEffect("frWait");
+                audioManager.PlayThisEffect("frWait");
             }
             else if (playerIndex == 3)
             {
-                audioManager.playThisEffect("arWait");
+                audioManager.PlayThisEffect("arWait");
             }
 
             //If there's waiting time, go to wait state and end the turn 
@@ -1208,19 +1208,19 @@ public class Player : MonoBehaviour
         {
             if(playerIndex == 0)
             {
-                audioManager.playThisEffect("faWait");
+                audioManager.PlayThisEffect("faWait");
             }
             else if (playerIndex == 1)
             {
-                audioManager.playThisEffect("obWait");
+                audioManager.PlayThisEffect("obWait");
             }
             else if (playerIndex == 2)
             {
-                audioManager.playThisEffect("frWait");
+                audioManager.PlayThisEffect("frWait");
             }
             else if (playerIndex == 3)
             {
-                audioManager.playThisEffect("arWait");
+                audioManager.PlayThisEffect("arWait");
             }
 
             //If there's waiting time, go to wait state and end the turn 
@@ -1275,19 +1275,19 @@ public class Player : MonoBehaviour
         {
             if (playerIndex == 0)
             {
-                audioManager.playThisEffect("faWait");
+                audioManager.PlayThisEffect("faWait");
             }
             else if (playerIndex == 1)
             {
-                audioManager.playThisEffect("obWait");
+                audioManager.PlayThisEffect("obWait");
             }
             else if (playerIndex == 2)
             {
-                audioManager.playThisEffect("frWait");
+                audioManager.PlayThisEffect("frWait");
             }
             else if (playerIndex == 3)
             {
-                audioManager.playThisEffect("arWait");
+                audioManager.PlayThisEffect("arWait");
             }
 
             //If there's waiting time, go to wait state and end the turn 
@@ -1780,7 +1780,7 @@ public class Player : MonoBehaviour
             // ----- End of Skill Effect -----  //
             if (audioForSkillEffectName != "")
             {
-                audioManager.playThisEffect(audioForSkillEffectName);
+                audioManager.PlayThisEffect(audioForSkillEffectName);
                 audioForSkillEffectName = ""; //Reset, ready for the next effect
             }
             if (chosenSkill == (int)SKILLS.Ob_SpearDance)
