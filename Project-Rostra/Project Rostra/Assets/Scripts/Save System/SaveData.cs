@@ -105,11 +105,11 @@ public class SaveData
 
         money = MainInventory.totalMoney;
 
-        inventory = MainInventory.invItem;
+        inventory = MainInventory.invInstance.invItem; // Every object that you need its data to be stored has an static instance that you can reference
 
-        equippedSkills = CharacterSkills.equippedSkills;
+        equippedSkills = PartySkills.skills[0].equippedSkills; // To access equipped skills use this PartySkills.skills[playerIndex].equippedSkills
 
-        learnedSkills = CharacterSkills.learnedSkills;
+        learnedSkills = PartySkills.skills[0].learnedSkills;// To access equipped skills use this PartySkills.skills[playerIndex].learnedSkills
 
         position = new float[3];
         position[0] = player.transform.position.x;

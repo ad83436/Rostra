@@ -8,7 +8,7 @@ public class MainInventory : MonoBehaviour {
 	public static MainInventory invInstance;    // Holds the current inventory instance in a single variable
 	public static int totalMoney = 500;           // The amount of money the player has
 	public static int INVENTORY_SIZE = 60;      // The maximum size of the inventory
-	public static int[,] invItem = new int[INVENTORY_SIZE, 3];
+	public int[,] invItem = new int[INVENTORY_SIZE, 3];
 	// NOTE -- Element 0 is the item's ID value that will point to its name, description, icon, etc.
 	//         Element 1 is how many items currently occupy the slot in the inventory
 	//         Element 2 is what character has this item equipped (Ex. armor and weapons)

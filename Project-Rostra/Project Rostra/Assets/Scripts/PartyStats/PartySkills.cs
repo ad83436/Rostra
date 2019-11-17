@@ -65,8 +65,8 @@ public static class PartySkills {
 
 public struct CharacterSkills {
     public int[] unlockableSkills;      // The list of skills that a character is able to learn
-    public static int[] equippedSkills;        // The skills that the player currently has equipped to the character
-    public static int[] learnedSkills;         // The array of skills that the character has unlocked
+    public int[] equippedSkills;        // The skills that the player currently has equipped to the character
+    public int[] learnedSkills;         // The array of skills that the character has unlocked
 
     public int numSkillsLearned;        // The number of skills that the character has learned so far 
 
