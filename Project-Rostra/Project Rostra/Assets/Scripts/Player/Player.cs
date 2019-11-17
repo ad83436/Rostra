@@ -881,7 +881,7 @@ public class Player : MonoBehaviour
         {
             audioForSkillEffectName = "manaCharge";
             skillTarget = 6;//Single player heal
-            skillAnimatorName = "Heal";
+            skillAnimatorName = "ManaCharge";
             skillWaitingIndex = 2; //Mana heal wait is 2 per the animator
         }
         else if(skillID == (int)SKILLS.Ar_LullabyOfHope)
@@ -1670,9 +1670,15 @@ public class Player : MonoBehaviour
                 }
                 else if (chosenSkill == (int)SKILLS.Ar_ManaCharge)
                 {
-                    
+                    //Mana Charge costs HP not MP to use
                     healThisPlayer.ManaCharge(0.01f * (0.5f * actualATK + skills.SkillStats(chosenSkill)[0]));
-                    playerAnimator.SetBool("Heal", false);
+                    playerAnimator.SetBool("ManaCharge", false);
+                    currentHP -= mpCost;
+                    damageText.text = mpCost.ToString();
+                    damageText.gameObject.SetActive(true);
+                    hpImage.fillAmount = currentHP / maxHP;
+                    battleManager.players[playerIndex].currentHP = currentHP;
+                    PartyStats.chara[playerIndex].hitpoints = currentHP;
                 }
                 else if (chosenSkill == (int)SKILLS.Ar_LullabyOfHope)
                 {
@@ -1789,11 +1795,14 @@ public class Player : MonoBehaviour
             }
             //Claculate the new MP and reset the player's state
             totalBoFAtkToBeAdded = 0;
+            if (chosenSkill != (int)SKILLS.Ar_ManaCharge) //Mana Charge costs HP not MP
+            {
+                currentMP -= mpCost;
+                mpImage.fillAmount = currentMP / maxMP;
+                battleManager.players[playerIndex].currentMP = currentMP;
+                PartyStats.chara[playerIndex].magicpoints = currentMP;
+            }
             chosenSkill = (int)SKILLS.NO_SKILL;
-            currentMP -= mpCost;
-            mpImage.fillAmount = currentMP / maxMP;
-            battleManager.players[playerIndex].currentMP = currentMP;
-            PartyStats.chara[playerIndex].magicpoints = currentMP;
             uiBTL.UpdatePlayerMPControlPanel();
             currentState = playerState.Idle;
         }
