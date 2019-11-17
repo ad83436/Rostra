@@ -36,16 +36,12 @@ public class SkillsInventory : MonoBehaviour {
         EquipSkill((int)SKILLS.Fa_SwordOfFury, 0, 0);
         AddToUnlockedSkills((int)SKILLS.Ob_FierceStrike, 1);
         EquipSkill((int)SKILLS.Ob_FierceStrike, 0, 1);
-        AddToUnlockedSkills((int)SKILLS.Ob_LionsPride, 1);
-        EquipSkill((int)SKILLS.Ob_LionsPride, 1, 1);
-        AddToUnlockedSkills((int)SKILLS.Ob_Lutenist, 1);
-        EquipSkill((int)SKILLS.Ob_Lutenist, 2, 1);
-        AddToUnlockedSkills((int)SKILLS.Ob_SpearDance, 1);
-        EquipSkill((int)SKILLS.Ob_SpearDance, 3, 1);
         AddToUnlockedSkills((int)SKILLS.Fr_DoubleShot, 2);
         EquipSkill((int)SKILLS.Fr_DoubleShot, 0, 2);
         AddToUnlockedSkills((int)SKILLS.Ar_Heal, 3);
         EquipSkill((int)SKILLS.Ar_Heal, 0, 3);
+        AddToUnlockedSkills((int)SKILLS.Ar_ManaCharge, 3);
+        EquipSkill((int)SKILLS.Ar_ManaCharge, 1, 3);
     }
 
     private void OnDestroy()
@@ -370,7 +366,7 @@ public class SkillsInventory : MonoBehaviour {
             case (int)SKILLS.Ar_LullabyOfHope:
                 return "Arcelus never gives up on a patient. Revives one ally with half of their HP.";
             case (int)SKILLS.Ar_ManaCharge:
-                return "Restores a portion of one ally’s MP.";
+                return "The Circle of Mages advises caution when using this spell for its effects on one's life force. Trade HP to restore MP ";
             case (int)SKILLS.Ar_Armageddon:
                 return " Sometimes to save someone, another must perish. Arcelus summons pillars of fire burning all enemies.";
             case (int)SKILLS.Ar_IceAge:
@@ -580,11 +576,11 @@ public class SkillsInventory : MonoBehaviour {
                 skillStat[5] = 60;
                 break;
             case (int)SKILLS.Ar_ManaCharge:
-                skillStat[0] = 20;
+                skillStat[0] = 50;
                 skillStat[1] = 100;
-                skillStat[2] = 1;
+                skillStat[2] = 0;
                 skillStat[4] = (float)SKILL_TYPE.SINGLE_PLAYER_HEAL;
-                skillStat[5] = 30;
+                skillStat[5] = 50;
                 break;
             case (int)SKILLS.Ar_Armageddon:
                 skillStat[0] = 70;

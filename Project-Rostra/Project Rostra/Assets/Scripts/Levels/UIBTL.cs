@@ -763,7 +763,14 @@ public class UIBTL : MonoBehaviour
                             for (int i = 0; i < 4; i++)
                             {
                                 skillNames[i].text = skills.SkillName(PartySkills.skills[playerInControl.playerIndex].equippedSkills[i]);
-                                mpCosts[i].text = "MP: " + skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[i])[5].ToString();
+                                if (PartySkills.skills[playerInControl.playerIndex].equippedSkills[i] != (int)SKILLS.Ar_ManaCharge) //Mana charge costs HP. This needs to be displayed correctly
+                                {
+                                    mpCosts[i].text = "MP: " + skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[i])[5].ToString();
+                                }
+                                else
+                                {
+                                    mpCosts[i].text = "HP: " + skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[i])[5].ToString();
+                                }
                             }
                             firstTimeOpenedSkillsPanel = true;
                         }
@@ -905,126 +912,142 @@ public class UIBTL : MonoBehaviour
             audioManager.PlayThisEffect("uiConfirm");
             if (PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator] != (int)SKILLS.NO_SKILL)
             {
-                //Choose skill, make sure you have enough MP to use it, then check if it targets players or enemies       
-                if (playerInControl.currentMP >= skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[5])
+                if (PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator] != (int)SKILLS.Ar_ManaCharge) //Mana Charge is speical in that it checks for HP not for MP. Everything else works in a generic way so make sure we are not choosing MC first
                 {
-                    skillsPanel.gameObject.SetActive(false);
-                    controlsPanel.gameObject.SetActive(false);
+                    //Choose skill, make sure you have enough MP to use it, then check if it targets players or enemies       
+                    if (playerInControl.currentMP >= skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[5])
+                    {
+                        skillsPanel.gameObject.SetActive(false);
+                        controlsPanel.gameObject.SetActive(false);
 
-                    //Check for Frea's special I Don't Miss skillc and Oberon's Lion's Pride skill which automatically targets the controlled character
-                    if (PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator] == (int)SKILLS.Fr_IDontMiss || PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator] == (int)SKILLS.Ob_LionsPride)
-                    {
-                        UpdateActivityText(skills.SkillName(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator]));
-                        playerInControl.UseSkillOnOnePlayer(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator],
-                                                           skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[5],
-                                                           skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[2],
-                                                           playerInControl);
-                    }
-                    else
-                    {
-                        switch (skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[4])
+                        //Check for Frea's special I Don't Miss skillc and Oberon's Lion's Pride skill which automatically targets the controlled character
+                        if (PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator] == (int)SKILLS.Fr_IDontMiss || PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator] == (int)SKILLS.Ob_LionsPride)
                         {
-                            case (float)SKILL_TYPE.SINGLE_TARGET_ATK:
-                                MoveEnemyIndicatorToFirstAliveEnemy();
-                                chooseEnemyArrow.SetActive(true);
-                                activeRange = playerInControl.range;
-                                previousState = btlUIState.choosingSkillsCommand;
-                                currentState = btlUIState.choosingEnemy;
-                                break;
-                            case (float)SKILL_TYPE.SINGLE_TARGET_DEBUFF:
-                                MoveEnemyIndicatorToFirstAliveEnemy();
-                                chooseEnemyArrow.SetActive(true);
-                                previousState = btlUIState.choosingSkillsCommand;
-                                currentState = btlUIState.choosingEnemy;
-                                break;
-                            case (float)SKILL_TYPE.ALL_TARGETS_ATK:
-                                //Activate the indicators for alive enemies only
-                                for (int i = 0; i < enemiesDead.Length; i++)
-                                {
-                                    if (enemiesDead[i] == false && btlManager.enemies[i].enemyReference != null)
-                                    {
-                                        chooseEnemyArrowForSelectAll[i].gameObject.SetActive(true);
-                                    }
-                                }
-                                previousState = btlUIState.choosingSkillsCommand;
-                                currentState = btlUIState.choosingAllEnemies;
-                                break;
-                            case (float)SKILL_TYPE.ALL_TARGETS_DEBUFF:
-                                break;
-                            case (float)SKILL_TYPE.FULL_ROW_ATK:
-                                if (!enemiesDead[0] || !enemiesDead[1] || !enemiesDead[2]) //Check if there are any enemies alive in the first row
-                                {
-                                    chooseEnemyRowIndicator = 0; //Enemy row indicator goes to the first row where at least an enemy is alive
-
-                                    for (int i = 0; i < 3; i++) //Check which enemies are actually alive in the first row, and activate their indicators
-                                    {
-                                        if (enemiesDead[i] == false && btlManager.enemies[i].enemyReference != null)
-                                        {
-                                            chooseEnemyArrowForSelectAll[i].gameObject.SetActive(true);
-                                        }
-                                    }
-
-                                }
-                                else if (!enemiesDead[3] || !enemiesDead[4]) //Check for the ranged row
-                                {
-                                    chooseEnemyRowIndicator = 1; //Enemy row indicator goes to the first row where at least an enemy is alive
-
-                                    for (int i = 3; i < 5; i++) //Check which enemies are actually alive in the ranged row, and activate their indicators
-                                    {
-                                        if (enemiesDead[i] == false && btlManager.enemies[i].enemyReference != null)
-                                        {
-                                            chooseEnemyArrowForSelectAll[i].gameObject.SetActive(true);
-                                        }
-                                    }
-                                }
-                                previousState = btlUIState.choosingSkillsCommand;
-                                currentState = btlUIState.choosingRowOfEnemies;
-                                break;
-                            case (float)SKILL_TYPE.FULL_ROW_DEBUFF:
-                                break;
-                            case (float)SKILL_TYPE.SINGLE_PLAYER_HEAL:
-                                choosePlayerArrow.gameObject.SetActive(true);
-                                playerIndicatorIndex = 0;
-                                choosePlayerArrow.transform.position = choosePlayerPos[0].transform.position;
-                                previousState = btlUIState.choosingSkillsCommand;
-                                currentState = btlUIState.choosingPlayer;
-                                break;
-                            case (float)SKILL_TYPE.ALL_PLAYER_HEAL:
-                                for (int i = 0; i < choosePlayerArrowForSelectAll.Length; i++)
-                                {
-                                    if (btlManager.players[i].playerReference != null)
-                                    {
-                                        if (!btlManager.players[i].playerReference.dead)
-                                        {
-                                            choosePlayerArrowForSelectAll[i].gameObject.SetActive(true);
-                                        }
-                                    }
-                                }
-                                previousState = btlUIState.choosingSkillsCommand;
-                                currentState = btlUIState.choosingAllPlayers;
-                                break;
-                            case (float)SKILL_TYPE.SINGLE_PLAYER_BUFF:
-                                choosePlayerArrow.gameObject.SetActive(true);
-                                playerIndicatorIndex = 0;
-                                choosePlayerArrow.transform.position = choosePlayerPos[0].transform.position;
-                                previousState = btlUIState.choosingSkillsCommand;
-                                currentState = btlUIState.choosingPlayer;
-                                break;
-                            case (float)SKILL_TYPE.ALL_PLAYER_BUFF:
-                                for (int i = 0; i < choosePlayerArrowForSelectAll.Length; i++)
-                                {
-                                    if (btlManager.players[i].playerReference != null)
-                                    {
-                                        if (!btlManager.players[i].playerReference.dead)
-                                        {
-                                            choosePlayerArrowForSelectAll[i].gameObject.SetActive(true);
-                                        }
-                                    }
-                                }
-                                previousState = btlUIState.choosingSkillsCommand;
-                                currentState = btlUIState.choosingAllPlayers;
-                                break;
+                            UpdateActivityText(skills.SkillName(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator]));
+                            playerInControl.UseSkillOnOnePlayer(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator],
+                                                               skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[5],
+                                                               skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[2],
+                                                               playerInControl);
                         }
+                        else
+                        {
+                            switch (skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[4])
+                            {
+                                case (float)SKILL_TYPE.SINGLE_TARGET_ATK:
+                                    MoveEnemyIndicatorToFirstAliveEnemy();
+                                    chooseEnemyArrow.SetActive(true);
+                                    activeRange = playerInControl.range;
+                                    previousState = btlUIState.choosingSkillsCommand;
+                                    currentState = btlUIState.choosingEnemy;
+                                    break;
+                                case (float)SKILL_TYPE.SINGLE_TARGET_DEBUFF:
+                                    MoveEnemyIndicatorToFirstAliveEnemy();
+                                    chooseEnemyArrow.SetActive(true);
+                                    previousState = btlUIState.choosingSkillsCommand;
+                                    currentState = btlUIState.choosingEnemy;
+                                    break;
+                                case (float)SKILL_TYPE.ALL_TARGETS_ATK:
+                                    //Activate the indicators for alive enemies only
+                                    for (int i = 0; i < enemiesDead.Length; i++)
+                                    {
+                                        if (enemiesDead[i] == false && btlManager.enemies[i].enemyReference != null)
+                                        {
+                                            chooseEnemyArrowForSelectAll[i].gameObject.SetActive(true);
+                                        }
+                                    }
+                                    previousState = btlUIState.choosingSkillsCommand;
+                                    currentState = btlUIState.choosingAllEnemies;
+                                    break;
+                                case (float)SKILL_TYPE.ALL_TARGETS_DEBUFF:
+                                    break;
+                                case (float)SKILL_TYPE.FULL_ROW_ATK:
+                                    if (!enemiesDead[0] || !enemiesDead[1] || !enemiesDead[2]) //Check if there are any enemies alive in the first row
+                                    {
+                                        chooseEnemyRowIndicator = 0; //Enemy row indicator goes to the first row where at least an enemy is alive
+
+                                        for (int i = 0; i < 3; i++) //Check which enemies are actually alive in the first row, and activate their indicators
+                                        {
+                                            if (enemiesDead[i] == false && btlManager.enemies[i].enemyReference != null)
+                                            {
+                                                chooseEnemyArrowForSelectAll[i].gameObject.SetActive(true);
+                                            }
+                                        }
+
+                                    }
+                                    else if (!enemiesDead[3] || !enemiesDead[4]) //Check for the ranged row
+                                    {
+                                        chooseEnemyRowIndicator = 1; //Enemy row indicator goes to the first row where at least an enemy is alive
+
+                                        for (int i = 3; i < 5; i++) //Check which enemies are actually alive in the ranged row, and activate their indicators
+                                        {
+                                            if (enemiesDead[i] == false && btlManager.enemies[i].enemyReference != null)
+                                            {
+                                                chooseEnemyArrowForSelectAll[i].gameObject.SetActive(true);
+                                            }
+                                        }
+                                    }
+                                    previousState = btlUIState.choosingSkillsCommand;
+                                    currentState = btlUIState.choosingRowOfEnemies;
+                                    break;
+                                case (float)SKILL_TYPE.FULL_ROW_DEBUFF:
+                                    break;
+                                case (float)SKILL_TYPE.SINGLE_PLAYER_HEAL:
+                                    choosePlayerArrow.gameObject.SetActive(true);
+                                    playerIndicatorIndex = 0;
+                                    choosePlayerArrow.transform.position = choosePlayerPos[0].transform.position;
+                                    previousState = btlUIState.choosingSkillsCommand;
+                                    currentState = btlUIState.choosingPlayer;
+                                    break;
+                                case (float)SKILL_TYPE.ALL_PLAYER_HEAL:
+                                    for (int i = 0; i < choosePlayerArrowForSelectAll.Length; i++)
+                                    {
+                                        if (btlManager.players[i].playerReference != null)
+                                        {
+                                            if (!btlManager.players[i].playerReference.dead)
+                                            {
+                                                choosePlayerArrowForSelectAll[i].gameObject.SetActive(true);
+                                            }
+                                        }
+                                    }
+                                    previousState = btlUIState.choosingSkillsCommand;
+                                    currentState = btlUIState.choosingAllPlayers;
+                                    break;
+                                case (float)SKILL_TYPE.SINGLE_PLAYER_BUFF:
+                                    choosePlayerArrow.gameObject.SetActive(true);
+                                    playerIndicatorIndex = 0;
+                                    choosePlayerArrow.transform.position = choosePlayerPos[0].transform.position;
+                                    previousState = btlUIState.choosingSkillsCommand;
+                                    currentState = btlUIState.choosingPlayer;
+                                    break;
+                                case (float)SKILL_TYPE.ALL_PLAYER_BUFF:
+                                    for (int i = 0; i < choosePlayerArrowForSelectAll.Length; i++)
+                                    {
+                                        if (btlManager.players[i].playerReference != null)
+                                        {
+                                            if (!btlManager.players[i].playerReference.dead)
+                                            {
+                                                choosePlayerArrowForSelectAll[i].gameObject.SetActive(true);
+                                            }
+                                        }
+                                    }
+                                    previousState = btlUIState.choosingSkillsCommand;
+                                    currentState = btlUIState.choosingAllPlayers;
+                                    break;
+                            }
+                        }
+                    }
+                }
+                else //Mana charge checks for HP not for MP
+                {
+                    if(playerInControl.currentHP > skills.SkillStats(PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator])[5])
+                    {
+                        skillsPanel.gameObject.SetActive(false);
+                        controlsPanel.gameObject.SetActive(false);
+                        choosePlayerArrow.gameObject.SetActive(true);
+                        playerIndicatorIndex = 0;
+                        choosePlayerArrow.transform.position = choosePlayerPos[0].transform.position;
+                        previousState = btlUIState.choosingSkillsCommand;
+                        currentState = btlUIState.choosingPlayer;
                     }
                 }
             }
