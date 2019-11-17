@@ -62,6 +62,7 @@ public class WMEnemy : MonoBehaviour
         else if(!BattleManager.battleInProgress && NewWMEnemy.isActive && !enemyCollider.enabled && !PauseMenuController.isPaused) //If you transition from one place to another, NEW WM enemy will go active, and so should the collider and SR
         {
             enemyCollider.enabled = true;
+            if(enemySpriteRenderer!=null)
             enemySpriteRenderer.enabled = true;
         }
     }
@@ -92,6 +93,7 @@ public class WMEnemy : MonoBehaviour
         }
 
         enemyCollider.enabled = false;
+        if(enemySpriteRenderer!=null)
         enemySpriteRenderer.enabled = false;
 
     }

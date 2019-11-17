@@ -57,6 +57,7 @@ public class EnemySpawner : MonoBehaviour
     {
         if (isBoss) //If it is a boss, summon it in the middle spot. Turned true by a trigger
         {
+            AudioManager.instance.PlayThisClip("BossMusic1");            
             enemySpawned = Instantiate(enemiesToSpawn[0], enemyPos[1].transform.position, gameObject.transform.rotation);
             enemySpawned.enemyIndexInBattleManager = 1;
             enemySpawned.IncreaseStatsBasedOnLevel(enemyLevels[0]);
@@ -64,7 +65,7 @@ public class EnemySpawner : MonoBehaviour
         }
         else
         {
-
+            AudioManager.instance.PlayThisClip("BattleMusic1");
             for (int i = 0; i < enemiesToSpawn.Length; i++)
             {
                 if (enemiesToSpawn[i] != null)

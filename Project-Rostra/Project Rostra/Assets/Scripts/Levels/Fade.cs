@@ -8,9 +8,11 @@ public class Fade : MonoBehaviour
 {
     private Image thisImage;
     public WMEnemy enemyHolder;
+    public WMEnemy grendolHolder; //Bad code, have to. 
     public bool tutorial;
     private bool fadeOut;
     private bool transitionToBattle;
+    private bool transitionToGrendolFight; //Bad code, have to. 
     private bool transitionToVictory;
     private bool transitionToDefeat;
     private bool transitionToWorldMap;
@@ -27,6 +29,7 @@ public class Fade : MonoBehaviour
     public GameObject endTestPanel;
     private UIBTL uiBtl;
     private AudioManager audioManager;
+    private int bossCounter = -1; //Checks if which boss we're fighitng
 
 
     void Start()
@@ -34,6 +37,7 @@ public class Fade : MonoBehaviour
         thisImage = gameObject.GetComponent<Image>();
         fadeOut = false;
         transitionToBattle = false;
+        transitionToGrendolFight = false;
         transitionToVictory = false;
         transitionToDefeat = false;
         transitionToWorldMap = false;
@@ -84,6 +88,12 @@ public class Fade : MonoBehaviour
                 {
                     transitionToBattle = false;
                     TransitionIntoBattle();
+                    fadeOut = false;
+                }
+                else if(transitionToGrendolFight)
+                {
+                    transitionToGrendolFight = false;
+                    TransitionToGrendol();
                     fadeOut = false;
                 }
                 else if (transitionToVictory)
@@ -147,19 +157,28 @@ public class Fade : MonoBehaviour
 
     public void FlipFadeToBattle(WMEnemy enemyCollidingWithPlayer)
     {
-		
 		enemyHolder = enemyCollidingWithPlayer;
         fadeOut = true;
         transitionToBattle = true;
-        audioManager.PlayThisClip("BattleMusic1");
     }
     //Two version of flip fade, one for controlled situations where the WM is assigned from the editor and one for the world map
     public void FlipFadeToBattle()
     {
-		//Debug.Log("Flipped To Battle");
-		fadeOut = !fadeOut;
-        transitionToBattle = true;
-        audioManager.PlayThisClip("BattleMusic1");
+        if(EnemySpawner.instance.isBoss)
+        {
+            bossCounter++;
+        }
+
+        if (bossCounter == 1 && grendolHolder!=null) //Boss counter 0 is Farea, 1 is Grendol
+        {
+            fadeOut = !fadeOut;
+            transitionToGrendolFight = true;
+        }
+        else
+        {
+            fadeOut = !fadeOut;
+            transitionToBattle = true;
+        }
     }
 
     public void FlipFadeToVictory()
@@ -191,8 +210,12 @@ public class Fade : MonoBehaviour
     }
     public void TransitionIntoBattle()
     {
-       
         enemyHolder.TransitionIntoBattle();
+    }
+
+    public void TransitionToGrendol() //Bad code. Have to
+    {
+        grendolHolder.TransitionIntoBattle();
     }
 
     public void TransitionIntoVictory()
