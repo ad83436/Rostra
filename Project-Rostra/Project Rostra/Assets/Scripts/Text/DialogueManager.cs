@@ -28,7 +28,11 @@ public enum ChoiceEnum : byte
 	talkToContact = 11,
 	battleFarea = 12,
 	battleGrendol = 13,
-	unTriggerable = 15, // this is a bool that will literally never be set to true
+	tellKill = 14,
+	lieKill = 15,
+	tellSpare = 16,
+	lieSpare = 17,
+	unTriggerable = 20, // this is a bool that will literally never be set to true
 }
 
 
@@ -152,7 +156,7 @@ public class DialogueManager : MonoBehaviour
 		DontDestroyOnLoad(this.gameObject);
         // set everything to its default 
         textElements = new Queue<string>();
-		choices = new bool[18]; // was 7
+		choices = new bool[20]; // was 7
 		normalChoices = new bool[7];
 		change = 0;
 		currentChange = 0;
@@ -459,7 +463,15 @@ public class DialogueManager : MonoBehaviour
 					tell = true;
 					normalChoices[3] = true;
 					SetChoice(ChoiceEnum.tell, true);
-					break;
+					if (GetChoice(ChoiceEnum.kill) == true)
+					{
+						SetChoice(ChoiceEnum.tellKill, true);
+					}
+					else if (GetChoice(ChoiceEnum.spare) == true)
+					{
+						SetChoice(ChoiceEnum.tellSpare, true);
+					}
+						break;
 				default:
 					Debug.LogError("You wanted a story choice but passed no choice set, fix it you idiot");
 					break;
@@ -497,6 +509,14 @@ public class DialogueManager : MonoBehaviour
 					lie = true;
 					normalChoices[6] = true;
 					SetChoice(ChoiceEnum.lie, true);
+					if (GetChoice(ChoiceEnum.kill) == true)
+					{
+						SetChoice(ChoiceEnum.lieKill, true);
+					}
+					else if (GetChoice(ChoiceEnum.spare) == true)
+					{
+						SetChoice(ChoiceEnum.lieSpare, true);
+					}
 					break;
 				default:
 					Debug.LogError("You wanted a story choice but passed no choice set");
@@ -659,9 +679,9 @@ public class DialogueManager : MonoBehaviour
 		}
 		if (battle == true && isActive == false)
 		{
+			Debug.Log("Flip to battle");
 			fade.FlipFadeToBattle();
 			battle = false;
-
             if (CutsceneManager.instance.isActive) //If the CM is active, that means we need to return the player to where he was before the cutscene started
             {
                 CutsceneManager.instance.End();

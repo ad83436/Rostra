@@ -2726,21 +2726,6 @@ PrefabInstance:
       propertyPath: fade
       value: 
       objectReference: {fileID: 212276441}
-    - target: {fileID: 8123089090278092117, guid: 1049f6c024b4f5a49919bf0bc201bbde,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[0].isBattle
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8123089090278092117, guid: 1049f6c024b4f5a49919bf0bc201bbde,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[1].isBattle
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8123089090278092117, guid: 1049f6c024b4f5a49919bf0bc201bbde,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[1].triggerBool
-      value: 13
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1049f6c024b4f5a49919bf0bc201bbde, type: 3}
 --- !u!1001 &826816069
@@ -22109,6 +22094,26 @@ PrefabInstance:
         type: 3}
       propertyPath: d.povChange.Array.data[8]
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6956292027799549236, guid: 0951f2793dadde648962124890327555,
+        type: 3}
+      propertyPath: m_Offset.x
+      value: -0.038993835
+      objectReference: {fileID: 0}
+    - target: {fileID: 6956292027799549236, guid: 0951f2793dadde648962124890327555,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 2.3236237
+      objectReference: {fileID: 0}
+    - target: {fileID: 6956292027799549236, guid: 0951f2793dadde648962124890327555,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: -0.07227135
+      objectReference: {fileID: 0}
+    - target: {fileID: 6956292027799549236, guid: 0951f2793dadde648962124890327555,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 2.1839008
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6956292027799549242, guid: 0951f2793dadde648962124890327555, type: 3}
