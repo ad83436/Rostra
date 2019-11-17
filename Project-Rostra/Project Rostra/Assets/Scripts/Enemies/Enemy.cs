@@ -3513,6 +3513,7 @@ public class Enemy : MonoBehaviour
     public virtual void Heal(float healAmount)
     {
         currentHP += healAmount;
+		if (currentHP > maxHP) currentHP = maxHP;
         HP.fillAmount = currentHP / maxHP;
         healthObject.gameObject.SetActive(true);
     }
