@@ -55,7 +55,6 @@ public class Fade : MonoBehaviour
 
     void Update()
     {
-        Debug.Log("fadeOut is :" + fadeOut);
         if (Input.GetKeyDown(KeyCode.Space) && canGoToSurvey)
         {
             Application.OpenURL("https://docs.google.com/forms/d/1YV2OpAa3DlDGKMnicz97-1V5Shs8iR6eQgThn0fjRzE");
