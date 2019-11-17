@@ -386,7 +386,9 @@ public class DialogueManager : MonoBehaviour
 		{
 			fade = GameObject.Find("Fade").GetComponent<Fade>();
 			battle = true;
-		}
+            dia.isBattle = false;
+
+        }
 		if (willCount == dia.maxWillCount && hasCountTriggered == true)
 		{
 			willCount = 0;
@@ -660,7 +662,11 @@ public class DialogueManager : MonoBehaviour
 		{
 			fade.FlipFadeToBattle();
 			battle = false;
-			CutsceneManager.instance.End();
+
+            if (CutsceneManager.instance.isActive) //If the CM is active, that means we need to return the player to where he was before the cutscene started
+            {
+                CutsceneManager.instance.End();
+            }
 		}
 	}
 
