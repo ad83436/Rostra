@@ -575,11 +575,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c49573c71ef3f541813f91b7a35cd10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyIndexInBattleManager: 2
+  enemyIndexInBattleManager: 0
   eMana: 0
   eAttack: 15
   eAgility: 5
-  eDefence: 24
+  eDefence: 10
   eStrength: 14
   eSpeed: 3
   eBaseLevel: 1
@@ -1034,16 +1034,6 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -0.22
       objectReference: {fileID: 0}
-    - target: {fileID: 5902366916643307587, guid: 9b55465ff82f04b429c1403fd10c00c3,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -3.31
-      objectReference: {fileID: 0}
-    - target: {fileID: 5902366916643307587, guid: 9b55465ff82f04b429c1403fd10c00c3,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.68
-      objectReference: {fileID: 0}
     - target: {fileID: 6463730775431805352, guid: 9b55465ff82f04b429c1403fd10c00c3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1113,6 +1103,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.x
       value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5902366916643307587, guid: 9b55465ff82f04b429c1403fd10c00c3,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.31
+      objectReference: {fileID: 0}
+    - target: {fileID: 5902366916643307587, guid: 9b55465ff82f04b429c1403fd10c00c3,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.68
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9b55465ff82f04b429c1403fd10c00c3, type: 3}

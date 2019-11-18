@@ -3545,7 +3545,6 @@ public class Enemy : MonoBehaviour
             uiBTL.UpdateActivityText("Waiting " + waitTime + " Turns");
             if(enemyName == EnemyName.Boar)
             {
-                Debug.Log("Miss");
                 BoarWaitingSound();
                 Invoke("BoarWaitingSound",.16f);
                 Invoke("BoarWaitingSound",.3f);
@@ -3559,7 +3558,6 @@ public class Enemy : MonoBehaviour
     //used for invoking 
     void BoarWaitingSound()
     {
-        Debug.Log("Hit");
         audioManager.PlayThisEffect("Boar Waiting");
     }
     void HealEnemy()
