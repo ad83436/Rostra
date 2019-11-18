@@ -315,6 +315,8 @@ public class Enemy : MonoBehaviour
         {
             if (currentState == EnemyState.waiting)
             {
+                CheckForAilments();
+                CheckForBuffs();
                 waitTime--;
                 waitQTurns--;
                 waitTurnsText.text = waitQTurns.ToString(); //Update the UI
@@ -337,10 +339,16 @@ public class Enemy : MonoBehaviour
             // used for skills that dont need to wait to activate instead happen right away and last for multiple turns 
             else if (currentState == EnemyState.skilling)
             {
+                CheckForAilments();
+                CheckForBuffs();
                 waitQTurns--;
                 waitTime--;
                 waitTurnsText.text = waitQTurns.ToString(); //Update the UI
-                //if (waitQTurns <= 0) { MakeSkillsWork(canUseSkill); }
+                if (waitQTurns <= 0) 
+                {
+                    waitTurnsText.gameObject.SetActive(false);
+                    MakeSkillsWork(canUseSkill); 
+                }
                 EndTurn();
             }
 
@@ -2017,6 +2025,7 @@ public class Enemy : MonoBehaviour
                 actualDEF = eDefence;
                 uiBTL.UpdateActivityText("Enemy DEF is back to normal");
                 defBuffArrowIndicator.gameObject.SetActive(false);
+
             }
         }
 
