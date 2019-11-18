@@ -15,7 +15,7 @@ public class WMEnemy : MonoBehaviour
     public EnemySpawner enemySpwn;
     private Collider2D enemyCollider;
     private SpriteRenderer enemySpriteRenderer;
-    private float reActivateTime = 10.0f;
+    private float reActivateTime = 5.0f;
     private Vector2 startingPosition; //Used to reset the enemy should it not collide with the player in time
     private UIBTL uiBtl;
 
