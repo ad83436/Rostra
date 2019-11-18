@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         if (Application.targetFrameRate != targetFPS)
-        {
+       {
             Application.targetFrameRate = targetFPS;
         }
     }

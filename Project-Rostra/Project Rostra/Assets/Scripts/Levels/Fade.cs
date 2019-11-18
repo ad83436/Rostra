@@ -125,7 +125,8 @@ public class Fade : MonoBehaviour
                     {
                         SceneManager.UnloadSceneAsync(SceneManager.GetSceneByName("Queue Scene"));
                     }
-                    audioManager.PlayThisClip("WorldMapMusic1");
+                    audioManager.PlayThePreviousSong();
+                    NewWMEnemy.isActive = true;
                 }
                 else if (transitionToEndTest)
                 {

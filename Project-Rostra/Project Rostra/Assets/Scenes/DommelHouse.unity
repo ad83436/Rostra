@@ -21158,6 +21158,8 @@ MonoBehaviour:
   fadePanel: {fileID: 212276441}
   endTestPanel: {fileID: 0}
   enemySpwn: {fileID: 0}
+  enemyCollider: {fileID: 0}
+  enemyPhysicalCollider: {fileID: 0}
   backgroundImage: {fileID: 21300000, guid: ddc3a2dffca633c49bb2d14757c8128a, type: 3}
 --- !u!4 &1068205758
 Transform:
@@ -28430,8 +28432,30 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: ddc3a2dffca633c49bb2d14757c8128a,
         type: 3}
+    - target: {fileID: 2080110826257365248, guid: ddf28dd3966eac94db2d020d08928c1e,
+        type: 3}
+      propertyPath: enemyPhysicalCollider
+      value: 
+      objectReference: {fileID: 1261835684}
+    - target: {fileID: 2080110826257365248, guid: ddf28dd3966eac94db2d020d08928c1e,
+        type: 3}
+      propertyPath: enemyCollider
+      value: 
+      objectReference: {fileID: 1261835685}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ddf28dd3966eac94db2d020d08928c1e, type: 3}
+--- !u!58 &1261835684 stripped
+CircleCollider2D:
+  m_CorrespondingSourceObject: {fileID: 4717335671837877284, guid: ddf28dd3966eac94db2d020d08928c1e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1261835683}
+  m_PrefabAsset: {fileID: 0}
+--- !u!58 &1261835685 stripped
+CircleCollider2D:
+  m_CorrespondingSourceObject: {fileID: 2804867714409018185, guid: ddf28dd3966eac94db2d020d08928c1e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1261835683}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1276751037
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29223,8 +29247,30 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: ddc3a2dffca633c49bb2d14757c8128a,
         type: 3}
+    - target: {fileID: 2080110826257365248, guid: ddf28dd3966eac94db2d020d08928c1e,
+        type: 3}
+      propertyPath: enemyPhysicalCollider
+      value: 
+      objectReference: {fileID: 1432598441}
+    - target: {fileID: 2080110826257365248, guid: ddf28dd3966eac94db2d020d08928c1e,
+        type: 3}
+      propertyPath: enemyCollider
+      value: 
+      objectReference: {fileID: 1432598442}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ddf28dd3966eac94db2d020d08928c1e, type: 3}
+--- !u!58 &1432598441 stripped
+CircleCollider2D:
+  m_CorrespondingSourceObject: {fileID: 4717335671837877284, guid: ddf28dd3966eac94db2d020d08928c1e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1432598440}
+  m_PrefabAsset: {fileID: 0}
+--- !u!58 &1432598442 stripped
+CircleCollider2D:
+  m_CorrespondingSourceObject: {fileID: 2804867714409018185, guid: ddf28dd3966eac94db2d020d08928c1e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1432598440}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1444600367
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -45020,6 +45066,8 @@ MonoBehaviour:
   fadePanel: {fileID: 212276441}
   endTestPanel: {fileID: 0}
   enemySpwn: {fileID: 0}
+  enemyCollider: {fileID: 0}
+  enemyPhysicalCollider: {fileID: 0}
   backgroundImage: {fileID: 21300000, guid: ddc3a2dffca633c49bb2d14757c8128a, type: 3}
 --- !u!4 &1812408187
 Transform:
@@ -45398,8 +45446,30 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: ddc3a2dffca633c49bb2d14757c8128a,
         type: 3}
+    - target: {fileID: 2080110826257365248, guid: ddf28dd3966eac94db2d020d08928c1e,
+        type: 3}
+      propertyPath: enemyPhysicalCollider
+      value: 
+      objectReference: {fileID: 1967707769}
+    - target: {fileID: 2080110826257365248, guid: ddf28dd3966eac94db2d020d08928c1e,
+        type: 3}
+      propertyPath: enemyCollider
+      value: 
+      objectReference: {fileID: 1967707770}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ddf28dd3966eac94db2d020d08928c1e, type: 3}
+--- !u!58 &1967707769 stripped
+CircleCollider2D:
+  m_CorrespondingSourceObject: {fileID: 4717335671837877284, guid: ddf28dd3966eac94db2d020d08928c1e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1967707768}
+  m_PrefabAsset: {fileID: 0}
+--- !u!58 &1967707770 stripped
+CircleCollider2D:
+  m_CorrespondingSourceObject: {fileID: 2804867714409018185, guid: ddf28dd3966eac94db2d020d08928c1e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1967707768}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1999492031
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -45637,8 +45707,30 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: ddc3a2dffca633c49bb2d14757c8128a,
         type: 3}
+    - target: {fileID: 2080110826257365248, guid: ddf28dd3966eac94db2d020d08928c1e,
+        type: 3}
+      propertyPath: enemyPhysicalCollider
+      value: 
+      objectReference: {fileID: 2073405284}
+    - target: {fileID: 2080110826257365248, guid: ddf28dd3966eac94db2d020d08928c1e,
+        type: 3}
+      propertyPath: enemyCollider
+      value: 
+      objectReference: {fileID: 2073405285}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ddf28dd3966eac94db2d020d08928c1e, type: 3}
+--- !u!58 &2073405284 stripped
+CircleCollider2D:
+  m_CorrespondingSourceObject: {fileID: 4717335671837877284, guid: ddf28dd3966eac94db2d020d08928c1e,
+    type: 3}
+  m_PrefabInstance: {fileID: 2073405283}
+  m_PrefabAsset: {fileID: 0}
+--- !u!58 &2073405285 stripped
+CircleCollider2D:
+  m_CorrespondingSourceObject: {fileID: 2804867714409018185, guid: ddf28dd3966eac94db2d020d08928c1e,
+    type: 3}
+  m_PrefabInstance: {fileID: 2073405283}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2115493734
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -45776,8 +45868,30 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: ddc3a2dffca633c49bb2d14757c8128a,
         type: 3}
+    - target: {fileID: 2080110826257365248, guid: ddf28dd3966eac94db2d020d08928c1e,
+        type: 3}
+      propertyPath: enemyPhysicalCollider
+      value: 
+      objectReference: {fileID: 2115493735}
+    - target: {fileID: 2080110826257365248, guid: ddf28dd3966eac94db2d020d08928c1e,
+        type: 3}
+      propertyPath: enemyCollider
+      value: 
+      objectReference: {fileID: 2115493736}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ddf28dd3966eac94db2d020d08928c1e, type: 3}
+--- !u!58 &2115493735 stripped
+CircleCollider2D:
+  m_CorrespondingSourceObject: {fileID: 4717335671837877284, guid: ddf28dd3966eac94db2d020d08928c1e,
+    type: 3}
+  m_PrefabInstance: {fileID: 2115493734}
+  m_PrefabAsset: {fileID: 0}
+--- !u!58 &2115493736 stripped
+CircleCollider2D:
+  m_CorrespondingSourceObject: {fileID: 2804867714409018185, guid: ddf28dd3966eac94db2d020d08928c1e,
+    type: 3}
+  m_PrefabInstance: {fileID: 2115493734}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &408660828801850411
 PrefabInstance:
   m_ObjectHideFlags: 0

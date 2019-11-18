@@ -47,7 +47,7 @@ public class ExpManager : MonoBehaviour {
 		PartyStats.chara[1].maxHealth = 250.0f;
 		PartyStats.chara[1].magicpoints = 150.0f;
 		PartyStats.chara[1].maxMana = 150.0f;
-		PartyStats.chara[1].attack = 15.0f;
+		PartyStats.chara[1].attack = 25.0f;
 		PartyStats.chara[1].defence = 30.0f;
 		PartyStats.chara[1].agility = 10.0f;
 		PartyStats.chara[1].strength = 14.0f;
@@ -75,7 +75,7 @@ public class ExpManager : MonoBehaviour {
 		PartyStats.chara[3].maxHealth = 180.0f;
 		PartyStats.chara[3].magicpoints = 250.0f;
 		PartyStats.chara[3].maxMana = 250.0f;
-		PartyStats.chara[3].attack = 18.0f;
+		PartyStats.chara[3].attack = 20.0f;
 		PartyStats.chara[3].defence = 13.0f;
 		PartyStats.chara[3].agility = 26.0f;
 		PartyStats.chara[3].strength = 13.0f;
@@ -230,12 +230,12 @@ public class ExpManager : MonoBehaviour {
                 }
 			case 1: //Oberon
 				switch (skill) {
-					case SKILLS.Ob_ShieldAlly:	    return new int[] { 15, 30, 250, 150, 14, 10, 9 };
-                    case SKILLS.Ob_ShieldAllAllies: return new int[] { 15, 33, 250, 150, 14, 10, 9 };
-                    case SKILLS.Ob_SpearDance: return new int[] { 16, 30, 250, 225, 14, 10, 9 };
-                    case SKILLS.Ob_LionsPride: return new int[] { 15, 33, 325, 150, 14, 10, 11 };
-                    case SKILLS.Ob_Lutenist: return new int[] { 17, 31, 325, 300, 15, 10, 9 };
-                    case SKILLS.Ob_FierceStrike: return new int[] { 20, 33, 325, 375, 16, 10, 12 };
+					case SKILLS.Ob_ShieldAlly:	    return new int[] { 25, 30, 250, 150, 14, 10, 9 };
+                    case SKILLS.Ob_ShieldAllAllies: return new int[] { 25, 33, 250, 150, 14, 10, 9 };
+                    case SKILLS.Ob_SpearDance: return new int[] { 26, 30, 250, 225, 14, 10, 9 };
+                    case SKILLS.Ob_LionsPride: return new int[] { 25, 33, 325, 150, 14, 10, 11 };
+                    case SKILLS.Ob_Lutenist: return new int[] { 27, 31, 325, 300, 15, 10, 9 };
+                    case SKILLS.Ob_FierceStrike: return new int[] { 29, 33, 325, 375, 16, 10, 12 };
                     default: return null;
                 }
 			case 2: //Frea
@@ -251,13 +251,13 @@ public class ExpManager : MonoBehaviour {
                 }
 			case 3: //Arcelus
 				switch (skill) {
-                    case SKILLS.Ar_Heal:        return new int[] { 18, 13, 180, 250, 13, 26, 12 };
-                    case SKILLS.Ar_HealingAura:	return new int[] { 18, 13, 180, 325, 13, 26, 12 }; //case SKILLS.Ar_HealingAura:	return new int[] { 20, 13, 180, 325, 13, 26, 12 };
-                    case SKILLS.Ar_DrainEye:    return new int[] { 18, 13, 255, 325, 13, 26, 12 };
-                    case SKILLS.Ar_LullabyOfHope: return new int[] { 18, 15, 180, 400, 13, 26, 14 };
-                    case SKILLS.Ar_ManaCharge: return new int[] { 19, 13, 255, 325, 14, 26, 12 };
-                    case SKILLS.Ar_IceAge:     return new int[] { 22, 15, 330, 475, 15, 26, 14 };
-                    case SKILLS.Ar_Armageddon: return new int[] { 22, 15, 330, 475, 15, 26, 14 };
+                    case SKILLS.Ar_Heal:        return new int[] { 20, 13, 180, 250, 13, 26, 12 };
+                    case SKILLS.Ar_HealingAura:	return new int[] { 20, 13, 180, 325, 13, 26, 12 }; //case SKILLS.Ar_HealingAura:	return new int[] { 20, 13, 180, 325, 13, 26, 12 };
+                    case SKILLS.Ar_DrainEye:    return new int[] { 20, 13, 255, 325, 13, 26, 12 };
+                    case SKILLS.Ar_LullabyOfHope: return new int[] { 20, 15, 180, 400, 13, 26, 14 };
+                    case SKILLS.Ar_ManaCharge: return new int[] { 21, 13, 255, 325, 14, 26, 12 };
+                    case SKILLS.Ar_IceAge:     return new int[] { 23, 15, 330, 475, 15, 26, 14 };
+                    case SKILLS.Ar_Armageddon: return new int[] { 23, 15, 330, 475, 15, 26, 14 };
                     default: return null;
                 }
 			default: return null;

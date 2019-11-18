@@ -13,12 +13,14 @@ public class WMEnemy : MonoBehaviour
     public GameObject endTestPanel;
 
     public EnemySpawner enemySpwn;
-    private Collider2D enemyCollider;
+    public Collider2D enemyCollider;
+    public Collider2D enemyPhysicalCollider;
     private SpriteRenderer enemySpriteRenderer;
-    private float reActivateTime = 10.0f;
     private Vector2 startingPosition; //Used to reset the enemy should it not collide with the player in time
-
+    private NewWMEnemy moveScript;
     public Sprite backgroundImage;
+    private bool collidedWithPlayer = false;
+    private float collisionDelay = 3.5f;
 
     private void Start()
     {
@@ -30,6 +32,7 @@ public class WMEnemy : MonoBehaviour
         }
         enemyCollider = gameObject.GetComponent<Collider2D>();
         enemySpriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        moveScript = gameObject.GetComponent<NewWMEnemy>();
         startingPosition = gameObject.transform.position;
 
         if(fadePanel)
@@ -41,42 +44,57 @@ public class WMEnemy : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.C))
+        if (!collidedWithPlayer)
         {
-            if (endTestPanel)
+            if (BattleManager.battleInProgress && !NewWMEnemy.isActive && enemyCollider.enabled && !PauseMenuController.isPaused) //If two enemies race towards the player, the one who does not collide with the player should reset
             {
-                endTestPanel.gameObject.SetActive(false);
+                enemyCollider.enabled = false;
+                enemySpriteRenderer.enabled = false; //What if the player passes by the enemy? It must not be seen stuck like an idiot\
+                if (enemyPhysicalCollider != null)
+                    enemyPhysicalCollider.enabled = false;
+                gameObject.transform.position = startingPosition;
+            }
+            else if (!BattleManager.battleInProgress && NewWMEnemy.isActive && enemyCollider.enabled && !PauseMenuController.isPaused) //If you transition from one place to another, NEW WM enemy will go active, and so should the collider and SR
+            {
+                ActivateEnemy();
+            }
+            else if (!BattleManager.battleInProgress && NewWMEnemy.isActive && !enemyCollider.enabled && !PauseMenuController.isPaused)
+            {
+                ActivateEnemy();
             }
         }
-
-        if(!BattleManager.battleInProgress && !NewWMEnemy.isActive && !enemyCollider.enabled && !PauseMenuController.isPaused) //If the battle has ended, and we're not moving
+        else if( collidedWithPlayer && !BattleManager.battleInProgress)
         {
-            InvokeRepeating("SpawnEnemy", reActivateTime, 1);
-            gameObject.transform.position = startingPosition;
-        }
-        else if (BattleManager.battleInProgress && !NewWMEnemy.isActive && enemyCollider.enabled && !PauseMenuController.isPaused) //If two enemies race towards the player, the one who does not collide with the player should reset
-        {
-            enemyCollider.enabled = false;
-            enemySpriteRenderer.enabled = false; //What if the player passes by the enemy? It must not be seen stuck like an idiot
-            gameObject.transform.position = startingPosition;
-        }
-        else if(!BattleManager.battleInProgress && NewWMEnemy.isActive && enemyCollider.enabled && !PauseMenuController.isPaused) //If you transition from one place to another, NEW WM enemy will go active, and so should the collider and SR
-        {
-            enemyCollider.enabled = true;
-            if(enemySpriteRenderer!=null)
-            enemySpriteRenderer.enabled = true;
-
+            if(collisionDelay > 0.0f)
+            {
+                collisionDelay -= Time.deltaTime;
+            }
+            else
+            {
+                collisionDelay = 3.5f;
+                collidedWithPlayer = false;
+                ActivateEnemy();
+            }
         }
     }
 
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if(col.gameObject.tag.Equals("Player"))
+        if(col.gameObject.tag.Equals("Player") && !collidedWithPlayer)
         {
             NewWMEnemy.isActive = false;
             fadePanel.FlipFadeToBattle(this);
             BattleManager.battleInProgress = true;
+            gameObject.transform.position = startingPosition;
+            moveScript.currentState = NewWMEnemy.WMState.idle;
+            moveScript.idleDelay = 4.0f;
+            enemyCollider.enabled = false;
+            if (enemyPhysicalCollider != null)
+                enemyPhysicalCollider.enabled = false;
+            if (enemySpriteRenderer != null)
+                enemySpriteRenderer.enabled = false;
+            collidedWithPlayer = true;
         }
     }
 
@@ -97,23 +115,19 @@ public class WMEnemy : MonoBehaviour
         enemyCollider.enabled = false;
         if(enemySpriteRenderer!=null)
         enemySpriteRenderer.enabled = false;
+        if(enemyPhysicalCollider!=null)
+        enemyPhysicalCollider.enabled = false;
 
-            PassInfoIntoBattle.battleBackgroundImage = backgroundImage;
+        PassInfoIntoBattle.battleBackgroundImage = backgroundImage;
 
     }
 
-    public void SpawnEnemy()
+    public void ActivateEnemy()
     {
-        if (!BattleManager.battleInProgress) //If the battle is active, don't turn on
-        {
             enemyCollider.enabled = true;
+        if (enemySpriteRenderer != null)
             enemySpriteRenderer.enabled = true;
-            NewWMEnemy.isActive = true;
-        }
-        else
-        {
-            InvokeRepeating("SpawnEnemy", reActivateTime, 1);
-
-        }
+        if(enemyPhysicalCollider!=null)
+            enemyPhysicalCollider.enabled = true;
     }
 }
