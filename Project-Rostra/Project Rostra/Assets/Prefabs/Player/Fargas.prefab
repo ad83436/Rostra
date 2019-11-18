@@ -752,7 +752,7 @@ MonoBehaviour:
   speed: 16
   playerIndex: 0
   nameOfCharacter: Fargas
-  range: 1
+  range: 3
   initialPos: 0
   dead: 0
   currentAilment: 0
@@ -791,7 +791,6 @@ MonoBehaviour:
   statusPotionEffect: {fileID: 9055298781803428908}
   btlCam: {fileID: 0}
   actualAgi: 0
-  healable: 0
   currentState: 0
 --- !u!95 &3631274366451639315
 Animator:

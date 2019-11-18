@@ -1575,7 +1575,7 @@ MonoBehaviour:
   speed: 9
   playerIndex: 1
   nameOfCharacter: Oberon
-  range: 1
+  range: 3
   initialPos: 0
   dead: 0
   currentAilment: 0
@@ -1614,7 +1614,6 @@ MonoBehaviour:
   statusPotionEffect: {fileID: 1905072818296565542}
   btlCam: {fileID: 0}
   actualAgi: 0
-  healable: 0
   currentState: 0
 --- !u!95 &3066886500637916762
 Animator:
