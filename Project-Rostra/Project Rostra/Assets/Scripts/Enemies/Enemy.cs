@@ -968,7 +968,6 @@ public class Enemy : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("Enemy has Just called end turn");
                     uiBTL.EndTurn();
                 }
             }
@@ -1464,7 +1463,6 @@ public class Enemy : MonoBehaviour
     {
         if (playerAttack > 0.0f)
         {
-            Debug.Log("Received player attack: " + playerAttack);
             float damage = playerAttack - ((actualDEF / (20.0f + actualDEF)) * playerAttack);
             damage *= ralliedDamageModifier;
             currentHP -= damage;
@@ -1529,7 +1527,6 @@ public class Enemy : MonoBehaviour
         if (playerAttack > 0.0f) //Don't need to calcualte damage if the incoming attack is debuff only
         {
             //Didn't recall the original function cause the "Hit" animation ends the turn
-            Debug.Log("Received player attack: " + playerAttack);
             float damage = playerAttack - ((actualDEF / (20.0f + actualDEF)) * playerAttack);
             damage *= ralliedDamageModifier; //Increase damage if rallied;
             currentHP -= damage;
@@ -1662,7 +1659,6 @@ public class Enemy : MonoBehaviour
 
     public void TakeChainedDamage(float playerAttack, int numberOfAttacks)
     {
-        Debug.Log("Received chained attack: " + playerAttack);
         float damage = playerAttack - ((eDefence / (20.0f + eDefence)) * playerAttack);
         damage *= ralliedDamageModifier;
         currentHP -= damage;
@@ -1893,7 +1889,6 @@ public class Enemy : MonoBehaviour
 
     public void BuffStats(string statToBuff, float precentage, float lastsNumberOfTurns)
     {
-        Debug.Log("Stat to buff: " + statToBuff);
         lastsNumberOfTurns++; //Add one more turn since the system should count the number of turns based on the caster not the receiver. This way ensures that the queue goes around equal to the number of turns it the buff/debuff is supposed to last
         switch (statToBuff)
         {
@@ -2022,7 +2017,6 @@ public class Enemy : MonoBehaviour
                 defenseBuffSkillQCounter = 0;
                 defenseBuffed = false;
                 actualDEF = eDefence;
-                Debug.Log("Buff has ended");
                 uiBTL.UpdateActivityText("Enemy DEF is back to normal");
                 defBuffArrowIndicator.gameObject.SetActive(false);
             }
@@ -2318,7 +2312,6 @@ public class Enemy : MonoBehaviour
 
     public void IncreaseStatsBasedOnLevel(int enemyCurrentLevel)
     {
-        Debug.Log("Enemy Current Level: " + enemyCurrentLevel);
         enemyCurrentLevel = eCurrentLevel;
         //eHP increase is still temporary until we agree how much each class'es HP increases with leveling up
         float skillPoints = enemyCurrentLevel - eBaseLevel;
@@ -2331,21 +2324,18 @@ public class Enemy : MonoBehaviour
                     eAttack = Mathf.CeilToInt(eAttack + (skillPoints * 0.2f));
                     eAgility = Mathf.CeilToInt(eAgility + (skillPoints * 0.1f));
                     currentHP = Mathf.CeilToInt(currentHP + (skillPoints * 1.2f));
-                    Debug.Log(eName + " is a " + enemyClass + " Class of enemy");
                     break;
 
                 case EnemyClassType.Tank:
                     eAttack = Mathf.CeilToInt(eAttack + (skillPoints * 0.1f));
                     eDefence = Mathf.CeilToInt(eDefence + (skillPoints * 0.2f));
                     currentHP = Mathf.CeilToInt(currentHP + (skillPoints * 1.5f));
-                    Debug.Log(eName + " is a " + enemyClass + " Class of enemy");
                     break;
 
                 case EnemyClassType.Support:
                     eAttack = Mathf.CeilToInt(eAttack + (skillPoints * 0.1f));
                     eAgility = Mathf.CeilToInt(eAgility + (skillPoints * 0.2f));
                     currentHP = Mathf.CeilToInt(currentHP + (skillPoints * 2.0f));
-                    Debug.Log(eName + " is a " + enemyClass + " Class of enemy");
                     break;
             }
         }
