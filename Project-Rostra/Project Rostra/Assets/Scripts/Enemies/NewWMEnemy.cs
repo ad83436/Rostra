@@ -25,16 +25,21 @@ public class NewWMEnemy : MonoBehaviour
     private float radius = 3.0f;
     private Vector2 newPos;
     private Vector2 startPos;
+    private Rigidbody2D rigidBody;
     private float direction = 1.0f;
     public float idleDelay = 8.0f;
-    private float chaseTimer = 3.0f;
+    private float chaseTimer = 4.0f;
+    private Vector3 directionToplayer;
+    private float velocity = 2.0f;
 
     void Start()
     {
         target = player.GetComponent<Transform>();
+        rigidBody = gameObject.GetComponent<Rigidbody2D>();
         startPos = gameObject.transform.position;
         newPos = new Vector2(Random.Range(startPos.x, startPos.x + radius * direction), Random.Range(startPos.y, startPos.y + radius * direction));
     }
+
 
     void Update()
     {
@@ -49,8 +54,7 @@ public class NewWMEnemy : MonoBehaviour
                     currentState = WMState.moving;
                     break;
                 case WMState.moving: //Move towards new pos
-                    transform.position = Vector2.MoveTowards(gameObject.transform.position, newPos, speed * Time.deltaTime);
-
+                   transform.position = Vector2.MoveTowards(gameObject.transform.position, newPos, speed * Time.deltaTime);
                     if (Mathf.Abs(player.transform.position.x - gameObject.transform.position.x) < 1.0f) //If the player is close enough, give chase
                     {
                         currentState = WMState.chasing;
@@ -77,11 +81,14 @@ public class NewWMEnemy : MonoBehaviour
                     if(chaseTimer>0.0f)
                     {
                         chaseTimer -= Time.deltaTime;
-                        transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+                        directionToplayer = player.transform.position - gameObject.transform.position;
+                        directionToplayer.Normalize();
+
+                        rigidBody.velocity = directionToplayer * velocity;
                     }
                     else
                     {
-                        chaseTimer = 3.0f;
+                        chaseTimer = 4.0f;
                         currentState = WMState.idle;
                     }
                    
