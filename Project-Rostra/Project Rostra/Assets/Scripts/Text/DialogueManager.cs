@@ -148,7 +148,7 @@ public class DialogueManager : MonoBehaviour
 		DontDestroyOnLoad(this.gameObject);
         // set everything to its default 
         textElements = new Queue<string>();
-		choices = new bool[20]; // was 7
+		choices = new bool[25]; // was 7
 		normalChoices = new bool[7];
 		change = 0;
 		currentChange = 0;
@@ -431,7 +431,7 @@ public class DialogueManager : MonoBehaviour
 				choice1.text = dia.choiceText1;
 				choice2.text = dia.choiceText2;
 			}
-			yield return new WaitForSeconds(dia.typingSpeed * zTypeSpeed /*(Input.GetButton("Confirm") ? 0.01f : 1f)*/);
+			yield return new WaitForSeconds(0.001f);
 		}
 	}
 	// did you pick door 1 

@@ -44,22 +44,22 @@ public class PlayerMove : MonoBehaviour {
 				an.SetFloat("Vertical", rb.velocity.y);
 				an.SetFloat("Speed", rb.velocity.sqrMagnitude);
 				TalkToNPC();
-			} else if (dm.canWalk == false) {
+			} else if (dm.canWalk == false || PauseMenuController.isPaused == true) {
 				an.SetFloat("Horizontal", 0);
 				an.SetFloat("Vertical", 0);
 				an.SetFloat("Speed", 0);
 			}
 			// these are debug commands, please please please remove once done testing
 
-			//if (Input.GetKeyDown(KeyCode.G))
-			//{
-			//	DialogueManager.instance.metAllChars = true;
-			//	DialogueManager.instance.SetChoice(ChoiceEnum.metAllChars, true);
-			//	DialogueManager.instance.dwarf = true;
-			//	DialogueManager.instance.SetChoice(ChoiceEnum.dwarf, true);
-			//	DialogueManager.instance.battleFarea = true;
-			//	DialogueManager.instance.SetChoice(ChoiceEnum.battleFarea, true);
-			//}
+			if (Input.GetKeyDown(KeyCode.G))
+			{
+				DialogueManager.instance.metAllChars = true;
+				DialogueManager.instance.SetChoice(ChoiceEnum.metAllChars, true);
+				//DialogueManager.instance.dwarf = true;
+				//DialogueManager.instance.SetChoice(ChoiceEnum.dwarf, true);
+				//DialogueManager.instance.battleFarea = true;
+				//DialogueManager.instance.SetChoice(ChoiceEnum.battleFarea, true);
+			}
 			//if (Input.GetKeyDown(KeyCode.U))
 			//{
 			//	DialogueManager.instance.kill = true;
@@ -112,7 +112,7 @@ public class PlayerMove : MonoBehaviour {
 
 			rb.velocity = vel;
 
-		} else if (dm.canWalk == false) {
+		} else if (dm.canWalk == false  || PauseMenuController.isPaused == true) {
 			rb.velocity = Vector3.zero;
 		}
 	}
@@ -140,13 +140,13 @@ public class PlayerMove : MonoBehaviour {
 	public void TalkToNPC() {
 		if ((dm.nextDialogue == true && dm.isActive == false) && Input.GetButtonDown("Confirm") && ct != null && ct.isChoiceDepend == false && !ItemShopUI.IsOpen) {
 			ct.TriggerConvo();
-			Debug.Log("Talking");
+			//Debug.Log("Talking");
 		} else if ((dm.nextDialogue == true && dm.isActive == false) && Input.GetButtonDown("Confirm") && ct != null && ct.dialogue.isChoice == true && ct.dialogue.hasPlayed == true) {
 			ct.TriggerNormalDialogue();
-			Debug.Log("Talking");
+			//Debug.Log("Talking");
 		} else if ((dm.nextDialogue == true && dm.isActive == false) && Input.GetButtonDown("Confirm") && ct != null && ct.isChoiceDepend == true) {
 			ct.TriggerChoiceDependantConvo();
-			Debug.Log("Talking");
+			//Debug.Log("Talking");
 		}
 	}
 
