@@ -40,8 +40,6 @@ public class SkillsInventory : MonoBehaviour {
         EquipSkill((int)SKILLS.Fr_DoubleShot, 0, 2);
         AddToUnlockedSkills((int)SKILLS.Ar_Heal, 3);
         EquipSkill((int)SKILLS.Ar_Heal, 0, 3);
-        AddToUnlockedSkills((int)SKILLS.Ar_ManaCharge, 3);
-        EquipSkill((int)SKILLS.Ar_ManaCharge, 1, 3);
     }
 
     private void OnDestroy()

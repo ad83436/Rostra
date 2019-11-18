@@ -747,21 +747,33 @@ public class MainInventory : MonoBehaviour {
 		switch (itemID) {
 			case (int)ITEM_ID.HP_POTION:
 				itemAddAmount = 50;
-				UpdatePlayerHitpoints(itemAddAmount, playerID);
+                AudioManager.instance.PlayThisEffect("heal");
+                UpdatePlayerHitpoints(itemAddAmount, playerID);
 				break;
 			case (int)ITEM_ID.MP_ELIXIR:
 				itemAddAmount = 50;
-				UpdatePlayerMagicpoints(itemAddAmount, playerID);
+                AudioManager.instance.PlayThisEffect("manaCharge");
+                UpdatePlayerMagicpoints(itemAddAmount, playerID);
 				break;
             case (int)ITEM_ID.HOPE_POTION:
+                AudioManager.instance.PlayThisEffect("hope");
                 itemAddAmount = 100;
                 UpdatePlayerHitpoints(itemAddAmount, playerID);
                 break;
             case (int)ITEM_ID.TEST_ARMOR1:
 			case (int)ITEM_ID.TEST_WEAPON1:
-				UpdatePlayerStats(playerID, itemID, isEquipped);
+            case (int)ITEM_ID.CHAINMAIL:
+            case (int)ITEM_ID.PLATED_ARMOR:
+            case (int)ITEM_ID.ROBE:
+            case (int)ITEM_ID.LEATHER_JACKET:
+            case (int)ITEM_ID.STEEL_LANCE:
+            case (int)ITEM_ID.STEEL_SWORD:
+            case (int)ITEM_ID.LONGBOW:
+            case (int)ITEM_ID.WOODEN_STAFF:
+                UpdatePlayerStats(playerID, itemID, isEquipped);
 				break;
             default:
+                AudioManager.instance.PlayThisEffect("specialItem");
                 break;
 		}
 

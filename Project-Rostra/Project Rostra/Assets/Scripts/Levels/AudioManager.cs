@@ -29,6 +29,9 @@ public class AudioManager : MonoBehaviour
     //Map
     public AudioClip collect;
 
+    //Items
+    public AudioClip specialItem;
+
     //Player
     public AudioClip attack;
     public AudioClip buff;
@@ -276,6 +279,11 @@ public class AudioManager : MonoBehaviour
             //Map
             case "collect":
                 effectAudioSource.PlayOneShot(collect);
+                break;
+
+            //Items
+            case "specialItem":
+                effectAudioSource.PlayOneShot(specialItem);
                 break;
 
             //Generic 
