@@ -146,8 +146,6 @@ public class Enemy : MonoBehaviour
         IncreaseStatsBasedOnLevel(eCurrentLevel);
         AssingClassSkills(this);
         GiveNamesAndSkills();
-       
-
     }
 
     protected virtual void Start()
@@ -2359,12 +2357,12 @@ public class Enemy : MonoBehaviour
                 // give wait times to skills 
                 if ((int)canUseSkill == skills[0])
                 {
-                    waitTime = 2;
+                    waitTime = 1;
                 }
 
                 else if ((int)canUseSkill == skills[1])
                 {
-                    waitTime = 2;
+                    waitTime = 1;
                 }
 
                 else if ((int)canUseSkill == skills[2])
@@ -2384,13 +2382,13 @@ public class Enemy : MonoBehaviour
                     (int) AllEnemySkills.Raise_Defence
                 };
 
-                if ((int)canUseSkill == skills[0]) { waitTime = 2; }
+                if ((int)canUseSkill == skills[0]) { waitTime = 1; }
                
                 else if ((int)canUseSkill == skills[1]) { }
                
                 else if ((int)canUseSkill == skills[2]) { waitTime = 1; }
                
-                else if((int)canUseSkill == skills[3]) { waitTime = 2; }
+                else if((int)canUseSkill == skills[3]) { waitTime = 1; }
 
                 break;
 
@@ -2405,12 +2403,12 @@ public class Enemy : MonoBehaviour
 
                 if ((int)canUseSkill == skills[0])
                 {
-                    waitTime = 2;
+                    waitTime = 1;
                 }
 
                 else if ((int)canUseSkill == skills[1])
                 {
-                    waitTime = 2;
+                    waitTime = 1;
                 }
 
                 break;
