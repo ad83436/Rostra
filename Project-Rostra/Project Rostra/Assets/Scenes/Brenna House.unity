@@ -2451,7 +2451,7 @@ PrefabInstance:
     - target: {fileID: 311607092273751673, guid: 2d9d923676cf43546bc0ccb49a73d753,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 311607092273751674, guid: 2d9d923676cf43546bc0ccb49a73d753,
         type: 3}
@@ -3692,6 +3692,11 @@ PrefabInstance:
         type: 3}
       propertyPath: cs.dialogues.Array.data[1].addMilestone
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8123743599454692811, guid: 461ff7b82d54a2a4d9a56db412a5459f,
+        type: 3}
+      propertyPath: isInteractable
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 461ff7b82d54a2a4d9a56db412a5459f, type: 3}
