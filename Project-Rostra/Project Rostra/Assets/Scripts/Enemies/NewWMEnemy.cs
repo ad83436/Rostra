@@ -22,7 +22,7 @@ public class NewWMEnemy : MonoBehaviour
 
     public WMState currentState = WMState.idle;
 
-    private float radius = 5.0f;
+    private float radius = 3.0f;
     private Vector2 newPos;
     private Vector2 startPos;
     private float direction = 1.0f;
@@ -50,7 +50,7 @@ public class NewWMEnemy : MonoBehaviour
                 case WMState.moving: //Move towards new pos
                     transform.position = Vector2.MoveTowards(gameObject.transform.position, newPos, speed * Time.deltaTime);
 
-                    if (Mathf.Abs(player.transform.position.x - gameObject.transform.position.x) < 2.0f) //If the player is close enough, give chase
+                    if (Mathf.Abs(player.transform.position.x - gameObject.transform.position.x) < 1.0f) //If the player is close enough, give chase
                     {
                         currentState = WMState.chasing;
                     }
