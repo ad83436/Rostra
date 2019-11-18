@@ -2818,11 +2818,6 @@ PrefabInstance:
       propertyPath: fade
       value: 
       objectReference: {fileID: 212276441}
-    - target: {fileID: 8123089090278092117, guid: 1049f6c024b4f5a49919bf0bc201bbde,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[1].addMilestone
-      value: 8
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1049f6c024b4f5a49919bf0bc201bbde, type: 3}
 --- !u!1001 &826816069
@@ -3057,11 +3052,6 @@ PrefabInstance:
       propertyPath: fade
       value: 
       objectReference: {fileID: 212276441}
-    - target: {fileID: 2060916730576287188, guid: 11f9cf09c9499ab41b06f8f31f6b4e7a,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[1].addMilestone
-      value: 8
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 11f9cf09c9499ab41b06f8f31f6b4e7a, type: 3}
 --- !u!1001 &841217003
