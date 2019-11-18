@@ -28915,6 +28915,86 @@ Camera:
     type: 3}
   m_PrefabInstance: {fileID: 1374373281}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1379022208
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5373299555425003729, guid: 20a54639835e8494d8e62fdc4b81400f,
+        type: 3}
+      propertyPath: m_Name
+      value: PotionMerchant
+      objectReference: {fileID: 0}
+    - target: {fileID: 5373299555425003731, guid: 20a54639835e8494d8e62fdc4b81400f,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 209.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 5373299555425003731, guid: 20a54639835e8494d8e62fdc4b81400f,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.91
+      objectReference: {fileID: 0}
+    - target: {fileID: 5373299555425003731, guid: 20a54639835e8494d8e62fdc4b81400f,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.302734
+      objectReference: {fileID: 0}
+    - target: {fileID: 5373299555425003731, guid: 20a54639835e8494d8e62fdc4b81400f,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5373299555425003731, guid: 20a54639835e8494d8e62fdc4b81400f,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5373299555425003731, guid: 20a54639835e8494d8e62fdc4b81400f,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5373299555425003731, guid: 20a54639835e8494d8e62fdc4b81400f,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5373299555425003731, guid: 20a54639835e8494d8e62fdc4b81400f,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 28
+      objectReference: {fileID: 0}
+    - target: {fileID: 5373299555425003731, guid: 20a54639835e8494d8e62fdc4b81400f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5373299555425003731, guid: 20a54639835e8494d8e62fdc4b81400f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5373299555425003731, guid: 20a54639835e8494d8e62fdc4b81400f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4126484775781317416, guid: 20a54639835e8494d8e62fdc4b81400f,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[0]
+      value: 'Hey there stranger!
+
+
+        Care to look at my wares?
+
+
+        ...No I wasn''t following you'
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 20a54639835e8494d8e62fdc4b81400f, type: 3}
 --- !u!1001 &1391573805
 PrefabInstance:
   m_ObjectHideFlags: 0
