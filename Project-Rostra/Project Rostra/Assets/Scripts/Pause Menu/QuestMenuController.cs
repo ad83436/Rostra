@@ -11,6 +11,10 @@ public class QuestMenuController : SubMenu {
 	public UnityEngine.UI.Text Test_QuestMile;
 	public UnityEngine.UI.Text Test_QuestDesc;
 
+    public GameObject Location_BrennasHouse;
+    public GameObject Location_Hadria;
+    public GameObject Location_MyHouse;
+
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	private void Awake() {
@@ -24,6 +28,10 @@ public class QuestMenuController : SubMenu {
 		Test_QuestName.text = QuestManager.questName;
 		Test_QuestMile.text = QuestManager.milestoneName;
 		Test_QuestDesc.text = QuestManager.description;
+        // set the locations
+        Location_Hadria.SetActive(QuestManager.visitedLocals["Town"]);
+        Location_BrennasHouse.SetActive(QuestManager.visitedLocals["Brenna's House"]);
+        Location_MyHouse.SetActive(QuestManager.visitedLocals["Domel's house"]);
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
