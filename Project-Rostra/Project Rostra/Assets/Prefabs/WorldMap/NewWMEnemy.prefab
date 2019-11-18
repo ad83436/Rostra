@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2804867714409018185}
   - component: {fileID: 2804867714409018187}
   - component: {fileID: 2080110826257365248}
+  - component: {fileID: 4717335671837877284}
   m_Layer: 0
   m_Name: NewWMEnemy
   m_TagString: Untagged
@@ -64,9 +65,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.015968403}
   serializedVersion: 2
-  m_Radius: 0.085
+  m_Radius: 0.14887369
 --- !u!212 &2804867714409018187
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -138,3 +139,19 @@ MonoBehaviour:
   fadePanel: {fileID: 0}
   endTestPanel: {fileID: 0}
   enemySpwn: {fileID: 0}
+--- !u!58 &4717335671837877284
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2804867714409018183}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.005658388, y: 0.014677118}
+  serializedVersion: 2
+  m_Radius: 0.063112654
