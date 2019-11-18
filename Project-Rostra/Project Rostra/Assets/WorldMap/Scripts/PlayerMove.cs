@@ -40,8 +40,8 @@ public class PlayerMove : MonoBehaviour {
 	void LateUpdate() {
 		if (gameObject.activeSelf) {
 			if (dm.canWalk && !BattleManager.battleInProgress && !PauseMenuController.isPaused && !ItemShopUI.IsOpen && CutsceneManager.instance.isActive == false) {
-				an.SetFloat("Horizontal", rb.velocity.x);
-				an.SetFloat("Vertical", rb.velocity.y);
+				an.SetFloat("Horizontal", (Right ? 1f : 0f) - (Left ? 1f : 0f));
+				an.SetFloat("Vertical", (Up ? 1f : 0f) - (Down ? 1f : 0f));
 				an.SetFloat("Speed", rb.velocity.sqrMagnitude);
 				TalkToNPC();
 			} else if (dm.canWalk == false || PauseMenuController.isPaused == true) {
@@ -73,7 +73,7 @@ public class PlayerMove : MonoBehaviour {
 	}
 
 	void FixedUpdate() {
-		Debug.Log(dm.canWalk + "" + BattleManager.battleInProgress + "" + PauseMenuController.isPaused + "" + ItemShopUI.IsOpen + "" + CutsceneManager.instance.isActive);
+		//Debug.Log(dm.canWalk + "" + BattleManager.battleInProgress + "" + PauseMenuController.isPaused + "" + ItemShopUI.IsOpen + "" + CutsceneManager.instance.isActive);
 		if (dm.canWalk && !BattleManager.battleInProgress && !PauseMenuController.isPaused && !ItemShopUI.IsOpen && CutsceneManager.instance.isActive == false) {
 
 			float speed = (Input.GetButton("Cancel") ? max_run_speed : max_walk_speed) * speedMultiplier;
