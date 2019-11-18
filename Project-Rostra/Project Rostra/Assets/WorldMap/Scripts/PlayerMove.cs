@@ -61,8 +61,8 @@ public class PlayerMove : MonoBehaviour {
 				DialogueManager.instance.SetChoice(ChoiceEnum.dwarf, true);
 				DialogueManager.instance.talkedToContact = true;
 				DialogueManager.instance.SetChoice(ChoiceEnum.talkToContact, true);
-				DialogueManager.instance.battleFarea = true;
-				DialogueManager.instance.SetChoice(ChoiceEnum.battleFarea, true);
+				//DialogueManager.instance.battleFarea = true;
+				//DialogueManager.instance.SetChoice(ChoiceEnum.battleFarea, true);
 			}
 			//if (Input.GetKeyDown(KeyCode.U))
 			//{
