@@ -96,10 +96,7 @@ public class WMEnemy : MonoBehaviour
         if(enemySpriteRenderer!=null)
         enemySpriteRenderer.enabled = false;
 
-        if(!tutorial)
-        {
             PassInfoIntoBattle.battleBackgroundImage = backgroundImage;
-        }
 
     }
 
