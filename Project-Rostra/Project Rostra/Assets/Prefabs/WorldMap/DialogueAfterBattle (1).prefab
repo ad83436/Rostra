@@ -1,0 +1,141 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6439686512616943564
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6439686512616943567}
+  - component: {fileID: 6439686512616943553}
+  - component: {fileID: 6439686512616943566}
+  m_Layer: 0
+  m_Name: DialogueAfterBattle (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6439686512616943567
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6439686512616943564}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 228.48, y: -0.29, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6439686512616943553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6439686512616943564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a8a3c80295678c41b5693a0fa326720, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  d:
+    names:
+    - Domel
+    - Fargas
+    - Domel
+    - Fargas
+    - Domel
+    - Fargas
+    - Domel
+    - Fargas
+    sentences:
+    - Is it... over?
+    - We're done here.
+    - Listen, I want to thank you for coming after me. I was sure people thought I
+      was dead.
+    - I didn't do it for you. I needed to find where Brenna was.
+    - '...'
+    - I'm going to need you to promise me something. When we return to the village,
+      you can't tell the others what happened here.
+    - The Alchemy Guild tried to murder you and took my sister from me! Why shouldn't
+      I tell them what happened?
+    - The other Dwarves are rilled up. I heard some of them talking about a bloody
+      massacre given the chance. If they found out about what happened I can't tell
+      you how many innocent lives will be lost.
+    - I can't promise anything.
+    portrait:
+    - {fileID: 21300000, guid: 26feff2f0d4e92349a70bba8a0c18d31, type: 3}
+    - {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825, type: 3}
+    - {fileID: 21300000, guid: 26feff2f0d4e92349a70bba8a0c18d31, type: 3}
+    - {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825, type: 3}
+    - {fileID: 21300000, guid: 26feff2f0d4e92349a70bba8a0c18d31, type: 3}
+    - {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825, type: 3}
+    - {fileID: 21300000, guid: 26feff2f0d4e92349a70bba8a0c18d31, type: 3}
+    - {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825, type: 3}
+    povChange:
+    - 1
+    - 2
+    - 3
+    - 4
+    - 6
+    - 7
+    - 8
+    - 8
+    - 8
+    typingSpeed: 0.001
+    isChoice: 0
+    choiceLine: 0
+    choice1: {fileID: 0}
+    choice2: {fileID: 0}
+    willRemember: 0
+    choiceSet: 0
+    choiceCare1: {fileID: 0}
+    choiceCare2: {fileID: 0}
+    choiceText1: 
+    choiceText2: 
+    normal: {fileID: 0}
+    hasPlayed: 0
+    willCount: 0
+    maxWillCount: 0
+    isBattle: 0
+    triggerBool: 0
+    isOneShot: 0
+    addMilestone: 0
+    addItem: 0
+    itemId: 0
+    itemNum: 0
+  ce: 13
+  fade: {fileID: 0}
+  played: 0
+--- !u!61 &6439686512616943566
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6439686512616943564}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.038993835, y: -0.07227135}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2.3236237, y: 2.1839008}
+  m_EdgeRadius: 0

@@ -392,7 +392,17 @@ public class DialogueManager : MonoBehaviour
                 fade = GameObject.Find("Fade").GetComponent<Fade>();
                 battle = true;
             }
-        }
+			if (battle == true && isActive == false)
+			{
+				if (!BattleManager.battleInProgress)
+				{
+					//Debug.Log("CALL BATTLE");
+					fade.FlipFadeToBattle();
+					battle = false;
+					dia.isBattle = false;
+				}
+			}
+		}
 	}
 	// this is a coroutine that will take our chars from the string and print one at a time 
 	IEnumerator TypeLetters(string s)
@@ -672,15 +682,15 @@ public class DialogueManager : MonoBehaviour
 			// temporary just for demo
 			choices[6] = true;
 		}
-		if (battle == true && isActive == false)
-		{
-            if (!BattleManager.battleInProgress)
-            {
-				//Debug.Log("CALL BATTLE");
-                fade.FlipFadeToBattle();
-                battle = false;
-            }
-		}
+		//if (battle == true && isActive == false)
+		//{
+  //          if (!BattleManager.battleInProgress)
+  //          {
+		//		//Debug.Log("CALL BATTLE");
+  //              fade.FlipFadeToBattle();
+  //              battle = false;
+  //          }
+		//}
 	}
 
 	public void AddMilestone(int i)
