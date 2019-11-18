@@ -37,6 +37,7 @@ public static class QuestManager
 				milestone = m;
 				milestoneName = "Talk to the Commander";
 				enable.SetActive(true);
+				AddVisitedLocation("Military Camp");
 				break;
 			case 2:
 				questName = "Find Brenna";
@@ -56,23 +57,24 @@ public static class QuestManager
 				break;
 			case 4:
 				questName = "Find Brenna";
-				location = 1;
+				location = 2;
 				description = "We've escaped from the camp, now we should go to Brenna's house";
 				milestone = m;
-				milestoneName = "Go to Hadria";
+				milestoneName = "Go to Brenna's house";
 				enable.SetActive(true);
+				AddVisitedLocation("Brenna's House");
 				break;
 			case 5:
 				questName = "Find Brenna";
 				location = 3;
-				description = "Well, we've arrived in Hadria. We should go and see if the local barkeep can tell us anything";
+				description = "We need to go look for Domel, the barkeep in Hadria should know";
 				milestone = m;
-				milestoneName = "Find the Barkeep";
+				milestoneName = "Go To Hadria and speak to the barkeep";
 				enable.SetActive(true);
 				break;
 			case 6:
 				questName = "Find Brenna";
-				location = 3;
+				location = 4;
 				description = "I've spoken to the Barkeep, now we just need to find out where our contact is";
 				milestone = m;
 				milestoneName = "Find the contact";
@@ -80,10 +82,19 @@ public static class QuestManager
 				break;
 			case 7:
 				questName = "Find Brenna";
-				location = 3;
-				description = "We have all the info we need, we should leave the tavern";
+				location = 5;
+				description = "We have all the info we need, we should go find Domel's house";
 				milestone = m;
 				milestoneName = "Leave the Inn";
+				enable.SetActive(true);
+				AddVisitedLocation("Domel's house");
+				break;
+			case 8:
+				questName = "Find Brenna";
+				location = 3;
+				description = "We should go back to Hadria";
+				milestone = m;
+				milestoneName = "Return to Hadria";
 				enable.SetActive(true);
 				break;
 		}
