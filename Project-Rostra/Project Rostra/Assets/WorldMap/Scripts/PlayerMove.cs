@@ -55,8 +55,12 @@ public class PlayerMove : MonoBehaviour {
 			{
 				DialogueManager.instance.metAllChars = true;
 				DialogueManager.instance.SetChoice(ChoiceEnum.metAllChars, true);
-				//DialogueManager.instance.dwarf = true;
-				//DialogueManager.instance.SetChoice(ChoiceEnum.dwarf, true);
+				DialogueManager.instance.sawJournal = true;
+				DialogueManager.instance.SetChoice(ChoiceEnum.sawJournal, true);
+				DialogueManager.instance.dwarf = true;
+				DialogueManager.instance.SetChoice(ChoiceEnum.dwarf, true);
+				DialogueManager.instance.talkedToContact = true;
+				DialogueManager.instance.SetChoice(ChoiceEnum.talkToContact, true);
 				//DialogueManager.instance.battleFarea = true;
 				//DialogueManager.instance.SetChoice(ChoiceEnum.battleFarea, true);
 			}
@@ -69,6 +73,7 @@ public class PlayerMove : MonoBehaviour {
 	}
 
 	void FixedUpdate() {
+		Debug.Log(dm.canWalk + "" + BattleManager.battleInProgress + "" + PauseMenuController.isPaused + "" + ItemShopUI.IsOpen + "" + CutsceneManager.instance.isActive);
 		if (dm.canWalk && !BattleManager.battleInProgress && !PauseMenuController.isPaused && !ItemShopUI.IsOpen && CutsceneManager.instance.isActive == false) {
 
 			float speed = (Input.GetButton("Cancel") ? max_run_speed : max_walk_speed) * speedMultiplier;
