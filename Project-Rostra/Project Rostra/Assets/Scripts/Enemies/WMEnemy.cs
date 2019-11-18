@@ -15,7 +15,7 @@ public class WMEnemy : MonoBehaviour
     public EnemySpawner enemySpwn;
     private Collider2D enemyCollider;
     private SpriteRenderer enemySpriteRenderer;
-    private float reActivateTime = 5.0f;
+    private float reActivateTime = 10.0f;
     private Vector2 startingPosition; //Used to reset the enemy should it not collide with the player in time
 
     public Sprite backgroundImage;
@@ -52,18 +52,20 @@ public class WMEnemy : MonoBehaviour
         if(!BattleManager.battleInProgress && !NewWMEnemy.isActive && !enemyCollider.enabled && !PauseMenuController.isPaused) //If the battle has ended, and we're not moving
         {
             InvokeRepeating("SpawnEnemy", reActivateTime, 1);
+            gameObject.transform.position = startingPosition;
         }
-        else if (!BattleManager.battleInProgress && !NewWMEnemy.isActive && enemyCollider.enabled && !PauseMenuController.isPaused) //If two enemies race towards the player, the one who does not collide with the player should reset
+        else if (BattleManager.battleInProgress && !NewWMEnemy.isActive && enemyCollider.enabled && !PauseMenuController.isPaused) //If two enemies race towards the player, the one who does not collide with the player should reset
         {
             enemyCollider.enabled = false;
             enemySpriteRenderer.enabled = false; //What if the player passes by the enemy? It must not be seen stuck like an idiot
             gameObject.transform.position = startingPosition;
         }
-        else if(!BattleManager.battleInProgress && NewWMEnemy.isActive && !enemyCollider.enabled && !PauseMenuController.isPaused) //If you transition from one place to another, NEW WM enemy will go active, and so should the collider and SR
+        else if(!BattleManager.battleInProgress && NewWMEnemy.isActive && enemyCollider.enabled && !PauseMenuController.isPaused) //If you transition from one place to another, NEW WM enemy will go active, and so should the collider and SR
         {
             enemyCollider.enabled = true;
             if(enemySpriteRenderer!=null)
             enemySpriteRenderer.enabled = true;
+
         }
     }
 

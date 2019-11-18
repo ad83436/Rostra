@@ -2330,21 +2330,21 @@ public class Enemy : MonoBehaviour
                 case EnemyClassType.DPS:
                     eAttack = Mathf.CeilToInt(eAttack + (skillPoints * 0.2f));
                     eAgility = Mathf.CeilToInt(eAgility + (skillPoints * 0.1f));
-                    currentHP = Mathf.CeilToInt(currentHP + (skillPoints * 3.0f));
+                    currentHP = Mathf.CeilToInt(currentHP + (skillPoints * 1.2f));
                     Debug.Log(eName + " is a " + enemyClass + " Class of enemy");
                     break;
 
                 case EnemyClassType.Tank:
                     eAttack = Mathf.CeilToInt(eAttack + (skillPoints * 0.1f));
                     eDefence = Mathf.CeilToInt(eDefence + (skillPoints * 0.2f));
-                    currentHP = Mathf.CeilToInt(currentHP + (skillPoints * 4.0f));
+                    currentHP = Mathf.CeilToInt(currentHP + (skillPoints * 1.5f));
                     Debug.Log(eName + " is a " + enemyClass + " Class of enemy");
                     break;
 
                 case EnemyClassType.Support:
                     eAttack = Mathf.CeilToInt(eAttack + (skillPoints * 0.1f));
                     eAgility = Mathf.CeilToInt(eAgility + (skillPoints * 0.2f));
-                    currentHP = Mathf.CeilToInt(currentHP + (skillPoints * 5.0f));
+                    currentHP = Mathf.CeilToInt(currentHP + (skillPoints * 2.0f));
                     Debug.Log(eName + " is a " + enemyClass + " Class of enemy");
                     break;
             }
