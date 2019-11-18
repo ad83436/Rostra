@@ -82,6 +82,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip sliceAndDice;
     //Boar
     public AudioClip ironTusk;
+    public AudioClip boarWaiting;
 
 	// Grendol
 	public AudioClip Grendol_Lightning;
@@ -392,6 +393,9 @@ public class AudioManager : MonoBehaviour
             //Boar
             case "Iron Tusk":
                 effectAudioSource.PlayOneShot(ironTusk);
+                break;
+            case "Boar Waiting":
+                effectAudioSource.PlayOneShot(boarWaiting);
                 break;
 
 
