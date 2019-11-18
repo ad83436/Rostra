@@ -20,7 +20,7 @@ public class WMEnemy : MonoBehaviour
     private NewWMEnemy moveScript;
     public Sprite backgroundImage;
     private bool collidedWithPlayer = false;
-    private float collisionDelay = 3.5f;
+    private float collisionDelay = 7.5f;
 
     private void Start()
     {
@@ -71,7 +71,7 @@ public class WMEnemy : MonoBehaviour
             }
             else
             {
-                collisionDelay = 3.5f;
+                collisionDelay = 7.5f;
                 collidedWithPlayer = false;
                 ActivateEnemy();
             }

@@ -26,7 +26,7 @@ public class NewWMEnemy : MonoBehaviour
     private Vector2 newPos;
     private Vector2 startPos;
     private float direction = 1.0f;
-    public float idleDelay = 4.0f;
+    public float idleDelay = 8.0f;
 
     void Start()
     {
@@ -82,7 +82,7 @@ public class NewWMEnemy : MonoBehaviour
                     }
                     else 
                     {
-                        idleDelay = 2.0f;
+                        idleDelay = 8.0f;
                         currentState = WMState.patrolling;
                     }
                     break;
