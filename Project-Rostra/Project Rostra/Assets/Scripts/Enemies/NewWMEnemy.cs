@@ -27,6 +27,7 @@ public class NewWMEnemy : MonoBehaviour
     private Vector2 startPos;
     private float direction = 1.0f;
     public float idleDelay = 8.0f;
+    private float chaseTimer = 3.0f;
 
     void Start()
     {
@@ -53,6 +54,7 @@ public class NewWMEnemy : MonoBehaviour
                     if (Mathf.Abs(player.transform.position.x - gameObject.transform.position.x) < 1.0f) //If the player is close enough, give chase
                     {
                         currentState = WMState.chasing;
+                        chaseTimer = 3.0f;
                     }
 
                    else if (direction > 0.0f)
@@ -72,7 +74,17 @@ public class NewWMEnemy : MonoBehaviour
 
                     break;
                 case WMState.chasing: //Chase player
-                    transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+                    if(chaseTimer>0.0f)
+                    {
+                        chaseTimer -= Time.deltaTime;
+                        transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+                    }
+                    else
+                    {
+                        chaseTimer = 3.0f;
+                        currentState = WMState.idle;
+                    }
+                   
                     break;
                 case WMState.idle: //Stay still for a while
 
