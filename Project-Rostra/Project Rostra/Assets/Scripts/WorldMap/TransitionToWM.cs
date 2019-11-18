@@ -18,6 +18,7 @@ public class TransitionToWM : MonoBehaviour
 	public Collider2D collision;
 	public Dialogue dia;
 	public bool isBoss;
+	public string song;
 	// Start is called before the first frame update
 	void Start()
     {
@@ -52,6 +53,10 @@ public class TransitionToWM : MonoBehaviour
 				EnemySpawner.instance.isBoss = false;
 			}
             NewWMEnemy.isActive = true; //If the player teleports to a new location, the enemies should wake up
+			if (song.Length > 1)
+			{
+				AudioManager.instance.PlayThisClip(song);
+			}
 		}
 		else if (col.CompareTag("Player") && needsBool == true && DialogueManager.instance.GetChoice(ce) == true && transitionToWM == false && stopsPlayer == false)
 		{
@@ -66,7 +71,11 @@ public class TransitionToWM : MonoBehaviour
 			{
 				EnemySpawner.instance.isBoss = false;
 			}
-            NewWMEnemy.isActive = true; //If the player teleports to a new location, the enemies should wake up
+			if (song.Length > 1)
+			{
+				AudioManager.instance.PlayThisClip(song);
+			}
+			NewWMEnemy.isActive = true; //If the player teleports to a new location, the enemies should wake up
         }
 		else if (col.CompareTag("Player") && needsBool == false && transitionToWM == true && stopsPlayer == false)
 		{
@@ -81,7 +90,11 @@ public class TransitionToWM : MonoBehaviour
 			{
 				EnemySpawner.instance.isBoss = false;
 			}
-            NewWMEnemy.isActive = true; //If the player teleports to a new location, the enemies should wake up
+			if (song.Length > 1)
+			{
+				AudioManager.instance.PlayThisClip(song);
+			}
+			NewWMEnemy.isActive = true; //If the player teleports to a new location, the enemies should wake up
         }
 		else if (col.CompareTag("Player") && needsBool == false && transitionToWM == false && stopsPlayer == false)
 		{
@@ -96,7 +109,11 @@ public class TransitionToWM : MonoBehaviour
 			{
 				EnemySpawner.instance.isBoss = false;
 			}
-            NewWMEnemy.isActive = true; //If the player teleports to a new location, the enemies should wake up
+			if (song.Length > 1)
+			{
+				AudioManager.instance.PlayThisClip(song);
+			}
+			NewWMEnemy.isActive = true; //If the player teleports to a new location, the enemies should wake up
         }
 	}
 	// start a conversation if your being blocked by a real collider... We'll need this for Hadria Domel's house

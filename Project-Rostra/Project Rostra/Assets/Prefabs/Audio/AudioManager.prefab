@@ -253,6 +253,7 @@ MonoBehaviour:
   uiConfirm: {fileID: 8300000, guid: aac2f6804f482764590e58304f62628f, type: 3}
   uiCancel: {fileID: 8300000, guid: e5814d9748cc3e740a6141ee7b123bb4, type: 3}
   collect: {fileID: 8300000, guid: 78a345ccf8951c142a7bc01bcb5e95cf, type: 3}
+  specialItem: {fileID: 8300000, guid: ace9e2fd5fbb8af4d8e7dbba5cf64314, type: 3}
   attack: {fileID: 8300000, guid: 7dc16aabb21df7c4fbcf28758c07c71e, type: 3}
   buff: {fileID: 8300000, guid: e9c4595e8065d1541adca56bbb5943c5, type: 3}
   deBuff: {fileID: 8300000, guid: fb38bf0ff63f1024ab988d5900a103fb, type: 3}
@@ -288,6 +289,15 @@ MonoBehaviour:
   sliceAndDice: {fileID: 8300000, guid: bfe983dc21200f446941929385609fc6, type: 3}
   ironTusk: {fileID: 8300000, guid: 50e2f96f17d0a774fb6ec277b03957f2, type: 3}
   boarWaiting: {fileID: 8300000, guid: 4b298478f912744479c8fdc41f003aa1, type: 3}
+  ironTusk: {fileID: 8300000, guid: 1e59dc9fd8b1ca848bb54f3709914486, type: 3}
+  despair: {fileID: 8300000, guid: afbfeda611d237047a3f2de585760949, type: 3}
+  youAreNotMine: {fileID: 8300000, guid: fc9fbe47dd967234bb68802a8b36f6aa, type: 3}
+  mothersPain: {fileID: 8300000, guid: b7dee3b192a933743bc7ed8c0319ab83, type: 3}
+  ties: {fileID: 8300000, guid: 20068706a9677ca4f8fc0851c1fc0d82, type: 3}
+  judge: {fileID: 8300000, guid: af63dee857c64e1409c6da22f104b2cd, type: 3}
+  wrath: {fileID: 8300000, guid: 50c75f22bd44bc84e8e13f40c62c58bf, type: 3}
+  wails: {fileID: 8300000, guid: 4f40e071b59a81c408a1ff55f01c365a, type: 3}
+  faryaWait: {fileID: 8300000, guid: 0f574294977d01149af7a9b42731be35, type: 3}
   Grendol_Lightning: {fileID: 8300000, guid: ae6056d219c611f4b8612cf137164168, type: 3}
   Grendol_Fire: {fileID: 8300000, guid: f004915018c9a7b4aae5104a0e8dfa5c, type: 3}
   Grendol_Wind: {fileID: 8300000, guid: 4d8f17da304b7ab49a4c1dd9472f3b28, type: 3}

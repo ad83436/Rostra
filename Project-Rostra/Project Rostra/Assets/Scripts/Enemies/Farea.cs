@@ -325,7 +325,7 @@ public class Farea : Enemy
         currentState = EnemyState.idle;
         uiBTL.EndTurn(); //End the player's turn
         bossPhase = 2;
-        maxHP *= 2;
+        maxHP *= 1.5f;
         currentHP = maxHP;
         eAttack *= 1.2f;
         eDefence *= 1.2f;
@@ -348,7 +348,6 @@ public class Farea : Enemy
         //Check if we're waiting on a skill first
         if (currentState == EnemyState.waiting)
         {
-
             waitQTurns--;
             waitTurnsText.text = waitQTurns.ToString(); //Update the UI
             if (waitQTurns <= 0)
@@ -378,7 +377,7 @@ public class Farea : Enemy
                 }
                 else if (attackChance >= 10.0f && attackChance < 40.0f) //Wails of Frailty
                 {
-                    GoToWaitState(fareaSkills.wails, 2, 2);
+                    GoToWaitState(fareaSkills.wails, 1, 2);
                     //Summon skill effect
                     wailWait.gameObject.SetActive(true);
                     uiBTL.UpdateActivityText("Wails of Frailty");
@@ -408,6 +407,7 @@ public class Farea : Enemy
                     //Summon skill effect
                     mothersPainWait.gameObject.SetActive(true);
                     uiBTL.UpdateActivityText("Mother's Pain");
+                    totalDamageThreshold -= 50; //If the Farya used MP that means she's suffered a lot of damage, make it easier to use MP 
                 }
                 else
                 {
@@ -429,7 +429,7 @@ public class Farea : Enemy
                     attackChance = Random.Range(0.0f, 100.0f * skillChanceModifier);
                     //Debug.Log("Attack chance is: " + attackChance);
                     //attackChance = 50; //Testing
-                    if (attackChance >= 0.0f && attackChance < 20.0f * skillChanceModifier && isThereADeadPlayer)
+                    if (attackChance >= 0.0f && attackChance < 30.0f * skillChanceModifier && isThereADeadPlayer)
                     {
                         //You are not mine
                         GoToWaitState(fareaSkills.youAreNotMine, 1, 2);
@@ -437,15 +437,7 @@ public class Farea : Enemy
                         youAreNotMineObject.gameObject.SetActive(true);
                         uiBTL.UpdateActivityText("You Are Not Mine");
                     }
-                    //Mother's Pain
-                    else if (attackChance >= 20.0f && attackChance < 40.0f * skillChanceModifier)
-                    {
-                        GoToWaitState(fareaSkills.mothersPain, 1, 3);
-                        //Summon skill effect
-                        mothersPainWait.gameObject.SetActive(true);
-                        uiBTL.UpdateActivityText("Mother's Pain");
-                    }
-                    else if (attackChance >= 40.0f && attackChance < 60.0f * skillChanceModifier)
+                    else if (attackChance >= 30.0f && attackChance < 60.0f * skillChanceModifier)
                     {
                         if (tieThisPlayer == null)
                         {
@@ -464,7 +456,7 @@ public class Farea : Enemy
                     }
                     else if (attackChance >= 60.0f && attackChance < 70.0f) //Wails of Frailty
                     {
-                        GoToWaitState(fareaSkills.wails, 2, 2);
+                        GoToWaitState(fareaSkills.wails, 1, 2);
                         //Summon skill effect
                         wailWait.gameObject.SetActive(true);
                         uiBTL.UpdateActivityText("Wails of Frailty");
@@ -475,7 +467,7 @@ public class Farea : Enemy
                         animator.SetBool("JudgementAndWrath", true);
                         uiBTL.UpdateActivityText("Judgement & Wrath");
                     }
-                    else if (attackChance >= 80.0f && attackChance <= 90.0f) // Lullaby Of Despair
+                    else if (attackChance >=80.0f && attackChance <= 90.0f) // Lullaby Of Despair
                     {
                         GoToWaitState(fareaSkills.lullabyOfDepsair, 1, 2);
                         //Summon skill effect
@@ -501,6 +493,7 @@ public class Farea : Enemy
         waitTurnsText.text = waitQTurns.ToString();
         animator.SetInteger("WaitingIndex", waitingIndex);
         currentState = EnemyState.waiting;
+        audioManager.PlayThisEffect("faryaWait");
         uiBTL.EndTurn();
     }
 
@@ -510,6 +503,7 @@ public class Farea : Enemy
     {
         //Disable J and apply the damage.
         //Should change this to use animations
+        audioManager.PlayThisEffect("Judge");
         objPooler.SpawnFromPool("JudgeAttack", attackThisPlayer.gameObject.transform.position, gameObject.transform.rotation);
         jObj.gameObject.SetActive(false);
         attackThisPlayer.TakeDamage(eAttack);
@@ -519,6 +513,7 @@ public class Farea : Enemy
     {
         //Disable W and apply the damage.
         //Should change this to use animations
+        audioManager.PlayThisEffect("Wrath");
         objPooler.SpawnFromPool("WrathAttack", attackThisPlayer.gameObject.transform.position, gameObject.transform.rotation);
         wObj.gameObject.SetActive(false);
         attackThisPlayer.TakeDamage(eAttack * 1.2f); //Wrath does a little more damage
@@ -536,6 +531,7 @@ public class Farea : Enemy
     private void DeadlyTies()
     {
         //Affect the player and tie them
+        audioManager.PlayThisEffect("Ties");
         tieThisPlayer.TakeDamage(0.0f, 0, "", Player.playerAilments.tied, this, 0.0f, tiedTimer, false);
         animator.SetBool("DeadlyTies", false);
         deadlyTiesObject.gameObject.SetActive(false);
@@ -569,6 +565,7 @@ public class Farea : Enemy
         switch (chosenSkill)
         {
             case fareaSkills.wails:
+                audioManager.PlayThisEffect("Wails");
                 //Choose at random whether you want to damage attack or defense
                 chosenStat = statToDebuff[Random.Range(0, statToDebuff.Length)];
                 //Update the UI
@@ -595,6 +592,7 @@ public class Farea : Enemy
                 //If the player has no ailments, then affect thme with fear
                 if (attackThisPlayer.currentAilment == Player.playerAilments.none) //Make sure you target 
                 {
+                    audioManager.PlayThisEffect("Despair");
                     attackThisPlayer.TakeDamage(0.0f, 0, "", Player.playerAilments.fear, null, 0, 3, false);
                 }
                 else
@@ -606,6 +604,7 @@ public class Farea : Enemy
 
                 break;
             case fareaSkills.mothersPain:
+                audioManager.PlayThisEffect("MothersPain");
                 for (int i = 0; i < battleManager.players.Length; i++)
                 {
                     if (!battleManager.players[i].playerReference.dead)
@@ -621,6 +620,7 @@ public class Farea : Enemy
             case fareaSkills.youAreNotMine:
                 if (thisPlayerIsDead.dead)
                 {
+                    audioManager.PlayThisEffect("YouAreNotMine");
                     youAreNotMineObject.gameObject.SetActive(false);
                     objPooler.SpawnFromPool("YouAreNotMine", thisPlayerIsDead.transform.position, gameObject.transform.rotation);
                     Heal(thisPlayerIsDead.maxHP * 0.7f);

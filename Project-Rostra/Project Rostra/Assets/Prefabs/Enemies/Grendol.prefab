@@ -1128,15 +1128,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyIndexInBattleManager: 0
   eMana: 0
-  eAttack: 60
-  eAgility: 0
+  eAttack: 70
+  eAgility: 13
   eDefence: 30
   eStrength: 30
   eSpeed: 15
-  eBaseLevel: 1
-  eCurrentLevel: 1
+  eBaseLevel: 30
+  eCurrentLevel: 30
   eName: Grendol
-  eRange: 0
+  eRange: 3
   waitTime: 0
   playerIndexHolder: 0
   timeAttackingForSlice: 0
@@ -1145,8 +1145,8 @@ MonoBehaviour:
   hitAmount: 0
   playerStatNeeded: []
   enemyStatNeeded: []
-  eCritical: 0
-  qImage: {fileID: 0}
+  eCritical: 5
+  qImage: {fileID: 21300000, guid: b77238ac62712ad4eb8ebcbfa572f399, type: 3}
   HP: {fileID: 7258485256067680936}
   maxHP: 1200
   currentHP: 1200

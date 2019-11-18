@@ -63,8 +63,6 @@ public class BattleManager : MonoBehaviour
     public bool battleHasEnded;
     public static bool battleInProgress = false;
 
-    private float dummyTimer = 5.0f;
-
     //At the beginning of each battle, each player and enemy will use the singleton to update their stats
     #region singleton
 

@@ -139,8 +139,6 @@ public class UIBTL : MonoBehaviour
 
     //End Battle Screen
     public Fade fadePanel;
-    public GameObject victoryPanel;
-    public GameObject defeatPanel;
     private bool battleHasEnded;
 
 
@@ -148,6 +146,9 @@ public class UIBTL : MonoBehaviour
     public static bool conversationAfterBattle = false; //If true, a conversation will start right after the battle ends
     private DialogueManager dialogueManager;
     private DialogueContainer dialogueContainer;
+
+    //Background image
+    public  SpriteRenderer backgroundImage;
 
     #region singleton
     public static UIBTL instance;
@@ -263,6 +264,8 @@ public class UIBTL : MonoBehaviour
         }
 
         lastImageIndex = numberOfEnemies + 3; //Number of enemies + number of players - 1
+
+        backgroundImage.sprite = PassInfoIntoBattle.battleBackgroundImage;
     }
 
 

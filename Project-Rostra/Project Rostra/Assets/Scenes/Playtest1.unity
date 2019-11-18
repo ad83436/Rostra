@@ -2506,6 +2506,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyHolder: {fileID: 1830220262}
+  secondBossHolder: {fileID: 0}
   tutorial: 0
   victoryPanel: {fileID: 0}
   defeatPanel: {fileID: 0}
@@ -4451,7 +4452,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 1927818603
-  m_SortingOrder: 100
+  m_SortingOrder: 300
   m_TargetDisplay: 0
 --- !u!224 &1372131767
 RectTransform:
@@ -6572,11 +6573,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tutorial: 0
   enemies:
-  - {fileID: 1234658493057158479, guid: 991942d1c70012248a48c594ab357b40, type: 3}
-  enemyLevels: 02000000
+  - {fileID: 8830413635625265082, guid: 09875b434c97e954a8ca9276dca80ae4, type: 3}
+  - {fileID: 8830413635625265082, guid: 09875b434c97e954a8ca9276dca80ae4, type: 3}
+  - {fileID: 8830413635625265082, guid: 09875b434c97e954a8ca9276dca80ae4, type: 3}
+  - {fileID: 2487905135032201599, guid: 3c7d329df66cd7349923408792b8e755, type: 3}
+  - {fileID: 2487905135032201599, guid: 3c7d329df66cd7349923408792b8e755, type: 3}
+  enemyLevels: 0300000003000000030000000400000004000000
   fadePanel: {fileID: 0}
   endTestPanel: {fileID: 126959872}
   enemySpwn: {fileID: 1950009557}
+  backgroundImage: {fileID: 0}
 --- !u!4 &1830220263
 Transform:
   m_ObjectHideFlags: 0
@@ -6822,11 +6828,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemySpawner
       objectReference: {fileID: 0}
-    - target: {fileID: 5063818996988190477, guid: e39707a10eec55043a689f4f4f23dd65,
-        type: 3}
-      propertyPath: isBoss
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5063818996988190474, guid: e39707a10eec55043a689f4f4f23dd65,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6881,6 +6882,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5063818996988190477, guid: e39707a10eec55043a689f4f4f23dd65,
+        type: 3}
+      propertyPath: isBoss
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e39707a10eec55043a689f4f4f23dd65, type: 3}
