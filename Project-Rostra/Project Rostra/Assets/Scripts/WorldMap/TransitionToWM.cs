@@ -46,11 +46,11 @@ public class TransitionToWM : MonoBehaviour
 			player.GetComponent<PlayerMove>().speedMultiplier = 0.5f;
 			if (isBoss == true)
 			{
-				EnemySpawner.instance.isBoss = true;
+				//EnemySpawner.instance.isBoss = true;
 			}
 			else
 			{
-				EnemySpawner.instance.isBoss = false;
+				//EnemySpawner.instance.isBoss = false;
 			}
             NewWMEnemy.isActive = true; //If the player teleports to a new location, the enemies should wake up
 			if (song.Length > 1)
@@ -65,11 +65,11 @@ public class TransitionToWM : MonoBehaviour
 			player.GetComponent<PlayerMove>().speedMultiplier = 1f;
 			if (isBoss == true)
 			{
-				EnemySpawner.instance.isBoss = true;
+				//EnemySpawner.instance.isBoss = true;
 			}
 			else
 			{
-				EnemySpawner.instance.isBoss = false;
+				//EnemySpawner.instance.isBoss = false;
 			}
 			if (song.Length > 1)
 			{
@@ -84,11 +84,11 @@ public class TransitionToWM : MonoBehaviour
 			player.GetComponent<PlayerMove>().speedMultiplier = 0.5f;
 			if (isBoss == true)
 			{
-				EnemySpawner.instance.isBoss = true;
+				//EnemySpawner.instance.isBoss = true;
 			}
 			else
 			{
-				EnemySpawner.instance.isBoss = false;
+				//EnemySpawner.instance.isBoss = false;
 			}
 			if (song.Length > 1)
 			{
@@ -103,11 +103,11 @@ public class TransitionToWM : MonoBehaviour
 			player.GetComponent<PlayerMove>().speedMultiplier = 1f;
 			if (isBoss == true)
 			{
-				EnemySpawner.instance.isBoss = true;
+				//EnemySpawner.instance.isBoss = true;
 			}
 			else
 			{
-				EnemySpawner.instance.isBoss = false;
+				//EnemySpawner.instance.isBoss = false;
 			}
 			if (song.Length > 1)
 			{
