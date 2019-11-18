@@ -38,7 +38,7 @@ public class NewWMEnemy : MonoBehaviour
 
     void Update()
     {
-        if (isActive && !PauseMenuController.isPaused && !BattleManager.battleInProgress && !DialogueManager.instance.isActive) //If we open the pause menu, the enemies should stop
+        if (isActive && !PauseMenuController.isPaused && !BattleManager.battleInProgress && !DialogueManager.instance.isActive && !CutsceneManager.instance.isActive) //If we open the pause menu, the enemies should stop
         {
             switch (currentState)
             {
