@@ -19,7 +19,8 @@ public class MainMenu : MonoBehaviour
     {
         main,
         howToPlay,
-        controls
+        controls,
+        contactUs
     };
     private MainMenuState currentState;
 
@@ -34,6 +35,9 @@ public class MainMenu : MonoBehaviour
 
     //Controls
     public GameObject controlsPanel;
+
+    //ContactUs
+    public GameObject contactUsPanel;
 
 	//Input
 	private bool InDw_Down => Input.GetButtonDown("Down");
@@ -85,6 +89,9 @@ public class MainMenu : MonoBehaviour
             case MainMenuState.controls:
                 Controls();
                 break;
+            case MainMenuState.contactUs:
+                ContactUs();
+                break;
         }
        
     }
@@ -104,7 +111,7 @@ public class MainMenu : MonoBehaviour
                 else if (InDW_Up)
                 {
                     menuIndex = 3;
-                    hilighter.transform.localPosition = hPos[3].transform.localPosition;
+                    hilighter.transform.localPosition = hPos[4].transform.localPosition;
                     audioManager.PlayThisEffect("uiScroll");
 
                 }
@@ -174,6 +181,29 @@ public class MainMenu : MonoBehaviour
             case 3:
                 if (InDw_Down)
                 {
+                    menuIndex = 4;
+                    hilighter.transform.localPosition = hPos[4].transform.localPosition;
+                    audioManager.PlayThisEffect("uiScroll");
+
+                }
+                else if (InDW_Up)
+                {
+                    menuIndex--;
+                    hilighter.transform.localPosition = hPos[2].transform.localPosition;
+                    audioManager.PlayThisEffect("uiScroll");
+
+                }
+                else if (InDW_Confirm) //Player has chosen to quit
+                {
+                    audioManager.PlayThisEffect("uiConfirm");
+                    contactUsPanel.gameObject.SetActive(true);
+                    Cursor.visible = true;
+                    currentState = MainMenuState.contactUs;
+                }
+                break;
+            case 4:
+                if (InDw_Down)
+                {
                     menuIndex = 0;
                     hilighter.transform.localPosition = hPos[0].transform.localPosition;
                     audioManager.PlayThisEffect("uiScroll");
@@ -182,7 +212,7 @@ public class MainMenu : MonoBehaviour
                 else if (InDW_Up)
                 {
                     menuIndex--;
-                    hilighter.transform.localPosition = hPos[2].transform.localPosition;
+                    hilighter.transform.localPosition = hPos[3].transform.localPosition;
                     audioManager.PlayThisEffect("uiScroll");
 
                 }
@@ -270,6 +300,18 @@ public class MainMenu : MonoBehaviour
             menuIndex = 2;
             controlsPanel.gameObject.SetActive(false);
             currentState = MainMenuState.main;
+        }
+    }
+
+    private void ContactUs()
+    {
+        if (InDW_Cancel)
+        {
+            audioManager.PlayThisEffect("uiCancel");
+            menuIndex = 3;
+            contactUsPanel.gameObject.SetActive(false);
+            currentState = MainMenuState.main;
+            Cursor.visible = false;
         }
     }
 }
