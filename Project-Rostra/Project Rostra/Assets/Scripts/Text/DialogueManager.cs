@@ -7,14 +7,6 @@ using UnityEngine;
 
 public enum ChoiceEnum : byte
 {
-	// hey sean why does the list start at 10 then goes to 1? I mean what kind of shitty programming is that?
-	// I don't wanna have to add an extra bool to check to see if a convo wants to flip a bool if zero do nothing
-	// in an ideal world I wouldn't do this but i'm running out of time and fuck it. If whoever is reading this wants to do it
-	// maybe i'll buy lunch 
-
-
-
-	// Nevermind was bugging me too so I moved it down
 	guild = 1,
 	kill =  2,
 	spare = 3,
@@ -156,7 +148,7 @@ public class DialogueManager : MonoBehaviour
 		DontDestroyOnLoad(this.gameObject);
         // set everything to its default 
         textElements = new Queue<string>();
-		choices = new bool[20]; // was 7
+		choices = new bool[25]; // was 7
 		normalChoices = new bool[7];
 		change = 0;
 		currentChange = 0;
@@ -439,7 +431,7 @@ public class DialogueManager : MonoBehaviour
 				choice1.text = dia.choiceText1;
 				choice2.text = dia.choiceText2;
 			}
-			yield return new WaitForSeconds(dia.typingSpeed * zTypeSpeed /*(Input.GetButton("Confirm") ? 0.01f : 1f)*/);
+			yield return new WaitForSeconds(0.001f);
 		}
 	}
 	// did you pick door 1 

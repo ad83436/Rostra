@@ -43,7 +43,7 @@ public class TransitionToWM : MonoBehaviour
 		{
 			player.transform.position = loadPosition;
 			player.transform.localScale = new Vector3(2, 2, player.transform.localScale.z);
-			player.GetComponent<PlayerMove>().Speed = 2;
+			player.GetComponent<PlayerMove>().speedMultiplier = 0.5f;
 			if (isBoss == true)
 			{
 				EnemySpawner.instance.isBoss = true;
@@ -62,7 +62,7 @@ public class TransitionToWM : MonoBehaviour
 		{
 			player.transform.position = loadPosition;
 			player.transform.localScale = new Vector3(3, 3, player.transform.localScale.z);
-			player.GetComponent<PlayerMove>().Speed = 4;
+			player.GetComponent<PlayerMove>().speedMultiplier = 1f;
 			if (isBoss == true)
 			{
 				EnemySpawner.instance.isBoss = true;
@@ -81,7 +81,7 @@ public class TransitionToWM : MonoBehaviour
 		{
 			player.transform.position = loadPosition;
 			player.transform.localScale = new Vector3(2, 2, player.transform.localScale.z);
-			player.GetComponent<PlayerMove>().Speed = 2;
+			player.GetComponent<PlayerMove>().speedMultiplier = 0.5f;
 			if (isBoss == true)
 			{
 				EnemySpawner.instance.isBoss = true;
@@ -100,7 +100,7 @@ public class TransitionToWM : MonoBehaviour
 		{
 			player.transform.position = loadPosition;
 			player.transform.localScale = new Vector3(3, 3, player.transform.localScale.z);
-			player.GetComponent<PlayerMove>().Speed = 4;
+			player.GetComponent<PlayerMove>().speedMultiplier = 1f;
 			if (isBoss == true)
 			{
 				EnemySpawner.instance.isBoss = true;
