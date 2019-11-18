@@ -152,7 +152,7 @@ public class Enemy : MonoBehaviour
 
     protected virtual void Start()
     {
-        print("First" + currentHP);
+      
 
         amountModed = 0;
         timeAttacking = 1;
@@ -200,7 +200,6 @@ public class Enemy : MonoBehaviour
         ChoosePlayer();
         enemyStartingAtk = Mathf.CeilToInt(eAttack);
         enemyStartingDefence = Mathf.CeilToInt(eDefence);
-        print(currentHP);
 
         currentState = EnemyState.idle;
 
@@ -991,7 +990,7 @@ public class Enemy : MonoBehaviour
             timeAttacking += 1;
         }
 
-        Debug.Log("Enemy Hit is " + hit);
+       
     }
 
     protected virtual float CalculateCrit()
@@ -1015,7 +1014,7 @@ public class Enemy : MonoBehaviour
 
             if (CalculateCrit() <= eCritical)
             {
-                Debug.Log("Critical Hit from Enemy");
+               
                 attackThisPlayer.TakeDamage(eAttack * 1.2f);
                 audioManager.PlayThisEffect("attack");
             }
@@ -1029,7 +1028,7 @@ public class Enemy : MonoBehaviour
         else
         {
             uiBTL.UpdateActivityText("Attack Missed");
-            Debug.Log("Enemy has missed");
+            
             attackThisPlayer.TakeDamage(0.0f); //Pass in zero, i.e miss
         }
         animator.SetBool("Attack", false);
@@ -1083,7 +1082,7 @@ public class Enemy : MonoBehaviour
             if (battleManager.players[i].def == Mathf.Min(playerStatNeeded.ToArray()))
             {
                 attackThisPlayer = battleManager.players[i].playerReference;
-                print(eName + " Attacked " + battleManager.players[i].name + " Who has a defence of " + battleManager.players[i].def);
+                
                 CalculateHit();
                 animator.SetBool("Attack", true);
             }
@@ -1143,7 +1142,7 @@ public class Enemy : MonoBehaviour
 
         if (timeAttacking == 1)
         {
-            print("enemy has attacked " + timeAttacking + " time(s) since the start of the battle");
+            
             CalculateHit();
             animator.SetBool("Attack", true);
             ++timeAttacking;
@@ -1153,7 +1152,6 @@ public class Enemy : MonoBehaviour
         {
             Mathf.CeilToInt(attackMod = eAttack * 0.1f);
             eAttack += attackMod;
-            print("enemy has attacked " + timeAttacking + " time(s) since the start of the battle with a attack of " + eAttack);
             CalculateHit();
             animator.SetBool("Attack", true);
             ++timeAttacking;
@@ -1163,7 +1161,7 @@ public class Enemy : MonoBehaviour
         {
             Mathf.CeilToInt(attackMod = eAttack * 0.2f);
             eAttack += attackMod;
-            print("enemy has attacked " + timeAttacking + " time(s) since the start of the battle with a attack of " + eAttack);
+           
             CalculateHit();
             animator.SetBool("Attack", true);
             ++timeAttacking;
@@ -1173,7 +1171,7 @@ public class Enemy : MonoBehaviour
         {
             Mathf.CeilToInt(attackMod = eAttack * 0.3f);
             eAttack += attackMod;
-            print("enemy has attacked " + timeAttacking + " time(s) since the start of the battle with a attack of " + eAttack);
+           
             CalculateHit();
             animator.SetBool("Attack", true);
             ++timeAttacking;
@@ -1183,7 +1181,7 @@ public class Enemy : MonoBehaviour
         {
             Mathf.CeilToInt(attackMod = eAttack * 0.4f);
             eAttack += attackMod;
-            print("enemy has attacked " + timeAttacking + " time(s) since the start of the battle with a attack of " + eAttack);
+           
             CalculateHit();
             animator.SetBool("Attack", true);
             ++timeAttacking;
@@ -1193,7 +1191,7 @@ public class Enemy : MonoBehaviour
         {
             Mathf.CeilToInt(attackMod = eAttack * 0.5f);
             eAttack += attackMod;
-            print("enemy has attacked " + timeAttacking + " time(s) since the start of the battle with a attack of " + eAttack);
+          
             CalculateHit();
             animator.SetBool("Attack", true);
         }
@@ -1356,7 +1354,7 @@ public class Enemy : MonoBehaviour
                  if(playerStatNeeded[i] != statsRefForCheck)
                  {
                     playerStatNeeded.Remove(playerStatNeeded[i]);
-                     print("Removed" + battleManager.players[i].name);
+                     
                  }
 
                  else if (playerStatNeeded[i] == statsRefForCheck)
@@ -1386,7 +1384,7 @@ public class Enemy : MonoBehaviour
                  if (playerStatNeeded[i] != statsRefForCheck)
                  {
                     playerStatNeeded.Remove(playerStatNeeded[i]);
-                     print("Removed" + battleManager.players[i].name);
+                   
                  }
 
                  else if (playerStatNeeded[i] == statsRefForCheck)
@@ -1416,7 +1414,7 @@ public class Enemy : MonoBehaviour
                 if (playerStatNeeded[i] != statsRefForCheck)
                 {
                     playerStatNeeded.Remove(playerStatNeeded[i]);
-                    print("Removed" + battleManager.players[i].name);
+                    
                 }
                
                 else if (playerStatNeeded[i] == statsRefForCheck)
@@ -1445,7 +1443,7 @@ public class Enemy : MonoBehaviour
                  if (playerStatNeeded[i] != statsRefForCheck)
                  {
                      playerStatNeeded.Remove(playerStatNeeded[i]);
-                     print("Removed" + battleManager.players[i].name);
+                     
                  }
 
                  else if (playerStatNeeded[i] == statsRefForCheck)
@@ -2565,7 +2563,7 @@ public class Enemy : MonoBehaviour
         if (enemyAttack == EnemyAttackType.Relentless)
         {
             playerIndexHolder = battleManager.players[PickRandomNumber(battleManager.players[0].playerReference.playerIndex, battleManager.players[1].playerReference.playerIndex, battleManager.players[2].playerReference.playerIndex, battleManager.players[3].playerReference.playerIndex)].playerReference.playerIndex;
-            print(playerIndexHolder);
+           
         }
     }
     
@@ -2896,7 +2894,7 @@ public class Enemy : MonoBehaviour
         if (randomRow == 0)
         {
             
-            print("Picked Back Row");
+         
             if (OberonHit())
             {
                 AttackOberon(eAttack * 1.5f);
@@ -2921,7 +2919,7 @@ public class Enemy : MonoBehaviour
 
         else if (randomRow == 1)
         {
-            print("Picked Back Row");
+          
 
             if (FargasHit())
             {
@@ -3024,7 +3022,7 @@ public class Enemy : MonoBehaviour
     {
         uiBTL.UpdateActivityText("Heal All");
         int healthMod = 100;
-        print("Used The Heal All Skill");
+       
 
         for (int i = 0; i < battleManager.enemies.Length; ++i)
         {
@@ -3545,10 +3543,23 @@ public class Enemy : MonoBehaviour
         if (waitTime == waitTimeAtStart && playedWaitingText)
         {
             uiBTL.UpdateActivityText("Waiting " + waitTime + " Turns");
+            if(enemyName == EnemyName.Boar)
+            {
+                BoarWaitingSound();
+                Invoke("BoarWaitingSound",.16f);
+                Invoke("BoarWaitingSound",.3f);
+
+
+            }
             playedWaitingText = false;
         }
     }
 
+    //used for invoking 
+    void BoarWaitingSound()
+    {
+        audioManager.PlayThisEffect("Boar Waiting");
+    }
     void HealEnemy()
     {
         audioManager.PlayThisEffect("buff");

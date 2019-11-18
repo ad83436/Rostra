@@ -85,6 +85,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip sliceAndDice;
     //Boar
     public AudioClip ironTusk;
+    public AudioClip boarWaiting;
 
     //Farya
     public AudioClip despair;
@@ -410,6 +411,9 @@ public class AudioManager : MonoBehaviour
             //Boar
             case "Iron Tusk":
                 effectAudioSource.PlayOneShot(ironTusk);
+                break;
+            case "Boar Waiting":
+                effectAudioSource.PlayOneShot(boarWaiting);
                 break;
 
             //Fraya
