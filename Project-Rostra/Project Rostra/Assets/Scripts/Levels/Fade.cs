@@ -175,7 +175,7 @@ public class Fade : MonoBehaviour
         {
             bossCounter++;
         }
-        Debug.Log("Flip Fade to battle and counter is " + bossCounter);
+        //Debug.Log("Flip Fade to battle and counter is " + bossCounter);
 
         if (bossCounter == 1 && enemyHolder!=null) //Boss counter 0 is Farea, 1 is Grendol
         {

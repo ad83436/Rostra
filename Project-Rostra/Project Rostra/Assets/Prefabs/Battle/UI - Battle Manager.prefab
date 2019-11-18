@@ -2368,6 +2368,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyHolder: {fileID: 0}
+  secondBossHolder: {fileID: 0}
+  tutorial: 0
   victoryPanel: {fileID: 230563281654219797}
   defeatPanel: {fileID: 1576159974}
   endTestPanel: {fileID: 0}
@@ -10099,8 +10101,7 @@ MonoBehaviour:
   activtyTextBack: {fileID: 3386447122747993141}
   activityText: {fileID: 364471767208789639}
   fadePanel: {fileID: 875374380}
-  victoryPanel: {fileID: 230563282549537478}
-  defeatPanel: {fileID: 0}
+  backgroundImage: {fileID: 0}
 --- !u!1 &230563281722165080
 GameObject:
   m_ObjectHideFlags: 0
@@ -14255,6 +14256,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyHolder: {fileID: 0}
+  secondBossHolder: {fileID: 0}
+  tutorial: 0
   victoryPanel: {fileID: 0}
   defeatPanel: {fileID: 0}
   endTestPanel: {fileID: 0}
