@@ -676,15 +676,9 @@ public class DialogueManager : MonoBehaviour
 		{
             if (!BattleManager.battleInProgress)
             {
-				Debug.Log("CALL BATTLE");
+				//Debug.Log("CALL BATTLE");
                 fade.FlipFadeToBattle();
                 battle = false;
-				dia = null;
-            }
-
-            if (CutsceneManager.instance.isActive) //If the CM is active, that means we need to return the player to where he was before the cutscene started
-            {
-                CutsceneManager.instance.End();
             }
 		}
 	}

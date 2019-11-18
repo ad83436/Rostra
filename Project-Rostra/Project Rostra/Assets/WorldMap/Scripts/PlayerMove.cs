@@ -73,7 +73,7 @@ public class PlayerMove : MonoBehaviour {
 	}
 
 	void FixedUpdate() {
-		Debug.Log(dm.canWalk + "" + BattleManager.battleInProgress + "" + PauseMenuController.isPaused + "" + ItemShopUI.IsOpen + "" + CutsceneManager.instance.isActive);
+		//Debug.Log(dm.canWalk + "" + BattleManager.battleInProgress + "" + PauseMenuController.isPaused + "" + ItemShopUI.IsOpen + "" + CutsceneManager.instance.isActive);
 		if (dm.canWalk && !BattleManager.battleInProgress && !PauseMenuController.isPaused && !ItemShopUI.IsOpen && CutsceneManager.instance.isActive == false) {
 
 			float speed = (Input.GetButton("Cancel") ? max_run_speed : max_walk_speed) * speedMultiplier;
