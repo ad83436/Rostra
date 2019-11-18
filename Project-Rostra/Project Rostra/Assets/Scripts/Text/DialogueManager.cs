@@ -300,95 +300,98 @@ public class DialogueManager : MonoBehaviour
 	// go home you done
 	public void End()
 	{
-		if (dia.triggerBool > 0)
-		{
-			Debug.Log(dia.triggerBool);
-			switch (dia.triggerBool)
-			{
-				case 1:
-					guild = true;
-					SetChoice(ChoiceEnum.guild, true);
-					talkedToContact = true;
-					SetChoice(ChoiceEnum.talkToContact, true);
-					Debug.Log("Chose the Guild");
-					break;
-				case 2:
-					kill = true;
-					SetChoice(ChoiceEnum.kill, true);
-					Debug.Log("Killed Farya");
-					break;
-				case 3:
-					spare = true;
-					SetChoice(ChoiceEnum.spare, true);
-					Debug.Log("Spared Farya");
-					break;
-				case 6:
-					demo = true;
-					SetChoice(ChoiceEnum.demo, true);
-					Debug.Log("We can leave the tavern");
-					break;
-				case 7:
-					talkedToCo = true;
-					SetChoice(ChoiceEnum.talkToCo, true);
-					Debug.Log("We talked to the commander!");
-					break;
-				case 9:
-					sawJournal = true;
-					SetChoice(ChoiceEnum.sawJournal, true);
-					Debug.Log("Saw the journal");
-					break;
-				case 10:
-					dwarf = true;
-					SetChoice(ChoiceEnum.dwarf, true);
-					talkedToContact = true;
-					SetChoice(ChoiceEnum.talkToContact, true);
-					Debug.Log("Chose the Dwarves");
-					break;
-				case 12:
-					battleFarea = true;
-					SetChoice(ChoiceEnum.battleFarea, true);
-					Debug.Log("Battled the Farea");
-					break;
-				case 13:
-					battleGrendol = true;
-					SetChoice(ChoiceEnum.battleGrendol, true);
-					Debug.Log("Battled the Grendol");
-					break;
+        if (dia != null)
+        {
+            if (dia.triggerBool > 0)
+            {
+                Debug.Log(dia.triggerBool);
+                switch (dia.triggerBool)
+                {
+                    case 1:
+                        guild = true;
+                        SetChoice(ChoiceEnum.guild, true);
+                        talkedToContact = true;
+                        SetChoice(ChoiceEnum.talkToContact, true);
+                        Debug.Log("Chose the Guild");
+                        break;
+                    case 2:
+                        kill = true;
+                        SetChoice(ChoiceEnum.kill, true);
+                        Debug.Log("Killed Farya");
+                        break;
+                    case 3:
+                        spare = true;
+                        SetChoice(ChoiceEnum.spare, true);
+                        Debug.Log("Spared Farya");
+                        break;
+                    case 6:
+                        demo = true;
+                        SetChoice(ChoiceEnum.demo, true);
+                        Debug.Log("We can leave the tavern");
+                        break;
+                    case 7:
+                        talkedToCo = true;
+                        SetChoice(ChoiceEnum.talkToCo, true);
+                        Debug.Log("We talked to the commander!");
+                        break;
+                    case 9:
+                        sawJournal = true;
+                        SetChoice(ChoiceEnum.sawJournal, true);
+                        Debug.Log("Saw the journal");
+                        break;
+                    case 10:
+                        dwarf = true;
+                        SetChoice(ChoiceEnum.dwarf, true);
+                        talkedToContact = true;
+                        SetChoice(ChoiceEnum.talkToContact, true);
+                        Debug.Log("Chose the Dwarves");
+                        break;
+                    case 12:
+                        battleFarea = true;
+                        SetChoice(ChoiceEnum.battleFarea, true);
+                        Debug.Log("Battled the Farea");
+                        break;
+                    case 13:
+                        battleGrendol = true;
+                        SetChoice(ChoiceEnum.battleGrendol, true);
+                        Debug.Log("Battled the Grendol");
+                        break;
 
-			}
-		}
-		if (dia.addMilestone > 0)
-		{
-			AddMilestone(dia.addMilestone);
-		}
-		charName.text = "";
-		text.text = "";
-		portrait.sprite = null;
-		currentChange = 0;
-		boxCount = 0;
-		lenght = 0;
-		continueCountTotal = 0;
-		continueCount = 0;
-		anim.SetBool("isOpen", false);
-		choiceNum = 0;
-		highlight1.SetActive(false);
-		highlight2.SetActive(false);
-		canWalk = true;
-		startUpdating = false;
-		nextDialogue = false;
-		isActive = false;
-		choiceCount = 0;
-		
-		if (willCount == dia.maxWillCount && hasCountTriggered == true)
-		{
-			willCount = 0;
-			dia = null;
-			hasCountTriggered = false;
-		}
-		if (dia != null && dia.isBattle == true)
-		{
-			fade = GameObject.Find("Fade").GetComponent<Fade>();
-			battle = true;
+                }
+            }
+            if (dia.addMilestone > 0)
+            {
+                AddMilestone(dia.addMilestone);
+            }
+            charName.text = "";
+            text.text = "";
+            portrait.sprite = null;
+            currentChange = 0;
+            boxCount = 0;
+            lenght = 0;
+            continueCountTotal = 0;
+            continueCount = 0;
+            anim.SetBool("isOpen", false);
+            choiceNum = 0;
+            highlight1.SetActive(false);
+            highlight2.SetActive(false);
+            canWalk = true;
+            startUpdating = false;
+            nextDialogue = false;
+            isActive = false;
+            choiceCount = 0;
+
+            if (willCount == dia.maxWillCount && hasCountTriggered == true)
+            {
+                willCount = 0;
+                dia = null;
+                hasCountTriggered = false;
+            }
+            if (dia != null && dia.isBattle == true)
+            {
+                fade = GameObject.Find("Fade").GetComponent<Fade>();
+                battle = true;
+            }
         }
 	}
 	// this is a coroutine that will take our chars from the string and print one at a time 
@@ -673,15 +676,9 @@ public class DialogueManager : MonoBehaviour
 		{
             if (!BattleManager.battleInProgress)
             {
-				Debug.Log("CALL BATTLE");
+				//Debug.Log("CALL BATTLE");
                 fade.FlipFadeToBattle();
                 battle = false;
-				dia = null;
-            }
-
-            if (CutsceneManager.instance.isActive) //If the CM is active, that means we need to return the player to where he was before the cutscene started
-            {
-                CutsceneManager.instance.End();
             }
 		}
 	}
