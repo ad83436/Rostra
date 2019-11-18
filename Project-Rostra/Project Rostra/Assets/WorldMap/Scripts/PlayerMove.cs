@@ -46,22 +46,6 @@ public class PlayerMove : MonoBehaviour
                 animator.SetFloat("Vertical", 0);
                 animator.SetFloat("Speed", 0);
             }
-			// these are debug commands, please please please remove once done testing
-
-			//if (Input.GetKeyDown(KeyCode.G))
-			//{
-			//	DialogueManager.instance.metAllChars = true;
-			//	DialogueManager.instance.SetChoice(ChoiceEnum.metAllChars, true);
-			//	DialogueManager.instance.dwarf = true;
-			//	DialogueManager.instance.SetChoice(ChoiceEnum.dwarf, true);
-			//	DialogueManager.instance.battleFarea = true;
-			//	DialogueManager.instance.SetChoice(ChoiceEnum.battleFarea, true);
-			//}
-			//if (Input.GetKeyDown(KeyCode.U))
-			//{
-			//	DialogueManager.instance.kill = true;
-			//	DialogueManager.instance.SetChoice(ChoiceEnum.kill, true);
-			//}
 		}
 	}
 

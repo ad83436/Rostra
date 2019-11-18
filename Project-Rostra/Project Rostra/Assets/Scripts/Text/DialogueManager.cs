@@ -7,14 +7,6 @@ using UnityEngine;
 
 public enum ChoiceEnum : byte
 {
-	// hey sean why does the list start at 10 then goes to 1? I mean what kind of shitty programming is that?
-	// I don't wanna have to add an extra bool to check to see if a convo wants to flip a bool if zero do nothing
-	// in an ideal world I wouldn't do this but i'm running out of time and fuck it. If whoever is reading this wants to do it
-	// maybe i'll buy lunch 
-
-
-
-	// Nevermind was bugging me too so I moved it down
 	guild = 1,
 	kill =  2,
 	spare = 3,
