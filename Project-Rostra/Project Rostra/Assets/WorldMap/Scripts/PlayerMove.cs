@@ -2,50 +2,53 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMove : MonoBehaviour
-{
-    public float Speed;
-    public Animator animator;
-    private Rigidbody2D rb;
-    private Vector2 moveVelocity;
-    float horizontalMove;
-    float verticalMove;
+
+public class PlayerMove : MonoBehaviour {
+	public Animator an;
+	private Rigidbody2D rb;
 	private ConversationTrigger ct;
 	private DialogueManager dm;
 	DialogueToBattle dtm;
-    private Vector2 moveInput;
 
-	void Start()
-    {
-        rb = GetComponent<Rigidbody2D>();
-        moveInput = new Vector2(0.0f, 0.0f);
-        dm = DialogueManager.instance;
-    }
+	[Header("Movement Variables")]
+	public float max_walk_speed;
+	public float max_run_speed;
+	public float accel;
+	public float decel;
+	public float perc;
 
-    void LateUpdate()
-    {
-        if (gameObject.activeSelf)
-        {
-            if (dm.canWalk && !BattleManager.battleInProgress && !PauseMenuController.isPaused && !ItemShopUI.IsOpen && CutsceneManager.instance.isActive == false)
-            {
-                moveInput.x = Input.GetAxisRaw("Horizontal");
-                moveInput.y = Input.GetAxisRaw("Vertical");
-                moveVelocity = moveInput.normalized * Speed;
-                horizontalMove = Input.GetAxisRaw("Horizontal") * Speed;
-                verticalMove = Input.GetAxisRaw("Vertical") * Speed;
+	[HideInInspector]
+	public float speedMultiplier;
 
-                animator.SetFloat("Horizontal", horizontalMove);
-                animator.SetFloat("Vertical", verticalMove);
-                animator.SetFloat("Speed", moveVelocity.sqrMagnitude);
-                TalkToNPC();
-            }
-            else if (dm.canWalk == false)
-            {
-                moveVelocity = Vector2.zero;
-                animator.SetFloat("Horizontal", 0);
-                animator.SetFloat("Vertical", 0);
-                animator.SetFloat("Speed", 0);
-            }
+	// input
+	private bool Up => Input.GetButton("Up");
+	private bool Down => Input.GetButton("Down");
+	private bool Left => Input.GetButton("Left");
+	private bool Right => Input.GetButton("Right");
+
+	void Start() {
+		speedMultiplier = 1f;
+		rb = GetComponent<Rigidbody2D>();
+		dm = DialogueManager.instance;
+		an = GetComponent<Animator>();
+	}
+
+	bool NearZero(float value) {
+		return Mathf.Abs(value) <= perc;
+	}
+
+	void LateUpdate() {
+		if (gameObject.activeSelf) {
+			if (dm.canWalk && !BattleManager.battleInProgress && !PauseMenuController.isPaused && !ItemShopUI.IsOpen && CutsceneManager.instance.isActive == false) {
+				an.SetFloat("Horizontal", rb.velocity.x);
+				an.SetFloat("Vertical", rb.velocity.y);
+				an.SetFloat("Speed", rb.velocity.sqrMagnitude);
+				TalkToNPC();
+			} else if (dm.canWalk == false) {
+				an.SetFloat("Horizontal", 0);
+				an.SetFloat("Vertical", 0);
+				an.SetFloat("Speed", 0);
+			}
 			// these are debug commands, please please please remove once done testing
 
 			//if (Input.GetKeyDown(KeyCode.G))
@@ -65,65 +68,92 @@ public class PlayerMove : MonoBehaviour
 		}
 	}
 
+	void FixedUpdate() {
+		if (dm.canWalk && !BattleManager.battleInProgress && !PauseMenuController.isPaused && !ItemShopUI.IsOpen && CutsceneManager.instance.isActive == false) {
 
-	void FixedUpdate()
-    {
-        if (!BattleManager.battleInProgress)
-        {
-            rb.MovePosition(rb.position + moveVelocity * Time.fixedDeltaTime);
-        }
-    }
+			float speed = (Input.GetButton("Cancel") ? max_run_speed : max_walk_speed) * speedMultiplier;
+			Vector2 vel = rb.velocity;
+
+			#region Movement Garbo
+			if (Up != Down) {
+				if (Up) {
+					if (NearZero(vel.y - speed)) vel.y = speed;
+					else if (vel.y < speed) vel.y += accel * Time.fixedDeltaTime * speedMultiplier;
+					else if (vel.y > speed) vel.y -= decel * Time.fixedDeltaTime * speedMultiplier;
+				}
+				if (Down) {
+					if (NearZero(vel.x + speed)) vel.y = -speed;
+					else if (vel.y > -speed) vel.y -= accel * Time.fixedDeltaTime * speedMultiplier;
+					else if (vel.y < -speed) vel.y += decel * Time.fixedDeltaTime * speedMultiplier;
+				}
+			} else {
+				if (NearZero(vel.y)) vel.y = 0f;
+				else if (vel.y > 0f) vel.y -= decel * Time.fixedDeltaTime * speedMultiplier;
+				else if (vel.y < 0f) vel.y += decel * Time.fixedDeltaTime * speedMultiplier;
+			}
+
+			if (Right != Left) {
+				if (Right) {
+					if (NearZero(vel.x - speed)) vel.x = speed;
+					else if (vel.x < speed) vel.x += accel * Time.fixedDeltaTime * speedMultiplier;
+					else if (vel.x > speed) vel.x -= decel * Time.fixedDeltaTime * speedMultiplier;
+				}
+				if (Left) {
+					if (NearZero(vel.x + speed)) vel.x = -speed;
+					else if (vel.x > -speed) vel.x -= accel * Time.fixedDeltaTime * speedMultiplier;
+					else if (vel.x < -speed) vel.x += decel * Time.fixedDeltaTime * speedMultiplier;
+				}
+			} else {
+				if (NearZero(vel.x)) vel.x = 0f;
+				else if (vel.x > 0f) vel.x -= decel * Time.fixedDeltaTime * speedMultiplier;
+				else if (vel.x < 0f) vel.x += decel * Time.fixedDeltaTime * speedMultiplier;
+			}
+			#endregion
+
+			rb.velocity = vel;
+
+		} else if (dm.canWalk == false) {
+			rb.velocity = Vector3.zero;
+		}
+	}
 
 	// this is all code for handeling getting the collision with the NPC and getting it's dialogue
-	private void OnTriggerEnter2D(Collider2D col)
-	{
-		if (col.CompareTag("NPC"))
-		{
+	private void OnTriggerEnter2D(Collider2D col) {
+		if (col.CompareTag("NPC")) {
 			ct = col.GetComponent<ConversationTrigger>();
-			if (ct.pressZ != null)
-			{
+			if (ct.pressZ != null) {
 				ct.SetPressZ(true);
 			}
 		}
 	}
 	// set your CT to null once you exit the range of the NPC
-	private void OnTriggerExit2D(Collider2D col)
-	{
-		if (col.CompareTag("NPC") && col.GetComponent<ConversationTrigger>() == ct)
-		{
-			if (ct.pressZ != null)
-			{
+	private void OnTriggerExit2D(Collider2D col) {
+		if (col.CompareTag("NPC") && col.GetComponent<ConversationTrigger>() == ct) {
+			if (ct.pressZ != null) {
 				ct.SetPressZ(false);
 			}
 			ct = null;
-			
+
 		}
 	}
 	// this is will handle talking to the NPC 
-	public void TalkToNPC()
-	{
-		if ((dm.nextDialogue == true && dm.isActive == false) && Input.GetButtonDown("Confirm") && ct != null && ct.isChoiceDepend == false && !ItemShopUI.IsOpen)
-		{
+	public void TalkToNPC() {
+		if ((dm.nextDialogue == true && dm.isActive == false) && Input.GetButtonDown("Confirm") && ct != null && ct.isChoiceDepend == false && !ItemShopUI.IsOpen) {
 			ct.TriggerConvo();
 			Debug.Log("Talking");
-		}
-		else if ((dm.nextDialogue == true && dm.isActive == false) && Input.GetButtonDown("Confirm") && ct != null && ct.dialogue.isChoice == true && ct.dialogue.hasPlayed == true)
-		{
+		} else if ((dm.nextDialogue == true && dm.isActive == false) && Input.GetButtonDown("Confirm") && ct != null && ct.dialogue.isChoice == true && ct.dialogue.hasPlayed == true) {
 			ct.TriggerNormalDialogue();
 			Debug.Log("Talking");
-		}
-		else if ((dm.nextDialogue == true && dm.isActive == false) && Input.GetButtonDown("Confirm") && ct != null && ct.isChoiceDepend == true)
-		{
+		} else if ((dm.nextDialogue == true && dm.isActive == false) && Input.GetButtonDown("Confirm") && ct != null && ct.isChoiceDepend == true) {
 			ct.TriggerChoiceDependantConvo();
 			Debug.Log("Talking");
 		}
 	}
 
-    public static void Test()
-    {
-        Debug.Log("event invoked");
-    }
+	public static void Test() {
+		Debug.Log("event invoked");
+	}
 }
-    
+
 
 

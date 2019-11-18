@@ -73,7 +73,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1927818603
   m_SortingLayer: 1
-  m_SortingOrder: 200
+  m_SortingOrder: 1
   m_Sprite: {fileID: 5239984519489884028, guid: f26b7a521e024fd4b81372091a12d134,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -119,8 +119,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18bfa8ad38085354f91f7e6806787ff2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 4
-  animator: {fileID: 3029439829066752902}
+  an: {fileID: 0}
+  max_walk_speed: 4
+  max_run_speed: 8
+  accel: 50
+  decel: 90
+  perc: 1
+  speedMultiplier: 0
 --- !u!58 &3029439829066752903
 CircleCollider2D:
   m_ObjectHideFlags: 0
