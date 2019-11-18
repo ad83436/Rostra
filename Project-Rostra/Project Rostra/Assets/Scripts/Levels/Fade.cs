@@ -127,6 +127,7 @@ public class Fade : MonoBehaviour
                     }
                     audioManager.PlayThePreviousSong();
                     NewWMEnemy.isActive = true;
+                    CutsceneManager.instance.isActive = false;
                 }
                 else if (transitionToEndTest)
                 {
