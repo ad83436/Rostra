@@ -301,22 +301,22 @@ PrefabInstance:
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
       propertyPath: cs.dialogues.Array.data[0].names.Array.size
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
       propertyPath: cs.dialogues.Array.data[0].sentences.Array.size
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
       propertyPath: cs.dialogues.Array.data[0].portrait.Array.size
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
       propertyPath: cs.dialogues.Array.data[0].povChange.Array.size
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
@@ -355,150 +355,177 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
-      propertyPath: cs.dialogues.Array.data[0].names.Array.data[1]
+      propertyPath: cs.dialogues.Array.data[0].names.Array.data[0]
       value: Torven
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
+      propertyPath: cs.dialogues.Array.data[0].names.Array.data[1]
+      value: Fargas
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
+        type: 3}
       propertyPath: cs.dialogues.Array.data[0].names.Array.data[2]
-      value: Arcelus
+      value: Torven
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
       propertyPath: cs.dialogues.Array.data[0].names.Array.data[3]
-      value: Fargas
-      objectReference: {fileID: 0}
-    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[0].names.Array.data[4]
       value: Frea
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
-      propertyPath: cs.dialogues.Array.data[0].names.Array.data[5]
+      propertyPath: cs.dialogues.Array.data[0].names.Array.data[4]
       value: Fargas
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
+      propertyPath: cs.dialogues.Array.data[0].names.Array.data[5]
+      value: Frea
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
+        type: 3}
       propertyPath: cs.dialogues.Array.data[0].names.Array.data[6]
-      value: Arcelus
+      value: Fargas
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
       propertyPath: cs.dialogues.Array.data[0].names.Array.data[7]
-      value: Oberon
+      value: Arcelus
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
       propertyPath: cs.dialogues.Array.data[0].names.Array.data[8]
+      value: Oberon
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
+        type: 3}
+      propertyPath: cs.dialogues.Array.data[0].names.Array.data[9]
       value: Fargas
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
       propertyPath: cs.dialogues.Array.data[0].sentences.Array.data[0]
+      value: What happened to Domel?
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
+        type: 3}
+      propertyPath: cs.dialogues.Array.data[0].sentences.Array.data[1]
       value: We couldn't find Domel. We tried but we never made it past the monsters
         to get to his home.
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
-      propertyPath: cs.dialogues.Array.data[0].sentences.Array.data[1]
+      propertyPath: cs.dialogues.Array.data[0].sentences.Array.data[2]
       value: At least you were willing to give it a try. I'm so worried about him.
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
-      propertyPath: cs.dialogues.Array.data[0].sentences.Array.data[2]
+      propertyPath: cs.dialogues.Array.data[0].sentences.Array.data[3]
       value: Why did you lie to him?
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
-      propertyPath: cs.dialogues.Array.data[0].sentences.Array.data[3]
+      propertyPath: cs.dialogues.Array.data[0].sentences.Array.data[4]
       value: He was looking for a fight. I don't want to get innocent people wrapped
         up in whatever he has planned.
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
-      propertyPath: cs.dialogues.Array.data[0].sentences.Array.data[4]
+      propertyPath: cs.dialogues.Array.data[0].sentences.Array.data[5]
       value: Well... where do we go from here?
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
-      propertyPath: cs.dialogues.Array.data[0].sentences.Array.data[5]
+      propertyPath: cs.dialogues.Array.data[0].sentences.Array.data[6]
       value: We need to put a stop to whoever turned Brenna into a Farea. They aren't
         going to stop unless we do something about it.
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
-      propertyPath: cs.dialogues.Array.data[0].sentences.Array.data[6]
+      propertyPath: cs.dialogues.Array.data[0].sentences.Array.data[7]
       value: I agree we should everything we can to stop the people responsible. How
         are we going to find out who did this though.
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
-      propertyPath: cs.dialogues.Array.data[0].sentences.Array.data[7]
+      propertyPath: cs.dialogues.Array.data[0].sentences.Array.data[8]
       value: I know a few people in the capital of Udrasil. They might be able to
         point us in the right direction.
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
-      propertyPath: cs.dialogues.Array.data[0].sentences.Array.data[8]
+      propertyPath: cs.dialogues.Array.data[0].sentences.Array.data[9]
       value: Hopefully, if they don't then the trail goes cold here.
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
-      propertyPath: cs.dialogues.Array.data[0].sentences.Array.data[9]
-      value: 'Ending 4: The Road Less Traveled'
+      propertyPath: cs.dialogues.Array.data[0].sentences.Array.data[10]
+      value: ' Ending 4: Road Less Traveled'
       objectReference: {fileID: 0}
+    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
+        type: 3}
+      propertyPath: cs.dialogues.Array.data[0].portrait.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: bc67c4137ad9fc246937d8bfa972edf7,
+        type: 3}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
       propertyPath: cs.dialogues.Array.data[0].portrait.Array.data[1]
       value: 
-      objectReference: {fileID: 21300000, guid: 26feff2f0d4e92349a70bba8a0c18d31,
+      objectReference: {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825,
         type: 3}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
       propertyPath: cs.dialogues.Array.data[0].portrait.Array.data[2]
       value: 
-      objectReference: {fileID: 21300000, guid: f40486206916ccc4a9bf37f57f448dee,
+      objectReference: {fileID: 21300000, guid: bc67c4137ad9fc246937d8bfa972edf7,
         type: 3}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
       propertyPath: cs.dialogues.Array.data[0].portrait.Array.data[3]
       value: 
-      objectReference: {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825,
+      objectReference: {fileID: 21300000, guid: 1f1660c1b92d23a4fb0b75fcca80183d,
         type: 3}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
       propertyPath: cs.dialogues.Array.data[0].portrait.Array.data[4]
       value: 
-      objectReference: {fileID: 21300000, guid: 1f1660c1b92d23a4fb0b75fcca80183d,
+      objectReference: {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825,
         type: 3}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
       propertyPath: cs.dialogues.Array.data[0].portrait.Array.data[5]
       value: 
-      objectReference: {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825,
+      objectReference: {fileID: 21300000, guid: 1f1660c1b92d23a4fb0b75fcca80183d,
         type: 3}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
       propertyPath: cs.dialogues.Array.data[0].portrait.Array.data[6]
       value: 
-      objectReference: {fileID: 21300000, guid: f40486206916ccc4a9bf37f57f448dee,
+      objectReference: {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825,
         type: 3}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
       propertyPath: cs.dialogues.Array.data[0].portrait.Array.data[7]
       value: 
-      objectReference: {fileID: 21300000, guid: e24a4049526ca704eb781c65db5c188d,
+      objectReference: {fileID: 21300000, guid: f40486206916ccc4a9bf37f57f448dee,
         type: 3}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
       propertyPath: cs.dialogues.Array.data[0].portrait.Array.data[8]
       value: 
-      objectReference: {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825,
+      objectReference: {fileID: 21300000, guid: e24a4049526ca704eb781c65db5c188d,
         type: 3}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
       propertyPath: cs.dialogues.Array.data[0].portrait.Array.data[9]
+      value: 
+      objectReference: {fileID: 21300000, guid: cf3e11517c6c240428fb1d44e8a3b825,
+        type: 3}
+    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
+        type: 3}
+      propertyPath: cs.dialogues.Array.data[0].portrait.Array.data[10]
       value: 
       objectReference: {fileID: 21300000, guid: dd3d4b940a009d14dbfe8b78c3b4f6ca,
         type: 3}
@@ -544,18 +571,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
-      propertyPath: cs.dialogues.Array.data[0].povChange.Array.data[8]
-      value: 9
+      propertyPath: cs.dialogues.Array.data[0].povChange.Array.data[9]
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
-      propertyPath: cs.dialogues.Array.data[0].povChange.Array.data[9]
-      value: 9
+      propertyPath: cs.dialogues.Array.data[0].povChange.Array.data[10]
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
       propertyPath: cs.dialogues.Array.data[0].typingSpeed
       value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
+        type: 3}
+      propertyPath: cs.dialogues.Array.data[0].triggerBool
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 8985207403294694728, guid: fc807c7c7bed02e44a3cdae90dddf003,
         type: 3}
