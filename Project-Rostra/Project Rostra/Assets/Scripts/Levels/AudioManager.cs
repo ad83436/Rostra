@@ -32,6 +32,9 @@ public class AudioManager : MonoBehaviour
     //Items
     public AudioClip specialItem;
 
+    //Credits 
+    public AudioClip creditsTheme;
+
     //Player
     public AudioClip attack;
     public AudioClip buff;
@@ -245,6 +248,9 @@ public class AudioManager : MonoBehaviour
                 playThisNext = brennaHouse;
                 previousSong = "Brenna";
                 break;
+            case "End":
+                playThisNext = creditsTheme;
+                break;
         }
 
         if(currentState == audioManagerState.notPlaying) //The very first call
@@ -300,6 +306,8 @@ public class AudioManager : MonoBehaviour
             case "guard":
                 effectAudioSource.PlayOneShot(guard);
                 break;
+
+
 
             //Fargas
             case "swordOfFury":

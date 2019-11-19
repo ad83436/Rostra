@@ -341,16 +341,25 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 2117776291}
-    - target: {fileID: 430210745630348945, guid: 1916108d2e633f94f89ca988fced3113,
+    - target: {fileID: 6136338546659725936, guid: 1916108d2e633f94f89ca988fced3113,
         type: 3}
-      propertyPath: gameManager
-      value: 
-      objectReference: {fileID: 4680228678307591171, guid: fb169ced7c50e894ca46fee893a3f0b1,
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6141139387527719070, guid: 1916108d2e633f94f89ca988fced3113,
         type: 3}
-    - target: {fileID: 430210745630348945, guid: 1916108d2e633f94f89ca988fced3113,
+      propertyPath: m_Color.r
+      value: 0.9789212
+      objectReference: {fileID: 0}
+    - target: {fileID: 6141139387527719070, guid: 1916108d2e633f94f89ca988fced3113,
         type: 3}
-      propertyPath: SceneToLoad
-      value: PlayTest2
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6141139387527719070, guid: 1916108d2e633f94f89ca988fced3113,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.0141509175
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1916108d2e633f94f89ca988fced3113, type: 3}
