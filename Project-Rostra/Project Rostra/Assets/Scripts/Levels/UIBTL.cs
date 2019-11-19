@@ -1710,7 +1710,7 @@ public class UIBTL : MonoBehaviour
                         PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator] == (int)SKILLS.Fr_BleedingEdge ||
                         PartySkills.skills[playerInControl.playerIndex].equippedSkills[controlsIndicator] == (int)SKILLS.Fa_SwordOfFury) //Also prevents sound from repeating
                     {
-                        Debug.Log("This happened");
+                       // Debug.Log("This happened");
                         currentState = btlUIState.idle;
                     }
                 }
