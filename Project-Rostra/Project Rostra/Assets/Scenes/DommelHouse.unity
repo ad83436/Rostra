@@ -2744,7 +2744,7 @@ Transform:
   - {fileID: 322956887}
   - {fileID: 1217847189}
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &808057998
 PrefabInstance:
@@ -2978,7 +2978,7 @@ Transform:
   - {fileID: 1244910418}
   - {fileID: 615339563}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &833431685
 PrefabInstance:
@@ -3382,7 +3382,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 30
+  m_RootOrder: 31
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &894618509
 GameObject:
@@ -21203,7 +21203,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 21
+  m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1072683624
 PrefabInstance:
@@ -28664,7 +28664,7 @@ PrefabInstance:
     - target: {fileID: 3029439829066752904, guid: 5f8e4d9700e139945944c1d4e8577c67,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.92
+      value: -1.85
       objectReference: {fileID: 0}
     - target: {fileID: 3029439829066752904, guid: 5f8e4d9700e139945944c1d4e8577c67,
         type: 3}
@@ -28694,7 +28694,7 @@ PrefabInstance:
     - target: {fileID: 3029439829066752904, guid: 5f8e4d9700e139945944c1d4e8577c67,
         type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3029439829066752904, guid: 5f8e4d9700e139945944c1d4e8577c67,
         type: 3}
@@ -44939,7 +44939,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1812408188
 BoxCollider2D:
@@ -46243,6 +46243,12 @@ PrefabInstance:
       propertyPath: fade
       value: 
       objectReference: {fileID: 212276441}
+    - target: {fileID: 6956292027799549243, guid: 0951f2793dadde648962124890327555,
+        type: 3}
+      propertyPath: d.portrait.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: e2c96532dff15e745ac5eccd13f817af,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0951f2793dadde648962124890327555, type: 3}
 --- !u!1001 &7724106061180483969

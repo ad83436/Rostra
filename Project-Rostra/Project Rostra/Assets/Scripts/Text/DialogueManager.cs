@@ -24,6 +24,7 @@ public enum ChoiceEnum : byte
 	lieKill = 15,
 	tellSpare = 16,
 	lieSpare = 17,
+	endGame = 18,
 	unTriggerable = 20, // this is a bool that will literally never be set to true
 }
 
@@ -312,50 +313,53 @@ public class DialogueManager : MonoBehaviour
                         SetChoice(ChoiceEnum.guild, true);
                         talkedToContact = true;
                         SetChoice(ChoiceEnum.talkToContact, true);
-                        Debug.Log("Chose the Guild");
+                        //Debug.Log("Chose the Guild");
                         break;
                     case 2:
                         kill = true;
                         SetChoice(ChoiceEnum.kill, true);
-                        Debug.Log("Killed Farya");
+                       // Debug.Log("Killed Farya");
                         break;
                     case 3:
                         spare = true;
                         SetChoice(ChoiceEnum.spare, true);
-                        Debug.Log("Spared Farya");
+                       // Debug.Log("Spared Farya");
                         break;
                     case 6:
                         demo = true;
                         SetChoice(ChoiceEnum.demo, true);
-                        Debug.Log("We can leave the tavern");
+                       // Debug.Log("We can leave the tavern");
                         break;
                     case 7:
                         talkedToCo = true;
                         SetChoice(ChoiceEnum.talkToCo, true);
-                        Debug.Log("We talked to the commander!");
+                        //Debug.Log("We talked to the commander!");
                         break;
                     case 9:
                         sawJournal = true;
                         SetChoice(ChoiceEnum.sawJournal, true);
-                        Debug.Log("Saw the journal");
+                        //Debug.Log("Saw the journal");
                         break;
                     case 10:
                         dwarf = true;
                         SetChoice(ChoiceEnum.dwarf, true);
                         talkedToContact = true;
                         SetChoice(ChoiceEnum.talkToContact, true);
-                        Debug.Log("Chose the Dwarves");
+                       // Debug.Log("Chose the Dwarves");
                         break;
                     case 12:
                         battleFarea = true;
                         SetChoice(ChoiceEnum.battleFarea, true);
-                        Debug.Log("Battled the Farea");
+                       // Debug.Log("Battled the Farea");
                         break;
                     case 13:
                         battleGrendol = true;
                         SetChoice(ChoiceEnum.battleGrendol, true);
-                        Debug.Log("Battled the Grendol");
+                        //Debug.Log("Battled the Grendol");
                         break;
+					case 18:
+						SetChoice(ChoiceEnum.endGame, true);
+						break;
 
                 }
             }

@@ -83,6 +83,7 @@ public class CutsceneTrigger : MonoBehaviour
 			DialogueManager.instance.canWalk = false;
 			hasActivated = true;
 			CutsceneManager.instance.pl = col.gameObject;
+			Debug.Log("Triggered Cutscene");
 		}
 		if (col.CompareTag("Player") && hasActivated == false && DialogueManager.instance.GetChoice(ce) == true && stay == true && DialogueManager.instance.isActive == false && directTrigger == false)
 		{
