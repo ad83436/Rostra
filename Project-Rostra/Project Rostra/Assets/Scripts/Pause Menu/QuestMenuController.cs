@@ -19,6 +19,9 @@ public class QuestMenuController : SubMenu {
 
 	private void Awake() {
 		canOpen = false; // prevent the menu from opening
+	}
+
+	private void Start() {
 		QuestManager.AddMilestone(1);
 	}
 
@@ -49,6 +52,7 @@ public class QuestMenuController : SubMenu {
 	public override void OnInvisible() { }
 	public override void OnVisible() {
 		UpdateCurrentQuest();
+		PauseMenuController.ChangeQuestPopupState(0);
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

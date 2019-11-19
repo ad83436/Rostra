@@ -22,6 +22,22 @@ public class PauseMenuController : MonoBehaviour {
 
 	[SerializeField] private UnityEngine.UI.Text[] listItems;
 	[SerializeField] private SubMenu[] allSubMenus;
+	[SerializeField] private CanvasGroup questPopup;
+	[SerializeField] private UnityEngine.UI.Text questPText;
+
+	public static void ChangeQuestPopupState(int state) {
+		if (state == 0) {
+			instance.questPopup.alpha = 0f;
+		} else if (state == 1) {
+			instance.questPopup.alpha = 1f;
+			instance.questPText.text = "<size=27><color=yellow>You have a new quest!</color></size>\nPress C to open the pause menu.";
+		} else if (state == 2) {
+			instance.questPopup.alpha = 1f;
+			instance.questPText.text = "<size=27><color=yellow>You have a new quest!</color></size>\nGo to quest menu";
+		} else {
+
+		}
+	}
 
 	#region Main list variables
 
@@ -61,6 +77,8 @@ public class PauseMenuController : MonoBehaviour {
 			allSubMenus[i].IsActive = false;
 			allSubMenus[i].Visible = false;
 		}
+
+		questPopup.alpha = 0f;
 	}
 
 	private void OnDestroy() {
@@ -85,6 +103,7 @@ public class PauseMenuController : MonoBehaviour {
 				group.alpha = 1f;
 				allSubMenus[currentListItem].Visible = true;
 				allSubMenus[currentListItem].OnActive();
+				if (questPopup.alpha > 0f) ChangeQuestPopupState(2);
 			} else {
 				//onUnPause logic
 				listItems[currentListItem].color = Color.white;
@@ -92,6 +111,7 @@ public class PauseMenuController : MonoBehaviour {
 				allSubMenus[currentListItem].Visible = false;
 				allSubMenus[currentListItem].OnInactive();
 				currentListItem = 0;
+				if (questPopup.alpha > 0f) ChangeQuestPopupState(1);
 			}
 		}
 

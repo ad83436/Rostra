@@ -48,21 +48,44 @@ public class PartyMenuController : SubMenu {
 		CharacterStats stats = PartyStats.chara[playerIndex];
 
 		attackStatText.text = "" + stats.attack +
-			(stats.attackMod > 0f ? " <size=18><color=lime>(+ " + stats.attackMod + ")</color></size>" : "");
+			(stats.attackMod > 0f 
+			? " <size=18><color=lime>(+ " + 
+			stats.attackMod + ")</color></size>" : "");
+
 		defenceStatText.text = "" + stats.defence +
-			(stats.defenceMod > 0f ? " <size=18><color=lime>(+ " + stats.defenceMod + ")</color></size>" : "");
+			(stats.defenceMod > 0f 
+			? " <size=18><color=lime>(+ " + 
+			stats.defenceMod + ")</color></size>" : "");
+
 		maxHealthStatText.text = "" + stats.maxHealth +
-			(stats.maxHealthMod > 0f ? " <size=18><color=lime>(+ " + stats.maxHealthMod + ")</color></size>" : "");
+			(stats.maxHealthMod > 0f 
+			? " <size=18><color=lime>(+ " + 
+			stats.maxHealthMod + ")</color></size>" : "");
+
 		maxManaStatText.text = "" + stats.maxMana +
-			(stats.maxManaMod > 0f ? " <size=18><color=lime>(+ " + stats.maxManaMod + ")</color></size>" : "");
+			(stats.maxManaMod > 0f 
+			? " <size=18><color=lime>(+ " + 
+			stats.maxManaMod + ")</color></size>" : "");
+
 		strengthStatText.text = "" + stats.strength +
-			(stats.strengthMod > 0f ? " <size=18><color=lime>(+ " + stats.strengthMod + ")</color></size>" : "");
+			(stats.strengthMod > 0f 
+			? " <size=18><color=lime>(+ " + 
+			stats.strengthMod + ")</color></size>" : "");
+
 		agilityStatText.text = "" + stats.agility +
-			(stats.agilityMod > 0f ? " <size=18><color=lime>(+ " + stats.agilityMod + ")</color></size>" : "");
+			(stats.agilityMod > 0f 
+			? " <size=18><color=lime>(+ " + 
+			stats.agilityMod + ")</color></size>" : "");
+
 		speedStatText.text = "" + stats.speed +
-			(stats.speedMod > 0f ? " <size=18><color=lime>(+ " + stats.speedMod + ")</color></size>" : "");
+			(stats.speedMod > 0f 
+			? " <size=18><color=lime>(+ " + 
+			stats.speedMod + ")</color></size>" : "");
+
 		CriticalStatText.text = "" + stats.critical +
-			(stats.criticalMod > 0f ? " <size=18><color=lime>(+ " + stats.criticalMod + ")</color></size>" : "");
+			(stats.criticalMod > 0f 
+			? " <size=18><color=lime>(+ " + 
+			stats.criticalMod + ")</color></size>" : "");
 	}
 
 	#endregion

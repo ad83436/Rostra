@@ -12,7 +12,6 @@ public static class QuestManager
 	public static int location { get; private set; }
 	public static string milestoneName { get; private set; }
 	public static Dictionary<string, bool> visitedLocals;
-	public static GameObject enable;
 	/// <summary>
 	/// Okay so let's run through all the locations
 	/// 1 = Military camp
@@ -36,7 +35,7 @@ public static class QuestManager
 				description = "Well, I should go and talk to the commander. ";
 				milestone = m;
 				milestoneName = "Talk to the Commander";
-				enable.SetActive(true);
+				PauseMenuController.ChangeQuestPopupState(1);
 				AddVisitedLocation("Military Camp");
 				break;
 			case 2:
@@ -45,7 +44,7 @@ public static class QuestManager
 				description = "I need to go find the others, they should be somewhere around the camp.";
 				milestone = m;
 				milestoneName = "Find the others";
-				enable.SetActive(true);
+				PauseMenuController.ChangeQuestPopupState(1);
 				break;
 			case 3:
 				questName = "Find Brenna";
@@ -53,7 +52,7 @@ public static class QuestManager
 				description = "We should go to the south entrance it's the least guarded";
 				milestone = m;
 				milestoneName = "Leave Camp";
-				enable.SetActive(true);
+				PauseMenuController.ChangeQuestPopupState(1);
 				break;
 			case 4:
 				questName = "Find Brenna";
@@ -61,7 +60,7 @@ public static class QuestManager
 				description = "We've escaped from the camp, now we should go to Brenna's house";
 				milestone = m;
 				milestoneName = "Go to Brenna's house";
-				enable.SetActive(true);
+				PauseMenuController.ChangeQuestPopupState(1);
 				AddVisitedLocation("Brenna's House");
 				break;
 			case 5:
@@ -70,7 +69,7 @@ public static class QuestManager
 				description = "We need to go look for Domel, the barkeep in Hadria should know";
 				milestone = m;
 				milestoneName = "Go To Hadria and speak to the barkeep";
-				enable.SetActive(true);
+				PauseMenuController.ChangeQuestPopupState(1);
 				AddVisitedLocation("Town");
 				break;
 			case 6:
@@ -79,7 +78,7 @@ public static class QuestManager
 				description = "I've spoken to the Barkeep, now we just need to find out where our contact is";
 				milestone = m;
 				milestoneName = "Find the contact";
-				enable.SetActive(true);
+				PauseMenuController.ChangeQuestPopupState(1);
 				AddVisitedLocation("Inn");
 				break;
 			case 7:
@@ -88,7 +87,7 @@ public static class QuestManager
 				description = "We have all the info we need, we should go find Domel's house";
 				milestone = m;
 				milestoneName = "Leave the Inn";
-				enable.SetActive(true);
+				PauseMenuController.ChangeQuestPopupState(1);
 				AddVisitedLocation("Domel's house");
 				break;
 			case 8:
@@ -97,7 +96,7 @@ public static class QuestManager
 				description = "We should go back to Hadria";
 				milestone = m;
 				milestoneName = "Return to Hadria";
-				enable.SetActive(true);
+				PauseMenuController.ChangeQuestPopupState(1);
 				break;
 		}
 
@@ -128,7 +127,6 @@ public static class QuestManager
 		description = "";
 		milestone = 0;
 		milestoneName = "";
-		enable = GameObject.FindGameObjectWithTag("NewQuest");
 	}
 
 }
