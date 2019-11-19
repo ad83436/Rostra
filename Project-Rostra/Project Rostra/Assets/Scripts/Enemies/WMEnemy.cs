@@ -51,8 +51,8 @@ public class WMEnemy : MonoBehaviour
             {
                 if (enemyCollider != null)
                     enemyCollider.enabled = false;
-                if (enemySpriteRenderer != null)
-                    enemySpriteRenderer.enabled = false; //What if the player passes by the enemy? It must not be seen stuck like an idiot\
+                //if (enemySpriteRenderer != null)
+                   // enemySpriteRenderer.enabled = false; //What if the player passes by the enemy? It must not be seen stuck like an idiot\
                 if (enemyPhysicalCollider != null)
                     enemyPhysicalCollider.enabled = false;
                 gameObject.transform.position = startingPosition;
@@ -104,7 +104,7 @@ public class WMEnemy : MonoBehaviour
             if (moveScript != null)
             {
                 moveScript.currentState = NewWMEnemy.WMState.idle;
-                moveScript.idleDelay = 5.0f;
+                moveScript.idleDelay = 3.0f;
             }
             if (enemyCollider != null)
                 enemyCollider.enabled = false;

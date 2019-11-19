@@ -225,17 +225,17 @@ public class ExpManager : MonoBehaviour {
                     case SKILLS.Fa_WarCry: return new int[] { 30, 16, 200, 200, 16, 15, 16 };
                     case SKILLS.Fa_Rally: return new int[] { 31, 16, 275, 200, 16, 15, 17 };
                     case SKILLS.Fa_Sunguard: return new int[] { 32, 16, 275, 275, 17, 14, 17 };
-                    case SKILLS.Fa_BladeOfTheFallen: return new int[] { 35, 17, 350, 350, 17, 16, 18 };
+                    case SKILLS.Fa_BladeOfTheFallen: return new int[] { 33, 17, 350, 350, 17, 15, 18 };
                     default: return null;
                 }
 			case 1: //Oberon
 				switch (skill) {
 					case SKILLS.Ob_ShieldAlly:	    return new int[] { 25, 30, 250, 150, 14, 10, 9 };
-                    case SKILLS.Ob_ShieldAllAllies: return new int[] { 25, 33, 250, 150, 14, 10, 9 };
+                    case SKILLS.Ob_ShieldAllAllies: return new int[] { 25, 31, 250, 150, 14, 10, 9 };
                     case SKILLS.Ob_SpearDance: return new int[] { 26, 30, 250, 225, 14, 10, 9 };
-                    case SKILLS.Ob_LionsPride: return new int[] { 25, 33, 325, 150, 14, 10, 11 };
+                    case SKILLS.Ob_LionsPride: return new int[] { 25, 31, 325, 150, 14, 10, 11 };
                     case SKILLS.Ob_Lutenist: return new int[] { 27, 31, 325, 300, 15, 10, 9 };
-                    case SKILLS.Ob_FierceStrike: return new int[] { 29, 33, 325, 375, 16, 10, 12 };
+                    case SKILLS.Ob_FierceStrike: return new int[] { 28, 31, 325, 300, 16, 10, 12 };
                     default: return null;
                 }
 			case 2: //Frea
@@ -243,9 +243,9 @@ public class ExpManager : MonoBehaviour {
                     case SKILLS.Fr_DoubleShot:      return new int[] { 35, 14, 190, 200, 15, 16, 14 };
                     case SKILLS.Fr_PiercingShot:	return new int[] { 35, 14, 190, 200, 16, 16, 14 }; //return new int[] { 40, 14, 265, 200, 15, 16, 14 };
                     case SKILLS.Fr_ArrowRain:       return new int[] { 37, 14, 265, 275, 16, 16, 14 };
-                    case SKILLS.Fr_IDontMiss:       return new int[] { 35, 16, 265, 350, 16, 16, 16 };
-                    case SKILLS.Fr_BleedingEdge:     return new int[] { 42, 18, 265, 425, 18, 16, 16 };
-                    case SKILLS.Fr_NeverAgain:      return new int[] { 44, 20, 340, 425, 20, 18, 17 };
+                    case SKILLS.Fr_IDontMiss:       return new int[] { 35, 16, 265, 350, 16, 16, 15 };
+                    case SKILLS.Fr_BleedingEdge:     return new int[] { 39, 17, 265, 425, 18, 16, 16 };
+                    case SKILLS.Fr_NeverAgain:      return new int[] { 39, 18, 340, 425, 19, 17, 16 };
                     default: return null;
                         
                 }
