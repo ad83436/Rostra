@@ -238,8 +238,8 @@ MonoBehaviour:
   eCritical: 5
   qImage: {fileID: 21300000, guid: be5d792087417284986f46aa95392316, type: 3}
   HP: {fileID: 4665885087033448503}
-  maxHP: 500
-  currentHP: 500
+  maxHP: 300
+  currentHP: 300
   damageText: {fileID: 5421913819528711214}
   healText: {fileID: 6227560897037634794}
   missText: {fileID: 6315034812166961477}
@@ -1072,15 +1072,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1234658493057158477}
     m_Modifications:
-    - target: {fileID: 4527264768814590209, guid: 9b55465ff82f04b429c1403fd10c00c3,
-        type: 3}
-      propertyPath: m_Name
-      value: EnemySymbols
-      objectReference: {fileID: 0}
     - target: {fileID: 6501979754105340378, guid: 9b55465ff82f04b429c1403fd10c00c3,
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4527264768814590209, guid: 9b55465ff82f04b429c1403fd10c00c3,
+        type: 3}
+      propertyPath: m_Name
+      value: EnemySymbols
       objectReference: {fileID: 0}
     - target: {fileID: 2245281221146130406, guid: 9b55465ff82f04b429c1403fd10c00c3,
         type: 3}
@@ -1503,16 +1503,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1234658493057158477}
     m_Modifications:
-    - target: {fileID: 7322866209666608019, guid: 15662f6348e46d94cba23f1cfca6b81c,
-        type: 3}
-      propertyPath: m_Name
-      value: Wrath
-      objectReference: {fileID: 0}
-    - target: {fileID: 7322866209666608019, guid: 15662f6348e46d94cba23f1cfca6b81c,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6840952368139592850, guid: 15662f6348e46d94cba23f1cfca6b81c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1567,6 +1557,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7322866209666608019, guid: 15662f6348e46d94cba23f1cfca6b81c,
+        type: 3}
+      propertyPath: m_Name
+      value: Wrath
+      objectReference: {fileID: 0}
+    - target: {fileID: 7322866209666608019, guid: 15662f6348e46d94cba23f1cfca6b81c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 15662f6348e46d94cba23f1cfca6b81c, type: 3}
@@ -1771,16 +1771,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1234658493057158477}
     m_Modifications:
-    - target: {fileID: 9165071415216830549, guid: 80f6b1ce2dda5844fbd0cbe8ffb49521,
-        type: 3}
-      propertyPath: m_Name
-      value: MothersPainIndicator
-      objectReference: {fileID: 0}
-    - target: {fileID: 9165071415216830549, guid: 80f6b1ce2dda5844fbd0cbe8ffb49521,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7524259404518469788, guid: 80f6b1ce2dda5844fbd0cbe8ffb49521,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1846,6 +1836,16 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 1.386
       objectReference: {fileID: 0}
+    - target: {fileID: 9165071415216830549, guid: 80f6b1ce2dda5844fbd0cbe8ffb49521,
+        type: 3}
+      propertyPath: m_Name
+      value: MothersPainIndicator
+      objectReference: {fileID: 0}
+    - target: {fileID: 9165071415216830549, guid: 80f6b1ce2dda5844fbd0cbe8ffb49521,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 80f6b1ce2dda5844fbd0cbe8ffb49521, type: 3}
 --- !u!1 &1591353070390312739 stripped
@@ -1867,16 +1867,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1234658493057158477}
     m_Modifications:
-    - target: {fileID: 5678943745060061631, guid: 92196a67c0c9cc643a2f098765d15a4f,
-        type: 3}
-      propertyPath: m_Name
-      value: WailWait
-      objectReference: {fileID: 0}
-    - target: {fileID: 5678943745060061631, guid: 92196a67c0c9cc643a2f098765d15a4f,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6919235626470450892, guid: 92196a67c0c9cc643a2f098765d15a4f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1931,6 +1921,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5678943745060061631, guid: 92196a67c0c9cc643a2f098765d15a4f,
+        type: 3}
+      propertyPath: m_Name
+      value: WailWait
+      objectReference: {fileID: 0}
+    - target: {fileID: 5678943745060061631, guid: 92196a67c0c9cc643a2f098765d15a4f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 92196a67c0c9cc643a2f098765d15a4f, type: 3}
