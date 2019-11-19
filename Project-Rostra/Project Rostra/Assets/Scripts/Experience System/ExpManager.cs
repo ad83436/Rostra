@@ -221,11 +221,11 @@ public class ExpManager : MonoBehaviour {
 			case 0: //Fargas
 				switch (skill) {
                     case SKILLS.Fa_SwordOfFury: return new int[] { 30, 15, 200, 200, 16, 14, 16 };
-                    case SKILLS.Fa_SwiftStrike: return new int[] { 31, 15, 200, 200, 17, 14, 16 };
+                    case SKILLS.Fa_SwiftStrike: return new int[] { 31, 15, 200, 200, 16, 14, 16 };
                     case SKILLS.Fa_WarCry: return new int[] { 30, 16, 200, 200, 16, 15, 16 };
-                    case SKILLS.Fa_Rally: return new int[] { 31, 16, 275, 200, 16, 15, 17 };
-                    case SKILLS.Fa_Sunguard: return new int[] { 32, 16, 275, 275, 17, 15, 17 };
-                    case SKILLS.Fa_BladeOfTheFallen: return new int[] { 33, 17, 350, 350, 17, 15, 18 };
+                    case SKILLS.Fa_Rally: return new int[] { 31, 16, 275, 200, 17, 15, 16 };
+                    case SKILLS.Fa_Sunguard: return new int[] { 32, 16, 275, 275, 16, 15, 16 };
+                    case SKILLS.Fa_BladeOfTheFallen: return new int[] { 33, 16, 350, 350, 16, 15, 16 };
                     default: return null;
                 }
 			case 1: //Oberon

@@ -3584,13 +3584,16 @@ public class Enemy : MonoBehaviour
     //An enemy tied to a player should get healed when the player is healed. Called from the tied player 
     public virtual void HealDueToTied(float healAmount)
     { 
-        currentHP += healAmount; 
+        currentHP += healAmount;
+        if (currentHP >= maxHP)
+            currentHP = maxHP;
         HP.fillAmount = currentHP / maxHP; 
         healthObject.gameObject.SetActive(true); 
         tiedTimer--; //Tied timer decreases when damaged or healed 
         if (tiedTimer <= 0) 
         { 
             tiedTimer = 0; 
+            if(tieThisPlayer!=null)
             tieThisPlayer.Untie(); 
             chain.gameObject.SetActive(false); 
         } 
