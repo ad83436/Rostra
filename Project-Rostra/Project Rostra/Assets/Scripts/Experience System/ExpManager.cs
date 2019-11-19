@@ -221,11 +221,11 @@ public class ExpManager : MonoBehaviour {
 			case 0: //Fargas
 				switch (skill) {
                     case SKILLS.Fa_SwordOfFury: return new int[] { 30, 15, 200, 200, 16, 14, 16 };
-                    case SKILLS.Fa_SwiftStrike: return new int[] { 31, 15, 200, 200, 17, 14, 16 };
+                    case SKILLS.Fa_SwiftStrike: return new int[] { 31, 15, 200, 200, 16, 14, 16 };
                     case SKILLS.Fa_WarCry: return new int[] { 30, 16, 200, 200, 16, 15, 16 };
-                    case SKILLS.Fa_Rally: return new int[] { 31, 16, 275, 200, 16, 15, 17 };
-                    case SKILLS.Fa_Sunguard: return new int[] { 32, 16, 275, 275, 17, 15, 17 };
-                    case SKILLS.Fa_BladeOfTheFallen: return new int[] { 33, 17, 350, 350, 17, 15, 18 };
+                    case SKILLS.Fa_Rally: return new int[] { 31, 16, 275, 200, 17, 15, 16 };
+                    case SKILLS.Fa_Sunguard: return new int[] { 31, 16, 275, 275, 17, 15, 16 };
+                    case SKILLS.Fa_BladeOfTheFallen: return new int[] { 32, 16, 350, 350, 17, 15, 16 };
                     default: return null;
                 }
 			case 1: //Oberon
@@ -235,17 +235,17 @@ public class ExpManager : MonoBehaviour {
                     case SKILLS.Ob_SpearDance: return new int[] { 26, 30, 250, 225, 14, 10, 9 };
                     case SKILLS.Ob_LionsPride: return new int[] { 25, 31, 325, 150, 14, 10, 11 };
                     case SKILLS.Ob_Lutenist: return new int[] { 27, 31, 325, 300, 15, 10, 9 };
-                    case SKILLS.Ob_FierceStrike: return new int[] { 28, 31, 325, 300, 16, 10, 11 };
+                    case SKILLS.Ob_FierceStrike: return new int[] { 27, 31, 325, 300, 16, 10, 11 };
                     default: return null;
                 }
 			case 2: //Frea
 				switch (skill) {
                     case SKILLS.Fr_DoubleShot:      return new int[] { 35, 14, 190, 200, 15, 16, 14 };
                     case SKILLS.Fr_PiercingShot:	return new int[] { 35, 14, 190, 200, 16, 16, 14 }; //return new int[] { 40, 14, 265, 200, 15, 16, 14 };
-                    case SKILLS.Fr_ArrowRain:       return new int[] { 37, 14, 265, 275, 16, 16, 14 };
-                    case SKILLS.Fr_IDontMiss:       return new int[] { 35, 16, 265, 350, 16, 16, 15 };
-                    case SKILLS.Fr_BleedingEdge:     return new int[] { 38, 17, 265, 425, 18, 16, 16 };
-                    case SKILLS.Fr_NeverAgain:      return new int[] { 39, 18, 340, 425, 19, 16, 16 };
+                    case SKILLS.Fr_ArrowRain:       return new int[] { 36, 14, 190, 275, 16, 16, 14 };
+                    case SKILLS.Fr_IDontMiss:       return new int[] { 35, 15, 265, 275, 16, 16, 15 };
+                    case SKILLS.Fr_BleedingEdge:     return new int[] { 36, 16, 265, 350, 16, 16, 16 };
+                    case SKILLS.Fr_NeverAgain:      return new int[] { 37, 16, 340, 350, 17, 16, 16 };
                     default: return null;
                         
                 }
@@ -254,10 +254,10 @@ public class ExpManager : MonoBehaviour {
                     case SKILLS.Ar_Heal:        return new int[] { 20, 13, 180, 250, 13, 26, 12 };
                     case SKILLS.Ar_HealingAura:	return new int[] { 20, 13, 180, 325, 13, 26, 12 }; //case SKILLS.Ar_HealingAura:	return new int[] { 20, 13, 180, 325, 13, 26, 12 };
                     case SKILLS.Ar_DrainEye:    return new int[] { 20, 13, 255, 325, 13, 26, 12 };
-                    case SKILLS.Ar_LullabyOfHope: return new int[] { 20, 15, 180, 400, 13, 26, 14 };
+                    case SKILLS.Ar_LullabyOfHope: return new int[] { 20, 14, 180, 325, 13, 26, 12 };
                     case SKILLS.Ar_ManaCharge: return new int[] { 21, 13, 255, 325, 14, 26, 12 };
-                    case SKILLS.Ar_IceAge:     return new int[] { 22, 14, 330, 325, 14, 26, 13 };
-                    case SKILLS.Ar_Armageddon: return new int[] { 23, 15, 330, 400, 15, 26, 14 };
+                    case SKILLS.Ar_IceAge:     return new int[] { 21, 13, 330, 325, 14, 26, 12 };
+                    case SKILLS.Ar_Armageddon: return new int[] { 21, 14, 330, 400, 14, 26, 13 };
                     default: return null;
                 }
 			default: return null;
