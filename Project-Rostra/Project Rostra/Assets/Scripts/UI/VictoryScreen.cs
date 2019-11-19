@@ -421,18 +421,26 @@ public class VictoryScreen : MonoBehaviour
                     case 0:
                         fargasLevelUpBack.gameObject.SetActive(true);
                         fargasLevelUpFore.gameObject.SetActive(true);
+                        fargasMP.fillAmount = 1.0f; //HP and MP are filled on level up
+                        fargasHP.fillAmount = 1.0f;
                         break;
                     case 1:
                         oberonLevelUpBack.gameObject.SetActive(true);
                         oberonLevelUpFore.gameObject.SetActive(true);
+                        oberonMP.fillAmount = 1.0f;
+                        oberonHP.fillAmount = 1.0f;
                         break;
                     case 2:
                         freaLevelUpBack.gameObject.SetActive(true);
                         freaLevelUpFore.gameObject.SetActive(true);
+                        freaMP.fillAmount = 1.0f;
+                        freaHP.fillAmount = 1.0f;
                         break;
                     case 3:
                         arcelusLevelUpBack.gameObject.SetActive(true);
                         arcelusLevelUpFore.gameObject.SetActive(true);
+                        arcelusMP.fillAmount = 1.0f;
+                        arcelusHP.fillAmount = 1.0f;
                         break;
                 }
 

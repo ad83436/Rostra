@@ -897,7 +897,7 @@ MonoBehaviour:
   eMana: 0
   eAttack: 1
   eAgility: 1
-  eDefence: 25
+  eDefence: 27
   eStrength: 1
   eSpeed: 0
   eBaseLevel: 1
@@ -989,6 +989,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4169715565616838485, guid: 3f488f8a478bf47449e80656caeb737a,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 26
+      objectReference: {fileID: 0}
     - target: {fileID: 6342407726840530736, guid: 3f488f8a478bf47449e80656caeb737a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1043,11 +1048,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4169715565616838485, guid: 3f488f8a478bf47449e80656caeb737a,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: 26
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6193761979635782366, guid: 3f488f8a478bf47449e80656caeb737a, type: 3}
