@@ -37,7 +37,8 @@ public class CutsceneTrigger : MonoBehaviour
 	}
 	public void TriggerCutscene()
 	{
-		returnPositon = transform.position;
+        Debug.Log("Cutscene has been triggered by fade");
+        returnPositon = transform.position;
 		CutsceneManager.instance.StartCutscene(cs, returnPositon, fade);
 	}
 	private void OnTriggerEnter2D(Collider2D col)
