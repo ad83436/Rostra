@@ -59,6 +59,7 @@ public class WMEnemy : MonoBehaviour
             else if (!BattleManager.battleInProgress && NewWMEnemy.isActive && enemyCollider.enabled && !PauseMenuController.isPaused) //If you transition from one place to another, NEW WM enemy will go active, and so should the collider and SR
             {
                 ActivateEnemy();
+                gameObject.transform.position = startingPosition;
                 if (moveScript != null)
                 {
                     moveScript.idleDelay = 0.0f;
