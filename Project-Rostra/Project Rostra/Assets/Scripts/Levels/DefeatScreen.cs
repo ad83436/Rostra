@@ -29,7 +29,7 @@ public class DefeatScreen : MonoBehaviour
     public GameObject highlighter;
     public GameObject[] hPos;
     public GameObject menuOptions;
-    private int menuIndex = 0;
+    private int menuIndex = 1;
     private bool menuActive = false; //Used to know when the highlighter is active
     private bool choiceMade = false; //Used to know when to change the text
 
@@ -104,12 +104,13 @@ public class DefeatScreen : MonoBehaviour
                         }
                         break;
                     case 1: //Return to main menu
-                        if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.UpArrow))
-                        {
-                            highlighter.transform.position = hPos[0].transform.position;
-                            menuIndex = 0;
-                        }
-                        else if (Input.GetButtonDown("Confirm"))
+                            // if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.UpArrow))
+                            // {
+                            //     highlighter.transform.position = hPos[0].transform.position;
+                            //     menuIndex = 0;
+                            //  }
+                            // else 
+                        if (Input.GetButtonDown("Confirm"))
                         {
                             BattleManager.battleInProgress = false;
                             choiceMade = true;

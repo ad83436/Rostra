@@ -29,7 +29,7 @@ public class ExpManager : MonoBehaviour {
 		//Will be changed to use a load file instead
 
 		//Fargas
-		PartyStats.chara[0].hitpoints = 200.0f;
+		PartyStats.chara[0].hitpoints = 10.0f;
 		PartyStats.chara[0].maxHealth = 200.0f;
 		PartyStats.chara[0].magicpoints = 200.0f;
 		PartyStats.chara[0].maxMana = 200.0f;
@@ -43,7 +43,7 @@ public class ExpManager : MonoBehaviour {
 		PartyStats.chara[0].neededExperience = 150;
 
 		//Oberon
-		PartyStats.chara[1].hitpoints = 250.0f;
+		PartyStats.chara[1].hitpoints = 10.0f;
 		PartyStats.chara[1].maxHealth = 250.0f;
 		PartyStats.chara[1].magicpoints = 150.0f;
 		PartyStats.chara[1].maxMana = 150.0f;
@@ -57,7 +57,7 @@ public class ExpManager : MonoBehaviour {
 		PartyStats.chara[1].neededExperience = 150;
 
 		//Frea
-		PartyStats.chara[2].hitpoints = 190.0f;
+		PartyStats.chara[2].hitpoints = 10.0f;
 		PartyStats.chara[2].maxHealth = 190.0f;
 		PartyStats.chara[2].magicpoints = 200.0f;
 		PartyStats.chara[2].maxMana = 200.0f;
@@ -71,7 +71,7 @@ public class ExpManager : MonoBehaviour {
 		PartyStats.chara[2].neededExperience = 150;
 
 		//Arcelus
-		PartyStats.chara[3].hitpoints = 180.0f;
+		PartyStats.chara[3].hitpoints = 10.0f;
 		PartyStats.chara[3].maxHealth = 180.0f;
 		PartyStats.chara[3].magicpoints = 250.0f;
 		PartyStats.chara[3].maxMana = 250.0f;
