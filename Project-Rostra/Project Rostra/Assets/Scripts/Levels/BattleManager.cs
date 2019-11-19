@@ -466,6 +466,9 @@ public class BattleManager : MonoBehaviour
         //Update the needed exp for next levelup
         players[playerIndex].expNeededForNextLevel = PartyStats.chara[playerIndex].neededExperience;
         //Debug.Log("You need this much to level up again! " + players[playerIndex].expNeededForNextLevel);
+        //Refill the players HP and MP
+        PartyStats.chara[playerIndex].magicpoints = PartyStats.chara[playerIndex].maxMana; 
+        PartyStats.chara[playerIndex].hitpoints = PartyStats.chara[playerIndex].maxHealth;
     }
 
     public virtual void UpdatePlayerStats(int playerIndex)

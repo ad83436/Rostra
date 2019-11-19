@@ -462,14 +462,14 @@ public class SkillsInventory : MonoBehaviour {
                 skillStat[5] = 100;
                 break;
             case (int)SKILLS.Fr_DoubleShot:
-                skillStat[0] = 20;
+                skillStat[0] = PartyStats.chara[2].TotalAttack;
                 skillStat[1] = 16;
                 skillStat[2] = 0;
                 skillStat[4] = (float)SKILL_TYPE.SINGLE_TARGET_ATK;
                 skillStat[5] = 25;
                 break;
             case (int)SKILLS.Fr_PiercingShot:
-                skillStat[0] = 70;
+                skillStat[0] = 90;
                 skillStat[1] = 18;
                 skillStat[2] = 1;
                 skillStat[4] = (float)SKILL_TYPE.SINGLE_TARGET_ATK;
