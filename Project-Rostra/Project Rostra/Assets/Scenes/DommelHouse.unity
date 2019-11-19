@@ -2978,7 +2978,7 @@ Transform:
   - {fileID: 1244910418}
   - {fileID: 615339563}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &833431685
 PrefabInstance:
@@ -21203,7 +21203,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 22
+  m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1072683624
 PrefabInstance:
@@ -28530,7 +28530,7 @@ PrefabInstance:
     - target: {fileID: 897531993148028118, guid: 267a8d337ff374c43ac20be385171929,
         type: 3}
       propertyPath: isBoss
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 897531993148028105, guid: 267a8d337ff374c43ac20be385171929,
         type: 3}
@@ -44939,7 +44939,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1812408188
 BoxCollider2D:
