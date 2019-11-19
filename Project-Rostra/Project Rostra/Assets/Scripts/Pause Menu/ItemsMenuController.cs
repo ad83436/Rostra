@@ -403,8 +403,8 @@ public class ItemsMenuController : SubMenu {
 				break;
 			default: break;
 		}
-		mainUItemsList[relativeindex].SetNormalItem(null, itemDeque[relativeindex].name, charaname,
-									 itemDeque[relativeindex].count > 1 ? "" + itemDeque[relativeindex].count : "");
+		mainUItemsList[relativeindex].SetNormalItem(invinst.ItemIcon(itemDeque[relativeindex].itemID), 
+			itemDeque[relativeindex].name, charaname, itemDeque[relativeindex].count > 1 ? "" + itemDeque[relativeindex].count : "");
 	}
 
 	private void UpdateListUI() {
@@ -487,14 +487,65 @@ public class ItemsMenuController : SubMenu {
 
 	private void UpdateEquipmentUI() {
 		for (int i = 0; i < 12; i++) {
+			// clear all to "---"
 			equipUItemsList[i].SetSmallItem(invinst.ItemName((int)ITEM_ID.NO_ITEM));
 		}
+
+		// new code
+		int eqc0 = 0;
+		int eqc1 = 0;
+		int eqc2 = 0;
+		int eqc3 = 0;
 		int listItem = 0;
-		for (int j = 0; j < MainInventory.INVENTORY_SIZE; j++) {
-			if (invinst.ItemType(invinst.invItem[j, 0]) == (int)ITEM_TYPE.EQUIPABLE && invinst.invItem[j, 2] != -1) {
-				equipUItemsList[invinst.invItem[j, 2] * 3 + listItem].SetSmallItem(invinst.ItemName(invinst.invItem[j, 0]));
-				++listItem;
-				if (listItem == 12) break;
+		for (int i = 0; i < MainInventory.INVENTORY_SIZE; i++) {
+			if (invinst.ItemType(invinst.invItem[i, 0]) == (int)ITEM_TYPE.EQUIPABLE) {
+				switch (invinst.invItem[i, 2]) {
+					case -1:
+						// skip this one because its not equipped
+						break;
+					case 0:
+						if (eqc0 > 2) {
+							Debug.LogError("eqc was 3 or more");
+							break;
+						}
+						equipUItemsList[eqc0].SetSmallItem(invinst.ItemName(invinst.invItem[i, 0]));
+						// iterate
+						++eqc0; ++listItem;
+						break;
+					case 1:
+						if (eqc1 > 3) {
+							Debug.LogError("eqc was 3 or more");
+							break;
+						}
+						equipUItemsList[eqc1 + 3].SetSmallItem(invinst.ItemName(invinst.invItem[i, 0]));
+						// iterate
+						++eqc1; ++listItem;
+						break;
+					case 2:
+						if (eqc2 > 3) {
+							Debug.LogError("eqc was 3 or more");
+							break;
+						}
+						equipUItemsList[eqc2 + 6].SetSmallItem(invinst.ItemName(invinst.invItem[i, 0]));
+						// iterate
+						++eqc2; ++listItem;
+						break;
+					case 3:
+						if (eqc3 > 3) {
+							Debug.LogError("eqc was 3 or more");
+							break;
+						}
+						equipUItemsList[eqc3 + 9].SetSmallItem(invinst.ItemName(invinst.invItem[i, 0]));
+						// iterate
+						++eqc3;
+						++listItem;
+						break;
+					default: Debug.LogError("Weird but the player was: " + invinst.invItem[i, 2]); break;
+				}
+
+				if (listItem > 11) {
+					break;
+				}
 			}
 		}
 	}
@@ -508,14 +559,65 @@ public class ItemsMenuController : SubMenu {
 
 	private void UpdatePeekUI() {
 		for (int i = 0; i < 12; i++) {
+			// clear all to "---"
 			peekItems[i].SetSmallItem(invinst.ItemName((int)ITEM_ID.NO_ITEM));
 		}
+
+		// new code
+		int eqc0 = 0;
+		int eqc1 = 0;
+		int eqc2 = 0;
+		int eqc3 = 0;
 		int listItem = 0;
-		for (int j = 0; j < MainInventory.INVENTORY_SIZE; j++) {
-			if (invinst.ItemType(invinst.invItem[j, 0]) == (int)ITEM_TYPE.EQUIPABLE && invinst.invItem[j, 2] != -1) {
-				peekItems[invinst.invItem[j, 2] * 3 + listItem].SetSmallItem(invinst.ItemName(invinst.invItem[j, 0]));
-				++listItem;
-				if (listItem == 12) break;
+		for (int i = 0; i < MainInventory.INVENTORY_SIZE; i++) {
+			if (invinst.ItemType(invinst.invItem[i, 0]) == (int)ITEM_TYPE.EQUIPABLE) {
+				switch (invinst.invItem[i, 2]) {
+					case -1:
+						// skip this one because its not equipped
+						break;
+					case 0:
+						if (eqc0 > 2) {
+							Debug.LogError("eqc was 3 or more");
+							break;
+						}
+						peekItems[eqc0].SetSmallItem(invinst.ItemName(invinst.invItem[i, 0]));
+						// iterate
+						++eqc0; ++listItem;
+						break;
+					case 1:
+						if (eqc1 > 3) {
+							Debug.LogError("eqc was 3 or more");
+							break;
+						}
+						peekItems[eqc1 + 3].SetSmallItem(invinst.ItemName(invinst.invItem[i, 0]));
+						// iterate
+						++eqc1; ++listItem;
+						break;
+					case 2:
+						if (eqc2 > 3) {
+							Debug.LogError("eqc was 3 or more");
+							break;
+						}
+						peekItems[eqc2 + 6].SetSmallItem(invinst.ItemName(invinst.invItem[i, 0]));
+						// iterate
+						++eqc2; ++listItem;
+						break;
+					case 3:
+						if (eqc3 > 3) {
+							Debug.LogError("eqc was 3 or more");
+							break;
+						}
+						peekItems[eqc3 + 9].SetSmallItem(invinst.ItemName(invinst.invItem[i, 0]));
+						// iterate
+						++eqc3;
+						++listItem;
+						break;
+					default: Debug.LogError("Weird but the player was: " + invinst.invItem[i, 2]); break;
+				}
+
+				if (listItem > 11) {
+					break;
+				}
 			}
 		}
 	}

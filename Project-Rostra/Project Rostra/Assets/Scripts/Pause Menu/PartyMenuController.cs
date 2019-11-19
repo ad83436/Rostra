@@ -44,14 +44,25 @@ public class PartyMenuController : SubMenu {
 	private int playerIndex = 0;
 
 	private void UpdateStats() {
-		attackStatText.text = "" + PartyStats.chara[playerIndex].TotalAttack;
-		defenceStatText.text = "" + PartyStats.chara[playerIndex].TotalDefence;
-		maxHealthStatText.text = "" + PartyStats.chara[playerIndex].TotalMaxHealth;
-		maxManaStatText.text = "" + PartyStats.chara[playerIndex].TotalMaxMana;
-		strengthStatText.text = "" + PartyStats.chara[playerIndex].TotalStrength;
-		agilityStatText.text = "" + PartyStats.chara[playerIndex].TotalAgility;
-		speedStatText.text = "" + PartyStats.chara[playerIndex].TotalSpeed;
-		CriticalStatText.text = "" + PartyStats.chara[playerIndex].TotalCritical;
+		// copy to make things easier
+		CharacterStats stats = PartyStats.chara[playerIndex];
+
+		attackStatText.text = "" + stats.attack +
+			(stats.attackMod > 0f ? " <size=18><color=lime>(+ " + stats.attackMod + ")</color></size>" : "");
+		defenceStatText.text = "" + stats.defence +
+			(stats.defenceMod > 0f ? " <size=18><color=lime>(+ " + stats.defenceMod + ")</color></size>" : "");
+		maxHealthStatText.text = "" + stats.maxHealth +
+			(stats.maxHealthMod > 0f ? " <size=18><color=lime>(+ " + stats.maxHealthMod + ")</color></size>" : "");
+		maxManaStatText.text = "" + stats.maxMana +
+			(stats.maxManaMod > 0f ? " <size=18><color=lime>(+ " + stats.maxManaMod + ")</color></size>" : "");
+		strengthStatText.text = "" + stats.strength +
+			(stats.strengthMod > 0f ? " <size=18><color=lime>(+ " + stats.strengthMod + ")</color></size>" : "");
+		agilityStatText.text = "" + stats.agility +
+			(stats.agilityMod > 0f ? " <size=18><color=lime>(+ " + stats.agilityMod + ")</color></size>" : "");
+		speedStatText.text = "" + stats.speed +
+			(stats.speedMod > 0f ? " <size=18><color=lime>(+ " + stats.speedMod + ")</color></size>" : "");
+		CriticalStatText.text = "" + stats.critical +
+			(stats.criticalMod > 0f ? " <size=18><color=lime>(+ " + stats.criticalMod + ")</color></size>" : "");
 	}
 
 	#endregion
@@ -71,12 +82,18 @@ public class PartyMenuController : SubMenu {
 	[SerializeField] private UnityEngine.UI.Image[] charaImages;
 
 	#endregion
-	
-	public override void OnVisible() { }
 
-	private void Awake() { 
+	public override void OnVisible() {
+		partyGroup.alpha = 1f;
+		statsGroup.alpha = 0f;
+	}
+
+	private void Awake() {
 		statsMenu.pressedDelegate = IncreaseStat;
 		statsMenu.exitDelegate = CloseStatsMenu;
+		
+		partyGroup.alpha = 0f;
+		statsGroup.alpha = 0f;
 	}
 
 	private bool IsInStatsMenu {

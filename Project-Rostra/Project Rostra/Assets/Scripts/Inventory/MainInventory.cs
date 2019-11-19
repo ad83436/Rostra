@@ -76,6 +76,22 @@ public class MainInventory : MonoBehaviour {
         invItem[2, 0] = (int)ITEM_ID.HOPE_POTION;
         invItem[2, 1] = 1;
 
+		// my stuff
+		invItem[3, 0] = (int)ITEM_ID.PLATED_ARMOR;
+        invItem[3, 1] = 1;
+
+		invItem[4, 0] = (int)ITEM_ID.LEATHER_JACKET;
+        invItem[4, 1] = 1;
+		
+		invItem[5, 0] = (int)ITEM_ID.CHAINMAIL;
+        invItem[5, 1] = 1;
+		
+		invItem[6, 0] = (int)ITEM_ID.ROBE;
+        invItem[6, 1] = 1;
+		
+		invItem[7, 0] = (int)ITEM_ID.ROBE;
+        invItem[7, 1] = 1;
+
     }
 
 	// Handling keyboard functionality
