@@ -388,7 +388,7 @@ public class DialogueManager : MonoBehaviour
             if (willCount == dia.maxWillCount && hasCountTriggered == true)
             {
                 willCount = 0;
-                dia = null;
+                //dia = null;
                 hasCountTriggered = false;
             }
             if (dia != null && dia.isBattle == true)
@@ -545,8 +545,9 @@ public class DialogueManager : MonoBehaviour
 	public void ChoiceDependantConvo(float choice, Dialogue d)
 	{
 		dia = d;
+		Dialogue dia1 = d;
 		// if the choice is more than half of the array take away half the array to get it's counterpart
-		if (d.choiceCare1.dialogue.hasPlayed == true && d.choiceCare1.dialogue.isOneShot == true)
+		if (d.choiceCare1 != null && d.choiceCare1.dialogue.hasPlayed == true && d.choiceCare1.dialogue.isOneShot == true)
 		{
 			StartConversation(dia.choiceCare1.dialogue.normal.dialogue);
 			if (dia.normal.dialogue.addMilestone > 0)
@@ -574,10 +575,10 @@ public class DialogueManager : MonoBehaviour
 				Debug.Log((int)choice - normalChoices.Length / 2);
 			}
 			// if it's less than half add half
-			else if (choice <= normalChoices.Length / 2 && (normalChoices[(int)choice] == false && normalChoices[(int)choice + normalChoices.Length / 2] == false))
+			else if ( dia.normal != null && choice <= normalChoices.Length / 2 && (normalChoices[(int)choice] == false && normalChoices[(int)choice + normalChoices.Length / 2] == false))
 			{
 				StartConversation(dia.normal.dialogue);
-				if (dia.normal.dialogue.addItem == true && dia.normal.dialogue.itemId > 0)
+				if (dia.normal != null && dia.normal.dialogue.addItem == true && dia.normal.dialogue.itemId > 0)
 				{
 					AddItem(dia.normal.dialogue.itemId, dia.normal.dialogue.itemNum);
 				}
@@ -585,17 +586,17 @@ public class DialogueManager : MonoBehaviour
 				Debug.Log((int)choice + normalChoices.Length / 2);
 			}
 			// init dialogue 1
-			else if (normalChoices[(int)choice] == true)
+			else if (normalChoices[(int)choice] == true && dia.choiceCare1 != null && !dia.choiceCare1.Equals(null))
 			{
+				//dia.choiceCare1.dialogue.hasPlayed = true;
 				StartConversation(dia.choiceCare1.dialogue);
-				dia.choiceCare1.dialogue.hasPlayed = true;
-				if (dia.choiceCare1.dialogue != null && dia.choiceCare1.dialogue.addItem == true && dia.choiceCare1.dialogue.itemId > 0)
+				if (dia1 != null && dia1.choiceCare1.dialogue != null && !dia1.choiceCare1.Equals(null)  && dia1.choiceCare1.dialogue.addItem == true && dia1.choiceCare1.dialogue.itemId > 0)
 				{
-					AddItem(dia.choiceCare1.dialogue.itemId, dia.choiceCare1.dialogue.itemNum);
+					AddItem(dia1.choiceCare1.dialogue.itemId, dia1.choiceCare1.dialogue.itemNum);
 				}
-				if (dia.choice1.dialogue.addMilestone > 0)
+				if (dia1.choice1 != null && dia1.choice1.dialogue.addMilestone > 0)
 				{
-					AddMilestone(dia.choice1.dialogue.addMilestone);
+					AddMilestone(dia1.choice1.dialogue.addMilestone);
 				}
 			}
 			// init dialogue 2
