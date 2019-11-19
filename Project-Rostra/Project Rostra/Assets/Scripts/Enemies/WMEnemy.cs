@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class WMEnemy : MonoBehaviour
 {
     public static bool startTutorial = false;
-	public bool tutorial = false;
+    public bool tutorial = false;
     public Enemy[] enemies;
     public int[] enemyLevels;
     public Fade fadePanel;
@@ -26,7 +26,7 @@ public class WMEnemy : MonoBehaviour
     {
         enemySpwn = EnemySpawner.instance;
 
-        if(endTestPanel)
+        if (endTestPanel)
         {
             endTestPanel.gameObject.SetActive(false);
         }
@@ -35,7 +35,7 @@ public class WMEnemy : MonoBehaviour
         moveScript = gameObject.GetComponent<NewWMEnemy>();
         startingPosition = gameObject.transform.position;
 
-        if(fadePanel)
+        if (fadePanel)
         {
             fadePanel.tutorial = tutorial;
         }
@@ -48,10 +48,10 @@ public class WMEnemy : MonoBehaviour
         {
             if (BattleManager.battleInProgress && !NewWMEnemy.isActive && enemyCollider.enabled && !PauseMenuController.isPaused) //If two enemies race towards the player, the one who does not collide with the player should reset
             {
-                if(enemyCollider!=null)
-                enemyCollider.enabled = false;
-                if(enemySpriteRenderer!=null)
-                enemySpriteRenderer.enabled = false; //What if the player passes by the enemy? It must not be seen stuck like an idiot\
+                if (enemyCollider != null)
+                    enemyCollider.enabled = false;
+                if (enemySpriteRenderer != null)
+                    enemySpriteRenderer.enabled = false; //What if the player passes by the enemy? It must not be seen stuck like an idiot\
                 if (enemyPhysicalCollider != null)
                     enemyPhysicalCollider.enabled = false;
                 gameObject.transform.position = startingPosition;
@@ -59,7 +59,7 @@ public class WMEnemy : MonoBehaviour
             else if (!BattleManager.battleInProgress && NewWMEnemy.isActive && enemyCollider.enabled && !PauseMenuController.isPaused) //If you transition from one place to another, NEW WM enemy will go active, and so should the collider and SR
             {
                 ActivateEnemy();
-                if(moveScript!=null)
+                if (moveScript != null)
                 {
                     moveScript.idleDelay = 0.0f;
                 }
@@ -69,9 +69,9 @@ public class WMEnemy : MonoBehaviour
                 ActivateEnemy();
             }
         }
-        else if( collidedWithPlayer && !BattleManager.battleInProgress)
+        else if (collidedWithPlayer && !BattleManager.battleInProgress)
         {
-            if(collisionDelay > 0.0f)
+            if (collisionDelay > 0.0f)
             {
                 collisionDelay -= Time.deltaTime;
             }
@@ -87,7 +87,7 @@ public class WMEnemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if(col.gameObject.tag.Equals("Player") && !collidedWithPlayer)
+        if (col.gameObject.tag.Equals("Player") && !collidedWithPlayer)
         {
             NewWMEnemy.isActive = false;
             fadePanel.FlipFadeToBattle(this);
@@ -96,7 +96,7 @@ public class WMEnemy : MonoBehaviour
             if (moveScript != null)
             {
                 moveScript.currentState = NewWMEnemy.WMState.idle;
-                moveScript.idleDelay = 4.0f;
+                moveScript.idleDelay = 5.0f;
             }
             if (enemyCollider != null)
                 enemyCollider.enabled = false;
@@ -123,10 +123,10 @@ public class WMEnemy : MonoBehaviour
         }
         if (enemyCollider != null)
             enemyCollider.enabled = false;
-        if(enemySpriteRenderer!=null)
-        enemySpriteRenderer.enabled = false;
-        if(enemyPhysicalCollider!=null)
-        enemyPhysicalCollider.enabled = false;
+        if (enemySpriteRenderer != null)
+            enemySpriteRenderer.enabled = false;
+        if (enemyPhysicalCollider != null)
+            enemyPhysicalCollider.enabled = false;
 
         PassInfoIntoBattle.battleBackgroundImage = backgroundImage;
 
@@ -138,7 +138,7 @@ public class WMEnemy : MonoBehaviour
             enemyCollider.enabled = true;
         if (enemySpriteRenderer != null)
             enemySpriteRenderer.enabled = true;
-        if(enemyPhysicalCollider!=null)
+        if (enemyPhysicalCollider != null)
             enemyPhysicalCollider.enabled = true;
     }
 }
