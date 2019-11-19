@@ -51,19 +51,19 @@ public class PlayerMove : MonoBehaviour {
 			}
 			// these are debug commands, please please please remove once done testing
 
-			if (Input.GetKeyDown(KeyCode.G))
-			{
-				DialogueManager.instance.metAllChars = true;
-				DialogueManager.instance.SetChoice(ChoiceEnum.metAllChars, true);
-				DialogueManager.instance.sawJournal = true;
-				DialogueManager.instance.SetChoice(ChoiceEnum.sawJournal, true);
-				DialogueManager.instance.dwarf = true;
-				DialogueManager.instance.SetChoice(ChoiceEnum.dwarf, true);
-				DialogueManager.instance.talkedToContact = true;
-				DialogueManager.instance.SetChoice(ChoiceEnum.talkToContact, true);
-				//DialogueManager.instance.battleFarea = true;
-				//DialogueManager.instance.SetChoice(ChoiceEnum.battleFarea, true);
-			}
+			//if (Input.GetKeyDown(KeyCode.G))
+			//{
+			//	DialogueManager.instance.metAllChars = true;
+			//	DialogueManager.instance.SetChoice(ChoiceEnum.metAllChars, true);
+			//	DialogueManager.instance.sawJournal = true;
+			//	DialogueManager.instance.SetChoice(ChoiceEnum.sawJournal, true);
+			//	DialogueManager.instance.dwarf = true;
+			//	DialogueManager.instance.SetChoice(ChoiceEnum.dwarf, true);
+			//	DialogueManager.instance.talkedToContact = true;
+			//	DialogueManager.instance.SetChoice(ChoiceEnum.talkToContact, true);
+			//	//DialogueManager.instance.battleFarea = true;
+			//	//DialogueManager.instance.SetChoice(ChoiceEnum.battleFarea, true);
+			//}
 			//if (Input.GetKeyDown(KeyCode.U))
 			//{
 			//	DialogueManager.instance.kill = true;

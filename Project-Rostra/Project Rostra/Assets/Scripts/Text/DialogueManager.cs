@@ -24,6 +24,7 @@ public enum ChoiceEnum : byte
 	lieKill = 15,
 	tellSpare = 16,
 	lieSpare = 17,
+	endGame = 18,
 	unTriggerable = 20, // this is a bool that will literally never be set to true
 }
 
