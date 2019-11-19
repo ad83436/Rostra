@@ -117,7 +117,7 @@ public class PlayerMove : MonoBehaviour {
 
 			rb.velocity = vel;
 
-		} else if (dm.canWalk == false  || PauseMenuController.isPaused == true) {
+		} else if (dm.canWalk == false  || PauseMenuController.isPaused == true || BattleManager.battleInProgress == true) {
 			rb.velocity = Vector3.zero;
 		}
 	}

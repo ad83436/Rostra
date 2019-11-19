@@ -21,6 +21,7 @@ public class WMEnemy : MonoBehaviour
     public Sprite backgroundImage;
     private bool collidedWithPlayer = false;
     private float collisionDelay = 7.8f;
+    private bool resetPosition = false;
 
     private void Start()
     {
@@ -56,10 +57,11 @@ public class WMEnemy : MonoBehaviour
                     enemyPhysicalCollider.enabled = false;
                 gameObject.transform.position = startingPosition;
             }
-            else if (!BattleManager.battleInProgress && NewWMEnemy.isActive && enemyCollider.enabled && !PauseMenuController.isPaused) //If you transition from one place to another, NEW WM enemy will go active, and so should the collider and SR
+            else if (!BattleManager.battleInProgress && NewWMEnemy.isActive && enemyCollider.enabled && !PauseMenuController.isPaused && resetPosition) //If you transition from one place to another, NEW WM enemy will go active, and so should the collider and SR
             {
                 ActivateEnemy();
                 gameObject.transform.position = startingPosition;
+                resetPosition = false;
                 if (moveScript != null)
                 {
                     moveScript.idleDelay = 0.0f;
@@ -82,6 +84,11 @@ public class WMEnemy : MonoBehaviour
                 collidedWithPlayer = false;
                 ActivateEnemy();
             }
+        }
+
+        if(BattleManager.battleInProgress)
+        {
+            resetPosition = true;
         }
     }
 
