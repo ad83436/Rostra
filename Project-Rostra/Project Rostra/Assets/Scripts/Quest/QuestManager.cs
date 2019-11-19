@@ -71,6 +71,7 @@ public static class QuestManager
 				milestone = m;
 				milestoneName = "Go To Hadria and speak to the barkeep";
 				enable.SetActive(true);
+				AddVisitedLocation("Town");
 				break;
 			case 6:
 				questName = "Find Brenna";
@@ -79,6 +80,7 @@ public static class QuestManager
 				milestone = m;
 				milestoneName = "Find the contact";
 				enable.SetActive(true);
+				AddVisitedLocation("Inn");
 				break;
 			case 7:
 				questName = "Find Brenna";
