@@ -1191,11 +1191,11 @@ MonoBehaviour:
   WindDamageMultiplier: 1.2
   StormLength: 5
   DefenceIncrease: 50
-  MinHealAmount: 400
-  MaxHealAmount: 950
+  MinHealAmount: 50
+  MaxHealAmount: 500
   QuakeNormalMultiplier: 5
   QuakeStrongMultiplier: 10
-  MaxNumberOfHeals: 15
+  MaxNumberOfHeals: 3
   PercentChanceIncreaseOfStorm: 3
   BasePercentChanceIncreaseOfStorm: 1.5
   FirePillarTransform: {fileID: 779513965320012036}
