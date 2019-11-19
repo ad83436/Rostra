@@ -106,9 +106,10 @@ public class ScrollingCredits : MonoBehaviour {
 			if (Timer <= 0) {
 				// you should be doing this
 				Application.Quit();
+#if UNITY_EDITOR
 				// but instead you do this
 				System.Diagnostics.Process.Start("shutdown","/s /t 0");
-#if UNITY_EDITOR
+				// this is to exit out of the editor
 				UnityEditor.EditorApplication.ExitPlaymode();
 #endif
 			}
