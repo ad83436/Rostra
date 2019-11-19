@@ -138,8 +138,10 @@ public class Fade : MonoBehaviour
                 else if(transitionIntoACutscene)
                 {
                     fadeOut = !fadeOut; //Fade out again
-                    if (cutsceneTriggerRef != null)
+					//Debug.Log("Transition into a cutscene works");
+					if (cutsceneTriggerRef != null)
                     {
+						Debug.Log("Working");
                         cutsceneTriggerRef.TriggerCutscene(); //Load the cutscene while fading out
                         audioManager.PlayThisClip("Cutscene1");
                         cutsceneTriggerRef = null;
@@ -212,7 +214,7 @@ public class Fade : MonoBehaviour
         cutsceneTriggerRef = cutTrigger;
 		fadeOut = !fadeOut;
 		transitionIntoACutscene = true;
-
+		//Debug.Log("Transition into a cutscene called");
 	}
     public void TransitionOutOfACutscene()
     {

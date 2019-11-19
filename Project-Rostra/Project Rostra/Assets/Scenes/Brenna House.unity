@@ -3693,6 +3693,11 @@ PrefabInstance:
       propertyPath: cs.dialogues.Array.data[1].addMilestone
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 8123743599454692811, guid: 461ff7b82d54a2a4d9a56db412a5459f,
+        type: 3}
+      propertyPath: isInteractable
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 461ff7b82d54a2a4d9a56db412a5459f, type: 3}
 --- !u!1 &1337500227
