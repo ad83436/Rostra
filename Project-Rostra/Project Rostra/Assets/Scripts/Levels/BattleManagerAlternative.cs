@@ -13,6 +13,7 @@ public class BattleManagerAlternative : BattleManager {
 
 	public override void EndOfBattle(bool victory) {
 		base.EndOfBattle(victory);
+		BatTutorial.Singleton.Hide();
 	}
 
 	public override bool Equals(object other) {
