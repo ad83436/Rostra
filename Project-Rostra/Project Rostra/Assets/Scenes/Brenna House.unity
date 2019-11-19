@@ -3688,45 +3688,6 @@ PrefabInstance:
       propertyPath: fade
       value: 
       objectReference: {fileID: 542632598}
-    - target: {fileID: 8123743599454692811, guid: 461ff7b82d54a2a4d9a56db412a5459f,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[1].addMilestone
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8123743599454692811, guid: 461ff7b82d54a2a4d9a56db412a5459f,
-        type: 3}
-      propertyPath: isInteractable
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8123743599454692811, guid: 461ff7b82d54a2a4d9a56db412a5459f,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[1].sentences.Array.data[2]
-      value: 'He was asking for donations. I politely declined but I''m starting to
-        get worried. I was alone when I left the house and only me and Domel live
-        on the outskirts of town. '
-      objectReference: {fileID: 0}
-    - target: {fileID: 8123743599454692811, guid: 461ff7b82d54a2a4d9a56db412a5459f,
-        type: 3}
-      propertyPath: cs.dialogues.Array.data[1].sentences.Array.data[8]
-      value: We don't need to. She mentioned she was going to see someone named Domel.
-        They were the only two who lived on the outskirts. If anything happened to
-        her he would know.
-      objectReference: {fileID: 0}
-    - target: {fileID: 8123743599454692810, guid: 461ff7b82d54a2a4d9a56db412a5459f,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -10.84
-      objectReference: {fileID: 0}
-    - target: {fileID: 868221954028346295, guid: 461ff7b82d54a2a4d9a56db412a5459f,
-        type: 3}
-      propertyPath: m_Offset.y
-      value: 0.7829437
-      objectReference: {fileID: 0}
-    - target: {fileID: 868221954028346295, guid: 461ff7b82d54a2a4d9a56db412a5459f,
-        type: 3}
-      propertyPath: m_Size.y
-      value: 1.2403374
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 461ff7b82d54a2a4d9a56db412a5459f, type: 3}
 --- !u!1 &1337500227

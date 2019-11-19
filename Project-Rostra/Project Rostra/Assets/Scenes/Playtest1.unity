@@ -6582,6 +6582,8 @@ MonoBehaviour:
   fadePanel: {fileID: 0}
   endTestPanel: {fileID: 126959872}
   enemySpwn: {fileID: 1950009557}
+  enemyCollider: {fileID: 0}
+  enemyPhysicalCollider: {fileID: 0}
   backgroundImage: {fileID: 0}
 --- !u!4 &1830220263
 Transform:
