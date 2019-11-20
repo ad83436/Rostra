@@ -156,6 +156,7 @@ public class Fade : MonoBehaviour
                 }
                 else if(transitionToMainMenu)
                 {
+                    GameManager.instance.DestoryUndestroyables();
                     transitionToMainMenu = false;
                     SceneManager.LoadScene("Main Menu");
                 }
