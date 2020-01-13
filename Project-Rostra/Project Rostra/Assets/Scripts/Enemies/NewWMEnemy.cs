@@ -6,10 +6,7 @@ public class NewWMEnemy : MonoBehaviour
 {
     public static bool isActive = true; //Changed by WM script after colliding with player. All enemies should stop when engaged in a battle
     public float speed;
-    public float rSpeed;
 
-    public Transform enemy;
-    private Transform target;
     public GameObject player;
 
     public enum WMState
@@ -20,18 +17,19 @@ public class NewWMEnemy : MonoBehaviour
         idle //Go inactive for a while
     }
 
-    public WMState currentState = WMState.idle;
+    public WMState currentState = WMState.patrolling;
 
-    private float radius = 3.0f;
+    private float radius = 5.0f;
     private Vector2 newPos;
     private Vector2 startPos;
-    private float direction = 1.0f;
-    public float idleDelay = 3.0f;
+    private float direction = -1.0f;
+    public float idleDelay = 8.0f;
     private float chaseTimer = 3.0f;
 
     void Start()
     {
-        target = player.GetComponent<Transform>();
+        idleDelay = 8.0f;
+        currentState = WMState.patrolling;
         startPos = gameObject.transform.position;
         newPos = new Vector2(Random.Range(startPos.x, startPos.x + radius * direction), Random.Range(startPos.y, startPos.y + radius * direction));
     }
@@ -43,15 +41,16 @@ public class NewWMEnemy : MonoBehaviour
             switch (currentState)
             {
                 case WMState.patrolling: //Choose a new pos to go to
-                    newPos.x = Random.Range(startPos.x, radius * direction);
-                    newPos.y = Random.Range(startPos.y, radius * direction);
                     direction *= -1.0f; //Flip the direction every turn
+                    startPos = gameObject.transform.position;
+                    newPos.x = Random.Range(startPos.x, startPos.x + radius * direction);
+                    newPos.y = Random.Range(startPos.y, startPos.y + radius * direction);
                     currentState = WMState.moving;
                     break;
                 case WMState.moving: //Move towards new pos
                     transform.position = Vector2.MoveTowards(gameObject.transform.position, newPos, speed * Time.deltaTime);
 
-                    if (Mathf.Abs(player.transform.position.x - gameObject.transform.position.x) < 1.0f) //If the player is close enough, give chase
+                    if (Mathf.Abs(player.transform.position.x - gameObject.transform.position.x) <= radius) //If the player is close enough, give chase
                     {
                         currentState = WMState.chasing;
                         chaseTimer = 3.0f;
@@ -59,14 +58,14 @@ public class NewWMEnemy : MonoBehaviour
 
                     else if (direction > 0.0f)
                     {
-                        if (transform.position.x >= newPos.x || transform.position.y >= newPos.y)
+                        if (transform.position.x >= newPos.x && transform.position.y >= newPos.y)
                         {
                             currentState = WMState.idle; //Stop
                         }
                     }
                     else if (direction < 0.0f)
                     {
-                        if (transform.position.x <= newPos.x || transform.position.y <= newPos.y)
+                        if (transform.position.x <= newPos.x && transform.position.y <= newPos.y)
                         {
                             currentState = WMState.idle; //Stop
                         }
@@ -74,15 +73,23 @@ public class NewWMEnemy : MonoBehaviour
 
                     break;
                 case WMState.chasing: //Chase player
-                    if (chaseTimer > 0.0f)
+
+                    if (Mathf.Abs(player.transform.position.x - gameObject.transform.position.x) <= radius) //If the player is within range, keep chasing
                     {
-                        chaseTimer -= Time.deltaTime;
-                        transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+                        transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
                     }
-                    else
+                    else //If the player is out of range, chase for a while then give up
                     {
-                        chaseTimer = 3.0f;
-                        currentState = WMState.idle;
+                        if (chaseTimer > 0.0f)
+                        {
+                            chaseTimer -= Time.deltaTime;
+                            transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
+                        }
+                        else
+                        {
+                            chaseTimer = 3.0f;
+                            currentState = WMState.idle;
+                        }
                     }
 
                     break;
@@ -94,7 +101,7 @@ public class NewWMEnemy : MonoBehaviour
                     }
                     else
                     {
-                        idleDelay = 3.0f;
+                        idleDelay = 8.0f;
                         currentState = WMState.patrolling;
                     }
                     break;

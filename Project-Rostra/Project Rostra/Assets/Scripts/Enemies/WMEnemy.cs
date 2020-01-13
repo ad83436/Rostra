@@ -100,11 +100,11 @@ public class WMEnemy : MonoBehaviour
             NewWMEnemy.isActive = false;
             fadePanel.FlipFadeToBattle(this);
             BattleManager.battleInProgress = true;
-            gameObject.transform.position = startingPosition;
+            gameObject.transform.position = startingPosition; //Reset position
             if (moveScript != null)
             {
                 moveScript.currentState = NewWMEnemy.WMState.idle;
-                moveScript.idleDelay = 3.0f;
+                moveScript.idleDelay = 8.0f;
             }
             if (enemyCollider != null)
                 enemyCollider.enabled = false;
